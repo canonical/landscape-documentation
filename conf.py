@@ -23,7 +23,7 @@ import ast
 #
 # TODO: Update with the official name of your project or product
 
-project = "Documentation starter pack"
+project = "Landscape"
 author = "Canonical Ltd."
 
 
@@ -69,7 +69,7 @@ copyright = "%s CC-BY-SA, %s" % (datetime.date.today().year, author)
 # NOTE: The Open Graph Protocol (OGP) enhances page display in a social graph
 #       and is used by social media platforms; see https://ogp.me/
 
-ogp_site_url = "https://canonical-starter-pack.readthedocs-hosted.com/"
+ogp_site_url = ""
 
 
 # Preview name of the documentation website
@@ -106,7 +106,7 @@ html_context = {
     # TODO: If there's no such website,
     #       remove the {{ product_page }} link from the page header template
     #       (usually .sphinx/_templates/header.html; also, see README.rst).
-    "product_page": "documentation.ubuntu.com",
+    "product_page": "https://ubuntu.com/landscape",
     # Product tag image; the orange part of your logo, shown in the page header
     #
     # TODO: To add a tag image, uncomment and update as needed.
@@ -117,23 +117,23 @@ html_context = {
     #
     # NOTE: If set, adding ':discourse: 123' to an .rst file
     #       will add a link to Discourse topic 123 at the bottom of the page.
-    "discourse": "https://discourse.ubuntu.com",
+    "discourse": "https://discourse.ubuntu.com/c/project/landscape/89",
     # Your Mattermost channel URL
     #
     # TODO: Change to your Mattermost channel URL or leave empty.
     "mattermost":
-    "https://chat.canonical.com/canonical/channels/documentation",
+    "",
     # Your Matrix channel URL
     #
     # TODO: Change to your Matrix channel URL or leave empty.
-    "matrix": "https://matrix.to/#/#documentation:ubuntu.com",
+    "matrix": "",
     # Your documentation GitHub repository URL
     #
     # TODO: Change to your documentation GitHub repository URL or leave empty.
     #
     # NOTE: If set, links for viewing the documentation source files
     #       and creating GitHub issues are added at the bottom of each page.
-    "github_url": "https://github.com/canonical/sphinx-docs-starter-pack",
+    "github_url": "https://github.com/canonical/landscape-documentation",
     # Docs branch in the repo; used in links for viewing the source files
     #
     # TODO: To customise the branch, uncomment and update as needed.
@@ -141,7 +141,7 @@ html_context = {
     # Docs location in the repo; used in links for viewing the source files
     #
     # TODO: To customise the directory, uncomment and update as needed.
-    "github_folder": "/sp-docs/",
+    "github_folder": "/",
 
     # TODO: To enable or disable the Previous / Next buttons at the bottom of pages
     # Valid options: none, prev, next, both
