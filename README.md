@@ -14,7 +14,7 @@ For system administrators, security analysts, CISOs and more, Landscape provides
 
 ## Support
 
-[Support](https://support.canonical.com/) is available to those who purchase it with [Ubuntu Pro](https://ubuntu.com/pro).
+[Support](https://support-portal.canonical.com/) is available to those who purchase it with [Ubuntu Pro](https://ubuntu.com/pro).
 
 ## Project and community
 
