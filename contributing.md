@@ -1,183 +1,67 @@
----
-orphan: true
----
-
 <!-- TODO: Replace all mentions of ACME with your project name -->
 <!-- TODO: Update all sections containing TODOs; make sure no TODOs are left -->
+(contribute)=
+# Contribute to our documentation
 
-# How to contribute
+We warmly welcome your engagement with the Landscape community and appreciate all contributions, suggestions, and feedback. There are many reasons why you should contribute to the Landscape documentation.
 
-We believe that everyone has something valuable to contribute, whether you're a coder, a writer, or a tester. Here's how and why you can get involved:
+- **Improve your skills**
+    
+    Contributing to the Landscape docs is a great way to improve your documentation and technical communication skills. You’ll get experience writing clear, concise documentation that’s helpful to the Landscape community, and you’ll have the opportunity to learn about writing documentation that focuses on user needs.
+    
+- **Give back to the community**
+    
+    By contributing to the Landscape documentation, you foster a supportive community and can help other users learn about Landscape. Your contributions make a difference to other Landscape users!
+    
+- **Learn more about Landscape**
+    
+    Contributing to the Landscape documentation can help you broaden your understanding of Landscape and its related technologies. Writing documentation often involves exploring new features and investigating potential problems or challenges users may face, which can help you learn more about how Landscape works and how users interact with it.
+    
+- **Connect with the Landscape community**
+    
+    As a member of the Landscape community, you’re encouraged to collaborate with others and participate in discussions in the Discourse forum. Contributing to the documentation is a great way to connect with others in the community and learn from their experiences.
 
-- **Why join us?** Work with like-minded people, develop your skills, connect with diverse professionals, and make a difference.
-- **What do you get?** Personal growth, recognition for your contributions, early access to new features, and the joy of seeing your work appreciated.
-- **Start early, start easy**: Dive into code contributions, improve documentation, or be among the first testers. Your presence matters, regardless of experience or the size of your contribution.
 
-The guidelines below will help keep your contributions effective and meaningful.
+We believe that everyone has something valuable to contribute, no matter your level of experience, and we hope to make it as easy as possible to contribute. If you find any part of our process doesn't work well for you, please let us know!
 
-## Code of conduct
+## Prerequisites
 
-When contributing, you must abide by the [Ubuntu Code of Conduct](https://ubuntu.com/community/ethos/code-of-conduct).
+There are some prerequisites to contributing to the Landscape documentation.
 
-## License and copyright
+- **Code of Conduct**: You will need to read and agree to the Ubuntu [Code of Conduct](https://ubuntu.com/community/ethos/code-of-conduct). By participating, you implicitly agree to abide by the Code of Conduct.
 
-<!-- TODO: Update with your license details or drop if excessive -->
+- **GitHub account**: You need a [GitHub account](https://github.com/) to create issues, comment, reply, or submit contributions.
 
-By default, all contributions to Landscape are made under the AGPLv3 licence. See the [license](https://github.com/canonical/Landscape/blob/main/COPYING) in the Landscape GitHub repository for details.
+    You don't need to know git before you start, and you definitely don't need to work on the command line if you don't want to. Many documentation tasks can be done using [GitHub's web interface](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files). On the command line, we use the standard "fork and pull" process.
 
-All contributors must sign the [Canonical contributor licence agreement](https://ubuntu.com/legal/contributors), which grants Canonical permission to use the contributions. The author of a change remains the copyright owner of their code (no copyright assignment occurs).
+- **Licensing**: The first time you contribute to a Canonical project, you will need to sign the Canonical License agreement (CLA). If you have already signed it, e.g. when contributing to another Canonical project, you do not need to sign it again.
 
-## Releases and versions
+    This license protects your copyright over your contributions, including the right to use them elsewhere, but grants us (Canonical) permission to use them in our project. You can read [more about the CLA](https://ubuntu.com/legal/contributors) before you [sign the CLA](https://ubuntu.com/legal/contributors/agreement).
 
-<!-- TODO: Add your release and versioning details or drop if excessive -->
+## Landscape Docs overview and Diátaxis
 
-Landscape uses [semantic versioning](https://semver.org/); major releases occur once or twice a year.
+This documentation is [hosted in GitHub](https://github.com/canonical/landscape-documentation) and rendered on Read the Docs. You need to create a GitHub account to contribute, but you don't need a Read the Docs account.
 
-The release notes can be found TODO: [here](https://example.com).
+Our navigational structure, style, and the content of our documentation follows the [Diátaxis](https://diataxis.fr/) systematic framework for technical documentation authoring. This splits documentation pages into tutorials, how-to guides, reference material and explanatory text:
 
-## Environment setup
+- **Tutorials** are lessons that accomplish specific tasks through *doing*. They help with familiarity and place users in the safe hands of an instructor.
+- **How-to guides** are recipes, showing users how to achieve something, helping them get something done. A *How-to guide* has no obligation to teach.
+- **Reference** material is descriptive, providing facts about functionality that is isolated from what needs to be done.
+- **Explanation** is discussion, helping users gain a deeper or better understanding of Landscape, including *how* and *why* Landscape functions the way it does.
 
-<!-- TODO: Update with your prerequisites or drop if excessive -->
+For further details on our Diátaxis strategy, see [Diátaxis, a new foundation for Canonical documentation](https://ubuntu.com/blog/diataxis-a-new-foundation-for-canonical-documentation).
 
-To work on the project, you need the following prerequisites:
+Improving our documentation and applying the principles of Diátaxis are on-going tasks. There’s a lot to do, and we don’t want to deter anyone from contributing to our docs. If you don’t know whether something should be a tutorial, how-to guide, reference doc or explanatory text, either ask on the forum or publish what you’re thinking. Changes are easy to make, and every contribution helps.
 
-- [TODO: Prerequisite 1](http://example.com)
-- [TODO: Prerequisite 2](http://example.com)
+## Ways to contribute
 
-To install and configure these tools:
+Most Landscape documentation contributions are made on GitHub. There are several ways you can contribute:
 
-```bash
-TODO: prerequisite command 1
-TODO: prerequisite command 2
-```
+- [Find an issue](https://github.com/canonical/landscape-documentation/issues) or [create your own issue](https://github.com/canonical/landscape-documentation/issues/new) to work on
+- Fix an issue directly and [create a pull request (PR)](https://github.com/canonical/landscape-documentation/pulls)
+- Report a bug or provide feedback by [creating an issue](https://github.com/canonical/landscape-documentation/issues/new) in GitHub
+- Ask a question or help other Landscape community members on [Discourse](https://discourse.ubuntu.com/c/project/landscape/89)
 
-## Submissions
+If you're new to contributing with Git and the command line, see the [Getting Started guide](https://github.com/canonical/open-documentation-academy/blob/main/getting-started/get_started.md) from the Canonical Open Documentation Academy for an overview.
 
-<!-- TODO: Suggest your own PR process or drop if excessive -->
-
-If you want to address an issue or a bug in Landscape, notify in advance the people involved to avoid confusion; also, reference the issue or bug number when you submit the changes.
-
-- Fork [our GitHub repository](https://github.com/canonical/Landscape) and add the changes to your fork, properly structuring your commits, providing detailed commit messages, and signing your commits.
-
-- Make sure the updated project builds and runs without warnings or errors; this includes linting, documentation, code, and tests.
-
-- Submit the changes as a [pull request (PR)](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
-
-Your changes will be reviewed in due time; if approved, they will eventually be merged.
-
-### Describing pull requests
-
-<!-- TODO: Update with your own checklist or drop if excessive -->
-
-To be properly considered, reviewed, and merged, your pull request must provide the following details:
-
-- **Title**: Summarise the change in a short, descriptive title.
-- **Description**: Explain the problem that your pull request solves. Mention any new features, bug fixes, or refactoring.
-- **Relevant issues**: Reference any [related issues, pull requests, and repositories](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/autolinked-references-and-urls).
-- **Testing**: Explain whether new or updated tests are included.
-- **Reversibility**: If you propose decisions that may be costly to reverse, list the reasons and suggest steps to reverse the changes if necessary.
-
-### Commit structure and messages
-
-<!-- TODO: Update with your own guidelines or drop if excessive -->
-
-Use separate commits for each logical change, and for changes to different components. Prefix your commit messages with the names of components they affect, using the code tree structure. For example, start a commit that updates the Landscape service with `Landscape/service:`.
-
-Use [conventional commits](https://www.conventionalcommits.org/) to ensure consistency across the project:
-
-```none
-Ensure correct permissions and ownership for the content mounts
-
-* Work around an Landscape issue regarding empty dirs: https://github.com/canonical/Landscape/issues/12345
-
-* Ensure the source directory is owned by the user running a container.
-
-Links:
-- ...
-- ...
-```
-
-Such structure makes it easier to review contributions and simplifies porting fixes to other branches.
-
-### Signing commits
-
-<!-- TODO: Update with your suggestions or drop if excessive -->
-
-To improve contribution tracking, we use the developer certificate of origin ([DCO 1.1](https://developercertificate.org/)) and require a "sign-off" for any changes going into each branch.
-
-The sign-off is a simple line at the end of the commit message certifying that you wrote it or have the right to commit it as an open-source contribution.
-
-To sign off on a commit, use the `--signoff` option in `git commit`.
-
-## Code
-
-### Formatting and linting
-
-<!-- TODO: Update with your linting configuration setup or drop if excessive -->
-
-Landscape relies on these formatting and linting tools:
-
-- [TODO: Tool 1](http://example.com)
-- [TODO: Tool 2](http://example.com)
-
-To configure and run them:
-
-```bash
-TODO: lint command 1
-TODO: lint command 2
-```
-
-### Structure
-
-- **Check linked code elements**: Ensure coupled code elements, files, and directories are adjacent. For instance, store test data close to the corresponding test code.
-- **Group variable declaration and initialisation**: Declare and initialise variables together to improve code organisation and readability.
-- **Split large expressions**: Break down large expressions into smaller self-explanatory parts. Use multiple variables where appropriate to make the code more understandable and choose names that reflect their purpose.
-- **Use blank lines for logical separation**: Insert a blank line between two logically separate sections of code to improve its structure and readability.
-- **Avoid nested conditions**: Avoid nesting conditions to improve readability and maintainability.
-- **Remove dead code and redundant comments**: Drop unused or obsolete code and comments to promote a cleaner code base and reduce confusion.
-- **Normalise symmetries**: Treat identical operations consistently, using a uniform approach to improve consistency and readability.
-
-### Best practices
-
-<!-- TODO: Update with your best practices or drop if excessive -->
-
-## Tests
-
-<!-- TODO: Update with your testing framework details or drop if excessive -->
-
-All code contributions must include tests.
-
-To run the tests locally before submitting your changes:
-
-```bash
-TODO: test command 1
-TODO: test command 2
-```
-
-## Documentation
-
-Landscape's documentation is stored in the `DOCDIR` directory of the repository. It is based on the [Canonical starter pack](https://canonical-starter-pack.readthedocs-hosted.com/latest/) and hosted on [Read the Docs](https://about.readthedocs.com/).
-
-For general guidance, refer to the [starter pack guide](https://canonical-starter-pack.readthedocs-hosted.com/latest/).
-
-For syntax help and guidelines, refer to the [Canonical style guides](https://canonical-documentation-with-sphinx-and-readthedocscom.readthedocs-hosted.com/#style-guides).
-
-In structuring, the documentation employs the [Diátaxis](https://diataxis.fr/) approach.
-
-To run the documentation locally before submitting your changes:
-
-```bash
-make run
-```
-
-### Automatic checks
-
-GitHub runs automatic checks on the documentation to verify spelling, validate links, and suggest inclusive language.
-
-You can (and should) run the same checks locally:
-
-```bash
-make spelling
-make linkcheck
-make woke
-```
+Your submitted issues and pull requests will be reviewed in due time. If you submit a PR, we have some automatic checks that will run against your PR to check for consistent style and language. However, don't let this be a barrier to your contribution. You can still submit contributions to the best of your ability, and if something is inconsistent, we'll help you fix it.
