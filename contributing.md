@@ -19,11 +19,11 @@ The guidelines below will help keep your contributions effective and meaningful.
 
 When contributing, you must abide by the [Ubuntu Code of Conduct](https://ubuntu.com/community/ethos/code-of-conduct).
 
-## Licence and copyright
+## License and copyright
 
 <!-- TODO: Update with your license details or drop if excessive -->
 
-By default, all contributions to ACME are made under the AGPLv3 licence. See the [licence](https://github.com/canonical/ACME/blob/main/COPYING) in the ACME GitHub repository for details.
+By default, all contributions to Landscape are made under the AGPLv3 licence. See the [license](https://github.com/canonical/Landscape/blob/main/COPYING) in the Landscape GitHub repository for details.
 
 All contributors must sign the [Canonical contributor licence agreement](https://ubuntu.com/legal/contributors), which grants Canonical permission to use the contributions. The author of a change remains the copyright owner of their code (no copyright assignment occurs).
 
@@ -31,7 +31,7 @@ All contributors must sign the [Canonical contributor licence agreement](https:/
 
 <!-- TODO: Add your release and versioning details or drop if excessive -->
 
-ACME uses [semantic versioning](https://semver.org/); major releases occur once or twice a year.
+Landscape uses [semantic versioning](https://semver.org/); major releases occur once or twice a year.
 
 The release notes can be found TODO: [here](https://example.com).
 
@@ -55,9 +55,9 @@ TODO: prerequisite command 2
 
 <!-- TODO: Suggest your own PR process or drop if excessive -->
 
-If you want to address an issue or a bug in ACME, notify in advance the people involved to avoid confusion; also, reference the issue or bug number when you submit the changes.
+If you want to address an issue or a bug in Landscape, notify in advance the people involved to avoid confusion; also, reference the issue or bug number when you submit the changes.
 
-- Fork [our GitHub repository](https://github.com/canonical/ACME) and add the changes to your fork, properly structuring your commits, providing detailed commit messages, and signing your commits.
+- Fork [our GitHub repository](https://github.com/canonical/Landscape) and add the changes to your fork, properly structuring your commits, providing detailed commit messages, and signing your commits.
 
 - Make sure the updated project builds and runs without warnings or errors; this includes linting, documentation, code, and tests.
 
@@ -81,14 +81,14 @@ To be properly considered, reviewed, and merged, your pull request must provide 
 
 <!-- TODO: Update with your own guidelines or drop if excessive -->
 
-Use separate commits for each logical change, and for changes to different components. Prefix your commit messages with the names of components they affect, using the code tree structure. For example, start a commit that updates the ACME service with `ACME/service:`.
+Use separate commits for each logical change, and for changes to different components. Prefix your commit messages with the names of components they affect, using the code tree structure. For example, start a commit that updates the Landscape service with `Landscape/service:`.
 
 Use [conventional commits](https://www.conventionalcommits.org/) to ensure consistency across the project:
 
 ```none
 Ensure correct permissions and ownership for the content mounts
 
-* Work around an ACME issue regarding empty dirs: https://github.com/canonical/ACME/issues/12345
+* Work around an Landscape issue regarding empty dirs: https://github.com/canonical/Landscape/issues/12345
 
 * Ensure the source directory is owned by the user running a container.
 
@@ -115,7 +115,7 @@ To sign off on a commit, use the `--signoff` option in `git commit`.
 
 <!-- TODO: Update with your linting configuration setup or drop if excessive -->
 
-ACME relies on these formatting and linting tools:
+Landscape relies on these formatting and linting tools:
 
 - [TODO: Tool 1](http://example.com)
 - [TODO: Tool 2](http://example.com)
@@ -156,7 +156,7 @@ TODO: test command 2
 
 ## Documentation
 
-ACME's documentation is stored in the `DOCDIR` directory of the repository. It is based on the [Canonical starter pack](https://canonical-starter-pack.readthedocs-hosted.com/latest/) and hosted on [Read the Docs](https://about.readthedocs.com/).
+Landscape's documentation is stored in the `DOCDIR` directory of the repository. It is based on the [Canonical starter pack](https://canonical-starter-pack.readthedocs-hosted.com/latest/) and hosted on [Read the Docs](https://about.readthedocs.com/).
 
 For general guidance, refer to the [starter pack guide](https://canonical-starter-pack.readthedocs-hosted.com/latest/).
 
