@@ -2,7 +2,7 @@
 # Beta-only
 
 ```{note}
-**Note:** The following endpoints are only in beta.
+The following endpoints are only in beta.
 ```
 
 There aren't currently any endpoints that are only in Landscape beta.

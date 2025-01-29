@@ -17,7 +17,7 @@ We strongly recommend that administrators of a self-hosted Landscape instance fa
 Given the wide variety of clients (from physical hardware, to VMs, to containers, some of which may be permanent and others merely temporary), backup of Landscape Clients (if required at all) isn't covered in this guide.
 
 ```{note}
-**Note:** The database guidelines here don't apply to juju deployments with [Charmed PostgreSQL](https://canonical.com/data/docs/postgresql/iaas). Charmed PostgreSQL was introduced in the [Landscape 24.04 LTS charm](https://charmhub.io/landscape-server). See [Charmed PostgreSQL's backup and restore documentation](https://canonical.com/data/docs/postgresql/iaas/h-create-backup) for information on backing up and restoring your charmed database.
+The database guidelines here don't apply to juju deployments with [Charmed PostgreSQL](https://canonical.com/data/docs/postgresql/iaas). Charmed PostgreSQL was introduced in the [Landscape 24.04 LTS charm](https://charmhub.io/landscape-server). See [Charmed PostgreSQL's backup and restore documentation](https://canonical.com/data/docs/postgresql/iaas/h-create-backup) for information on backing up and restoring your charmed database.
 ```
 
 ## Define a backup and retention policy

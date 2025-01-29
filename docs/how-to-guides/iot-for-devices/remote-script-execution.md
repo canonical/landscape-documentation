@@ -74,7 +74,7 @@ snap_http.http.post(
 While this isn't as compact, it allows your Core device and your Snap to maintain the security and robustness that strict confinement offers while still giving full access to manage your snaps and your system.
 
 ```{note}
-**Note:** The Landscape team has a [repository of example scripts in GitHub](https://github.com/canonical/landscape-scripts/tree/main) that covers many scenarios you may encounter. The repository is also open to pull requests. If you have a script you think would be useful to others and want to include in the repository, please open a PR.
+The Landscape team has a [repository of example scripts in GitHub](https://github.com/canonical/landscape-scripts/tree/main) that covers many scenarios you may encounter. The repository is also open to pull requests. If you have a script you think would be useful to others and want to include in the repository, please open a PR.
 ```
 
 ## Example scripts to run on your device

@@ -2,7 +2,7 @@
 # 23.10 release notes
 
 ```{note}
-**Note:** Support for Landscape 23.10 ended in April 2024. 
+Support for Landscape 23.10 ended in April 2024. 
 ```
 
 Landscape 23.10 is an interim release and is **not recommended for production use**. Interim releases provide access to upcoming features, but these releases are only supported for 6 months, until the next release is published. Production deployments should only use LTS releases, which come with 10 years of support.

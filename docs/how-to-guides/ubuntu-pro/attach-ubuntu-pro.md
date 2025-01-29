@@ -8,13 +8,13 @@ Attaching the [Ubuntu Pro](https://ubuntu.com/pro) subscription to Ubuntu brings
 The following instructions explain how to attach your Ubuntu Pro subscription to your Ubuntu systems.
 
 ```{note}
-**Note:** Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
+Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
 ```
 
 ## Step 1: Install the Ubuntu Pro Client
 
 ```{note}
-**Note:** You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
+You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
 ```
 
 This step is necessary for Ubuntu Pro users or holders of personal subscriptions. If you are an Ubuntu Pro user through a public cloud offering, your subscription is already attached and you can skip these instructions.
