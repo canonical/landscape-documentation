@@ -65,7 +65,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 
 ## IoT for devices
 
-- [Overview](/how-to-guides/iot-for-devices/overview)
+- [Overview](/how-to-guides/iot-for-devices/index)
 - [Install the snap](/how-to-guides/iot-for-devices/install-the-snap)
 - [Configure the snap](/how-to-guides/iot-for-devices/configure-the-snap)
 - [Create a Core image](/how-to-guides/iot-for-devices/create-a-core-image)

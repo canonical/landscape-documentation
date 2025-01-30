@@ -21,7 +21,7 @@
 
 - **Snap management:** Manage snaps directly from the Landscape web portal.
 
-- **Landscape Client - new features for Ubuntu Core users**: The Landscape Client snap now includes additional features for Ubuntu Core users, such as remote script execution for snaps, user management on Core, and more. For more information, see the [Landscape client snap how-to guides](/how-to-guides/iot-for-devices/overview).
+- **Landscape Client - new features for Ubuntu Core users**: The Landscape Client snap now includes additional features for Ubuntu Core users, such as remote script execution for snaps, user management on Core, and more. For more information, see the [Landscape client snap how-to guides](/how-to-guides/iot-for-devices/index).
 
 ## Additional updates
 
