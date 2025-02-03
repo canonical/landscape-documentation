@@ -1,5 +1,5 @@
 (introduction-to-landscape)=
-# Introduction to Landscape
+# What is Landscape?
 
 Landscape is Canonical’s systems management solution. You can use Landscape to manage all of your Ubuntu systems—desktops, servers, cloud instances, IoT devices, and more.
 

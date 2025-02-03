@@ -145,6 +145,7 @@ misconfigurations
 Mitaka
 MTU
 MTUs
+Multipass
 Nagios
 nagios
 netinstall

@@ -1,5 +1,5 @@
 (how-to-guides-ubuntu-pro-enable-landscape)=
-# HOw to enable Landscape in the Ubuntu Pro Client
+# How to enable Landscape in the Ubuntu Pro Client
 
 > See also: [Ubuntu Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/)
 

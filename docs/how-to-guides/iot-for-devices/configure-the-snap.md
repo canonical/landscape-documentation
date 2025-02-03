@@ -90,3 +90,24 @@ To enable this setting, run the following command: (note this will only work if 
 sudo snap set system refresh.timer="managed"
 ```
 
+## Log rotation
+
+The Landscape Client Snap includes built-in log rotation with similar configuration to the [Debian package](/how-to-guides/landscape-installation-and-set-up/configure-landscape-client.md#log-rotation). Log rotation is done by the `landscape-client.logrotate` daemon weekly on Sunday. Due to the nature of snap applications, the rotation schedule cannot be modified.
+
+To view the daemon’s logs, run:
+
+```bash
+$ snap logs landscape-client.logrotate
+```
+
+To disable log rotation, run:
+
+```bash
+$ snap stop --disable landscape-client.logrotate
+```
+
+To enable log rotation, run:
+
+```bash
+$ snap start --enable landscape-client.logrotate
+```
