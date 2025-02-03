@@ -1,5 +1,5 @@
 (how-to-guides-wsl-integration-manage-wsl-instances)=
-# Manage WSL instances
+# How to manage WSL instances
 
 > See also: [WSL Legacy API methods](/reference/api/legacy-api-endpoints/wsl)
 

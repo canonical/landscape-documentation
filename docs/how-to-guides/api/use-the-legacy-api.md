@@ -1,5 +1,5 @@
 (how-to-guides-api-use-the-legacy-api)=
-# Use the legacy API
+# How to use the legacy API
 
 
 Landscape's API lets you perform many Landscape tasks from the command line or a shell script, or a Python module. You can also use the API in HTTPS calls.

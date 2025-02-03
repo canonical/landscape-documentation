@@ -1,5 +1,5 @@
 (explanation-security-cryptographic-technology)=
-# Cryptographic technology
+# Cryptographic technology in Landscape
 
 Landscape Server uses various cryptographic technologies internally. They’re used for communication between Landscape Server services and dependency services, Landscape Client and users of the web interface and APIs.
 

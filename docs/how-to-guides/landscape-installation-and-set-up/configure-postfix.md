@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-configure-postfix)=
-# Configure Postfix
+# How to configure Postfix for emails
 
 ```{note}
 These steps use SendGrid as an example email service provider that can be configured to work with Postfix. They may still generally apply to other email service providers, such as Mailjet, Amazon SES or Google.

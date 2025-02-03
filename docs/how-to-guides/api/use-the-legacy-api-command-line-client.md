@@ -1,5 +1,5 @@
 (how-to-guides-api-use-the-legacy-api-command-line-client)=
-# Use the legacy API command-line client
+# How to use the legacy API command-line client
 
 
 The **landscape-api** package is available as a snap package, and also in the same PPA repository as Landscape Server.

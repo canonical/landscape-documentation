@@ -1,5 +1,5 @@
 (how-to-guides-repository-mirrors-manage-repositories-in-the-web-portal)=
-# Manage repositories in the web portal
+# How to manage and mirror repositories from the web portal
 
 > See also: [About repository mirroring](/explanation/repository-mirroring/repository-mirroring)
 

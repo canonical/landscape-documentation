@@ -1,5 +1,5 @@
 (how-to-guides-wsl-integration-use-a-specific-image-source)=
-# Use a specific image source
+# How to use a specific Ubuntu image source for WSL and push the image to your Windows machines
 
 If you don’t want to download your Ubuntu image from the Microsoft Store, you can instead use a different image source. This guide describes how to get your Ubuntu image from a different source and push that image to your WSL machines using the Landscape REST API. 
 

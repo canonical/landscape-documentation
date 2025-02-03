@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-juju-installation)=
-# Juju installation
+# How to install Landscape Server with Juju
 
 > See also: [Landscape Server charm (Charmhub)](https://charmhub.io/landscape-server)
 

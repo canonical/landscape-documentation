@@ -1,5 +1,5 @@
 (how-to-guides-external-authentication-pluggable-authentication-modules-pam)=
-# Pluggable Authentication Modules (PAM)
+# How to enable PAM authentication
 
 If you want to use Pluggable Authentication Modules (PAM) to authenticate users in your self-hosted Landscape server, you must create the file `/etc/pam.d/landscape` with the appropriate PAM configuration.
 

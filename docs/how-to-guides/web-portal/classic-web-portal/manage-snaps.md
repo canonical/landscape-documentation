@@ -1,5 +1,5 @@
 (how-to-guides-web-portal-classic-web-portal-manage-snaps)=
-# Manage snaps
+# How to manage snaps
 
 You can manage snaps from the web portal for each managed computer in your Landscape account.
 

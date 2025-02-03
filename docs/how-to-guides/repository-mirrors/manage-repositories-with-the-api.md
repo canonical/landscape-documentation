@@ -1,5 +1,5 @@
 (how-to-guides-repository-mirrors-manage-repositories-with-the-api)=
-# Manage repositories with the API
+# How to manage and mirror repositories with the API
 
 ```{note}
 Repository mirroring is available for self-hosted users.

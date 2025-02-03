@@ -1,5 +1,5 @@
 (how-to-guides-iot-for-devices-use-annotations)=
-# Use annotations
+# How to use annotations with the Landscape Client snap
 
 Annotations in Landscape provide a mechanism for sending custom metadata from a client device to your Landscape server. These annotations can then be used to monitor, group and search for devices.
 

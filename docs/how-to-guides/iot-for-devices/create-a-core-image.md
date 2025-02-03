@@ -1,5 +1,5 @@
 (how-to-guides-iot-for-devices-create-a-core-image)=
-# Create a Core image
+# How to create an Ubuntu Core image with Landscape Client included
 
 You can manage your Ubuntu Core device deployments with the Landscape Client snap and the Landscape web portal. This guide demonstrates how you can deploy your devices at scale by building a custom Ubuntu Core image that includes the Landscape Client snap and configuring the image to automatically register each device after its first boot.
 

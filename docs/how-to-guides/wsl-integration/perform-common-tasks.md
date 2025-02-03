@@ -1,5 +1,5 @@
 (how-to-guides-wsl-integration-perform-common-tasks)=
-# Perform common tasks
+# How to perform common tasks with WSL in Landscape
 
 > See also: [WSL API methods](/reference/api/legacy-api-endpoints/wsl)
 

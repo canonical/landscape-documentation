@@ -272,7 +272,7 @@ rst_epilog = """
 #
 # TODO: To disable the button, uncomment this.
 
-# disable_feedback_button = True
+disable_feedback_button = False
 
 
 # Your manpage URL

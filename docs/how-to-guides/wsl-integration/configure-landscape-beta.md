@@ -1,5 +1,5 @@
 (how-to-guides-wsl-integration-configure-landscape-beta)=
-# Configure Landscape beta
+# How to configure WSL-related services after upgrading Landscape
 
 ```{note}
 This guide is only for those who've upgraded from Landscape 23.10 or earlier.

@@ -1,5 +1,5 @@
 (how-to-guides-web-portal-web-portal-24-04-or-later-manage-livepatch-and-kernel-updates)=
-# Manage Livepatch and kernel updates
+# How to manage Livepatch and kernel updates from the Landscape web portal
 
 You can view and manage kernel and Livepatch information from the **Kernel** tab. To access this tab, go to **Instances** > Select your instance > **Kernel**.
 

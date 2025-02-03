@@ -1,5 +1,5 @@
 (how-to-guides-api-make-a-rest-api-request)=
-# Make a REST API request
+# How to make a REST API request
 
 
 > See also: [Login API endpoints](/reference/api/rest-api-endpoints/login)

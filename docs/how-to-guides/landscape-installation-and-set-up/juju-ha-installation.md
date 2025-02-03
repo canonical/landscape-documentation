@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-juju-ha-installation)=
-# Juju HA installation
+# How to install and configure Landscape for high-availability deployments
 
 > See also: [Juju documentation](https://juju.is/docs/juju)
 

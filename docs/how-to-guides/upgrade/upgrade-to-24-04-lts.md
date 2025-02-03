@@ -1,5 +1,5 @@
 (how-to-guides-upgrade-upgrade-to-24-04-lts)=
-# Upgrade to 24.04 LTS
+# How to upgrade to Landscape Server 24.04 LTS
 
 ```{note}
 There is a [known issue](https://bugs.launchpad.net/ubuntu/+source/rabbitmq-server/+bug/2074309) affecting Ubuntu 22.04 LTS (Jammy) to Ubuntu 24.04 LTS (Noble) upgrades for systems that run RabbitMQ, which includes systems that use Landscape. If you run into this issue, we recommend waiting until it's resolved before upgrading your Ubuntu version. This issue doesn't affect Landscape upgrades, and you can still upgrade to Landscape 24.04 LTS for Jammy.

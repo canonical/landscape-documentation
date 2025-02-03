@@ -1,5 +1,5 @@
 (how-to-guides-web-portal-web-portal-24-04-or-later-manage-access-groups)=
-# Manage access groups
+# How to manage access groups
 
 > See also: [Access groups](/explanation/terms/access-groups)
 

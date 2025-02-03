@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-install-in-a-lxd-container)=
-# Install in a LXD container
+# How to install and configure Landscape Server in a single LXD container
 
 ```{note}
 You can also use this guide to test Landscape inside a single LXD container.

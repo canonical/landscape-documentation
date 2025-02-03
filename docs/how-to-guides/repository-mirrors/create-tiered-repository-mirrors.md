@@ -1,5 +1,5 @@
 (how-to-guides-repository-mirrors-create-tiered-repository-mirrors)=
-# Create tiered repository mirrors
+# How to create tiered repository mirrors for multi-region and air-gapped deployments
 
 > See also: [About repository mirroring](https://ubuntu.com/landscape/docs/explanation-about-repository-mirroring)
 

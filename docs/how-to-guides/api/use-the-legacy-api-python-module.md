@@ -1,5 +1,5 @@
 (how-to-guides-api-use-the-legacy-api-python-module)=
-# Use the legacy API Python module
+# How to use the legacy API Python module
 
 
 The **landscape-api** package also has a Python module to use the Landscape API. Once the package is installed, the `API` class can be imported.

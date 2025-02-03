@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-configure-rabbitmq)=
-# Configure RabbitMQ
+# How to configure RabbitMQ for Jammy 22.04 (or later)
 
 RabbitMQ is configured with a default timeout of 30 minutes in Jammy 22.04 or later. This timeout can cause issues when installing Landscape Server or syncing repository mirrors. Any tasks that run longer than 30 minutes without reporting any progress or updates are automatically flagged as failed. RabbitMQ then disconnects from the task due to this perceived failure, and the system assigns a “failed” status to the entire operation. The error message for this issue is `No transition: delivered=>delivered`. 
 

@@ -1,5 +1,5 @@
 (how-to-guides-iot-for-devices-configure-the-snap)=
-# Configure the snap
+# How to configure the snap
 
 ```{note}
 You must have the Landscape Client snap installed on at least one client device before configuring it with `landscape-client.config`. For instructions, see [how to install the Landscape Client snap](/how-to-guides/iot-for-devices/install-the-snap).

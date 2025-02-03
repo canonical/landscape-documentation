@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-manual-installation)=
-# Manual installation
+# How to install Landscape manually
 
 ```{note}
 If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see [how to attach your Ubuntu Pro subscription](/how-to-guides/ubuntu-pro/attach-ubuntu-pro) and [how to enable Landscape in the Ubuntu Pro Client](/how-to-guides/ubuntu-pro/enable-landscape).

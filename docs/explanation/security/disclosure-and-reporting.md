@@ -1,5 +1,5 @@
 (explanation-security-disclosure-and-reporting)=
-# Disclosure and reporting
+# Security disclosure and reporting for Landscape
 
 > See also: [Ubuntu Security documentation](https://ubuntu.com/security)
 

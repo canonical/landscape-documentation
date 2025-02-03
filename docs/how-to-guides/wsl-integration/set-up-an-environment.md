@@ -1,5 +1,5 @@
 (how-to-guides-wsl-integration-set-up-an-environment)=
-# Set up an environment
+# How to set up a Windows 11 environment to use WSL with Landscape
 
 ```{note}
 If you already have a Windows machine with WSL 2 and Ubuntu installed, you don’t need to go through this guide.

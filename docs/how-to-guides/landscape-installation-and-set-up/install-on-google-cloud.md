@@ -1,5 +1,5 @@
 (how-to-guides-landscape-installation-and-set-up-install-on-google-cloud)=
-# Install on Google Cloud
+# How to install Landscape Server on Google Cloud
 
 This guide provides an example of how to install and set up your Landscape server on Google Cloud with [cloud-init](https://cloudinit.readthedocs.io/en/latest/). The instructions here can be used for both standard or FIPS-compliant deployments. 
 

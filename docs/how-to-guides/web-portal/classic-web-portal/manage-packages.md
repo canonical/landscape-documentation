@@ -1,5 +1,5 @@
 (how-to-guides-web-portal-classic-web-portal-manage-packages)=
-# Manage packages
+# How to manage packages
 
 ## Access package information
 
