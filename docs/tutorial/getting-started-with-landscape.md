@@ -190,7 +190,7 @@ Go to your Landscape Server UI in your browser and click the arrow icon in the h
 
 ## Run a script
 
-From the **Organisation** home page in the Landscape web portal, click on the **Scripts** tab. Click **Add script** to create a script with the following contents to be run as the `ubuntu` user. Give it the name `Hello World` and save it.
+From the **{spellexception}`Organisation`** home page in the Landscape web portal, click on the **Scripts** tab. Click **Add script** to create a script with the following contents to be run as the `ubuntu` user. Give it the name `Hello World` and save it.
 
 ```bash
 #!/bin/bash

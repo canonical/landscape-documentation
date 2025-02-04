@@ -240,7 +240,7 @@ myst_heading_anchors = 4
 extensions = [
     "canonical_sphinx",
     "sphinxcontrib.cairosvgconverter",
-    "sphinx_last_updated_by_git"
+    "sphinx_last_updated_by_git",
 ]
 
 
