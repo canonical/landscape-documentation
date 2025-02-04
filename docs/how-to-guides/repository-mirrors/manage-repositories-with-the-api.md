@@ -9,11 +9,11 @@ Repository management requires the use of the Landscape [API.](/how-to-guides/ap
 
 In the following instructions we will use:
 
-* **[distribution](/explanation/terms/distribution)**: ubuntu
-* **[series](/explanation/terms/series)**: bionic
-* **[pockets](/explanation/terms/pocket)**: release, updates, security
-* **[components](/explanation/terms/components)**: main, restricted, universe, multiverse
-* **[tag](/explanation/terms/tags)**: example-tag
+* **[distribution](/reference/terms/distribution)**: ubuntu
+* **[series](/reference/terms/series)**: bionic
+* **[pockets](/reference/terms/pocket)**: release, updates, security
+* **[components](/reference/terms/components)**: main, restricted, universe, multiverse
+* **[tag](/reference/terms/tags)**: example-tag
 * **repository profile**: example-profile
 * **mirror-key**: the name of the gpg key used by Landscape to sign your repository
 

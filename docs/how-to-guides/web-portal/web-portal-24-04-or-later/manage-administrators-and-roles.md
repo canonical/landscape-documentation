@@ -1,7 +1,7 @@
 (how-to-guides-web-portal-web-portal-24-04-or-later-manage-administrators-and-roles)=
 # How to manage administrators and roles
 
-See also: [Administrators](/explanation/terms/administrators), [Roles](/explanation/terms/roles)
+See also: [Administrators](/reference/terms/administrators), [Roles](/reference/terms/roles)
 
 ```{note}
 Note: You must be an administrator to perform these tasks.
