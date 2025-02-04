@@ -6,6 +6,6 @@
 :maxdepth: 2
 :glob:
 
-active-directory
-openid-connect-oidc
-pluggable-authentication-modules-pam
+Active Directory <active-directory>
+OIDC <openid-connect-oidc>
+PAM <pluggable-authentication-modules-pam>

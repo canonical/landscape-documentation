@@ -6,6 +6,6 @@
 :maxdepth: 2
 :glob:
 
-manage-repositories-in-the-web-portal
-manage-repositories-with-the-api
-create-tiered-repository-mirrors
+Manage repositories in the web portal <manage-repositories-in-the-web-portal>
+Manage repositories with the API <manage-repositories-with-the-api>
+Create tiered-repository mirrors <create-tiered-repository-mirrors>

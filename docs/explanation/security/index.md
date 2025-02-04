@@ -6,6 +6,6 @@
 :maxdepth: 2
 :glob:
 
-cryptographic-technology
-disclosure-and-reporting
-apparmor
+Cryptographic technology <cryptographic-technology>
+Disclosure and reporting <disclosure-and-reporting>
+AppArmor <apparmor>

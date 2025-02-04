@@ -6,5 +6,5 @@
 :maxdepth: 2
 :glob:
 
-attach-ubuntu-pro
-enable-landscape
+Attach Ubuntu Pro <attach-ubuntu-pro>
+Enable Landscape <enable-landscape>

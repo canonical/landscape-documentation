@@ -6,5 +6,5 @@
 :maxdepth: 2
 
 about-landscape
-self-hosted-landscape
-licenses
+Self-hosted Landscape <self-hosted-landscape>
+Licenses <licenses>

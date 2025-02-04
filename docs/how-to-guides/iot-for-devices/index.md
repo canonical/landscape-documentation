@@ -1,9 +1,6 @@
 (how-to-guides-iot-for-devices-index)=
 # IoT for devices
 
-(how-to-guides-iot-for-devices-overview)=
-# Overview
-
 Managing IoT devices can be a challenge, especially when you consider the requirements for deploying these devices to physically inaccessible locations, or the need to dictate exactly when and how your devices are updated.
 
 Landscape can solve these issues. Landscape enables you to remotely manage, configure, and control each of your devices, choose when and which updates are installed, and allow remote debugging and health checking of your devices all from a centralized web portal.
@@ -18,17 +15,17 @@ We have the following how-to guides to help you use the Landscape Client snap to
 
 ```{toctree}
 :titlesonly:
-- Install the snap <install-the-snap>
-- Configure the snap <configure-the-snap>
-- Create an Ubuntu Core image that includes the snap <create-a-core-image>
+Install the snap <install-the-snap>
+Configure the snap <configure-the-snap>
+Create an Ubuntu Core image that includes the snap <create-a-core-image>
 ```
 
 ### Use
 
 ```{toctree}
 :titlesonly:
-- Use remote script execution <remote-script-execution>
-- Use annotations <use-annotations>
+Use remote script execution <remote-script-execution>
+Use annotations <use-annotations>
 ```
 
 ## Best practices for IoT

@@ -4,7 +4,6 @@
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
-:glob:
 
-backup-and-restore
-manage-maintenance-tasks
+Backup and restore <backup-and-restore>
+Manage maintenance tasks <manage-maintenance-tasks>

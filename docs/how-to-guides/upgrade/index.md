@@ -4,6 +4,7 @@
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
-:glob:
 
-*
+Upgrade <upgrade-landscape>
+Upgrade to 24.04 LTS <upgrade-to-24-04-lts>
+

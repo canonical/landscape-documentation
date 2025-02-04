@@ -4,12 +4,11 @@
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
-:glob:
 
-configure-landscape-beta
-set-up-an-environment
-register-wsl-hosts
-manage-wsl-instances
-use-a-specific-image-source
-perform-common-tasks
-get-support
+Configure Landscape Beta <configure-landscape-beta>
+Set up an environment <set-up-an-environment>
+Register WSL hosts <register-wsl-hosts>
+Manage WSL instances <manage-wsl-instances>
+Use a specific image source <use-a-specific-image-source>
+Perform common tasks <perform-common-tasks>
+Get support <get-support>
