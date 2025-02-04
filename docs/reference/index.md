@@ -12,3 +12,4 @@ api/index
 logs/index
 networking/index
 release-notes/index
+terms/index
