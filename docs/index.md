@@ -9,7 +9,7 @@
 :maxdepth: 2
 
 self
-Introduction to Landscape <introduction-to-landscape>
+what-is-landscape
 tutorial/index
 how-to-guides/index
 reference/index

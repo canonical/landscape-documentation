@@ -1,7 +1,7 @@
 (explanation-landscape-about-landscape)=
 # About Landscape
 
-> See also: [Introduction to Landscape](/introduction-to-landscape)
+> See also: [What is Landscape?](/what-is-landscape)
 
 There are three editions of Landscape:
 
