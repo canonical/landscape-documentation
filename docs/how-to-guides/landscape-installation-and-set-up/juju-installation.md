@@ -11,13 +11,13 @@ You can deploy Landscape in a scalable way with Juju.
 
 ## Install Juju
 
-[Install Juju](https://juju.is/docs/olm/installing-juju) as a snap with this command:
+[Install Juju](https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-juju/) as a snap with this command:
 
 ```bash
 sudo snap install juju --classic
 ```
 
-To learn more about Juju and to bootstrap a Juju controller, check out their [getting started](https://juju.is/docs/juju/get-started-with-juju) page.
+To learn more about Juju and to bootstrap a Juju controller, check out their [getting started](https://canonical-juju.readthedocs-hosted.com/en/latest/user/tutorial/) page.
 
 ## Deploy self-hosted Landscape Server
 
