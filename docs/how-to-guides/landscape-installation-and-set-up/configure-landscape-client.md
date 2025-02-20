@@ -29,6 +29,17 @@ To view all possible options for `landscape-config`, visit the man page with:
 man landscape-config
 ```
 
+## Update the `client.conf` file
+
+See the Landscape Client GitHub project for an [example `client.conf` file](https://github.com/canonical/landscape-client/blob/main/example.conf). This file contains all the existing configuration options available. 
+
+The Landscape Client configuration file is located in `/etc/landscape/client.conf` for the Debian package. If you change any configurations in this file, you’ll need to restart Landscape Client:
+
+```bash
+sudo systemctl restart landscape-client
+```
+
+
 ## Auto-register new computers
 
 ```{note}

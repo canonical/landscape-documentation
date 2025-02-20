@@ -6,6 +6,7 @@
 :maxdepth: 2
 :glob:
 
+Security overview <security-in-landscape>
 Cryptographic technology <cryptographic-technology>
 Disclosure and reporting <disclosure-and-reporting>
 AppArmor <apparmor>

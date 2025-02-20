@@ -85,7 +85,7 @@ To install `landscape-server-quickstart`:
 ## Install an SSL certificate
 
 ```{note}
-If you have the `fullchain.pem` and `privkey.pem` files for your SSL certificate, skip these steps and configure Apache manually.
+If you have the `fullchain.pem` and `privkey.pem` files for your SSL certificate, skip these steps and configure Apache manually. For more details, see [how to configure the web server](/how-to-guides/landscape-installation-and-set-up/manual-installation.md#configure-web-server) in the Landscape manual installation guide.
 ```
 
 ### Install Certbot

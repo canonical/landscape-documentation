@@ -7,7 +7,9 @@ This document provides the Landscape-specific steps needed for a FIPS-compliant 
 
 Use the [Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart-installation) or [Manual](/how-to-guides/landscape-installation-and-set-up/manual-installation) installation guides, with the following changes:
 
-- **Install Landscape 24.04 LTS on Ubuntu 22.04 LTS**
+- **Use Ubuntu 22.04 LTS**
+- **Run `pro enable fips-updates`, then reboot**
+- **Install Landscape 24.04 LTS**
 - **Install packages with `apt` instead of `snap`**
 - **Use external authentication instead of username/password**
 
