@@ -1,7 +1,7 @@
 (how-to-guides-repository-mirrors-create-tiered-repository-mirrors)=
 # How to create tiered repository mirrors for multi-region and air-gapped deployments
 
-> See also: [About repository mirroring](https://ubuntu.com/landscape/docs/explanation-about-repository-mirroring)
+> See also: [About repository mirroring](/explanation/repository-mirroring/repository-mirroring)
 
 You can create tiered (or layered) repository mirrors for additional control over the mirroring, storage and distribution of your packages. This tiered approach uses two or more Landscape Server instances to further segment different regions or components of your deployment.
 
