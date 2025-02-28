@@ -60,6 +60,4 @@ Most Landscape documentation contributions are made on GitHub. There are several
 - Report a bug or provide feedback by [creating an issue](https://github.com/canonical/landscape-documentation/issues/new) in GitHub
 - Ask a question or help other Landscape community members on [Discourse](https://discourse.ubuntu.com/c/project/landscape/89)
 
-If you're new to contributing with Git and the command line, see the [Getting Started guide](https://github.com/canonical/open-documentation-academy/blob/main/getting-started/get_started.md) from the Canonical Open Documentation Academy for an overview.
-
 Your submitted issues and pull requests will be reviewed in due time. If you submit a PR, we have some automatic checks that will run against your PR to check for consistent style and language. However, don't let this be a barrier to your contribution. You can still submit contributions to the best of your ability, and if something is inconsistent, we'll help you fix it.
