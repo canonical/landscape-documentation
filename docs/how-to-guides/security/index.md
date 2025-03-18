@@ -1,5 +1,5 @@
 (how-to-guides-security-index)=
-# Ubuntu Pro
+# Security
 
 ```{toctree}
 :titlesonly:
