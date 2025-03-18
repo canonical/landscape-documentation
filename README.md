@@ -12,6 +12,14 @@ For system administrators, security analysts, CISOs and more, Landscape provides
 
 [Support](https://support-portal.canonical.com/) is available to those who purchase it with [Ubuntu Pro](https://ubuntu.com/pro).
 
+## In this documentation
+
+| | |
+|--|--|
+| [Tutorial](/tutorial/getting-started-with-landscape) </br> A hands-on introduction to Landscape for new users | [How-to guides](/how-to-guides/index) </br> Step-by-step guides covering key operations and common tasks |
+| [Reference](/reference/index) </br> Technical information - APIs, logs, glossary | [Explanation](/explanation/index) </br> Concepts - discussion and clarification of key topics |
+---
+
 ## Project and community
 
 Landscape is a member of the Ubuntu family. It welcomes community contributions, suggestions, fixes and constructive feedback. 
