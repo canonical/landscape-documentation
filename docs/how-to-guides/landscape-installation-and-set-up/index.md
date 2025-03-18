@@ -19,4 +19,3 @@ Install Landscape Client <install-landscape-client>
 Configure Landscape Client <configure-landscape-client>
 Configure RabbitMQ <configure-rabbitmq>
 Configure Postfix <configure-postfix>
-Harden your deployment <harden-your-deployment>

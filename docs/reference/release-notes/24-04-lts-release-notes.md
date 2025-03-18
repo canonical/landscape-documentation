@@ -80,3 +80,15 @@
   - fix: correct new dashboard login page API URL.
   - fix: persist session from old dashboard to new dashboard (LP: [#2066944](https://launchpad.net/bugs/2066944))
 
+## Landscape 24.04.10 Point Release
+
+We published the 24.04.10 point release on 27 February 2025.
+
+ - fix: change access group API bug
+ - fix: API permissions check
+ - fix: make use of MD5 hash FIPS-compliant
+ - fix: bug in v2 API eventlog endpoint
+ - fix: make logfile create perms CIS-compliant; proper signal to rsyslogd
+ - fix: prevent epoll race conditions when writing API responses
+ - fix: reset passphrase oops backport (LP: [#2094844](https://bugs.launchpad.net/landscape/+bug/2094844))
+ - fix: 500 error when logging out in standalone

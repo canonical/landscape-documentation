@@ -82,6 +82,11 @@ These how-to guides can be applied to many key operations and common tasks with 
 - [Perform common tasks](/how-to-guides/wsl-integration/perform-common-tasks)
 - [Get support](/how-to-guides/wsl-integration/get-support)
 
+## Security
+
+- [Install Landscape in an air-gapped or offline environment](/how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment)
+- [Manage repositories in an air-gapped or offline environment](/how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment)
+- [Harden your deployment](/how-to-guides/security/harden-your-deployment)
 
 ```{toctree}
 :hidden:
@@ -98,4 +103,5 @@ repository-mirrors/index
 web-portal/index
 iot-for-devices/index
 wsl-integration/index
+security/index
 api/index

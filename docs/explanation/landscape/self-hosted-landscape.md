@@ -16,7 +16,7 @@ The following table applies to [Quickstart](/how-to-guides/landscape-installatio
 The [Landscape Server charm](https://charmhub.io/landscape-server) typically follows the same release cycles, although there can be some differences.
 
 ```{note}
-For the most up-to-date information on the charm and what versions of Ubuntu the charms support, visit [Charmhub](https://charmhub.io/).
+For the most up-to-date information on what versions of Ubuntu the charms support, visit [Charmhub](https://charmhub.io/).
 ```
 
 Landscape 23.03 manages all versions of Ubuntu 16.04 LTS (Xenial Xerus) onwards. Landscape 23.03 also manages two future Ubuntu releases, which includes the following interim release (Ubuntu 23.10) and LTS release (Ubuntu 24.04).

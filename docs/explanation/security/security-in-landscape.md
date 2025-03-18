@@ -7,7 +7,7 @@ This page provides an overview of various security topics related to Landscape.
 We have the following how-to guides for configuring your Landscape deployment beyond the default security settings.
 
 - [How to install Landscape Server on FIPS-compliant machines](/how-to-guides/landscape-installation-and-set-up/install-on-fips-compliant-machines)
-- [How to harden your Landscape deployment](/how-to-guides/landscape-installation-and-set-up/harden-your-deployment)
+- [How to harden your Landscape deployment](/how-to-guides/security/harden-your-deployment.md)
 
 ## Ubuntu Pro
 
@@ -26,9 +26,11 @@ For a more secure system, it’s recommended to use external authentication inst
 
 ## Air-gapped and restricted network environments
 
-If you’re using Landscape in an air-gapped environment, we have the following guide related to setting up repository mirrors for air-gapped and restricted network environments:
+If you’re using Landscape in an air-gapped environment, we have the following guides related to installing Landscape and setting up repository mirrors for offline environments:
 
-- [How to create tiered repository mirrors for multi-region and air-gapped deployments](/how-to-guides/repository-mirrors/create-tiered-repository-mirrors)
+- [How to install Landscape in an air-gapped or offline environment](/how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment)
+- [How to manage repositories in an air-gapped or offline environment](/how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment)
+- [How to create tiered repository mirrors for multi-region and air-gapped deployments](/how-to-guides/repository-mirrors/create-tiered-repository-mirrors.md)
 
 ## Livepatch
 
@@ -44,6 +46,7 @@ We also have the following explanations about security in Landscape:
 
 - [Cryptographic technology in Landscape](/explanation/security/cryptographic-technology)
 - [Security disclosure and reporting](/explanation/security/disclosure-and-reporting)
+- [Data handling](/explanation/security/data-handling.md)
 - [AppArmor and Landscape](/explanation/security/apparmor)
 
 ## Related topics

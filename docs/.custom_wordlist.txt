@@ -1,4 +1,5 @@
 AArch
+AES
 ajax
 allowlist
 allowlists
@@ -12,9 +13,11 @@ appserver
 ascii
 async
 auth
+autoinstall
 AutoPilot
 autoremove
 amd
+backport
 Backport
 backtrace
 blocklist
@@ -41,7 +44,6 @@ CISOs
 CLA
 CLI's
 Cognito
-ComputerOfflineAlert
 config
 configs
 conntrack
@@ -65,14 +67,13 @@ DNS
 DSA
 dpkg
 dput
-editpocket
 Entra
+epoll
 ESM
 FIPS
 FQDN
 gapped
 GCP
-GetComputers
 Github
 GlobalAdmin
 GlobalAdministrator
@@ -96,7 +97,6 @@ HmacSHA
 hostagent
 hostname
 html
-HTTPRequestURI
 http
 HTTPS
 https
@@ -109,6 +109,7 @@ Juju's
 Juju
 juju
 json
+jwt
 JWT
 JWTs
 Keycloak
@@ -128,6 +129,7 @@ lifecycle
 Livepatch
 Livepatches
 livepatching
+logfile
 loopback
 LXC
 LXD
@@ -155,7 +157,9 @@ NID
 NSG
 NVMe
 noreply
+OAuth
 Ocata
+oidc
 OIDC
 Okta
 onwards
@@ -172,7 +176,7 @@ organizational
 quickstart
 packagesearch
 PCI
-PendingComputer
+perf
 performant
 PITR
 pgSQL
@@ -203,7 +207,6 @@ radosgw
 RBAC
 reconnections
 reimplement
-RegisterMAASRegionController
 ReleaseNotes
 repo
 reprepro
@@ -214,6 +217,7 @@ routable
 RSA
 RSS
 rsyslog
+rsyslogd
 SaaS
 scalable
 scalability
@@ -238,7 +242,6 @@ subkeys
 submodule
 subpaths
 SupportAnalyst
-SyncPocket
 syslog
 systemd
 SES
@@ -260,8 +263,6 @@ udeb
 udebs
 unactivated
 uncomment
-UnknownAccessGroupError
-UnknownAccessGroupsError
 unscalable
 untrusted
 uploader
@@ -271,10 +272,10 @@ URIs
 URL
 url
 urlencoded
+USG
 usn
 USNs
 UTF
-ValueError
 vCPU
 vCPUs
 vhost
@@ -299,6 +300,9 @@ XSS
 # Partial words (e.g., amd from amd64)
 amd
 armhf
+authn
+bz
+conn
 ec
 el
 env
@@ -307,6 +311,8 @@ eth
 Gb
 iet
 ietf
+ipv
+md
 mis
 NNNN
 param
@@ -320,6 +326,22 @@ trgm
 txt
 un
 www
+
+# Endpoints / alerts / action / etc.
+AuthenticationFailure
+BIGINT
+ComputerOfflineAlert
+editpocket
+eventlog
+GetComputers
+HTTPRequestURI
+OIDCAuthnConfiguration
+PendingComputer
+RegisterMAASRegionController
+SyncPocket
+UnknownAccessGroupError
+UnknownAccessGroupsError
+ValueError
 
 # Contributors
 ade
