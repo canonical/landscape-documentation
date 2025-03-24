@@ -70,7 +70,7 @@ Our recommendation is to allocate 8 vCPUs or cores, 16GB RAM, and 512 GB of stor
 
 One machine with these specifications will run the landscape-server-quickstart package. When using Juju or manually installing across multiple machines, none of the machines should be configured below these baseline compute power specifications.
 
-The operating system to run Landscape Server and its dependencies are Ubuntu Server 20.04 LTS or 22.04 LTS on amd64, arm64, s390x, or ppc64el CPU architectures.
+The operating system to run Landscape Server and its dependencies are Ubuntu Server 22.04 LTS or 24.04 LTS on amd64, arm64, s390x, or ppc64el CPU architectures.
 
 ### Network access
 
