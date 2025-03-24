@@ -195,7 +195,8 @@ linkcheck_ignore = [
     "https://ubuntu.com/pro/dashboard",
     "https://support.canonical.com/",
     "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html",
-    "https://wiki.ubuntu.com/Membership"
+    "https://wiki.ubuntu.com/Membership",
+    "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server"
 ]
 
 
