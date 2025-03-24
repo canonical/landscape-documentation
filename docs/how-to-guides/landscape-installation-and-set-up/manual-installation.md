@@ -86,7 +86,7 @@ sudo systemctl restart postgresql
 
 ### Tune PostgreSQL
 
-It is strongly recommended to fine tune this PostgreSQL installation according to the hardware of the server. Keeping the default settings (especially of `max_connections`) is known to be problematic.  For more information, visit [PostgreSQL's guide on tuning your PostgreSQL server](http://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server).
+It is strongly recommended to fine tune this PostgreSQL installation according to the hardware of the server. Keeping the default settings (especially of `max_connections`) is known to be problematic.  For more information, visit [PostgreSQL's guide on tuning your PostgreSQL server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server).
 
 #### Landscape-specific tips for tuning PostgreSQL
 
