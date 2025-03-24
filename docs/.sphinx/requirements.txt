@@ -1,4 +1,4 @@
-canonical-sphinx[full]>=0.2.0
+canonical-sphinx[full]==0.3.0
 sphinx-autobuild
 sphinxcontrib-svg2pdfconverter[CairoSVG]
 sphinx-last-updated-by-git
