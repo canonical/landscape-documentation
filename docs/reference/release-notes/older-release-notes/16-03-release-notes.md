@@ -1,7 +1,7 @@
 (reference-release-notes-older-release-notes-16-03-release-notes)=
 # 16.03 release notes
 
-# Highlights
+## Highlights
  * Machine roles
  * Nagios
  * New charms
@@ -10,7 +10,7 @@
    * fix for performance regression in the account page
    * Autopilot only: updated Keystone charm can handle upcoming OpenStack Stable Release Update for Ubuntu 16.04 LTS ("trusty")
 
-# Changes and new features
+## Changes and new features
 
 ## Autopilot: Machine roles
 
@@ -27,7 +27,7 @@ The autopilot will now allow Nagios integration at cloud deployment time.  Each 
 ## New alert
 There is a new alert type that triggers when more than one computer has the same hostname.
 
-# Upgrade notes
+## Upgrade notes
 OPL 16.03 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded from OPL 15.11. Ubuntu 16.04 LTS ("xenial") is NOT supported by OPL 16.03.
 
 

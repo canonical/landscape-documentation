@@ -4,7 +4,7 @@
 > See also: [Landscape Server charm (Charmhub)](https://charmhub.io/landscape-server)
 
 ```{note}
-Note: For more information on charms and bundles, visit [Charmhub](https://charmhub.io/).
+For more information on charms and bundles, visit [Charmhub](https://charmhub.io/).
 ```
 
 You can deploy Landscape in a scalable way with Juju.
@@ -29,7 +29,7 @@ When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulati
 
 If you have a [MAAS](https://maas.io) server, you can take advantage of containers and use the `landscape-dense-maas` bundle:
 
-```console
+```bash
 juju deploy landscape-dense-maas
 ```
 
@@ -41,7 +41,7 @@ This will deploy Landscape on just one node using LXD containers for all service
 
 **landscape-scalable** each service gets its own machine. Currently that means you will need 4 machines for Landscape, and one for the controller node:
 
-```console
+```bash
 juju deploy landscape-scalable
 ```
 
@@ -51,7 +51,7 @@ juju deploy landscape-scalable
 
 **landscape-dense** is quite similar to the `landscape-dense-maas` deployment, but it installs the `haproxy` service directly on the machine without a container. All the other services use a container:
 
-```console
+```bash
 juju deploy landscape-dense
 ```
 

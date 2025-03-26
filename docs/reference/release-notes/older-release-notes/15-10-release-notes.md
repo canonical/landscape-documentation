@@ -1,7 +1,7 @@
 (reference-release-notes-older-release-notes-15-10-release-notes)=
 # 15.10 release notes
 
-# Highlights
+## Highlights
  * Autopilot only supported on MAAS 1.8.X only
  * New charm to deploy Landscape
  * Juju deployed Landscape can be upgraded to future versions
@@ -11,7 +11,7 @@
 
 Read on for details.
 
-# Changes and new features
+## Changes and new features
 This section describes the changes and new features in more detail.
 
 ## Machine requirement for Autopilot
@@ -36,7 +36,7 @@ Autopilot in LDS 15.10 will deploy OpenStack Kilo clouds.
 ## Adding hardware to an existing cloud
 Starting with LDS 15.10, Autopilot can add more nodes to a cloud after it is deployed. This is a beta feature, and it only works with clouds that were deployed with LDS 15.10 or later.
 
-# Upgrade notes
+## Upgrade notes
 LDS 15.10 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded from LDS 15.01.X.
 
 ## Quickstart upgrade
@@ -78,7 +78,7 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
 ## Charm upgrade
 Upgrading of a juju-deployed LDS 15.01 is not yet directly supported. Please follow the non-quickstart upgrade steps.
 
-# OpenStack Autopilot Beta issues
+## OpenStack Autopilot Beta issues
 Here are some of the known issues with this release of OpenStack Autopilot in LDS 15.10.
 
 ## Add hardware cancellation

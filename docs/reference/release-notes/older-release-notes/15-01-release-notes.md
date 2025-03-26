@@ -1,7 +1,7 @@
 (reference-release-notes-older-release-notes-15-01-release-notes)=
 # 15.01 release notes
 
-# Major changes from previous stable release
+## Major changes from previous stable release
  * less machines required for !AutoPilot cloud deployments
  * syslog support
  * audit logs replaced by event logs
@@ -18,7 +18,7 @@
   * force juju agent version to 1.22.1 to prevent unwanted agent upgrades (Autopilot related only)
 Read on for details.
 
-# Changes and new features
+## Changes and new features
 This section describes the changes and new features in more detail.
 
 ## Machine requirement for AutoPilot
@@ -67,10 +67,10 @@ If you have more than 800 registered computers and not enough RAM, you can disab
 That value of 100000 means that the `package-search` service will only kick into action when your account has more than 100k computers.
 
 
-# Non-quickstart deployment
+## Non-quickstart deployment
 For a non-quickstart deployment, where the database is separated from the application server, please go [[LDS/ManualInstallation15.01|here]].
 
-# Upgrading LDS
+## Upgrading LDS
 LDS 15.01 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded to from LDS 14.10.X.
 
 ## Important upgrade notes
@@ -147,7 +147,7 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
 ## Upgrade of a juju-deployed LDS
 Upgrading of a juju-deployed LDS is not yet directly supported. Please follow the non-quickstart upgrade steps.
 
-# OpenStack Autopilot Beta: Known Issues
+## OpenStack Autopilot Beta: Known Issues
  * Aborting a cloud deployment right after the abort button becomes available can fail and leak MAAS nodes. Furthermore, Landscape will probably have failed to clear the deployment from its database, so if a new deployment is attempted with the exact same region and cloud names, it will fail.
 
  * OpenStack clouds deployed with 15.01 will not be able to be upgraded to cloud architectures of future releases.

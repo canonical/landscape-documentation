@@ -1,7 +1,7 @@
 (reference-release-notes-older-release-notes-19-10-release-notes)=
 # 19.10 release notes
 
-# Landscape Release 19.10
+## Landscape Release 19.10
 These are the release notes for Landscape 19.10.
 
 **Warning**:

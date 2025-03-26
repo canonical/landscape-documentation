@@ -1,7 +1,7 @@
 (reference-release-notes-older-release-notes-14-10-release-notes)=
 # 14.10 release notes
 
-# Major changes from previous stable release
+## Major changes from previous stable release
  * OpenStack Autopilot Beta
  * Juju integration
  * Throttled package updates
@@ -21,7 +21,7 @@
 
 Read on for details.
 
-# Changes and new features
+## Changes and new features
 This section describes the changes and new features in more detail.
 
 ## LDS 14.10.1
@@ -67,10 +67,10 @@ Some API incompatibilities are being introduced in this release of LDS:
  * New field `access_group` in pending computers API call
  * Call to register a new MAAS controller is now RegisterMAASRegionController
 
-# Non-quickstart deployment
+## Non-quickstart deployment
 For a non-quickstart deployment, where the database is separated from the application server, please go [[LDS/ManualInstallation14.10|here]].
 
-# Upgrading LDS
+## Upgrading LDS
 LDS 14.10.2 supports Ubuntu 12.04 LTS ("precise") and Ubuntu 14.04 LTS ("trusty"). It can only be upgraded to from LDS 13.09.X.
 
 ## Large database schema changes
@@ -104,6 +104,6 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
   sudo lsctl start
 ```
 
-# OpenStack Autopilot Beta: Known Issues
+## OpenStack Autopilot Beta: Known Issues
  * Aborting a cloud deployment right after the abort button becomes available can fail and leak MAAS nodes. Furthermore, Landscape will probably have failed to clear the deployment from its database, so if a new deployment is attempted with the exact same region and cloud names, it will fail.
 

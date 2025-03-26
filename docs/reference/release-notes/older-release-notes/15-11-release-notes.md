@@ -1,7 +1,7 @@
 (reference-release-notes-older-release-notes-15-11-release-notes)=
 # 15.11 release notes
 
-# Highlights
+## Highlights
  * --(OpenStack Liberty cloud deployment)-- '''NOTE: in order to use the Autopilot to deploy OpenStack clouds, please use a more recent version of Landscape.'''
  * '''LDS 15.11.3 point release''':
   * This replaces LDS 15.11.2 in the 15.11 PPA
@@ -20,7 +20,7 @@
   * Configure Juju to not upgrade the agent when deploying a cloud
   * Do not truncate the administrator name in the top right corner so easily
 
-# Changes and new features
+## Changes and new features
 This section describes the changes and new features in more detail.
 
 ## OpenStack Liberty deployment
@@ -29,7 +29,7 @@ This section describes the changes and new features in more detail.
 ## MAAS supported version
 Autopilot in LDS 15.11 supports MAAS 1.8.x only.
 
-# Upgrade notes
+## Upgrade notes
 LDS 15.11 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded from LDS 15.10.X or an earlier version in the 15.11 series.
 
 ## Quickstart upgrade
@@ -110,7 +110,7 @@ timing:
   started: 2015-06-23 19:26:38 +0000 UTC
 ```
 
-# Known Issues
+## Known Issues
 This section describes important known issues with this release.
 
 ## Autopilot Cloud Deployments

@@ -4,7 +4,7 @@
 > See also: [Administrators](/reference/terms/administrators)
 
 ```{note}
-Note: You must be an administrator to perform these tasks.
+You must be an administrator to perform these tasks.
 ```
 
 This document describes how to manage additional administrators and roles.

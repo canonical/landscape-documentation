@@ -2,7 +2,7 @@
 # 17.03 release notes
 
 Title: Landscape Release Notes 17.03
-# Landscape Release 17.03
+## Landscape Release 17.03
 These are the release notes for Landscape 17.03.
 
 ## Highlights
