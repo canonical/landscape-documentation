@@ -1,5 +1,9 @@
 # Landscape Documentation
 
+```{note}
+We're in the process of migrating our documentation to this new site. The official transition will be announced soon. For now, you can continue using the [existing Landscape Documentation site](https://ubuntu.com/landscape/docs).
+```
+
 Landscape is a systems management tool designed to help you manage and monitor your Ubuntu systems from a unified platform.
 
 Landscape provides system administration for deployments at enterprise scale via a web portal and API. It streamlines functions including inventory management, automation, security hardening, compliance management, reporting and software distribution.
