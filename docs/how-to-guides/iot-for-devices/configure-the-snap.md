@@ -18,7 +18,7 @@ sudo landscape-client.config
 ```
 
 ```bash
-sudo landscape-config --silent --account-name="standalone"
+sudo landscape-client.config --silent --account-name="standalone"
 ```
 
 To view all possible configuration options for `landscape-client.config`, visit the help page with:
@@ -31,7 +31,7 @@ landscape-client.config --help
 
 If you’re using Ubuntu Core and require your own SSL certificates, you must place the certificate in `/var/snap/landscape-client/` and provide the full path to the `--ssl-public-key` option. For example, if you place the CA file in `/var/snap/landscape-client/ssl/server.pem`, then you can register the computer with:
 ```bash
-sudo landscape-config --ssl-public-key /var/snap/landscape-client/ssl/server.pem
+sudo landscape-client.config --ssl-public-key /var/snap/landscape-client/ssl/server.pem
 ```
 
 ## Auto-register new devices
