@@ -32,12 +32,13 @@ If you’re using Landscape in an air-gapped environment, we have the following 
 - [How to manage repositories in an air-gapped or offline environment](/how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment)
 - [How to create tiered repository mirrors for multi-region and air-gapped deployments](/how-to-guides/repository-mirrors/create-tiered-repository-mirrors.md)
 
-## Livepatch
+## Security updates and Livepatch
 
 > See also: [Livepatch documentation](https://ubuntu.com/security/livepatch/docs)
 
-You can use Livepatch to schedule high and critical Linux kernel vulnerability patches, which removes the immediate need to reboot to upgrade the kernel on critical infrastructure. We have the following guide on using Livepatch with Landscape:
+You can use Landscape to apply security updates to your client machines, and Livepatch (within Landscape) to schedule high and critical Linux kernel vulnerability patches. We have the following guides on applying security updates with Landscape:
 
+- [How to apply security patches and upgrades](/how-to-guides/security/apply-security-updates.md)
 - [How to manage Livepatch and kernel updates from the Landscape web portal](/how-to-guides/web-portal/web-portal-24-04-or-later/manage-livepatch-and-kernel-updates) (24.04 or later)
 
 ## Additional Landscape security topics
