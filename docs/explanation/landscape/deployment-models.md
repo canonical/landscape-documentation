@@ -2,7 +2,7 @@
 
 > See also: [What is Landscape?](/what-is-landscape)
 
-Landscape can be deployed in different ways depending on the scale and reliability requirements of your deployment. There are two primary deployment models: single-server (minimal) and multi-server (high availability):
+Landscape can be deployed in different ways depending on the scale and reliability requirements of your deployment. There are two primary deployment models: single-server and multi-server.
 
 - **Single-Server Deployment**: A minimal setup where Landscape Server, PostgreSQL, and RabbitMQ all run on the same machine. This is ideal for small-scale deployments or testing purposes.
 - **Multi-Server Deployment**: A scalable setup with multiple Landscape servers, and multiple instances of HAProxy, PostgreSQL, and RabbitMQ. This is ideal for large-scale, production deployments and can be set up for high-availability deployments.
