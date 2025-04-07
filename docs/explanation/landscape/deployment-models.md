@@ -5,7 +5,7 @@
 Landscape can be deployed in different ways depending on the scale and reliability requirements of your deployment. There are two primary deployment models: single-server (minimal) and multi-server (high availability):
 
 - **Single-Server Deployment**: A minimal setup where Landscape Server, PostgreSQL, and RabbitMQ all run on the same machine. This is ideal for small-scale deployments or testing purposes.
-- **Multi-Server (High Availability) Deployment**: A scalable setup with multiple Landscape servers, and multiple instances of HAProxy, PostgreSQL, and RabbitMQ. This is ideal for large-scale, production deployments.
+- **Multi-Server Deployment**: A scalable setup with multiple Landscape servers, and multiple instances of HAProxy, PostgreSQL, and RabbitMQ. This is ideal for large-scale, production deployments and can be set up for high-availability deployments.
 
 Landscape is also commonly used with other Canonical products.
 
@@ -13,17 +13,19 @@ Landscape is also commonly used with other Canonical products.
 
 This is the simplest deployment model where Landscape Server and its components all run on a single machine, and there’s only one instance of each component. Each Landscape Client registers directly with the single Landscape server.
 
-Single-server deployments can be deployed using any of the installation methods: [Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart-installation.md), [Juju-based](/how-to-guides/landscape-installation-and-set-up/juju-installation.md), or [Manual (deb)](/how-to-guides/landscape-installation-and-set-up/manual-installation.md).
+Single-server deployments should be installed using the [Quickstart installation](/how-to-guides/landscape-installation-and-set-up/quickstart-installation.md).
 
 ![Landscape single-server deployment](https://assets.ubuntu.com/v1/efcf89cc-Deployment_Landscape%20(1).png)
 
-## Multi-Server (High Availability) Deployment
+## Multi-Server Deployment
 
-This is a high-availability setup that provides redundancy and scalability to production and large-scale deployments. It uses a load balancer (HAProxy) to distribute requests across multiple Landscape servers, and includes multiple instances of Landscape Server and its components (PostgreSQL and RabbitMQ). Landscape Clients communicate through HAProxy, which then distributes the requests to available Landscape Servers.
+This setup provides redundancy and scalability to production and large-scale deployments and can be used in high-availability environments. This deployment uses a load balancer (HAProxy) to distribute requests across multiple Landscape servers, and includes multiple instances of Landscape Server and its components (PostgreSQL and RabbitMQ). Landscape Clients communicate through HAProxy, which then distributes the requests to available Landscape Servers.
 
-Multi-server deployments can be deployed using the [Juju-based](/how-to-guides/landscape-installation-and-set-up/juju-installation.md) or [Manual (deb)](/how-to-guides/landscape-installation-and-set-up/manual-installation.md) installation methods.
+Multi-server deployments are usually installed with [Juju](/how-to-guides/landscape-installation-and-set-up/juju-installation.md). For HA deployments, see [how to install Landscape for high-availability deployments](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
 
 ![Landscape multi-server deployment with the scalable charm](https://assets.ubuntu.com/v1/fbb9e2c3-HA_Deployment_Landscape%20(1).png)
+
+You can also use the [Manual (deb)](/how-to-guides/landscape-installation-and-set-up/manual-installation.md) installation method for multi-server deployments instead of Juju, but this isn't recommended for HA deployments.
 
 ## Products used with Landscape
 
