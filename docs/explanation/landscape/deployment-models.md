@@ -13,7 +13,7 @@ Landscape is also commonly used with other Canonical products.
 
 This is the simplest deployment model where Landscape Server and its components all run on a single machine, and there’s only one instance of each component. Each Landscape Client registers directly with the single Landscape server.
 
-Single-server deployments should be deployed using our [Quickstart installation](/how-to-guides/landscape-installation-and-set-up/quickstart-installation.md).
+Single-server deployments can be deployed using any of the installation methods: [Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart-installation.md), [Juju-based](/how-to-guides/landscape-installation-and-set-up/juju-installation.md), or [Manual (deb)](/how-to-guides/landscape-installation-and-set-up/manual-installation.md).
 
 ![Landscape single-server deployment](https://assets.ubuntu.com/v1/efcf89cc-Deployment_Landscape%20(1).png)
 
@@ -21,7 +21,7 @@ Single-server deployments should be deployed using our [Quickstart installation]
 
 This is a high-availability setup that provides redundancy and scalability to production and large-scale deployments. It uses a load balancer (HAProxy) to distribute requests across multiple Landscape servers, and includes multiple instances of Landscape Server and its components (PostgreSQL and RabbitMQ). Landscape Clients communicate through HAProxy, which then distributes the requests to available Landscape Servers.
 
-Multi-server deployments should be deployed using our [Manual (deb) installation](/how-to-guides/landscape-installation-and-set-up/manual-installation.md) or [Juju-based Landscape Scalable charm bundle](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
+Multi-server deployments can be deployed using the [Juju-based](/how-to-guides/landscape-installation-and-set-up/juju-installation.md) or [Manual (deb)](/how-to-guides/landscape-installation-and-set-up/manual-installation.md) installation methods.
 
 ![Landscape multi-server deployment with the scalable charm](https://assets.ubuntu.com/v1/fbb9e2c3-HA_Deployment_Landscape%20(1).png)
 
