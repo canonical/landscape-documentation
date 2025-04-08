@@ -12,6 +12,8 @@ For a manual installation of Landscape 24.04 LTS:
  * **Database server**: runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16.
  * **Application server**: runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services
 
+ You'll also need [certain PostgreSQL extensions](#install-postgresql-and-required-libraries) to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
+
 This is a long document. If you want a quick installation that just works, but doesn't scale to a large number of machines, then install the `landscape-server-quickstart` package. For more information, visit [how to install Landscape Server with quickstart mode](https://ubuntu.com/landscape/docs/quickstart-deployment).
 
 ## Prepare for the installation

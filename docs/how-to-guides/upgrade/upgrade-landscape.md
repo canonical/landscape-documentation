@@ -41,7 +41,7 @@ To upgrade your existing Landscape server:
     sudo apt full-upgrade
     ```
 
-During your upgrade, you may be asked if you want to replace your configuration file with a later version. Do not replace your configuration; you should keep your existing configuration file. 
+During your upgrade, you may be asked if you want to replace your configuration file with a later version. **Do not replace your configuration; you should keep your existing configuration file.** 
 
 If you accidentally replace your configuration file, you can put your previous configuration back by overwriting your `service.conf` file with the one you backed up earlier.
 
@@ -117,3 +117,8 @@ To upgrade a basic Juju deployment:
     juju run landscape-server/0 resume
     ```
 
+## Add additional configurations
+
+Landscape commonly has version-specific configurations that must be added to complete your upgrade.
+
+If you're upgrading to Landscape 24.04 LTS, follow these [additional upgrade steps](/how-to-guides/upgrade/upgrade-to-24-04-lts.md).
