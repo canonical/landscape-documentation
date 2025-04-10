@@ -3,16 +3,9 @@
 
 > See also: [Landscape Server charm (Charmhub)](https://charmhub.io/landscape-server)
 
-[note type=information]
-Note: For more information on charms and bundles, visit [Charmhub](https://charmhub.io/).
-[/note]
+You can deploy Landscape in a scalable way with Juju. This document provides a very high-level overview. 
 
-You can deploy Landscape in a scalable way with Juju.
-
-**Contents:**
-1. [Install Juju](#heading--install-juju)
-1. [Deploy self-hosted Landscape Server](#heading--deploy-self-hosted-landscape-server)
-1. [Access self-hosted Landscape](#heading--access-self-hosted-landscape)
+For detailed instructions on deploying Landscape with Juju in a high-availability environment, see [how to install and configure Landscape for high-availability deployments](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
 
 ## Install Juju
 
@@ -33,20 +26,21 @@ When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulati
 
 > See also: [Landscape-scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
 
-> Also note the other bundles have been deprecated (landscape-dense and landscape-dense-maas)
+In the **landscape-scalable** bundle configuration, each service gets its own machine. Currently that means you will need 4 machines for Landscape, and one for the controller node. Test it out using:
 
-**landscape-scalable** bundle is the one in which each service gets its own machine. Currently that means you will need 4 machines for Landscape, and one for the controller node. Test it out using:
-
-```console
+```bash
 juju deploy landscape-scalable
 ```
 
-For more detailed instructions on deploying the Landscape server with the bundle, 
-refer to the [Landscape Juju High Availability Installation Guide](https://ubuntu.com/landscape/docs/juju-ha-installation).
+For more detailed instructions on deploying the Landscape server with the bundle, refer to the [Landscape Juju high availability installation guide](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
+
+### Other bundles
+
+The Landscape Scalable bundle is the only bundle currently supported. Previously, there were two additional bundles: `landscape-dense` and `landscape-dense-maas`. These bundles are now deprecated.
 
 ## Access self-hosted Landscape
 
-Once the deployment has finished, grab the address of the first `haproxy` unit and access it with your browser:
+Once the deployment has finished, get the address of the first `haproxy` unit and access it with your browser:
 
 ```bash
 juju status haproxy
