@@ -107,7 +107,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" -H "
 
 Example output:
 
-```json
+```bash
 {
  "id": 119,
  "activity_status": "scheduled",
@@ -152,7 +152,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/employee_groups" -H "Author
 
 Example response:
 
-```json
+```bash
 {
     "count": 1000
     "results": [
@@ -180,7 +180,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/oidc/groups/import_session"
 
 Example output:
 
-```json
+```bash
 {
    "id": 1,
    "account_id": 312,
@@ -206,7 +206,7 @@ curl -X GET "https://landscape.canonical.com/api/v2/oidc/groups/import_session/1
 
 Example output:
 
-```json
+```bash
 {
    "id": 1,
    "account_id": 312,
@@ -236,7 +236,7 @@ curl -X GET "https://landscape.canonical.com/api/v2/oidc/groups/staged" -H "Auth
 
 Example output:
 
-```json
+```bash
 {
    "count": 500,
    "results": [
