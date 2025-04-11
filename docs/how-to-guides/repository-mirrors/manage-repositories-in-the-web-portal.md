@@ -146,6 +146,8 @@ The output of this returns a `progress` field that provides an estimate of the p
 
 ## Create a repository profile and associate computers to the profile
 
+A Repository Profile in Landscape is useful for updating repository configurations. When a machine is associated with a Repository Profile, the repository configurations are applied one time. Repository Profiles do not perform ongoing monitoring of repository configurations.
+
 To create a profile:
 
 1. From the sidebar, navigate to **Repositories** > **Profiles**
