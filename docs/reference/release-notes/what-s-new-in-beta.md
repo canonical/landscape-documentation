@@ -5,6 +5,60 @@ Here's what's new in Landscape beta:
 
 ## Landscape Server
 
+landscape-server 25.04~beta.11 published 24 March 2025
+
+  * refactor: revert message handler perfs
+  * feat: add employee-access OIDC authentication API
+  * feat: add script profile execute endpoint
+  * feat: include employee_id in computer serialization
+  * feat: create Google Workspace directory import module
+  * feat: add import directory API endpoints
+  * feat: add features supporting employee authorization
+  * feat: add ability to manage script profiles
+  * feat: add management class for autoinstall files
+  * feat: add script profile limits endpoint
+
+landscape-server 25.04~beta.10 unpublished
+
+  * perf: improve processor info message handling
+  * fix: download receipts in legacy UI
+  * feat: implement database-backed secrets client
+  * feat: add with_versions to autoinstall GET handler
+  * feat: add provider details to oidc issuer handlers
+  * feat: add filter and search to employees GET handler
+  * fix: permission errors replaced with blank elements in new web portal
+  * feat: add search and filter to autoinstall list handler
+  * feat: add list_secret_metadata to secrets clients
+  * feat: add script profile table
+  * feat: alter autoinstall file reference in employee group table
+  * fix: update the mirror lists
+  * feat: add search and filter to employee group list handler
+  * feat: add google service account model
+  * feat: allow duplicate and null priorities in employee group table
+  * feat: introduce script profiles
+  * feat: process authenticated attach code in client registration messages
+  * fix: allow employee, employee group, and autoinstall filters to take multiple ids
+  * feat: add script profile run table
+  * fix: make oidc issuer provider a property
+  * fix: handle null fields in employee group
+  * feat: add security endpoint
+  * fix: bug in optimized free space message handler
+  * feat: create JWT models for administrators and employees
+  * feat: add authentication configurations to oidc issuer endpoints
+
+landscape-server 25.04~beta.9 unpublished
+
+  * feat: add list OIDC configurations endpoint
+  * refactor: change PAYG forms to use Stripe forms instead
+  * feat: add DirectoryAPI interface
+  * feat: add bulk update/delete for employee groups
+  * feat!: add secrets client stubs
+  * feat: add autoinstall file model
+  * feat: USG activity info class
+  * feat: add configure and validation methods for autoinstall files
+  * refactor: move common archived computer check to superclass
+  * perf: improve handling of computer info messages
+
 landscape-server 25.04~beta.8 published 24 February 2025
 
 * feat: add query parameters to employee and employee_group GET/LIST endpoints
