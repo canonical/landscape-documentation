@@ -85,9 +85,9 @@ Example output:
 
 ## POST `/computers/<computer_id>/sanitize`
 
-[note type=information]
-**Note:** **Please make sure you are sanitizing the correct computer. This action is irreversible.**
-[/note]
+```{note}
+**Please make sure you are sanitizing the correct computer. This action is irreversible.**
+```
 
 Sanitizes the selected computer. This action will make the data on the selected computer permanently irrecoverable by erasing the keyslots of every encrypted volume. A configurable delay can be set in the service.conf file.
 
