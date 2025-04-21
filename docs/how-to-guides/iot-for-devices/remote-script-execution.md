@@ -1,4 +1,4 @@
-(how-to-guides-iot-for-devices-remote-script-execution)=
+(how-to-remote-script-execution)=
 # How to use remote script execution with the Landscape Client snap
 
 > See also: [Landscape's scripts repository on GitHub](https://github.com/canonical/landscape-scripts)

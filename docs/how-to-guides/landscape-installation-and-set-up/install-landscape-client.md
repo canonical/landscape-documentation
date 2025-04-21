@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-install-landscape-client)=
+(how-to-install-landscape-client)=
 # How to install Landscape Client
 
 There are multiple ways to install Landscape Client. This document describes each method.

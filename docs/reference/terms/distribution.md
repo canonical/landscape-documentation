@@ -1,4 +1,4 @@
-(explanation-terms-distribution)=
+(reference-terms-distribution)=
 # Distribution
 
 In Landscape, the **distribution** refers to the Ubuntu operating system. There are different ways to specify the distribution depending on your use case.

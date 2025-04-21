@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-beta-only)=
+(reference-rest-api-beta-only)=
 # Beta-only
 
 ```{note}

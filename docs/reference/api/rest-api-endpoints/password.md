@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-password)=
+(reference-rest-api-password)=
 # Password
 
 ## PUT `/password`

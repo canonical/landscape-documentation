@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-switch-account)=
+(reference-rest-api-switch-account)=
 # Switch Account
 
 ## POST `/switch-account`

@@ -1,4 +1,4 @@
-(how-to-guides-iot-for-devices-install-the-snap)=
+(how-to-install-the-client-snap)=
 # How to install the snap
 
 This document describes how to install the Landscape Client snap and some general limitations of the snap. If you want to install the Debian package instead of the snap, see [how to install Landscape Client](/how-to-guides/landscape-installation-and-set-up/install-landscape-client).

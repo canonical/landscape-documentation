@@ -1,4 +1,4 @@
-(how-to-guides-api-make-a-rest-api-request)=
+(how-to-rest-api-request)=
 # How to make a REST API request
 
 

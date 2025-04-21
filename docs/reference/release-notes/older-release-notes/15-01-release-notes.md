@@ -1,4 +1,4 @@
-(reference-release-notes-older-release-notes-15-01-release-notes)=
+(reference-release-notes-15-01)=
 # 15.01 release notes
 
 ## Major changes from previous stable release

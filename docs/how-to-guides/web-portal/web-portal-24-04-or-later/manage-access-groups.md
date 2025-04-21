@@ -1,4 +1,4 @@
-(how-to-guides-web-portal-web-portal-24-04-or-later-manage-access-groups)=
+(how-to-web-portal-manage-access-groups)=
 # How to manage access groups
 
 > See also: [Access groups](/reference/terms/access-groups)

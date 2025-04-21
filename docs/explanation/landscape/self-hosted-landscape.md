@@ -1,4 +1,4 @@
-(explanation-landscape-self-hosted-landscape)=
+(explanation-about-self-hosted)=
 # About Self-hosted Landscape
 
 Self-hosted Landscape is the standalone edition of Landscape that you can install on premises or in a public cloud.

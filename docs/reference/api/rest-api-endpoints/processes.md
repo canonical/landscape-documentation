@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-processes)=
+(reference-rest-api-processes)=
 # Processes
 
 ## POST `/processes/<signal>`

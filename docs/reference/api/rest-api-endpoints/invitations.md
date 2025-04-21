@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-invitations)=
+(reference-rest-api-invitations)=
 # Invitations
 
 ## GET `/invitations`

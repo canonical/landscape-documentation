@@ -1,4 +1,4 @@
-(explanation-terms-ssl-certificates)=
+(reference-terms-ssl-certificates)=
 # SSL certificates
 
 **Secure Sockets Layer (SSL) certificates** are part of creating secure communication over the internet. They provide a process for encrypting and authenticating data sent between a client and a server. In the context of Landscape, being a systems management tool, it uses SSL certificates to communicate securely with its servers, reducing the chance of unauthorized access and data breaches.

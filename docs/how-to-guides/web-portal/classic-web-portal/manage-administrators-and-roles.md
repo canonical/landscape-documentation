@@ -1,4 +1,4 @@
-(how-to-guides-web-portal-classic-web-portal-manage-administrators-and-roles)=
+(how-to-classic-web-portal-manage-admins-and-roles)=
 # How to manage administrators and roles
 
 > See also: [Administrators](/reference/terms/administrators)

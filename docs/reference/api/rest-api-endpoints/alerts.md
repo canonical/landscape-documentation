@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-alerts)=
+(reference-rest-api-alerts)=
 # Alerts
 
 The endpoints available here are for managing alerts for an account.

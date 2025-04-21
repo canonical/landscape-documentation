@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-repositories)=
+(reference-legacy-api-repositories)=
 # Repositories
 
 

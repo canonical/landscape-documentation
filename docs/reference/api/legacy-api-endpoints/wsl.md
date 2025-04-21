@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-wsl)=
+(reference-legacy-api-wsl)=
 # WSL
 
 The methods available here are for managing Windows Subsystem for Linux (WSL) clients registered with Landscape.

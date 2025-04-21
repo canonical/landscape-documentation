@@ -1,3 +1,4 @@
+(how-to-install-airgapped)=
 # How to install Landscape in an air-gapped or offline environment
 
 This guide provides a high-level overview of how to install Landscape in an offline environment. These instructions can be used for air-gapped deployments.

@@ -1,4 +1,4 @@
-(how-to-guides-wsl-integration-set-up-an-environment)=
+(how-to-wsl-set-up-environment)=
 # How to set up a Windows 11 environment to use WSL with Landscape
 
 ```{note}

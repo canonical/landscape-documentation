@@ -1,4 +1,4 @@
-(how-to-guides-external-authentication-openid-connect-oidc)=
+(how-to-external-auth-oidc)=
 # How to enable OIDC authentication
 
 Landscape offers support for OpenID-Connect (OIDC) authentication for self-hosted accounts. Common OIDC providers include Okta, Keycloak, Amazon Cognito, Google Identity Platform and Microsoft Entra ID (formerly Azure Active Directory).

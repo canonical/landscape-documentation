@@ -1,4 +1,4 @@
-(reference-release-notes-older-release-notes-19-10-release-notes)=
+(reference-release-notes-19-10)=
 # 19.10 release notes
 
 ## Landscape Release 19.10

@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-snaps)=
+(reference-rest-api-snaps)=
 # Snaps
 
 ## POST `/snaps`

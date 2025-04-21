@@ -1,4 +1,4 @@
-(contribute)=
+(contribute-to-docs)=
 # Contribute to our documentation
 
 We warmly welcome your engagement with the Landscape community and appreciate all contributions, suggestions, and feedback. There are many reasons why you should contribute to the Landscape documentation.

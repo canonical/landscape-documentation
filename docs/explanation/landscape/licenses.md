@@ -1,4 +1,4 @@
-(explanation-landscape-licenses)=
+(explanation-licenses)=
 # Landscape licenses
 
 Most Landscape accounts have a licensing mechanism; either Ubuntu Pro or a `license.txt` file. For Landscape SaaS accounts, the Ubuntu Pro license is already included in your subscription.

@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-install-on-microsoft-azure)=
+(how-to-install-on-microsoft-azure)=
 # How to install Landscape Server on Microsoft Azure
 
 > *Thanks to the following contributor(s): [@MikeT-gh](https://github.com/MikeT-gh)*

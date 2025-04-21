@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-manual-installation)=
+(how-to-manual-installation)=
 # How to install Landscape manually
 
 ```{note}

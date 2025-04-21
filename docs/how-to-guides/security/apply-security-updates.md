@@ -1,3 +1,4 @@
+(how-to-apply-security-updates)=
 # How to apply security patches and upgrades
 
 You can use Landscape to apply security updates to your client machines. This includes Livepatch for kernel patches within Landscape’s web portal.

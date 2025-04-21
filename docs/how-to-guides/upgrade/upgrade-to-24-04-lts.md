@@ -1,4 +1,4 @@
-(how-to-guides-upgrade-upgrade-to-24-04-lts)=
+(how-to-upgrade-to-24-04-lts)=
 # How to upgrade to Landscape Server 24.04 LTS
 
 ```{note}

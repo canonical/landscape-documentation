@@ -1,4 +1,4 @@
-(reference-release-notes-24-04-lts-release-notes)=
+(reference-release-notes-24-04-lts)=
 # 24.04 LTS release notes
 
 > See also: [Upgrade to Landscape Server 24.04 LTS](/how-to-guides/upgrade/upgrade-to-24-04-lts)

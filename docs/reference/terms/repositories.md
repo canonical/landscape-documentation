@@ -1,4 +1,4 @@
-(explanation-terms-repositories)=
+(reference-terms-repositories)=
 # Repositories
 
 **Repositories** are the foundation for software distribution in Linux environments. They hold all the necessary files and resources needed for projects. Linux distributions like Ubuntu maintain package repositories containing thousands of pre-built packages you can install on your managed computers.

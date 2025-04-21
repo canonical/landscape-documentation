@@ -1,4 +1,4 @@
-(how-to-guides-repository-mirrors-create-tiered-repository-mirrors)=
+(how-to-create-tiered-repo-mirrors)=
 # How to create tiered repository mirrors for multi-region and air-gapped deployments
 
 > See also: [About repository mirroring](/explanation/repository-mirroring/repository-mirroring)

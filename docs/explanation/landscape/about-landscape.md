@@ -1,4 +1,4 @@
-(explanation-landscape-about-landscape)=
+(explanation-about-landscape)=
 # About Landscape
 
 > See also: [What is Landscape?](/what-is-landscape)

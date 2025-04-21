@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-configure-landscape-client)=
+(how-to-configure-landscape-client)=
 # How to configure Landscape Client
 
 > See also: [How to install Landscape Client](/how-to-guides/landscape-installation-and-set-up/install-landscape-client)

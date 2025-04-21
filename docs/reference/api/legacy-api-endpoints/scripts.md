@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-scripts)=
+(reference-legacy-api-scripts)=
 # Scripts
 
 

@@ -1,4 +1,4 @@
-(how-to-guides-upgrade-upgrade-landscape)=
+(how-to-upgrade)=
 # How to upgrade your Landscape server
 
 This document is for upgrading Landscape Server 23.03 or later to a newer version. If you’re upgrading from a version of Landscape earlier than 23.03, see the manual upgrade guides for a [quickstart installation](https://discourse.ubuntu.com/t/upgrade-a-landscape-19-10-quickstart-installation-to-landscape-23-03/34336) and [manual installation](https://discourse.ubuntu.com/t/upgrade-a-landscape-19-10-manual-installation-to-landscape-23-03/34335).

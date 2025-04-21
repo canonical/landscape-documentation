@@ -1,4 +1,4 @@
-(how-to-guides-iot-for-devices-configure-the-snap)=
+(how-to-configure-the-client-snap)=
 # How to configure the snap
 
 ```{note}

@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-event-log)=
+(reference-legacy-api-event-log)=
 # Event Log
 
 

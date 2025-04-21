@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-role-based-access-control)=
+(reference-legacy-api-role-based-access-control)=
 # Role Based Access Control
 
 

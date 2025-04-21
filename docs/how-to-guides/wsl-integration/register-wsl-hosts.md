@@ -1,4 +1,4 @@
-(how-to-guides-wsl-integration-register-wsl-hosts)=
+(how-to-register-wsl-hosts)=
 # How to set up Ubuntu Pro for WSL and register WSL hosts to Landscape
 
 > See also: [Ubuntu Pro for WSL documentation](https://canonical-ubuntu-pro-for-wsl.readthedocs-hosted.com/en/latest/)

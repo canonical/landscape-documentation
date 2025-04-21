@@ -1,4 +1,4 @@
-(how-to-guides-repository-mirrors-manage-repositories-with-the-api)=
+(how-to-manage-repos-api)=
 # How to manage and mirror repositories with the API
 
 ```{note}

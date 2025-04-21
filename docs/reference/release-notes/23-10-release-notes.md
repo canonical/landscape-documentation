@@ -1,4 +1,4 @@
-(reference-release-notes-23-10-release-notes)=
+(reference-release-notes-23-10)=
 # 23.10 release notes
 
 ```{note}

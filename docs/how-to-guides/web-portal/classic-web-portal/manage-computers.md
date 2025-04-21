@@ -1,4 +1,4 @@
-(how-to-guides-web-portal-classic-web-portal-manage-computers)=
+(how-to-classic-web-portal-manage-computers)=
 # How to manage computers
 
 ## Register computers

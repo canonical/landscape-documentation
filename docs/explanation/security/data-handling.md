@@ -1,3 +1,4 @@
+(explanation-data-handling)=
 # Data handling
 
 > See also: [Cryptographic technology in Landscape](/explanation/security/cryptographic-technology.md)

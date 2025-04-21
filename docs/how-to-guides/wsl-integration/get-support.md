@@ -1,4 +1,4 @@
-(how-to-guides-wsl-integration-get-support)=
+(how-to-wsl-get-support)=
 # How to get support for WSL machines that connect to Landscape
 
 This document describes multiple ways to get support for Windows Subsystem for Linux (WSL) machines that connect to Landscape and troubleshoot some basic issues.

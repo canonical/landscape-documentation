@@ -1,4 +1,4 @@
-(explanation-terms-components)=
+(reference-terms-components)=
 # Components
 
 **Components** are categories of software in Ubuntu's repository. They include `main`, `restricted`, `universe` and `multiverse`.

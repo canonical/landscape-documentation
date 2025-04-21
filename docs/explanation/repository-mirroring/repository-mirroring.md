@@ -1,4 +1,4 @@
-(explanation-repository-mirroring-repository-mirroring)=
+(explanation-repo-mirroring)=
 # Repository mirroring
 
 Landscape uses repository mirroring to internally distribute software in Debian packages over your local network and manage updates. This feature allows you to establish custom repositories from your local mirror, which provides an additional layer of control over the software versions available to your client machines. This can also reduce bandwidth usage by distributing updates to clients using your local network.

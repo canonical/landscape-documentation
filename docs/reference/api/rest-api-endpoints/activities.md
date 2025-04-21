@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-activities)=
+(reference-rest-api-activities)=
 # Activities
 
 The endpoints available here are related to activity management.

@@ -1,4 +1,4 @@
-(how-to-guides-web-portal-classic-web-portal-other-tasks)=
+(how-to-classic-web-portal-other-tasks)=
 # Other tasks in the Landscape web portal
 
 ## Identify your Landscape version

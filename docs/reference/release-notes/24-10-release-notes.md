@@ -1,4 +1,4 @@
-(reference-release-notes-24-10-release-notes)=
+(reference-release-notes-24-10)=
 # 24.10 release notes
 
 > Landscape 24.10 runs on Ubuntu 24.04 LTS Noble Numbat or 22.04 LTS Jammy Jellyfish. Database schema changes are required to upgrade to Landscape Server 24.10.

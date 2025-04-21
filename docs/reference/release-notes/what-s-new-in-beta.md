@@ -1,4 +1,4 @@
-(reference-release-notes-what-s-new-in-beta)=
+(reference-whats-new-in-beta)=
 # What's new in beta
 
 Here's what's new in Landscape beta:

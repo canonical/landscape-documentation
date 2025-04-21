@@ -1,3 +1,4 @@
+(how-to-manage-repos-airgapped)=
 # How to manage repositories in an air-gapped or offline environment
 
 > See also: [About repository mirroring](/explanation/repository-mirroring/repository-mirroring.md)

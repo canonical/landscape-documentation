@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-administrators)=
+(reference-rest-api-administrators)=
 # Administrators
 
 The endpoint(s) available here are for managing administrators in your account.

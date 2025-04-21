@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-person)=
+(reference-rest-api-person)=
 # Person
 
 ## GET `/person`

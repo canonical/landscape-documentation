@@ -1,4 +1,4 @@
-(reference-release-notes-older-release-notes-18-03-release-notes)=
+(reference-release-notes-18-03)=
 # 18.03 release notes
 
 Title: Landscape Release Notes 18.03

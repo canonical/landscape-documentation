@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-quickstart-installation)=
+(how-to-quickstart-installation)=
 # How to install Landscape Server with quickstart mode
 
 The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments.
