@@ -7,7 +7,7 @@
 Web-based repository mirroring is available in Landscape 24.04 LTS for self-hosted users.
 ```
 
-The repository mirroring feature in Landscape enables you to mirror Ubuntu and third-party repositories locally, and to establish custom repositories from your local mirror. This provides an additional layer of control over the software versions available to your client machines. If you’re not familiar with repository mirroring in Landscape, we strongly encourage you to first read our {ref}`explanation-repo-mirroring`.
+The repository mirroring feature in Landscape enables you to mirror Ubuntu and third-party repositories locally, and to establish custom repositories from your local mirror. This provides an additional layer of control over the software versions available to your client machines. If you’re not familiar with repository mirroring in Landscape, we strongly encourage you to first read our explanation of {ref}`explanation-repo-mirroring`.
 
 The guide specifically demonstrates how to mirror an Ubuntu repository, but most of the information here also applies to mirroring third-party repositories.
 

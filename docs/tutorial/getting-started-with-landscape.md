@@ -98,7 +98,7 @@ Your VM's package information will now be up-to-date and includes information ab
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y landscape-server-quickstart
 ```
 
-The installation will take some time during which you'll get a lot of output. You can ignore the output for this tutorial. For the full details on installing Landscape in quickstart mode, see our {ref}`how-to-quickstart-installation`.
+The installation will take some time during which you'll get a lot of output. You can ignore the output for this tutorial. For the full details on installing Landscape in quickstart mode, see {ref}`how-to-quickstart-installation`.
 
 Once installation is complete, you can exit the shell by executing the `exit` command:
 

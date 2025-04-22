@@ -41,9 +41,9 @@ And edit the existing API RewriteRule to match the following:
 RewriteRule ^/api/(.*) http://localhost:9080/api/$1 [P,L]
 ```
 
-You can see a full Apache config example in our [how to configure the web server](https://ubuntu.com/landscape/docs/manual-installation#heading--configure-web-server) guide.
+You can see a full Apache config example in our {ref}`how to configure the web server <how-to-heading-manual-install-configure-web-server>` guide.
 
-To configure Windows Subsystem for Linux (WSL), you should also complete the steps in our how to {ref}`how-to-wsl-configure-landscape-beta` guide.
+To configure Windows Subsystem for Linux (WSL), you should also complete the steps in our {ref}`how-to-wsl-configure-landscape-beta` guide.
 
 ## Manual installations
 If you're upgrading a Landscape Server instance that was manually installed (instead of Quickstart), you also need to complete the following steps. These changes are needed to access the new web portal introduced in Landscape 24.04 LTS.

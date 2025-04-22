@@ -32,7 +32,7 @@ In the **landscape-scalable** bundle configuration, each service gets its own ma
 juju deploy landscape-scalable
 ```
 
-For more detailed instructions on deploying the Landscape server with the bundle, refer to the {ref}`how-to-juju-ha-installation`.
+For more detailed instructions on deploying the Landscape server with the bundle, see {ref}`how-to-juju-ha-installation`.
 
 ### Other bundles
 

@@ -14,7 +14,7 @@ For a manual installation of Landscape 24.04 LTS:
 
  You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
 
-This is a long document. If you want a quick installation that just works, but doesn't scale to a large number of machines, then install the `landscape-server-quickstart` package. For more information, visit [how to install Landscape Server with quickstart mode](https://ubuntu.com/landscape/docs/quickstart-deployment).
+This is a long document. If you want a quick installation that just works, but doesn't scale to a large number of machines, then install the `landscape-server-quickstart` package. For more information, visit {ref}`how-to-quickstart-installation`.
 
 ## Prepare for the installation
 
@@ -248,6 +248,7 @@ sudo setup-landscape-server
 ```
  * start all Landscape services again
 
+(how-to-heading-manual-install-configure-web-server)=
 ### Configure web server
 
 Landscape uses Apache to, among other things, redirect requests to each service and provide SSL support. The usual way to do this in Ubuntu is to create a Virtual Host for Landscape.

@@ -5,7 +5,7 @@
 Repository mirroring is available for self-hosted users.
 ```
 
-Repository management requires the use of the Landscape {ref}`how-to-use-legacy-api` Set it up and have it ready for the next steps. Linux distributions like Ubuntu use repositories to hold packages you can install on managed computers. While Ubuntu has several repositories that anyone can access, you can also maintain your own repositories on your network, and enforce repository configurations for the machines you manage. This can be useful when you want to maintain packages with different versions from those in the community repositories, or if you have private repositories of in-house software for internal distribution. Once you add your machines to a Landscape repository profile, you have a choice to enforce the entire repository configuration, or just individual repositories.
+Repository management requires the use of the Landscape {ref}`API <how-to-use-legacy-api>` Set it up and have it ready for the next steps. Linux distributions like Ubuntu use repositories to hold packages you can install on managed computers. While Ubuntu has several repositories that anyone can access, you can also maintain your own repositories on your network, and enforce repository configurations for the machines you manage. This can be useful when you want to maintain packages with different versions from those in the community repositories, or if you have private repositories of in-house software for internal distribution. Once you add your machines to a Landscape repository profile, you have a choice to enforce the entire repository configuration, or just individual repositories.
 
 In the following instructions we will use:
 
@@ -17,7 +17,7 @@ In the following instructions we will use:
 * **repository profile**: example-profile
 * **mirror-key**: the name of the gpg key used by Landscape to sign your repository
 
-Make sure you have set up the {ref}`how-to-use-legacy-api` client already, then follow the steps below. The following instructions were performed on a Ubuntu 18.04 LTS with Landscape server 19.01 installed.
+Make sure you have set up the {ref}`API <how-to-use-legacy-api>` client already, then follow the steps below. The following instructions were performed on a Ubuntu 18.04 LTS with Landscape server 19.01 installed.
 
 > ⓘ Note: The special pocket release never gets mentioned in a suite.
 

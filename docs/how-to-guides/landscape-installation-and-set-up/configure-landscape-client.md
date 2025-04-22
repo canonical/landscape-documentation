@@ -71,7 +71,7 @@ sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={
 
 > See also: [Landscape's scripts repository on GitHub](https://github.com/canonical/landscape-scripts)
 
-An administrator can remotely execute scripts on any client machine if the appropriate plugin is enabled. This plugin is disabled by default. Any calls to the `ExecuteScript` API endpoint will result in failed activities if the client has the default configuration. For more information on API endpoints for stored scripts, visit [API Methods: Scripts](https://ubuntu.com/landscape/docs/api-scripts).
+An administrator can remotely execute scripts on any client machine if the appropriate plugin is enabled. This plugin is disabled by default. Any calls to the `ExecuteScript` API endpoint will result in failed activities if the client has the default configuration. For more information on API endpoints for stored scripts, visit {ref}`API Methods: Scripts <reference-legacy-api-scripts>`.
 
 To use remote script execution on client machines, you must first enable it with the `landscape-config` command or by manually editing `/etc/landscape/client.conf`.
 
