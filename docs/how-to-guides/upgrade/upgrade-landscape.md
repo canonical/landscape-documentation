@@ -7,7 +7,7 @@ Note that you don’t need to upgrade your client machines when you upgrade your
 
 ## Prepare to upgrade
 
-> See also: [Backup and restore](/how-to-guides/backup-and-maintenance/backup-and-restore)
+> See also: {ref}`how-to-backup-and-restore`
 
 We strongly recommend you backup your database and configuration files before performing an upgrade. You should backup:
 
@@ -121,4 +121,4 @@ To upgrade a basic Juju deployment:
 
 Landscape commonly has version-specific configurations that must be added to complete your upgrade.
 
-If you're upgrading to Landscape 24.04 LTS, follow these [additional upgrade steps](/how-to-guides/upgrade/upgrade-to-24-04-lts.md).
+If you're upgrading to Landscape 24.04 LTS, follow these {ref}`how-to-upgrade-to-24-04-lts`.

@@ -1,13 +1,13 @@
 (how-to-manage-repos-web-portal)=
 # How to manage and mirror repositories from the web portal
 
-> See also: [About repository mirroring](/explanation/repository-mirroring/repository-mirroring)
+> See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
 Web-based repository mirroring is available in Landscape 24.04 LTS for self-hosted users.
 ```
 
-The repository mirroring feature in Landscape enables you to mirror Ubuntu and third-party repositories locally, and to establish custom repositories from your local mirror. This provides an additional layer of control over the software versions available to your client machines. If you’re not familiar with repository mirroring in Landscape, we strongly encourage you to first read our [explanation of repository mirroring](/explanation/repository-mirroring/repository-mirroring).
+The repository mirroring feature in Landscape enables you to mirror Ubuntu and third-party repositories locally, and to establish custom repositories from your local mirror. This provides an additional layer of control over the software versions available to your client machines. If you’re not familiar with repository mirroring in Landscape, we strongly encourage you to first read our {ref}`explanation-repo-mirroring`.
 
 The guide specifically demonstrates how to mirror an Ubuntu repository, but most of the information here also applies to mirroring third-party repositories.
 
@@ -123,7 +123,7 @@ To create a mirror using the distribution you previously made:
 ## Sync pockets
 
 ```{note}
-If you’re using Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ before syncing your pocket. For more information, see [how to configure RabbitMQ for Jammy 22.04 or later](/how-to-guides/landscape-installation-and-set-up/configure-rabbitmq).
+If you’re using Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ before syncing your pocket. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
 Syncing pockets involves downloading all packages from that pocket locally. For large pockets, such as those in the Ubuntu repositories, this step can take a few hours or even longer depending on the size of the pocket and your download speed. We have some estimates of the [amount of disk space required](#disk-space-requirements) for the Ubuntu repositories; however, these repositories change frequently and may be larger than the provided estimates. If you attempt to sync a pocket but don’t have enough disk space available, the sync pocket activity will fail and you’ll receive an error message before any packages are downloaded.

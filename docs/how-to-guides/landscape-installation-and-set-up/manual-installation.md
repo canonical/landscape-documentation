@@ -2,7 +2,7 @@
 # How to install Landscape manually
 
 ```{note}
-If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see [how to attach your Ubuntu Pro subscription](/how-to-guides/ubuntu-pro/attach-ubuntu-pro) and [how to enable Landscape in the Ubuntu Pro Client](/how-to-guides/ubuntu-pro/enable-landscape).
+If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 ```
 
 This is the baseline deployment recommendation we have for Landscape Server when Juju is not used. At a minimum, you need two machines: the database server and application server.
@@ -153,7 +153,7 @@ If you have no such file, Landscape will manage machines with Ubuntu Pro subscri
 ### Configure rabbitmq
 
 ```{note}
-If you're installing Landscape on Jammy 22.04 or later, you may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see [how to configure RabbitMQ for Jammy 22.04 or later](/how-to-guides/landscape-installation-and-set-up/configure-rabbitmq).
+If you're installing Landscape on Jammy 22.04 or later, you may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
 Just run the following commands, replacing `<password>` with a password of your choice. It will be needed later.
@@ -553,5 +553,5 @@ You can now accept your client in the Landscape UI, and it will begin to upload 
 
 ### (Optional) Add an email alias
 
-You can configure Postfix to handle Landscape Server email notifications and alerts. To ensure that important system emails get attention, we recommend you also add an alias for Landscape on your local environment. For details, see [how to configure Postfix for emails](/how-to-guides/landscape-installation-and-set-up/configure-postfix).
+You can configure Postfix to handle Landscape Server email notifications and alerts. To ensure that important system emails get attention, we recommend you also add an alias for Landscape on your local environment. For details, see {ref}`how-to-configure-postfix`.
 

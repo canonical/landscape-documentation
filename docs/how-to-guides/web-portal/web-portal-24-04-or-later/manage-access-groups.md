@@ -1,7 +1,7 @@
 (how-to-web-portal-manage-access-groups)=
 # How to manage access groups
 
-> See also: [Access groups](/reference/terms/access-groups)
+> See also: {ref}`reference-terms-access-groups`
 
 These guides describe how to manage access groups.
 

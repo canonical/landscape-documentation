@@ -9,7 +9,7 @@ Landscape Server gets security update information from [Ubuntu Security Notices]
 
 You can apply security updates directly from the Landscape web portal, but the process differs slightly depending on which web portal you use.
 
-You can also create [upgrade profiles](/reference/terms/profiles/upgrade-profile) to schedule security updates.
+You can also create {ref}`reference-terms-upgrade-profile` to schedule security updates.
 
 ### Web portal (24.04 LTS and later)
 
@@ -28,7 +28,7 @@ You can view security updates available and upgrade on a per-computer basis. To 
 
 ### Upgrade profiles
 
-You can use [upgrade profiles](/reference/terms/profiles/upgrade-profile) to schedule any package updates, and you can choose to only upgrade security issues.
+You can use {ref}`reference-terms-upgrade-profile` to schedule any package updates, and you can choose to only upgrade security issues.
 
 For more details, see [how to manage upgrade profiles](/how-to-guides/web-portal/classic-web-portal/manage-computers.md#manage-upgrade-profiles).
 
@@ -38,4 +38,4 @@ For more details, see [how to manage upgrade profiles](/how-to-guides/web-portal
 
 You can use Livepatch to schedule high and critical Linux kernel vulnerability patches, which removes the immediate need to reboot to upgrade the kernel on critical infrastructure.
 
-For more information, see our documentation on [how to manage Livepatch and kernel updates from the Landscape web portal](/how-to-guides/web-portal/web-portal-24-04-or-later/manage-livepatch-and-kernel-updates.md) (24.04 and later).
+For more information, see our documentation on {ref}`how-to-web-portal-manage-livepatch` (24.04 and later).

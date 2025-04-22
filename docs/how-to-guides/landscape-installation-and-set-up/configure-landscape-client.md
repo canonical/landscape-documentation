@@ -1,11 +1,11 @@
 (how-to-configure-landscape-client)=
 # How to configure Landscape Client
 
-> See also: [How to install Landscape Client](/how-to-guides/landscape-installation-and-set-up/install-landscape-client)
+> See also: {ref}`how-to-install-landscape-client`
 
 This guide describes how to configure the Landscape Client Debian package in multiple ways. 
 
-If you're using the snap instead of the Debian package, see [how to configure the Landscape Client snap](/how-to-guides/iot-for-devices/configure-the-snap).
+If you're using the snap instead of the Debian package, see {ref}`how-to-configure-the-client-snap`.
 
 If you're using the charm, you'll need to configure the client with `juju config`. For more information, see the [Juju documentation](https://juju.is/docs/juju) and [Charmhub's documentation on the Landscape client charm](https://charmhub.io/landscape-client).
 

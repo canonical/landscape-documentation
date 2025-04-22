@@ -13,7 +13,7 @@ To register a machine, you'll need (at a minimum) your Landscape account name an
 
 ## Attach your Pro subscription
 
-If you haven't attached your Pro subscription (token), you need to attach it before moving on. See [how to attach your Ubuntu Pro subscription](/how-to-guides/ubuntu-pro/attach-ubuntu-pro).
+If you haven't attached your Pro subscription (token), you need to attach it before moving on. See {ref}`how-to-attach-ubuntu-pro`.
 
 ## Enable interactively
 

@@ -1,10 +1,10 @@
 (how-to-wsl-perform-common-tasks)=
 # How to perform common tasks with WSL in Landscape
 
-> See also: [WSL API methods](/reference/api/legacy-api-endpoints/wsl)
+> See also: {ref}`reference-legacy-api-wsl`
 
 ```{note}
-This guide assumes that a registered WSL host and WSL instance already exist in Landscape. For more information, visit [how to register WSL hosts to Landscape](/how-to-guides/wsl-integration/register-wsl-hosts) and [how to register WSL instances to Landscape](/how-to-guides/wsl-integration/manage-wsl-instances).
+This guide assumes that a registered WSL host and WSL instance already exist in Landscape. For more information, visit {ref}`how-to-register-wsl-hosts` and {ref}`how-to-manage-wsl-instances`.
 ```
 
 

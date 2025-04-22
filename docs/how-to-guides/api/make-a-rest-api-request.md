@@ -2,7 +2,7 @@
 # How to make a REST API request
 
 
-> See also: [Login API endpoints](/reference/api/rest-api-endpoints/login)
+> See also: {ref}`reference-rest-api-login`
 
 This guide demonstrates how to login and make a request using the Landscape REST API. You need Landscape 24.04 LTS (or higher) to use the REST API. This guide provides general steps and examples using `curl`.
 

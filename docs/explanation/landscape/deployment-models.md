@@ -1,7 +1,7 @@
 (explanation-deployment-models)=
 # Landscape deployment models
 
-> See also: [What is Landscape?](/what-is-landscape)
+> See also: {ref}`what-is-landscape`
 
 Landscape can be deployed in different ways depending on the scale and reliability requirements of your deployment. There are two primary deployment models: single-server and multi-server.
 
@@ -14,7 +14,7 @@ Landscape is also commonly used with other Canonical products.
 
 This is the simplest deployment model where Landscape Server and its components all run on a single machine, and there’s only one instance of each component. Each Landscape Client registers directly with the single Landscape server.
 
-Single-server deployments should be installed using the [Quickstart installation](/how-to-guides/landscape-installation-and-set-up/quickstart-installation.md).
+Single-server deployments should be installed using the {ref}`how-to-quickstart-installation`.
 
 ![Landscape single-server deployment](https://assets.ubuntu.com/v1/efcf89cc-Deployment_Landscape%20(1).png)
 
@@ -22,11 +22,11 @@ Single-server deployments should be installed using the [Quickstart installation
 
 This setup provides redundancy and scalability to production and large-scale deployments and can be used in high-availability environments. This deployment uses a load balancer (HAProxy) to distribute requests across multiple Landscape servers, and includes multiple instances of Landscape Server and its components (PostgreSQL and RabbitMQ). Landscape Clients communicate through HAProxy, which then distributes the requests to available Landscape Servers.
 
-Multi-server deployments are usually installed with [Juju](/how-to-guides/landscape-installation-and-set-up/juju-installation.md). For HA deployments, see [how to install Landscape for high-availability deployments](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
+Multi-server deployments are usually installed with {ref}`how-to-juju-installation`. For HA deployments, see {ref}`how-to-juju-ha-installation`.
 
 ![Landscape multi-server deployment with the scalable charm](https://assets.ubuntu.com/v1/fbb9e2c3-HA_Deployment_Landscape%20(1).png)
 
-You can also use the [Manual (deb)](/how-to-guides/landscape-installation-and-set-up/manual-installation.md) installation method for multi-server deployments instead of Juju, but this isn't recommended for HA deployments.
+You can also use the {ref}`how-to-manual-installation` installation method for multi-server deployments instead of Juju, but this isn't recommended for HA deployments.
 
 ## Products used with Landscape
 

@@ -38,7 +38,7 @@ There are three different editions of Landscape: [SaaS](#landscape-saas), [Manag
 
 Landscape SaaS is our standard SaaS offering. It’s a cloud-based version of Landscape that’s hosted and maintained by Canonical, bundled with your [Ubuntu Pro](https://ubuntu.com/pro) subscription. Landscape SaaS is hosted on Canonical’s shared infrastructure (multi-tenanted) and is ready to use immediately, with no setup required.
 
-While the majority of Landscape features are offered in SaaS, there are certain features that aren’t available in SaaS due to the shared-tenancy or because these features require dedicated infrastructure. Landscape SaaS doesn't currently offer [repository management](/explanation/repository-mirroring/repository-mirroring) or configuring a custom external identity provider.
+While the majority of Landscape features are offered in SaaS, there are certain features that aren’t available in SaaS due to the shared-tenancy or because these features require dedicated infrastructure. Landscape SaaS doesn't currently offer {ref}`explanation-repo-mirroring` or configuring a custom external identity provider.
 
 Organizations interested in using Landscape SaaS at enterprise-scale should [contact Canonical Sales](https://ubuntu.com/landscape#get-in-touch).
 
@@ -46,7 +46,7 @@ Organizations interested in using Landscape SaaS at enterprise-scale should [con
 
 Managed Landscape is a single-tenant version of Landscape with dedicated resources that’s hosted by Canonical and comes with an SLA. It’s for organizations that want private, dedicated resources but don’t want to manage their own infrastructure. With Managed Landscape, you get your own private Landscape instance that’s managed by Canonical but customized to your organization’s needs.
 
-The Managed Landscape offering comes with all Landscape features, including [repository management](/explanation/repository-mirroring/repository-mirroring) and configuring custom external identity providers.
+The Managed Landscape offering comes with all Landscape features, including {ref}`explanation-repo-mirroring` and configuring custom external identity providers.
 
 Organizations interested in Managed Landscape should [contact Canonical Sales](https://ubuntu.com/landscape#get-in-touch).
 
@@ -67,5 +67,5 @@ For self-hosted installations, there are multiple ways to install Landscape Serv
 - **Landscape Client Snap**: This is the snap version of Landscape Client. It’s mainly for IoT device deployments, and it’s designed to be used with Ubuntu Core.
 - **Landscape Client Charm**: This deploys Landscape Client on Juju-managed systems. You should use the Landscape Client Charm if you’re also using the Juju-managed Landscape Server Charm.
 
-For more details on self-hosted Landscape installations, see our [about self-hosted](/explanation/landscape/self-hosted-landscape) page. Organizations interested in using self-hosted Landscape at enterprise-scale should [contact Canonical Sales](https://ubuntu.com/landscape#get-in-touch).
+For more details on self-hosted Landscape installations, see our {ref}`explanation-about-self-hosted` page. Organizations interested in using self-hosted Landscape at enterprise-scale should [contact Canonical Sales](https://ubuntu.com/landscape#get-in-touch).
 

@@ -167,7 +167,7 @@ Machine  State    Address        Inst id         Base          AZ  Message
 11       started  10.76.244.71   juju-dded29-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by [installing the Landscape Client charm](/how-to-guides/landscape-installation-and-set-up/install-landscape-client) on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the [configure HAProxy with an SSL certificate](#configure-haproxy-with-an-ssl-certificate) section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`how-to-install-landscape-client` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the [configure HAProxy with an SSL certificate](#configure-haproxy-with-an-ssl-certificate) section in this guide for more information.
 
 ### Option 2: Customize the configuration before deployment
 
@@ -360,7 +360,7 @@ Machine  State    Address        Inst id         Base          AZ  Message
 11       started  10.76.244.179  juju-be1fab-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by [installing the Landscape Client charm](/how-to-guides/landscape-installation-and-set-up/install-landscape-client) on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the [configure HAProxy with an SSL certificate](#configure-haproxy-with-an-ssl-certificate) section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`how-to-install-landscape-client` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the [configure HAProxy with an SSL certificate](#configure-haproxy-with-an-ssl-certificate) section in this guide for more information.
 
 
 ## Create a SSL certificate with LetsEncrypt (Optional)

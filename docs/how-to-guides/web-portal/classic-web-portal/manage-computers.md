@@ -12,7 +12,7 @@ This link provides the complete instructions for registering client computers wi
 
 ## Select computers
 
-You can select computers by selecting them individually, using searches or using [tags](/reference/terms/tags). 
+You can select computers by selecting them individually, using searches or using {ref}`reference-terms-tags`. 
 
 To select computers individually:
 
@@ -36,7 +36,7 @@ To select computers using tags:
 
 ## Apply tags to computers
 
-To apply [tags](/reference/terms/tags) to computers:
+To apply {ref}`reference-terms-tags` to computers:
 
 1. Navigate to the **Computers** page in the header
 2. Select the computers you want to associate with that tag
@@ -136,7 +136,7 @@ To assign a role to a new user or edit the role(s) of an existing user:
 
 ## Manage alerts
 
-Landscape uses [alerts](/reference/terms/alerts) to notify administrators of conditions that require attention. The following types of alerts are available:
+Landscape uses {ref}`reference-terms-alerts` to notify administrators of conditions that require attention. The following types of alerts are available:
 
 * when a pending computer needs to be accepted or rejected
 * when you are exceeding your license entitlements for Landscape Dedicated Server (This alert does not apply to the hosted version of Landscape.)
@@ -162,7 +162,7 @@ For some alerts, you can download a list of affected computers as a CSV file. Cl
 You must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit [how to enable script execution](https://ubuntu.com/landscape/docs/configure-landscape-client#heading--enable-script-execution).
 ```
 
-You can run [scripts](/reference/terms/scripts) on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.
+You can run {ref}`reference-terms-scripts` on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.
 
 From your organization's home page, click the **Scripts** tab to display a list of existing scripts, the access group they belong to, and the creator. To add a new script, click **Add script**. On the next page, you must enter a title, interpreter, the script code, the time within which the script must complete, and the access group to which the script belongs. You may enter a default user to run the script. If you don't, you'll have to specify the user when you choose to run the script. You may also attach up to five files with a maximum of 1MB in total size. On each computer on which a script runs, attachments are placed in the directory specified by the environment variable LANDSCAPE_ATTACHMENTS, and are deleted once the script has been run. After specifying all the information for a stored script, click **Save** to save it.
 
@@ -174,7 +174,7 @@ To run a new script, enter most of the same information you would if you were cr
 
 ## Manage upgrade profiles
 
-An [upgrade profile](/reference/terms/profiles/upgrade-profile) defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more computers with each upgrade profile via tags to install packages on those computers. You can also associate an upgrade profile with an access group, which limits its use to only computers within the specified access group. You can manage upgrade profiles from the **Upgrade Profiles** link in the **Profiles** tab on your organization's home page.
+An {ref}`reference-terms-upgrade-profile` defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more computers with each upgrade profile via tags to install packages on those computers. You can also associate an upgrade profile with an access group, which limits its use to only computers within the specified access group. You can manage upgrade profiles from the **Upgrade Profiles** link in the **Profiles** tab on your organization's home page.
 
 If you click **Upgrade Profiles**, Landscape displays a list of the names and descriptions of existing upgrade profiles.
 
@@ -188,7 +188,7 @@ To delete one or more upgrade profiles, select the checkbox next to the upgrade 
 
 ## Manage removal profiles
 
-A [removal profile](/reference/terms/profiles/removal-profile) defines a maximum number of days that a computer can go without exchanging data with the Landscape server before it's automatically removed. If more days pass than the profile's *Days without exchange*, that computer will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired computer data for long periods of time. You can associate zero or more computers with each removal profile via tags to ensure those computers are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only computers within the specified access group. You can manage removal profiles from the **Removal profiles** page in the **Profiles** tab under your organization's home page.
+A {ref}`reference-terms-removal-profile` defines a maximum number of days that a computer can go without exchanging data with the Landscape server before it's automatically removed. If more days pass than the profile's *Days without exchange*, that computer will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired computer data for long periods of time. You can associate zero or more computers with each removal profile via tags to ensure those computers are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only computers within the specified access group. You can manage removal profiles from the **Removal profiles** page in the **Profiles** tab under your organization's home page.
 
 When you do so, Landscape displays a list of the names and descriptions of existing removal profiles.
 

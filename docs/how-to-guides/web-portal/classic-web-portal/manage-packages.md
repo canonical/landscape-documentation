@@ -22,7 +22,7 @@ The **Request upgrades** button at the bottom of the screen lets you quickly req
 
 ## Add a package profile
 
-To add a [package profile](/reference/terms/profiles/package-profile):
+To add a {ref}`reference-terms-package-profile`:
 
 1. Navigate to your organization's home page
 2. Click the **Profiles** tab
@@ -46,7 +46,7 @@ Additionally, note that Debian package names can't contain underscores (`_`). If
 
 ## Export a package profile
 
-To export a [package profile](/reference/terms/profiles/package-profile):
+To export a {ref}`reference-terms-package-profile`:
 
 1. Navigate to your organization's home page
 2. Click the **Profiles** tab
@@ -56,7 +56,7 @@ To export a [package profile](/reference/terms/profiles/package-profile):
 
 ## Modify a package profile
 
-To modify a [package profile](/reference/terms/profiles/package-profile):
+To modify a {ref}`reference-terms-package-profile`:
 
 1.  Navigate to your organization's home page
 2. Click the **Profiles** tab
@@ -67,7 +67,7 @@ To modify a [package profile](/reference/terms/profiles/package-profile):
 
 ## Delete a package profile
 
-To delete a [package profile](/reference/terms/profiles/package-profile):
+To delete a {ref}`reference-terms-package-profile`:
 
 1. Navigate to your organization's home page
 2. Click the **Profiles** tab

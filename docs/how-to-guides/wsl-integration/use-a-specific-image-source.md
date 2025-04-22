@@ -3,7 +3,7 @@
 
 If you don’t want to download your Ubuntu image from the Microsoft Store, you can instead use a different image source. This guide describes how to get your Ubuntu image from a different source and push that image to your WSL machines using the Landscape REST API. 
 
-The example provided here uses `curl` and `jq`, and assumes your Windows host machine(s) are already registered in Landscape. If you haven't registered your host machine yet, see [how to register WSL hosts to Landscape](/how-to-guides/wsl-integration/register-wsl-hosts).
+The example provided here uses `curl` and `jq`, and assumes your Windows host machine(s) are already registered in Landscape. If you haven't registered your host machine yet, see {ref}`how-to-register-wsl-hosts`.
 
 ## Set up your environment
 
@@ -25,7 +25,7 @@ First, set up your environment:
     
 ## Install WSL on multiple Windows host machines
 
-If you’re installing WSL on multiple Windows machines, you can use one of the following scripts. Your Windows host machines should already be registered with Landscape before running this script. If you haven’t registered your machines yet, see [how to register WSL hosts to Landscape](/how-to-guides/wsl-integration/register-wsl-hosts).
+If you’re installing WSL on multiple Windows machines, you can use one of the following scripts. Your Windows host machines should already be registered with Landscape before running this script. If you haven’t registered your machines yet, see {ref}`how-to-register-wsl-hosts`.
 
 ### Installing an official Ubuntu image
 Before running this script, you first need to edit:

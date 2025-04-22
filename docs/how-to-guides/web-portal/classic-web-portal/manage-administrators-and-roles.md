@@ -1,7 +1,7 @@
 (how-to-classic-web-portal-manage-admins-and-roles)=
 # How to manage administrators and roles
 
-> See also: [Administrators](/reference/terms/administrators)
+> See also: {ref}`reference-terms-administrators`
 
 ```{note}
 You must be an administrator to perform these tasks.

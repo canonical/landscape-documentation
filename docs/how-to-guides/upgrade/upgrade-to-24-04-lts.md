@@ -5,7 +5,7 @@
 There is a [known issue](https://bugs.launchpad.net/ubuntu/+source/rabbitmq-server/+bug/2074309) affecting Ubuntu 22.04 LTS (Jammy) to Ubuntu 24.04 LTS (Noble) upgrades for systems that run RabbitMQ, which includes systems that use Landscape. If you run into this issue, we recommend waiting until it's resolved before upgrading your Ubuntu version. This issue doesn't affect Landscape upgrades, and you can still upgrade to Landscape 24.04 LTS for Jammy.
 ```
 
-To upgrade your self-hosted Landscape server to 24.04 LTS, you should first follow the basic upgrade instructions. See [how to upgrade Landscape](/how-to-guides/upgrade/upgrade-landscape). Note that you must be running Ubuntu 24.04 LTS Noble Numbat or 22.04 Jammy Jellyfish to upgrade to Landscape 24.04 LTS.
+To upgrade your self-hosted Landscape server to 24.04 LTS, you should first follow the basic upgrade instructions. See {ref}`how-to-upgrade`. Note that you must be running Ubuntu 24.04 LTS Noble Numbat or 22.04 Jammy Jellyfish to upgrade to Landscape 24.04 LTS.
 
 ## Additional upgrade steps
 
@@ -43,7 +43,7 @@ RewriteRule ^/api/(.*) http://localhost:9080/api/$1 [P,L]
 
 You can see a full Apache config example in our [how to configure the web server](https://ubuntu.com/landscape/docs/manual-installation#heading--configure-web-server) guide.
 
-To configure Windows Subsystem for Linux (WSL), you should also complete the steps in our how to [configure WSL-related services](/how-to-guides/wsl-integration/configure-landscape-beta) guide.
+To configure Windows Subsystem for Linux (WSL), you should also complete the steps in our how to {ref}`how-to-wsl-configure-landscape-beta` guide.
 
 ## Manual installations
 If you're upgrading a Landscape Server instance that was manually installed (instead of Quickstart), you also need to complete the following steps. These changes are needed to access the new web portal introduced in Landscape 24.04 LTS.

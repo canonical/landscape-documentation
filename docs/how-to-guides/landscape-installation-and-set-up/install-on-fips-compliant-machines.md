@@ -5,7 +5,7 @@ This document provides the Landscape-specific steps needed for a FIPS-compliant 
 
 ## Install and configure Landscape for FIPS-compliant deployments
 
-Use the [Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart-installation) or [Manual](/how-to-guides/landscape-installation-and-set-up/manual-installation) installation guides, with the following changes:
+Use the {ref}`how-to-quickstart-installation` or {ref}`how-to-manual-installation` installation guides, with the following changes:
 
 - **Use Ubuntu 22.04 LTS**
 - **Run `pro enable fips-updates`, then reboot**
@@ -13,7 +13,7 @@ Use the [Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart
 - **Install packages with `apt` instead of `snap`**
 - **Use external authentication instead of username/password**
 
-If you're [configuring Postfix for emails](/how-to-guides/landscape-installation-and-set-up/configure-postfix), add the following change:
+If you're {ref}`how-to-configure-postfix`, add the following change:
 
 - **After you've used Postconf to configure the `/etc/postfix/main.cf` file, add an additional step to manually set the SMTP TLS fingerprint digest**:
 

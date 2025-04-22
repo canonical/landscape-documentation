@@ -5,7 +5,7 @@
 
 You can deploy Landscape in a scalable way with Juju. This document provides a very high-level overview. 
 
-For detailed instructions on deploying Landscape with Juju in a high-availability environment, see [how to install and configure Landscape for high-availability deployments](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
+For detailed instructions on deploying Landscape with Juju in a high-availability environment, see {ref}`how-to-juju-ha-installation`.
 
 ## Install Juju
 
@@ -32,7 +32,7 @@ In the **landscape-scalable** bundle configuration, each service gets its own ma
 juju deploy landscape-scalable
 ```
 
-For more detailed instructions on deploying the Landscape server with the bundle, refer to the [Landscape Juju high availability installation guide](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md).
+For more detailed instructions on deploying the Landscape server with the bundle, refer to the {ref}`how-to-juju-ha-installation`.
 
 ### Other bundles
 

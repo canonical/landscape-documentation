@@ -222,5 +222,5 @@ To create and provision your Windows 11 VM using an ISO:
     ```
     
 
-Your environment is now set up to use WSL with Landscape. Next, you’ll need to install and configure Ubuntu Pro for WSL and register your Windows host machine. For these steps, see [how to set up Ubuntu Pro for WSL and register WSL hosts to Landscape](/how-to-guides/wsl-integration/register-wsl-hosts).
+Your environment is now set up to use WSL with Landscape. Next, you’ll need to install and configure Ubuntu Pro for WSL and register your Windows host machine. For these steps, see {ref}`how-to-register-wsl-hosts`.
 

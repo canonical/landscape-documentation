@@ -159,5 +159,5 @@ The Landscape Client snap doesn’t support management of Debian packages.
 You must be running a self-hosted Landscape server version 23.10 or later (or beta) to use the snap.
 ```
 
-The snap is generally used for Ubuntu Core devices. You can install the Landscape Client snap from the [Snap Store](https://snapcraft.io/landscape-client) or the command line. For more detailed instructions and information on the snap's limitations, see [how to install the Landscape Client snap](/how-to-guides/iot-for-devices/install-the-snap).
+The snap is generally used for Ubuntu Core devices. You can install the Landscape Client snap from the [Snap Store](https://snapcraft.io/landscape-client) or the command line. For more detailed instructions and information on the snap's limitations, see {ref}`how-to-install-the-client-snap`.
 
