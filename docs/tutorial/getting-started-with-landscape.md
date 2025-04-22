@@ -1,7 +1,7 @@
 (getting-started-with-landscape)=
 # Getting started with Landscape
 
-> See also: [What is Landscape?](../what-is-landscape.md)
+> See also: {ref}`what-is-landscape`
 
 This tutorial guides you through the process of installing Landscape Server on a Multipass virtual machine, configuring it, registering a client instance to Landscape, and running a script on your client instance.
 
