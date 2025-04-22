@@ -44,6 +44,7 @@ Landscape Server uses Ubuntu’s public GPG keys to verify upstream Ubuntu archi
 
 Any other GPG keys used for signature verification or for signing Landscape-managed repositories must be provided by the user.
 
+(header-recommended-usage-and-settings)=
 ## Recommended usage and settings
 
 We have the following recommendations for secure deployments.
@@ -76,5 +77,5 @@ For repository mirroring, administrators also generate a private key to sign and
 
 ## Cryptographic technology available to users
 
-Landscape doesn’t provide cryptography services for external uses, so users can't use Landscape to perform their own cryptographic actions, such as signing files or encrypting uploaded data. However, users can change the cryptographic settings in Landscape that would impact the security of their Landscape deployments. See the earlier section on [recommended usage and settings](#recommended-usage-and-settings) for guidance.
+Landscape doesn’t provide cryptography services for external uses, so users can't use Landscape to perform their own cryptographic actions, such as signing files or encrypting uploaded data. However, users can change the cryptographic settings in Landscape that would impact the security of their Landscape deployments. See the earlier section on {ref}`header-recommended-usage-and-settings` for guidance.
 

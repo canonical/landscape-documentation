@@ -49,7 +49,7 @@ If you accidentally replace your configuration file, you can put your previous c
 
 If you’re not using a quickstart deployment of Landscape, you need to manually update your database schema. You only need to run the database schema updates once, even if your deployment has multiple servers.
 
-For Juju deployments, see the [upgrade Juju deployments section](#upgrade-juju-deployments) in this guide. For manual installations of Landscape, follow these steps to manually update your database schema:
+For Juju deployments, see {ref}`how-to-heading-upgrade-juju` in this guide. For manual installations of Landscape, follow these steps to manually update your database schema:
 
 1. Stop Landscape
     
@@ -69,6 +69,7 @@ For Juju deployments, see the [upgrade Juju deployments section](#upgrade-juju-d
     sudo lsctl restart
     ```
     
+(how-to-heading-upgrade-juju)=
 ## Upgrade Juju deployments
 
 > See also: [Landscape-server charm on Charmhub](https://charmhub.io/landscape-server)
@@ -121,4 +122,4 @@ To upgrade a basic Juju deployment:
 
 Landscape commonly has version-specific configurations that must be added to complete your upgrade.
 
-If you're upgrading to Landscape 24.04 LTS, follow these {ref}`how-to-upgrade-to-24-04-lts`.
+If you're upgrading to Landscape 24.04 LTS, follow {ref}`how-to-upgrade-to-24-04-lts`.

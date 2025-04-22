@@ -10,6 +10,7 @@ To register computers with a Landscape server:
 
 This link provides the complete instructions for registering client computers with a Landscape server, which are also available at `https://yourserver/standalone/how-to-register`. You need to register computers with the server in order to manage them in Landscape.
 
+(how-to-heading-classic-portal-select-computers)=
 ## Select computers
 
 You can select computers by selecting them individually, using searches or using {ref}`reference-terms-tags`. 
@@ -40,7 +41,7 @@ To apply {ref}`reference-terms-tags` to computers:
 
 1. Navigate to the **Computers** page in the header
 2. Select the computers you want to associate with that tag
-   - For more information, see [Select computers](#select-computers)
+   - For more information, see {ref}`how-to-heading-classic-portal-select-computers`
 3. Click the **Info** tab
 4. Enter the tag you want to use in the **Tags** row
 5. Click **Add**

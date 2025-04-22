@@ -11,6 +11,7 @@ The repository mirroring feature in Landscape enables you to mirror Ubuntu and t
 
 The guide specifically demonstrates how to mirror an Ubuntu repository, but most of the information here also applies to mirroring third-party repositories.
 
+(how-to-heading-disk-space-requirements)=
 ## Disk space requirements
 
 As of March 2024, these are the estimates for the amount of disk space needed to download the following Ubuntu distributions:
@@ -126,7 +127,7 @@ To create a mirror using the distribution you previously made:
 If you’re using Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ before syncing your pocket. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
-Syncing pockets involves downloading all packages from that pocket locally. For large pockets, such as those in the Ubuntu repositories, this step can take a few hours or even longer depending on the size of the pocket and your download speed. We have some estimates of the [amount of disk space required](#disk-space-requirements) for the Ubuntu repositories; however, these repositories change frequently and may be larger than the provided estimates. If you attempt to sync a pocket but don’t have enough disk space available, the sync pocket activity will fail and you’ll receive an error message before any packages are downloaded.
+Syncing pockets involves downloading all packages from that pocket locally. For large pockets, such as those in the Ubuntu repositories, this step can take a few hours or even longer depending on the size of the pocket and your download speed. We have some estimates of the {ref}`amount of disk space required <how-to-heading-disk-space-requirements>` for the Ubuntu repositories; however, these repositories change frequently and may be larger than the provided estimates. If you attempt to sync a pocket but don’t have enough disk space available, the sync pocket activity will fail and you’ll receive an error message before any packages are downloaded.
 
 To sync a pocket from the web portal:
 

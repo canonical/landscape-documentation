@@ -34,7 +34,7 @@ The default timeout is set in milliseconds at 1,800,000 milli seconds (30 minute
     ```
     
 
-Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see [how to delete the lock file](#if-necessary-delete-the-lock-file).
+Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see {ref}`how to delete the lock file <how-to-header-delete-lock-file>`.
 
 ## Disable the RabbitMQ timeout
 
@@ -69,8 +69,9 @@ If you don’t want RabbitMQ to have a timeout at all, you can fully disable it:
     ```
     
 
-Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see [how to delete the lock file](#if-necessary-delete-the-lock-file).
+Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see {ref}`how to delete the lock file <how-to-header-delete-lock-file>`.
 
+(how-to-header-delete-lock-file)=
 ## (If necessary) Delete the lock file
 
 If you’re syncing a repository mirror, you may get the following error when you re-run your task:
