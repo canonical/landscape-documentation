@@ -67,7 +67,7 @@ The method returns a JSON serialized representation of the new script:
 ## ExecuteScript
 
 ```{note}
-To use this API endpoint, you must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit [how to enable script execution](https://ubuntu.com/landscape/docs/configure-landscape-client#heading--enable-script-execution).
+To use this API endpoint, you must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit {ref}`how to enable script execution <howto-heading-client-enable-script-execution>`.
 ```
 
 Execute script on computers.

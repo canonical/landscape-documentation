@@ -84,6 +84,7 @@ To delete a WSL instance via the API, make an API call such as:
 
 If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
+(howto-heading-wsl-view-computers)=
 ## View WSL host machines and child computers
 
 From the Landscape web portal, you can view all WSL host machines and their associated WSL instances, or child computers. All machines associated with WSL indicate their status next to their name in the **Select computers** table. WSL child instances also display their parent Windows machine next to their name.

@@ -138,7 +138,7 @@ Optional arguments:
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 
-This method doesn't return a list of WSL instances or WSL hosts that don't have a child WSL instance registered in Landscape. If you want to view those computers, you can use the `GetComputers` method from {ref}`reference-legacy-api-computers`, or visit [how to view WSL host machines and child computers in the Landscape web portal](https://ubuntu.com/landscape/docs/perform-common-tasks-with-wsl-in-landscape#heading--view-wsl-host-machines-and-child-computers).
+This method doesn't return a list of WSL instances or WSL hosts that don't have a child WSL instance registered in Landscape. If you want to view those computers, you can use the `GetComputers` method from {ref}`reference-legacy-api-computers`, or visit {ref}`how to view WSL host machines and child computers in the Landscape web portal <howto-heading-wsl-view-computers>`.
 
 Example calls:
 
