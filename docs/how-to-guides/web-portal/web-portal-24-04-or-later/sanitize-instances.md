@@ -1,5 +1,4 @@
 (how-to-guides-web-portal-web-portal-24-04-or-later-sanitize-computers)=
-
 # How to sanitize instances from the Landscape web portal
 
 You can sanitize instances from the **Info** tab. To access this tab, go to **Instances** > Select your instance.
