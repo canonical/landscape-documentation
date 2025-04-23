@@ -11,4 +11,3 @@ manage-access-groups
 use-annotations
 manage-livepatch-and-kernel-updates
 sanitize-instances
-
