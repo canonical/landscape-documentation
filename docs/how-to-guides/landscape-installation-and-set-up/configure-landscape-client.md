@@ -39,7 +39,7 @@ The Landscape Client configuration file is located in `/etc/landscape/client.con
 sudo systemctl restart landscape-client
 ```
 
-
+(howto-heading-client-autoregister)=
 ## Auto-register new computers
 
 ```{note}
@@ -66,6 +66,7 @@ Once you’ve defined a registration key and enabled the auto-registration featu
 sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={COMPUTER_TITLE} --registration-key={KEY}
 ```
 
+(howto-heading-client-enable-script-execution)=
 ## Enable script execution
 
 

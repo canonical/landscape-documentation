@@ -119,6 +119,7 @@ To finish registering your WSL host to Landscape:
 
 That's it! Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu instances, see {ref}`how-to-manage-wsl-instances`.
 
+(howto-heading-register-wsl-host-troubleshoot)=
 ## (If necessary) Troubleshoot
 
 > See also: [Ubuntu Pro for WSL's logs](https://documentation.ubuntu.com/wsl/en/latest/howto/06-access-the-logs/)
@@ -162,7 +163,7 @@ If your Windows host machine doesn’t appear as a pending computer in your Land
     
 - **If you have auto-registration enabled, check if your Windows machine is already listed as a computer in your Landscape account**
     
-    Landscape has an auto-registration feature that allows you to register computers without manually approving each one. If you’re using a registration key and you have this feature enabled, your Windows machine won’t appear as a pending computer. Instead, it’ll auto-register and appear in your list of computers. For more information, see [how to auto-register new computers](https://ubuntu.com/landscape/docs/configure-landscape-client#heading--auto-register-new-computers).
+    Landscape has an auto-registration feature that allows you to register computers without manually approving each one. If you’re using a registration key and you have this feature enabled, your Windows machine won’t appear as a pending computer. Instead, it’ll auto-register and appear in your list of computers. For more information, see {ref}`how to auto-register new computers <howto-heading-client-autoregister>`.
     
 - **Check that your Ubuntu Pro token was applied correctly**
     

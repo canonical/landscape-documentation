@@ -30,11 +30,11 @@ You can use the Landscape web portal to create role-isolated repository mirrors.
 
 **Step #1: Create your Mirror servers**
 
-Create your Mirror server(s) using the same installation method as your existing Management server: [Quickstart](https://ubuntu.com/landscape/docs/quickstart-deployment), [Manual](https://ubuntu.com/landscape/docs/manual-installation), or [Juju](https://ubuntu.com/landscape/docs/juju-installation).
+Create your Mirror server(s) using the same installation method as your existing Management server: {ref}`Quickstart <how-to-quickstart-installation>`, {ref}`Manual <how-to-manual-installation>`, or {ref}`Juju <how-to-juju-installation>`.
 
 **Step #2: Create and import your GPG key**
 
-1. On your Mirror server, follow these instructions to [create and import the GPG key](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-and-import-the-gpg-key).
+1. On your Mirror server, follow these instructions to {ref}`how-to-heading-create-import-gpg-key`.
 2. Add your secret key to all instances of Landscape Server—Management and Mirror(s).
 
 **Step #3: Get the public GPG key from the public repository you want to mirror.**
@@ -46,8 +46,8 @@ In this example, we discuss mirroring the Landscape PPA. Since the PPA is treate
 
 **Step #4: Create the mirror**
 
-1. In your Mirror Server web portal, [create a new distribution](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-new-repository).
-2. Then [create a mirror](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-mirror), with the following additional options:
+1. In your Mirror Server web portal, {ref}`create a new distribution <how-to-heading-create-new-repo>`.
+2. Then {ref}`how-to-heading-manage-repos-create-mirror`, with the following additional options:
     * Select **Third-party** as the **Type**
     * Enter the PPA location under **Mirror URI**. For example, the Landscape Server 24.04 LTS mirror URI is [https://ppa.launchpadcontent.net/landscape/self-hosted-24.04/ubuntu](https://ppa.launchpadcontent.net/landscape/self-hosted-24.04/ubuntu)
     * In the **Mirror GPG Key** dropdown menu, select the public key from the PPA that you just imported
@@ -56,7 +56,7 @@ In this example, we discuss mirroring the Landscape PPA. Since the PPA is treate
 
 **Note**: This step can take a few hours or more for larger repositories.
 
-To download all the packages for your mirror, you need to [sync the mirror or pockets](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--sync-pockets). To learn more about pockets, see the [about repository mirroring guide](https://ubuntu.com/landscape/docs/explanation-about-repository-mirroring).
+To download all the packages for your mirror, you need to {ref}`sync the mirror or pockets <how-to-heading-manage-repos-sync-pockets>`. To learn more about pockets, see the {ref}`about repository mirroring guide <explanation-repo-mirroring>`.
 
 **Step #6: Create an APT Source in your Management server**
 
@@ -70,7 +70,7 @@ To download all the packages for your mirror, you need to [sync the mirror or po
 
 **Step #7: Create a repository profile and associate instances to that profile**
 
-In your Management server, follow the [guide to create repository profiles](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-repository-profile-and-associate-computers), with the following changes:
+In your Management server, follow the {ref}`guide to create repository profiles <how-to-heading-manage-repos-create-repo-profile>`, with the following changes:
 
 * If you’ve tagged your clients with a specific tag, such as “repo-mirror-client”, associate your profile to the appropriate tag(s)
 * In the **APT Source** tab, select the APT source you previously added
@@ -93,17 +93,17 @@ You can use the Landscape web portal to create network-isolated repository mirro
 
 **Step #1: Create a Tier 1 Global server**
 
-Create your Tier 1 Global server using the same installation method as your existing Tier 2 Network server: [Quickstart](https://ubuntu.com/landscape/docs/quickstart-deployment), [Manual](https://ubuntu.com/landscape/docs/manual-installation), or [Juju](https://ubuntu.com/landscape/docs/juju-installation).
+Create your Tier 1 Global server using the same installation method as your existing Tier 2 Network server: {ref}`Quickstart <how-to-quickstart-installation>`, {ref}`Manual <how-to-manual-installation>`, or {ref}`Juju <how-to-juju-installation>`.
 
 **Step #2: Create and import your GPG key on your Tier 1 Global server**
 
-1. On your Tier 1 Global server, follow these instructions to [create and import the GPG key](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-and-import-the-gpg-key).
+1. On your Tier 1 Global server, follow these instructions to {ref}`how-to-heading-create-import-gpg-key`.
 2. Add your secret key to your Tier 1 Global server
 3. Add the matching public key to your Tier 2 Network server
 
 **Step #3: Create and import your GPG key on your Tier 2 Network server**
 
-1. On your Tier 2 Network server, follow these instructions to [create and import the GPG key](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-and-import-the-gpg-key).
+1. On your Tier 2 Network server, follow these instructions to {ref}`how-to-heading-create-import-gpg-key`.
 2. Add your secret key to your Tier 2 Network server
 
 **Step #4: Get the public GPG key from the public repository you want to mirror**
@@ -115,8 +115,8 @@ If you’re mirroring the Ubuntu repositories, these keys are already known in L
 
 **Step #5: Create the mirror in the Tier 1 Global server**
 
-1. In your Tier 1 Global server web portal, [create a new distribution](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-new-repository).
-2. Then [create a mirror](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-mirror), with the following additional options:
+1. In your Tier 1 Global server web portal, {ref}`create a new distribution <how-to-heading-create-new-repo>`.
+2. Then {ref}`how-to-heading-manage-repos-create-mirror`, with the following additional options:
     * Select the appropriate mirror type. If you’re *not* mirroring an Ubuntu repository, the type is **Third party**. Otherwise, select the appropriate Ubuntu mirror type.
     * Enter the URL for the repository location under **Mirror URI**. For example, the Landscape Server 24.04 LTS mirror URI is [https://ppa.launchpadcontent.net/landscape/self-hosted-24.04/ubuntu](https://ppa.launchpadcontent.net/landscape/self-hosted-24.04/ubuntu)
     * In the **Mirror GPG Key** dropdown menu, select the public key from the public repository that you just imported
@@ -126,8 +126,8 @@ If you’re mirroring the Ubuntu repositories, these keys are already known in L
 
 You also need to set up your Tier 2 Network server(s) to access the mirror from the Tier 1 Global server.
 
-1. In your Tier 2 Network server web portal, [create a new distribution](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-new-repository).
-2. Then [create a mirror](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--create-a-mirror), with the following additional options:
+1. In your Tier 2 Network server web portal, {ref}`create a new distribution <how-to-heading-create-new-repo>`.
+2. Then {ref}`how-to-heading-manage-repos-create-mirror`, with the following additional options:
     * Select **Third-party** as the **Type**
     * Enter the repository location under **Mirror URI**. This is the Mirror URI for your Tier 1 Global server. It’s typically formatted as `http://&lt;landscape-url>/repository/standalone/ubuntu`.
     * In the **Mirror GPG Key** dropdown menu, select the Tier 1 Global server’s public signing key, which you created earlier
@@ -137,7 +137,7 @@ You also need to set up your Tier 2 Network server(s) to access the mirror from 
 
 **Note**: This step can take a few hours or more for larger repositories.
 
-To download all the packages for your mirror, you need to [sync the mirror or pockets](https://ubuntu.com/landscape/docs/manage-repositories-web-portal#heading--sync-pockets). To learn more about pockets, see the [about repository mirroring guide](https://ubuntu.com/landscape/docs/explanation-about-repository-mirroring).
+To download all the packages for your mirror, you need to {ref}`sync the mirror or pockets <how-to-heading-manage-repos-sync-pockets>`. To learn more about pockets, see the {ref}`about repository mirroring guide <explanation-repo-mirroring>`.
 
 **Step #8: Sync the Tier 2 Network server mirror**
 

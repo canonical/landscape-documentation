@@ -45,7 +45,7 @@ Copy the downloaded `.deb` packages, carry them into the offline or air-gapped e
 sudo dpkg -i /PATH/TO/PACKAGES/*.deb
 ```
 
-Once Landscape Server is installed, you can finish setting up Landscape similar to how you would with an online server. See the {ref}`how-to-quickstart-installation` and {ref}`how-to-manual-installation` installation guides for more details. This also includes setting up your first administrator and attaching your {ref}`explanation-licenses`.
+Once Landscape Server is installed, you can finish setting up Landscape similar to how you would with an online server. See the {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installation guides for more details. This also includes setting up your first administrator and attaching your {ref}`explanation-licenses`.
 
 ## Install Landscape Client
 

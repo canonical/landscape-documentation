@@ -5,7 +5,7 @@ Self-hosted Landscape is the standalone edition of Landscape that you can instal
 
 Feature enhancements are released in our scheduled release windows which occur twice per year, typically in April and October. Security patches and bug fixes will be provided outside of our scheduled release windows at the earliest possible opportunity.
 
-The following table applies to {ref}`how-to-quickstart-installation` and {ref}`how-to-manual-installation` installations of Landscape Server.
+The following table applies to {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installations of Landscape Server.
 
 | **Major version**                | **Release date** | **Standard Support** | **Expanded security maintenance (ESM)** | **Installs on Ubuntu LTS version**  |
 | ----------------------           | ---------------- | ------------------- | ------------------- | ---------------------  |
@@ -48,15 +48,15 @@ Depending on your deployment method, these may exist on the same machine or diff
 
 ### Quickstart
 
-* **{ref}`how-to-quickstart-installation`**, for when you don't have Juju but quickly want to check out self-hosted Landscape. Not recommended for production environments when having more than 500 clients.
+* **{ref}`Quickstart installation <how-to-quickstart-installation>`**, for when you don't have Juju but quickly want to check out self-hosted Landscape. Not recommended for production environments when having more than 500 clients.
 
 ### Juju deployed
 
-* **{ref}`how-to-juju-installation`** for a truly scalable deployment.
+* **{ref}`Juju installation <how-to-juju-installation>`** for a truly scalable deployment.
 
 ### Manual installation
 
-* **{ref}`how-to-manual-installation`**: for when you don't have a suitable Juju environment but need a scalable deployment.
+* **{ref}`Manual installation <how-to-manual-installation>`**: for when you don't have a suitable Juju environment but need a scalable deployment.
 
 ## Installation requirements
 

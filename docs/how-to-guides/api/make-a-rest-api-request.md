@@ -17,8 +17,6 @@ The general steps to make a REST API request are:
 
 ## Password authentication: Make a REST API request with `curl`
 
-> See also: [`/login` REST API endpoint](https://ubuntu.com/landscape/docs/api-rest-login#p-110652-post-login)
-
 This method is for those using password authentication to login.
 
  To make a REST API request with `curl`:
@@ -61,8 +59,6 @@ This method is for those using password authentication to login.
     ```
 
 ## SSO: Make a REST API request with `curl`
-
-> See also: [`/login/access-key` REST API endpoint](https://ubuntu.com/landscape/docs/api-rest-login#p-110652-post-loginaccess-key)
 
 This method is for those using SSO (such as Ubuntu One or an external authentication provider) to login. This includes Landscape SaaS.  
 

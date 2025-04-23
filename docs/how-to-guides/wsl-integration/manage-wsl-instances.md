@@ -36,7 +36,7 @@ Or:
 curl -X POST https://your-landscape.domain.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Ubuntu"}'
 ```
 
-The `parent_id` is assigned by Landscape. The `computer_name` is the name of the child computer you’re creating. Unless you are specifying a `rootfs_url`, this `computer_name` must match exactly the name of one of the supported Ubuntu WSL images in the Windows Store: `Ubuntu`, `Ubuntu-22.04`, or `Ubuntu-24.04`. If you don’t know the ID of your parent computer, visit [how to get computer IDs](https://ubuntu.com/landscape/docs/managing-computers#heading--get-computer-ids).
+The `parent_id` is assigned by Landscape. The `computer_name` is the name of the child computer you’re creating. Unless you are specifying a `rootfs_url`, this `computer_name` must match exactly the name of one of the supported Ubuntu WSL images in the Windows Store: `Ubuntu`, `Ubuntu-22.04`, or `Ubuntu-24.04`. If you don’t know the ID of your parent computer, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
 
 ## Register new WSL instances with cloud-init

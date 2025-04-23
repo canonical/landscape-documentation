@@ -27,6 +27,7 @@ Packages will be downloaded to `/var/lib/landscape/landscape-repository/standalo
 
 Note that this is only a subset, and it does not include arm and other architectures. Including these will use more disk space.
 
+(howto-heading-manage-repos-web-portal-generate-api-credentials)=
 ## (If needed) Generate API credentials
 
 ```{note}
@@ -41,6 +42,7 @@ If you're a first-time user of the 24.04 LTS web portal and web-based repository
 
 Now you can access web-based repository management and navigate to the newer web portal by clicking **Repositories** from the header. You may need to log out and back in again, but you only need to generate API credentials once.
 
+(how-to-heading-create-import-gpg-key)=
 ## Create and import the GPG key
 
 You need to create a secret GPG key in your terminal before importing it into the web portal. 
@@ -96,6 +98,7 @@ If done successfully, your key will now be listed in the *GPG Keys* page. Once i
 If you intend to mirror a third-party repository, you'll also need to get their public GPG key and import it into Landscape.
 ```
 
+(how-to-heading-create-new-repo)=
 ## Create a new repository (distribution)
 
 To create a new distribution:
@@ -107,6 +110,7 @@ To create a new distribution:
 4. Select the appropriate access group(s) for this distribution
 5. Click **Add distribution**
 
+(how-to-heading-manage-repos-create-mirror)=
 ## Create a mirror
 
 To create a mirror using the distribution you previously made:
@@ -121,6 +125,7 @@ To create a mirror using the distribution you previously made:
 1. Review the selections under **Pockets**, **Components** and **Architectures**. Either use the defaults or change the options as needed to customize your mirror. 
 1. Click **Add mirror**
 
+(how-to-heading-manage-repos-sync-pockets)=
 ## Sync pockets
 
 ```{note}
@@ -145,6 +150,7 @@ landscape-api get-activities --query type:SyncPocketRequest --limit 1
 
 The output of this returns a `progress` field that provides an estimate of the percent complete of your pocket sync. You can also add `watch --`  before the previous command to get an update every two seconds.
 
+(how-to-heading-manage-repos-create-repo-profile)=
 ## Create a repository profile and associate computers to the profile
 
 A repository profile in Landscape is useful for updating repository configurations. When a machine is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.

@@ -14,7 +14,7 @@ Landscape is also commonly used with other Canonical products.
 
 This is the simplest deployment model where Landscape Server and its components all run on a single machine, and there’s only one instance of each component. Each Landscape Client registers directly with the single Landscape server.
 
-Single-server deployments should be installed using the {ref}`how-to-quickstart-installation`.
+Single-server deployments should be installed using the {ref}`Quickstart <how-to-quickstart-installation>` guide.
 
 ![Landscape single-server deployment](https://assets.ubuntu.com/v1/efcf89cc-Deployment_Landscape%20(1).png)
 
@@ -26,7 +26,7 @@ Multi-server deployments are usually installed with {ref}`how-to-juju-installati
 
 ![Landscape multi-server deployment with the scalable charm](https://assets.ubuntu.com/v1/fbb9e2c3-HA_Deployment_Landscape%20(1).png)
 
-You can also use the {ref}`how-to-manual-installation` installation method for multi-server deployments instead of Juju, but this isn't recommended for HA deployments.
+You can also use the {ref}`Manual <how-to-manual-installation>` installation method for multi-server deployments instead of Juju, but this isn't recommended for HA deployments.
 
 ## Products used with Landscape
 

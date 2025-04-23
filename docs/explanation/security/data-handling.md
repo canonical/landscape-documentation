@@ -8,7 +8,7 @@ This document provides an overview of how Landscape handles data in transit and 
 ## Data in transit
 
 - **SaaS deployment**: Encrypted with HTTPS (TLS), using RSA with SHA-256.
-- **Self-hosted deployment**: Encrypted with HTTPS (TLS) by default, using RSA with SHA-256. See our full {ref}`explanation-cryptographic-technology` for more information.
+- **Self-hosted deployment**: Encrypted with HTTPS (TLS) by default, using RSA with SHA-256. See our full {ref}`explanation-cryptographic-technology` guide for more information.
 
 ## Data at rest
 

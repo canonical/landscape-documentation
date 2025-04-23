@@ -9,7 +9,7 @@ Landscape Server gets security update information from [Ubuntu Security Notices]
 
 You can apply security updates directly from the Landscape web portal, but the process differs slightly depending on which web portal you use.
 
-You can also create {ref}`reference-terms-upgrade-profile` to schedule security updates.
+You can also create an {ref}`reference-terms-upgrade-profile` to schedule security updates.
 
 ### Web portal (24.04 LTS and later)
 
@@ -28,7 +28,7 @@ You can view security updates available and upgrade on a per-computer basis. To 
 
 ### Upgrade profiles
 
-You can use {ref}`reference-terms-upgrade-profile` to schedule any package updates, and you can choose to only upgrade security issues.
+You can use an {ref}`reference-terms-upgrade-profile` to schedule any package updates, and you can choose to only upgrade security issues.
 
 For more details, see [how to manage upgrade profiles](/how-to-guides/web-portal/classic-web-portal/manage-computers.md#manage-upgrade-profiles).
 

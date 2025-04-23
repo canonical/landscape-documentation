@@ -28,13 +28,13 @@ You will encounter issues with the following scenarios.
     
 - **Attempting to use Landscape Server 23.10 Stable or earlier**
     
-    WSL is not supported for Landscape Server 23.10 Stable or earlier. You must have Landscape Server Beta self-hosted in a public cloud or on premise to use WSL with Landscape. To install Landscape Server with the latest source code from the Landscape Beta PPA, visit [how to install Landscape Server in quickstart mode.](https://ubuntu.com/landscape/docs/quickstart-deployment)
+    WSL is not supported for Landscape Server 23.10 Stable or earlier. You must have Landscape Server Beta self-hosted in a public cloud or on premise to use WSL with Landscape. To install Landscape Server with the latest source code from the Landscape Beta PPA, visit {ref}`how-to-quickstart-installation`.
     
 - **Attempting to use Landscape Client 23.10 Stable or earlier**
     
-    WSL is not supported for Landscape Client 23.10 Stable or earlier. You must have the Landscape Beta PPA to install Landscape Client Beta. To install Landscape Client with the latest source code from the Landscape Beta PPA, visit [how to install Landscape Client](https://ubuntu.com/landscape/docs/install-landscape-client).
+    WSL is not supported for Landscape Client 23.10 Stable or earlier. You must have the Landscape Beta PPA to install Landscape Client Beta. To install Landscape Client with the latest source code from the Landscape Beta PPA, visit {ref}`how-to-install-landscape-client`.
 
-To troubleshoot issues with your Windows host registration, see the [troubleshooting guide for registering WSL hosts with Landscape](https://ubuntu.com/landscape/docs/register-wsl-hosts-to-landscape#heading--troubleshoot).
+To troubleshoot issues with your Windows host registration, see the {ref}`troubleshooting guide for registering WSL hosts with Landscape <howto-heading-register-wsl-host-troubleshoot>`.
     
 ## Contact Support
 

@@ -35,6 +35,7 @@ To select computers using tags:
 2. Click any tag to display the list of computers associated with that tag
 3. Select the checkbox for each computer or click **All**
 
+(howto-heading-manage-computers-appy-tags)=
 ## Apply tags to computers
 
 To apply {ref}`reference-terms-tags` to computers:
@@ -67,6 +68,7 @@ From the **Computers** page, you can get information about selected computers by
   * have contacted the server within the last five minutes
   * have applied security updates - four visualizations show computers that have applied Ubuntu Security Notices within the last two, 14, 30, and 60+ days
 
+(howto-heading-manage-computers-get-ids)=
 ## Get computer IDs
 
 There are two ways to locate the IDs for a specific computer:
@@ -160,7 +162,7 @@ For some alerts, you can download a list of affected computers as a CSV file. Cl
 ## Manage scripts
 
 ```{note}
-You must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit [how to enable script execution](https://ubuntu.com/landscape/docs/configure-landscape-client#heading--enable-script-execution).
+You must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit {ref}`how to enable script execution <howto-heading-client-enable-script-execution>`.
 ```
 
 You can run {ref}`reference-terms-scripts` on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.

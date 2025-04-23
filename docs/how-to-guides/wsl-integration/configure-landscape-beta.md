@@ -62,7 +62,7 @@ Then enable `proxy_http2`:
 ```bash
 sudo a2enmod proxy_http2
 ```
-You can see a full Apache config example with details in our [how to configure the web server](https://ubuntu.com/landscape/docs/manual-installation#heading--configure-web-server) guide.
+You can see a full Apache config example with details in our {ref}`how to configure the web server <how-to-heading-manual-install-configure-web-server>` guide.
 
 ## Add a virtual host to RabbitMQ
 

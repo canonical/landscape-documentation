@@ -3,7 +3,7 @@
 
 > See also: {ref}`explanation-repo-mirroring`
 
-You can manage repositories with Landscape in an air-gapped or offline environment, although the setup is more involved than in a standard online environment. This guide provides a high-level overview of how to set up Landscape in an air-gapped environment. If you aren’t familiar with repository mirroring and management in Landscape, it’s recommended that you read our {ref}`explanation-repo-mirroring` first.
+You can manage repositories with Landscape in an air-gapped or offline environment, although the setup is more involved than in a standard online environment. This guide provides a high-level overview of how to set up Landscape in an air-gapped environment. If you aren’t familiar with repository mirroring and management in Landscape, it’s recommended that you read our {ref}`About repository mirroring <explanation-repo-mirroring>` guide first.
 
 This guide assumes you already have Landscape installed and set up in your air-gapped environment. If you don’t have Landscape installed yet, follow the instructions in {ref}`how-to-install-airgapped` before completing this guide.
 
@@ -24,7 +24,7 @@ For fully disconnected air-gapped environments, using physical media to manually
 
 ## Restricted network air-gap
 
-**Note:** This process will take awhile to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see our {ref}`explanation-repo-mirroring`.
+**Note:** This process will take awhile to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see {ref}`explanation-repo-mirroring`.
 
 If you’re in a restricted network air-gap, setting up the repository mirrors is relatively similar to the standard (online) way, but with some additional steps. You need to set up your outside server as a third-party repository for the inside server. For detailed instructions, see {ref}`how-to-create-tiered-repo-mirrors`.
 
@@ -32,7 +32,7 @@ After you’ve set up your repository mirror structure, see {ref}`how-to-manage-
 
 ## Fully disconnected air-gap
 
-**Note:** This process will take awhile to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see our {ref}`explanation-repo-mirroring`.
+**Note:** This process will take awhile to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see {ref}`explanation-repo-mirroring`.
 
 If you’re in a fully-disconnected air-gap, the general process is that you copy the necessary data from your outside (online) server and manually transfer it to your inside (offline) server via physical media.
 
