@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-packages)=
+(reference-legacy-api-packages)=
 # Packages
 
 

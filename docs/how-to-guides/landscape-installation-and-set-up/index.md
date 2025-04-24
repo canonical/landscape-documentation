@@ -5,7 +5,6 @@ There are multiple different ways to install and configure Landscape.
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
-:glob:
 
 Quickstart installation <quickstart-installation>
 Manual installation <manual-installation>

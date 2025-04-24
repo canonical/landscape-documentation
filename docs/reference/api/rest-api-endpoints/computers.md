@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-computers)=
+(reference-rest-api-computers)=
 # Computers
 
 ## GET `/computers`

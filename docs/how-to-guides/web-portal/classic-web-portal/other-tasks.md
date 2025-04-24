@@ -1,4 +1,4 @@
-(how-to-guides-web-portal-classic-web-portal-other-tasks)=
+(how-to-classic-web-portal-other-tasks)=
 # Other tasks in the Landscape web portal
 
 ## Identify your Landscape version
@@ -39,7 +39,7 @@ Note: While the upgrade tasks are now in the queue, they will not be executed un
 
 ##  Keep a set of machines automatically up to date
 
-The best way is to use [upgrade profiles](/reference/terms/profiles/upgrade-profile), which rely on [access groups](/reference/terms/access-groups). If an access group is already set up for the group of machines you want to keep updated automatically, click on its name. If not, you must create an access group for them:
+The best way is to use {ref}`reference-terms-upgrade-profile`, which rely on {ref}`reference-terms-access-groups`. If an access group is already set up for the group of machines you want to keep updated automatically, click on its name. If not, you must create an access group for them:
 
 1. Click on your organization's name in the header
 2. Click **Access groups**
@@ -107,5 +107,5 @@ To view the graph, click **Computers** in the header, then click **Monitoring**.
 
 ## Ensure all computers with a given tag have a common list of packages installed
 
-Manage them via a [package profile](/reference/terms/profiles/package-profile).
+Manage them via a {ref}`reference-terms-package-profile`.
 

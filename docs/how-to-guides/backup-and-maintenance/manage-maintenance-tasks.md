@@ -1,4 +1,4 @@
-(how-to-guides-backup-and-maintenance-manage-maintenance-tasks)=
+(how-to-manage-maintenance)=
 # How to manage maintenance tasks
 
 Landscape Server installs a few scheduled tasks, defined in the `/etc/cron.d/landscape-server` file.

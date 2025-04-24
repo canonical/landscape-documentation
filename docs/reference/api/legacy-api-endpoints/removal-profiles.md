@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-removal-profiles)=
+(reference-legacy-api-removal-profiles)=
 # Removal Profiles
 
 

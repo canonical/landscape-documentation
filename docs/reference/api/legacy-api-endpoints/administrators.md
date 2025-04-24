@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-administrators)=
+(reference-legacy-api-administrators)=
 # Administrators
 
 

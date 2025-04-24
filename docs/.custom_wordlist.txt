@@ -61,6 +61,7 @@ CVEs
 datetime
 debian
 decrypt
+DirectoryAPI
 distros
 DMARC
 DNS
@@ -175,8 +176,10 @@ organization’s
 organizational
 quickstart
 packagesearch
+PAYG
 PCI
 perf
+perfs
 performant
 PITR
 pgSQL
@@ -241,6 +244,7 @@ stateful
 subkeys
 submodule
 subpaths
+superclass
 SupportAnalyst
 syslog
 systemd

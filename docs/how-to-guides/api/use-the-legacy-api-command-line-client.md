@@ -1,4 +1,4 @@
-(how-to-guides-api-use-the-legacy-api-command-line-client)=
+(how-to-use-legacy-api-cli)=
 # How to use the legacy API command-line client
 
 

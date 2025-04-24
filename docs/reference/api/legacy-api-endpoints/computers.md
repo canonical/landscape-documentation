@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-computers)=
+(reference-legacy-api-computers)=
 # Computers
 
 

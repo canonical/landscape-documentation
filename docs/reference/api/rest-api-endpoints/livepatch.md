@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-livepatch)=
+(reference-rest-api-livepatch)=
 # Livepatch
 
 ## GET /`computers/<computer_id>/livepatch/info`

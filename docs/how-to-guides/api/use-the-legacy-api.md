@@ -1,4 +1,4 @@
-(how-to-guides-api-use-the-legacy-api)=
+(how-to-use-legacy-api)=
 # How to use the legacy API
 
 

@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-packages)=
+(reference-rest-api-packages)=
 # Packages
 
 ## GET `/packages`

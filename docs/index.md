@@ -10,7 +10,7 @@
 
 self
 what-is-landscape
-tutorial/index
+Tutorial <getting-started-with-landscape.md>
 how-to-guides/index
 reference/index
 explanation/index

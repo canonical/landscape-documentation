@@ -1,8 +1,8 @@
-(how-to-guides-landscape-installation-and-set-up-manual-installation)=
+(how-to-manual-installation)=
 # How to install Landscape manually
 
 ```{note}
-If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see [how to attach your Ubuntu Pro subscription](/how-to-guides/ubuntu-pro/attach-ubuntu-pro) and [how to enable Landscape in the Ubuntu Pro Client](/how-to-guides/ubuntu-pro/enable-landscape).
+If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 ```
 
 This is the baseline deployment recommendation we have for Landscape Server when Juju is not used. At a minimum, you need two machines: the database server and application server.
@@ -12,7 +12,9 @@ For a manual installation of Landscape 24.04 LTS:
  * **Database server**: runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16.
  * **Application server**: runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services
 
-This is a long document. If you want a quick installation that just works, but doesn't scale to a large number of machines, then install the `landscape-server-quickstart` package. For more information, visit [how to install Landscape Server with quickstart mode](https://ubuntu.com/landscape/docs/quickstart-deployment).
+ You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
+
+This is a long document. If you want a quick installation that just works, but doesn't scale to a large number of machines, then install the `landscape-server-quickstart` package. For more information, visit {ref}`how-to-quickstart-installation`.
 
 ## Prepare for the installation
 
@@ -27,6 +29,7 @@ What you will need:
 
 After having installed the basic server profile of Ubuntu Server, we need to install the PostgreSQL database and configure it for use by Landscape. Please follow these steps:
 
+(how-to-header-install-postgresql)=
 ### Install PostgreSQL and required libraries
 
 Run one of the following commands to install the database software.
@@ -151,7 +154,7 @@ If you have no such file, Landscape will manage machines with Ubuntu Pro subscri
 ### Configure rabbitmq
 
 ```{note}
-If you're installing Landscape on Jammy 22.04 or later, you may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see [how to configure RabbitMQ for Jammy 22.04 or later](/how-to-guides/landscape-installation-and-set-up/configure-rabbitmq).
+If you're installing Landscape on Jammy 22.04 or later, you may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
 Just run the following commands, replacing `<password>` with a password of your choice. It will be needed later.
@@ -245,6 +248,7 @@ sudo setup-landscape-server
 ```
  * start all Landscape services again
 
+(how-to-heading-manual-install-configure-web-server)=
 ### Configure web server
 
 Landscape uses Apache to, among other things, redirect requests to each service and provide SSL support. The usual way to do this in Ubuntu is to create a Virtual Host for Landscape.
@@ -551,5 +555,5 @@ You can now accept your client in the Landscape UI, and it will begin to upload 
 
 ### (Optional) Add an email alias
 
-You can configure Postfix to handle Landscape Server email notifications and alerts. To ensure that important system emails get attention, we recommend you also add an alias for Landscape on your local environment. For details, see [how to configure Postfix for emails](/how-to-guides/landscape-installation-and-set-up/configure-postfix).
+You can configure Postfix to handle Landscape Server email notifications and alerts. To ensure that important system emails get attention, we recommend you also add an alias for Landscape on your local environment. For details, see {ref}`how-to-configure-postfix`.
 

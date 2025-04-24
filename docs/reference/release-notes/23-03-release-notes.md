@@ -1,4 +1,4 @@
-(reference-release-notes-23-03-release-notes)=
+(reference-release-notes-23-03)=
 # 23.03 release notes
 
 These are the release notes for Landscape 23.03.

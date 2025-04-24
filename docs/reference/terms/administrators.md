@@ -1,4 +1,4 @@
-(explanation-terms-administrators)=
+(reference-terms-administrators)=
 # Administrators
 
 **Administrators** are people who are authorized to manage computers using Landscape. You can manage administrators from the **Administrators** tab in your organization's home page.

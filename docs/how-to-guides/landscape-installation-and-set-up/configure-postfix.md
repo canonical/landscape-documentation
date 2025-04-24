@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-configure-postfix)=
+(how-to-configure-postfix)=
 # How to configure Postfix for emails
 
 ```{note}

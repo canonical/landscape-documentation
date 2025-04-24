@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-package-profiles)=
+(reference-legacy-api-package-profiles)=
 # Package Profiles
 
 

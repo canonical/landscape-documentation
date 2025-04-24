@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-saved-searches)=
+(reference-legacy-api-saved-searches)=
 # Saved Searches
 
 

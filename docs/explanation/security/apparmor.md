@@ -1,4 +1,4 @@
-(explanation-security-apparmor)=
+(explanation-apparmor)=
 # AppArmor and Landscape
 
 [AppArmor](https://apparmor.net/) is a security system for Linux applications that allows you to set fine-grained access controls on a per-application basis. In Ubuntu, AppArmor is installed by default.

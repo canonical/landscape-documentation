@@ -1,4 +1,4 @@
-(how-to-guides-backup-and-maintenance-backup-and-restore)=
+(how-to-backup-and-restore)=
 # How to backup and restore Landscape
 
 Self-hosted Landscape consists of several stateful components that must be roughly synchronized to guarantee correct functioning of the system as a whole. These include:
