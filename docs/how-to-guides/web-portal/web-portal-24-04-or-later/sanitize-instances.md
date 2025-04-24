@@ -1,5 +1,5 @@
 (how-to-web-portal-sanitize-computers)=
-# How to sanitize instances from the Landscape web portal
+# How to sanitize instances
 
 You can sanitize instances in Landscape. This permanently deletes the encryption key for that instance, making its data unrecoverable.
 
