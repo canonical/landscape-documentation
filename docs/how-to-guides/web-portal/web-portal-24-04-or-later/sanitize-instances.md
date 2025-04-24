@@ -1,12 +1,17 @@
-(how-to-guides-web-portal-web-portal-24-04-or-later-sanitize-computers)=
+(how-to-web-portal-sanitize-computers)=
 # How to sanitize instances from the Landscape web portal
 
-You can sanitize instances from the **Info** tab. To access this tab, go to **Instances** > Select your instance.
+You can sanitize instances in Landscape. This permanently deletes the encryption key for that instance, making its data unrecoverable.
 
-You can sanitize an instance with **Sanitize**.
+To do this from the web portal:
 
-It will prompt you to enter `"sanitize <instance title>"` before sanitizing. This will create an activity to send the sanitize script and shutdown the instance after a delay.
+1. Go to **Instances** 
+1. Select your instance
+1. In the **Info** tab, click **Sanitize**
+1. Follow the instructions in the prompt, then click **Sanitize**
+
+This creates an activity to send the sanitize script and shutdown the instance after a delay.
 
 The sanitize script erases the key slots of each encrypted volume on the instance.
 
-**Note:** **Please make sure you are sanitizing the correct computer. This action is irreversible once the activity is delivered.**
+**Note:** **Please make sure you're sanitizing the correct computer. This action is irreversible once the activity is delivered.**
