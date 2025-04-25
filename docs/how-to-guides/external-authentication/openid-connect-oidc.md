@@ -32,9 +32,11 @@ sudo lsctl restart
 A logout URL can be configured with `oidc-logout-url` if the provider doesn’t expose one. For example:
 
 ```bash
-[landscape] … oidc-logout-url =
-<https://accounts.google.com/logout>
+[landscape]
+…
+oidc-logout-url = <https://accounts.google.com/logout>
 ```
+
 ```{note}
 There is no provision yet to upgrade current users to OIDC authentication. Most providers return pairwise subject identifiers (sub) which are not easily available. For this reason, we do not provide a user migration method and recommend recreating users.
 ```
