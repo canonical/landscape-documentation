@@ -137,7 +137,10 @@ templates_path = [".sphinx/_templates"]
 # NOTE: If undefined, set to None, or empty,
 #       the sphinx_reredirects extension will be disabled.
 
-redirects = {}
+redirects = {
+    'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
+    'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure'
+}
 
 
 ###########################
@@ -153,7 +156,8 @@ linkcheck_ignore = [
     "https://support.canonical.com/",
     "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html",
     "https://wiki.ubuntu.com/Membership",
-    "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server"
+    "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
+    "https://ubuntu.com/aws#get-in-touch"
 ]
 
 

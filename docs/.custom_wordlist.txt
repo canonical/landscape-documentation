@@ -293,6 +293,8 @@ webapp
 WebUI
 whitespace
 WAL
+WorkSpace
+WorkSpaces
 WSL
 wsl
 WSL's
