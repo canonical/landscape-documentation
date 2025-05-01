@@ -13,7 +13,7 @@ You must have your Ubuntu WorkSpaces instances deployed before beginning this gu
 
 ## Create your Ubuntu Pro account for Landscape SaaS
 
-First, sign up for Landscape SaaS by visiting https://landscape.canonical.com/signup
+First, sign up for Landscape SaaS by visiting https://landscape.canonical.com/signup.
 
 You can log in using your Ubuntu One account. If you don’t have an account, select *I don’t have an Ubuntu One account* and complete the required details.
 
@@ -25,7 +25,7 @@ After you're registered, you’ll receive a confirmation email to validate your 
 The instructions in this guide use Landscape's **classic** web portal. These steps still broadly apply to the newer web portal, which you can preview by clicking **New Web Portal** from the header in your Landscape account.
 ```
 
-Once your account is set up, you can access Landscape SaaS at the following address: https://landscape.canonical.com/
+Once your account is set up, you can access Landscape SaaS at the following address: https://landscape.canonical.com/.
 
 ## Register your machines with Landscape
 
