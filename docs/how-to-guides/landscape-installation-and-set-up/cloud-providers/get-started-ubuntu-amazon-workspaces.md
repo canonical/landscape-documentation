@@ -1,7 +1,7 @@
 (how-to-ubuntu-on-ubuntu-amazon-workspaces)=
 # How to set up Ubuntu Amazon WorkSpaces on Landscape
 
-> This guide is for users with [Amazon WorkSpaces](https://docs.aws.amazon.com/workspaces/) and [Ubuntu Pro](https://documentation.ubuntu.com/pro/) subscriptions.
+> This guide is for users with [Amazon WorkSpaces](https://ubuntu.com/aws/workspaces) and [Ubuntu Pro](https://documentation.ubuntu.com/pro/) subscriptions.
 
 You can use Landscape SaaS to centrally manage your Ubuntu WorkSpaces instances. Landscape SaaS is included with your Ubuntu Pro subscription.
 
