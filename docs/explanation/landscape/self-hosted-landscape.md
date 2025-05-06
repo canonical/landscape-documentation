@@ -87,7 +87,7 @@ If this external network access is unavailable, Canonical's professional service
 ## Unsupported Versions
 | **major version**                | **Release date** | **Support expired on** | **Version of Ubuntu**  |
 | ----------------------           | ---------------- | ------------------------ | ---------------------  |
-| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | No ESM | 22.04 LTS or 24.04 LTS
+| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | 22.04 LTS or 24.04 LTS
 | {ref}`reference-release-notes-23-10`      | 2023-Oct    | **2024-Apr**     | 20.04 LTS or 22.04 LTS |
 | {ref}`reference-release-notes-19-10`  | 2019-Oct         | **2023-May-31**        |  18.04 LTS              |
 | {ref}`reference-release-notes-19-01`  | 2019-Jan         | **2020-Jan**             | 18.04 LTS              |
