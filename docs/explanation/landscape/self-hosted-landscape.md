@@ -10,7 +10,7 @@ The following table applies to {ref}`Quickstart <how-to-quickstart-installation>
 | **Major version**                | **Release date** | **Standard Support** | **Expanded security maintenance (ESM)** | **Installs on Ubuntu LTS version**  |
 | ----------------------           | ---------------- | ------------------- | ------------------- | ---------------------  |
 | {ref}`reference-release-notes-24-04-lts`     | 2024-Apr   | **2029-Apr**     |  **2036-Apr**   | 22.04 LTS or 24.04 LTS |
-| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | No ESM | 22.04 LTS or 24.04 LTS
+| {ref}`reference-release-notes-25-04` | 2025-May | **2025-Oct** | No ESM | 22.04 LTS or 24.04 LTS 
 | {ref}`reference-release-notes-23-03`  | 2023-Mar         | **2025-Apr**        | **2030-Apr**        | 20.04 LTS or 22.04 LTS             |
 
 The [Landscape Server charm](https://charmhub.io/landscape-server) typically follows the same release cycles, although there can be some differences.
@@ -87,6 +87,7 @@ If this external network access is unavailable, Canonical's professional service
 ## Unsupported Versions
 | **major version**                | **Release date** | **Support expired on** | **Version of Ubuntu**  |
 | ----------------------           | ---------------- | ------------------------ | ---------------------  |
+| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | No ESM | 22.04 LTS or 24.04 LTS
 | {ref}`reference-release-notes-23-10`      | 2023-Oct    | **2024-Apr**     | 20.04 LTS or 22.04 LTS |
 | {ref}`reference-release-notes-19-10`  | 2019-Oct         | **2023-May-31**        |  18.04 LTS              |
 | {ref}`reference-release-notes-19-01`  | 2019-Jan         | **2020-Jan**             | 18.04 LTS              |

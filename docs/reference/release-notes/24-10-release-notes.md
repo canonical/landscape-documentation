@@ -1,6 +1,10 @@
 (reference-release-notes-24-10)=
 # 24.10 release notes
 
+```{note}
+Support for Landscape 24.10 ended in April 2025. 
+```
+
 > Landscape 24.10 runs on Ubuntu 24.04 LTS Noble Numbat or 22.04 LTS Jammy Jellyfish. Database schema changes are required to upgrade to Landscape Server 24.10.
 
 You can now access Landscape 24.10 in our `latest-stable` rolling release PPA: `ppa:landscape/latest-stable`. 
