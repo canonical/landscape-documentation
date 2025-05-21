@@ -1,4 +1,4 @@
-(how-to-guides-wsl-integration-configure-landscape-beta)=
+(how-to-wsl-configure-landscape-beta)=
 # How to configure WSL-related services after upgrading Landscape
 
 ```{note}
@@ -62,7 +62,7 @@ Then enable `proxy_http2`:
 ```bash
 sudo a2enmod proxy_http2
 ```
-You can see a full Apache config example with details in our [how to configure the web server](https://ubuntu.com/landscape/docs/manual-installation#heading--configure-web-server) guide.
+You can see a full Apache config example with details in our {ref}`how to configure the web server <how-to-heading-manual-install-configure-web-server>` guide.
 
 ## Add a virtual host to RabbitMQ
 
@@ -84,5 +84,5 @@ sudo service landscape-hostagent-messenger restart
 sudo service landscape-hostagent-consumer restart
 ```
 
-Done! Now you're ready to use WSL with Landscape. If you want instructions on setting up your environment, see [how to set up an environment to use WSL with Landscape](/how-to-guides/wsl-integration/set-up-an-environment). If you already have a Windows machine set up with WSL and Ubuntu, see [how to set up Ubuntu Pro for WSL and register WSL hosts to Landscape](/how-to-guides/wsl-integration/register-wsl-hosts).
+Done! Now you're ready to use WSL with Landscape. If you want instructions on setting up your environment, see {ref}`how-to-wsl-set-up-environment`. If you already have a Windows machine set up with WSL and Ubuntu, see {ref}`how-to-register-wsl-hosts`.
 

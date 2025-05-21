@@ -1,4 +1,4 @@
-(how-to-guides-external-authentication-openid-connect-oidc)=
+(how-to-external-auth-oidc)=
 # How to enable OIDC authentication
 
 Landscape offers support for OpenID-Connect (OIDC) authentication for self-hosted accounts. Common OIDC providers include Okta, Keycloak, Amazon Cognito, Google Identity Platform and Microsoft Entra ID (formerly Azure Active Directory).
@@ -10,7 +10,9 @@ To enable OIDC support, add `oidc-issuer`, `oidc-client-id` and `oidc-client-sec
 ```bash
 [landscape]
 […]
-oidc-issuer = <https://accounts.google.com/> oidc-client-id = 000000000000-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com oidc-client-secret = a4sDFAsdfA4F52as-asDfAsd
+oidc-issuer = <https://accounts.google.com/>
+oidc-client-id = 000000000000-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com
+oidc-client-secret = a4sDFAsdfA4F52as-asDfAsd
 ```
 
 The `oidc-issuer` is the URL of the issuer. That URL should also be a discovery configuration file available by appending `.well-known/openid-configuration`, such as [https://accounts.google.com/.well-known/openid-configuration](https://accounts.google.com/.well-known/openid-configuration). 
@@ -30,8 +32,11 @@ sudo lsctl restart
 A logout URL can be configured with `oidc-logout-url` if the provider doesn’t expose one. For example:
 
 ```bash
-[landscape] … oidc-logout-url = <https://accounts.google.com/logout>
+[landscape]
+…
+oidc-logout-url = <https://accounts.google.com/logout>
 ```
+
 ```{note}
 There is no provision yet to upgrade current users to OIDC authentication. Most providers return pairwise subject identifiers (sub) which are not easily available. For this reason, we do not provide a user migration method and recommend recreating users.
 ```

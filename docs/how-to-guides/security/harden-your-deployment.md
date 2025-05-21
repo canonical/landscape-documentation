@@ -1,3 +1,4 @@
+(how-to-harden-deployment)=
 # How to harden your Landscape deployment
 
 You have many options when hardening your Landscape deployment.
@@ -25,7 +26,7 @@ Make sure these ports are exposed for internal traffic between the applications.
 
 ## Secure external traffic
 
-For more security, you should configure HAProxy or Apache with a TLS certificate. LetsEncrypt provides an easy way to create a certificate, and you can use LetsEncrypt with HAProxy by following the directions in the [Juju installation guide for Landscape](/how-to-guides/landscape-installation-and-set-up/juju-installation.md#configure-an-ssl-cert-on-haproxy).
+For more security, you should configure HAProxy or Apache with a TLS certificate. LetsEncrypt provides an easy way to create a certificate, and you can use LetsEncrypt with HAProxy by following the directions in the [Juju HA installation guide for Landscape](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md/#configure-haproxy-with-an-ssl-certificate).
 
 You can use LetsEncrypt with Apache by following the same directions to acquire the certificate, then install it by following the [configure web server](/how-to-guides/landscape-installation-and-set-up/manual-installation.md#configure-web-server) section of the manual installation guide.
 

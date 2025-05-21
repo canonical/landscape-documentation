@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-install-on-google-cloud)=
+(how-to-install-on-google-cloud)=
 # How to install Landscape Server on Google Cloud
 
 This guide provides an example of how to install and set up your Landscape server on Google Cloud with [cloud-init](https://cloudinit.readthedocs.io/en/latest/). The instructions here can be used for both standard or FIPS-compliant deployments. 
@@ -112,7 +112,7 @@ Your current project is [None].  You can change this setting by running:
 
 Before beginning the deployment process with cloud-init, you must choose which of the two cloud-init configuration automation templates you want to use. In the [Landscape Scripts](https://github.com/canonical/landscape-scripts) Github repository, there are two Landscape Quickstart cloud-init configuration templates: [`cloud-init-quickstart.yaml`](https://github.com/canonical/landscape-scripts/blob/main/provisioning/cloud-init-quickstart.yaml) and [`cloud-init-quickstart-fips.yaml`](https://github.com/canonical/landscape-scripts/blob/main/provisioning/cloud-init-quickstart-fips.yaml). 
 
-The `cloud-init-quickstart.yaml` template is designed for anyone, and the `cloud-init-quickstart-fips.yaml` is designed for FIPS compliant deployments of Landscape Server. For more information, see [how to install FIPS hardened Landscape Server](https://ubuntu.com/landscape/docs/install-fips-hardened-landscape-server).
+The `cloud-init-quickstart.yaml` template is designed for anyone, and the `cloud-init-quickstart-fips.yaml` is designed for FIPS compliant deployments of Landscape Server. For more information, see {ref}`how-to-install-fips-compliant`.
 
 Once you’ve chosen your configuration template, complete the following steps.
 

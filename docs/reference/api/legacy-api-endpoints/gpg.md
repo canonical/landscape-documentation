@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-gpg)=
+(reference-legacy-api-gpg)=
 # GPG
 
 

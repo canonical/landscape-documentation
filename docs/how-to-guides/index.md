@@ -3,90 +3,103 @@
 
 These how-to guides can be applied to many key operations and common tasks with Landscape.
 
+(how-to-index-heading-install-and-setup)=
 ## Landscape installation and set-up
 
-- [Quickstart installation](/how-to-guides/landscape-installation-and-set-up/quickstart-installation)
-- [Manual installation](/how-to-guides/landscape-installation-and-set-up/manual-installation)
-- [Juju installation](/how-to-guides/landscape-installation-and-set-up/juju-installation)
-- [Juju HA installation](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation)
-- [Install in a LXD container](/how-to-guides/landscape-installation-and-set-up/install-in-a-lxd-container)
-- [Install on Google Cloud](/how-to-guides/landscape-installation-and-set-up/install-on-google-cloud)
-- [Install on Microsoft Azure](/how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure)
-- [Install on FIPS-compliant machines](/how-to-guides/landscape-installation-and-set-up/install-on-fips-compliant-machines)
-- [Install Landscape Client](/how-to-guides/landscape-installation-and-set-up/install-landscape-client)
-- [Configure Landscape Client](/how-to-guides/landscape-installation-and-set-up/configure-landscape-client)
-- [Configure RabbitMQ](/how-to-guides/landscape-installation-and-set-up/configure-rabbitmq)
-- [Configure Postfix for emails](/how-to-guides/landscape-installation-and-set-up/configure-postfix)
+- {ref}`Quickstart installation <how-to-quickstart-installation>`
+- {ref}`Manual installation <how-to-manual-installation>`
+- {ref}`Juju installation <how-to-juju-installation>`
+- {ref}`Juju HA installation <how-to-juju-ha-installation>`
+- {ref}`Install in a LXD container <how-to-install-in-lxd-container>`
+- {ref}`Install on Google Cloud <how-to-install-on-google-cloud>`
+- {ref}`Install on Microsoft Azure <how-to-install-on-microsoft-azure>`
+- {ref}`Set up Ubuntu Amazon WorkSpaces <how-to-ubuntu-on-ubuntu-amazon-workspaces>`
+- {ref}`Install on FIPS-compliant machines <how-to-install-fips-compliant>`
+- {ref}`Install Landscape Client <how-to-install-landscape-client>`
+- {ref}`Configure Landscape Client <how-to-configure-landscape-client>`
+- {ref}`Configure RabbitMQ <how-to-configure-rabbitmq>`
+- {ref}`Configure Postfix for emails <how-to-configure-postfix>`
 
+(how-to-index-heading-upgrade)=
 ## Upgrade
 
-- [Upgrade Landscape](/how-to-guides/upgrade/upgrade-landscape)
-- [Upgrade to 24.04 LTS](/how-to-guides/upgrade/upgrade-to-24-04-lts)
+- {ref}`Upgrade Landscape <how-to-upgrade>`
+- {ref}`Upgrade to 24.04 LTS <how-to-upgrade-to-24-04-lts>`
 
+(how-to-index-heading-backup-maintenance)=
 ## Backup and maintenance
 
-- [Backup and restore](/how-to-guides/backup-and-maintenance/backup-and-restore)
-- [Manage maintenance tasks](/how-to-guides/backup-and-maintenance/manage-maintenance-tasks)
+- {ref}`Backup and restore <how-to-backup-and-restore>`
+- {ref}`Manage maintenance tasks <how-to-manage-maintenance>`
 
+(how-to-index-heading-ubuntu-pro)=
 ## Ubuntu Pro
 
-- [Attach Ubuntu Pro](/how-to-guides/ubuntu-pro/attach-ubuntu-pro)
-- [Enable Landscape](/how-to-guides/ubuntu-pro/enable-landscape)
+- {ref}`Attach Ubuntu Pro <how-to-attach-ubuntu-pro>`
+- {ref}`Enable Landscape <how-to-ubuntu-pro-enable-landscape>`
 
+(how-to-index-heading-external-auth)=
 ## External authentication
 
-- [Active Directory authentication](/how-to-guides/external-authentication/active-directory)
-- [OpenID-Connect (OIDC) authentication](/how-to-guides/external-authentication/openid-connect-oidc)
-- [Pluggable Authentication Modules (PAM) authentication](/how-to-guides/external-authentication/pluggable-authentication-modules-pam)
+- {ref}`Active Directory authentication <how-to-external-auth-active-directory>`
+- {ref}`OpenID-Connect (OIDC) authentication <how-to-external-auth-oidc>`
+- {ref}`Pluggable Authentication Modules (PAM) authentication <how-to-external-auth-pam>`
 
+(how-to-index-heading-repo-mirrors)=
 ## Repository mirrors
 
-- [Manage repositories in the web portal](/how-to-guides/repository-mirrors/manage-repositories-in-the-web-portal)
-- [Manage repositories with the API](/how-to-guides/repository-mirrors/manage-repositories-with-the-api)
-- [Create tiered repository mirrors](/how-to-guides/repository-mirrors/create-tiered-repository-mirrors)
+- {ref}`Manage repositories in the web portal <how-to-manage-repos-web-portal>`
+- {ref}`Manage repositories with the API <how-to-manage-repos-api>`
+- {ref}`Create tiered repository mirrors <how-to-create-tiered-repo-mirrors>`
 
 ## Web portal
 
+(how-to-index-heading-web-portal)=
 ### Web portal (24.04 or later)
 
-- [Manage administrators and roles](/how-to-guides/web-portal/web-portal-24-04-or-later/manage-administrators-and-roles)
-- [Manage access groups](/how-to-guides/web-portal/web-portal-24-04-or-later/manage-access-groups)
-- [Use annotations](/how-to-guides/web-portal/web-portal-24-04-or-later/use-annotations)
-- [Manage Livepatch and kernel updates](/how-to-guides/web-portal/web-portal-24-04-or-later/manage-livepatch-and-kernel-updates)
+- {ref}`Manage administrators and roles <how-to-web-portal-manage-admins-and-roles>`
+- {ref}`Manage access groups <how-to-web-portal-manage-access-groups>`
+- {ref}`Use annotations <how-to-web-portal-use-annotations>`
+- {ref}`Manage Livepatch and kernel updates <how-to-web-portal-manage-livepatch>`
 
+(how-to-index-heading-classic-web-portal)=
 ### Classic web portal (23.10 or earlier)
 
-- [Manage administrators and roles](/how-to-guides/web-portal/classic-web-portal/manage-administrators-and-roles)
-- [Manage access groups](/how-to-guides/web-portal/classic-web-portal/manage-access-groups)
-- [Manage computers](/how-to-guides/web-portal/classic-web-portal/manage-computers)
-- [Manage packages](/how-to-guides/web-portal/classic-web-portal/manage-packages)
-- [Manage snaps](/how-to-guides/web-portal/classic-web-portal/manage-snaps)
-- [Other tasks](/how-to-guides/web-portal/classic-web-portal/other-tasks)
+- {ref}`Manage administrators and roles <how-to-classic-web-portal-manage-admins-and-roles>`
+- {ref}`Manage access groups <how-to-classic-web-portal-manage-access-groups>`
+- {ref}`Manage computers <how-to-classic-web-portal-manage-computers>`
+- {ref}`Manage packages <how-to-classic-web-portal-manage-packages>`
+- {ref}`Manage snaps <how-to-classic-web-portal-manage-snaps>`
+- {ref}`Other tasks <how-to-classic-web-portal-other-tasks>`
 
+(how-to-index-heading-iot-for-devices)=
 ## IoT for devices
 
-- [Overview](/how-to-guides/iot-for-devices/index)
-- [Install the snap](/how-to-guides/iot-for-devices/install-the-snap)
-- [Configure the snap](/how-to-guides/iot-for-devices/configure-the-snap)
-- [Create a Core image](/how-to-guides/iot-for-devices/create-a-core-image)
-- [Remote script execution](/how-to-guides/iot-for-devices/remote-script-execution)
-- [Use annotations](/how-to-guides/iot-for-devices/use-annotations)
+- {ref}`Overview <how-to-guides-iot-for-devices-index>`
+- {ref}`Install the snap <how-to-install-the-client-snap>`
+- {ref}`Configure the snap <how-to-configure-the-client-snap>`
+- {ref}`Create a Core image <how-to-create-a-core-image>`
+- {ref}`Remote script execution <how-to-remote-script-execution>`
+- {ref}`Use annotations <how-to-use-annotations-client-snap>`
 
+(how-to-index-heading-wsl)=
 ## WSL integration
 
-- [Configure Landscape Beta](/how-to-guides/wsl-integration/configure-landscape-beta)
-- [Set up an environment](/how-to-guides/wsl-integration/set-up-an-environment)
-- [Register WSL hosts](/how-to-guides/wsl-integration/register-wsl-hosts)
-- [Manage WSL instances](/how-to-guides/wsl-integration/manage-wsl-instances)
-- [Use a specific image source](/how-to-guides/wsl-integration/use-a-specific-image-source)
-- [Perform common tasks](/how-to-guides/wsl-integration/perform-common-tasks)
-- [Get support](/how-to-guides/wsl-integration/get-support)
+- {ref}`Configure Landscape Beta <how-to-wsl-configure-landscape-beta>`
+- {ref}`Set up an environment <how-to-wsl-set-up-environment>`
+- {ref}`Register WSL hosts <how-to-register-wsl-hosts>`
+- {ref}`Manage WSL instances <how-to-manage-wsl-instances>`
+- {ref}`Use a specific image source <how-to-wsl-use-specific-image-source>`
+- {ref}`Perform common tasks <how-to-wsl-perform-common-tasks>`
+- {ref}`Get support <how-to-wsl-get-support>`
 
+(how-to-index-heading-security)=
 ## Security
 
-- [Install Landscape in an air-gapped or offline environment](/how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment)
-- [Manage repositories in an air-gapped or offline environment](/how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment)
-- [Harden your deployment](/how-to-guides/security/harden-your-deployment)
+- {ref}`Install Landscape in an air-gapped or offline environment <how-to-install-airgapped>`
+- {ref}`Manage repositories in an air-gapped or offline environment <how-to-manage-repos-airgapped>`
+- {ref}`Harden your deployment <how-to-harden-deployment>`
+- {ref}`Apply security patches <how-to-apply-security-updates>`
 
 ```{toctree}
 :hidden:
@@ -105,3 +118,4 @@ iot-for-devices/index
 wsl-integration/index
 security/index
 api/index
+```

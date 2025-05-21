@@ -1,4 +1,4 @@
-(reference-release-notes-older-release-notes-16-03-release-notes)=
+(reference-release-notes-16-03)=
 # 16.03 release notes
 
 ## Highlights

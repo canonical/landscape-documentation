@@ -1,4 +1,4 @@
-(explanation-terms-access-groups)=
+(reference-terms-access-groups)=
 # Access groups
 
 In Landscape, **access groups** are logical groupings used by administrators to assign specific administrative rights to computers on a per-group basis. Each computer can only be in one access group. In addition to computers, access groups can contain package profiles, scripts and custom graphs.

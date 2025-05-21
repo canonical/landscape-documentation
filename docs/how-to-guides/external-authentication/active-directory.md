@@ -1,4 +1,4 @@
-(how-to-guides-external-authentication-active-directory)=
+(how-to-external-auth-active-directory)=
 # How to authenticate with Active Directory
 
 This document describes how to enable authentication for self-hosted Landscape with Active Directory using Pluggable Authentication Modules (PAM).

@@ -1,11 +1,11 @@
-(how-to-guides-landscape-installation-and-set-up-configure-landscape-client)=
+(how-to-configure-landscape-client)=
 # How to configure Landscape Client
 
-> See also: [How to install Landscape Client](/how-to-guides/landscape-installation-and-set-up/install-landscape-client)
+> See also: {ref}`how-to-install-landscape-client`
 
 This guide describes how to configure the Landscape Client Debian package in multiple ways. 
 
-If you're using the snap instead of the Debian package, see [how to configure the Landscape Client snap](/how-to-guides/iot-for-devices/configure-the-snap).
+If you're using the snap instead of the Debian package, see {ref}`how-to-configure-the-client-snap`.
 
 If you're using the charm, you'll need to configure the client with `juju config`. For more information, see the [Juju documentation](https://juju.is/docs/juju) and [Charmhub's documentation on the Landscape client charm](https://charmhub.io/landscape-client).
 
@@ -39,7 +39,7 @@ The Landscape Client configuration file is located in `/etc/landscape/client.con
 sudo systemctl restart landscape-client
 ```
 
-
+(howto-heading-client-autoregister)=
 ## Auto-register new computers
 
 ```{note}
@@ -66,12 +66,13 @@ Once you’ve defined a registration key and enabled the auto-registration featu
 sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={COMPUTER_TITLE} --registration-key={KEY}
 ```
 
+(howto-heading-client-enable-script-execution)=
 ## Enable script execution
 
 
 > See also: [Landscape's scripts repository on GitHub](https://github.com/canonical/landscape-scripts)
 
-An administrator can remotely execute scripts on any client machine if the appropriate plugin is enabled. This plugin is disabled by default. Any calls to the `ExecuteScript` API endpoint will result in failed activities if the client has the default configuration. For more information on API endpoints for stored scripts, visit [API Methods: Scripts](https://ubuntu.com/landscape/docs/api-scripts).
+An administrator can remotely execute scripts on any client machine if the appropriate plugin is enabled. This plugin is disabled by default. Any calls to the `ExecuteScript` API endpoint will result in failed activities if the client has the default configuration. For more information on API endpoints for stored scripts, visit {ref}`API Methods: Scripts <reference-legacy-api-scripts>`.
 
 To use remote script execution on client machines, you must first enable it with the `landscape-config` command or by manually editing `/etc/landscape/client.conf`.
 

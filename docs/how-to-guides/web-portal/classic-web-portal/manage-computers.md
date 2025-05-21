@@ -1,4 +1,4 @@
-(how-to-guides-web-portal-classic-web-portal-manage-computers)=
+(how-to-classic-web-portal-manage-computers)=
 # How to manage computers
 
 ## Register computers
@@ -10,9 +10,10 @@ To register computers with a Landscape server:
 
 This link provides the complete instructions for registering client computers with a Landscape server, which are also available at `https://yourserver/standalone/how-to-register`. You need to register computers with the server in order to manage them in Landscape.
 
+(how-to-heading-classic-portal-select-computers)=
 ## Select computers
 
-You can select computers by selecting them individually, using searches or using [tags](/reference/terms/tags). 
+You can select computers by selecting them individually, using searches or using {ref}`reference-terms-tags`. 
 
 To select computers individually:
 
@@ -34,13 +35,14 @@ To select computers using tags:
 2. Click any tag to display the list of computers associated with that tag
 3. Select the checkbox for each computer or click **All**
 
+(howto-heading-manage-computers-appy-tags)=
 ## Apply tags to computers
 
-To apply [tags](/reference/terms/tags) to computers:
+To apply {ref}`reference-terms-tags` to computers:
 
 1. Navigate to the **Computers** page in the header
 2. Select the computers you want to associate with that tag
-   - For more information, see [Select computers](#select-computers)
+   - For more information, see {ref}`how-to-heading-classic-portal-select-computers`
 3. Click the **Info** tab
 4. Enter the tag you want to use in the **Tags** row
 5. Click **Add**
@@ -66,6 +68,7 @@ From the **Computers** page, you can get information about selected computers by
   * have contacted the server within the last five minutes
   * have applied security updates - four visualizations show computers that have applied Ubuntu Security Notices within the last two, 14, 30, and 60+ days
 
+(howto-heading-manage-computers-get-ids)=
 ## Get computer IDs
 
 There are two ways to locate the IDs for a specific computer:
@@ -136,7 +139,7 @@ To assign a role to a new user or edit the role(s) of an existing user:
 
 ## Manage alerts
 
-Landscape uses [alerts](/reference/terms/alerts) to notify administrators of conditions that require attention. The following types of alerts are available:
+Landscape uses {ref}`reference-terms-alerts` to notify administrators of conditions that require attention. The following types of alerts are available:
 
 * when a pending computer needs to be accepted or rejected
 * when you are exceeding your license entitlements for Landscape Dedicated Server (This alert does not apply to the hosted version of Landscape.)
@@ -159,10 +162,10 @@ For some alerts, you can download a list of affected computers as a CSV file. Cl
 ## Manage scripts
 
 ```{note}
-You must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit [how to enable script execution](https://ubuntu.com/landscape/docs/configure-landscape-client#heading--enable-script-execution).
+You must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit {ref}`how to enable script execution <howto-heading-client-enable-script-execution>`.
 ```
 
-You can run [scripts](/reference/terms/scripts) on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.
+You can run {ref}`reference-terms-scripts` on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.
 
 From your organization's home page, click the **Scripts** tab to display a list of existing scripts, the access group they belong to, and the creator. To add a new script, click **Add script**. On the next page, you must enter a title, interpreter, the script code, the time within which the script must complete, and the access group to which the script belongs. You may enter a default user to run the script. If you don't, you'll have to specify the user when you choose to run the script. You may also attach up to five files with a maximum of 1MB in total size. On each computer on which a script runs, attachments are placed in the directory specified by the environment variable LANDSCAPE_ATTACHMENTS, and are deleted once the script has been run. After specifying all the information for a stored script, click **Save** to save it.
 
@@ -174,7 +177,7 @@ To run a new script, enter most of the same information you would if you were cr
 
 ## Manage upgrade profiles
 
-An [upgrade profile](/reference/terms/profiles/upgrade-profile) defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more computers with each upgrade profile via tags to install packages on those computers. You can also associate an upgrade profile with an access group, which limits its use to only computers within the specified access group. You can manage upgrade profiles from the **Upgrade Profiles** link in the **Profiles** tab on your organization's home page.
+An {ref}`reference-terms-upgrade-profile` defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more computers with each upgrade profile via tags to install packages on those computers. You can also associate an upgrade profile with an access group, which limits its use to only computers within the specified access group. You can manage upgrade profiles from the **Upgrade Profiles** link in the **Profiles** tab on your organization's home page.
 
 If you click **Upgrade Profiles**, Landscape displays a list of the names and descriptions of existing upgrade profiles.
 
@@ -188,7 +191,7 @@ To delete one or more upgrade profiles, select the checkbox next to the upgrade 
 
 ## Manage removal profiles
 
-A [removal profile](/reference/terms/profiles/removal-profile) defines a maximum number of days that a computer can go without exchanging data with the Landscape server before it's automatically removed. If more days pass than the profile's *Days without exchange*, that computer will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired computer data for long periods of time. You can associate zero or more computers with each removal profile via tags to ensure those computers are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only computers within the specified access group. You can manage removal profiles from the **Removal profiles** page in the **Profiles** tab under your organization's home page.
+A {ref}`reference-terms-removal-profile` defines a maximum number of days that a computer can go without exchanging data with the Landscape server before it's automatically removed. If more days pass than the profile's *Days without exchange*, that computer will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired computer data for long periods of time. You can associate zero or more computers with each removal profile via tags to ensure those computers are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only computers within the specified access group. You can manage removal profiles from the **Removal profiles** page in the **Profiles** tab under your organization's home page.
 
 When you do so, Landscape displays a list of the names and descriptions of existing removal profiles.
 

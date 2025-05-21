@@ -1,23 +1,23 @@
-(how-to-guides-repository-mirrors-manage-repositories-with-the-api)=
+(how-to-manage-repos-api)=
 # How to manage and mirror repositories with the API
 
 ```{note}
 Repository mirroring is available for self-hosted users.
 ```
 
-Repository management requires the use of the Landscape [API.](/how-to-guides/api/use-the-legacy-api) Set it up and have it ready for the next steps. Linux distributions like Ubuntu use repositories to hold packages you can install on managed computers. While Ubuntu has several repositories that anyone can access, you can also maintain your own repositories on your network, and enforce repository configurations for the machines you manage. This can be useful when you want to maintain packages with different versions from those in the community repositories, or if you have private repositories of in-house software for internal distribution. Once you add your machines to a Landscape repository profile, you have a choice to enforce the entire repository configuration, or just individual repositories.
+Repository management requires the use of the Landscape {ref}`API <how-to-use-legacy-api>` Set it up and have it ready for the next steps. Linux distributions like Ubuntu use repositories to hold packages you can install on managed computers. While Ubuntu has several repositories that anyone can access, you can also maintain your own repositories on your network, and enforce repository configurations for the machines you manage. This can be useful when you want to maintain packages with different versions from those in the community repositories, or if you have private repositories of in-house software for internal distribution. Once you add your machines to a Landscape repository profile, you have a choice to enforce the entire repository configuration, or just individual repositories.
 
 In the following instructions we will use:
 
-* **[distribution](/reference/terms/distribution)**: ubuntu
-* **[series](/reference/terms/series)**: bionic
-* **[pockets](/reference/terms/pocket)**: release, updates, security
-* **[components](/reference/terms/components)**: main, restricted, universe, multiverse
-* **[tag](/reference/terms/tags)**: example-tag
+* **{ref}`reference-terms-distribution`**: ubuntu
+* **{ref}`reference-terms-series`**: bionic
+* **{ref}`reference-terms-pocket`**: release, updates, security
+* **{ref}`reference-terms-components`**: main, restricted, universe, multiverse
+* **{ref}`reference-terms-tags`**: example-tag
 * **repository profile**: example-profile
 * **mirror-key**: the name of the gpg key used by Landscape to sign your repository
 
-Make sure you have set up the [API](/how-to-guides/api/use-the-legacy-api) client already, then follow the steps below. The following instructions were performed on a Ubuntu 18.04 LTS with Landscape server 19.01 installed.
+Make sure you have set up the {ref}`API <how-to-use-legacy-api>` client already, then follow the steps below. The following instructions were performed on a Ubuntu 18.04 LTS with Landscape server 19.01 installed.
 
 > ⓘ Note: The special pocket release never gets mentioned in a suite.
 
@@ -114,7 +114,7 @@ landscape-api create-series bionic ubuntu \
 ## Sync pockets
 
 ```{note}
-If you're running Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ for your pockets to sync successfully. For more information, see [how to configure RabbitMQ for Jammy 22.04 or later](/how-to-guides/landscape-installation-and-set-up/configure-rabbitmq).
+If you're running Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ for your pockets to sync successfully. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
 We can sync only one pocket at a time. Once one pocket sync is done, we can start the next one. This command will start the actual mirroring process for the `release` pocket:

@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-users)=
+(reference-rest-api-users)=
 # Users
 
 ## DELETE `/users`

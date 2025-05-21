@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-activities)=
+(reference-legacy-api-activities)=
 # Activities
 
 

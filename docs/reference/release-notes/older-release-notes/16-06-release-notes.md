@@ -1,4 +1,4 @@
-(reference-release-notes-older-release-notes-16-06-release-notes)=
+(reference-release-notes-16-06)=
 # 16.06 release notes
 
 These are the release notes for Landscape 16.06.

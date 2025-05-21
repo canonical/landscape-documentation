@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-alerts)=
+(reference-legacy-api-alerts)=
 # Alerts
 
 

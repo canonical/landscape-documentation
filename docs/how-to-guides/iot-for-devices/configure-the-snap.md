@@ -1,11 +1,11 @@
-(how-to-guides-iot-for-devices-configure-the-snap)=
+(how-to-configure-the-client-snap)=
 # How to configure the snap
 
 ```{note}
-You must have the Landscape Client snap installed on at least one client device before configuring it with `landscape-client.config`. For instructions, see [how to install the Landscape Client snap](/how-to-guides/iot-for-devices/install-the-snap).
+You must have the Landscape Client snap installed on at least one client device before configuring it with `landscape-client.config`. For instructions, see {ref}`how-to-install-the-client-snap`.
 ```
 
-This document describes how to configure the Landscape Client snap in multiple ways. If you’re using the Debian package instead of the snap, see [how to configure Landscape Client](/how-to-guides/landscape-installation-and-set-up/configure-landscape-client).
+This document describes how to configure the Landscape Client snap in multiple ways. If you’re using the Debian package instead of the snap, see {ref}`how-to-configure-landscape-client`.
 
 ## Use `landscape-client.config`
 
@@ -18,7 +18,7 @@ sudo landscape-client.config
 ```
 
 ```bash
-sudo landscape-config --silent --account-name="standalone"
+sudo landscape-client.config --silent --account-name="standalone"
 ```
 
 To view all possible configuration options for `landscape-client.config`, visit the help page with:
@@ -31,13 +31,13 @@ landscape-client.config --help
 
 If you’re using Ubuntu Core and require your own SSL certificates, you must place the certificate in `/var/snap/landscape-client/` and provide the full path to the `--ssl-public-key` option. For example, if you place the CA file in `/var/snap/landscape-client/ssl/server.pem`, then you can register the computer with:
 ```bash
-sudo landscape-config --ssl-public-key /var/snap/landscape-client/ssl/server.pem
+sudo landscape-client.config --ssl-public-key /var/snap/landscape-client/ssl/server.pem
 ```
 
 ## Auto-register new devices
 
 ```{note}
-These steps are for automatically registering devices that are manually configured. If you’re registering a large-scale deployment of Ubuntu Core devices, you may want to auto-register them through the build image configuration. For more information, see [how to create an Ubuntu Core image with Landscape Client included](/how-to-guides/iot-for-devices/create-a-core-image).
+These steps are for automatically registering devices that are manually configured. If you’re registering a large-scale deployment of Ubuntu Core devices, you may want to auto-register them through the build image configuration. For more information, see {ref}`how-to-create-a-core-image`.
 ```
 
 You can automatically register new Landscape Client snap devices when they’re configured using a registration key. This eliminates the need for manual approval of each device. This feature is enabled by default.

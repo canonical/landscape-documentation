@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-configure-rabbitmq)=
+(how-to-configure-rabbitmq)=
 # How to configure RabbitMQ for Jammy 22.04 (or later)
 
 RabbitMQ is configured with a default timeout of 30 minutes in Jammy 22.04 or later. This timeout can cause issues when installing Landscape Server or syncing repository mirrors. Any tasks that run longer than 30 minutes without reporting any progress or updates are automatically flagged as failed. RabbitMQ then disconnects from the task due to this perceived failure, and the system assigns a “failed” status to the entire operation. The error message for this issue is `No transition: delivered=>delivered`. 
@@ -34,7 +34,7 @@ The default timeout is set in milliseconds at 1,800,000 milli seconds (30 minute
     ```
     
 
-Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see [how to delete the lock file](#if-necessary-delete-the-lock-file).
+Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see {ref}`how to delete the lock file <how-to-header-delete-lock-file>`.
 
 ## Disable the RabbitMQ timeout
 
@@ -69,8 +69,9 @@ If you don’t want RabbitMQ to have a timeout at all, you can fully disable it:
     ```
     
 
-Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see [how to delete the lock file](#if-necessary-delete-the-lock-file).
+Now you can re-run your original task. If you’re syncing a repository mirror, you may need to delete a lock file for the task to re-run successfully. For more information, see {ref}`how to delete the lock file <how-to-header-delete-lock-file>`.
 
+(how-to-header-delete-lock-file)=
 ## (If necessary) Delete the lock file
 
 If you’re syncing a repository mirror, you may get the following error when you re-run your task:

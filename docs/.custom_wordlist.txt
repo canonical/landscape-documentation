@@ -61,6 +61,8 @@ CVEs
 datetime
 debian
 decrypt
+DirectoryAPI
+DISA
 distros
 DMARC
 DNS
@@ -175,8 +177,10 @@ organization’s
 organizational
 quickstart
 packagesearch
+PAYG
 PCI
 perf
+perfs
 performant
 PITR
 pgSQL
@@ -219,6 +223,7 @@ RSS
 rsyslog
 rsyslogd
 SaaS
+Sanitization
 scalable
 scalability
 SDK
@@ -238,9 +243,11 @@ snapd
 sslmode
 sssd
 stateful
+STIG
 subkeys
 submodule
 subpaths
+superclass
 SupportAnalyst
 syslog
 systemd
@@ -289,6 +296,8 @@ webapp
 WebUI
 whitespace
 WAL
+WorkSpace
+WorkSpaces
 WSL
 wsl
 WSL's

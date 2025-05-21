@@ -1,13 +1,11 @@
-(how-to-guides-landscape-installation-and-set-up-juju-installation)=
+(how-to-juju-installation)=
 # How to install Landscape Server with Juju
 
 > See also: [Landscape Server charm (Charmhub)](https://charmhub.io/landscape-server)
 
-```{note}
-For more information on charms and bundles, visit [Charmhub](https://charmhub.io/).
-```
+You can deploy Landscape in a scalable way with Juju. This document provides a very high-level overview. 
 
-You can deploy Landscape in a scalable way with Juju.
+For detailed instructions on deploying Landscape with Juju in a high-availability environment, see {ref}`how-to-juju-ha-installation`.
 
 ## Install Juju
 
@@ -21,68 +19,29 @@ To learn more about Juju and to bootstrap a Juju controller, check out their [ge
 
 ## Deploy self-hosted Landscape Server
 
-When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires. When deploying Landscape Server using Juju, there are three different methods you can use. Select the one that meets the needs for your environment.
+When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires.
 
-### landscape-dense-maas bundle
-
-> See also: [Landscape-dense-maas bundle on Charmhub](https://charmhub.io/landscape-dense-maas)
-
-If you have a [MAAS](https://maas.io) server, you can take advantage of containers and use the `landscape-dense-maas` bundle:
-
-```bash
-juju deploy landscape-dense-maas
-```
-
-This will deploy Landscape on just one node using LXD containers for all services.
 
 ### landscape-scalable bundle
 
 > See also: [Landscape-scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
 
-**landscape-scalable** each service gets its own machine. Currently that means you will need 4 machines for Landscape, and one for the controller node:
+In the **landscape-scalable** bundle configuration, each service gets its own machine. Currently that means you will need 4 machines for Landscape, and one for the controller node. Test it out using:
 
 ```bash
 juju deploy landscape-scalable
 ```
 
-### landscape-dense bundle
+For more detailed instructions on deploying the Landscape server with the bundle, see {ref}`how-to-juju-ha-installation`.
 
-> See also: [Landscape-dense bundle on Charmhub](https://charmhub.io/landscape-dense)
+### Other bundles
 
-**landscape-dense** is quite similar to the `landscape-dense-maas` deployment, but it installs the `haproxy` service directly on the machine without a container. All the other services use a container:
-
-```bash
-juju deploy landscape-dense
-```
-
-This is useful for the cases where the LXD containers don't get externally routable IP addresses.
-
-## Configure an SSL cert on HAProxy
-
-### Create a SSL certificate with LetsEncrypt
-
-If your Landscape instance has a public IP, and your FQDN resolves to that public IP, run the following code to get a valid SSL certificate from LetsEncrypt. Replace `<EMAIL@EXAMPLE.COM>` with an email address where certificate renewal reminders can be sent.
-
-```bash
-sudo certbot certonly --standalone -d $FQDN --non-interactive --agree-tos --email <EMAIL@EXAMPLE.COM>
-```
-
-This will produce a `fullchain.pem` and `privkey.pem` file which you need for HAProxy SSL termination.
-
-### Configure HAProxy with the certificate
-
-Use the following commands to configure HAProxy with the generated certificate.
-
-```bash
-juju config haproxy ssl_cert="$(base64 fullchain.pem)"
-juju config haproxy ssl_key="$(base64 privkey.pem)"
-```
+The Landscape Scalable bundle is the only bundle currently supported. Previously, there were two additional bundles: `landscape-dense` and `landscape-dense-maas`. These bundles are now deprecated.
 
 ## Access self-hosted Landscape
 
-Once the deployment has finished, grab the address of the first `haproxy` unit and access it with your browser:
+Once the deployment has finished, get the address of the first `haproxy` unit and access it with your browser:
 
 ```bash
 juju status haproxy
 ```
-

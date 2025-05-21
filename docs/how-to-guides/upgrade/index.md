@@ -5,6 +5,6 @@
 :titlesonly:
 :maxdepth: 2
 
-Upgrade <upgrade-landscape>
-Upgrade to 24.04 LTS <upgrade-to-24-04-lts>
+Upgrade Landscape <upgrade-landscape>
+Upgrade to Landscape 24.04 LTS <upgrade-to-24-04-lts>
 

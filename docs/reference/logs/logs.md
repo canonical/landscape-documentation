@@ -1,4 +1,4 @@
-(reference-logs-logs)=
+(reference-logs)=
 # Logs
 
 You can find the Landscape's logs in the following locations:

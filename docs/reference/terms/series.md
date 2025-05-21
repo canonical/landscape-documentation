@@ -1,4 +1,4 @@
-(explanation-terms-series)=
+(reference-terms-series)=
 # Series
 
 A **series** is a distribution release nickname. Examples of Ubuntu series include Noble, Jammy and Focal.

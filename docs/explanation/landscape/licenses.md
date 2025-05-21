@@ -1,11 +1,11 @@
-(explanation-landscape-licenses)=
+(explanation-licenses)=
 # Landscape licenses
 
 Most Landscape accounts have a licensing mechanism; either Ubuntu Pro or a `license.txt` file. For Landscape SaaS accounts, the Ubuntu Pro license is already included in your subscription.
 
 For self-hosted Landscape accounts, users running version 23.03 or newer typically have Ubuntu Pro subscriptions. Users with older versions (or offline deployments) may use our older licensing mechanism. This older method involves manually downloading a `license.txt` file and applying it during the configuration process.
 
-For Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/), the [Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/) and [how to attach your Ubuntu Pro subscription in Landscape](/how-to-guides/ubuntu-pro/attach-ubuntu-pro) to learn more.
+For Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/), the [Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/) and {ref}`how-to-attach-ubuntu-pro` to learn more.
 
 For the `license.txt` method, you get your first `license.txt` file from Canonical and manually upload the file to your server: `/etc/landscape/license.txt`. You’ll need to re-upload your license every time you renew, but you can download your new license in your Landscape account from `https://landscape.canonical.com/account/<account_id>/self-hosted`.
 

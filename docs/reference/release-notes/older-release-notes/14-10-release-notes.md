@@ -1,4 +1,4 @@
-(reference-release-notes-older-release-notes-14-10-release-notes)=
+(reference-release-notes-14-10)=
 # 14.10 release notes
 
 ## Major changes from previous stable release

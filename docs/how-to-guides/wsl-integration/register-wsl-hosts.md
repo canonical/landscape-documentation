@@ -1,4 +1,4 @@
-(how-to-guides-wsl-integration-register-wsl-hosts)=
+(how-to-register-wsl-hosts)=
 # How to set up Ubuntu Pro for WSL and register WSL hosts to Landscape
 
 > See also: [Ubuntu Pro for WSL documentation](https://canonical-ubuntu-pro-for-wsl.readthedocs-hosted.com/en/latest/)
@@ -8,7 +8,7 @@ Ubuntu Pro for WSL is **not available yet** for everyone in the Microsoft Store.
 ```
 
 ```{note}
-If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. For more information, visit [how to configure WSL-related services after upgrading Landscape](/how-to-guides/wsl-integration/configure-landscape-beta).
+If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. For more information, visit {ref}`how-to-wsl-configure-landscape-beta`.
 ```
 
 This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts (Windows machines) to Landscape.
@@ -24,7 +24,7 @@ To use the WSL-Landscape integration, you must have the following applications d
 - [Windows Subsystem for Linux](https://apps.microsoft.com/detail/9P9TQF7MRM4R)
 - An Ubuntu application, such as [Ubuntu 24.04 LTS](https://apps.microsoft.com/detail/9nz3klhxdjp5?)
 
-If you don't want to download your Ubuntu image from the Microsoft Store, you can manually specify a different image source instead. See [how to use a specific Ubuntu image source for WSL machines](/how-to-guides/wsl-integration/use-a-specific-image-source).
+If you don't want to download your Ubuntu image from the Microsoft Store, you can manually specify a different image source instead. See {ref}`how-to-wsl-use-specific-image-source`.
 
 Also, you must have WSL 2 installed instead of WSL 1. If you've just now installed WSL from the Microsoft store, then you've installed WSL 2 and can proceed to the next steps. If you've previously installed WSL and aren't sure if it's WSL 1 or WSL 2, run `wsl -l -v` in PowerShell or Command Prompt to get the version. If you have WSL 1, you need to upgrade to WSL 2. For more information, see [Microsoft's guide on upgrading from WSL 1 to WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
 
@@ -117,8 +117,9 @@ To finish registering your WSL host to Landscape:
 3. Accept the pending computer
     - To accept it, tick the checkbox near its name, assign it to an access group, and click **Accept**
 
-That's it! Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu instances, see [how to register WSL instances](/how-to-guides/wsl-integration/manage-wsl-instances).
+That's it! Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu instances, see {ref}`how-to-manage-wsl-instances`.
 
+(howto-heading-register-wsl-host-troubleshoot)=
 ## (If necessary) Troubleshoot
 
 > See also: [Ubuntu Pro for WSL's logs](https://documentation.ubuntu.com/wsl/en/latest/howto/06-access-the-logs/)
@@ -162,7 +163,7 @@ If your Windows host machine doesn’t appear as a pending computer in your Land
     
 - **If you have auto-registration enabled, check if your Windows machine is already listed as a computer in your Landscape account**
     
-    Landscape has an auto-registration feature that allows you to register computers without manually approving each one. If you’re using a registration key and you have this feature enabled, your Windows machine won’t appear as a pending computer. Instead, it’ll auto-register and appear in your list of computers. For more information, see [how to auto-register new computers](https://ubuntu.com/landscape/docs/configure-landscape-client#heading--auto-register-new-computers).
+    Landscape has an auto-registration feature that allows you to register computers without manually approving each one. If you’re using a registration key and you have this feature enabled, your Windows machine won’t appear as a pending computer. Instead, it’ll auto-register and appear in your list of computers. For more information, see {ref}`how to auto-register new computers <howto-heading-client-autoregister>`.
     
 - **Check that your Ubuntu Pro token was applied correctly**
     

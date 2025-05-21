@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-gpg-key)=
+(reference-rest-api-gpg-key)=
 # GPG Key
 
 The endpoint(s) here are for GPG key management.
