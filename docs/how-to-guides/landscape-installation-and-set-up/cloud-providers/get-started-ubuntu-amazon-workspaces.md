@@ -39,10 +39,11 @@ On the machine you want to register with Landscape, open a terminal window. Make
 
 ### Step 2: Update repositories
 
-Ensure that your repositories are up-to-date:
+Ensure that your system is up-to-date:
 
 ```bash
 sudo apt-get update
+sudo apt-get upgrade -y
 ```
 
 ### Step 3: Install Landscape Client

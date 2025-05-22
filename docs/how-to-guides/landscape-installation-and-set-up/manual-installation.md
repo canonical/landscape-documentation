@@ -532,10 +532,17 @@ The first user that is created in Landscape automatically becomes the administra
 
 ### Configure the first client
 
+Make sure the system is up-to-date.
+
+```text
+sudo apt update
+sudo apt upgrade -y
+```
+
 On the client machine, install `landscape-client`.
 
 ```text
-sudo apt update && sudo apt install -y landscape-client
+sudo apt install -y landscape-client
 ```
 
 If you are using the self-signed certificate on your Landscape Server, download your self-signed certificate from Landscape Server to the client machine with this command:
