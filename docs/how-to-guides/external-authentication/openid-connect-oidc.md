@@ -25,6 +25,27 @@ The `oidc-issuer` is the URL of the issuer. That URL should also be a discovery 
 
 The `oidc-client-id` and `oidc-client-secret` should be provided by your OIDC provider when you create the client credentials. The provider may require setting an authorization redirect URI. This should look like `https://your_landscape/login/handle-openid`. If your provider also requires a logout redirect URL, this should be the address of your Landscape server such as `https://your_landscape/`.
 
+### (Optional) Specify your provider to enable additional features
+
+Certain features are available only for certain OIDC providers.
+Landscape recognizes the following slugs for providers:
+
+- `google`: Google OAuth 2.0
+- `okta`: Okta
+
+```bash
+[landscape]
+[…]
+oidc-issuer = <https://accounts.google.com/>
+oidc-client-id = 000000000000-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com
+oidc-client-secret = a4sDFAsdfA4F52as-asDfAsd
+oidc-provider = google
+```
+
+You will still be able to authenticate as usual without specifying an `oidc-provider`.
+It is not required for basic OIDC authentication.
+If you change the value of your `oidc-provider`, it will be updated on your next authentication.
+
 ## Restart all Landscape services
 
 To restart all Landscape services, run:
@@ -46,4 +67,3 @@ oidc-logout-url = <https://accounts.google.com/logout>
 ```{note}
 There is no provision yet to upgrade current users to OIDC authentication. Most providers return pairwise subject identifiers (sub) which are not easily available. For this reason, we do not provide a user migration method and recommend recreating users.
 ```
-
