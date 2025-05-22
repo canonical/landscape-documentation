@@ -7,10 +7,17 @@ There are multiple ways to install Landscape Client. This document describes eac
 
 Landscape Client is available in Ubuntu's `main` repository in all [Ubuntu releases](https://ubuntu.com/about/release-cycle), and is published independently of the self-hosted Landscape releases. This method is suitable when performing the installation through a terminal or shell scripting. To install Landscape Client from Ubuntu's `main` repository:
 
+1. Make sure the system is up-to-date:
+
+   ```bash
+   sudo apt update
+   sudo apt upgrade -y
+   ```
+
 1. Install the `landscape-client` package:
 
    ```bash
-   sudo apt update && sudo apt install -y landscape-client
+   sudo apt install -y landscape-client
    ```
 
 1. Set environment variables:
@@ -54,10 +61,17 @@ This method is suitable when performing the installation through a terminal or s
    ```
     - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
+1. Make sure the system is up-to-date:
+
+   ```bash
+   sudo apt update
+   sudo apt upgrade -y
+   ```
+
 1. Install the `landscape-client` package:
 
    ```bash
-   sudo apt update && sudo apt install -y landscape-client
+   sudo apt install -y landscape-client
    ```
 
 1. Set environment variables:

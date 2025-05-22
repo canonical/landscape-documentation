@@ -143,10 +143,17 @@ Next, get the server's public SSL certificate and save it where `landscape-clien
 echo | openssl s_client -connect 10.253.187.38:443 | openssl x509 | sudo tee /etc/landscape/server.pem
 ```
 
+Make sure the system is up-to-date.
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
 Now you'll install Landscape Client.
 
 ```bash
-sudo apt update && sudo apt install -y landscape-client
+sudo apt install -y landscape-client
 ```
 
 Edit the `/etc/landscape/client.conf` file to match the contents below. Be sure to replace the IP address in both `url` and `ping_url` with the one for your Landscape Server VM.
