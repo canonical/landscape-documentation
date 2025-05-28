@@ -19,11 +19,11 @@ jobs:
         run: |
           git remote add upstream https://github.com/canonical/landscape-documentation.git
           git fetch upstream
-          git merge upstream/main --no-edit
+          git merge upstream/main -m "merge: sync from public docs"
           git push origin main
 
       - name: Merge main into develop
         run: |
           git checkout develop
-          git merge main --no-edit
+          git merge main -m "merge: sync from main"
           git push origin develop
