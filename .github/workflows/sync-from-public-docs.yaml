@@ -22,7 +22,9 @@ jobs:
           git config user.email "landscape-github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/canonical/landscape-documentation.git
           git fetch upstream
-          git merge --allow-unrelated-histories upstream/main -Xtheirs -m "merge: sync from public docs"
+          git merge --allow-unrelated-histories upstream/main -Xtheirs --no-commit
+          git restore --staged .github
+          git commit -m "merge: sync from public docs"
           git push origin main
 
       - name: Merge main into develop
