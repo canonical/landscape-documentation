@@ -14,4 +14,4 @@ This creates an activity to send the sanitize script and shutdown the instance a
 
 The sanitize script erases the key slots of each encrypted volume on the instance.
 
-**Note:** **Please make sure you're sanitizing the correct computer. This action is irreversible once the activity is delivered.**
+**Note:** **Make sure you're sanitizing the correct computer. This action is irreversible once the activity is delivered.**
