@@ -5,7 +5,9 @@
 There is a [known issue](https://bugs.launchpad.net/ubuntu/+source/rabbitmq-server/+bug/2074309) affecting Ubuntu 22.04 LTS (Jammy) to Ubuntu 24.04 LTS (Noble) upgrades for systems that run RabbitMQ, which includes systems that use Landscape. If you run into this issue, we recommend waiting until it's resolved before upgrading your Ubuntu version. This issue doesn't affect Landscape upgrades, and you can still upgrade to Landscape 24.04 LTS for Jammy.
 ```
 
-To upgrade your self-hosted Landscape server to 24.04 LTS, you should first follow the basic upgrade instructions. See {ref}`how-to-upgrade`. Note that you must be running Ubuntu 24.04 LTS Noble Numbat or 22.04 Jammy Jellyfish to upgrade to Landscape 24.04 LTS.
+To upgrade your self-hosted Landscape server to 24.04 LTS, you should first follow the basic upgrade instructions. See {ref}`how-to-upgrade`. 
+
+Note that you must be running Ubuntu 24.04 LTS Noble Numbat or 22.04 Jammy Jellyfish to upgrade to Landscape 24.04 LTS.
 
 ## Additional upgrade steps
 
