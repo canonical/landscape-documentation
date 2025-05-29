@@ -14,12 +14,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
+          fetch-depth: '0'
 
       - name: Add public repo as upstream and merge
         run: |
           git remote add upstream https://github.com/canonical/landscape-documentation.git
           git fetch upstream
-          git merge upstream/main -m "merge: sync from public docs"
+          git merge --allow-unrelated-histories upstream/main -Xtheirs -m "merge: sync from public docs"
           git push origin main
 
       - name: Merge main into develop
