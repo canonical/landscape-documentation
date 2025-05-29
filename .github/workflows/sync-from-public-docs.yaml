@@ -18,6 +18,8 @@ jobs:
 
       - name: Add public repo as upstream and merge
         run: |
+          git config user.name "landscape-github-actions[bot]"
+          git config user.email "landscape-github-actions[bot]@users.noreply.github.com"
           git remote add upstream https://github.com/canonical/landscape-documentation.git
           git fetch upstream
           git merge --allow-unrelated-histories upstream/main -Xtheirs -m "merge: sync from public docs"
