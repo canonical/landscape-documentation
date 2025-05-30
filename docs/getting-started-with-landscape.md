@@ -3,7 +3,7 @@
 
 > See also: {ref}`what-is-landscape`
 
-This tutorial guides you through the process of installing Landscape Server on a Multipass virtual machine, configuring it, registering a client instance to Landscape, and running a script on your client instance.
+This tutorial guides you through the process of installing Landscape Server on a Multipass virtual machine, configuring it, registering a client instance to Landscape, and running a script on your client instance. At the end, you'll also be guided through how to teardown your environment.
 
 This tutorial should take about 45 minutes to complete.
 

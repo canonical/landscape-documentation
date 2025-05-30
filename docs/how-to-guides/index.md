@@ -13,6 +13,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 - {ref}`Install in a LXD container <how-to-install-in-lxd-container>`
 - {ref}`Install on Google Cloud <how-to-install-on-google-cloud>`
 - {ref}`Install on Microsoft Azure <how-to-install-on-microsoft-azure>`
+- {ref}`Set up Ubuntu Amazon WorkSpaces <how-to-ubuntu-on-ubuntu-amazon-workspaces>`
 - {ref}`Install on FIPS-compliant machines <how-to-install-fips-compliant>`
 - {ref}`Install Landscape Client <how-to-install-landscape-client>`
 - {ref}`Configure Landscape Client <how-to-configure-landscape-client>`
