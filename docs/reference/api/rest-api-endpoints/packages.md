@@ -28,7 +28,7 @@ A package is considered an upgrade if it’s available and if it has a version h
 For example, the following request queries computers that are tagged with 'server' and returns up to 2 reported packages whose names include 'python':
 
 ```bash
-http --verify=no GET "https://localhost/api/v2/packages" Authorization:"Bearer $JWT" query=="tag:server" search=="python" limit==2 
+curl -sk -X GET "https://localhost/api/v2/packages?query=tag:server&search=python&limit=2" -H "Authorization: Bearer $JWT"
 ```
 
 The handler returns a JSON serialized list of packages, with the list of computer IDs on which they are available, installed, or upgradable:
