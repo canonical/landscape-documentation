@@ -20,9 +20,8 @@ Optional parameters:
 - `access_group`: The access group name where the profile will be created. Defaults to `"global"`.
 - `tags`: A list of computer tags to target instead of `all_computers`.
 
-> ℹ️ **Note:**  \
+> ℹ️ **Note:** \
 > The scheduled time (`at_hour` and `at_minute`) is interpreted in **UTC**.
-
 
 Example request:
 
@@ -42,30 +41,26 @@ Example output:
 
 ```json
 {
-    "access_group": "global",
-    "all_computers": false,
-    "at_hour": 21,
-    "at_minute": 0,
-    "deliver_delay_window": 0,
-    "deliver_within": 1,
-    "id": 9,
-    "next_run": "2025-04-21T21:00:00Z",
-    "num_computers": 14,
-    "on_days": [
-        "mo"
-    ],
-    "profile_data": {},
-    "profile_type": "reboot_profile",
-    "tags": [
-        "laptop"
-    ],
-    "title": "rebootprofile1"
+  "access_group": "global",
+  "all_computers": false,
+  "at_hour": 21,
+  "at_minute": 0,
+  "deliver_delay_window": 0,
+  "deliver_within": 1,
+  "id": 9,
+  "next_run": "2025-04-21T21:00:00Z",
+  "num_computers": 14,
+  "on_days": ["mo"],
+  "profile_data": {},
+  "profile_type": "reboot_profile",
+  "tags": ["laptop"],
+  "title": "rebootprofile1"
 }
 ```
 
 ## PATCH `/v2/rebootprofiles/<profile_id>`
 
-Updates an existing reboot profile. 
+Updates an existing reboot profile.
 
 You must provide **at least one field** to modify. If updating the schedule (`every`, `on_days`, `at_hour`, `at_minute`), you must provide **all four** fields together.
 
@@ -101,26 +96,23 @@ Example output:
 
 ```json
 {
-    "access_group": "global",
-    "all_computers": false,
-    "at_hour": 21,
-    "at_minute": 0,
-    "deliver_delay_window": 0,
-    "deliver_within": 1,
-    "every": "week",
-    "id": 11,
-    "next_run": "2025-04-21T21:00:52Z",
-    "num_computers": 0,
-    "on_days": [
-        "mo"
-    ],
-    "profile_data": {},
-    "profile_type": "reboot_profile",
-    "tags": [],
-    "title": "newtitle"
+  "access_group": "global",
+  "all_computers": false,
+  "at_hour": 21,
+  "at_minute": 0,
+  "deliver_delay_window": 0,
+  "deliver_within": 1,
+  "every": "week",
+  "id": 11,
+  "next_run": "2025-04-21T21:00:52Z",
+  "num_computers": 0,
+  "on_days": ["mo"],
+  "profile_data": {},
+  "profile_type": "reboot_profile",
+  "tags": [],
+  "title": "newtitle"
 }
 ```
-
 
 ## GET `/v2/rebootprofiles`
 
@@ -141,57 +133,47 @@ Example output:
 
 ```json
 {
-    "count": 11,
-    "next": "/v2/rebootprofiles?limit=2&offset=2",
-    "previous": null,
-    "results": [
-        {
-            "access_group": "global",
-            "all_computers": false,
-            "at_hour": 21,
-            "at_minute": 18,
-            "deliver_delay_window": 0,
-            "deliver_within": 1,
-            "every": "week",
-            "id": 2,
-            "next_run": "2025-04-14T21:18:02Z",
-            "num_computers": 1,
-            "on_days": [
-                "mo"
-            ],
-            "profile_data": {},
-            "profile_type": "reboot_profile",
-            "tags": [
-                "world"
-            ],
-            "title": "hell777"
-        },
-        {
-            "access_group": "global",
-            "all_computers": false,
-            "at_hour": 21,
-            "at_minute": 17,
-            "deliver_delay_window": 0,
-            "deliver_within": 1,
-            "every": "week",
-            "id": 1,
-            "next_run": "2025-04-14T21:17:48Z",
-            "num_computers": 1,
-            "on_days": [
-                "mo"
-            ],
-            "profile_data": {},
-            "profile_type": "reboot_profile",
-            "tags": [
-                "world"
-            ],
-            "title": "hell777"
-        }
-    ]
+  "count": 11,
+  "next": "/v2/rebootprofiles?limit=2&offset=2",
+  "previous": null,
+  "results": [
+    {
+      "access_group": "global",
+      "all_computers": false,
+      "at_hour": 21,
+      "at_minute": 18,
+      "deliver_delay_window": 0,
+      "deliver_within": 1,
+      "every": "week",
+      "id": 2,
+      "next_run": "2025-04-14T21:18:02Z",
+      "num_computers": 1,
+      "on_days": ["mo"],
+      "profile_data": {},
+      "profile_type": "reboot_profile",
+      "tags": ["world"],
+      "title": "hell777"
+    },
+    {
+      "access_group": "global",
+      "all_computers": false,
+      "at_hour": 21,
+      "at_minute": 17,
+      "deliver_delay_window": 0,
+      "deliver_within": 1,
+      "every": "week",
+      "id": 1,
+      "next_run": "2025-04-14T21:17:48Z",
+      "num_computers": 1,
+      "on_days": ["mo"],
+      "profile_data": {},
+      "profile_type": "reboot_profile",
+      "tags": ["world"],
+      "title": "hell777"
+    }
+  ]
 }
 ```
-
-
 
 ## DELETE `/v2/rebootprofiles/<profile_id>`
 
@@ -209,4 +191,4 @@ curl -X DELETE "https://landscape.canonical.com/api/v2/rebootprofiles/1" -H "Aut
 
 Example output:
 
-*(empty response)*
+_(empty response)_
