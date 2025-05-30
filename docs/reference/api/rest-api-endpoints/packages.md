@@ -25,10 +25,10 @@ A package is considered available if it can be fetched from an APT source. Note 
 
 A package is considered an upgrade if it’s available and if it has a version higher than a non-held installed package with the same name.
 
-For example, the following request queries computers that are tagged with 'server' and returns up to 3 reported packages whose names include 'python':
+For example, the following request queries computers that are tagged with 'server' and returns up to 2 reported packages whose names include 'python':
 
 ```bash
-http --verify=no GET "https://localhost/api/v2/packages" Authorization:"Bearer $JWT" query=="tag:server" search=="python" limit==3  
+http --verify=no GET "https://localhost/api/v2/packages" Authorization:"Bearer $JWT" query=="tag:server" search=="python" limit==2 
 ```
 
 The handler returns a JSON serialized list of packages, with the list of computer IDs on which they are available, installed, or upgradable:
@@ -36,7 +36,7 @@ The handler returns a JSON serialized list of packages, with the list of compute
 ```json
 {
     "count": 2064,
-    "next": "/api/v2/packages?query=tag%3Aserver&search=python&limit=3&offset=3",
+    "next": "/api/v2/packages?query=tag%3Aserver&search=python&limit=2&offset=2",
     "previous": null,
     "results": [
         {
@@ -88,31 +88,6 @@ The handler returns a JSON serialized list of packages, with the list of compute
             "id": 411,
             "name": "python-2play",
             "summary": "peer-to-peer network game engine"
-        },
-        {
-            "computers": [
-                {
-                    "available_version": "1.0~rc4cvs20061016-1",
-                    "current_version": null,
-                    "id": 1,
-                    "status": "available"
-                },
-                {
-                    "available_version": "1.0~rc4cvs20061016-1",
-                    "current_version": null,
-                    "id": 2,
-                    "status": "available"
-                },
-                {
-                    "available_version": "1.0~rc4cvs20061016-1",
-                    "current_version": null,
-                    "id": 3,
-                    "status": "available"
-                }
-            ],
-            "id": 432,
-            "name": "python-4suite-doc",
-            "summary": "Documentation for 4Suite"
         }
     ]
 }
