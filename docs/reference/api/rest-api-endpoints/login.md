@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-login)=
+(reference-rest-api-login)=
 # Login
 
 ## POST `/login`

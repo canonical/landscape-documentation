@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-wsl)=
+(reference-rest-api-wsl)=
 # WSL
 
 ## GET `/child-instance-profiles`

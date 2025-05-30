@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-credentials)=
+(reference-rest-api-credentials)=
 # Credentials
 
 ## GET `/credentials`

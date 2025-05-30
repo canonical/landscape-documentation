@@ -1,4 +1,4 @@
-(how-to-guides-api-use-the-legacy-api-python-module)=
+(how-to-use-legacy-api-python)=
 # How to use the legacy API Python module
 
 

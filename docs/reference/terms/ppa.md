@@ -1,4 +1,4 @@
-(explanation-terms-ppa)=
+(reference-terms-ppa)=
 # PPA
 
 A **Personal Package Archive (PPA)** is a software repository specifically made for Ubuntu users. PPAs are used by developers to distribute their software. When you install Landscape, you provide a PPA so your system knows where to download Landscape and its required packages. For example, if you want the beta version of Landscape, you must add the Landscape beta PPA to your system.

@@ -16,8 +16,8 @@ For system administrators, security analysts, CISOs and more, Landscape provides
 
 | | |
 |--|--|
-| [Tutorial](/tutorial/getting-started-with-landscape) </br> A hands-on introduction to Landscape for new users | [How-to guides](/how-to-guides/index) </br> Step-by-step guides covering key operations and common tasks |
-| [Reference](/reference/index) </br> Technical information - APIs, logs, glossary | [Explanation](/explanation/index) </br> Concepts - discussion and clarification of key topics |
+| {ref}`Tutorial <getting-started-with-landscape>` </br> A hands-on introduction to Landscape for new users | {ref}`How-to guides <how-to-guides-index>` </br> Step-by-step guides covering key operations and common tasks |
+| {ref}`Reference <reference-index>` </br> Technical information - APIs, logs, glossary | {ref}`Explanation <explanation-index>` </br> Concepts - discussion and clarification of key topics |
 ---
 
 ## Project and community

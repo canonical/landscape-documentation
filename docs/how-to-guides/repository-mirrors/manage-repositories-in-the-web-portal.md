@@ -1,16 +1,17 @@
-(how-to-guides-repository-mirrors-manage-repositories-in-the-web-portal)=
+(how-to-manage-repos-web-portal)=
 # How to manage and mirror repositories from the web portal
 
-> See also: [About repository mirroring](/explanation/repository-mirroring/repository-mirroring)
+> See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
 Web-based repository mirroring is available in Landscape 24.04 LTS for self-hosted users.
 ```
 
-The repository mirroring feature in Landscape enables you to mirror Ubuntu and third-party repositories locally, and to establish custom repositories from your local mirror. This provides an additional layer of control over the software versions available to your client machines. If you’re not familiar with repository mirroring in Landscape, we strongly encourage you to first read our [explanation of repository mirroring](/explanation/repository-mirroring/repository-mirroring).
+The repository mirroring feature in Landscape enables you to mirror Ubuntu and third-party repositories locally, and to establish custom repositories from your local mirror. This provides an additional layer of control over the software versions available to your client machines. If you’re not familiar with repository mirroring in Landscape, we strongly encourage you to first read our explanation of {ref}`explanation-repo-mirroring`.
 
 The guide specifically demonstrates how to mirror an Ubuntu repository, but most of the information here also applies to mirroring third-party repositories.
 
+(how-to-heading-disk-space-requirements)=
 ## Disk space requirements
 
 As of March 2024, these are the estimates for the amount of disk space needed to download the following Ubuntu distributions:
@@ -26,6 +27,7 @@ Packages will be downloaded to `/var/lib/landscape/landscape-repository/standalo
 
 Note that this is only a subset, and it does not include arm and other architectures. Including these will use more disk space.
 
+(howto-heading-manage-repos-web-portal-generate-api-credentials)=
 ## (If needed) Generate API credentials
 
 ```{note}
@@ -40,6 +42,7 @@ If you're a first-time user of the 24.04 LTS web portal and web-based repository
 
 Now you can access web-based repository management and navigate to the newer web portal by clicking **Repositories** from the header. You may need to log out and back in again, but you only need to generate API credentials once.
 
+(how-to-heading-create-import-gpg-key)=
 ## Create and import the GPG key
 
 You need to create a secret GPG key in your terminal before importing it into the web portal. 
@@ -95,6 +98,7 @@ If done successfully, your key will now be listed in the *GPG Keys* page. Once i
 If you intend to mirror a third-party repository, you'll also need to get their public GPG key and import it into Landscape.
 ```
 
+(how-to-heading-create-new-repo)=
 ## Create a new repository (distribution)
 
 To create a new distribution:
@@ -106,6 +110,7 @@ To create a new distribution:
 4. Select the appropriate access group(s) for this distribution
 5. Click **Add distribution**
 
+(how-to-heading-manage-repos-create-mirror)=
 ## Create a mirror
 
 To create a mirror using the distribution you previously made:
@@ -120,13 +125,14 @@ To create a mirror using the distribution you previously made:
 1. Review the selections under **Pockets**, **Components** and **Architectures**. Either use the defaults or change the options as needed to customize your mirror. 
 1. Click **Add mirror**
 
+(how-to-heading-manage-repos-sync-pockets)=
 ## Sync pockets
 
 ```{note}
-If you’re using Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ before syncing your pocket. For more information, see [how to configure RabbitMQ for Jammy 22.04 or later](/how-to-guides/landscape-installation-and-set-up/configure-rabbitmq).
+If you’re using Landscape on Jammy 22.04 or later, you may need to change the default timeout of 30 minutes in RabbitMQ before syncing your pocket. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
-Syncing pockets involves downloading all packages from that pocket locally. For large pockets, such as those in the Ubuntu repositories, this step can take a few hours or even longer depending on the size of the pocket and your download speed. We have some estimates of the [amount of disk space required](#disk-space-requirements) for the Ubuntu repositories; however, these repositories change frequently and may be larger than the provided estimates. If you attempt to sync a pocket but don’t have enough disk space available, the sync pocket activity will fail and you’ll receive an error message before any packages are downloaded.
+Syncing pockets involves downloading all packages from that pocket locally. For large pockets, such as those in the Ubuntu repositories, this step can take a few hours or even longer depending on the size of the pocket and your download speed. We have some estimates of the {ref}`amount of disk space required <how-to-heading-disk-space-requirements>` for the Ubuntu repositories; however, these repositories change frequently and may be larger than the provided estimates. If you attempt to sync a pocket but don’t have enough disk space available, the sync pocket activity will fail and you’ll receive an error message before any packages are downloaded.
 
 To sync a pocket from the web portal:
 
@@ -144,7 +150,10 @@ landscape-api get-activities --query type:SyncPocketRequest --limit 1
 
 The output of this returns a `progress` field that provides an estimate of the percent complete of your pocket sync. You can also add `watch --`  before the previous command to get an update every two seconds.
 
+(how-to-heading-manage-repos-create-repo-profile)=
 ## Create a repository profile and associate computers to the profile
+
+A repository profile in Landscape is useful for updating repository configurations. When a machine is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
 
 To create a profile:
 

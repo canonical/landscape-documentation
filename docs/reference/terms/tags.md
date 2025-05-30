@@ -1,4 +1,4 @@
-(explanation-terms-tags)=
+(reference-terms-tags)=
 # Tags
 
 **Tags** are user-defined labels or metadata that can be used to organize your computers in Landscape. Landscape lets you group multiple computers by applying tags to them. You can group computers using any set of characteristics; architecture and location might be two logical tagging schemes. 

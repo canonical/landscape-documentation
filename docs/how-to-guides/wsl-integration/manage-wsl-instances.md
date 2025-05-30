@@ -1,11 +1,11 @@
-(how-to-guides-wsl-integration-manage-wsl-instances)=
+(how-to-manage-wsl-instances)=
 # How to manage WSL instances
 
-> See also: [WSL Legacy API methods](/reference/api/legacy-api-endpoints/wsl)
+> See also: {ref}`reference-legacy-api-wsl`
 
 This guide describes how to create and register new WSL instances to Landscape.
 
-You must have a Windows host machine registered with Landscape before making any Windows Subsystem for Linux (WSL) instances. To register a new WSL host with Landscape, visit [how to register WSL hosts to Landscape](/how-to-guides/wsl-integration/register-wsl-hosts).
+You must have a Windows host machine registered with Landscape before making any Windows Subsystem for Linux (WSL) instances. To register a new WSL host with Landscape, visit {ref}`how-to-register-wsl-hosts`.
 
 ## Register new WSL instances in the Landscape web portal
 
@@ -36,7 +36,7 @@ Or:
 curl -X POST https://your-landscape.domain.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Ubuntu"}'
 ```
 
-The `parent_id` is assigned by Landscape. The `computer_name` is the name of the child computer you’re creating. Unless you are specifying a `rootfs_url`, this `computer_name` must match exactly the name of one of the supported Ubuntu WSL images in the Windows Store: `Ubuntu`, `Ubuntu-22.04`, or `Ubuntu-24.04`. If you don’t know the ID of your parent computer, visit [how to get computer IDs](https://ubuntu.com/landscape/docs/managing-computers#heading--get-computer-ids).
+The `parent_id` is assigned by Landscape. The `computer_name` is the name of the child computer you’re creating. Unless you are specifying a `rootfs_url`, this `computer_name` must match exactly the name of one of the supported Ubuntu WSL images in the Windows Store: `Ubuntu`, `Ubuntu-22.04`, or `Ubuntu-24.04`. If you don’t know the ID of your parent computer, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
 
 ## Register new WSL instances with cloud-init
@@ -108,5 +108,5 @@ This feature is currently in beta.
 
 You can use child instance profiles to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images at scale. These WSL instances can be configured with cloud-init at the time of provisioning.
 
-For the available endpoints and example requests, see our [REST API (beta) documentation](/reference/api/rest-api-endpoints/beta-only).
+For the available endpoints and example requests, see our {ref}`reference-rest-api-beta-only`.
 

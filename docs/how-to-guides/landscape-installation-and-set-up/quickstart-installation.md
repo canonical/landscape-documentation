@@ -1,10 +1,10 @@
-(how-to-guides-landscape-installation-and-set-up-quickstart-installation)=
+(how-to-quickstart-installation)=
 # How to install Landscape Server with quickstart mode
 
 The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments.
 
 ```{note}
-If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see [how to attach your Ubuntu Pro subscription](/how-to-guides/ubuntu-pro/attach-ubuntu-pro) and [how to enable Landscape in the Ubuntu Pro Client](/how-to-guides/ubuntu-pro/enable-landscape).
+If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 ```
 
 ## Check minimum requirements
@@ -85,7 +85,7 @@ To install `landscape-server-quickstart`:
 ## Install an SSL certificate
 
 ```{note}
-If you have the `fullchain.pem` and `privkey.pem` files for your SSL certificate, skip these steps and configure Apache manually. For more details, see [how to configure the web server](/how-to-guides/landscape-installation-and-set-up/manual-installation.md#configure-web-server) in the Landscape manual installation guide.
+If you have the `fullchain.pem` and `privkey.pem` files for your SSL certificate, skip these steps and configure Apache manually. For more details, see {ref}`how to configure the web server <how-to-heading-manual-install-configure-web-server>` in the Landscape manual installation guide.
 ```
 
 ### Install Certbot
@@ -125,5 +125,5 @@ By default, the email address will be pre-filled with *noreply@HOST_NAME.DOMAIN*
 
 ## (Optional) Configure Postfix for email
 
-You can configure Postfix to handle Landscape Server email notifications and alerts. For details, see [how to configure Postfix for emails](/how-to-guides/landscape-installation-and-set-up/configure-postfix).
+You can configure Postfix to handle Landscape Server email notifications and alerts. For details, see {ref}`how-to-configure-postfix`.
 

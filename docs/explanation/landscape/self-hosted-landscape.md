@@ -1,17 +1,17 @@
-(explanation-landscape-self-hosted-landscape)=
+(explanation-about-self-hosted)=
 # About Self-hosted Landscape
 
 Self-hosted Landscape is the standalone edition of Landscape that you can install on premises or in a public cloud.
 
 Feature enhancements are released in our scheduled release windows which occur twice per year, typically in April and October. Security patches and bug fixes will be provided outside of our scheduled release windows at the earliest possible opportunity.
 
-The following table applies to [Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart-installation) and [Manual](/how-to-guides/landscape-installation-and-set-up/manual-installation) installations of Landscape Server.
+The following table applies to {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installations of Landscape Server.
 
 | **Major version**                | **Release date** | **Standard Support** | **Expanded security maintenance (ESM)** | **Installs on Ubuntu LTS version**  |
 | ----------------------           | ---------------- | ------------------- | ------------------- | ---------------------  |
-| [24.04 LTS](/reference/release-notes/24-04-lts-release-notes)     | 2024-Apr   | **2029-Apr**     |  **2036-Apr**   | 22.04 LTS or 24.04 LTS |
-| [24.10](/reference/release-notes/24-10-release-notes) | 2024-Nov | **2025-Apr** | No ESM | 22.04 LTS or 24.04 LTS
-| [23.03](/reference/release-notes/23-03-release-notes)  | 2023-Mar         | **2025-Apr**        | **2030-Apr**        | 20.04 LTS or 22.04 LTS             |
+| {ref}`reference-release-notes-24-04-lts`     | 2024-Apr   | **2029-Apr**     |  **2036-Apr**   | 22.04 LTS or 24.04 LTS |
+| {ref}`reference-release-notes-25-04` | 2025-May | **2025-Oct** | No ESM | 22.04 LTS or 24.04 LTS 
+| {ref}`reference-release-notes-23-03`  | 2023-Mar         | **2025-Apr**        | **2030-Apr**        | 20.04 LTS or 22.04 LTS             |
 
 The [Landscape Server charm](https://charmhub.io/landscape-server) typically follows the same release cycles, although there can be some differences.
 
@@ -26,7 +26,7 @@ Landscape 24.04 LTS manages the previous four Ubuntu LTS releases, from Ubuntu 1
 Compatibility beyond this range to older and newer versions of Ubuntu is on a best effort basis and is not guaranteed.
 
 ```{note}
-Landscape Client is available in the `main` repository in all Ubuntu releases, and is published independently of the self-hosted Landscape Server releases. For information on installing Landscape Client, see [how to install Landscape Client](/how-to-guides/landscape-installation-and-set-up/install-landscape-client).
+Landscape Client is available in the `main` repository in all Ubuntu releases, and is published independently of the self-hosted Landscape Server releases. For information on installing Landscape Client, see {ref}`how-to-install-landscape-client`.
 ```
 
 ## Landscape PPAs
@@ -48,15 +48,15 @@ Depending on your deployment method, these may exist on the same machine or diff
 
 ### Quickstart
 
-* **[Quickstart](/how-to-guides/landscape-installation-and-set-up/quickstart-installation)**, for when you don't have Juju but quickly want to check out self-hosted Landscape. Not recommended for production environments when having more than 500 clients.
+* **{ref}`Quickstart installation <how-to-quickstart-installation>`**, for when you don't have Juju but quickly want to check out self-hosted Landscape. Not recommended for production environments when having more than 500 clients.
 
 ### Juju deployed
 
-* **[Juju deployed](/how-to-guides/landscape-installation-and-set-up/juju-installation)** for a truly scalable deployment.
+* **{ref}`Juju installation <how-to-juju-installation>`** for a truly scalable deployment.
 
 ### Manual installation
 
-* **[Manual installation](/how-to-guides/landscape-installation-and-set-up/manual-installation)**: for when you don't have a suitable Juju environment but need a scalable deployment.
+* **{ref}`Manual installation <how-to-manual-installation>`**: for when you don't have a suitable Juju environment but need a scalable deployment.
 
 ## Installation requirements
 
@@ -87,11 +87,12 @@ If this external network access is unavailable, Canonical's professional service
 ## Unsupported Versions
 | **major version**                | **Release date** | **Support expired on** | **Version of Ubuntu**  |
 | ----------------------           | ---------------- | ------------------------ | ---------------------  |
-| [23.10](/reference/release-notes/23-10-release-notes)      | 2023-Oct    | **2024-Apr**     | 20.04 LTS or 22.04 LTS |
-| [19.10](/reference/release-notes/older-release-notes/19-10-release-notes)  | 2019-Oct         | **2023-May-31**        |  18.04 LTS              |
-| [19.01](/reference/release-notes/older-release-notes/19-01-release-notes)  | 2019-Jan         | **2020-Jan**             | 18.04 LTS              |
-| [18.03](/reference/release-notes/older-release-notes/18-03-release-notes)  | 2018-Jun         | **2019-Jun**             | 16.04 LTS or 18.04 LTS |
-| [17.03](/reference/release-notes/older-release-notes/17-03-release-notes)  | 2017-Mar         | **2019-Mar**             | 16.04 LTS              |
-| [16.06](/reference/release-notes/older-release-notes/16-06-release-notes)  | 2016-Jul         | **2017-Dec**             | 14.04 LTS or 16.04 LTS |
-| [16.03](/reference/release-notes/older-release-notes/16-03-release-notes)  | 2016-Apr         | **2017-Apr**             | 14.04 LTS              |
+| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | 22.04 LTS or 24.04 LTS
+| {ref}`reference-release-notes-23-10`      | 2023-Oct    | **2024-Apr**     | 20.04 LTS or 22.04 LTS |
+| {ref}`reference-release-notes-19-10`  | 2019-Oct         | **2023-May-31**        |  18.04 LTS              |
+| {ref}`reference-release-notes-19-01`  | 2019-Jan         | **2020-Jan**             | 18.04 LTS              |
+| {ref}`reference-release-notes-18-03`  | 2018-Jun         | **2019-Jun**             | 16.04 LTS or 18.04 LTS |
+| {ref}`reference-release-notes-17-03`  | 2017-Mar         | **2019-Mar**             | 16.04 LTS              |
+| {ref}`reference-release-notes-16-06`  | 2016-Jul         | **2017-Dec**             | 14.04 LTS or 16.04 LTS |
+| {ref}`reference-release-notes-16-03`  | 2016-Apr         | **2017-Apr**             | 14.04 LTS              |
 

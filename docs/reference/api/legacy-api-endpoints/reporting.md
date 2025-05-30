@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-reporting)=
+(reference-legacy-api-reporting)=
 # Reporting
 
 

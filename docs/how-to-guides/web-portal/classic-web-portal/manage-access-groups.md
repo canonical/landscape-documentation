@@ -1,7 +1,7 @@
-(how-to-guides-web-portal-classic-web-portal-manage-access-groups)=
+(how-to-classic-web-portal-manage-access-groups)=
 # How to manage access groups
 
-> See also: [Access groups](/reference/terms/access-groups)
+> See also: {ref}`reference-terms-access-groups`
 
 This document describes how to manage access groups.
 
@@ -16,7 +16,7 @@ To create a new access group:
 
 When you create a new access group, you must provide a title for the access group and a parent. The title can be whatever you want to name this new access group. The parent must be the global access group or an access group that is a child of global. If you want a flat management hierarchy, you can make every access group a child of global. Alternatively, you can use parent/child relationships to create a hierarchy of access groups. For instance, you could specify different sites at a high level, and under them individual buildings, and finally individual departments. Such a hierarchy allows you to specify groups of computers to be managed together by one administrator. Administrators whose roles are associated with higher-level access groups can manage all subgroups of which their access group is a parent.
 
-When a new access group is first created, its administrators are those who have roles linked to its parent access group, but you can edit the roles associated with an access group. For more information, see [how to associate roles with access groups](#associate-roles-with-access-groups) in this guide.
+When a new access group is first created, its administrators are those who have roles linked to its parent access group, but you can edit the roles associated with an access group. For more information, see {ref}`how-to-heading-classic-web-portal-associate-roles-with-access-groups` in this guide.
 
 ## Edit access groups
 
@@ -83,6 +83,7 @@ You can also add computers to access groups directly from the **Computers** page
 6. Select the access group you want from the dropdown menu
 7. Click **Update access group**
 
+(how-to-heading-classic-web-portal-associate-roles-with-access-groups)=
 ## Associate roles with access groups
 
 To associate a role with one or more access groups:

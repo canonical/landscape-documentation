@@ -1,4 +1,4 @@
-(how-to-guides-iot-for-devices-create-a-core-image)=
+(how-to-create-a-core-image)=
 # How to create an Ubuntu Core image with Landscape Client included
 
 You can manage your Ubuntu Core device deployments with the Landscape Client snap and the Landscape web portal. This guide demonstrates how you can deploy your devices at scale by building a custom Ubuntu Core image that includes the Landscape Client snap and configuring the image to automatically register each device after its first boot.
@@ -126,7 +126,7 @@ To create and configure your gadget snap:
     - `(ACCOUNT_NAME)`: Self-hosted Landscape users should set this to `standalone`.
     - `(REGISTRATION_KEY)`: Your registration key.
     
-    Now, you’ve finished configuring the details of your Landscape server instance. In the `auto-register` section, you’ll likely want to change `computer-title-pattern` to your preferred method of identifying devices. For more information on these parameters, see the [explanation on the auto-registration process in the gadget snap](#explanation-auto-registration-process-in-the-gadget-snap) located in this guide.
+    Now, you’ve finished configuring the details of your Landscape server instance. In the `auto-register` section, you’ll likely want to change `computer-title-pattern` to your preferred method of identifying devices. For more information on these parameters, see {ref}`header-explanation-auto-reg-process-gadget-snap` located in this guide.
     
 These details will be the same for all devices that run this image.
 
@@ -212,6 +212,7 @@ To boot the device:
 
 If done successfully, your device(s) should be registered, and they can now be remotely managed with your Landscape server. This process is essential for deploying large fleets or installing devices in inaccessible areas.
 
+(header-explanation-auto-reg-process-gadget-snap)=
 ## Explanation: Auto-registration process in the gadget snap
 
 The `gadget.yaml` file contains a configuration that is similar to the following:

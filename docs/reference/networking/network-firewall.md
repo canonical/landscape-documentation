@@ -1,4 +1,4 @@
-(reference-networking-network-firewall)=
+(reference-network-firewall)=
 # Network firewall
 
 ## Publicly accessible URIs

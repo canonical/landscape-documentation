@@ -1,4 +1,4 @@
-(how-to-guides-api-use-the-legacy-api-via-http-requests)=
+(how-to-use-legacy-api-http)=
 # How to use the legacy API via HTTP requests
 
 

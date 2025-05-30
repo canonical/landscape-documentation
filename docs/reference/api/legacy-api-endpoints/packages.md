@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-packages)=
+(reference-legacy-api-packages)=
 # Packages
 
 
@@ -6,12 +6,15 @@ The methods available here are related to package management operations.
 
 ## GetPackages
 
-Get a list of packages associated with the account used for authentication.
+Get a list of packages that have been reported to this Landscape account.
+
+Query parameters:
 
 - `query`: A query string used to select computers to query packages on. (See `query` under `GetComputers` for additional details.)
 - `search`: A string to restrict the search to (optional). All fields are searched, not just those returned. (e.g., description)
 - `names`: Restrict the search to these package names. Multiple names can be specified by numbering the names with `names.1`, `names.2`, etc.
 - `installed`: If true only packages in the installed state will be returned, if false only packages not installed will be returned. If not given both installed and not installed packages will be returned.
+    - **Note:** setting `installed` to `false` will only return computers where the given package is `available` but not `installed`, and will not work for arbitrary package names that have not been reported by Landscape Client. For example, using a non-existent package name for `names` will not return all computers.
 - `available`: If true only packages in the available state will be returned, if false only packages not available will be returned. If not given both available and not available packages will be returned.
 - `upgrade`: If true, only installable packages that are upgrades for an installed one are returned. If false, only installable packages that are not upgrades are returned. If not given, packages will be returned regardless of wether they are upgrades or not.
 - `held`: If true, only installed packages that are held on computers are returned. If false, only packages that are not held on computers are returned. If not given, packages will be returned regardless of the held state.
@@ -24,15 +27,15 @@ A package is considered available if it can be fetched from an APT source. Note 
 
 A package is considered an upgrade if it’s available and if it has a version higher than a non-held installed package with the same name.
 
-For example, the following request looks for a package named with the tag ‘server’ with a limit of 20 packages:
+For example, the following request queries computers that are tagged with 'server' and returns up to 2 reported packages whose names include 'python':
 
 ```text
-?action=GetPackages&query=tag:server&search=python&limit=20
+?action=GetPackages&query=tag:server&search=python&limit=2
 ```
 
-The method returns a JSON serialized list of packages, with the list of computer IDs on which they are available, installed, or available as upgrades:
+The method returns a JSON serialized list of packages, with the list of computer IDs on which they are available, installed, or upgradable:
 
-```text
+```json
 [
     {
         "name": "python2.7",

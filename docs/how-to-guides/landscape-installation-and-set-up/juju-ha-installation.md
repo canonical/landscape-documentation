@@ -1,4 +1,4 @@
-(how-to-guides-landscape-installation-and-set-up-juju-ha-installation)=
+(how-to-juju-ha-installation)=
 # How to install and configure Landscape for high-availability deployments
 
 > See also: [Juju documentation](https://juju.is/docs/juju)
@@ -167,7 +167,7 @@ Machine  State    Address        Inst id         Base          AZ  Message
 11       started  10.76.244.71   juju-dded29-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by [installing the Landscape Client charm](/how-to-guides/landscape-installation-and-set-up/install-landscape-client) on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the [configure HAProxy with an SSL certificate](#configure-haproxy-with-an-ssl-certificate) section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
 ### Option 2: Customize the configuration before deployment
 
@@ -360,7 +360,7 @@ Machine  State    Address        Inst id         Base          AZ  Message
 11       started  10.76.244.179  juju-be1fab-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by [installing the Landscape Client charm](/how-to-guides/landscape-installation-and-set-up/install-landscape-client) on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the [configure HAProxy with an SSL certificate](#configure-haproxy-with-an-ssl-certificate) section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
 
 ## Create a SSL certificate with LetsEncrypt (Optional)
@@ -373,6 +373,7 @@ sudo certbot certonly --standalone -d $FQDN --non-interactive --agree-tos --emai
 
 This will produce a `fullchain.pem` and `privkey.pem` file which you need for HAProxy SSL termination.
 
+(how-to-header-configure-haproxy-with-ssl-cert)=
 ## Configure HAProxy with an SSL certificate
 
 If you followed the previous instructions in this guide, you'll have a Landscape Server high availability deployment. The HAProxy application in this deployment uses a self-signed SSL certificate for secure HTTPS. Landscape Clients and your browser won't trust this certificate by default.

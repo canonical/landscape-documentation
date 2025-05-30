@@ -1,4 +1,4 @@
-(reference-api-rest-api-endpoints-scripts)=
+(reference-rest-api-scripts)=
 # Scripts
 
 ## GET `/scripts`

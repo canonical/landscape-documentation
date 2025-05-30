@@ -1,8 +1,8 @@
-(how-to-guides-api-make-a-rest-api-request)=
+(how-to-rest-api-request)=
 # How to make a REST API request
 
 
-> See also: [Login API endpoints](/reference/api/rest-api-endpoints/login)
+> See also: {ref}`reference-rest-api-login`
 
 This guide demonstrates how to login and make a request using the Landscape REST API. You need Landscape 24.04 LTS (or higher) to use the REST API. This guide provides general steps and examples using `curl`.
 
@@ -16,8 +16,6 @@ The general steps to make a REST API request are:
 4. Make your API request, using your token for authorization
 
 ## Password authentication: Make a REST API request with `curl`
-
-> See also: [`/login` REST API endpoint](https://ubuntu.com/landscape/docs/api-rest-login#p-110652-post-login)
 
 This method is for those using password authentication to login.
 
@@ -61,8 +59,6 @@ This method is for those using password authentication to login.
     ```
 
 ## SSO: Make a REST API request with `curl`
-
-> See also: [`/login/access-key` REST API endpoint](https://ubuntu.com/landscape/docs/api-rest-login#p-110652-post-loginaccess-key)
 
 This method is for those using SSO (such as Ubuntu One or an external authentication provider) to login. This includes Landscape SaaS.  
 

@@ -1,4 +1,4 @@
-(how-to-guides-ubuntu-pro-attach-ubuntu-pro)=
+(how-to-attach-ubuntu-pro)=
 # How to attach your Ubuntu Pro subscription
 
 > See also: [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/)

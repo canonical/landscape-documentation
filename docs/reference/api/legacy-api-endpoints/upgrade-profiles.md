@@ -1,4 +1,4 @@
-(reference-api-legacy-api-endpoints-upgrade-profiles)=
+(reference-legacy-api-upgrade-profiles)=
 # Upgrade Profiles
 
 

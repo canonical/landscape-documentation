@@ -1,3 +1,4 @@
+(how-to-harden-deployment)=
 # How to harden your Landscape deployment
 
 You have many options when hardening your Landscape deployment.

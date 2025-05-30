@@ -1,3 +1,4 @@
+(explanation-security-overview)=
 # Security in Landscape
 
 This page provides an overview of various security topics related to Landscape.
@@ -6,31 +7,31 @@ This page provides an overview of various security topics related to Landscape.
 
 We have the following how-to guides for configuring your Landscape deployment beyond the default security settings.
 
-- [How to install Landscape Server on FIPS-compliant machines](/how-to-guides/landscape-installation-and-set-up/install-on-fips-compliant-machines)
-- [How to harden your Landscape deployment](/how-to-guides/security/harden-your-deployment.md)
+- {ref}`how-to-install-fips-compliant`
+- {ref}`how-to-harden-deployment`
 
 ## Ubuntu Pro
 
 [Ubuntu Pro](https://ubuntu.com/pro) enhances the security and compliance of your Ubuntu systems. The following guides cover how to use Ubuntu Pro with Landscape:
 
-- [How to attach your Ubuntu Pro subscription](/how-to-guides/ubuntu-pro/attach-ubuntu-pro)
-- [How to enable Landscape in the Ubuntu Pro Client](/how-to-guides/ubuntu-pro/enable-landscape)
+- {ref}`how-to-attach-ubuntu-pro`
+- {ref}`how-to-ubuntu-pro-enable-landscape`
 
 ## External authentication
 
 For a more secure system, it’s recommended to use external authentication instead of password authentication. The following guides cover external authentication:
 
-- [How to authenticate with Active Directory](/how-to-guides/external-authentication/active-directory)
-- [How to enable OIDC authentication](/how-to-guides/external-authentication/openid-connect-oidc)
-- [How to enable PAM authentication](/how-to-guides/external-authentication/pluggable-authentication-modules-pam)
+- {ref}`how-to-external-auth-active-directory`
+- {ref}`how-to-external-auth-oidc`
+- {ref}`how-to-external-auth-pam`
 
 ## Air-gapped and restricted network environments
 
 If you’re using Landscape in an air-gapped environment, we have the following guides related to installing Landscape and setting up repository mirrors for offline environments:
 
-- [How to install Landscape in an air-gapped or offline environment](/how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment)
-- [How to manage repositories in an air-gapped or offline environment](/how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment)
-- [How to create tiered repository mirrors for multi-region and air-gapped deployments](/how-to-guides/repository-mirrors/create-tiered-repository-mirrors.md)
+- {ref}`how-to-install-airgapped`
+- {ref}`how-to-manage-repos-airgapped`
+- {ref}`how-to-create-tiered-repo-mirrors`
 
 ## Security updates and Livepatch
 
@@ -38,17 +39,17 @@ If you’re using Landscape in an air-gapped environment, we have the following 
 
 You can use Landscape to apply security updates to your client machines, and Livepatch (within Landscape) to schedule high and critical Linux kernel vulnerability patches. We have the following guides on applying security updates with Landscape:
 
-- [How to apply security patches and upgrades](/how-to-guides/security/apply-security-updates.md)
-- [How to manage Livepatch and kernel updates from the Landscape web portal](/how-to-guides/web-portal/web-portal-24-04-or-later/manage-livepatch-and-kernel-updates) (24.04 or later)
+- {ref}`how-to-apply-security-updates`
+- {ref}`how-to-web-portal-manage-livepatch` (24.04 or later)
 
 ## Additional Landscape security topics
 
 We also have the following explanations about security in Landscape:
 
-- [Cryptographic technology in Landscape](/explanation/security/cryptographic-technology)
-- [Security disclosure and reporting](/explanation/security/disclosure-and-reporting)
-- [Data handling](/explanation/security/data-handling.md)
-- [AppArmor and Landscape](/explanation/security/apparmor)
+- {ref}`explanation-cryptographic-technology`
+- {ref}`explanation-security-disclosure`
+- {ref}`explanation-data-handling`
+- {ref}`explanation-apparmor`
 
 ## Related topics
 
