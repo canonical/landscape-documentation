@@ -5,8 +5,9 @@ Reboot profiles in Landscape allow you to automatically restart specific Landsca
 
 This guide will show you how to create a reboot profile using Landscape Server to restart selected instances weekly.
 
-> ℹ️ **Note:**
-> This feature is only available in Landscape **25.04** and later.
+```{note}
+This feature is only available in **Landscape 25.04** and later.
+```
 
 ## Use case
 

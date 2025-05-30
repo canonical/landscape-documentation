@@ -20,8 +20,9 @@ Optional parameters:
 - `access_group`: The access group name where the profile will be created. Defaults to `"global"`.
 - `tags`: A list of computer tags to target instead of `all_computers`.
 
-> ℹ️ **Note:** \
-> The scheduled time (`at_hour` and `at_minute`) is interpreted in **UTC**.
+```{note}
+The scheduled time (`at_hour` and `at_minute`) is interpreted in **UTC**.
+```
 
 Example request:
 
