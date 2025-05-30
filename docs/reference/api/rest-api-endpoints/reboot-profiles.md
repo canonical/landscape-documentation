@@ -3,12 +3,12 @@
 
 ## POST `/v2/rebootprofiles`
 
-Creates a new reboot profile that schedules a system reboot on selected days and time.
+Creates a new reboot profile that schedules a system reboot on selected days of the week at the specified time. Currently, only intervals over a week are supported (i.e., you cannot create a monthly reboot profile).
 
 Required parameters:
 
 - `title`: The human readable title for this reboot profile.
-- `on_days`: A list of days (abbreviated: mo, tu, we, th, fr, sa, su) on which the reboot will run.
+- `on_days`: A list of days of the week (abbreviated: mo, tu, we, th, fr, sa, su) on which the reboot will run.
 - `at_hour`: The hour (0–23) at which the reboot will run.
 
 Optional parameters:
@@ -20,7 +20,9 @@ Optional parameters:
 - `access_group`: The access group name where the profile will be created. Defaults to `"global"`.
 - `tags`: A list of computer tags to target instead of `all_computers`.
 
-**Note:** The scheduled time (`at_hour` and `at_minute`) is interpreted in **UTC**.
+> ℹ️ **Note:**  \
+> The scheduled time (`at_hour` and `at_minute`) is interpreted in **UTC**.
+
 
 Example request:
 
