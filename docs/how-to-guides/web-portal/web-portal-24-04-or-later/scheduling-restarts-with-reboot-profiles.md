@@ -29,7 +29,7 @@ In the profile creation form:
 - **Access group**: Leave this as `"Global access"`.
 - **Schedule**: Set the reboot to occur **every Saturday at 3:30 AM** by selecting the day and entering `3:30` in the time field.
 - **Expires after**: Set this to **2 hours**—if a reboot fails, the request will be retried until this window closes.
-- **Spread delivery**: Choose `"No"` to execute the reboots without staggering them.
+- **Randomise delivery over a time window**: Choose `"No"` to execute the reboots without staggering them.
 - **Associate to all instances**: Check this box to apply the profile to every machine.
 
 Click **Add reboot profile** to save. You should now see the new profile listed, with its **next scheduled reboot** time clearly displayed.
