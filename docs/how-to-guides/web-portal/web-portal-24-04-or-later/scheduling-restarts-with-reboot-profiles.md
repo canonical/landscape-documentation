@@ -1,3 +1,4 @@
+(how-to-web-portal-scheduling-restarts-with-reboot-profiles)=
 # Scheduling restarts for Landscape Client instances with reboot profiles
 
 Reboot profiles in Landscape allow you to automatically restart specific Landscape Client instances on a scheduled basis. This guide will walk you through creating a reboot profile that restarts selected instances at regular intervals every week.
