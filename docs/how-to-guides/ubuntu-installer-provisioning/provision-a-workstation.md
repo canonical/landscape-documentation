@@ -4,10 +4,27 @@
 Recent releases of the Ubuntu installer (24.04+) can use Landscape to serve an autoinstall file.
 This is available on self-hosted and SaaS Landscape.
 On SaaS Landscape, your account must be hosted on a subdomain.
-Your Landscape account must use OIDC authentication. Currently, only Google OAuth 2.0 is supported.
+Your Landscape administrator must have configured an OIDC login method.
+Currently, Google OAuth 2.0 is the only OIDC provider that this feature supports.
 
-WIP:
+## In the Ubuntu installer
 
-- Choose Landscape provisioning in the installer
-- Use your attach code to authenticate against Landscape
-- Log in against your identity provider
+1. In the Ubuntu installer menu, select **install with Landscape**.
+1. Enter the URL of your Landscape deployment.
+
+The installer will generate a 6 digit attach code for you.
+Save this for the next step.
+
+## In Landscape
+
+1. Navigate to the **/attach** page in Landscape.
+1. Enter your 6 digit attach code.
+1. Landscape will confirm that the attach code is valid and prompt you to log in.
+1. Authenticate against your OIDC provider.
+
+## Back in the Ubuntu installer
+
+1. After successful authentication, Landscape will serve an autoinstall file to the Ubuntu installer.
+1. Confirm the autoinstall file.
+
+The Ubuntu installer will use the autoinstall file to provision your device.
