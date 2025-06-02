@@ -14,9 +14,24 @@ Configure Google OAuth 2.0 OIDC (link).
 Only users that are known to the OIDC provider will be able to use the provisioning experience.
 A local Landscape user that logs in with username/password will not.
 
+1. Navigate to **Org settings > Identity providers**.
+2. Configure a Google OAuth 2.0 client.
+3. Request the **groups** claim when configuring the client.
+4. Assign the **groups** claim to the **Autoinstall file** resource.
+
+The **groups** claim will be used to identify an autoinstall file for a user when they authenticate.
+
+## (Optional) Configure Hashicorp Vault for secure, versioned autoinstall storage
+
+(Not delivered in 25.10)
+
+Landscape supports integration with Hashicorp Vault for secure, versioned storage.
+When configured as a storage backend, Landscape will store autoinstall files in the Vault.
+
 ## Upload autoinstall files
 
-Add your autoinstall files to Landscape.
+1. Navigate to the **Employees > Autoinstall** tab.
+2. Upload your autoinstall files to Landscape.
 
 ## (Optional) Set default autoinstall file
 
@@ -26,7 +41,12 @@ You may change the default file at any time.
 
 ## Associate your autoinstall files with users
 
-TBD:
+Associate each autoinstall file with a particular value of the **groups** claim.
+When a user reports a **groups** claim with this value, they will be assigned the corresponding autoinstall file.
 
-- Option 1: explain the group import and association process
-- Option 2: custom claims
+### (Optional) Assign priorities
+
+If a user reports multiple **groups** claim values, they may be associated with multiple autoinstall files.
+However, Landscape will only serve users a single file.
+You may assign each file a priority to break ties if this situation arises.
+If two files have the same priority or no priority assigned, Landscape will internally resolve the tie and deterministically serve a single file.
