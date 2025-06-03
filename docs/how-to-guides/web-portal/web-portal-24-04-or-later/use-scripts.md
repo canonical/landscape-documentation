@@ -31,3 +31,4 @@ You can manage a script using the **Actions** menu:
 - **Delete**: Delete the script by redacting every version of the script, and deleting associated attachments.
   This operation also archives any associated script profile(s).
   Note that deletion is irreversible.
+- **Run Script**: One-off script runs can be manually triggered by specifying the username, time limit and affected instances.
