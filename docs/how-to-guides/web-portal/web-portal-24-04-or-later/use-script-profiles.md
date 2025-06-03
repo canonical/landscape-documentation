@@ -3,8 +3,7 @@
 
 Script profiles can be used to execute scripts based on a trigger.
 
-> **Note**
-> This feature is only available in **Landscape 25.04** and later.
+> **Note**: This feature is only available in **Landscape 25.04** and later.
 
 ## Creating a script profile
 
