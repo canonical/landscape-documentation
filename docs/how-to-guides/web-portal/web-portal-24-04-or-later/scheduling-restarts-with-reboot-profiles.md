@@ -1,7 +1,7 @@
 (how-to-web-portal-scheduling-restarts-with-reboot-profiles)=
 # Scheduling restarts for Landscape Client instances with reboot profiles
 
-Reboot profiles in Landscape allow you to automatically restart specific Landscape Client instances on a scheduled basis. This guide will walk you through creating a reboot profile that restarts selected instances at regular intervals every week.
+Reboot profiles in Landscape allow you to automatically restart specific Landscape Client instances on a scheduled basis. This guide will show you how to create a reboot profile that restarts selected instances at regular intervals every week.
 
 ```{note}
 This feature is only available in **Landscape 25.04** and later.
@@ -11,7 +11,7 @@ This feature is only available in **Landscape 25.04** and later.
 
 In the web app (`/new_dashboard`):
 
-1. Expand the **Profiles** tab.
+1. Expand the **Profiles** dropdown menu.
 2. Click on **Reboot profiles**.
 3. Click the green **Add reboot profile** button.
 
@@ -19,7 +19,7 @@ In the profile creation form, fill out the following fields:
 
 - **Name**: Enter the name of the profile.
 - **Access group**: Select the access group associated with this profile.
-- **Schedule**: Choose the day(s) of the week and the time (in 24-hour format) when the reboot will occur.
+- **Schedule**: Choose the day(s) of the week and the time (in 24-hour format) when the reboot will occur. The scheduled time is interpreted in UTC.
 - **Expires after**: Specify a time window for retrying the reboot if it fails. The request will be retried until this window closes.
 - **Randomize delivery over a time window**: Select this option if you want to stagger the delivery of reboots to the selected instances to avoid rebooting them all simultaneously.
 - **Association**: Set which instances this profile will affect using one of the following options:
@@ -34,4 +34,4 @@ After creating a profile, you can manage it using the **Actions** menu (the thre
 
 - **Edit**: Modify the schedule or settings. Changes will apply to the next run.
 - **Duplicate**: Create a new profile using the current one as a template.
-- **Delete**: Permanently remove the profile.
+- **Remove**: Permanently remove the profile.
