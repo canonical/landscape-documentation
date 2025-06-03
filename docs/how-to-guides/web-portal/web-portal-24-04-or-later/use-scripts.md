@@ -3,9 +3,8 @@
 
 Scripts can be used to execute code on instances.
 
-```{note}
-This feature, in the state described below, is only available in **Landscape 25.04** and later.
-```
+> **Note**
+> This feature, in the state described below, is only available in **Landscape 25.04** and later.
 
 ## Creating a script
 
