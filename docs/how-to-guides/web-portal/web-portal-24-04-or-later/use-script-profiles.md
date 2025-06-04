@@ -3,7 +3,9 @@
 
 Script profiles can be used to execute scripts based on a trigger.
 
-> **Note**: This feature is only available in **Landscape 25.04** and later.
+```{note}
+This feature is only available in **Landscape 25.04** and later.
+```
 
 ## Creating a script profile
 
@@ -21,13 +23,13 @@ In the script profile creation form, fill out the following fields:
 - **Time limit**: The time, in seconds, after which the script is considered defunct.
 - **Trigger**:
     - **Post Enrollment**: Triggers after a computer is enrolled in an account.
-    - **On a date**: A point in time the script profile should execute.
+    - **On a date**: A UTC time at which the script profile should execute.
     - **Recurring**: A start date after which the profile will execute the specified [Cron](https://en.wikipedia.org/wiki/Cron) schedule.
 - **Association**:
     - **All instances**: The profile will affect all instances in the same access group as the profile.
     - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
 
-## Managing a script profile
+## Managing script profiles
 
 You can manage a script profile using the **Actions** menu:
 

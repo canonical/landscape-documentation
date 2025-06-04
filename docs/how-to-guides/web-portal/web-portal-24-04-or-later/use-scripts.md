@@ -3,7 +3,9 @@
 
 Scripts can be used to execute code on instances.
 
-> **Note**: This feature, in the state described below, is only available in **Landscape 25.04** and later.
+```{note}
+This feature, in the state described below, is only available in **Landscape 25.04** and later.
+```
 
 ## Creating a script
 
@@ -19,7 +21,7 @@ In the script creation form, fill out the following fields:
 - **Access group**: The access group the script will belong to.
 - **Attachments**: A list of attachments that may be used inside the script, and submitted to instances.
 
-## Managing a script profile
+## Managing scripts
 
 You can manage a script using the **Actions** menu:
 
