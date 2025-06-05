@@ -1,24 +1,26 @@
 (how-to-web-portal-use-script-profiles)=
 # How to use script profiles
 
-Script profiles can be used to execute scripts based on a trigger.
+You can use script profiles to execute scripts based on certain triggers.
+The possible triggers are: post-enrollment, date, and a recurring schedule.
 
 ```{note}
-This feature is only available in **Landscape 25.04** and later.
+This feature is only available in self-hosted **Landscape 25.04** and later.
 ```
 
-## Creating a script profile
+## Create a script profile
 
 From the web portal:
 
 1. Go to **Scripts**.
-2. Click on **Profiles**.
-3. Click on **Add profile**.
+2. Click **Profiles**.
+3. Click **Add profile**.
 
-In the script profile creation form, fill out the following fields:
+In the script profile creation form, complete the following fields:
 
 - **Name**: Name of the profile.
-- **Script**: Name of a corresponding script (the same access group will be assigned to the profile).
+- **Script**: Name of a corresponding script.
+The same access group of this script will be assigned to the new profile.
 - **Run as user**: The username to execute the script as on the client.
 - **Time limit**: The time, in seconds, after which the script is considered defunct.
 - **Trigger**:
@@ -29,10 +31,4 @@ In the script profile creation form, fill out the following fields:
     - **All instances**: The profile will affect all instances in the same access group as the profile.
     - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
 
-## Managing script profiles
-
-You can manage a script profile using the **Actions** menu:
-
-- **Edit**: Modify the name, username, time limit or affected instances.
-- **Archive**: Archive the profile, making it inactive.
-               Note that archiving is irreversible.
+After you've created your script profile, you can view, edit, or archive it from the **Profiles** tab, under *Actions*.
