@@ -20,6 +20,7 @@ autoinstall
 AutoPilot
 autoremove
 amd
+backend
 backport
 Backport
 backtrace
@@ -65,6 +66,7 @@ CVEs
 datetime
 debian
 decrypt
+deterministically
 DirectoryAPI
 DISA
 distros
@@ -94,6 +96,7 @@ filesystem
 frontend
 HAProxy
 hardcoded
+Hashicorp
 hashid
 Hashids
 heredoc
