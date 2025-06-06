@@ -44,7 +44,7 @@ In the security profile creation form, complete the following fields:
 - **Upload tailoring file**: a [benchmark customization file](https://documentation.ubuntu.com/security/docs/compliance/usg/cis-customize/). If provided, it supersedes the **Base profile**.
 - **Schedule**:
   - **On a date**: a specific date and time at which the profile will execute once
-  - **Recurring**: a start date and end date between which the profile will execute repeatedly, with the provided number of days between executions. The recurrance cannot be more frequent than once every seven days.
+  - **Recurring**: a start date and end date between which the profile will execute repeatedly, with the provided number of days between executions. The recurrence cannot be more frequent than once every seven days.
 - **Association**:
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected
