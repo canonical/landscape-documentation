@@ -13,3 +13,4 @@ manage-livepatch-and-kernel-updates
 sanitize-instances
 scheduling-restarts-with-reboot-profiles
 use-script-profiles
+use-security-profiles
