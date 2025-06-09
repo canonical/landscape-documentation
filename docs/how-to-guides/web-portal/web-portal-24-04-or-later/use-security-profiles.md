@@ -38,9 +38,9 @@ From the web portal:
 In the security profile creation form, complete the following fields:
 
 - **Profile name**: name of the profile
-- **Access group**: the access group the profile will apply to
-- **Base profile**: the security benchmark the profile will use
-- **Mode**: the profile's mode – which actions it will perform on instances
+- **Access group**: the access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
+- **Base profile**: the security benchmark the profile will use. See the [Ubuntu Security's type of compliance](https://documentation.ubuntu.com/security/docs/compliance/usg/) for more information.
+- **Mode**: the profile's mode – which actions it will perform on instances. "Audit" will only execute compliance audits, "Fix and audit" will also attempt to modify instances to fix failing compliance tests, and "Fix, restart, audit" will restart instances after modifying them.
 - **Upload tailoring file**: A [benchmark customization file](https://documentation.ubuntu.com/security/docs/compliance/usg/cis-customize/). If provided, it supersedes the **Base profile**.
 - **Schedule**:
   - **On a date**: A specific date and time at which the profile will execute once
@@ -49,7 +49,7 @@ In the security profile creation form, complete the following fields:
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected
   
-After you've created your security profile, you can view, edit, run, duplicate, or archive it from the **Security profiles** tag, under **Actions**.
+After you've created your security profile, you can view, download audit reports, edit, run, duplicate, or archive it from the **Security profiles** tag, using the dot menu under **Actions**.
 
 ## Download audit for a security profile
 
