@@ -13,21 +13,21 @@ On each instance you want to manage, follow the steps in [Install Ubuntu Securit
 
 1. Edit the client configuration file `/etc/landscape/client.conf`, add this line:
 
-```
-include_manager_plugins = UsgManager
-```
+    ```
+    include_manager_plugins = UsgManager
+    ```
 
-If your `client.conf` already includes an `include_manager_plugins` line, then add `UsgManager` to it. For example:
+    If your `client.conf` already includes an `include_manager_plugins` line, then add `UsgManager` to it. For example:
 
-```
-include_manager_plugins = ScriptExecution,UsgManager
-```
+    ```
+    include_manager_plugins = ScriptExecution,UsgManager
+    ```
 
 2. Restart Landscape Client:
 
-```
-sudo systemctl restart landscape-client
-```
+    ```
+    sudo systemctl restart landscape-client
+    ```
 
 From the web portal:
 
