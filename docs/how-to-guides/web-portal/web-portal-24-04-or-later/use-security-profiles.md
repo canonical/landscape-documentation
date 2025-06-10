@@ -37,10 +37,10 @@ From the web portal:
 
 In the security profile creation form, complete the following fields:
 
-- **Profile name**: name of the profile
-- **Access group**: the access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
-- **Base profile**: the security benchmark the profile will use. See the [Ubuntu Security's type of compliance](https://documentation.ubuntu.com/security/docs/compliance/usg/) for more information.
-- **Mode**: the profile's mode – which actions it will perform on instances. "Audit" will only execute compliance audits, "Fix and audit" will also attempt to modify instances to fix failing compliance tests, and "Fix, restart, audit" will restart instances after modifying them.
+- **Profile name**: Name of the profile
+- **Access group**: The access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
+- **Base profile**: The security benchmark the profile will use. See the [Ubuntu Security's type of compliance](https://documentation.ubuntu.com/security/docs/compliance/usg/) for more information.
+- **Mode**: The profile's mode – which actions it will perform on instances. "Audit" will only execute compliance audits, "Fix and audit" will also attempt to modify instances to fix failing compliance tests, and "Fix, restart, audit" will restart instances after modifying them.
 - **Upload tailoring file**: A [benchmark customization file](https://documentation.ubuntu.com/security/docs/compliance/usg/cis-customize/). If provided, it supersedes the **Base profile**.
 - **Schedule**:
   - **On a date**: A specific date and time at which the profile will execute once
