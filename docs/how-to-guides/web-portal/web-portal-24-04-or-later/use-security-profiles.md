@@ -49,7 +49,7 @@ In the security profile creation form, complete the following fields:
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected
   
-After you've created your security profile, you can view, download audit reports, edit, run, duplicate, or archive it from the **Security profiles** tag, using the dot menu under **Actions**.
+After you've created your security profile, you can view, download audit reports, edit, run, duplicate, or archive it using the dot menu under **Actions**.
 
 ## Download audit for a security profile
 
