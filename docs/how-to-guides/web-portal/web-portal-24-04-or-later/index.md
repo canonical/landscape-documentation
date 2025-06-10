@@ -11,5 +11,5 @@ manage-access-groups
 use-annotations
 manage-livepatch-and-kernel-updates
 sanitize-instances
-scheduling-restarts-with-reboot-profiles
+use-reboot-profiles
 use-script-profiles
