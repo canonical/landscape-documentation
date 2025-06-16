@@ -137,7 +137,7 @@ Required parameters:
 
 Optional parameters:
 
-- `query`: A query string with tokens used to filter the returned result objects.
+- `query`: A query string with tokens used to filter the returned result objects. See {ref}`reference-rest-api-computers` for details.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 

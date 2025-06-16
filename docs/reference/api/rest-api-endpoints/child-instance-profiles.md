@@ -104,14 +104,14 @@ Optional parameters:
 
 - `image_source`: The URL or file path for the rootfs image.
 - `cloud_init_contents`: The base64-encoded cloud init file contents.
-- `access_group`: Optional name of the access group to create the profile under; defaults to Global Access.
-- `tags`: A comma separated string of tag names to associate with the profile.
+- `access_group`: Name of the access group the profile applies to; defaults to Global Access.
+- `tags`: A list of tag names to associate with the profile.
 - `all_computers`: If true, this profile will be associated with all computers; defaults to false.
 
 Example requests:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "Stock Ubuntu 24.04", "description": "The image from the store", "image_name": "Ubuntu-24.04", "tags": "windows_laptops,windows_desktops"}'
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "Stock Ubuntu 24.04", "description": "The image from the store", "image_name": "Ubuntu-24.04", "tags": ["windows_laptops", "windows_desktops"]}'
 
 curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d "{\"title\": \"Customized Ubuntu 24.04\", \"description\": \"The image from the store customized\", \"image_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < cloud_init.yaml)\"}"
 
@@ -145,7 +145,7 @@ Example output:
 }
 ```
 
-## DELETE `/child-instance-profiles/<str:profile_name>`
+## DELETE `/child-instance-profiles/<string:profile_name>`
 
 Delete the specified child instance profile.
 
@@ -167,7 +167,7 @@ Example output:
 
 Empty response.
 
-## GET `/child-instance-profiles/<str:profile_name>`
+## GET `/child-instance-profiles/<string:profile_name>`
 
 Get details of the specified child instance profile.
 
@@ -225,13 +225,13 @@ Optional parameters:
 - `title`: A title for the profile.
 - `description`: A human readable description for the profile.
 - `access_group`: Name of the access group for the profile under.
-- `tags`: A comma separated string of tag names to associate with the profile.
+- `tags`: A list of tag names to associate with the profile.
 - `all_computers`: Whether or not to associate this profile with all computers.
 
 Example request:
 
 ```bash
-curl -X PATCH https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT" -d '{"description": "The stock image from the store", "tags": "windows_laptops"}'
+curl -X PATCH https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT" -d '{"description": "The stock image from the store", "tags": ["windows_laptops"]}'
 ```
 
 Example output:
@@ -260,7 +260,7 @@ Example output:
 }
 ```
 
-## POST `/child-instance-profiles/<str:profile_name>:reapply`
+## POST `/child-instance-profiles/<string:profile_name>:reapply`
 
 Reapply a Child Instance Profile to host machines to make them compliant.
 
