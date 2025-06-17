@@ -47,13 +47,15 @@ Required parameters:
 
 Optional parameters:
 
+- `names`: A comma separated list of profile names. The profiles returned will exactly match one of these names.
+- `search`: Only profiles with names or descriptions matching the search term are returned.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.canonical.com/api/v2/child-instance-profiles?search=ubuntu -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
