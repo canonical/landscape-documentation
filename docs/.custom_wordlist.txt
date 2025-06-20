@@ -1,6 +1,7 @@
 AArch
 AES
 ajax
+airgapped
 allowlist
 allowlists
 amongst

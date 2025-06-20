@@ -124,24 +124,6 @@ html_context = {
 html_static_path = [".sphinx/_static"]
 templates_path = [".sphinx/_templates"]
 
-#############
-# Redirects #
-#############
-
-# To set up redirects: https://documatt.gitlab.io/sphinx-reredirects/usage.html
-# For example: 'explanation/old-name.html': '../how-to/prettify.html',
-
-# To set up redirects in the Read the Docs project dashboard:
-# https://docs.readthedocs.io/en/stable/guides/redirects.html
-
-# NOTE: If undefined, set to None, or empty,
-#       the sphinx_reredirects extension will be disabled.
-
-redirects = {
-    'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
-    'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure'
-}
-
 
 ###########################
 # Link checker exceptions #
@@ -282,3 +264,23 @@ with open(".sphinx/latex_elements_template.txt", "rt") as file:
     latex_config = file.read()
 
 latex_elements = ast.literal_eval(latex_config.replace("$PROJECT", project))
+
+#############
+# Redirects #
+#############
+
+# To set up redirects: https://documatt.gitlab.io/sphinx-reredirects/usage.html
+# For example: 'explanation/old-name.html': '../how-to/prettify.html',
+
+# To set up redirects in the Read the Docs project dashboard:
+# https://docs.readthedocs.io/en/stable/guides/redirects.html
+
+# NOTE: If undefined, set to None, or empty,
+#       the sphinx_reredirects extension will be disabled.
+
+redirects = {
+    'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
+    'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure',
+    'how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment': '../../repository-mirrors/manage-repositories-in-an-air-gapped-or-offline-environment.md',
+    'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment'
+}
