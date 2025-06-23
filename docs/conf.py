@@ -188,6 +188,7 @@ extensions = [
     "canonical_sphinx",
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
+    "sphinx_sitemap"
 ]
 
 
@@ -264,6 +265,11 @@ with open(".sphinx/latex_elements_template.txt", "rt") as file:
     latex_config = file.read()
 
 latex_elements = ast.literal_eval(latex_config.replace("$PROJECT", project))
+
+## Sitemap configuration
+
+html_baseurl = "https://documentation.ubuntu.com/landscape/"
+sitemap_url_scheme = "{link}"
 
 #############
 # Redirects #
