@@ -46,7 +46,8 @@ Example output:
           "constrained": [2, 3, 4, 5],
           "non-compliant": [3, 5],
           "pending": [4]
-        }
+        },
+        "only_landscape_created": false
       }
     ],
     "next": null,
@@ -71,6 +72,8 @@ Optional parameters:
 - `access_group`: Optional name of the access group to create the profile under; defaults to Global Access.
 - `tags`: A comma separated string of tag names to associate with the profile.
 - `all_computers`: If true, this profile will be associated with all computers; defaults to false.
+- `only_landscape_created`: If true, delete WSL instances from the associated computers that were not created by Landscape. This cannot be changed and defaults to false.
+
 
 Example requests:
 
@@ -105,7 +108,8 @@ Example output:
       "constrained": [2, 3, 4, 5],
       "non-compliant": [],
       "pending": [2, 3, 4, 5]
-    }
+    },
+    "only_landscape_created": false
 }
 ```
 
@@ -172,7 +176,8 @@ Example output:
     "constrained": [2, 3, 4, 5],
     "non-compliant": [3, 5],
     "pending": [4]
-  }
+  },
+  "only_landscape_created": false
 }
 ```
 
@@ -220,7 +225,8 @@ Example output:
     "constrained": [2, 3, 4, 5],
     "non-compliant": [3, 5],
     "pending": [4]
-  }
+  },
+  "only_landscape_created": false
 }
 ```
 ## POST `/computers/<computer_id>/children`
