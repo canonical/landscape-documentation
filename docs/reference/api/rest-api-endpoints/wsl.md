@@ -6,38 +6,6 @@
 WSL features are in beta testing. The API endpoints below may not be available to all accounts.
 ```
 
-## GET `/accounts/<string:name>/wsl_feature_limits`
-
-Get the limits for WSL related features for the account.
-
-Path parameters:
-
-- `name`: The name of the account
-
-Required parameters:
-
-- None
-
-Optional parameters:
-
-- None
-
-Example request:
-
-```bash
-curl -X GET https://landscape.canonical.com/api/v2/accounts/example-account/wsl_feature_limits -H "Authorization: Bearer $JWT"
-```
-
-Example response:
-
-```json
-{
-  "max_windows_host_machines": 1000,
-  "max_wsl_child_instances_per_host": 10,
-  "max_wsl_child_instance_profiles": 100
-}
-```
-
 ## POST `/computers/<computer_id>/children`
 
 Creates an activity to install a WSL instance on a Windows host. The WSL instance will be managed in Landscape.
@@ -308,6 +276,38 @@ Example output:
   ],
   "next": null,
   "previous": null
+}
+```
+
+## GET `/wsl-feature-limits`
+
+Get the limits for WSL related features for the account.
+
+Path parameters:
+
+- `name`: The name of the account
+
+Required parameters:
+
+- None
+
+Optional parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET https://landscape.canonical.com/api/v2/wsl-feature-limits -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "max_windows_host_machines": 1000,
+  "max_wsl_child_instances_per_host": 10,
+  "max_wsl_child_instance_profiles": 100
 }
 ```
 
