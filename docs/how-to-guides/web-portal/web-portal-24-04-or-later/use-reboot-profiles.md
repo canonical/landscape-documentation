@@ -4,7 +4,7 @@
 You can use reboot profiles to automatically restart specific Landscape Client instances on a scheduled basis. 
 
 ```{note}
-This feature is only available in self-hosted **Landscape 25.04** and later.
+This feature is only available in **Landscape 25.04** and later.
 ```
 
 ## Create the profile
