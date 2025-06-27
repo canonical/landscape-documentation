@@ -272,6 +272,84 @@ Query parameters:
 - `with_grouped_hardware`: If true, include the details of all hardware information known, grouped by hardware  type.
 - `with_hardware`: If true, include the details of all hardware information known.
 - `with_network`: If true, include the details of all network devices attached to the computer.
+- `with_profiles`: If true, include details about all profiles the computer is associated with.
+
+Example request:
+
+```bash
+curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_profiles=true -H "Authorization: Bearer $JWT" 
+```
+
+Example response:
+
+```json
+{
+  "access_group": "server",
+  "archived": false,
+  "children": [],
+  "clone_id": null,
+  "cloud_init": {
+    "availability_zone": "us-east-1"
+  },
+  "cloud_instance_metadata": {},
+  "comment": "",
+  "container_info": null,
+  "default_child": null,
+  "distribution": "10.04",
+  "distribution_info": {
+    "code_name": "lucid",
+    "description": "Ubuntu 10.04 LTS",
+    "distributor": "Ubuntu",
+    "release": "10.04"
+  },
+  "employee_id": null,
+  "hostname": "appserv1",
+  "id": 1,
+  "is_default_child": null,
+  "is_wsl_instance": false,
+  "last_exchange_time": null,
+  "last_ping_time": "2025-06-27T21:17:37Z",
+  "livepatch_info": null,
+  "num_child": 0,
+  "parent": null,
+  "profiles": [
+    {
+      "id": 7,
+      "name": "Desktop Packages",
+      "type": "package"
+    },
+    {
+      "id": 7,
+      "name": "Engineering Repos",
+      "type": "repository"
+    },
+    {
+      "id": 22,
+      "name": "One Month Removal",
+      "type": "removal"
+    }
+    {
+      "id": 4,
+      "name": "Server Packages",
+      "type": "package",
+    },
+  ],
+  "reboot_required_flag": false,
+  "secrets_name": null,
+  "tags": [
+    "lucid",
+    "server",
+    "webfarm"
+  ],
+  "title": "Application Server 1",
+  "total_memory": 1024,
+  "total_swap": 1024,
+  "ubuntu_pro_info": null,
+  "ubuntu_pro_reboot_required_info": null,
+  "update_manager_prompt": "normal",
+  "vm_info": null
+}
+```
 
 Example request:
 
