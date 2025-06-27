@@ -274,7 +274,6 @@ Query parameters:
 - `with_network`: If true, include the details of all network devices attached to the computer.
 - `with_profiles`: If true, include details about all profiles the computer is associated with.
 
-
 Example request:
 
 ```bash
