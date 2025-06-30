@@ -63,5 +63,5 @@ annotation:<key>:<value>
 
 You can also save this search to re-use it and check for any changes. 
 
-**Note**: Annotations and searching for keys and values are case-sensitive. Annotation search matches partial strings, so tracking state with keys such as "attached" and "unattached" would be problematic. Searching for "attached" would produce results with "unattached" computers mixed into the results, due to the word "attached" being a substring of "unattached".
+Note that annotations and searching for keys and values are case-sensitive. Annotation search is a basic text search that doesn't consider word boundaries. For example, using the keys "attached" and "unattached" would be problematic because searching for "attached" will also return results labeled as "unattached".
 
