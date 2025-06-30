@@ -11,3 +11,6 @@ manage-access-groups
 use-annotations
 manage-livepatch-and-kernel-updates
 sanitize-instances
+use-reboot-profiles
+use-script-profiles
+use-security-profiles

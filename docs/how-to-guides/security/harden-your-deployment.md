@@ -68,4 +68,4 @@ Ubuntu LTS releases with Ubuntu Pro can take advantage of the [Ubuntu Security G
 
 ## Harden Juju
 
-If you used Juju to deploy Landscape, you can follow [Juju's hardening guide](https://juju.is/docs/juju/harden-your-deployment) to harden the Juju aspects of your deployment.
+If you used Juju to deploy Landscape, you can follow [Juju's hardening guide](https://documentation.ubuntu.com/juju/3.6/howto/manage-your-deployment/#harden-your-deployment) to harden the Juju aspects of your deployment.
