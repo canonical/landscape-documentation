@@ -6,11 +6,11 @@
 :maxdepth: 2
 :glob:
 
-manage-administrators-and-roles
-manage-access-groups
-use-annotations
-manage-livepatch-and-kernel-updates
-sanitize-instances
-use-reboot-profiles
-use-script-profiles
-use-security-profiles
+Manage administrators and roles <manage-administrators-and-roles>
+Manage access groups <manage-access-groups>
+Use annotations <use-annotations>
+Manage Livepatch and kernel updates <manage-livepatch-and-kernel-updates>
+Sanitize instances <sanitize-instances>
+Use reboot profiles <use-reboot-profiles>
+Use script profiles <use-script-profiles>
+Use security profiles <use-security-profiles>

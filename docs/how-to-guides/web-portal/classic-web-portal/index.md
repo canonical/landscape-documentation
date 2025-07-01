@@ -6,9 +6,9 @@
 :maxdepth: 2
 :glob:
 
-manage-administrators-and-roles
-manage-access-groups
-manage-computers
-manage-packages
-manage-snaps
-other-tasks
+Manage administrators and roles <manage-administrators-and-roles>
+Manage access groups <manage-access-groups>
+Manage computers <manage-computers>
+Manage packages <manage-packages>
+Manage snaps <manage-snaps>
+Other tasks <other-tasks>
