@@ -134,9 +134,11 @@ Example output:
 
 ```json
 {
-    "computer_ids_reapplied_to": [6, 15],
-    "message": "Successfully created activities for 2 Windows computers to 
-    make them compliant with their WSL profile(s)."
+    "computer_ids_reapplied_to": [
+        6,
+        15
+    ],
+    "message": "Successfully created activities for 2 Windows computers to make them compliant with their WSL profile(s)."
 }
 
 ```
