@@ -1,5 +1,5 @@
 (reference-known-issues-index)=
-# Known Issues
+# Known issues
 
 ```{toctree}
 :titlesonly:
