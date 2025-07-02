@@ -315,22 +315,26 @@ Example response:
   "profiles": [
     {
       "id": 7,
-      "name": "Desktop Packages",
+      "name": "desktop-packages",
+      "title": "Desktop Packages",
       "type": "package"
     },
     {
       "id": 7,
-      "name": "Engineering Repos",
+      "name": "engineering-repos",
+      "title": "Engineering Repos",
       "type": "repository"
     },
     {
       "id": 22,
-      "name": "One Month Removal",
+      "name": "one-month-removal",
+      "title": "One Month Removal",
       "type": "removal"
     }
     {
       "id": 4,
-      "name": "Server Packages",
+      "name": "server-packages",
+      "title": "Server Packages",
       "type": "package",
     },
   ],
