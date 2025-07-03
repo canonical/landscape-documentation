@@ -6,6 +6,15 @@
 WSL features are in beta testing. The API endpoints below may not be available to all accounts.
 ```
 
+To enable WSL features in self-hosted Landscape, add:
+
+```bash
+[features]
+enable-wsl-child-instance-profiles = true
+```
+
+to the `service.conf` file.
+
 ## POST `/computers/<computer_id>/children`
 
 Creates an activity to install a WSL instance on a Windows host. The WSL instance will be managed in Landscape.

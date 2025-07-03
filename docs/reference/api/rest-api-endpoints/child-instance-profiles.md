@@ -6,6 +6,15 @@
 Child Instance Profiles are in beta testing. The API endpoints below may not be available to all accounts.
 ```
 
+To enable WSL features in self-hosted Landscape, add:
+
+```bash
+[features]
+enable-wsl-child-instance-profiles = true
+```
+
+to the `service.conf` file.
+
 ## GET `/child-instance-profile-types`
 
 Returns a list of the child instance profile types supported by Landscape. Currently, only WSL Child Instance Profiles are supported.
