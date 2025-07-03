@@ -22,6 +22,9 @@ grpc.max_connection_age_ms = 2592000000  # 30 days
 [hostagent-message-consumer]
 threads = 1
 stores = main account-1
+
+[features]
+enable-wsl-child-instance-profiles = true
 ```
 
 ## Update your Apache config
@@ -52,8 +55,8 @@ Listen 6554
   # directive. Try using SSLCACertificateFile instead
   # SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt
  
-  ProxyPass / h2c://localhost:50051/
-  ProxyPassReverse / http://localhost:50051/
+  ProxyPass / h2c://localhost:50052/
+  ProxyPassReverse / http://localhost:50052/
 </VirtualHost>
 ```
 

@@ -497,8 +497,8 @@ Listen 6554
   # directive. Try using SSLCACertificateFile instead
   # SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt
  
-  ProxyPass / h2c://localhost:50051/
-  ProxyPassReverse / http://localhost:50051/
+  ProxyPass / h2c://localhost:50052/
+  ProxyPassReverse / http://localhost:50052/
 </VirtualHost>
 ```
 We now need to enable some modules:
