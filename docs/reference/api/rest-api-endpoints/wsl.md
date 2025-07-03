@@ -26,10 +26,7 @@ Required parameters:
 Example requests:
 
 ```sh
-curl -X POST http://your-landscape.domain.com/child-instance-profiles/make-hosts-compliant \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $JWT" \
-    -d '{"host_computer_ids": [6, 15]}'
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/make-hosts-compliant -H "Authorization: Bearer $JWT" -d '{"host_computer_ids": [6, 15]}'
 ```
 
 Example output:
@@ -42,7 +39,6 @@ Example output:
     ],
     "message": "Successfully created activities for 2 Windows computers to make them compliant with their WSL profile(s)."
 }
-
 ```
 
 ## POST `/computers/<computer_id>/children`
