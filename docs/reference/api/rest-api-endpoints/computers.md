@@ -37,6 +37,7 @@ Query parameters:
 - `with_network`: If true, include the details of all network devices attached to the computer.
 - `with_hardware`: If true, include the details of all hardware information known.
 - `with_annotations`: If true, include the details of all custom annotation information known.
+- `with_wsl_profiles`: If true, include WSL profiles associated with Windows computers. Defaults to false.
 
 Example request:
 
@@ -165,7 +166,7 @@ Example output:
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers/?query=profile:wsl:1:compliant -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.canonical.com/api/v2/computers/?query=profile:wsl:1:compliant&with_wsl_profiles=true -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
@@ -250,7 +251,21 @@ Example output:
           "is_wsl_instance": true
         }
       ],
-      "parent": null
+      "parent": null,
+      "wsl_profiles": [
+        {
+          "id": 1,
+          "name": "Bionic WSL",
+          "title": "Bionic Profile",
+          "type": "wsl"
+        },
+        {
+          "id": 2,
+          "name": "Focal WSL",
+          "title": "Focal Profile",
+          "type": "wsl"
+        }
+      ]
     }
   ],
   "next": null,
