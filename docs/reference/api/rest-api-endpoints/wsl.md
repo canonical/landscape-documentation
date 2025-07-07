@@ -320,7 +320,7 @@ Get the limits for WSL related features for the account.
 
 Path parameters:
 
-- `name`: The name of the account
+- None
 
 Required parameters:
 
