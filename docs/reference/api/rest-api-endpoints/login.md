@@ -81,7 +81,6 @@ curl -X POST "https://landscape.canonical.com/api/v2/login/access-key" \
     "current_account": "onward",
     "email": "john@example.com",
     "name": "John Smith",
-    "self_hosted": false,
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjUwMzkyNzYsImlhdCI6MTcyNDk1Mjg3Niwic3ViIjoiam9obkBleGFtcGxlLmNvbSIsImFjYyI6Im9ud2FyZCIsImlkIjoxfQ.8rWW_GN1jRzKownpg4k1Zp4iZMmn_lfLjy0cX-DLh_g"
 }
 ```
