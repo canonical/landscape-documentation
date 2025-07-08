@@ -41,6 +41,119 @@ Example output:
 }
 ```
 
+## GET `/computers/<int:computer_id>/children`
+
+Get information about the WSL instances associated with the computer.
+
+Path parameters:
+
+- `computer_id`: The ID assigned to a specific computer.
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/23/children" -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+[
+    {
+        "name": "WSL instance created via WSL profile, installed, registered",
+        "computer_id": 5,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "compliant",
+        "profile": "WSL Profile 1",
+        "is_running": true,
+        "installed": true,
+        "registered": true,
+        "default": true,
+    },
+    {
+        "name": "WSL instance associated with profile, not installed, installation in progress",
+        "computer_id": null,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "uninstalled",
+        "profile": "WSL Profile 2",
+        "is_running": false,
+        "installed": false,
+        "registered": false,
+        "default": null
+    },
+    {
+        "name": "WSL instance associated with profile, installed, registration in progress",
+        "computer_id": null,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "unregistered",
+        "profile": "WSL Profile 3",
+        "is_running": false,
+        "installed": true,
+        "registered": false,
+        "default": null
+    },
+    {
+        "name": "WSL instance associated with profile, not installed, installation not in progress",
+        "computer_id": null,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "noncompliant",
+        "profile": "WSL Profile 4",
+        "is_running": false,
+        "installed": false,
+        "registered": false,
+        "default": null
+    },
+    {
+        "name": "WSL instance not created via Landscape, not conflicting with any profile",
+        "computer_id": null,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "compliant",
+        "profile": null,
+        "is_running": false,
+        "installed": true,
+        "registered": false,
+        "default": false
+    },
+    {
+        "name": "WSL instance not created via Landscape, conflicting with a profile",
+        "computer_id": null,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "noncompliant",
+        "profile": "WSL Profile 2",
+        "is_running": false,
+        "installed": true,
+        "registered": false,
+        "default": false
+    },
+    {
+        "name": "WSL instance created via Landscape without a WSL profile, registered, not conflicting with any profile",
+        "computer_id": 6,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "compliant",
+        "profile": null,
+        "is_running": false,
+        "installed": true,
+        "registered": true,
+        "default": false
+    },
+    {
+        "name": "WSL instance created via Landscape without a WSL profile, registered, conflicting with any profile",
+        "computer_id": 7,
+        "version_id": "Ubuntu 22.04",
+        "compliance": "noncompliant",
+        "profile": "WSL Profile 1",
+        "is_running": false,
+        "installed": true,
+        "registered": true,
+        "default": false
+    }
+]
+```
+
 ## POST `/computers/<computer_id>/children`
 
 Creates an activity to install a WSL instance on a Windows host. The WSL instance will be managed in Landscape.

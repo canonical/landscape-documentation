@@ -860,74 +860,6 @@ Example output:
 }
 ```
 
-## GET `/computers/activities`
-
-Get details of the activities for specified computer(s).
-
-Path parameters:
-
-- None
-
-Query parameters:
-
-- (Required) `computer_ids`: An ID assigned to a specific computer.
-- `limit`: The maximum number of results returned by the method. It defaults to 1000.
-- `offset`: The offset inside the list of results.
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1" -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-
-```json
-{
-  "count": 26,
-  "results": [
-    {
-      "id": 143,
-      "creation_time": "2024-03-01T20:58:14Z",
-      "creator": {
-        "name": "John Smith",
-        "email": "john@example.com",
-        "id": 1
-      },
-      "type": "ChangePackagesRequest",
-      "summary": "Remove package abs-guide",
-      "result_text": null,
-      "computer_id": 1,
-      "approval_time": null,
-      "delivery_time": null,
-      "deliver_after_time": null,
-      "deliver_before_time": null,
-      "package_ids": [
-        73
-      ],
-      "changes": [
-        {
-          "package": "abs-guide",
-          "complemented": false,
-          "type": "remove",
-          "version": "10-3"
-        }
-      ],
-      "parent_id": 142,
-      "modification_time": "2024-03-01T20:58:14Z",
-      "completion_time": null,
-      "schedule_before_time": null,
-      "schedule_after_time": null,
-      "result_code": null,
-      "activity_status": "undelivered",
-      "children": []
-    }
-  ],
-  "next": "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1&offset=1",
-  "previous": null
-}
-```
-
 ## GET `/computers/<int:computer_id>/groups`
 
 Get all user groups for the provided computer ID.
@@ -989,6 +921,102 @@ Example output:
   ],
   "next": "https://landscape.canonical.com/api/v2/computers/23/packages?limit=2&offset=2",
   "previous": null
+}
+```
+
+## GET `/computers/<int:computer_id>/processes`
+
+Gets the active processes for the computer.
+
+Path parameters:
+
+- `computer_id`: An ID assigned to a specific computer.
+
+Query parameters:
+
+- `limit`: The maximum number of results returned by the method. It defaults to 1000.
+- `offset`: The offset inside the list of results.
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2" -H "Authorization: Bearer $JWT"
+```
+
+Example output:
+
+```json
+{
+  "count": 84,
+  "results": [
+    {
+      "id": 2551,
+      "computer_id": 22,
+      "pid": 1525,
+      "gid": 1000,
+      "name": "(sd-pam)",
+      "state": "S",
+      "start_time": "2024-02-07T20:26:55Z",
+      "vm_size": 104024,
+      "cpu_utilisation": 0
+    },
+    {
+      "id": 2552,
+      "computer_id": 22,
+      "pid": 1530,
+      "gid": 1000,
+      "name": "-bash",
+      "state": "S",
+      "start_time": "2024-02-07T20:26:55Z",
+      "vm_size": 10032,
+      "cpu_utilisation": 0
+    }
+  ],
+  "next": "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2&offset=2",
+  "previous": null
+}
+```
+
+## POST `/computers/<int:computer_id>/restart`
+
+Restarts the specified computer
+
+Path parameters:
+
+- `computer_id`: An ID assigned to a specific computer.
+
+Optional query parameters:
+
+- `deliver_after`: A time in the future to deliver the reboot activity
+- `deliver_delay_window`: Randomize delivery within the given time frame (minutes)
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/computers/29/restart" \
+  -H "Authorization: Bearer $JWT" \
+```
+
+Example response:
+
+```json
+{
+  "activity_status": "undelivered",
+  "approval_time": null,
+  "completion_time": null,
+  "creation_time": "2024-11-22T00:01:18Z",
+  "creator": {
+    "email": "john@example.com",
+    "id": 1,
+    "name": "John Smith"
+  },
+  "deliver_delay_window": 0,
+  "id": 2225,
+  "parent_id": null,
+  "result_code": null,
+  "result_text": null,
+  "summary": "Restart computer",
+  "type": "ActivityGroup"
 }
 ```
 
@@ -1055,99 +1083,6 @@ Example output:
 }
 ```
 
-## GET `/computers/<int:computer_id>/users/<string:username>/groups`
-
-Get all the groups for the provided username on the given computer ID.
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-- `username`: The username of the account.
-
-Query parameters:
-
-- None
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/ubuntu/groups" -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-
-```json
-{
-  "groups": [
-    {
-      "id": 1020,
-      "computer_id": 22,
-      "gid": 4,
-      "name": "adm"
-    },
-    {
-      "id": 1022,
-      "computer_id": 22,
-      "gid": 29,
-      "name": "audio"
-    },
-  ]
-}
-```
-
-## GET `/computers/<int:computer_id>/processes`
-
-Gets the active processes for the computer.
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-
-Query parameters:
-
-- `limit`: The maximum number of results returned by the method. It defaults to 1000.
-- `offset`: The offset inside the list of results.
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2" -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-
-```json
-{
-  "count": 84,
-  "results": [
-    {
-      "id": 2551,
-      "computer_id": 22,
-      "pid": 1525,
-      "gid": 1000,
-      "name": "(sd-pam)",
-      "state": "S",
-      "start_time": "2024-02-07T20:26:55Z",
-      "vm_size": 104024,
-      "cpu_utilisation": 0
-    },
-    {
-      "id": 2552,
-      "computer_id": 22,
-      "pid": 1530,
-      "gid": 1000,
-      "name": "-bash",
-      "state": "S",
-      "start_time": "2024-02-07T20:26:55Z",
-      "vm_size": 10032,
-      "cpu_utilisation": 0
-    }
-  ],
-  "next": "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2&offset=2",
-  "previous": null
-}
-```
-
 ## POST `/computers/<int:computer_id>/usergroups/update_bulk`
 
 Update all the groups for the provided username on the given computer ID.
@@ -1194,45 +1129,110 @@ Example output:
 }
 ```
 
-## POST `/computers/<computer_id>/restart`
+## GET `/computers/<int:computer_id>/users/<string:username>/groups`
 
-Restarts the specified computer
+Get all the groups for the provided username on the given computer ID.
 
 Path parameters:
 
 - `computer_id`: An ID assigned to a specific computer.
+- `username`: The username of the account.
 
-Optional query parameters:
+Query parameters:
 
-- `deliver_after`: A time in the future to deliver the reboot activity
-- `deliver_delay_window`: Randomize delivery within the given time frame (minutes)
+- None
 
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/restart" \
-  -H "Authorization: Bearer $JWT" \
+curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/ubuntu/groups" -H "Authorization: Bearer $JWT"
 ```
 
-Example response:
+Example output:
 
 ```json
 {
-  "activity_status": "undelivered",
-  "approval_time": null,
-  "completion_time": null,
-  "creation_time": "2024-11-22T00:01:18Z",
-  "creator": {
-    "email": "john@example.com",
-    "id": 1,
-    "name": "John Smith"
-  },
-  "deliver_delay_window": 0,
-  "id": 2225,
-  "parent_id": null,
-  "result_code": null,
-  "result_text": null,
-  "summary": "Restart computer",
-  "type": "ActivityGroup"
+  "groups": [
+    {
+      "id": 1020,
+      "computer_id": 22,
+      "gid": 4,
+      "name": "adm"
+    },
+    {
+      "id": 1022,
+      "computer_id": 22,
+      "gid": 29,
+      "name": "audio"
+    },
+  ]
+}
+```
+
+## GET `/computers/activities`
+
+Get details of the activities for specified computer(s).
+
+Path parameters:
+
+- None
+
+Query parameters:
+
+- (Required) `computer_ids`: An ID assigned to a specific computer.
+- `limit`: The maximum number of results returned by the method. It defaults to 1000.
+- `offset`: The offset inside the list of results.
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1" -H "Authorization: Bearer $JWT"
+```
+
+Example output:
+
+```json
+{
+  "count": 26,
+  "results": [
+    {
+      "id": 143,
+      "creation_time": "2024-03-01T20:58:14Z",
+      "creator": {
+        "name": "John Smith",
+        "email": "john@example.com",
+        "id": 1
+      },
+      "type": "ChangePackagesRequest",
+      "summary": "Remove package abs-guide",
+      "result_text": null,
+      "computer_id": 1,
+      "approval_time": null,
+      "delivery_time": null,
+      "deliver_after_time": null,
+      "deliver_before_time": null,
+      "package_ids": [
+        73
+      ],
+      "changes": [
+        {
+          "package": "abs-guide",
+          "complemented": false,
+          "type": "remove",
+          "version": "10-3"
+        }
+      ],
+      "parent_id": 142,
+      "modification_time": "2024-03-01T20:58:14Z",
+      "completion_time": null,
+      "schedule_before_time": null,
+      "schedule_after_time": null,
+      "result_code": null,
+      "activity_status": "undelivered",
+      "children": []
+    }
+  ],
+  "next": "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1&offset=1",
+  "previous": null
 }
 ```
