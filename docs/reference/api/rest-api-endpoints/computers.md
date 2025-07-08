@@ -373,7 +373,7 @@ Example response:
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_grouped_hardware=true -H "Authorization: Bearer $JWT" 
+curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_grouped_hardware=true&with_annotations=true -H "Authorization: Bearer $JWT" 
 ```
 
 Example output:
@@ -387,6 +387,7 @@ Example output:
   "total_memory": 1024,
   "total_swap": 1024,
   "reboot_required_flag": false,
+  "registered_at": "2024-07-10T22:22:16Z",
   "update_manager_prompt": "normal",
   "clone_id": null,
   "secrets_name": null,
@@ -397,6 +398,9 @@ Example output:
     "server",
     "webfarm"
   ],
+  "annotations": {
+    "code": "Ymv1YjUL"
+  },
   "access_group": "server",
   "distribution": "10.04",
   "cloud_instance_metadata": {},
