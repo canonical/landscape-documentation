@@ -57,7 +57,7 @@ Authenticates an SSO user, returning user details and an authentication token.
 **Example request:**
 
 ```bash
-curl -X POST http://localhost:9091/v2/login/access-key \
+curl -X POST "https://landscape.canonical.com/api/v2/login/access-key" \
 -H "Content-Type: application/json" \
 -d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
 ```
