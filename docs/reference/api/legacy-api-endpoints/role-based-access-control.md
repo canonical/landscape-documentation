@@ -437,7 +437,7 @@ For example, the following request removes a role named ‘MyRole’:
 ?action=RemoveRole&name=MyRole
 ```
 
-An empty response is returned is the role is successfuly removed:
+An empty response is returned is the role is successfully removed:
 
 ```text
 {}
