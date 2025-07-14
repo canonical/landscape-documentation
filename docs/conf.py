@@ -139,7 +139,8 @@ linkcheck_ignore = [
     "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html",
     "https://wiki.ubuntu.com/Membership",
     "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
-    "https://ubuntu.com/aws#get-in-touch"
+    "https://ubuntu.com/aws#get-in-touch",
+    "http://nfs.sourceforge.net/#faq_d2"
 ]
 
 
@@ -288,5 +289,6 @@ redirects = {
     'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
     'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure',
     'how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment': '../../repository-mirrors/manage-repositories-in-an-air-gapped-or-offline-environment',
-    'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment'
+    'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment',
+    'getting-started-with-landscape': '/tutorial'
 }
