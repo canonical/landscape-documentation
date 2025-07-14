@@ -143,7 +143,7 @@ Create a new script.
 For example, the following request creates a new script:
 
 ```text
-?action=CreateScript&title=Example&interepreter=python&time_limit=200&code=aGVsbG8=
+?action=CreateScript&title=Example&interpreter=python&time_limit=200&code=aGVsbG8=
 ```
 
 The following errors may be raised:
@@ -191,7 +191,7 @@ Edit an existing script.
 For example, the following request edits the script with ID 2:
 
 ```text
-?action=EditScript&script_id=2&title=NewTitle&interepreter=newpython
+?action=EditScript&script_id=2&title=NewTitle&interpreter=newpython
     &time_limit=999&username=foo&code=aGVsbG8
 ```
 
@@ -306,7 +306,7 @@ The following errors may be raised:
 - `DuplicateScriptAttachment`: An attachment with the same name already exists for the given script.
 - `UnknownScriptAttachment`: An attachment with the specified filename could not be found in this script.
 - `TooManyScriptAttachments`: The script you wish the attachment to belong to already has the maximum allowed number of scripts.
-- `ScriptAttachmentSize`: The maximum allowed size for attachments is already reached, or would be reached should the creation have occured.
+- `ScriptAttachmentSize`: The maximum allowed size for attachments is already reached, or would be reached should the creation have occurred.
 - `Unauthorised`: The user doesn’t have permission to create the attachment.
 
 For example, the following request creates an attachment named “foo.txt” containing “hello”:
