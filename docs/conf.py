@@ -70,7 +70,6 @@ ogp_site_name = project
 ogp_image = \
     "https://assets.ubuntu.com/v1/253da317-image-document-ubuntudocs.svg"
 
-
 # Product favicon; shown in bookmarks, browser tabs, etc. - can set custom one here
 # html_favicon = '.sphinx/_static/favicon.png'
 
@@ -123,7 +122,6 @@ html_context = {
 
 html_static_path = [".sphinx/_static"]
 templates_path = [".sphinx/_templates"]
-
 
 ###########################
 # Link checker exceptions #
@@ -203,12 +201,13 @@ exclude_patterns = [
 
 html_css_files = [
     "css/pdf.css",
+    "css/cookie-banner.css"
 ]
 
-
 # Adds custom JavaScript files, located under 'html_static_path'
-# html_js_files = []
-
+html_js_files = [
+    "js/bundle.js"
+ ]
 
 # Specifies a reST snippet to be appended to each .rst file
 rst_epilog = """
