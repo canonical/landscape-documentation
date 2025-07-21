@@ -30,14 +30,23 @@ Query parameters:
   - `profile:<profile-type>:<profile-id>`: Instances associated with the specified profile. The `<profile-type>` must be one of `security`, `script`, `repository`, `package`, `upgrade`, `reboot`, `removal`, or `wsl`. The `<profile-id>` is the database id of the profile.
   - `profile:security:<profile-id>:<status>`: Instances associated with the specified USG security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
   - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
-  - `OR`: Search for computers matching term A or term B. `OR` must be in all-caps.
-  - `NOT`: search for computers not matching the next term. `NOT` must be in all-caps.
+  - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
+  - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
-- `with_network`: If true, include the details of all network devices attached to the computer.
-- `with_hardware`: If true, include the details of all hardware information known.
-- `with_annotations`: If true, include the details of all custom annotation information known.
+- `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.
+- `with_upgrades`: If true, includes how many regular and security upgrades that computer has. Defaults to false.
+- `with_reboot_packages`: Show packages needing reboot. Defaults to false.
+- `with_network`: If true, include the details of all network devices attached to the computer. Defaults to false.
+- `with_all_network`: If true, include the details of all active and inactive network devices attached to the computer. Defaults to false.
+- `with_hardware`: If true, include the details of all hardware information known. Defaults to false.
+- `with_annotations`: If true, include the details of all custom annotation information known. Defaults to false.
+- `with_grouped_hardware`: If true, include the details of all known hardware information grouped by device category. Defaults to false.
 - `with_wsl_profiles`: If true, include WSL profiles associated with Windows computers. Defaults to false.
+- `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
+- `root_only`: Whether or not to include only the root member of a computer family tree. Defaults to true. If false, all computers will be included.
+- `wsl_parents`: If true, restrict the result to WSL parent instances (i.e. Windows machines). This parameter can be used in conjunction with the `wsl_children` parameter. Defaults to false (no additional filtering).
+- `wsl_children`: If true, restrict the result to WSL child instances. This parameter can be used in conjunction with the `wsl_parents` parameter. This parameter requires the `root_only` flag be set to false. Defaults to false (no additional filtering).
 
 Example request:
 
