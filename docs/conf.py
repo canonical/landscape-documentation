@@ -139,7 +139,8 @@ linkcheck_ignore = [
     "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html",
     "https://wiki.ubuntu.com/Membership",
     "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
-    "https://ubuntu.com/aws#get-in-touch"
+    "https://ubuntu.com/aws#get-in-touch",
+    "http://nfs.sourceforge.net/#faq_d2"
 ]
 
 
