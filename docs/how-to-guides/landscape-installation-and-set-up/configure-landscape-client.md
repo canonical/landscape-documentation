@@ -96,6 +96,29 @@ sudo service landscape-client restart
 ```
 Setting `script_users = ALL` (or passing `ALL` to the `--script-users` parameter of `landscape-config`) will allow any system user to run scripts. If `script_users` is not set, then scripts can only be run by the `nobody` user.
 
+Landscape will default to using `/tmp` as a working directory for script execution.
+If you'd like to use a different directory, you can set `script_tempdir`:
+
+```ini
+[client]
+...
+script_tempdir = /var/custom-tempdir
+```
+
+Landscape will use the `script_tempdir` and when creating scripts and script attachments.
+You will need to ensure that whichever user you run scripts as has write and execute privileges on the directories.
+
+```sh
+mkdir -p /var/custom-tempdir
+
+# all users
+sudo chmod 777 /var/custom-tempdir
+
+# Or, only the landscape user
+sudo chown landscape:landscape
+sudo chmod 700 /var/custom-tempdir
+```
+
 ## Landscape clients with configuration management tools
 
 If you want to manage `landscape-client` through a configuration management tool such as Puppet or Ansible, you can avoid getting duplicate computers by writing the `/etc/landscape/client.conf` and `/etc/default/landscape-client` files, and then restarting the `landscape-client` service.
