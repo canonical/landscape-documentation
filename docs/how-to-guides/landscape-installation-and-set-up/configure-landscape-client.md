@@ -105,8 +105,8 @@ If you'd like to use a different directory, you can set `script_tempdir`:
 script_tempdir = /var/custom-tempdir
 ```
 
-Landscape will use the `script_tempdir` and when creating scripts and script attachments.
-You will need to ensure that whichever user you run scripts as has write and execute privileges on the directories.
+Landscape will use the `script_tempdir` when creating scripts and script attachments.
+You will need to ensure that whichever user you run scripts as has write and execute privileges on the directory.
 
 ```sh
 mkdir -p /var/custom-tempdir
