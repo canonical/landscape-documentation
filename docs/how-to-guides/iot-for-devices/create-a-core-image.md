@@ -41,8 +41,8 @@ You can use a text editor to edit these properties. Your model file will be simi
     "series": "16",
     "model": "ubuntu-core-22-pi-arm64",
     "architecture": "arm64",
-    "authority-id": "(DEVELOPER_ID}",
-    "brand-id": "(DEVELOPER_ID}",
+    "authority-id": "{DEVELOPER_ID}",
+    "brand-id": "{DEVELOPER_ID}",
     "timestamp": "2022-04-04T10:40:41+00:00",
     "base": "core22",
     "grade": "signed",
@@ -83,9 +83,9 @@ Now, add an additional record in the `snaps` array for the Landscape Client snap
 ```json
         {
             "name": "landscape-client",
-				      "type": "app",
-			      "default-channel": "latest/beta",
-			      "id": "ffnH0sJpX3NFAclH777M8BdXIWpo93af"
+            "type": "app",
+            "default-channel": "latest/stable",
+            "id": "ffnH0sJpX3NFAclH777M8BdXIWpo93af"
         }
 ```
 
@@ -112,8 +112,8 @@ To create and configure your gadget snap:
       # landscape client
       ffnH0sJpX3NFAclH777M8BdXIWpo93af:
         landscape-url: {LANDSCAPE_ACCOUNT_URL}
-        account-name: (ACCOUNT_NAME)
-        registration-key: "(REGISTRATION_KEY)"
+        account-name: {ACCOUNT_NAME}
+        registration-key: "{REGISTRATION_KEY}"
         auto-register:
           enabled: true
           computer-title-pattern: test-${model:7}-${serial:0:8}
@@ -122,9 +122,9 @@ To create and configure your gadget snap:
     
     Replacing the following values with the relevant configuration values:
     
-    - `{LANDSCAPE_ACCOUNT_URL}`: The full URL of your Landscape account.
-    - `(ACCOUNT_NAME)`: Self-hosted Landscape users should set this to `standalone`.
-    - `(REGISTRATION_KEY)`: Your registration key.
+    - `{LANDSCAPE_ACCOUNT_URL}`: The full URL of your Landscape account. Canonical’s Landscape URL is https://landscape.canonical.com
+    - `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`.
+    - `{REGISTRATION_KEY}`: Your registration key.
     
     Now, you’ve finished configuring the details of your Landscape server instance. In the `auto-register` section, you’ll likely want to change `computer-title-pattern` to your preferred method of identifying devices. For more information on these parameters, see {ref}`header-explanation-auto-reg-process-gadget-snap` located in this guide.
     
@@ -222,8 +222,8 @@ defaults:
   # landscape client
   ffnH0sJpX3NFAclH777M8BdXIWpo93af:
     landscape-url: {LANDSCAPE_ACCOUNT_URL}
-    account-name: (ACCOUNT_NAME)
-    registration-key: "(REGISTRATION_KEY)"
+    account-name: {ACCOUNT_NAME}
+    registration-key: "{REGISTRATION_KEY}"
     auto-register:
       enabled: true
       computer-title-pattern: test-${model:7}-${serial:0:8}
