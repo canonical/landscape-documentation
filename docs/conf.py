@@ -101,7 +101,7 @@ html_context = {
     # Docs branch in the repo; used in links for viewing the source files
     # 'github_version': 'main',
     # Docs location in the repo; used in links for viewing the source files
-    "github_folder": "/docs/",
+    "repo_folder": "/docs/",
 
     # To enable or disable the Previous / Next buttons at the bottom of pages
     # Valid options: none, prev, next, both
@@ -109,6 +109,8 @@ html_context = {
 
     # Enabling GH issues so the feedback button shows up
     'github_issues': 'enabled',
+
+    "repo_default_branch": "main",
 }
 
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
@@ -134,6 +136,7 @@ linkcheck_ignore = [
     "https://github.com/canonical/landscape-documentation/*",
     "https://ubuntu.com/pro/dashboard",
     "https://support.canonical.com/",
+    "https://support-portal.canonical.com/",
     "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html",
     "https://wiki.ubuntu.com/Membership",
     "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
