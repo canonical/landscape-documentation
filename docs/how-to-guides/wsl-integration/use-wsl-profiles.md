@@ -55,13 +55,17 @@ curl -X POST https://your-landscape.domain.com/api/v2/child-instance-profiles/Ja
 
 You can apply all WSL profiles that are associated to a Windows host machine from the Landscape web portal. To do this:
 
-1. Find the Windows machine that you want to apply WSL profiles. This can be found by clicking the link under **Associated Parents** in the **WSL profiles** page or by going to the **Computers** page.
+1. Find the Windows machine that you want to apply WSL profiles. This can be found by clicking the link under **Associated parents** in the **WSL profiles** page or by going to the **Instances** page.
 2. Click the name of the Windows machine that you want to make compliant.
 3. Click on the **WSL** tab.
 4. Click on **Make Compliant**
-5. Type "make {the name of your Windows host machine}"
+5. Type "make {the name of your Windows host machine} compliant"
 
 This will create activities to provision WSL instances on specified Windows host machines for all associated WSL profiles.
+
+```{note}
+The **Make compliant** button will be hidden if the Windows machine has no associated WSL profiles.
+```
 
 ## Apply all WSL profiles by Windows host machine using the Landscape API
 
