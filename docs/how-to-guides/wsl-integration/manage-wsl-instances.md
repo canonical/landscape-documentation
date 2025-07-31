@@ -108,5 +108,5 @@ This feature is currently in beta.
 
 You can use child instance profiles to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images at scale. These WSL instances can be configured with cloud-init at the time of provisioning.
 
-For the available endpoints and example requests, see our {ref}`reference-rest-api-beta-only`.
+For more information, see {ref}`how-to-use-child-instance-profiles`.
 
