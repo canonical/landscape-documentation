@@ -100,13 +100,13 @@ landscape-api delete-child-computers 21,34
 
 Removing a WSL instance from its Windows host machine will also remove the associated WSL instance from Landscape.
 
-## Use child instance profiles
+## Use WSL profiles
 
 ```{note}
 This feature is currently in beta.
 ```
 
-You can use child instance profiles to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images at scale. These WSL instances can be configured with cloud-init at the time of provisioning.
+You can use WSL profiles to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images at scale. These WSL instances can be configured with cloud-init at the time of provisioning.
 
-For more information, see {ref}`how-to-use-child-instance-profiles`.
+For more information, see {ref}`how-to-use-wsl-profiles`.
 

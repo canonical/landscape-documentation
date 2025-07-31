@@ -115,6 +115,7 @@ Optional parameters:
 
 - `image_source`: The URL or file path for the rootfs image.
 - `cloud_init_contents`: The base64-encoded cloud init file contents.
+- `only_landscape_created`: If true, this profile will delete WSL instances that were not created by Landscape from the associated Windows host machines; defaults to false.
 - `access_group`: Name of the access group the profile applies to; defaults to Global Access.
 - `tags`: A list of tag names to associate with the profile.
 - `all_computers`: If true, this profile will be associated with all computers; defaults to false.
