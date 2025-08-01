@@ -52,7 +52,7 @@ reST
 reStructuredText
 roadmap
 rootfs
-RootFS
+Rootfs
 RTD
 subdirectories
 subfolders
