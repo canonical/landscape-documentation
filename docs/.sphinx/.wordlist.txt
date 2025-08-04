@@ -51,6 +51,8 @@ ReadMe
 reST
 reStructuredText
 roadmap
+rootfs
+Rootfs
 RTD
 subdirectories
 subfolders
