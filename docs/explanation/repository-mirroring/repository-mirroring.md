@@ -5,7 +5,7 @@ Landscape uses repository mirroring to internally distribute software in Debian 
 
 You can use the repository mirroring feature in Landscape to mirror several publicly accessible repositories owned by Ubuntu, repositories owned by third parties or your own private repositories for distributing internal software. 
 
-Snaps can't be mirrored with Landscape. If you want to mirror snaps, use [Snap Store Proxy](https://docs.ubuntu.com/snap-store-proxy/en/).
+Snaps can't be mirrored with Landscape. If you want to mirror snaps, use [Enterprise Store](https://documentation.ubuntu.com/enterprise-store/main/).
 
 ## Repository mirror hierarchy
 
