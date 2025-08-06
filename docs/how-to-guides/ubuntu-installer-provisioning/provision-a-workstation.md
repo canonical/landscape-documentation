@@ -5,7 +5,6 @@ Recent releases of the Ubuntu installer (24.04+) can use Landscape to serve an a
 This is available on self-hosted and SaaS Landscape.
 On SaaS Landscape, your account must be hosted on a subdomain.
 Your Landscape administrator must have configured an OIDC login method.
-Currently, Google OAuth 2.0 is the only OIDC provider that this feature supports.
 
 ## In the Ubuntu installer
 
