@@ -15,32 +15,6 @@ enable-wsl-child-instance-profiles = true
 
 to the `service.conf` file.
 
-## POST `/child-instance-profiles/make-hosts-compliant`
-
-Make the given Windows host computers compliant with all of their WSL profiles by reapplying them if needed.
-
-Required parameters:
-
-- `host_computer_ids`: The list of IDs of Windows computers to make compliant with their WSL profiles.
-
-Example requests:
-
-```sh
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/make-hosts-compliant -H "Authorization: Bearer $JWT" -d '{"host_computer_ids": [6, 15]}'
-```
-
-Example output:
-
-```json
-{
-    "computer_ids_reapplied_to": [
-        6,
-        15
-    ],
-    "message": "Successfully created activities for 2 Windows computers to make them compliant with their WSL profile(s)."
-}
-```
-
 ## GET `/computers/<int:computer_id>/children`
 
 Get information about the WSL instances associated with the computer.
