@@ -16,9 +16,6 @@ Open the `service.conf` file located in the `/etc/landscape` directory and add t
 hostagent_virtual_host = landscape-hostagent
 hostagent_task_queue = landscape-server-hostagent-task-queue
 
-[grpc]
-grpc.max_connection_age_ms = 2592000000  # 30 days
-
 [hostagent-message-consumer]
 threads = 1
 stores = main account-1
@@ -88,4 +85,3 @@ sudo service landscape-hostagent-consumer restart
 ```
 
 Done! Now you're ready to use WSL with Landscape. If you want instructions on setting up your environment, see {ref}`how-to-wsl-set-up-environment`. If you already have a Windows machine set up with WSL and Ubuntu, see {ref}`how-to-register-wsl-hosts`.
-
