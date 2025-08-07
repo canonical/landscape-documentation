@@ -200,7 +200,11 @@ Section `[landscape]`:
 
 * Add an entry for `secret-token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`.
 
-If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names.
+If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names. For example, to only allow connections on localhost, you may have a configuration like the following:
+
+```bash
+allowed_interfaces  = localhost 127.0.0.1 ::1
+```
 
 ### Run the Landscape setup script
 
