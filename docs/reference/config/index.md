@@ -7,3 +7,4 @@
 :glob:
 
 immutable-settings
+service-conf
