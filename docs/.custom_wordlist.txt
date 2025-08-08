@@ -133,6 +133,7 @@ Livepatch
 Livepatches
 livepatching
 logfile
+localhost
 loopback
 LXC
 LXD
