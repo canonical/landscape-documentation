@@ -21,8 +21,8 @@ The following immutable configurations can be set in `service.conf` or through e
 | `LANDSCAPE_ROOT_URL` | `LANDSCAPE_SYSTEM__ROOT_URL` | `global` | `system` | `root-url` | `root_url` | `None` | The Landscape Server’s root URL path. HTTP requests are expected to be made to this path. |
 | `LANDSCAPE_TESTRUN` | `LANDSCAPE_TESTING__TESTRUN` | `N/A` | `testing` | `N/A` | `test_run` | `False` | If true, do not replace the importer with the import guardian to speed up the tests. |
 | `LANDSCAPE_TEST_RUNNER` | `LANDSCAPE_TESTING__TEST_RUNNER` | `N/A` | `testing` | `N/A` | `test_runner` | `trial` | The `twisted` test runner to use for the `trial` script in `/dev`. |
-| `VAULT_ADDR` | `LANDSCAPE_SECRETS__VAULT_URL` | `secrets` | `secrets` | `secrets-url` | `vault_url` | `None` | The URL to use for the secrets service. |
-| `VAULT_TOKEN` | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `secrets` | `secrets` | `secrets-service-url` | `secrets_service_url` | `None` | If provided through an environment variable, it’s expected to be the token itself. If set in `service.conf` it’s expected to be the URL of the secrets service to get the token from. |
+| `VAULT_ADDR` | `LANDSCAPE_SECRETS__VAULT_URL` | `secrets` | `secrets` | `secrets-url` | `vault_url` | `http://localhost:8200` | The address of the vault to use for the secrets service. |
+| `VAULT_TOKEN` | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `N/A` | `secrets` | `N/A` | `vault_token` | `None` | The token to use for the vault instead of getting it from the secrets service. |
 
 The following immutable configurations can be set through environment variables only:
 
