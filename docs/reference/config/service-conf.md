@@ -51,6 +51,22 @@ The `[async_frontend]` section contains configurations that apply to the `landsc
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
 
+## The `[broker]` section
+
+The `[broker]` section contains configurations that describe how services connect to our message queues.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `host` | - | `LANDSCAPE_BROKER__HOST` | `localhost` | The hostname or IP address of the message broker server. |
+| `hostagent_command_status_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_COMMAND_STATUS_QUEUE` | `landscape-server-hostagent-command-status-queue` | Queue for sending command status updates from the hostagent server to the hostagent consumer. |
+| `hostagent_ping_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_PING_QUEUE` | `landscape-server-hostagent-ping-queue` | Queue for sending pings from the hostagent server to the hostagent consumer. |
+| `hostagent_task_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_TASK_QUEUE` | `landscape-server-hostagent-task-queue` | Queue for sending tasks from the hostagent consumer to the hostagent server. |
+| `hostagent_virtual_host` | - | `LANDSCAPE_BROKER__HOSTAGENT_VIRTUAL_HOST` | `landscape-hostagent` | The virtual host of message queues for the hostagent message server and consumer. This provides support for Landscape integration with Ubuntu Pro for WSL. |
+| `password` | - | `LANDSCAPE_BROKER__PASSWORD` | `guest` | Password used to authenticate with the message broker. |
+| `port` | - | `LANDSCAPE_BROKER__PORT` | 5672 | Network port where message broker server is listening. |
+| `user` | - | `LANDSCAPE_BROKER__USER` | `guest` | Username used to authenticate with the message broker. |
+| `vhost` | - | `LANDSCAPE_BROKER__VHOST` | `landscape` | The virtual host namespace. |
+
 ## The `[job_handler]` section
 
 ```{note}
