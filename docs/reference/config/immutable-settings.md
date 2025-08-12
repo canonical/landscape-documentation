@@ -14,7 +14,7 @@ The following immutable configurations can be set in `service.conf` or through e
 | `LANDSCAPE_FQDN` | `LANDSCAPE_SYSTEM__FQDN` | `N/A` | `system` | `N/A` | `fqdn` | `None` | Sets the root URL using the FQDN. |
 | `LANDSCAPE_GPG_HOME` | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `N/A` | `system` | `N/A` | `gpg_home_dir` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
 | `LANDSCAPE_LICENSE_FILE` | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `N/A` | `system` | `N/A` | `license_file` | `/etc/landscape/license.txt` | The file path location of the license file. |
-| `LANDSCAPE_MESSAGE_URL` | `LANDSCAPE_SYSTEM__MESSAGE_URL` | `N/A` | `message_system` | `N/A` | `message_system_url` | The HTTP version of the root URL with `/message-system` appended.  | The message system URL to use |
+| `LANDSCAPE_MESSAGE_URL` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_URL` | `N/A` | `message_system` | `N/A` | `message_system_url` | The HTTP version of the root URL with `/message-system` appended.  | The message system URL to use. |
 | `LANDSCAPE_MIDDLEWARE` | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `N/A` | `system` | `N/A` | `middleware` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
 | `LANDSCAPE_OFFLINE` | `LANDSCAPE_FEATURES__ENABLE_OFFLINE` | `global` | `features` | `offline` | `enable_offline` | `False` | Whether offline mode is set or not (only relevant for standalone setups). |
 | `LANDSCAPE_QUERY_DEBUG` | `LANDSCAPE_OOPS__QUERY_DEBUG` | `N/A` | `oops` | `N/A` | `enable_query_debug` | `False` | Whether to enable query introspection and debugging middleware for Landscape or not. |

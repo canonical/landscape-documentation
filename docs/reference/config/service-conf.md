@@ -76,3 +76,20 @@ The `[job-handler]` section name is deprecated. The `[job_handler]` section repl
 The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond those shared by all services.
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
+
+## The `[message_server]` section
+
+```{note}
+The `[message-server]` section name is deprecated. The `[message_server]` section replaces the `[message-server]` section.
+```
+
+The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client.
+
+It has the following settings beyond those shared by all services.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `max_msg_size_bytes` | `max-msg-size-bytes` | `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES` | 30000000 (30 MB) | The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected. |
+| `message_snippet_bytes` | `message-snippet-bytes` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES` | 1000 | When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message. |
+| `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
+| `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
