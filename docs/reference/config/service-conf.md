@@ -94,6 +94,32 @@ It has the following settings beyond those shared by all services.
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
 | `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
 
+## The `[scripts]` section
+
+The `[scripts]` section contains configurations for the scripts service, including service operation settings, database store configurations, and SSL options.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
+| `base_port` | `base-port` | `LANDSCAPE_SCRIPTS__BASE_PORT` | `8090` | Base port number for the service. |
+| `devmode` | - | `LANDSCAPE_SCRIPTS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SCRIPTS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SCRIPTS__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SCRIPTS__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
+| `mailer` | - | `LANDSCAPE_SCRIPTS__MAILER` | `None` | Mailer service configuration. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_SCRIPTS__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
+| `oops_key` | `oops-key` | `LANDSCAPE_SCRIPTS__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SCRIPTS__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
+| `sslcert` | - | `LANDSCAPE_SCRIPTS__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_SCRIPTS__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_SCRIPTS__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_SCRIPTS__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_SCRIPTS__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_SCRIPTS__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_SCRIPTS__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_SCRIPTS__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_SCRIPTS__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[secrets]` section
 
 The `[secrets]` section contains configurations for the secrets service, including vault connection settings, service URLs, database store configurations, and SSL options.
