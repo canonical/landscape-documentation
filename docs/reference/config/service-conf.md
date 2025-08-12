@@ -43,6 +43,20 @@ The `[system]` section contains configurations that apply across many or all of 
 
 ## The `[async_frontend]` section
 
+```{note}
+The `[async-frontend]` section name is deprecated. The `[async_frontend]` section replaces the `[async-frontend]` section.
+```
+
 The `[async_frontend]` section contains configurations that apply to the `landscape-async-frontend` service which handles AJAX requests from the Legacy UI. It has no settings beyond those shared by all services.
+
+In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
+
+## The `[job_handler]` section
+
+```{note}
+The `[job-handler]` section name is deprecated. The `[job_handler]` section replaces the `[job-handler]` section.
+```
+
+The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond those shared by all services.
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
