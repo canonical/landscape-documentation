@@ -93,3 +93,29 @@ It has the following settings beyond those shared by all services.
 | `message_snippet_bytes` | `message-snippet-bytes` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES` | 1000 | When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message. |
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
 | `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
+
+## The `[stores]` section
+
+The `[stores]` section contains configurations for database store connections and SSL settings used across Landscape services.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `account_1` | `account-1` | `LANDSCAPE_STORES__ACCOUNT_1` | `landscape-standalone-account-1` | The first account database store name. |
+| `account_2` | `account-2` | `LANDSCAPE_STORES__ACCOUNT_2` | `None` | The second account database store name. Optional. |
+| `host` | - | `LANDSCAPE_STORES__HOST` | `localhost` | The hostname or IP address of the database server. |
+| `knowledge` | - | `LANDSCAPE_STORES__KNOWLEDGE` | `landscape-standalone-knowledge` | The knowledge database name. |
+| `main` | - | `LANDSCAPE_STORES__MAIN` | `landscape-standalone-main` | The main database name. |
+| `package` | - | `LANDSCAPE_STORES__PACKAGE` | `landscape-standalone-package` | The package database name. |
+| `password` | - | `LANDSCAPE_STORES__PASSWORD` | `None` | The password for database connections. |
+| `resource_1` | `resource-1` | `LANDSCAPE_STORES__RESOURCE_1` | `landscape-standalone-resource-1` | The first resource database name. |
+| `resource_2` | `resource-2` | `LANDSCAPE_STORES__RESOURCE_2` | `None` | The second resource database name. Optional and used for testing only. |
+| `session` | - | `LANDSCAPE_STORES__SESSION` | `landscape-standalone-session` | The session database name. |
+| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with {spellexception}`autocommit` isolation. |
+| `sslcert` | - | `LANDSCAPE_STORES__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_STORES__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_STORES__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_STORES__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_STORES__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_STORES__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_STORES__STORES` | `None` | The stores the service should use. |
+| `user` | - | `LANDSCAPE_STORES__USER` | `landscape` | The username for database connections. |
