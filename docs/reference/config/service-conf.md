@@ -94,6 +94,35 @@ It has the following settings beyond those shared by all services.
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
 | `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
 
+## The `[secrets]` section
+
+The `[secrets]` section contains configurations for the secrets service, including vault connection settings, service URLs, database store configurations, and SSL options.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
+| `base_port` | `base-port` | `LANDSCAPE_SECRETS__BASE_PORT` | `8090` | Base port number for the service. |
+| `devmode` | - | `LANDSCAPE_SECRETS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SECRETS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SECRETS__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SECRETS__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
+| `mailer` | - | `LANDSCAPE_SECRETS__MAILER` | `None` | Mailer service configuration. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_SECRETS__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
+| `oops_key` | `oops-key` | `LANDSCAPE_SECRETS__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `service_url` | `secrets-service-url` | `LANDSCAPE_SECRETS__SERVICE_URL` | `None` | The URL to use for the secrets service. Must include a port. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SECRETS__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
+| `sslcert` | - | `LANDSCAPE_SECRETS__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_SECRETS__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_SECRETS__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_SECRETS__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_SECRETS__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_SECRETS__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_SECRETS__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_SECRETS__THREADS` | `None` | Number of threads for the service. |
+| `vault_token` | - | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `None` | The token to use for the vault instead of getting it from the secrets service. |
+| `vault_url` | `secrets-url` | `LANDSCAPE_SECRETS__VAULT_URL` | `http://localhost:8200` | The address of the vault to use for the secrets service. |
+| `workers` | - | `LANDSCAPE_SECRETS__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[stores]` section
 
 The `[stores]` section contains configurations for database store connections and SSL settings used across Landscape services.
