@@ -1,7 +1,9 @@
 AArch
 AES
-ajax
+Agentless
+agentless
 airgapped
+ajax
 allowlist
 allowlists
 amongst
@@ -217,6 +219,7 @@ repo
 reprepro
 restorable
 RewriteRule
+RHEL
 rollout
 routable
 RSA
