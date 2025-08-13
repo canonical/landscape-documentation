@@ -77,6 +77,22 @@ The `[job_handler]` section contains configurations for the `landscape-job-handl
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
 
+## The `[maintenance]` section
+
+The `[maintenance]` section contains configurations for running maintenance scripts.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `sslcert` | - | `LANDSCAPE_MAINTENANCE__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_MAINTENANCE__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_MAINTENANCE__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_MAINTENANCE__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_MAINTENANCE__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_MAINTENANCE__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_MAINTENANCE__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_MAINTENANCE__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_MAINTENANCE__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[message_server]` section
 
 ```{note}
@@ -100,7 +116,7 @@ The `[scripts]` section contains configurations for the scripts service, includi
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
+| `allowed_interfaces` | - | `LANDSCAPE_SCRIPTS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
 | `base_port` | `base-port` | `LANDSCAPE_SCRIPTS__BASE_PORT` | `8090` | Base port number for the service. |
 | `devmode` | - | `LANDSCAPE_SCRIPTS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
 | `enable_metrics` | `enable-metrics` | `LANDSCAPE_SCRIPTS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
