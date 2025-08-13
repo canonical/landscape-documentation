@@ -17,7 +17,7 @@ Landscape and Ansible are both tools used in systems management, but they serve 
 | Feature/Aspect | Landscape | Ansible |
 | :--- | :--- | :--- |
 | **Main goal** | **Observe and manage state:** Continuously monitors the health, security, and compliance of your Ubuntu estate. | **Define and enforce state:** Configures servers to match a specific, desired state. |
-| **Agent** | **Agent-based:** Landscape Client is installed on each managed instance and provides real-time data and control. | **Agentless:** Uses SSH for on-demand connections to execute tasks. |
+| **Agent** | **Agent-based:** Landscape Client is installed on each managed instance and provides continuous status updates and control. | **Agentless:** Uses SSH for on-demand connections to execute tasks. |
 | **Focus** | **Ubuntu:** Integrated with the Ubuntu ecosystem, including all official repositories, security notices (USNs), Livepatch, and Ubuntu Pro. | **Cross-platform:** A general-purpose tool designed to work across a wide variety of operating systems. |
 | **User Interface** | **Web-based GUI and API:** Designed for interactive management via a web portal and integration via a REST API. | **CLI:** Executes playbooks (YAML files) from the command line. |
 
