@@ -83,12 +83,17 @@ In practice, only the `base_port` setting needs to be configured for the service
 The `[message-server]` section name is deprecated. The `[message_server]` section replaces the `[message-server]` section.
 ```
 
+```{note}
+The `[backoff]` section is deprecated. The settings have been moved to the `[message_server]` section.
+```
+
 The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client.
 
 It has the following settings beyond those shared by all services.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
+| `backoff_dir` | `backoff-dirpath` | `LANDSCAPE_MESSAGE_SERVER__BACKOFF_DIR` | `None` | The directory to hold the `backoff.txt` file the server uses to indicate it should back off requests. If `None`, a `config` directory within the `landscape` directory will be used. |
 | `max_msg_size_bytes` | `max-msg-size-bytes` | `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES` | 30000000 (30 MB) | The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected. |
 | `message_snippet_bytes` | `message-snippet-bytes` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES` | 1000 | When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message. |
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
