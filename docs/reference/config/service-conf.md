@@ -16,6 +16,35 @@ The usage of the `-` character in section names and key names is deprecated in L
 In addition, the names of some sections of the `service.conf` file are deprecated in Landscape Server 25.10. The new names are detailed below. Support for the deprecated names will be removed in Landscape Server 26.04.
 ```
 
+## The `[api]` section
+
+The `[api]` section contains configurations for the Landscape API service, including service connection settings and database store configurations.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `allowed_interfaces` | - | `LANDSCAPE_API__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
+| `base_port` | `base-port` | `LANDSCAPE_API__BASE_PORT` | `8090` | Base port number for the service. |
+| `cookie_encryption_key` | `cookie-encryption-key` | `LANDSCAPE_API__COOKIE_ENCRYPTION_KEY` | `None` | The key used to encrypt state and nonce cookies. |
+| `cors_allow_all` | `cors-allow-all` | `LANDSCAPE_API__CORS_ALLOW_ALL` | `False` | Whether to allow CORS. |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_API__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_API__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_API__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
+| `mailer` | - | `LANDSCAPE_API__MAILER` | `None` | Mailer service configuration. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_API__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
+| `oops_key` | `oops-key` | `LANDSCAPE_API__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `root_url` | `root-url` | `LANDSCAPE_API__ROOT_URL` | `None` | The API URL to use. |
+| `snap_store_api_url` | `snap-store-api-url` | `LANDSCAPE_API__SNAP_STORE_API_URL` | `https://api.snapcraft.io/v2` | The API for a Snap Store Proxy. By default, this is the Canonical Snap Store. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_API__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
+| `sslcert` | - | `LANDSCAPE_API__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_API__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_API__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_API__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_API__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_API__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_API__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_API__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_API__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[appserver]` section
 
 ```{note}
@@ -114,6 +143,29 @@ The `[job_handler]` section contains configurations for the `landscape-job-handl
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
 
+## The `[maintenance]` section
+
+The `[maintenance]` section contains configurations for running maintenance scripts.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_MAINTENANCE__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_MAINTENANCE__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_MAINTENANCE__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
+| `mailer` | - | `LANDSCAPE_MAINTENANCE__MAILER` | `None` | Mailer service configuration. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_MAINTENANCE__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
+| `oops_key` | `oops-key` | `LANDSCAPE_MAINTENANCE__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_MAINTENANCE__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
+| `sslcert` | - | `LANDSCAPE_MAINTENANCE__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_MAINTENANCE__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_MAINTENANCE__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_MAINTENANCE__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_MAINTENANCE__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_MAINTENANCE__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_MAINTENANCE__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_MAINTENANCE__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_MAINTENANCE__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[message_server]` section
 
 ```{note}
@@ -136,13 +188,29 @@ It has the following settings beyond those shared by all services.
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
 | `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
 
+## The `[schema]` section
+
+The `[schema]` section contains configurations for updating the database schema.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `sslcert` | - | `LANDSCAPE_SCHEMA__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_SCHEMA__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_SCHEMA__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_SCHEMA__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_SCHEMA__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_SCHEMA__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_SCHEMA__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_SCHEMA__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_SCHEMA__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[scripts]` section
 
 The `[scripts]` section contains configurations for the scripts service, including service operation settings, database store configurations, and SSL options.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
+| `allowed_interfaces` | - | `LANDSCAPE_SCRIPTS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
 | `base_port` | `base-port` | `LANDSCAPE_SCRIPTS__BASE_PORT` | `8090` | Base port number for the service. |
 | `devmode` | - | `LANDSCAPE_SCRIPTS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
 | `enable_metrics` | `enable-metrics` | `LANDSCAPE_SCRIPTS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
