@@ -9,6 +9,7 @@ This section includes technical information you may need to reference when using
 :glob:
 
 api/index
+config/index
 release-notes/index
 known-issues/index
 logs/index
