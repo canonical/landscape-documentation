@@ -61,7 +61,7 @@ Copy an existing package profile to a package profile with a new name.
 - `name`: A name of the existing package profile to copy.
 - `destination_name`: The profile name of the copied package profile. (optional)
 - `title`: The title of the copied package profile. By default the title of the source profile is used. (optional)
-- `description`: The descrption of the copied package profile. By default the descrption of the source profile is used. (optional)
+- `description`: The description of the copied package profile. By default the description of the source profile is used. (optional)
 - `access_group`: An optional name of the access group to copy the profile to. Defaults to the origin’s access group.
 
 For example, the following command copies the package profile ‘mysqlprofile’ to ‘copiedprofilename’ within registered with the account:

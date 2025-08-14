@@ -7,6 +7,12 @@ Once enabled, users will be required to authenticate with an Active Directory ac
 
 Note that this document is for integrating with [Microsoft's Active Directory](https://learn.microsoft.com/en-us/troubleshoot/windows-server/active-directory/active-directory-overview), not Microsoft Entra ID (formerly "Azure Active Directory").
 
+```{note}
+Landscape uses Active Directory only for authentication decisions.
+Landscape doesn't currently integrate with external roles, groups, or existing user metadata.
+You still need to invite users and assign their roles and permissions within Landscape.
+```
+
 ## Integrate Landscape with Active Directory
 
 To integrate Landscape with Active Directory:

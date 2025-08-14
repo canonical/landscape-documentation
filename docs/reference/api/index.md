@@ -6,5 +6,5 @@
 :maxdepth: 2
 :glob:
 
-rest-api-endpoints/index
+REST API endpoints <rest-api-endpoints/index>
 legacy-api-endpoints/index

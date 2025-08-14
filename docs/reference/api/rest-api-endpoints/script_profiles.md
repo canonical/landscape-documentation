@@ -255,7 +255,7 @@ Example output:
 
 ### Trigger
 
-Required parameteres:
+Required parameters:
   - `trigger_type`: Either of `event`, `one_time`, `recurring`.
 
 Each `trigger_type` has corresponding required parameters.

@@ -3,6 +3,12 @@
 
 Landscape offers support for OpenID-Connect (OIDC) authentication for self-hosted accounts. Common OIDC providers include Okta, Keycloak, Amazon Cognito, Google Identity Platform and Microsoft Entra ID (formerly Azure Active Directory).
 
+```{note}
+Landscape uses OIDC only for authentication decisions.
+Landscape doesn't currently integrate with external roles, groups, or existing user metadata.
+You still need to invite users and assign their roles and permissions within Landscape.
+```
+
 ## Enable OIDC support in Landscape
 
 To enable OIDC support, add `oidc-issuer`, `oidc-client-id` and `oidc-client-secret` to `/etc/landscape/service.conf` in the `[landscape]` section. For example:

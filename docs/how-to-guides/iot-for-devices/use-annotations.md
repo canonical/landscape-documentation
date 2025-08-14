@@ -63,5 +63,5 @@ annotation:<key>:<value>
 
 You can also save this search to re-use it and check for any changes. 
 
-**Note**: Annotations and searching for keys and values are case-sensitive.
+Note that annotations and searching for keys and values are case-sensitive. Annotation search is a basic text search that doesn't consider word boundaries. For example, using the keys "attached" and "unattached" would be problematic because searching for "attached" will also return results labeled as "unattached".
 

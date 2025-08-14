@@ -27,7 +27,7 @@ Inside the annotation folder, create a file. The file name should be the annotat
 
 Any annotations created in this folder will automatically be sent to the Landscape server and are visible in the web portal: **Computers** (**Instances**) > Select computer > **Info** tab.
 
-**Note**: Updating an annotation on the client will automatically push it to the server; however, deleting a file from the folder will not delete the annotation with the last known value persisting.
+Note that annotations and searching for keys and values are case-sensitive. Annotation search is a basic text search that doesn't consider word boundaries. For example, using the keys "attached" and "unattached" would be problematic because searching for "attached" will also return results labeled as "unattached".
 
 ## Use annotations in the web portal
 

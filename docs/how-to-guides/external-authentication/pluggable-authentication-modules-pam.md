@@ -16,3 +16,8 @@ If you use PAM to authenticate, the user details stored in Landscape are associa
 
 For more information on PAM authentication see [PAM Tutorial](https://wpollock.com/AUnix2/PAM-Help.htm).
 
+```{note}
+Landscape uses PAM only for authentication decisions.
+Landscape doesn't currently integrate with external roles, groups, or existing user metadata.
+You still need to invite users and assign their roles and permissions within Landscape.
+```
