@@ -231,6 +231,10 @@ The `[system]` section contains configurations that apply across many or all of 
 | `apt_port` | - | `LANDSCAPE_SYSTEM__APT_PORT` | 8085 | The port the `landscape_apt` service should use. |
 | `audit_retention_period` | `audit-retention-period` | `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD` | `-1` | The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely. |
 | `deployment_mode` | `deployment-mode` | `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE` | `standalone` | Used only for development. The default value is appropriate for self-hosted Landscape. |
+| `enable_password_authentication` | - | `LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION` | `False` | Whether to enable password-based authentication or not. |
+| `enable_query_debug` | - | `LANDSCAPE_SYSTEM__ENABLE_QUERY_DEBUG` | `False` | Whether to enable query introspection and debugging middleware or not. |
+| `enable_saas_metrics` | - | `LANDSCAPE_SYSTEM__ENABLE_SAAS_METRICS` | `False` | Whether to enable metrics on SaaS or not. |
+| `enable_subdomain_accounts` | - | `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS` | `False` | Whether to enable subdomain accounts or not. |
 | `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
 | `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
 | `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |

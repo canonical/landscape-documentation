@@ -17,7 +17,7 @@ The following immutable configurations can be set in `service.conf` or through e
 | `LANDSCAPE_MESSAGE_URL` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_URL` | `N/A` | `message_system` | `N/A` | `message_system_url` | The HTTP version of the root URL with `/message-system` appended.  | The message system URL to use. |
 | `LANDSCAPE_MIDDLEWARE` | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `N/A` | `system` | `N/A` | `middleware` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
 | `LANDSCAPE_OFFLINE` | `LANDSCAPE_FEATURES__ENABLE_OFFLINE` | `global` | `features` | `offline` | `enable_offline` | `False` | Whether offline mode is set or not (only relevant for standalone setups). |
-| `LANDSCAPE_QUERY_DEBUG` | `LANDSCAPE_OOPS__QUERY_DEBUG` | `N/A` | `oops` | `N/A` | `enable_query_debug` | `False` | Whether to enable query introspection and debugging middleware for Landscape or not. |
+| `LANDSCAPE_QUERY_DEBUG` | `LANDSCAPE_SYSTEM__ENABLE_QUERY_DEBUG` | `N/A` | `system` | `N/A` | `enable_query_debug` | `False` | Whether to enable query introspection and debugging middleware for Landscape or not. |
 | `LANDSCAPE_ROOT_URL` | `LANDSCAPE_SYSTEM__ROOT_URL` | `global` | `system` | `root-url` | `root_url` | `None` | The Landscape Server’s root URL path. HTTP requests are expected to be made to this path. |
 | `LANDSCAPE_TESTRUN` | `LANDSCAPE_TESTING__TESTRUN` | `N/A` | `testing` | `N/A` | `test_run` | `False` | If true, do not replace the importer with the import guardian to speed up the tests. |
 | `LANDSCAPE_TEST_RUNNER` | `LANDSCAPE_TESTING__TEST_RUNNER` | `N/A` | `testing` | `N/A` | `test_runner` | `trial` | The `twisted` test runner to use for the `trial` script in `/dev`. |
