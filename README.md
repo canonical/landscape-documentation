@@ -6,7 +6,7 @@ Landscape uses a client–server model. An agent (Landscape Client) runs on each
 
 Managing large systems often requires switching between multiple tools and manual processes. Landscape reduces this complexity by consolidating system management tasks into one portal, making it easier to keep systems up to date, secure, and compliant.
 
-Landscape is used by system administrators, security teams, IT managers, and compliance officers in organizations of all sizes. It works in on-premises, cloud, and hybrid environments, and scales from small installations to large infrastructures with thousands of machines.
+Landscape is used by system administrators, security teams, IT managers, and compliance officers in organizations of all sizes. It works in on-premise, cloud, and hybrid environments, and scales from small installations to large infrastructures with thousands of machines.
 
 ## Support
 
