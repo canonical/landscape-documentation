@@ -159,6 +159,22 @@ It has the following settings beyond those shared by all services.
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
 | `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
 
+## The `[schema]` section
+
+The `[schema]` section contains configurations for updating the database schema.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `sslcert` | - | `LANDSCAPE_SCHEMA__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_SCHEMA__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_SCHEMA__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_SCHEMA__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_SCHEMA__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_SCHEMA__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_SCHEMA__STORES` | `None` | The stores the service should use. |
+| `threads` | - | `LANDSCAPE_SCHEMA__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_SCHEMA__WORKERS` | `None` | Number of worker processes for the service. |
+
 ## The `[scripts]` section
 
 The `[scripts]` section contains configurations for the scripts service, including service operation settings, database store configurations, and SSL options.
