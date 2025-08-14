@@ -83,6 +83,13 @@ The `[maintenance]` section contains configurations for running maintenance scri
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_MAINTENANCE__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_MAINTENANCE__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_MAINTENANCE__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
+| `mailer` | - | `LANDSCAPE_MAINTENANCE__MAILER` | `None` | Mailer service configuration. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_MAINTENANCE__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
+| `oops_key` | `oops-key` | `LANDSCAPE_MAINTENANCE__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_MAINTENANCE__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
 | `sslcert` | - | `LANDSCAPE_MAINTENANCE__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
 | `sslkey` | - | `LANDSCAPE_MAINTENANCE__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
 | `sslmode` | - | `LANDSCAPE_MAINTENANCE__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
