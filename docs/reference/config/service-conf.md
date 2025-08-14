@@ -16,30 +16,67 @@ The usage of the `-` character in section names and key names is deprecated in L
 In addition, the names of some sections of the `service.conf` file are deprecated in Landscape Server 25.10. The new names are detailed below. Support for the deprecated names will be removed in Landscape Server 26.04.
 ```
 
-## The `[system]` section
+## The `[appserver]` section
 
 ```{note}
-The `[global]` section name is deprecated. The `[system]` section replaces the `[global]` section.
+The `[landscape]` section name is deprecated. The `[appserver]` section replaces the `[landscape]` section.
 ```
 
-The `[system]` section contains configurations that apply across many or all of Landscape's services.
+The `[appserver]` section contains configurations for the Landscape application server, including storage paths, authentication providers, and security settings.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `analytics_id` | - | `LANDSCAPE_SYSTEM__ANALYTICS_ID` | `UA-1018242-60` | Google Analytics tracker ID for the deployment. |
-| `apt_port` | - | `LANDSCAPE_SYSTEM__APT_PORT` | 8085 | The port the `landscape_apt` service should use. |
-| `audit_retention_period` | `audit-retention-period` | `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD` | `-1` | The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely. |
-| `deployment_mode` | `deployment-mode` | `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE` | `standalone` | Used only for development. The default value is appropriate for self-hosted Landscape. |
-| `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
-| `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
-| `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |
-| {spellexception}`pidfile_directory` | {spellexception}`pidfile-directory` | {spellexception}`LANDSCAPE_SYSTEM__PIDFILE_DIRECTORY` | `/tmp/landscape` | Unused |
-| `max_service_memory` | `max-service-memory` | `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY` | `0` | An upper limit (in {spellexception}`mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit. |
-| `middleware` | - | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
-| `offline` | - | `LANDSCAPE_SYSTEM__OFFLINE` | `None` | Set `True` if Landscape is deployed in an air-gapped environment. |
-| `oops_path` | `oops-path` | `LANDSCAPE_SYSTEM__OOPS_PATH` | `/var/lib/landscape/landscape-oops` | The directory where OOPS reports are stored. The `landscape` system user must have read/write access to the specified directory. |
-| `root_url` | `root-url` | `LANDSCAPE_SYSTEM__ROOT_URL` | `http://localhost:8080` | Landscape Server's root URL path. |
-| `syslog_address` | `syslog-address` | `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS` | `/dev/log` | Path to the system's syslog logger. |
+| `access_log` | `access-log` | `LANDSCAPE_APPSERVER__ACCESS_LOG` | `None` | Path to access log file for this service. |
+| `allowed_interfaces` | | `LANDSCAPE_APPSERVER__ALLOWED_INTERFACES` | `None` | Network interfaces allowed for connections. |
+| `base_port` | `base-port` | `LANDSCAPE_APPSERVER__BASE_PORT` | `8090` | Base port number for the service. |
+| `blob_storage_root` | `blob-storage-root` | `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT` | `/var/lib/landscape/blobs` | Root directory for blob storage. |
+| `devmode` | | `LANDSCAPE_APPSERVER__DEVMODE` | `None` | Development mode settings. |
+| `display_consent_banner_at_each_login` | `display-consent-banner-at-each-login` | `LANDSCAPE_APPSERVER__DISPLAY_CONSENT_BANNER_AT_EACH_LOGIN` | `False` | Whether to display consent banner at each login. |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_APPSERVER__ENABLE_METRICS` | `False` | Whether to enable metrics collection. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_APPSERVER__GPG_HOME_PATH` | `None` | Path to GPG home directory. Must be used with `gpg_passphrase_path`. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_APPSERVER__GPG_PASSPHRASE_PATH` | `None` | Path to GPG passphrase file. Required when `gpg_home_path` is set. |
+| `juju_homes_path` | `juju-homes-path` | `LANDSCAPE_APPSERVER__JUJU_HOMES_PATH` | `/var/tmp/juju-homes` | Path to Juju home directories. |
+| `known_proxies` | `known-proxies` | `LANDSCAPE_APPSERVER__KNOWN_PROXIES` | `None` | Comma-separated names of known proxies. |
+| `mailer` | | `LANDSCAPE_APPSERVER__MAILER` | `None` | Mailer type specification. Must be used with `mailer_path`. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_APPSERVER__MAILER_PATH` | `None` | Path to mailer executable. Required when `mailer` is set. |
+| `oidc_client_id` | `oidc-client-id` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_ID` | `None` | OIDC client identifier. Required when using OIDC authentication. |
+| `oidc_client_secret` | `oidc-client-secret` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_SECRET` | `None` | OIDC client secret. Required when using OIDC authentication. |
+| `oidc_issuer` | `oidc-issuer` | `LANDSCAPE_APPSERVER__OIDC_ISSUER` | `None` | OIDC issuer URL. Required when using OIDC authentication. |
+| `oidc_provider` | `oidc-provider` | `LANDSCAPE_APPSERVER__OIDC_PROVIDER` | `unspecified` | The name of OIDC provider to use. Must be either `google`, `okta`, or `unspecified`. |
+| `oidc_redirect_uri` | `oidc-redirect-uri` | `LANDSCAPE_APPSERVER__OIDC_REDIRECT_URI` | `None` | OIDC redirect URI for authentication callbacks. |
+| `oops_key` | `oops-key` | `LANDSCAPE_APPSERVER__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `openid_logout_url` | `openid-logout-url` | `LANDSCAPE_APPSERVER__OPENID_LOGOUT_URL` | `None` | OpenID logout URL. Required when using OpenID authentication. |
+| `openid_provider_url` | `openid-provider-url` | `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL` | `None` | OpenID provider URL. Required when using OpenID authentication. |
+| `repository_path` | `repository-path` | `LANDSCAPE_APPSERVER__REPOSITORY_PATH` | `/tmp/landscape-repository` | Path to the package repository. |
+| `reprepro_binary` | `reprepro-binary` | `LANDSCAPE_APPSERVER__REPREPRO_BINARY` | `None` | Path to the reprepro binary executable. |
+| `sanitize_delay` | `sanitize-delay` | `LANDSCAPE_APPSERVER__SANITIZE_DELAY` | `3600` | Delay in seconds for data {spellexception}`sanitization` operations. |
+| `secret_token` | `secret-token` | `LANDSCAPE_APPSERVER__SECRET_TOKEN` | `None` | Secret token for application security. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_APPSERVER__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
+| `threads` | | `LANDSCAPE_APPSERVER__THREADS` | `None` | Number of threads for the service. |
+| `ubuntu_images_path` | `ubuntu-images-path` | `LANDSCAPE_APPSERVER__UBUNTU_IMAGES_PATH` | `/var/tmp/ubuntu-images` | Path to Ubuntu images directory. |
+| `ubuntu_one_redirect_url` | `ubuntu-one-redirect-url` | `LANDSCAPE_APPSERVER__UBUNTU_ONE_REDIRECT_URL` | `None` | Ubuntu One redirect URL for authentication. |
+| `workers` | | `LANDSCAPE_APPSERVER__WORKERS` | `None` | Number of worker processes for the service. |
+
+### Authentication providers
+
+OpenID:
+
+- Requires both `openid_provider_url` and `openid_logout_url` to be configured
+- Defaults to using Ubuntu One
+
+OIDC:
+
+- Requires `oidc_issuer`, `oidc_client_id`, and `oidc_client_secret` to be configured
+
+### Moved Configuration Keys
+
+The following keys have moved from the `[appserver]` section to the `[system]` section in Landscape 25.10:
+
+- `enable-password-authentication` → `enable_password_authentication` in `[system]`
+- `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
+- `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
+
+These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape 26.04, when support will be removed and they must be configured in the `[system]` section.
 
 ## The `[async_frontend]` section
 
@@ -106,12 +143,17 @@ The `[maintenance]` section contains configurations for running maintenance scri
 The `[message-server]` section name is deprecated. The `[message_server]` section replaces the `[message-server]` section.
 ```
 
+```{note}
+The `[backoff]` section is deprecated. The settings have been moved to the `[message_server]` section.
+```
+
 The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client.
 
 It has the following settings beyond those shared by all services.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
+| `backoff_dir` | `backoff-dirpath` | `LANDSCAPE_MESSAGE_SERVER__BACKOFF_DIR` | `None` | The directory to hold the `backoff.txt` file the server uses to indicate it should back off requests. If `None`, a `config` directory within the `landscape` directory will be used. |
 | `max_msg_size_bytes` | `max-msg-size-bytes` | `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES` | 30000000 (30 MB) | The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected. |
 | `message_snippet_bytes` | `message-snippet-bytes` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES` | 1000 | When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message. |
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
@@ -197,3 +239,28 @@ The `[stores]` section contains configurations for database store connections an
 | `store_user` | - | `LANDSCAPE_STORES__STORE_USER` | `None` | Overrides the store username. |
 | `stores` | - | `LANDSCAPE_STORES__STORES` | `None` | The stores the service should use. |
 | `user` | - | `LANDSCAPE_STORES__USER` | `landscape` | The username for database connections. |
+
+## The `[system]` section
+
+```{note}
+The `[global]` section name is deprecated. The `[system]` section replaces the `[global]` section.
+```
+
+The `[system]` section contains configurations that apply across many or all of Landscape's services.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `analytics_id` | - | `LANDSCAPE_SYSTEM__ANALYTICS_ID` | `UA-1018242-60` | Google Analytics tracker ID for the deployment. |
+| `apt_port` | - | `LANDSCAPE_SYSTEM__APT_PORT` | 8085 | The port the `landscape_apt` service should use. |
+| `audit_retention_period` | `audit-retention-period` | `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD` | `-1` | The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely. |
+| `deployment_mode` | `deployment-mode` | `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE` | `standalone` | Used only for development. The default value is appropriate for self-hosted Landscape. |
+| `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
+| `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
+| `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |
+| {spellexception}`pidfile_directory` | {spellexception}`pidfile-directory` | {spellexception}`LANDSCAPE_SYSTEM__PIDFILE_DIRECTORY` | `/tmp/landscape` | Unused |
+| `max_service_memory` | `max-service-memory` | `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY` | `0` | An upper limit (in {spellexception}`mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit. |
+| `middleware` | - | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
+| `offline` | - | `LANDSCAPE_SYSTEM__OFFLINE` | `None` | Set `True` if Landscape is deployed in an air-gapped environment. |
+| `oops_path` | `oops-path` | `LANDSCAPE_SYSTEM__OOPS_PATH` | `/var/lib/landscape/landscape-oops` | The directory where OOPS reports are stored. The `landscape` system user must have read/write access to the specified directory. |
+| `root_url` | `root-url` | `LANDSCAPE_SYSTEM__ROOT_URL` | `http://localhost:8080` | Landscape Server's root URL path. |
+| `syslog_address` | `syslog-address` | `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS` | `/dev/log` | Path to the system's syslog logger. |
