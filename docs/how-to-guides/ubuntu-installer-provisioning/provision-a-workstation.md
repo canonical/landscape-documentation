@@ -18,7 +18,7 @@ Save this for the next step.
 
 1. Navigate to the **/attach** page in Landscape.
 1. Enter your 6 digit attach code.
-1. Landscape will confirm that the attach code is valid and prompt you to log in.
+1. Landscape will confirm that the attach code is valid and will prompt you to log in.
 1. Authenticate against your OIDC provider.
 
 ## Back in the Ubuntu installer
