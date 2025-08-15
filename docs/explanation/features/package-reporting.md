@@ -1,3 +1,4 @@
+(explanation-package-reporting)=
 # Landscape package reporting
 
 Package management is a core feature of Landscape. This document describes package reporting, a component of package management, and outlines the services and steps involved for Landscape to gather and display package information.
