@@ -104,6 +104,7 @@ The following keys have moved from the `[appserver]` section to the `[system]` s
 - `enable-password-authentication` → `enable_password_authentication` in `[system]`
 - `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
 - `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
+- `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
 
 These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape 26.04, when support will be removed and they must be configured in the `[system]` section.
 
@@ -303,6 +304,7 @@ The `[system]` section contains configurations that apply across many or all of 
 | `enable_query_debug` | - | `LANDSCAPE_SYSTEM__ENABLE_QUERY_DEBUG` | `False` | Whether to enable query introspection and debugging middleware or not. |
 | `enable_saas_metrics` | - | `LANDSCAPE_SYSTEM__ENABLE_SAAS_METRICS` | `False` | Whether to enable metrics on SaaS or not. |
 | `enable_subdomain_accounts` | - | `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS` | `False` | Whether to enable subdomain accounts or not. |
+| `enable_tag_script_execution` | - | `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION` | `False` | Whether to enable tag-based script execution or not. |
 | `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
 | `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
 | `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |
