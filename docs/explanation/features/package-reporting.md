@@ -125,7 +125,7 @@ Landscape package reporting involves multiple steps, some of which may be repeat
      
   5. Client: queue `unknown-package-hashes` request message
   
-     Client queues a message to Server with type `unknown-package-hashes`, containing the list of unknown hashes. The number of hashes in this request is configurable, but the default is 500.
+     Client queues a message to Server with type `unknown-package-hashes`, containing the list of unknown hashes. The number of hashes in this request is [configurable](https://github.com/canonical/landscape-client/blob/afebfb75954cc03aea1124651373498a5fe4eca1/example.conf#L222-L226), but the default is 500.
      
   6. Client: detect package state changes
   
