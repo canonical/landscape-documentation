@@ -27,13 +27,13 @@ Landscape Server and Landscape Client both store package reporting state. Here's
 
 **Server**:
 
-  - `packages` database: a PostgreSQL database that contains general, non-Client-specific information regarding packages that Landscape knows about. It is the authoritative source for [Landscape package IDs](#landscape-package-id).
+  - `package` database: a PostgreSQL database that contains general, non-Client-specific information regarding packages that Landscape knows about. It is the authoritative source for [Landscape package IDs](#landscape-package-id).
   - `computer_packages` database: a PostgreSQL database table that contains arrays of [Landscape package IDs](#landscape-package-id) for each Client, one column for each [package state](#package-state).
   - `hash-id` database files: a collection of SQLite database files that contain a mapping of [Landscape package hashes](#landscape-package-hash) to [Landscape package IDs](#landscape-package-id). There is one `hash-id` database file per Ubuntu series, per CPU architecture.
   
 **Client**:
 
-  - Client `packages` database: a SQLite database file that mirrors the `computer_packages` database on Server. It has one table for each [package state](#package-state) with one column of [Landscape package IDs](#landscape-package-id). It also contains some state regarding the current package reporting progress.
+  - Client `package` database: a SQLite database file that mirrors the `computer_packages` database on Server. It has one table for each [package state](#package-state) with one column of [Landscape package IDs](#landscape-package-id). It also contains some state regarding the current package reporting progress.
   - `hash-id` database file: one of Server's `hash-id` database files, downloaded from Server and matching the Client's Ubuntu series and CPU architecture. 
 
 ## Package state
@@ -67,7 +67,7 @@ An individual package is represented by its:
 
 ### Landscape package ID
 
-When Server learns about new packages from Client, it adds them to its `packages` database. When a package is added, it is assigned an incremental integer database ID. This ID is used to represent the package both internally on Server and when communicating package reporting and package management activities to and from Client.
+When Server learns about new packages from Client, it adds them to its `package` database. When a package is added, it is assigned an incremental integer database ID. This ID is used to represent the package both internally on Server and when communicating package reporting and package management activities to and from Client.
 
 **Note**: Landscape package IDs are not portable across installations of Server. This means that if an instance is unregistered and then registered to a new Server installation, it will need to re-report its package state.
 
@@ -89,7 +89,7 @@ When Client updates its package state, it calculates a SHA1 hash for each packag
 
 Client uses this hash to look up the Landscape package ID in its local "hash to ID" SQLite database. It then uses those IDs to report package state changes to Server.
 
-Server also stores these hashes in its `packages` database. If a Client cannot find the hash in its local database, it can ask Server to provide it. This is further explained in the [Package reporting step-by-step](#package-reporting-step-by-step) section.
+Server also stores these hashes in its `package` database. If a Client cannot find the hash in its local database, it can ask Server to provide it. This is further explained in the [Package reporting step-by-step](#package-reporting-step-by-step) section.
 
 Here's an example of a string that's hashed to produce the Landscape package hash:
 
@@ -121,7 +121,7 @@ Landscape package reporting involves multiple steps, some of which may be repeat
      
   4. Client: look up [Landscape package IDs](#landscape-package-id)
   
-     Client searches for the Landscape package hash in its Client `packages` database, which at this point only consists of the `hash-id` database file. It records which packages it finds Landscape package IDs for (known packages), and which packages are "unknown package hashes".
+     Client searches for the Landscape package hash in its Client `package` database, which at this point only consists of the `hash-id` database file. It records which packages it finds Landscape package IDs for (known packages), and which packages are "unknown package hashes".
      
   5. Client: queue `unknown-package-hashes` request message
   
@@ -137,7 +137,7 @@ Landscape package reporting involves multiple steps, some of which may be repeat
      
   8. Server: respond to `unknown-package-hashes` message with `package-ids` message
   
-     Server sends a message to Client with type `package-ids`, containing a list of Landscape package IDs from Server's `packages` database in the same order as the original `unknown-package-hashes` message. If Server does not know the Landscape package ID for a given hash, the ID value is `None`.
+     Server sends a message to Client with type `package-ids`, containing a list of Landscape package IDs from Server's `package` database in the same order as the original `unknown-package-hashes` message. If Server does not know the Landscape package ID for a given hash, the ID value is `None`.
      
   9. Server: record known packages state
   
@@ -145,11 +145,11 @@ Landscape package reporting involves multiple steps, some of which may be repeat
      
   10. Client: respond to `package-ids` with package `add-packages` message
   
-      Client records the known Landscape package IDs from Server's `package-ids` message in its Client `packages` database. For every Landscape Package ID that is `None`, Client collects all the package metadata (name, version, description, _etc._). Client then queues a single `add-packages` message to Server containing this information for all of the `None` packages.
+      Client records the known Landscape package IDs from Server's `package-ids` message in its Client `package` database. For every Landscape Package ID that is `None`, Client collects all the package metadata (name, version, description, _etc._). Client then queues a single `add-packages` message to Server containing this information for all of the `None` packages.
      
   11. Server: respond to `add-packages` message with `package-ids` message
   
-      Similar to step *8*, Server sends a message to Client with type `package-ids`, containing a list of Landscape package IDs in the same order as the original `add-packages` message. The IDs are generated by adding the package from the `add-packages` message to Server's `packages` database.
+      Similar to step *8*, Server sends a message to Client with type `package-ids`, containing a list of Landscape package IDs in the same order as the original `add-packages` message. The IDs are generated by adding the package from the `add-packages` message to Server's `package` database.
       
   12. Client: repeat step *10*, except this time there will be no Landscape Package IDs that are `None`, so no `add-packages` message is queued.
   
@@ -159,7 +159,7 @@ Keep in mind that steps *8*, *9*, *10*, and *11* can occur during any Client-Ser
 
 Eventually a steady state is reached, where:
 
-  - No packages are unknown - all packages have Landscape Package IDs in Client's `packages` database
+  - No packages are unknown - all packages have Landscape Package IDs in Client's `package` database
   - No difference in package state is detected by Client
   
 At this point, `package-reporting` ends, restarting only when new differences are detected in the package state. This means only steps *2* through *6* (skipping *5*) are performed.
@@ -190,6 +190,6 @@ When this happens, Server sends a "resynchronize" activity to Client, scoped to 
 
 In step *1* of package reporting, Client downloads the `hash-id` database file from Landscape Server. This step significantly decreases total package-reporting time by giving Client some starting data to use for step *4*, looking up the Landscape Package IDs from the Landscape package hashes. However, package reporting can progress and succeed without this step.
 
-The `hash-id` databases are generated by Server from a set of configurable package sources. Server reads the package indices from these sources, calculates the Landscape package hashes, and populates the files. In most deployments, this is done by a weekly `cron` job that is automatically enabled in Landscape.
+The `hash-id` databases are generated by Server from a set of configurable package sources. Server reads the package indices from these sources, calculates the Landscape package hashes, and populates the files. In most deployments, this is done by a weekly `cron` job that is automatically enabled in Landscape, defined in `/etc/cron.d/landscape-server`.
 
-A usual deployment only includes the official Ubuntu sources and ESM sources in the `hash-id` databases configuration. Therefore, Clients using other sources do not benefit as much from this package reporting bootstrapping mechanism.
+A usual deployment only includes the official Ubuntu sources and ESM sources in the `hash-id` databases configuration, usually defined at `/opt/canonical/landscape/configs/standalone/hash-id-databases.conf`. Therefore, Clients using other sources do not benefit as much from this package reporting bootstrapping mechanism.
