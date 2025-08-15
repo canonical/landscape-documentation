@@ -4,10 +4,12 @@ addons
 AGPLv
 API
 APIs
+Autoremovable
 balancer
 Charmhub
 CLI
 DCO
+deduplication
 Diátaxis
 Dqlite
 dropdown
@@ -50,6 +52,8 @@ Quickstart
 ReadMe
 reST
 reStructuredText
+Resynchronization
+resynchronize
 roadmap
 RTD
 subdirectories
@@ -58,6 +62,7 @@ subtree
 TODO
 Ubuntu
 UI
+unholding
 UUID
 VM
 webhook

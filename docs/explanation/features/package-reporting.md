@@ -109,7 +109,7 @@ Landscape package reporting involves multiple steps, some of which may be repeat
 
   1. Client: `hash-id` database file download
   
-     Client downloads a `hash-id` database file from Server that matches its Ubuntu series and CPU architecure. For example, on an amd64 24.04 Noble Numbat instance, the file would be `<server UUID>_noble_amd64`.
+     Client downloads a `hash-id` database file from Server that matches its Ubuntu series and CPU architecture. For example, on an amd64 24.04 Noble Numbat instance, the file would be `<server UUID>_noble_amd64`.
      
   2. Client: update package cache
   
