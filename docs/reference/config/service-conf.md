@@ -167,6 +167,24 @@ The `[maintenance]` section contains configurations for running maintenance scri
 | `threads` | - | `LANDSCAPE_MAINTENANCE__THREADS` | `None` | Number of threads for the service. |
 | `workers` | - | `LANDSCAPE_MAINTENANCE__WORKERS` | `None` | Number of worker processes for the service. |
 
+## The `[load_shaper]` section
+
+```{note}
+The `[load-shaper]` section name is deprecated. The `[load_shaper]` section replaces the `[load-shaper]` section.
+```
+
+The `[load_shaper]` section contains configurations for controlling how many messages are processed in each message exchange. It allots a time window for message processing based on the current database load.
+
+```{caution}
+The default values have been chosen based on the underlying algorithm and typical workloads. Modifying these values is not advisable unless you have thoroughly tested the impact on your specific system, as changes can significantly affect performance and system stability.
+```
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `critical_load` | `critical-load` | `LANDSCAPE_LOAD_SHAPER__CRITICAL_LOAD` | `10.0` | A float representing the database load threshold at which message processing time is reduced to zero. When load reaches this value, no time slice is allocated for processing. |
+| `good_duration` | `good-duration` | `LANDSCAPE_LOAD_SHAPER__GOOD_DURATION` | `60.0` | A float representing the baseline time slice (in seconds) allocated for message processing when the database load is at the good load threshold. This duration is scaled up or down based on current load. |
+| `good_load` | `good-load` | `LANDSCAPE_LOAD_SHAPER__GOOD_LOAD` | `3.0` | A float representing the optimal database load threshold. When load is at this value, the full good duration time slice is allocated. Load below this increases the time slice, load above this decreases it. |
+
 ## The `[message_server]` section
 
 ```{note}
