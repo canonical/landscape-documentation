@@ -16,34 +16,59 @@ The usage of the `-` character in section names and key names is deprecated in L
 In addition, the names of some sections of the `service.conf` file are deprecated in Landscape Server 25.10. The new names are detailed below. Support for the deprecated names will be removed in Landscape Server 26.04.
 ```
 
-## The `[api]` section
+(shared-service-settings)=
+## Shared service settings
 
-The `[api]` section contains configurations for the Landscape API service, including service connection settings and database store configurations.
+There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service:
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_API__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
-| `base_port` | `base-port` | `LANDSCAPE_API__BASE_PORT` | `8090` | Base port number for the service. |
+| `allowed_interfaces` | - | `LANDSCAPE_SERVICE__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or hostnames for the service. |
+| `base_port` | `base-port` | `LANDSCAPE_SERVICE__BASE_PORT` | `8090` | Base port number for the service. |
+| `devmode` | - | `LANDSCAPE_SERVICE__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
+| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SERVICE__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
+| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SERVICE__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
+| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SERVICE__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
+| `mailer` | - | `LANDSCAPE_SERVICE__MAILER` | `None` | Mailer service configuration. |
+| `mailer_path` | `mailer-path` | `LANDSCAPE_SERVICE__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
+| `oops_key` | `oops-key` | `LANDSCAPE_SERVICE__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
+| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SERVICE__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
+| `threads` | - | `LANDSCAPE_SERVICE__THREADS` | `None` | Number of threads for the service. |
+| `workers` | - | `LANDSCAPE_SERVICE__WORKERS` | `None` | Number of worker processes for the service. |
+
+```{important}
+The shared service settings are not mutually exclusive with the shared store settings; services can use both, if specified.
+```
+
+(shared-store-settings)=
+## Shared store settings
+
+There are a set of generic settings related to databases and SSL connections to Postgres that several sections can set, where `SECTION` in the ENV name matches the (uppercase) name of the section:
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `sslcert` | - | `LANDSCAPE_SECTION__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
+| `sslkey` | - | `LANDSCAPE_SECTION__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
+| `sslmode` | - | `LANDSCAPE_SECTION__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
+| `sslrootcert` | - | `LANDSCAPE_SECTION__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
+| `store_password` | - | `LANDSCAPE_SECTION__STORE_PASSWORD` | `None` | Overrides the store password. |
+| `store_user` | - | `LANDSCAPE_SECTION__STORE_USER` | `None` | Overrides the store username. |
+| `stores` | - | `LANDSCAPE_SECTION__STORES` | `None` | The stores the service should use. |
+
+```{important}
+The shared store settings are not mutually exclusive with the shared service settings; services can use both, if specified.
+```
+
+## The `[api]` section
+
+The `[api]` section contains configurations for the Landscape API service, including service connection settings and database store configurations. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
 | `cookie_encryption_key` | `cookie-encryption-key` | `LANDSCAPE_API__COOKIE_ENCRYPTION_KEY` | `None` | The key used to encrypt state and nonce cookies. |
 | `cors_allow_all` | `cors-allow-all` | `LANDSCAPE_API__CORS_ALLOW_ALL` | `False` | Whether to allow CORS. |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_API__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_API__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_API__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_API__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_API__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_API__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
 | `root_url` | `root-url` | `LANDSCAPE_API__ROOT_URL` | `None` | The API URL to use. |
 | `snap_store_api_url` | `snap-store-api-url` | `LANDSCAPE_API__SNAP_STORE_API_URL` | `https://api.snapcraft.io/v2` | The API for a Snap Store Proxy. By default, this is the Canonical Snap Store. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_API__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `sslcert` | - | `LANDSCAPE_API__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_API__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_API__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_API__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_API__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_API__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_API__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_API__THREADS` | `None` | Number of threads for the service. |
-| `workers` | - | `LANDSCAPE_API__WORKERS` | `None` | Number of worker processes for the service. |
 
 ## The `[appserver]` section
 
@@ -51,40 +76,27 @@ The `[api]` section contains configurations for the Landscape API service, inclu
 The `[landscape]` section name is deprecated. The `[appserver]` section replaces the `[landscape]` section.
 ```
 
-The `[appserver]` section contains configurations for the Landscape application server, including storage paths, authentication providers, and security settings.
+The `[appserver]` section contains configurations for the Landscape application server, including storage paths and authentication providers. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `access_log` | `access-log` | `LANDSCAPE_APPSERVER__ACCESS_LOG` | `None` | Path to access log file for this service. |
-| `allowed_interfaces` | | `LANDSCAPE_APPSERVER__ALLOWED_INTERFACES` | `None` | Network interfaces allowed for connections. |
-| `base_port` | `base-port` | `LANDSCAPE_APPSERVER__BASE_PORT` | `8090` | Base port number for the service. |
 | `blob_storage_root` | `blob-storage-root` | `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT` | `/var/lib/landscape/blobs` | Root directory for blob storage. |
-| `devmode` | | `LANDSCAPE_APPSERVER__DEVMODE` | `None` | Development mode settings. |
 | `display_consent_banner_at_each_login` | `display-consent-banner-at-each-login` | `LANDSCAPE_APPSERVER__DISPLAY_CONSENT_BANNER_AT_EACH_LOGIN` | `False` | Whether to display consent banner at each login. |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_APPSERVER__ENABLE_METRICS` | `False` | Whether to enable metrics collection. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_APPSERVER__GPG_HOME_PATH` | `None` | Path to GPG home directory. Must be used with `gpg_passphrase_path`. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_APPSERVER__GPG_PASSPHRASE_PATH` | `None` | Path to GPG passphrase file. Required when `gpg_home_path` is set. |
 | `juju_homes_path` | `juju-homes-path` | `LANDSCAPE_APPSERVER__JUJU_HOMES_PATH` | `/var/tmp/juju-homes` | Path to Juju home directories. |
 | `known_proxies` | `known-proxies` | `LANDSCAPE_APPSERVER__KNOWN_PROXIES` | `None` | Comma-separated names of known proxies. |
-| `mailer` | | `LANDSCAPE_APPSERVER__MAILER` | `None` | Mailer type specification. Must be used with `mailer_path`. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_APPSERVER__MAILER_PATH` | `None` | Path to mailer executable. Required when `mailer` is set. |
 | `oidc_client_id` | `oidc-client-id` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_ID` | `None` | OIDC client identifier. Required when using OIDC authentication. |
 | `oidc_client_secret` | `oidc-client-secret` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_SECRET` | `None` | OIDC client secret. Required when using OIDC authentication. |
 | `oidc_issuer` | `oidc-issuer` | `LANDSCAPE_APPSERVER__OIDC_ISSUER` | `None` | OIDC issuer URL. Required when using OIDC authentication. |
 | `oidc_provider` | `oidc-provider` | `LANDSCAPE_APPSERVER__OIDC_PROVIDER` | `unspecified` | The name of OIDC provider to use. Must be either `google`, `okta`, or `unspecified`. |
 | `oidc_redirect_uri` | `oidc-redirect-uri` | `LANDSCAPE_APPSERVER__OIDC_REDIRECT_URI` | `None` | OIDC redirect URI for authentication callbacks. |
-| `oops_key` | `oops-key` | `LANDSCAPE_APPSERVER__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
 | `openid_logout_url` | `openid-logout-url` | `LANDSCAPE_APPSERVER__OPENID_LOGOUT_URL` | `None` | OpenID logout URL. Required when using OpenID authentication. |
 | `openid_provider_url` | `openid-provider-url` | `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL` | `None` | OpenID provider URL. Required when using OpenID authentication. |
 | `repository_path` | `repository-path` | `LANDSCAPE_APPSERVER__REPOSITORY_PATH` | `/tmp/landscape-repository` | Path to the package repository. |
 | `reprepro_binary` | `reprepro-binary` | `LANDSCAPE_APPSERVER__REPREPRO_BINARY` | `None` | Path to the reprepro binary executable. |
 | `sanitize_delay` | `sanitize-delay` | `LANDSCAPE_APPSERVER__SANITIZE_DELAY` | `3600` | Delay in seconds for data sanitization operations. |
 | `secret_token` | `secret-token` | `LANDSCAPE_APPSERVER__SECRET_TOKEN` | `None` | Secret token for application security. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_APPSERVER__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `threads` | | `LANDSCAPE_APPSERVER__THREADS` | `None` | Number of threads for the service. |
 | `ubuntu_images_path` | `ubuntu-images-path` | `LANDSCAPE_APPSERVER__UBUNTU_IMAGES_PATH` | `/var/tmp/ubuntu-images` | Path to Ubuntu images directory. |
 | `ubuntu_one_redirect_url` | `ubuntu-one-redirect-url` | `LANDSCAPE_APPSERVER__UBUNTU_ONE_REDIRECT_URL` | `None` | Ubuntu One redirect URL for authentication. |
-| `workers` | | `LANDSCAPE_APPSERVER__WORKERS` | `None` | Number of worker processes for the service. |
 
 ### Authentication providers
 
@@ -114,7 +126,7 @@ These keys can still be used in their deprecated forms in `[appserver]`/`[landsc
 The `[async-frontend]` section name is deprecated. The `[async_frontend]` section replaces the `[async-frontend]` section.
 ```
 
-The `[async_frontend]` section contains configurations that apply to the `landscape-async-frontend` service which handles AJAX requests from the Legacy UI. It has no settings beyond those shared by all services.
+The `[async_frontend]` section contains configurations that apply to the `landscape-async-frontend` service which handles AJAX requests from the Legacy UI. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
 
@@ -140,32 +152,9 @@ The `[broker]` section contains configurations that describe how services connec
 The `[job-handler]` section name is deprecated. The `[job_handler]` section replaces the `[job-handler]` section.
 ```
 
-The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond those shared by all services.
+The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
-
-## The `[maintenance]` section
-
-The `[maintenance]` section contains configurations for running maintenance scripts.
-
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_MAINTENANCE__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_MAINTENANCE__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_MAINTENANCE__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_MAINTENANCE__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_MAINTENANCE__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_MAINTENANCE__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_MAINTENANCE__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `sslcert` | - | `LANDSCAPE_MAINTENANCE__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_MAINTENANCE__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_MAINTENANCE__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_MAINTENANCE__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_MAINTENANCE__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_MAINTENANCE__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_MAINTENANCE__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_MAINTENANCE__THREADS` | `None` | Number of threads for the service. |
-| `workers` | - | `LANDSCAPE_MAINTENANCE__WORKERS` | `None` | Number of worker processes for the service. |
 
 ## The `[load_shaper]` section
 
@@ -185,6 +174,10 @@ The default values have been chosen based on the underlying algorithm and typica
 | `good_duration` | `good-duration` | `LANDSCAPE_LOAD_SHAPER__GOOD_DURATION` | `60.0` | A float representing the baseline time slice (in seconds) allocated for message processing when the database load is at the good load threshold. This duration is scaled up or down based on current load. |
 | `good_load` | `good-load` | `LANDSCAPE_LOAD_SHAPER__GOOD_LOAD` | `3.0` | A float representing the optimal database load threshold. When load is at this value, the full good duration time slice is allocated. Load below this increases the time slice, load above this decreases it. |
 
+## The `[maintenance]` section
+
+The `[maintenance]` section contains configurations for running maintenance scripts. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
 ## The `[message_server]` section
 
 ```{note}
@@ -195,9 +188,7 @@ The `[message-server]` section name is deprecated. The `[message_server]` sectio
 The `[backoff]` section is deprecated. The settings have been moved to the `[message_server]` section.
 ```
 
-The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client.
-
-It has the following settings beyond those shared by all services.
+The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
@@ -219,80 +210,39 @@ The `[oops]` section contains configurations for the OOPS error reporting and de
 | `path` | - | `LANDSCAPE_OOPS__PATH` | `None` | File path for OOPS configuration. |
 | `reporter` | - | `LANDSCAPE_OOPS__REPORTER` | `None` | Error reporter configuration. |
 
-## The `[schema]` section
 
-The `[schema]` section contains configurations for updating the database schema.
+The `[schema]` section contains configurations for updating the database schema. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+## The `[package_upload]` section
+
+```{note}
+The `[package-upload]` section name is deprecated. The `[package_upload]` section replaces the `[package-upload]` section.
+```
+
+The `[package_upload]` section contains configurations for the package upload service, including service connection settings, database store configurations, and SSL options. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `sslcert` | - | `LANDSCAPE_SCHEMA__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_SCHEMA__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_SCHEMA__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_SCHEMA__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_SCHEMA__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_SCHEMA__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_SCHEMA__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_SCHEMA__THREADS` | `None` | Number of threads for the service. |
-| `workers` | - | `LANDSCAPE_SCHEMA__WORKERS` | `None` | Number of worker processes for the service. |
+| `port` | - | `LANDSCAPE_PACKAGE_UPLOAD__PORT` | `None` | The port the service will use. This field is required. |
+| `service_path` | `root-url` | `LANDSCAPE_PACKAGE_UPLOAD__SERVICE_PATH` | `/upload/` | The relative path portion to use for the service URL. |
 
 ## The `[scripts]` section
 
-The `[scripts]` section contains configurations for the scripts service, including service operation settings, database store configurations, and SSL options.
-
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SCRIPTS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
-| `base_port` | `base-port` | `LANDSCAPE_SCRIPTS__BASE_PORT` | `8090` | Base port number for the service. |
-| `devmode` | - | `LANDSCAPE_SCRIPTS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SCRIPTS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SCRIPTS__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SCRIPTS__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_SCRIPTS__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_SCRIPTS__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_SCRIPTS__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SCRIPTS__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `sslcert` | - | `LANDSCAPE_SCRIPTS__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_SCRIPTS__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_SCRIPTS__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_SCRIPTS__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_SCRIPTS__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_SCRIPTS__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_SCRIPTS__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_SCRIPTS__THREADS` | `None` | Number of threads for the service. |
-| `workers` | - | `LANDSCAPE_SCRIPTS__WORKERS` | `None` | Number of worker processes for the service. |
+The `[scripts]` section contains configurations for scripts. The section contains only the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 ## The `[secrets]` section
 
-The `[secrets]` section contains configurations for the secrets service, including vault connection settings, service URLs, database store configurations, and SSL options.
+The `[secrets]` section contains configurations for the secrets service, such as vault connection settings. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or hostnames for the service. |
-| `base_port` | `base-port` | `LANDSCAPE_SECRETS__BASE_PORT` | `8090` | Base port number for the service. |
-| `devmode` | - | `LANDSCAPE_SECRETS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SECRETS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SECRETS__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SECRETS__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_SECRETS__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_SECRETS__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_SECRETS__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
 | `service_url` | `secrets-service-url` | `LANDSCAPE_SECRETS__SERVICE_URL` | `None` | The URL to use for the secrets service. Must include a port. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SECRETS__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `sslcert` | - | `LANDSCAPE_SECRETS__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_SECRETS__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_SECRETS__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_SECRETS__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_SECRETS__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_SECRETS__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_SECRETS__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_SECRETS__THREADS` | `None` | Number of threads for the service. |
 | `vault_token` | - | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `None` | The token to use for the vault instead of getting it from the secrets service. |
 | `vault_url` | `secrets-url` | `LANDSCAPE_SECRETS__VAULT_URL` | `http://localhost:8200` | The address of the vault to use for the secrets service. |
-| `workers` | - | `LANDSCAPE_SECRETS__WORKERS` | `None` | Number of worker processes for the service. |
 
 ## The `[stores]` section
 
-The `[stores]` section contains configurations for database store connections and SSL settings used across Landscape services.
+The `[stores]` section contains configurations for database store names and connections. In addition, the this section can use the {ref}`shared store settings <shared-store-settings>`.
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
@@ -306,14 +256,7 @@ The `[stores]` section contains configurations for database store connections an
 | `resource_1` | `resource-1` | `LANDSCAPE_STORES__RESOURCE_1` | `landscape-standalone-resource-1` | The first resource database name. |
 | `resource_2` | `resource-2` | `LANDSCAPE_STORES__RESOURCE_2` | `None` | The second resource database name. Optional and used for testing only. |
 | `session` | - | `LANDSCAPE_STORES__SESSION` | `landscape-standalone-session` | The session database name. |
-| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with autocommit isolation. |
-| `sslcert` | - | `LANDSCAPE_STORES__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_STORES__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_STORES__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_STORES__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_STORES__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_STORES__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_STORES__STORES` | `None` | The stores the service should use. |
+| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with {spellexception}`autocommit` isolation. |
 | `user` | - | `LANDSCAPE_STORES__USER` | `landscape` | The username for database connections. |
 
 ## The `[system]` section
