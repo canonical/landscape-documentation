@@ -50,7 +50,7 @@ See {ref}`how-to-external-auth-oidc`.
 
 ## Upload autoinstall file
 
-```note
+```{note}
 Currently, only the default file can be served to users.
 Ensure that you set a default file.
 ```
