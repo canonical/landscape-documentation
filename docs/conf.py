@@ -118,7 +118,7 @@ html_context = {
 # If your documentation is hosted on https://docs.ubuntu.com/,
 #       uncomment and update as needed.
 
-# slug = ''
+slug = 'landscape'
 
 # Template and asset locations
 
