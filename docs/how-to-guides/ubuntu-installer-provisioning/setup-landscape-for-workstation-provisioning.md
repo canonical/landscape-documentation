@@ -50,8 +50,13 @@ See {ref}`how-to-external-auth-oidc`.
 
 ## Upload autoinstall file
 
+```note
+Currently, only the default file can be served to users.
+Ensure that you set a default file.
+```
+
 1. Navigate to the **Employees > Autoinstall** tab.
 2. Upload your autoinstall file(s) to Landscape.
-3. Set the autoinstall file to be your default autoinstall file. This ensures it is served to all users that successfully authenticate.
+3. Set the autoinstall file to be your default autoinstall file.
 
 Only one file may be the default.
