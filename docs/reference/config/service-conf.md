@@ -78,7 +78,7 @@ The `[appserver]` section contains configurations for the Landscape application 
 | `openid_provider_url` | `openid-provider-url` | `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL` | `None` | OpenID provider URL. Required when using OpenID authentication. |
 | `repository_path` | `repository-path` | `LANDSCAPE_APPSERVER__REPOSITORY_PATH` | `/tmp/landscape-repository` | Path to the package repository. |
 | `reprepro_binary` | `reprepro-binary` | `LANDSCAPE_APPSERVER__REPREPRO_BINARY` | `None` | Path to the reprepro binary executable. |
-| `sanitize_delay` | `sanitize-delay` | `LANDSCAPE_APPSERVER__SANITIZE_DELAY` | `3600` | Delay in seconds for data {spellexception}`sanitization` operations. |
+| `sanitize_delay` | `sanitize-delay` | `LANDSCAPE_APPSERVER__SANITIZE_DELAY` | `3600` | Delay in seconds for data sanitization operations. |
 | `secret_token` | `secret-token` | `LANDSCAPE_APPSERVER__SECRET_TOKEN` | `None` | Secret token for application security. |
 | `soft_timeout` | `soft-timeout` | `LANDSCAPE_APPSERVER__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
 | `threads` | | `LANDSCAPE_APPSERVER__THREADS` | `None` | Number of threads for the service. |
@@ -189,6 +189,18 @@ It has the following settings beyond those shared by all services.
 | `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
 | `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
 
+## The `[oops]` section
+
+The `[oops]` section contains configurations for the OOPS error reporting and debugging system used for logging and traceback collection.
+
+| Key name | Deprecated key name | ENV name | Default | Purpose |
+| :------- | :------------------ | :------- | :------ | :------ |
+| `amqp_exchange` | `amqp-exchange` | `LANDSCAPE_OOPS__AMQP_EXCHANGE` | `None` | AMQP exchange name for error reporting. |
+| `amqp_key` | `amqp-key` | `LANDSCAPE_OOPS__AMQP_KEY` | `None` | AMQP routing key for error messages. Requires `amqp_exchange` to be set. |
+| `directory` | - | `LANDSCAPE_OOPS__DIRECTORY` | `None` | Directory path for OOPS error report storage. |
+| `path` | - | `LANDSCAPE_OOPS__PATH` | `None` | File path for OOPS configuration. |
+| `reporter` | - | `LANDSCAPE_OOPS__REPORTER` | `None` | Error reporter configuration. |
+
 ## The `[schema]` section
 
 The `[schema]` section contains configurations for updating the database schema.
@@ -237,7 +249,7 @@ The `[secrets]` section contains configurations for the secrets service, includi
 
 | Key name | Deprecated key name | ENV name | Default | Purpose |
 | :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
+| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or hostnames for the service. |
 | `base_port` | `base-port` | `LANDSCAPE_SECRETS__BASE_PORT` | `8090` | Base port number for the service. |
 | `devmode` | - | `LANDSCAPE_SECRETS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
 | `enable_metrics` | `enable-metrics` | `LANDSCAPE_SECRETS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
@@ -276,7 +288,7 @@ The `[stores]` section contains configurations for database store connections an
 | `resource_1` | `resource-1` | `LANDSCAPE_STORES__RESOURCE_1` | `landscape-standalone-resource-1` | The first resource database name. |
 | `resource_2` | `resource-2` | `LANDSCAPE_STORES__RESOURCE_2` | `None` | The second resource database name. Optional and used for testing only. |
 | `session` | - | `LANDSCAPE_STORES__SESSION` | `landscape-standalone-session` | The session database name. |
-| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with {spellexception}`autocommit` isolation. |
+| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with autocommit isolation. |
 | `sslcert` | - | `LANDSCAPE_STORES__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
 | `sslkey` | - | `LANDSCAPE_STORES__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
 | `sslmode` | - | `LANDSCAPE_STORES__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
@@ -306,7 +318,7 @@ The `[system]` section contains configurations that apply across many or all of 
 | `enable_subdomain_accounts` | - | `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS` | `False` | Whether to enable subdomain accounts or not. |
 | `enable_tag_script_execution` | - | `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION` | `False` | Whether to enable tag-based script execution or not. |
 | `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
-| `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
+| `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the keyrings. |
 | `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |
 | {spellexception}`pidfile_directory` | {spellexception}`pidfile-directory` | {spellexception}`LANDSCAPE_SYSTEM__PIDFILE_DIRECTORY` | `/tmp/landscape` | Unused |
 | `max_service_memory` | `max-service-memory` | `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY` | `0` | An upper limit (in {spellexception}`mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit. |
