@@ -48,6 +48,19 @@ See {ref}`how-to-external-auth-oidc`.
 1. Navigate to **Org settings > Identity providers**.
 2. Configure an OIDC client.
 
+## Create and validate your autoinstall file
+
+```{important}
+Landscape requires the use of the top-level `"autoinstall"` keyword.
+```
+
+See [the Autoinstall configuration reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html)
+for more details on creating an autoinstall file.
+
+It is strongly recommended that you test your file by provisioning a client device.
+See {ref}`how-to-provision-a-workstation` for details on provisioning a client device.
+Landscape injects some configuration into the autoinstall file to enable the client device to register with the server after installation.
+
 ## Upload autoinstall file
 
 ```{note}
