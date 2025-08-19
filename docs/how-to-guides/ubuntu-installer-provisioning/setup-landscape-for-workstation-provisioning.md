@@ -7,7 +7,7 @@ On SaaS Landscape, your account must be hosted on a subdomain.
 Your Landscape account must use OIDC authentication.
 
 ```{note}
-This feature is available from Landscape server `25.08` onwards.
+This feature is available from Landscape server `25.10~beta.3` onwards.
 ```
 
 ## Install the `landscape-ubuntu-installer-attach` package
@@ -15,7 +15,7 @@ This feature is available from Landscape server `25.08` onwards.
 Landscape requires an additional service for the Ubuntu installer attach experience.
 
 ```sh
-sudo add-apt-repository ppa:landscape/latest-stable
+sudo add-apt-repository ppa:landscape/self-hosted-beta
 sudo apt update
 sudo apt install landscape-ubuntu-installer-attach
 ```
