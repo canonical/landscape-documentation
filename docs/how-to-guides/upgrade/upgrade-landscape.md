@@ -92,30 +92,42 @@ To upgrade a basic Juju deployment:
     
     If you’re upgrading to a different version of Landscape, use the appropriate PPA.
     
-    Note: At the moment, the `landscape-server` charm only adds the PPA source during installation, so you will need to manually update this PPA on each of the `landscape-server` units. When the charm is updated, this will no longer be necessary.
+    **Note**: At the moment, the `landscape-server` charm only adds the PPA source during installation, so you will need to manually update this PPA on each of the `landscape-server` units. When the charm is updated, this will no longer be necessary.
     
-3. Pause Landscape services
+3. Pause Landscape services on all `landscape-server` units
     
     ```bash
     juju run landscape-server/0 pause
+    juju run landscape-server/1 pause
+    juju run landscape-server/2 pause
+    ...
+    juju run landscape-server/n pause
     ```
     
-4. Upgrade the Landscape server packages from the updated PPA
+4. Upgrade the Landscape server packages from the updated PPA on all `landscape-server` units
     
     ```bash
     juju run landscape-server/0 upgrade
+    juju run landscape-server/1 upgrade
+    juju run landscape-server/2 upgrade
+    ...
+    juju run landscape-server/n upgrade
     ```
     
-5. Update the database schema
+5. Update the database schema. Run this only once, and on one `landscape-server` unit
     
     ```bash
     juju run landscape-server/0 migrate-schema
     ```
     
-6. Re-start the Landscape services again
+6. Re-start the Landscape services again on all `landscape-server` units
     
     ```bash
     juju run landscape-server/0 resume
+    juju run landscape-server/1 resume
+    juju run landscape-server/2 resume
+    ...
+    juju run landscape-server/n resume
     ```
 
 ## Add additional configurations
