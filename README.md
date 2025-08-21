@@ -1,12 +1,12 @@
 # Landscape Documentation
 
-Landscape is a systems management tool designed to help you manage and monitor your Ubuntu systems from a unified platform.
+Landscape is a systems administration tool for managing and monitoring Ubuntu deployments, ranging from a few machines to large environments. It lets you control configuration, updates, and security from a central location. You can use Landscape for all of your Ubuntu systems, such as desktops, servers, cloud instances, and IoT devices.
 
-Landscape provides system administration for deployments at enterprise scale via a web portal and API. It streamlines functions including inventory management, automation, security hardening, compliance management, reporting and software distribution.
+Landscape uses a client–server model. An agent (Landscape Client) runs on each managed machine and communicates with the Landscape server, which can be managed via the web portal or API. This setup allows you to inventory systems, deploy software, automate updates, apply security patches, check compliance, generate reports, and more from a single interface.
 
-These administration tasks typically span multiple systems and interfaces, which can present challenges. Landscape reduces these challenges and simplifies administrative tasks by serving as a centralized hub that unifies these operations.
+Managing large systems often requires switching between multiple tools and manual processes. Landscape reduces this complexity by consolidating system management tasks into one portal, making it easier to keep systems up to date, secure, and compliant.
 
-For system administrators, security analysts, CISOs and more, Landscape provides a flexible and efficient system management solution that can adapt to various organizational sizes, requirements and complexities.
+Landscape is used by system administrators, security teams, IT managers, and compliance officers in organizations of all sizes. It works in on-premise, cloud, and hybrid environments, and scales from small installations to large infrastructures at enterprise scale.
 
 ## Support
 
