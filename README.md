@@ -1,6 +1,6 @@
 # Landscape Documentation
 
-Landscape is a systems administration tool for managing and monitoring Ubuntu deployments, ranging from a few machines to large environments. It lets you control configuration, updates, and security from a central location instead of handling each machine separately. You can use Landscape for all of your Ubuntu systems, such as desktops, servers, cloud instances, and IoT devices.
+Landscape is a systems administration tool for managing and monitoring Ubuntu deployments, ranging from a few machines to large environments. It lets you control configuration, updates, and security from a central location. You can use Landscape for all of your Ubuntu systems, such as desktops, servers, cloud instances, and IoT devices.
 
 Landscape uses a client–server model. An agent (Landscape Client) runs on each managed machine and communicates with the Landscape server, which can be managed via the web portal or API. This setup allows you to inventory systems, deploy software, automate updates, apply security patches, check compliance, generate reports, and more from a single interface.
 
