@@ -1,9 +1,11 @@
 (explanation-features-index)=
 # Features
 
+We have the following explanations for certain features in Landscape.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
-:glob:
 
-Package Reporting <package-reporting>
+repository-mirroring
+Package reporting <package-reporting>
