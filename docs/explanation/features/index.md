@@ -1,7 +1,7 @@
 (explanation-features-index)=
 # Features
 
-We have following explanations for certain features in Landscape.
+We have the following explanations for certain features in Landscape.
 
 ```{toctree}
 :titlesonly:
