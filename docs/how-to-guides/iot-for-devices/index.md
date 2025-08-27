@@ -26,6 +26,7 @@ Create an Ubuntu Core image that includes the snap <create-a-core-image>
 :titlesonly:
 Use remote script execution <remote-script-execution>
 Use annotations <use-annotations>
+Secure removal <secure-removal>
 ```
 
 ## Best practices for IoT
