@@ -137,6 +137,7 @@ livepatching
 logfile
 localhost
 loopback
+lsctl
 LXC
 LXD
 lxd
