@@ -9,3 +9,4 @@ We have the following explanations for certain features in Landscape.
 
 repository-mirroring
 Package reporting <package-reporting>
+Remote script execution <remote-script-execution>
