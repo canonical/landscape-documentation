@@ -8,32 +8,32 @@ This document explains how Landscape Client executes scripts.
 
 When an administrator requests a script execution, or when a script profile is scheduled, Landscape Server creates an `ExecuteScriptRequest` activity. See {ref}`explanation-activities` for details on how activities are delivered to clients.
 
-### Attachments
+## Attachments
 
 Scripts may include attachments. Attachments are stored on Landscape Server, and clients can fetch them before execution.
 
-### `execute-script` message
+## `execute-script` message
 
 Landscape Server sends a message to Landscape Client in the following form:
 
 ```json
 {
   "type": "execute-script",
-  "interpreter": <interpreter>,
-  "code": <code>,
-  "username": <user>,
-  "time-limit": <time_limit>,
-  "operation-id": <activity_id>,
-  "attachments": <attachments>,
+  "interpreter": "INTERPRETER",
+  "code": "SCRIPT_CODE",
+  "username": "USER",
+  "time-limit": "TIME_LIMIT",
+  "operation-id": "ACTIVITY_ID",
+  "attachments": ["ATTACHMENT_IDS"],
   "env": {
-    "LANDSCAPE_ACCOUNT": <account_name>, 
-    "LANDSCAPE_COMPUTER_ID": <computer_id>,
-    "LANDSCAPE_COMPUTER_TAGS": <computer_tags>,
-    "LANDSCAPE_URL": <landscape_url>
-    "LANDSCAPE_ACTIVITY_ID": <activity_id>,
-    "LANDSCAPE_ACTIVITY_CREATOR_ID": <creator_id>,
-    "LANDSCAPE_ACTIVITY_CREATION_TIME": <creation_time>,
-  },
+    "LANDSCAPE_ACCOUNT": "ACCOUNT_NAME",
+    "LANDSCAPE_COMPUTER_ID": "COMPUTER_ID",
+    "LANDSCAPE_COMPUTER_TAGS": ["COMPUTER_TAGS"],
+    "LANDSCAPE_URL": "LANDSCAPE_URL",
+    "LANDSCAPE_ACTIVITY_ID": "ACTIVITY_ID",
+    "LANDSCAPE_ACTIVITY_CREATOR_ID": "CREATOR_ID",
+    "LANDSCAPE_ACTIVITY_CREATION_TIME": "CREATION_TIME"
+  }
 }
 ```
 
@@ -47,7 +47,7 @@ Field descriptions:
 `attachments`: List of attachment IDs stored on Landscape Server.
 `env`: Environment variables provided by Landscape Server, including account name, computer metadata, and activity metadata.
 
-### Execution flow on Landscape Client
+## Execution flow on Landscape Client
 
 Once Landscape Client receives the `execute-script` message, it executes the following steps:
 
