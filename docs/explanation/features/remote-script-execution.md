@@ -1,16 +1,13 @@
 (explanation-remote-script-execution)=
+# Remote script execution
 
-# Landscape remote script execution
+Landscape has a remote script execution feature that allows administrators to run scripts on registered client machines from Landscape Server. You must have {ref}`script execution enabled <howto-heading-client-enable-script-execution>` to use this feature.
 
 This document explains how Landscape Client executes scripts.
 
 ## Overview
 
 When an administrator requests a script execution, or when a script profile is scheduled, Landscape Server creates an `ExecuteScriptRequest` activity. See {ref}`explanation-activities` for details on how activities are delivered to clients.
-
-## Attachments
-
-Scripts may include attachments. Attachments are stored on Landscape Server, and clients can fetch them before execution.
 
 ## `execute-script` message
 
@@ -39,13 +36,15 @@ Landscape Server sends a message to Landscape Client in the following form:
 
 Field descriptions:
 
-`interpreter`: The interpreter to run the script. This is parsed from the script code.
-`code`: The script body, excluding the interpreter line.
-`username`: The user under which the script will run. In the Landscape Client snap, this is always root.
-`time_limit`: Maximum execution time before the process is forcibly terminated.
-`activity_id`: Unique identifier of the activity.
-`attachments`: List of attachment IDs stored on Landscape Server.
-`env`: Environment variables provided by Landscape Server, including account name, computer metadata, and activity metadata.
+- `interpreter`: The interpreter to run the script. This is parsed from the script code.
+- `code`: The script body, excluding the interpreter line.
+- `username`: The user under which the script will run. If you're using the Landscape Client snap, this is always root.
+- `time_limit`: Maximum execution time before the process is forcibly terminated.
+- `activity_id`: Unique identifier of the activity.
+- `attachments`: List of attachment IDs stored on Landscape Server.
+- `env`: Environment variables provided by Landscape Server, including account name, computer metadata, and activity metadata.
+
+If an attachment is included in a script, the attachment is stored on Landscape Server. Clients can fetch attachments before executing the script.
 
 ## Execution flow on Landscape Client
 

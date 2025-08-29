@@ -1,11 +1,11 @@
 (explanation-activities)=
 # Activities
 
-Landscape tracks the progress of various tasks using activities. There are two types of activities: client activities and server activities. This document will explain how each type of activity is tracked and their possible states.
+Landscape tracks the progress of various tasks using activities, such as script execution and installing packages. There are two types of activities: client activities and server activities. This document explains how each type of activity is tracked and their possible states.
 
 ## Client activities
 
-Client activities are tasks that execute on Landscape Client. Examples include {ref}`remote script execution <explanation-remote-script-execution>`. They are processed by the `message-system` when an instance exchanges messages with Landscape Server.
+Client activities are tasks that execute on Landscape Client. For example, {ref}`remote script execution <explanation-remote-script-execution>`. They are processed by the `message-system` when an instance exchanges messages with Landscape Server.
 
 ### Client activity states
 
@@ -33,7 +33,7 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 
 ## Server activities
 
-Server activities run on Landscape Server without interacting with Landscape Client. Examples include {ref}`downloading security profile reports <reference-rest-api-security-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
+Server activities run on Landscape Server without interacting with Landscape Client. For example, {ref}`downloading security profile reports <reference-rest-api-security-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
 
 ### Server activity states
 
@@ -53,3 +53,45 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 1. An activity is created (e.g., by an admin action or scheduled profile) and added to a RabbitMQ queue.
 1. The `job-handler` consumes the activity from the queue and moves the activity from `Queued` or `Scheduled` to `In Progress`.
 1. The `job-handler` completes the activity and updates the status to `Succeeded` or `Failed`.
+
+## Types of activities
+
+- `ResynchronizeRequest`
+- `CreateUserRequest`
+- `EditUserRequest`
+- `DeleteUserRequest`
+- `CreateGroupRequest`
+- `AddGroupMemberRequest`
+- `RemoveGroupMemberRequest`
+- `LockUserRequest`
+- `UnlockUserRequest`
+- `ChangePackagesRequest`
+- `UpgradeAllPackagesRequest`
+- `ReleaseUpgradeRequest`
+- `ChangePackageProfilesRequest`
+- `ChangeRepositoryProfilesRequest`
+- `ChangeUpgradeProfilesRequest`
+- `UpgradeKernelPackageRequest`
+- `DowngradeKernelPackageRequest`
+- `SignalProcessRequest`
+- `ExecuteScriptRequest`
+- `RestartRequest`
+- `ShutdownRequest`
+- `SyncPocketRequest`
+- `InstallSnaps`
+- `RemoveSnaps`
+- `RefreshSnaps`
+- `HoldSnaps`
+- `UnholdSnaps`
+- `StartChildComputerActivity`
+- `StopChildComputerActivity`
+- `DeleteChildComputerActivity`
+- `SetDefaultChildComputerActivity`
+- `ShutdownHostComputerActivity`
+- `CreateChildComputerActivity`
+- `DeleteUnmanagedWSLInstanceActivity`
+- `ArchiveRequest`
+- `UsgActivity`
+- `GenerateUsgReportActivity`
+- `RemoveComputerActivity`
+- `AttachProRequest`
