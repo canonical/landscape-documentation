@@ -20,17 +20,17 @@ sudo apt install landscape-ubuntu-installer-attach
 
 ## Configure the proxy
 
-Landscape requires the `X-FQDN` header to be set in order to properly configure the autoinstall files.
+This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination.
+
+- The installer expects the service to be available at port `50051` on the proxy.
+- The installer uses HTTPS by default
+- Port `53354` is the default port for the `ubuntu-installer-attach` service.
 
 For example, if using HAProxy, include the following in `/etc/haproxy/haproxy.cfg`:
 
 ```text
 frontend haproxy-0-grpc-ubuntu-installer
     bind 0.0.0.0:50051 ssl crt /var/lib/haproxy/default.pem alpn h2
-    acl host_found hdr(host) -m found
-    http-request set-var(req.full_fqdn) hdr(authority) if !host_found
-    http-request set-var(req.full_fqdn) hdr(host) if host_found
-    http-request set-header X-FQDN %[var(req.full_fqdn)]
     default_backend landscape-ubuntu-installer-attach-messenger
 
 backend landscape-ubuntu-installer-attach-messenger
@@ -38,8 +38,26 @@ backend landscape-ubuntu-installer-attach-messenger
     server landscape-ubuntu-installer-attach-messenger-0-0 localhost:53354 proto h2
 ```
 
-- The installer expects the service to be available at port `50051` on the proxy.
-- Port `53354` is the default port for the `ubuntu-installer-attach` service.
+### (Optional) Configure the X-FQDN header
+
+```{note}
+This is only useful for multitenant deployments.
+If you are using self-hosted, you can disregard this.
+```
+
+For multitenant deployments, Landscape requires an `X-FQDN` header to disambiguate the tenant.
+
+For example, if using HAProxy, include the following in `/etc/haproxy/haproxy.cfg`:
+
+```text
+frontend haproxy-0-grpc-ubuntu-installer
+    bind 0.0.0.0:50051 ssl crt /var/lib/haproxy/default.pem alpn h2
+    default_backend landscape-ubuntu-installer-attach-messenger
+    acl host_found hdr(host) -m found
+    http-request set-var(req.full_fqdn) hdr(authority) if !host_found
+    http-request set-var(req.full_fqdn) hdr(host) if host_found
+    http-request set-header X-FQDN %[var(req.full_fqdn)]
+```
 
 ## Enable the feature
 
