@@ -1,5 +1,5 @@
-(how-to-ubuntu-installer-provisioning-setup-landscape)=
-# How to set up Landscape for workstation provisioning
+(how-to-ubuntu-installer-provisioning-administer-autoinstall-provisioning)=
+# How to administer autoinstall provisioning
 
 Recent releases of the Ubuntu installer (24.04+) can use Landscape to serve an autoinstall file.
 This is available on self-hosted and SaaS Landscape.
@@ -7,30 +7,14 @@ On SaaS Landscape, your account must be hosted on a subdomain.
 Your Landscape account must use OIDC authentication.
 
 ```{note}
-This feature is available from Landscape server `25.10~beta.3` onwards.
+This feature is available from Landscape server `25.10~beta.4` onwards.
 ```
 
-## Install the `landscape-ubuntu-installer-attach` package
+## Before you start
 
-Landscape requires an additional service for the Ubuntu installer attach experience.
+If you're on SaaS, you'll need to request that this feature is enabled for your account.
 
-```sh
-sudo add-apt-repository ppa:landscape/self-hosted-beta
-sudo apt update
-sudo apt install landscape-ubuntu-installer-attach
-```
-
-## Enable the feature
-
-On self-hosted, you'll need to set the feature flag in your `service.conf`:
-
-```ini
-[features]
-[...]
-enable-employee-management = true
-```
-
-On SaaS, you'll need to make a request to support.
+If you're on self-hosted, you'll need to configure your deployment to enable this feature. See {ref}`how-to-ubuntu-installer-provisioning-deployment-configuration`.
 
 ## Configure OIDC
 

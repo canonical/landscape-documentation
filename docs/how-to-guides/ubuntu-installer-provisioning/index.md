@@ -6,5 +6,6 @@
 :maxdepth: 2
 :glob:
 
-Setup Landscape for Workstation Provisioning <setup-landscape-for-workstation-provisioning>
-Provision a Workstation <provision-a-workstation>
+Configure a deployment for autoinstall provisioning <configure-landscape-deployment-for-autoinstall-provisioning>
+Administer autoinstall provisioning <administer-autoinstall-provisioning>
+Provision a workstation <provision-a-workstation>
