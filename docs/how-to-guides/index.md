@@ -123,7 +123,7 @@ repository-mirrors/index
 web-portal/index
 iot-for-devices/index
 wsl-integration/index
-ubuntu-installer-provisioning/index
+ubuntu-installer/index
 security/index
 api/index
 ```
