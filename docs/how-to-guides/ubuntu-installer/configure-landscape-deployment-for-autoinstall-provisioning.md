@@ -30,11 +30,15 @@ sudo apt install landscape-ubuntu-installer-attach
 
 This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination.
 
-- The installer expects the service to be available at port `50051` on the proxy.
-- The installer uses HTTPS by default
-- Port `53354` is the default port for the `ubuntu-installer-attach` service.
+### Requirements
 
-For example, if using HAProxy, include the following in `/etc/haproxy/haproxy.cfg`:
+- The installer connects to the proxy on port 50051.
+- The installer connects using HTTPS.
+- The `ubuntu-installer-attach` service listens on port 53354 by default.
+
+### Example configuration (HAProxy)
+
+For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
 
 ```text
 frontend haproxy-0-grpc-ubuntu-installer
