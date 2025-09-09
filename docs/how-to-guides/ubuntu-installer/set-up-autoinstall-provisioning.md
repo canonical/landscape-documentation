@@ -1,5 +1,5 @@
-(how-to-ubuntu-installer-provisioning-set-up-autoinstall-provisioning)=
-# How to set up autoinstall provisioning
+(how-to-ubuntu-installer-set-up-landscape)=
+# How to set up your Landscape server to provision workstations with Autoinstall via the Ubuntu installer
 
 > See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 
@@ -21,7 +21,8 @@ Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at
 
 If you're on SaaS, you'll need to request that this feature is enabled for your account.
 
-If you're on self-hosted, you'll need to configure your deployment to enable this feature. See {ref}`how-to-ubuntu-installer-provisioning-deployment-configuration`.
+If you're on self-hosted, you'll need to configure your deployment to enable this feature.
+See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
 ## Configure OIDC
 

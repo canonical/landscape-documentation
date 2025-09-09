@@ -1,5 +1,5 @@
 (how-to-ubuntu-installer-provision-a-workstation)=
-# How to provision a workstation using Landscape and the Ubuntu installer
+# How to provision a workstation with Autoinstall using Landscape and the Ubuntu installer
 
 The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file.
 This is available on self-hosted and Landscape SaaS.

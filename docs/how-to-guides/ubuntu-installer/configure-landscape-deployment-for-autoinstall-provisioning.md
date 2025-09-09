@@ -1,5 +1,5 @@
-(how-to-ubuntu-installer-provisioning-deployment-configuration)=
-# How to configure a Landscape deployment for autoinstall provisioning
+(how-to-ubuntu-installer-configure-landscape-deployment)=
+# How to configure your Landscape deployment to provision workstations with Autoinstall via the Ubuntu installer
 
 > See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 
