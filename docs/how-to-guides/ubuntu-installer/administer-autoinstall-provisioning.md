@@ -37,7 +37,7 @@ See {ref}`how-to-external-auth-oidc`.
 ### SaaS
 
 1. Navigate to **Org settings > Identity providers**.
-2. Configure an OIDC client.
+2. Configure an OIDC provider.
 
 ## Create and validate your autoinstall file
 
