@@ -44,7 +44,7 @@ snap_http.get_snapshots()
 If you wish to uninstall snap but not retain any of this data, you can do this by uninstalling the snap with the purge flag. Here's an example script demonstrating how to do this from Landscape.
 
 ```python
-<missing-script>
+snap_http.remove(snap, purge=True)
 ```
 
 ## Manual snapshots
