@@ -79,7 +79,7 @@ Set the following configuration in your `service.conf`:
 ```ini
 [features]
 [...]
-enable-employee-management = true
+employee_management = true
 ```
 
 ## Verify the connection
