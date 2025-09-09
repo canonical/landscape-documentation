@@ -84,9 +84,16 @@ enable-employee-management = true
 
 ## Verify the connection
 
+You should verify the connection to ensure that your server can be reached using HTTPS, and that the certificate is verifiable without additional flags.
+The Ubuntu installer expects a valid SSL certificate that is signed by a known CA.
+
+For example:
+
 ```sh
-curl -i https://<Landscape server host>:50051
+curl -i https://<LANDSCAPE_SERVER_HOST>:50051
 ```
+
+Sample output:
 
 ```text
 HTTP/2 200 
@@ -94,6 +101,3 @@ content-type: application/grpc
 grpc-status: 2
 grpc-message: Bad method header
 ```
-
-Ensure that your server can be reached using HTTPS, and that the certificate is verifiable without additional flags.
-The Ubuntu installer expects a valid SSL certificate that is signed by a known CA.
