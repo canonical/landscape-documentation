@@ -53,11 +53,11 @@ backend landscape-ubuntu-installer-attach-messenger
 ### (Optional) Configure the X-FQDN header
 
 ```{note}
-This is only useful for multitenant deployments.
+This is only useful for multi-tenant deployments.
 If you are using self-hosted, you can disregard this.
 ```
 
-For multitenant deployments, Landscape requires an `X-FQDN` header to disambiguate the tenant.
+For multi-tenant deployments, Landscape requires an `X-FQDN` header to disambiguate the tenant.
 
 For example, if using HAProxy, include the following in `/etc/haproxy/haproxy.cfg`:
 
