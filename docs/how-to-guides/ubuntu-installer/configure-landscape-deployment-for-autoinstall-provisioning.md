@@ -59,7 +59,8 @@ If you are using self-hosted, you can disregard this.
 
 For multi-tenant deployments, Landscape requires an `X-FQDN` header to disambiguate the tenant.
 
-For example, if using HAProxy, include the following in `/etc/haproxy/haproxy.cfg`:
+You'll need to configure this X-FQDN in your proxy settings.
+For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
 
 ```text
 frontend haproxy-0-grpc-ubuntu-installer
