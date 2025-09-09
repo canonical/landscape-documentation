@@ -21,6 +21,11 @@ Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at
 
 If you're on SaaS, you'll need to request that this feature is enabled for your account.
 
+```{note}
+This feature is **not generally available on SaaS yet**.
+It's only available for certain beta customers at this time.
+```
+
 If you're on self-hosted, you'll need to configure your deployment to enable this feature.
 See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
