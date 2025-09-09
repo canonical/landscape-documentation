@@ -1,5 +1,5 @@
-(how-to-ubuntu-installer-provisioning-administer-autoinstall-provisioning)=
-# How to administer autoinstall provisioning
+(how-to-ubuntu-installer-provisioning-set-up-autoinstall-provisioning)=
+# How to set up autoinstall provisioning
 
 > See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 

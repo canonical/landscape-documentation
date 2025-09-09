@@ -7,5 +7,5 @@
 :glob:
 
 Configure a deployment for autoinstall provisioning <configure-landscape-deployment-for-autoinstall-provisioning>
-Administer autoinstall provisioning <administer-autoinstall-provisioning>
+Set up autoinstall provisioning <set-up-autoinstall-provisioning>
 Provision a workstation <provision-a-workstation>

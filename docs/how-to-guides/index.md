@@ -97,7 +97,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 ## Ubuntu installer
 
 - {ref}`Configure Landscape for autoinstall provisioning <how-to-ubuntu-installer-provisioning-deployment-configuration>`
-- {ref}`Administer autoinstall provisioning <how-to-ubuntu-installer-provisioning-administer-autoinstall-provisioning>`
+- {ref}`Set up autoinstall provisioning <how-to-ubuntu-installer-provisioning-set-up-autoinstall-provisioning>`
 - {ref}`Provision a workstation <how-to-ubuntu-installer-provision-a-workstation>`
 
 (how-to-index-heading-security)=
