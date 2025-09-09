@@ -4,8 +4,8 @@
 > See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 
 The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file.
-This is available on self-hosted and SaaS Landscape.
-On SaaS Landscape, your account must be hosted on a subdomain.
+This is available on self-hosted and Landscape SaaS.
+On Landscape SaaS, your account must be hosted on a subdomain.
 Your Landscape account must use OIDC authentication.
 
 ```{note}
