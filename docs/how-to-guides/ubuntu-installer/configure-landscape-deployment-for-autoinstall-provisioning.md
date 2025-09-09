@@ -18,6 +18,7 @@ Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at
 ## Install the `landscape-ubuntu-installer-attach` package
 
 Landscape requires an additional service for the Ubuntu installer attach experience.
+This example uses the Landscape Beta PPA.
 
 ```sh
 sudo add-apt-repository ppa:landscape/self-hosted-beta
