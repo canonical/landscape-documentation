@@ -1,8 +1,6 @@
 (how-to-ubuntu-installer-configure-landscape-deployment)=
 # How to configure your Landscape deployment to provision workstations with Autoinstall via the Ubuntu installer
 
-> See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
-
 The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file.
 Your Landscape account must use OIDC authentication.
 
@@ -14,6 +12,8 @@ This feature is available from Landscape server `25.10~beta.4` onwards.
 
 [Autoinstall](https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html) is a means to automate an Ubuntu installation.
 Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at installation time.
+
+> See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 
 ## Install the `landscape-ubuntu-installer-attach` package
 
