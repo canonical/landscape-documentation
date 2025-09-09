@@ -1,7 +1,7 @@
 (how-to-ubuntu-installer-provisioning-administer-autoinstall-provisioning)=
 # How to administer autoinstall provisioning
 
-Recent releases of the Ubuntu installer (24.04+) can use Landscape to serve an autoinstall file.
+The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file.
 This is available on self-hosted and SaaS Landscape.
 On SaaS Landscape, your account must be hosted on a subdomain.
 Your Landscape account must use OIDC authentication.
