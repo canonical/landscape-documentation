@@ -5,6 +5,7 @@ The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall
 This is available on self-hosted and Landscape SaaS.
 On Landscape SaaS, your account must be hosted on a subdomain.
 Your Landscape administrator must have configured an OIDC login method.
+Your Landscape administrator must have set up your Landscape deployment for workstation provisioning. See {ref}`how-to-ubuntu-installer-set-up-landscape`.
 
 ## In the Ubuntu installer
 
