@@ -45,7 +45,7 @@ See {ref}`how-to-external-auth-oidc`.
 Landscape requires the use of the top-level `"autoinstall"` keyword.
 ```
 
-See [the Autoinstall configuration reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html)
+See [Ubuntu's Autoinstall configuration reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html)
 for more details on creating an autoinstall file.
 
 It is strongly recommended that you test your file by provisioning a client device.
