@@ -74,7 +74,7 @@ frontend haproxy-0-grpc-ubuntu-installer
 
 ## Enable the feature
 
-Set the feature flag in your `service.conf`:
+Set the following configuration in your `service.conf`:
 
 ```ini
 [features]
