@@ -7,3 +7,4 @@
 
 Backup and restore <backup-and-restore>
 Manage maintenance tasks <manage-maintenance-tasks>
+Remove duplicate instances <remove-duplicate-instances>

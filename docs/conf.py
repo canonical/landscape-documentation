@@ -293,5 +293,6 @@ redirects = {
     'how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment': '../../repository-mirrors/manage-repositories-in-an-air-gapped-or-offline-environment',
     'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment',
     'getting-started-with-landscape': '/tutorial',
-    'explanation/repository-mirroring/repository-mirroring': '../../features/repository-mirroring'
+    'explanation/repository-mirroring/repository-mirroring': '../../features/repository-mirroring',
+    'reference/known-issues/known-issues': '../../known-issues'
 }
