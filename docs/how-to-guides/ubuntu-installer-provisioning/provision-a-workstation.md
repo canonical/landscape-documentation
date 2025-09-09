@@ -1,4 +1,4 @@
-(how-to-provision-a-workstation)=
+(how-to-ubuntu-installer-provision-a-workstation)=
 # How to provision a workstation using Landscape and the Ubuntu installer
 
 Recent releases of the Ubuntu installer (24.04+) can use Landscape to serve an autoinstall file.
@@ -16,7 +16,7 @@ Save this for the next step.
 
 ## In Landscape
 
-1. Navigate to the **/attach** page in Landscape.
+1. Navigate to the `/attach` page in Landscape.
 1. Enter your 6 digit attach code.
 1. Landscape will confirm that the attach code is valid and will prompt you to log in.
 1. Authenticate against your OIDC provider.

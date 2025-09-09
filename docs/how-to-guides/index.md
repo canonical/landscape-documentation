@@ -93,6 +93,13 @@ These how-to guides can be applied to many key operations and common tasks with 
 - {ref}`Perform common tasks <how-to-wsl-perform-common-tasks>`
 - {ref}`Get support <how-to-wsl-get-support>`
 
+(how-to-index-heading-ubuntu-installer)=
+## Ubuntu installer
+
+- {ref}`Configure Landscape for autoinstall provisioning <how-to-ubuntu-installer-provisioning-deployment-configuration>`
+- {ref}`Administer autoinstall provisioning <how-to-ubuntu-installer-provisioning-administer-autoinstall-provisioning>`
+- {ref}`Provision a workstation <how-to-ubuntu-installer-provision-a-workstation>`
+
 (how-to-index-heading-security)=
 ## Security
 
@@ -116,7 +123,7 @@ repository-mirrors/index
 web-portal/index
 iot-for-devices/index
 wsl-integration/index
+ubuntu-installer-provisioning/index
 security/index
 api/index
-ubuntu-installer-provisioning/index
 ```

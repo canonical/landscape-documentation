@@ -1,5 +1,5 @@
 (how-to-guides-ubuntu-installer-provisioning-index)=
-# Provisioning devices with the Ubuntu Installer
+# Ubuntu installer
 
 ```{toctree}
 :titlesonly:
