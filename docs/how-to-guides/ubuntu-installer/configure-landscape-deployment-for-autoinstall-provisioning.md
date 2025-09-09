@@ -1,6 +1,8 @@
 (how-to-ubuntu-installer-provisioning-deployment-configuration)=
 # How to configure a Landscape deployment for autoinstall provisioning
 
+> See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
+
 The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file.
 Your Landscape account must use OIDC authentication.
 
