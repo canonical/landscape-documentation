@@ -190,7 +190,8 @@ extensions = [
     "canonical_sphinx",
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
-    "sphinx_sitemap"
+    "sphinx_sitemap",
+    "sphinxext.rediraffe"
 ]
 
 
@@ -278,21 +279,18 @@ sitemap_url_scheme = "{link}"
 # Redirects #
 #############
 
-# To set up redirects: https://documatt.gitlab.io/sphinx-reredirects/usage.html
-# For example: 'explanation/old-name.html': '../how-to/prettify.html',
+## Rediraffe extension
+rediraffe_branch = "main"
+rediraffe_redirects = "redirects.txt"
 
-# To set up redirects in the Read the Docs project dashboard:
-# https://docs.readthedocs.io/en/stable/guides/redirects.html
-
-# NOTE: If undefined, set to None, or empty,
-#       the sphinx_reredirects extension will be disabled.
-
+## Reredirects extension 
+## NOTE: We've moved to use rediraffe as our main redirects extension.
+## The following are ones we already had in place, but haven't migrated
 redirects = {
     'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
     'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure',
     'how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment': '../../repository-mirrors/manage-repositories-in-an-air-gapped-or-offline-environment',
     'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment',
-    'getting-started-with-landscape': '/tutorial',
     'explanation/repository-mirroring/repository-mirroring': '../../features/repository-mirroring',
     'reference/known-issues/known-issues': '../../known-issues'
 }
