@@ -46,4 +46,3 @@ oidc-logout-url = <https://accounts.google.com/logout>
 ```{note}
 There is no provision yet to upgrade current users to OIDC authentication. Most providers return pairwise subject identifiers (sub) which are not easily available. For this reason, we do not provide a user migration method and recommend recreating users.
 ```
-
