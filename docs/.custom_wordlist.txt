@@ -276,6 +276,8 @@ udeb
 udebs
 unactivated
 uncomment
+unhold
+Unhold
 unscalable
 untrusted
 uploader

@@ -17,3 +17,4 @@ Sanitize instances <sanitize-instances>
 Use reboot profiles <use-reboot-profiles>
 Use script profiles <use-script-profiles>
 Use security profiles <use-security-profiles>
+Manage snaps <manage-snaps>
