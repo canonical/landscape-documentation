@@ -1,8 +1,7 @@
 (how-to-ubuntu-installer-configure-landscape-deployment)=
 # How to configure your Landscape deployment to provision workstations with Autoinstall via the Ubuntu installer
 
-The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file.
-Your Landscape account must use OIDC authentication.
+The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
 
 ```{note}
 This feature is available from Landscape server `25.10~beta.4` onwards.
@@ -10,15 +9,13 @@ This feature is available from Landscape server `25.10~beta.4` onwards.
 
 ## Background information
 
-[Autoinstall](https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html) is a means to automate an Ubuntu installation.
-Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at installation time.
+[Autoinstall](https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html) is a means to automate an Ubuntu installation. Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at installation time.
 
 > See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 
 ## Install the `landscape-ubuntu-installer-attach` package
 
-Landscape requires an additional service for the Ubuntu installer attach experience.
-This example uses the Landscape Beta PPA.
+Landscape requires an additional service for the Ubuntu installer attach experience. This example uses the Landscape Beta PPA.
 
 ```sh
 sudo add-apt-repository ppa:landscape/self-hosted-beta
@@ -59,8 +56,7 @@ If you are using self-hosted, you can disregard this.
 
 For multi-tenant deployments, Landscape requires an `X-FQDN` header to disambiguate the tenant.
 
-You'll need to configure this X-FQDN in your proxy settings.
-For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
+You'll need to configure this X-FQDN in your proxy settings. For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
 
 ```text
 frontend haproxy-0-grpc-ubuntu-installer
@@ -84,8 +80,7 @@ employee_management = true
 
 ## Verify the connection
 
-You should verify the connection to ensure that your server can be reached using HTTPS, and that the certificate is verifiable without additional flags.
-The Ubuntu installer expects a valid SSL certificate that is signed by a known CA.
+You should verify the connection to ensure that your server can be reached using HTTPS, and that the certificate is verifiable without additional flags. The Ubuntu installer expects a valid SSL certificate that is signed by a known CA.
 
 For example:
 
