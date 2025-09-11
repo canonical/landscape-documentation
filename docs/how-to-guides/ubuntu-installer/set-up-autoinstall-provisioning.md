@@ -7,6 +7,10 @@ The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall
 This feature is available from Landscape server `25.10~beta.4` onwards.
 ```
 
+```{note}
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
+```
+
 ## Background information
 
 [Autoinstall](https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html) is a means to automate an Ubuntu installation. Landscape integrates with the Ubuntu installer to deliver an Autoinstall file at installation time.
@@ -14,12 +18,6 @@ This feature is available from Landscape server `25.10~beta.4` onwards.
 > See also: [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html)
 
 ## Before you start
-
-If you're on SaaS, you'll need to request that this feature is enabled for your account.
-
-```{note}
-This feature is **not generally available on SaaS yet**. It's only available for certain beta customers at this time.
-```
 
 If you're on self-hosted, you'll need to configure your deployment to enable this feature. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
