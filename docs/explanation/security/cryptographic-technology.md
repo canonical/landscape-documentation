@@ -55,6 +55,13 @@ We recommend using TLS for all endpoints. By default, traffic to Landscape Serve
 
 To enable HTTPS for the `ping` and `hash-id-databases` endpoints, Landscape Clients can be configured using the `ping_url` and `package_hash_id_url` settings to use HTTPS.
 
+For Juju deployments using the Landscape Server Charm, you can enable HTTPS pings by setting the charm config option:
+
+```bash
+juju config landscape-server ping_https=true
+```
+When `true`, the /ping endpoint will only be served over HTTPS, and when `false` (default), the /ping endpoint will be available over both HTTP and HTTPS.
+
 To enable HTTPS for the `repository` endpoint, Landscape repository profiles can be configured to use HTTPS APT sources, but this may require creating those APT sources manually rather than having Landscape determine them automatically based on created repository mirrors.
 
 ### JSON Web Tokens
