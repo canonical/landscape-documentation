@@ -12,6 +12,13 @@ If you're using Landscape's repository mirroring features, Landscape Server may 
 Port 80 is only needed for Landscape's repository mirroring features. If you don't use these
 features, then you don't need to expose Port 80. In this case, you would configure your Landscape clients to use HTTPS for all traffic:
 
+For Juju deployments using the Landscape Server Charm, you can enable HTTPS pings by setting the charm config option:
+
+```bash
+juju config landscape-server ping_https=true
+```
+When `true`, the /ping endpoint will only be served over HTTPS, and when `false` (default), the /ping endpoint will be available over both HTTP and HTTPS.
+
   1. Edit `/etc/landscape/client.conf` to ensure that the entries for `url`, `package_hash_id_url`,
      and `ping_url` all start with `https` instead of `http`
   1. Restart Landscape client: `sudo systemctl restart landscape-client`
