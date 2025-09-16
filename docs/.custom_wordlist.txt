@@ -52,6 +52,7 @@ CLI's
 Cognito
 config
 configs
+conformant
 conntrack
 CORS
 createseries
@@ -112,10 +113,11 @@ html
 http
 HTTPS
 https
+init
+incrementation
 IoT
 Iot
 ip
-init
 jQuery
 Juju's
 Juju
