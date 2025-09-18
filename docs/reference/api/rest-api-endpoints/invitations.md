@@ -1,5 +1,30 @@
 (reference-rest-api-invitations)=
+
 # Invitations
+
+## POST `/accept-invitation`
+
+Accept an invitation for the current user.
+
+Required parameters:
+
+- `invitation_id`: The alphanumeric string used to identify the invitation.
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/accept-invitation" -H "Authorization: Bearer $JWT" -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
+
+```
+
+Example output:
+
+```json
+{
+  "account_id": 4,
+  "account_title": "My Account"
+}
+```
 
 ## GET `/invitations`
 
@@ -14,12 +39,14 @@ Query parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X GET "https://landscape.canonical.com/api/v2/invitations" -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
-```bash
+
+```json
 {
   "count": 2,
   "results": [
@@ -59,12 +86,14 @@ Optional parameters:
 - `roles`: If specified, a list of strings with the roles that the administrator will have in your account.
 
 Example request:
+
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/invitations" -H "Authorization: Bearer $JWT" -d '{"name": "Bobby", "email": "bobby@ubuntu.com", "roles": ["Auditor", "SupportAnalyst"]}'
 ```
 
 Example output:
-```bash
+
+```json
 {
   "id": 4,
   "secure_id": "ozVPhiV41ZfgyP53QHvlwOP3syeKel"
@@ -84,6 +113,7 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X DELETE "https://landscape.canonical.com/api/v2/invitations/4" -H "Authorization: Bearer $JWT"
 ```
@@ -101,12 +131,14 @@ Query parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X GET  "https://landscape.canonical.com/api/v2/invitations/2" -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
-```bash
+
+```json
 {
   "id": 2,
   "secure_id": "YE6XEiWr5T0HUBgMhXAwgyofwY5EKd",
@@ -116,4 +148,3 @@ Example output:
   "creation_time": "2024-03-20T14:49:25Z"
 }
 ```
-
