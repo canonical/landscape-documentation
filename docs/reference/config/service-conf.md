@@ -201,12 +201,29 @@ The shared store settings are not mutually exclusive with the shared service set
 
 The `[api]` section contains configurations for the Landscape API service, including service connection settings and database store configurations. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `cookie_encryption_key` | `cookie-encryption-key` | `LANDSCAPE_API__COOKIE_ENCRYPTION_KEY` | `None` | The key used to encrypt state and nonce cookies. |
-| `cors_allow_all` | `cors-allow-all` | `LANDSCAPE_API__CORS_ALLOW_ALL` | `False` | Whether to allow CORS. |
-| `root_url` | `root-url` | `LANDSCAPE_API__ROOT_URL` | `None` | The API URL to use. |
-| `snap_store_api_url` | `snap-store-api-url` | `LANDSCAPE_API__SNAP_STORE_API_URL` | `https://api.snapcraft.io/v2` | The API for a Snap Store Proxy. By default, this is the Canonical Snap Store. |
+### `cookie_encryption_key`
+
+- Purpose: The key used to encrypt state and nonce cookies. Must be 32 url-safe, base64-encoded bytes. If unset, Landscape will generate and set a key using the Fernet symmetric encryption algorithm. If the key is invalid, the `landscape-api` service will fail to start.
+- Deprecated key name: `cookie-encryption-key`
+- ENV name: `LANDSCAPE_API__COOKIE_ENCRYPTION_KEY`
+- Default: `None`
+
+### `cors_allow_all`
+
+- Purpose: This setting should only be enabled in a development environment. If `True`, the following headers will be set in HTTP responses from the API service:
+  - `Access-Control-Allow-Origin: *`
+  - `Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS`
+  - `Access-Control-Allow-Credentials: true`
+- Deprecated key name: `cors-allow-all`
+- ENV name: `LANDSCAPE_API__CORS_ALLOW_ALL`
+- Default: `False`
+
+### `snap_store_api_url`
+
+- Purpose: The API for a Snap Store Proxy. By default, this is the Canonical Snap Store.
+- Deprecated key name: `snap-store-api-url`
+- ENV name: `LANDSCAPE_API__SNAP_STORE_API_URL`
+- Default: `https://api.snapcraft.io/v2`
 
 ## The `[appserver]` section
 

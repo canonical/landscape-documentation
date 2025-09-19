@@ -81,6 +81,7 @@ dput
 Entra
 epoll
 ESM
+Fernet
 FIPS
 FQDN
 gapped
