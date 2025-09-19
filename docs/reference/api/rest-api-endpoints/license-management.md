@@ -121,7 +121,8 @@ Required parameters:
 
 Optional parameters:
 
-- None
+- available_only: only include licenses that have open seats.
+- active_only: only include licenses that are not expired.
 
 Example Request:
 
