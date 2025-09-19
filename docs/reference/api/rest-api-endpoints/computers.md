@@ -32,6 +32,10 @@ Query parameters:
   - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
   - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
   - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.
+  - `license-type:<license-type>`: Instances associated with the specified <`license-type`>. The `license-type` must be one of `unlicensed`, `pro`, `free_pro`, `legacy`.
+  - `contract:<contract-id>`: Instances associated with the specified <`contract-id>`.
+  - `contract-expires-within-days:<days>`: Instances associated with a Ubuntu Pro contract that expires within `<days>` days.
+  - `license-expires-within-days:<days>`: Instances associated with a Legacy License that expires within `<days>` days.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 - `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.

@@ -9,6 +9,12 @@ For Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documen
 
 For the `license.txt` method, you get your first `license.txt` file from Canonical and manually upload the file to your server: `/etc/landscape/license.txt`. You’ll need to re-upload your license every time you renew, but you can download your new license in your Landscape account from `https://landscape.canonical.com/account/<account_id>/self-hosted`.
 
+Along with the `license.txt` method and Ubuntu Pro subscription, Landscape introduced a feature to accept clients without any valid licensing. This will place clients into an `unlicensed` state where they are unable to be managed however, you can run an activity on the client to attach a Pro token, in turn licensing the instance.
+
+```{note}
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and unavailable for offline deployments.
+```
+
 ## License type
 
 You can view the number of seats used per license type for each computer in the classic web portal. This functionality is in the **Licenses** tab.
