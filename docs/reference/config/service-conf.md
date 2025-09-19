@@ -17,43 +17,181 @@ In addition, the names of some sections of the `service.conf` file are deprecate
 ```
 
 (shared-service-settings)=
+
 ## Shared service settings
 
-There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service:
+There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SERVICE__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or hostnames for the service. |
-| `base_port` | `base-port` | `LANDSCAPE_SERVICE__BASE_PORT` | `8090` | Base port number for the service. |
-| `devmode` | - | `LANDSCAPE_SERVICE__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SERVICE__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SERVICE__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SERVICE__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_SERVICE__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_SERVICE__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_SERVICE__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SERVICE__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `threads` | - | `LANDSCAPE_SERVICE__THREADS` | `None` | Number of threads for the service. |
-| `workers` | - | `LANDSCAPE_SERVICE__WORKERS` | `None` | Number of worker processes for the service. |
+### `allowed_interfaces`
+
+- Purpose: A list of allowed IP addresses or hostnames for the service.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__ALLOWED_INTERFACES`
+- Default: `None`
+
+### `base_port`
+
+- Purpose: Workers for the service will run on ports incrementing from this base port.
+- Deprecated key name: `base-port`
+- ENV name: `LANDSCAPE_SERVICE__BASE_PORT`
+- Default: `8090`
+
+### `devmode`
+
+- Purpose: To control development mode configuration. This setting should not be configured in production environments.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__DEVMODE`
+- Default: `None`
+
+### `enable_metrics`
+
+- Purpose: Whether to enable metrics collection for the service.
+- Deprecated key name: `enable-metrics`
+- ENV name: `LANDSCAPE_SERVICE__ENABLE_METRICS`
+- Default: `False`
+
+### `gpg_home_path`
+
+- Purpose: Sets the path to the GPG home directory.
+- Deprecated key name: `gpg-home-path`
+- ENV name: `LANDSCAPE_SERVICE__GPG_HOME_PATH`
+- Default: `None`
+
+### `gpg_passphrase_path`
+
+- Purpose: Sets the path to the GPG passphrase file. Required if `gpg_home_path` is set.
+- Deprecated key name: `gpg-passphrase-path`
+- ENV name: `LANDSCAPE_SERVICE__GPG_PASSPHRASE_PATH`
+- Default: `None`
+
+### `mailer`
+
+- Purpose: If set to `queue` the mailer will use the queue specified by the `mailer_path`. If set to `default` the queue will be at `/tmp/landscape-mail-queue`. If unset, no mailer will be configured for the service. Production deployments do not need to modify this setting.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__MAILER`
+- Default: `None`
+
+### `mailer_path`
+
+- Purpose: Path to the mail queue. Required if `mailer` is set.
+- Deprecated key name: `mailer-path`
+- ENV name: `LANDSCAPE_SERVICE__MAILER_PATH`
+- Default: `None`
+
+### `oops_key`
+
+- Purpose: Key for OOPS error reporting system. Production deployments do not need to modify this setting.
+- Deprecated key name: `oops-key`
+- ENV name: `LANDSCAPE_SERVICE__OOPS_KEY`
+- Default: `None`
+
+### `root_url`
+
+- Purpose: The URL for the service.
+- Deprecated key name: `root-url`
+- ENV name: `LANDSCAPE_SERVICE__ROOT_URL`
+- Default: `None`
+
+### `soft_timeout`
+
+- Purpose: Soft timeout value in seconds for the OOPS reporter.
+- Deprecated key name: `soft-timeout`
+- ENV name: `LANDSCAPE_SERVICE__SOFT_TIMEOUT`
+- Default: `None`
+
+### `ssl_server_cert`
+
+- Purpose: Sets the path to the certificate to use for mTLS. If set, `ssl_private_key` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_CERT`
+- Default: `None`
+
+### `ssl_private_key`
+
+- Purpose: Sets the path to the private key to use for mTLS. If set, `ssl_server_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__SSL_PRIVATE_KEY`
+- Default: `None`
+
+### `ssl_ca_cert`
+
+- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_private_key` and `ssl_server_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__SSL_CA_CERT`
+- Default: `None`
+
+### `threads`
+
+- Purpose: Number of threads for the service to use. This setting only applies to Twisted services.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__THREADS`
+- Default: `None`
+
+### `workers`
+
+- Purpose: Number of worker processes for the service. If unset, the service will have a single worker.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__WORKERS`
+- Default: `None`
 
 ```{important}
 The shared service settings are not mutually exclusive with the shared store settings; services can use both, if specified.
 ```
 
 (shared-store-settings)=
+
 ## Shared store settings
 
 There are a set of generic settings related to databases and SSL connections to Postgres that several sections can set, where `SECTION` in the ENV name matches the (uppercase) name of the section:
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `sslcert` | - | `LANDSCAPE_SECTION__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_SECTION__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_SECTION__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_SECTION__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_SECTION__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_SECTION__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_SECTION__STORES` | `None` | The stores the service should use. |
+### `sslcert`
+
+- Purpose: Path to the client certificate to use for SSL connection to Postgres. Landscape Server will set this as the `PGSSLCERT` environment variable for Postgres to consume.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLCERT`
+- Default: `None`
+
+### `sslkey`
+
+- Purpose: Path to the private key to use for SSL connection to Postgres. Landscape Server will set this as the `PGSSLKEY` environment variable for Postgres to consume.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLKEY`
+- Default: `None`
+
+### `sslmode`
+
+- Purpose: SSL mode to use when connecting to Postgres, for example `verify-full`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLMODE`
+- Default: `None`
+
+### `sslrootcert`
+
+- Purpose: Path to the root CA certificate to use for SSL connection to Postgres. Landscape Server will set this as the `PGSSLROOTCERT` environment variable for Postgres to consume.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLROOTCERT`
+- Default: `None`
+
+### `store_password`
+
+- Purpose: Overrides the store password set in the `store` settings.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__STORE_PASSWORD`
+- Default: `None`
+
+### `store_user`
+
+- Purpose: Overrides the store username set in the `store` settings.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__STORE_USER`
+- Default: `None`
+
+### `stores`
+
+- Purpose: The stores the service should use.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__STORES`
+- Default: `None`
 
 ```{important}
 The shared store settings are not mutually exclusive with the shared service settings; services can use both, if specified.
@@ -209,7 +347,6 @@ The `[oops]` section contains configurations for the OOPS error reporting and de
 | `directory` | - | `LANDSCAPE_OOPS__DIRECTORY` | `None` | Directory path for OOPS error report storage. |
 | `path` | - | `LANDSCAPE_OOPS__PATH` | `None` | File path for OOPS configuration. |
 | `reporter` | - | `LANDSCAPE_OOPS__REPORTER` | `None` | Error reporter configuration. |
-
 
 The `[schema]` section contains configurations for updating the database schema. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
