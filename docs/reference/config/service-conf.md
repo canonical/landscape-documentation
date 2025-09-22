@@ -735,24 +735,130 @@ The `[global]` section name is deprecated. The `[system]` section replaces the `
 
 The `[system]` section contains configurations that apply across many or all of Landscape's services.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `analytics_id` | - | `LANDSCAPE_SYSTEM__ANALYTICS_ID` | `UA-1018242-60` | Google Analytics tracker ID for the deployment. |
-| `apt_port` | - | `LANDSCAPE_SYSTEM__APT_PORT` | 8085 | The port the `landscape_apt` service should use. |
-| `audit_retention_period` | `audit-retention-period` | `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD` | `-1` | The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely. |
-| `deployment_mode` | `deployment-mode` | `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE` | `standalone` | Used only for development. The default value is appropriate for self-hosted Landscape. |
-| `enable_password_authentication` | - | `LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION` | `False` | Whether to enable password-based authentication or not. |
-| `enable_query_debug` | - | `LANDSCAPE_SYSTEM__ENABLE_QUERY_DEBUG` | `False` | Whether to enable query introspection and debugging middleware or not. |
-| `enable_saas_metrics` | - | `LANDSCAPE_SYSTEM__ENABLE_SAAS_METRICS` | `False` | Whether to enable metrics on SaaS or not. |
-| `enable_subdomain_accounts` | - | `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS` | `False` | Whether to enable subdomain accounts or not. |
-| `enable_tag_script_execution` | - | `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION` | `False` | Whether to enable tag-based script execution or not. |
-| `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
-| `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the keyrings. |
-| `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |
-| {spellexception}`pidfile_directory` | {spellexception}`pidfile-directory` | {spellexception}`LANDSCAPE_SYSTEM__PIDFILE_DIRECTORY` | `/tmp/landscape` | Unused |
-| `max_service_memory` | `max-service-memory` | `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY` | `0` | An upper limit (in {spellexception}`mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit. |
-| `middleware` | - | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
-| `offline` | - | `LANDSCAPE_SYSTEM__OFFLINE` | `None` | Set `True` if Landscape is deployed in an air-gapped environment. |
-| `oops_path` | `oops-path` | `LANDSCAPE_SYSTEM__OOPS_PATH` | `/var/lib/landscape/landscape-oops` | The directory where OOPS reports are stored. The `landscape` system user must have read/write access to the specified directory. |
-| `root_url` | `root-url` | `LANDSCAPE_SYSTEM__ROOT_URL` | `http://localhost:8080` | Landscape Server's root URL path. |
-| `syslog_address` | `syslog-address` | `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS` | `/dev/log` | Path to the system's syslog logger. |
+### `analytics_id`
+
+- Purpose: Google Analytics tracker ID for the deployment.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ANALYTICS_ID`
+- Default: `UA-1018242-60`
+
+### `apt_port`
+
+- Purpose: The port the `landscape_apt` service should use.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__APT_PORT`
+- Default: `8085`
+
+### `audit_retention_period`
+
+- Purpose: The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely.
+- Deprecated key name: `audit-retention-period`
+- ENV name: `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD`
+- Default: `-1`
+
+### `deployment_mode`
+
+- Purpose: Used only for development. The default value is appropriate for self-hosted Landscape Server.
+- Deprecated key name: `deployment-mode`
+- ENV name: `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE`
+- Default: `standalone`
+
+### `enable_password_authentication`
+
+- Purpose: Whether to enable password-based authentication or not.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION`
+- Default: `False`
+
+### `enable_query_debug`
+
+- Purpose: Whether to enable query introspection and debugging middleware or not. The default value is appropriate for self-hosted Landscape Server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_QUERY_DEBUG`
+- Default: `False`
+
+### `enable_saas_metrics`
+
+- Purpose: Whether to enable metrics on SaaS or not. The default value is appropriate for self-hosted Landscape Server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_SAAS_METRICS`
+- Default: `False`
+
+### `enable_subdomain_accounts`
+
+- Purpose: Whether to enable subdomain accounts or not. The default value is appropriate for self-hosted Landscape Server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS`
+- Default: `False`
+
+### `enable_tag_script_execution`
+
+- Purpose: Whether to enable tag-based script execution or not.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION`
+- Default: `False`
+
+### `gpg_home_dir`
+
+- Purpose: The directory containing GnuPG config files and the keyrings.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__GPG_HOME_DIR`
+- Default: `/var/lib/landscape-server/gnupg`
+
+### `license_file`
+
+- Purpose: The file path location of the license file. The `landscape` system user must be able to read this file.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__LICENSE_FILE`
+- Default: `/etc/landscape/license.txt`
+
+### `max_service_memory`
+
+- Purpose: An upper limit (in `mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit.
+- Deprecated key name: `max-service-memory`
+- ENV name: `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY`
+- Default: `0`
+
+### `middleware`
+
+- Purpose: The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. This setting should remain unset in production environments.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__MIDDLEWARE`
+- Default: `None`
+
+### `offline`
+
+- Purpose: Set `True` if Landscape is deployed in an air-gapped environment.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__OFFLINE`
+- Default: `None`
+
+### `oops_path`
+
+- Purpose: The directory where OOPS reports are stored. The `landscape` system user must have read/write access to the specified directory.
+- Deprecated key name: `oops-path`
+- ENV name: `LANDSCAPE_SYSTEM__OOPS_PATH`
+- Default: `/var/lib/landscape/landscape-oops`
+
+### `root_url`
+
+- Purpose: Landscape Server's root URL path.
+- Deprecated key name: `root-url`
+- ENV name: `LANDSCAPE_SYSTEM__ROOT_URL`
+- Default: `http://localhost:8080`
+
+### `syslog_address`
+
+- Purpose: Path to the system's syslog logger.
+- Deprecated key name: `syslog-address`
+- ENV name: `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS`
+- Default: `/dev/log`
+
+<!-- This setting is technically available, but the relevant feature is not yet implemented.
+### `ubuntu_pro_contract_server_url`
+
+- Purpose: The URL of the Ubuntu Pro contract server, used to verify Ubuntu Pro tokens.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__UBUNTU_PRO_CONTRACT_SERVER_URL`
+- Default: `https://contracts.canonical.com/`
+-->
