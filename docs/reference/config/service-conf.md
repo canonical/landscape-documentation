@@ -395,11 +395,26 @@ The `[load_shaper]` section contains configurations for controlling how many mes
 The default values have been chosen based on the underlying algorithm and typical workloads. Modifying these values is not advisable unless you have thoroughly tested the impact on your specific system, as changes can significantly affect performance and system stability.
 ```
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `critical_load` | `critical-load` | `LANDSCAPE_LOAD_SHAPER__CRITICAL_LOAD` | `10.0` | A float representing the database load threshold at which message processing time is reduced to zero. When load reaches this value, no time slice is allocated for processing. |
-| `good_duration` | `good-duration` | `LANDSCAPE_LOAD_SHAPER__GOOD_DURATION` | `60.0` | A float representing the baseline time slice (in seconds) allocated for message processing when the database load is at the good load threshold. This duration is scaled up or down based on current load. |
-| `good_load` | `good-load` | `LANDSCAPE_LOAD_SHAPER__GOOD_LOAD` | `3.0` | A float representing the optimal database load threshold. When load is at this value, the full good duration time slice is allocated. Load below this increases the time slice, load above this decreases it. |
+### `critical_load`
+
+- Purpose: A float representing the database load threshold at which message processing time is reduced to zero. When load reaches this value, no time slice is allocated for processing.
+- Deprecated key name: `critical-load`
+- ENV name: `LANDSCAPE_LOAD_SHAPER__CRITICAL_LOAD`
+- Default: `10.0`
+
+### `good_duration`
+
+- Purpose: A float representing the baseline time slice (in seconds) allocated for message processing when the database load is at the good load threshold. This duration is scaled up or down based on current load.
+- Deprecated key name: `good-duration`
+- ENV name: `LANDSCAPE_LOAD_SHAPER__GOOD_DURATION`
+- Default: `60.0`
+
+### `good_load`
+
+- Purpose: A float representing the optimal database load threshold. When load is at this value, the full good duration time slice is allocated. Load below this increases the time slice, load above this decreases it.
+- Deprecated key name: `good-load`
+- ENV name: `LANDSCAPE_LOAD_SHAPER__GOOD_LOAD`
+- Default: `3.0`
 
 ## The `[maintenance]` section
 
