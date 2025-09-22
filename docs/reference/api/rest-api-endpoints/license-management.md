@@ -51,7 +51,7 @@ Example Response:
 ```
 
 ```{note}
-"invalid_computer_ids" in the response are for computers that do not accept the proper message type to attach pro (e.g., older client versions) or a computer id that don't exist
+"invalid_computer_ids" in the response are for computers that do not accept the proper message type to attach pro (e.g., older client versions) or a computer id that don't exist. This activity is only available for client versions 25.08.3 and newer.
 ```
 
 ## POST `/detach-token`
@@ -108,7 +108,7 @@ Example Response:
 ```
 
 ```{note}
-"invalid_computer_ids" in the response are for computers that do not accept the proper message type to attach pro (e.g., older client versions) or a computer id that don't exist
+"invalid_computer_ids" in the response are for computers that do not accept the proper message type to attach pro (e.g., older client versions) or a computer id that don't exist. This activity is only available for client versions 25.08.3 and newer.
 ```
 
 ## GET `/legacy-licenses`
@@ -121,8 +121,8 @@ Required parameters:
 
 Optional parameters:
 
-- available_only: only include licenses that have open seats.
-- active_only: only include licenses that are not expired.
+- `available_only`: only include licenses that have open seats.
+- `active_only`: only include licenses that are not expired.
 
 Example Request:
 
@@ -168,7 +168,7 @@ Optional parameters:
 
 Path parameters:
 
-- id: license id to get information on
+- `id`: license id to get information on
 
 Example Request:
 
@@ -196,7 +196,7 @@ Required parameters:
 
 Optional parameters:
 
-- None
+- `active_only`: only include licenses that are not expired.
 
 Example Request:
 
@@ -242,7 +242,7 @@ Optional parameters:
 
 Path parameters:
 
-- id: contract to get information on
+- `id`: contract id to get information on
 
 Example Request:
 
