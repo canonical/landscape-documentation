@@ -31,7 +31,7 @@ For the Pro Client Method customers running Landscape version 23.03 or newer and
 Along with the `license.txt` method and Ubuntu Pro subscription, Landscape introduced a feature to accept clients without any valid licensing available in versions `25.10x` or newer. This will place clients into an `unlicensed` state where they are unable to be managed however, you can run an activity on the client to attach a Pro token, in turn licensing the instance. License management activities are only available for `landscape-client` versions `25.08.3` and newer. For more details see {ref}`license-management`.
 
 ```{note}
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments.
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
 ```
 
 ## Legacy License types
