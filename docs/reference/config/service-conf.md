@@ -563,13 +563,28 @@ The `[message_server]` section contains configurations that apply to the `landsc
 
 The `[oops]` section contains configurations for the OOPS error reporting and debugging system used for logging and traceback collection.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `amqp_exchange` | `amqp-exchange` | `LANDSCAPE_OOPS__AMQP_EXCHANGE` | `None` | AMQP exchange name for error reporting. |
-| `amqp_key` | `amqp-key` | `LANDSCAPE_OOPS__AMQP_KEY` | `None` | AMQP routing key for error messages. Requires `amqp_exchange` to be set. |
-| `directory` | - | `LANDSCAPE_OOPS__DIRECTORY` | `None` | Directory path for OOPS error report storage. |
-| `path` | - | `LANDSCAPE_OOPS__PATH` | `None` | File path for OOPS configuration. |
-| `reporter` | - | `LANDSCAPE_OOPS__REPORTER` | `None` | Error reporter configuration. |
+### `amqp_exchange`
+
+- Purpose: AMQP exchange name for error reporting.
+- Deprecated key name: `amqp-exchange`
+- ENV name: `LANDSCAPE_OOPS__AMQP_EXCHANGE`
+- Default: `""`
+
+### `amqp_key`
+
+- Purpose: AMQP routing key for error messages. Requires `amqp_exchange` to be set.
+- Deprecated key name: `amqp-key`
+- ENV name: `LANDSCAPE_OOPS__AMQP_KEY`
+- Default: `landscape-oops`
+
+### `path`
+
+- Purpose: File path for local OOPS publishing. If set, overrides the value set by `LANDSCAPE_SYSTEM__OOPS_PATH`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_OOPS__PATH`
+- Default: `None`
+
+## The `[schema]` section
 
 The `[schema]` section contains configurations for updating the database schema. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
