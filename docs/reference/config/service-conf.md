@@ -581,10 +581,19 @@ The `[package-upload]` section name is deprecated. The `[package_upload]` sectio
 
 The `[package_upload]` section contains configurations for the package upload service, including service connection settings, database store configurations, and SSL options. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `port` | - | `LANDSCAPE_PACKAGE_UPLOAD__PORT` | `None` | The port the service will use. This field is required. |
-| `service_path` | `root-url` | `LANDSCAPE_PACKAGE_UPLOAD__SERVICE_PATH` | `/upload/` | The relative path portion to use for the service URL. |
+### `base_port`
+
+- Purpose: Workers for the service will run on ports incrementing from this base port.
+- Deprecated key names: `port`, `base-port`
+- ENV name: `LANDSCAPE_PACKAGE_UPLOAD__BASE_PORT`
+- Default: `9100`
+
+### `service_path`
+
+- Purpose: The relative path portion to use for the service URL.
+- Deprecated key name: `root-url`
+- ENV name: `LANDSCAPE_PACKAGE_UPLOAD__SERVICE_PATH`
+- Default: `/upload/`
 
 ## The `[scripts]` section
 
