@@ -12,7 +12,7 @@ For Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documen
 For the `license.txt` method, you get your first `license.txt` file from Canonical and manually upload the file to your server: `/etc/landscape/license.txt`. You’ll need to re-upload your license every time you renew, but you can download your new license in your Landscape account from `https://landscape.canonical.com/account/<account_id>/self-hosted`.
 
 ```{tip}
-New `license.txt` files become available on their start date. For renewal customers, this is the day after your old licences expire.
+New `license.txt` files become available on their start date. For renewal customers, this is the day after your old licenses expire.
 ```
 
 ## Pro Client Method
@@ -23,7 +23,7 @@ For the Pro Client Method customers running Landscape version 23.03 or newer and
 
 2. Then enable Landscape to initiate the registration process. See {ref}`how-to-ubuntu-pro-enable-landscape`.
 
-3. Landscape will detect your Pro entitlement via the Pro token and create a licence for your machine.
+3. Landscape will detect your Pro entitlement via the Pro token and create a license for your machine.
 
 
 ## Ubuntu Pro Licensing Method
