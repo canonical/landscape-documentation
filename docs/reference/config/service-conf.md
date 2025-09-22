@@ -287,19 +287,91 @@ In practice, only the `base_port` setting needs to be configured for the service
 
 ## The `[broker]` section
 
-The `[broker]` section contains configurations that describe how services connect to our message queues.
+The `[broker]` section contains configurations that describe how services connect to our AMQP broker (RabbitMQ).
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `host` | - | `LANDSCAPE_BROKER__HOST` | `localhost` | The hostname or IP address of the message broker server. |
-| `hostagent_command_status_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_COMMAND_STATUS_QUEUE` | `landscape-server-hostagent-command-status-queue` | Queue for sending command status updates from the hostagent server to the hostagent consumer. |
-| `hostagent_ping_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_PING_QUEUE` | `landscape-server-hostagent-ping-queue` | Queue for sending pings from the hostagent server to the hostagent consumer. |
-| `hostagent_task_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_TASK_QUEUE` | `landscape-server-hostagent-task-queue` | Queue for sending tasks from the hostagent consumer to the hostagent server. |
-| `hostagent_virtual_host` | - | `LANDSCAPE_BROKER__HOSTAGENT_VIRTUAL_HOST` | `landscape-hostagent` | The virtual host of message queues for the hostagent message server and consumer. This provides support for Landscape integration with Ubuntu Pro for WSL. |
-| `password` | - | `LANDSCAPE_BROKER__PASSWORD` | `guest` | Password used to authenticate with the message broker. |
-| `port` | - | `LANDSCAPE_BROKER__PORT` | 5672 | Network port where message broker server is listening. |
-| `user` | - | `LANDSCAPE_BROKER__USER` | `guest` | Username used to authenticate with the message broker. |
-| `vhost` | - | `LANDSCAPE_BROKER__VHOST` | `landscape` | The virtual host namespace. |
+### `host`
+
+- Purpose: The hostname or IP address of the AMQP broker server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOST`
+- Default: `localhost`
+
+### `hostagent_command_status_queue`
+
+- Purpose: Queue for sending command status updates from the hostagent server to the hostagent consumer.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_COMMAND_STATUS_QUEUE`
+- Default: `landscape-server-hostagent-command-status-queue`
+
+### `hostagent_ping_queue`
+
+- Purpose: Queue for pings from registered Windows instances.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_PING_QUEUE`
+- Default: `landscape-server-hostagent-ping-queue`
+
+### `hostagent_task_queue`
+
+- Purpose: Queue for messages received from registered Windows instances.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_TASK_QUEUE`
+- Default: `landscape-server-hostagent-task-queue`
+
+### `hostagent_virtual_host`
+
+- Purpose: The virtual host of message queues for the hostagent message server and consumer. This provides support for Landscape integration with Ubuntu Pro for WSL.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_VIRTUAL_HOST`
+- Default: `landscape-hostagent`
+
+### `password`
+
+- Purpose: Password used to authenticate with the AMQP broker.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__PASSWORD`
+- Default: `guest`
+
+### `port`
+
+- Purpose: Network port where the AMQP broker is listening.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__PORT`
+- Default: `5672`
+
+### `ssl_client_cert`
+
+- Purpose: Path to the client certificate to use for an SSL connection to the AMQP broker. Required along with `ssl_private_key` for mTLS connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_CERT`
+- Default: `None`
+
+### `ssl_private_key`
+
+- Purpose: Path to the private key to use for an SSL connection to the AMQP broker. Required along with `ssl_client_cert` for mTLS connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__SSL_PRIVATE_KEY`
+- Default: `None`
+
+### `ssl_ca_cert`
+
+- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_private_key` and `ssl_server_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__SSL_CA_CERT`
+- Default: `None`
+
+### `user`
+
+- Purpose: Username used to authenticate with the message broker.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__USER`
+- Default: `guest`
+
+### `vhost`
+
+- Purpose: The virtual host namespace used by most of the Landscape services.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__VHOST`
+- Default: `landscape`
 
 ## The `[job_handler]` section
 
