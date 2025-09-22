@@ -233,25 +233,16 @@ The `[landscape]` section name is deprecated. The `[appserver]` section replaces
 
 The `[appserver]` section contains configurations for the Landscape application server, including storage paths and authentication providers. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `blob_storage_root` | `blob-storage-root` | `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT` | `/var/lib/landscape/blobs` | Root directory for blob storage. |
-| `display_consent_banner_at_each_login` | `display-consent-banner-at-each-login` | `LANDSCAPE_APPSERVER__DISPLAY_CONSENT_BANNER_AT_EACH_LOGIN` | `False` | Whether to display consent banner at each login. |
-| `juju_homes_path` | `juju-homes-path` | `LANDSCAPE_APPSERVER__JUJU_HOMES_PATH` | `/var/tmp/juju-homes` | Path to Juju home directories. |
-| `known_proxies` | `known-proxies` | `LANDSCAPE_APPSERVER__KNOWN_PROXIES` | `None` | Comma-separated names of known proxies. |
-| `oidc_client_id` | `oidc-client-id` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_ID` | `None` | OIDC client identifier. Required when using OIDC authentication. |
-| `oidc_client_secret` | `oidc-client-secret` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_SECRET` | `None` | OIDC client secret. Required when using OIDC authentication. |
-| `oidc_issuer` | `oidc-issuer` | `LANDSCAPE_APPSERVER__OIDC_ISSUER` | `None` | OIDC issuer URL. Required when using OIDC authentication. |
-| `oidc_provider` | `oidc-provider` | `LANDSCAPE_APPSERVER__OIDC_PROVIDER` | `unspecified` | The name of OIDC provider to use. Must be either `google`, `okta`, or `unspecified`. |
-| `oidc_redirect_uri` | `oidc-redirect-uri` | `LANDSCAPE_APPSERVER__OIDC_REDIRECT_URI` | `None` | OIDC redirect URI for authentication callbacks. |
-| `openid_logout_url` | `openid-logout-url` | `LANDSCAPE_APPSERVER__OPENID_LOGOUT_URL` | `None` | OpenID logout URL. Required when using OpenID authentication. |
-| `openid_provider_url` | `openid-provider-url` | `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL` | `None` | OpenID provider URL. Required when using OpenID authentication. |
-| `repository_path` | `repository-path` | `LANDSCAPE_APPSERVER__REPOSITORY_PATH` | `/tmp/landscape-repository` | Path to the package repository. |
-| `reprepro_binary` | `reprepro-binary` | `LANDSCAPE_APPSERVER__REPREPRO_BINARY` | `None` | Path to the reprepro binary executable. |
-| `sanitize_delay` | `sanitize-delay` | `LANDSCAPE_APPSERVER__SANITIZE_DELAY` | `3600` | Delay in seconds for data sanitization operations. |
-| `secret_token` | `secret-token` | `LANDSCAPE_APPSERVER__SECRET_TOKEN` | `None` | Secret token for application security. |
-| `ubuntu_images_path` | `ubuntu-images-path` | `LANDSCAPE_APPSERVER__UBUNTU_IMAGES_PATH` | `/var/tmp/ubuntu-images` | Path to Ubuntu images directory. |
-| `ubuntu_one_redirect_url` | `ubuntu-one-redirect-url` | `LANDSCAPE_APPSERVER__UBUNTU_ONE_REDIRECT_URL` | `None` | Ubuntu One redirect URL for authentication. |
+### Moved Configuration Keys
+
+The following keys have moved from the `[appserver]` section to the `[system]` section in Landscape 25.10:
+
+- `enable-password-authentication` → `enable_password_authentication` in `[system]`
+- `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
+- `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
+- `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
+
+These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape 26.04, when support will be removed and they must be configured in the `[system]` section.
 
 ### Authentication providers
 
@@ -264,16 +255,110 @@ OIDC:
 
 - Requires `oidc_issuer`, `oidc_client_id`, and `oidc_client_secret` to be configured
 
-### Moved Configuration Keys
+### `blob_storage_root`
 
-The following keys have moved from the `[appserver]` section to the `[system]` section in Landscape 25.10:
+- Purpose: Root directory for blob storage used for USG reports.
+- Deprecated key name: `blob-storage-root`
+- ENV name: `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT`
+- Default: `/var/lib/landscape/blobs`
 
-- `enable-password-authentication` → `enable_password_authentication` in `[system]`
-- `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
-- `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
-- `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
+### `display_consent_banner_at_each_login`
 
-These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape 26.04, when support will be removed and they must be configured in the `[system]` section.
+- Purpose: This setting should only be enabled in DISA STIG environments. Whether to display consent banner at each login.
+- Deprecated key name: `display-consent-banner-at-each-login`
+- ENV name: `LANDSCAPE_APPSERVER__DISPLAY_CONSENT_BANNER_AT_EACH_LOGIN`
+- Default: `False`
+
+### `known_proxies`
+
+- Purpose: Comma-separated names of known proxies to consider when updating an administrator's last login host.
+- Deprecated key name: `known-proxies`
+- ENV name: `LANDSCAPE_APPSERVER__KNOWN_PROXIES`
+- Default: `None`
+
+### `oidc_client_id`
+
+- Purpose: OIDC client identifier. Required along with `oidc_client_secret` and `oidc_issuer` when using OIDC authentication.
+- Deprecated key name: `oidc-client-id`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_CLIENT_ID`
+- Default: `None`
+
+### `oidc_client_secret`
+
+- Purpose: OIDC client secret. Required along with `oidc_client_id` and `oidc_issuer` when using OIDC authentication.
+- Deprecated key name: `oidc-client-secret`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_CLIENT_SECRET`
+- Default: `None`
+
+### `oidc_issuer`
+
+- Purpose: OIDC issuer URL. Required along with `oidc_client_secret` and `oidc_client_id` when using OIDC authentication.
+- Deprecated key name: `oidc-issuer`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_ISSUER`
+- Default: `None`
+
+### `oidc_provider`
+
+- Purpose: The name of OIDC provider to use. Must be either `google`, `okta`, or `unspecified`.
+- Deprecated key name: `oidc-provider`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_PROVIDER`
+- Default: `unspecified`
+
+### `oidc_redirect_uri`
+
+- Purpose: OIDC redirect URI for authentication callbacks.
+- Deprecated key name: `oidc-redirect-uri`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_REDIRECT_URI`
+- Default: `None`
+
+### `openid_logout_url`
+
+- Purpose: OpenID logout URL. Required along with `openid_provider_url` when using OpenID authentication.
+- Deprecated key name: `openid-logout-url`
+- ENV name: `LANDSCAPE_APPSERVER__OPENID_LOGOUT_URL`
+- Default: `None`
+
+### `openid_provider_url`
+
+- Purpose: OpenID logout URL. Required along with `openid_logout_url` when using OpenID authentication.
+- Deprecated key name: `openid-provider-url`
+- ENV name: `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL`
+- Default: `None`
+
+### `repository_path`
+
+- Purpose: Path to the package repository directory. The `landscape` system user must have read and write privileges for that directory.
+- Deprecated key name: `repository-path`
+- ENV name: `LANDSCAPE_APPSERVER__REPOSITORY_PATH`
+- Default: `/tmp/landscape-repository`
+
+### `reprepro_binary`
+
+- Purpose: Path to the reprepro binary executable. If unset the binary installed at `/usr/bin/reprepro` is used.
+- Deprecated key name: `reprepro-binary`
+- ENV name: `LANDSCAPE_APPSERVER__REPREPRO_BINARY`
+- Default: `None`
+
+### `sanitize_delay`
+
+- Purpose: Delay in seconds before a sanitize activity is sent to a registered instance.
+- Deprecated key name: `sanitize-delay`
+- ENV name: `LANDSCAPE_APPSERVER__SANITIZE_DELAY`
+- Default: `3600`
+
+### `secret_token`
+
+- Purpose: Secret token used as the secret key for symmetric encryption of JWTs.
+- Deprecated key name: `secret-token`
+- ENV name: `LANDSCAPE_APPSERVER__SECRET_TOKEN`
+- Default: `None`
+
+### `ubuntu_one_redirect_url`
+
+- Purpose: Ubuntu One redirect URL for authentication.
+- Deprecated key name: `ubuntu-one-redirect-url`
+- ENV name: `LANDSCAPE_APPSERVER__UBUNTU_ONE_REDIRECT_URL`
+- Default: `None`
 
 ## The `[async_frontend]` section
 
