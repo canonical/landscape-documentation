@@ -517,13 +517,47 @@ The `[backoff]` section is deprecated. The settings have been moved to the `[mes
 
 The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `backoff_dir` | `backoff-dirpath` | `LANDSCAPE_MESSAGE_SERVER__BACKOFF_DIR` | `None` | The directory to hold the `backoff.txt` file the server uses to indicate it should back off requests. If `None`, a `config` directory within the `landscape` directory will be used. |
-| `max_msg_size_bytes` | `max-msg-size-bytes` | `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES` | 30000000 (30 MB) | The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected. |
-| `message_snippet_bytes` | `message-snippet-bytes` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES` | 1000 | When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message. |
-| `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
-| `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
+### `backoff_dir`
+
+- Purpose: The directory to hold the `backoff.txt` file the server uses to indicate it should back off requests. If `None`, a `config` directory within the `landscape` directory will be used.
+- Deprecated key name: `backoff-dirpath`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__BACKOFF_DIR`
+- Default: `None`
+
+### `check_interval`
+
+- Purpose: The interval in seconds at which to update knowledge of computers with outstanding messages from the database.
+- Deprecated key name: `check-interval`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__CHECK_INTERVAL`
+- Default: `1200`
+
+### `max_msg_size_bytes`
+
+- Purpose: The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected.
+- Deprecated key name: `max-msg-size-bytes`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES`
+- Default: `30000000` (30MB)
+
+### `message_snippet_bytes`
+
+- Purpose: When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message.
+- Deprecated key name: `message-snippet-bytes`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES`
+- Default: `1000`
+
+### `message_system_url`
+
+- Purpose: The message system URL to use. If not set, the system root url appended with `/message-system` is used.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL`
+- Default: `None`
+
+### `ping_interval`
+
+- Purpose: Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds. If unset, each registered client will use the value set in its own Landscape Client configuration.
+- Deprecated key name: `ping-interval`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL`
+- Default: `None`
 
 ## The `[oops]` section
 
