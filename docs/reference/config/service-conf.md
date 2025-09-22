@@ -643,20 +643,89 @@ The `[secrets]` section contains configurations for the secrets service, such as
 
 The `[stores]` section contains configurations for database store names and connections. In addition, the this section can use the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `account_1` | `account-1` | `LANDSCAPE_STORES__ACCOUNT_1` | `landscape-standalone-account-1` | The first account database store name. |
-| `account_2` | `account-2` | `LANDSCAPE_STORES__ACCOUNT_2` | `None` | The second account database store name. Optional. |
-| `host` | - | `LANDSCAPE_STORES__HOST` | `localhost` | The hostname or IP address of the database server. |
-| `knowledge` | - | `LANDSCAPE_STORES__KNOWLEDGE` | `landscape-standalone-knowledge` | The knowledge database name. |
-| `main` | - | `LANDSCAPE_STORES__MAIN` | `landscape-standalone-main` | The main database name. |
-| `package` | - | `LANDSCAPE_STORES__PACKAGE` | `landscape-standalone-package` | The package database name. |
-| `password` | - | `LANDSCAPE_STORES__PASSWORD` | `None` | The password for database connections. |
-| `resource_1` | `resource-1` | `LANDSCAPE_STORES__RESOURCE_1` | `landscape-standalone-resource-1` | The first resource database name. |
-| `resource_2` | `resource-2` | `LANDSCAPE_STORES__RESOURCE_2` | `None` | The second resource database name. Optional and used for testing only. |
-| `session` | - | `LANDSCAPE_STORES__SESSION` | `landscape-standalone-session` | The session database name. |
-| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with {spellexception}`autocommit` isolation. |
-| `user` | - | `LANDSCAPE_STORES__USER` | `landscape` | The username for database connections. |
+### `account_1`
+
+- Purpose: The account database store name.
+- Deprecated key name: `account-1`
+- ENV name: `LANDSCAPE_STORES__ACCOUNT_1`
+- Default: `landscape-standalone-account-1`
+
+### `account_2`
+
+- Purpose: The second account database store name. In practice this settings should be left unset as it is used only by tests.
+- Deprecated key name: `account-2`
+- ENV name: `LANDSCAPE_STORES__ACCOUNT_2`
+- Default: `None`
+
+### `host`
+
+- Purpose: The hostname or IP address of the database server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__HOST`
+- Default: `localhost`
+
+### `knowledge`
+
+- Purpose: The knowledge database name. The knowledge database is deprecated and will be dropped in a future release of Landscape Server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__KNOWLEDGE`
+- Default: `landscape-standalone-knowledge`
+
+### `main`
+
+- Purpose: The main database name.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__MAIN`
+- Default: `landscape-standalone-main`
+
+### `package`
+
+- Purpose: The package database name.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__PACKAGE`
+- Default: `landscape-standalone-package`
+
+### `password`
+
+- Purpose: The password for database connections by the configured `user`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__PASSWORD`
+- Default: `None`
+
+### `resource_1`
+
+- Purpose: The resource database name.
+- Deprecated key name: `resource-1`
+- ENV name: `LANDSCAPE_STORES__RESOURCE_1`
+- Default: `landscape-standalone-resource-1`
+
+### `resource_2`
+
+- Purpose: The second resource database name. In practice this settings should be left unset as it is used only by tests.
+- Deprecated key name: `resource-2`
+- ENV name: `LANDSCAPE_STORES__RESOURCE_2`
+- Default: `None`
+
+### `session`
+
+- Purpose: The session database name.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__SESSION`
+- Default: `landscape-standalone-session`
+
+### `session_autocommit`
+
+- Purpose: The name of the session database with `autocommit` isolation.
+- Deprecated key name: `session-autocommit`
+- ENV name: `LANDSCAPE_STORES__SESSION_AUTOCOMMIT`
+- Default: `landscape-standalone-session`
+
+### `user`
+
+- Purpose: The username for database connections.
+- Deprecated key name: `session-autocommit`
+- ENV name: `LANDSCAPE_STORES__USER`
+- Default: `landscape`
 
 ## The `[system]` section
 
