@@ -618,11 +618,26 @@ The `[scripts]` section contains configurations for scripts. The section contain
 
 The `[secrets]` section contains configurations for the secrets service, such as vault connection settings. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `service_url` | `secrets-service-url` | `LANDSCAPE_SECRETS__SERVICE_URL` | `None` | The URL to use for the secrets service. Must include a port. |
-| `vault_token` | - | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `None` | The token to use for the vault instead of getting it from the secrets service. |
-| `vault_url` | `secrets-url` | `LANDSCAPE_SECRETS__VAULT_URL` | `http://localhost:8200` | The address of the vault to use for the secrets service. |
+### `service_url`
+
+- Purpose: The URL to use for the secrets service. Must include a port.
+- Deprecated key name: `secrets-service-url`
+- ENV name: `LANDSCAPE_SECRETS__SERVICE_URL`
+- Default: `None`
+
+### `vault_token`
+
+- Purpose: The token to use for the vault instead of getting it from the secrets service.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECRETS__VAULT_TOKEN`
+- Default: `None`
+
+### `vault_url`
+
+- Purpose: The address of the vault to use for the secrets service.
+- Deprecated key name: `secrets-url`
+- ENV name: `LANDSCAPE_SECRETS__VAULT_URL`
+- Default: `http://localhost:8200`
 
 ## The `[stores]` section
 
