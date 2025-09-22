@@ -72,3 +72,9 @@ For self-hosted installations, there are multiple ways to install Landscape Serv
 
 For more details on self-hosted Landscape installations, see our {ref}`explanation-about-self-hosted` page. Organizations interested in using self-hosted Landscape at enterprise-scale should [contact Canonical Sales](https://ubuntu.com/landscape#get-in-touch).
 
+
+## Useful Links
+
+- [Knowledge Base - Landscape Section](https://support-portal.canonical.com/knowledge-base?topic=Landscape): content published by Canonical Support, typically addressing FAQs and providing workarounds for bugs
+
+- [GitHub - script repository for Landscape](https://github.com/canonical/landscape-scripts): a collection of scripts to make Landscape more powerful.
