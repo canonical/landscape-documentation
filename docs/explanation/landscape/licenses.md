@@ -1,7 +1,7 @@
 (explanation-licenses)=
 # Landscape licenses
 
-Landscape's main licensing mechanism is Ubuntu Pro. For Landscape SaaS accounts, the Ubuntu Pro license is already included in your subscription. You can also get a free Landscape SaaS account with Ubuntu Pro, which allows you to manage up to 5 machines for free. Most self-hosted Landscape accounts also use Ubuntu Pro.
+Landscape's main licensing mechanism is [Ubuntu Pro](https://ubuntu.com/pro). For Landscape SaaS accounts, the Ubuntu Pro license is already included in your subscription. You can also get a free Landscape SaaS account with Ubuntu Pro, which allows you to manage up to 5 machines for free. Most self-hosted Landscape accounts also use Ubuntu Pro.
 
 For more information on Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/), the [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/en/latest/) and {ref}`how-to-attach-ubuntu-pro`. The Ubuntu Pro Client is a command-line tool that helps you manage your Ubuntu Pro subscription.
 
@@ -25,7 +25,7 @@ Note that new `license.txt` files become available on their start date. For rene
 
 ## Ubuntu Pro Licensing Method
 
-Along with the `license.txt` method and Ubuntu Pro subscription, Landscape introduced a feature to accept clients without any valid licensing available in versions `25.10x` or newer. This will place clients into an `unlicensed` state where they are unable to be managed however, you can run an activity on the client to attach a Pro token, in turn licensing the instance. License management activities are only available for `landscape-client` versions `25.08.3` and newer. For more details see {ref}`license-management`.
+Along with the `license.txt` method and Ubuntu Pro subscription, Landscape introduced a feature to accept clients without any valid licensing available in versions `25.10x` or newer. This will place clients into an `unlicensed` state where they are unable to be managed however, you can run an activity on the client to attach a Pro token, in turn licensing the instance. License management activities are only available for `landscape-client` versions `25.08.3` and newer. For more details see {ref}`reference-rest-api-license-management`.
 
 ```{note}
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
