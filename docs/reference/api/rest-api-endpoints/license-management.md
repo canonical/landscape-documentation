@@ -1,4 +1,4 @@
-(license-management)=
+(reference-rest-api-license-management)=
 # License Management
 
 ## POST `/attach-token`
@@ -14,17 +14,17 @@ Optional parameters:
 
 - None
 
-Example Request:
+Example request:
 
 ```bash
-curl -X POST https://your-landscape-domain.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2, 3, 4], "token": "<ubuntu-pro-token>"}'
+curl -X POST https://your-landscape-domain.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2], "token": "<ubuntu-pro-token>"}'
 ```
 
-Example Response:
+Example response:
 ```json
 {
     "activity": {
-        "activity_status": "undelivered",
+        "activity_status": "queued",
         "approval_time": null,
         "completion_time": null,
         "creation_time": "2025-09-19T14:24:07Z",
@@ -41,12 +41,7 @@ Example Response:
         "summary": "Attach a pro token to computers",
         "type": "ActivityGroup"
     },
-    "invalid_computer_ids": [
-        3,
-        4,
-        5,
-        6
-    ]
+    "invalid_computer_ids": []
 }
 ```
 
@@ -70,18 +65,18 @@ Optional parameters:
 
 - None
 
-Example Request:
+Example request:
 
 ```bash
-curl -X POST https://your-landscape-domain.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2, 3, 4]}'
+curl -X POST https://your-landscape-domain.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2]}'
 ```
 
-Example Response:
+Example response:
 
 ```json
 {
     "activity": {
-        "activity_status": "undelivered",
+        "activity_status": "queued",
         "approval_time": null,
         "completion_time": null,
         "creation_time": "2025-09-19T14:28:32Z",
@@ -98,12 +93,7 @@ Example Response:
         "summary": "Detach pro token from computers",
         "type": "ActivityGroup"
     },
-    "invalid_computer_ids": [
-        3,
-        4,
-        5,
-        6
-    ]
+    "invalid_computer_ids": []
 }
 ```
 
@@ -124,13 +114,13 @@ Optional parameters:
 - `available_only`: only include licenses that have open seats.
 - `active_only`: only include licenses that are not expired.
 
-Example Request:
+Example request:
 
 ```bash
 curl -X GET https://your-landscape-domain.com/api/v2/legacy-licenses -H "Authorization: Bearer $JWT"
 ```
 
-Example Response:
+Example response:
 
 ```json
 {
@@ -170,13 +160,13 @@ Path parameters:
 
 - `id`: license id to get information on
 
-Example Request:
+Example request:
 
 ```bash
 curl -X GET https://your-landscape-domain.com/api/v2/legacy-licenses/8 -H "Authorization: Bearer $JWT"
 ```
 
-Example Response:
+Example response:
 
 ```json
 {
@@ -198,13 +188,13 @@ Optional parameters:
 
 - `active_only`: only include licenses that are not expired.
 
-Example Request:
+Example request:
 
 ```bash
 curl -X GET https://your-landscape-domain.com/api/v2/contracts -H "Authorization: Bearer $JWT"
 ```
 
-Example Response:
+Example response:
 
 ```json
 {
@@ -244,13 +234,13 @@ Path parameters:
 
 - `id`: contract id to get information on
 
-Example Request:
+Example request:
 
 ```bash
 curl -X GET https://your-landscape-domain.com/api/v2/contracts/contract-id-1 -H "Authorization: Bearer $JWT"
 ```
 
-Example Response:
+Example response:
 
 ```json
 {

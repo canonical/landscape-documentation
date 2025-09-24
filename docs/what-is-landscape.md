@@ -75,6 +75,6 @@ For more details on self-hosted Landscape installations, see our {ref}`explanati
 
 ## Useful Links
 
-- [Knowledge Base - Landscape Section](https://support-portal.canonical.com/knowledge-base?topic=Landscape): content published by Canonical Support, typically addressing FAQs and providing workarounds for bugs
+- [Knowledge Base - Landscape Section](https://support-portal.canonical.com/knowledge-base?topic=Landscape): Content published by Canonical Support, typically addressing FAQs and providing workarounds for bugs. You need to have a Support contract to access this content.
 
-- [GitHub - script repository for Landscape](https://github.com/canonical/landscape-scripts): a collection of scripts to make Landscape more powerful.
+- [GitHub - script repository for Landscape](https://github.com/canonical/landscape-scripts): A collection of scripts to make Landscape more powerful.

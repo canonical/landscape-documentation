@@ -1,30 +1,27 @@
 (explanation-licenses)=
 # Landscape licenses
 
-Most Landscape accounts have a licensing mechanism; either Ubuntu Pro or a `license.txt` file. For Landscape SaaS accounts, the Ubuntu Pro license is already included in your subscription.
+Landscape's main licensing mechanism is Ubuntu Pro. For Landscape SaaS accounts, the Ubuntu Pro license is already included in your subscription. You can also get a free Landscape SaaS account with Ubuntu Pro, which allows you to manage up to 5 machines for free. Most self-hosted Landscape accounts also use Ubuntu Pro.
 
-For self-hosted Landscape accounts, users running version 23.03 or newer typically have Ubuntu Pro subscriptions. Users with older versions (or offline deployments) may use our older licensing mechanism. This older method involves manually downloading a `license.txt` file and applying it during the configuration process.
+For more information on Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/), the [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/en/latest/) and {ref}`how-to-attach-ubuntu-pro`. The Ubuntu Pro Client is a command-line tool that helps you manage your Ubuntu Pro subscription.
 
-For Ubuntu Pro subscriptions, see the [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/), the [Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/) and {ref}`how-to-attach-ubuntu-pro` to learn more.
+Users with older versions of Landscape (or offline deployments) may use our legacy licensing mechanism. This older method involves manually downloading a `license.txt` file and applying it during the configuration process.
 
-## License.txt Method
+## Ubuntu Pro subscription
+
+To use Ubuntu Pro with Landscape, you must be running Landscape Server version 23.03 or newer, and Landscape Client version 23.03 or newer. We have the following guides to help you get started:
+
+1. {ref}`how-to-attach-ubuntu-pro`
+
+2. {ref}`how-to-ubuntu-pro-enable-landscape`
+
+After you've enabled Landscape, Landscape will detect your Pro entitlement via the Pro token and create a license for your machine.
+
+## License.txt method
 
 For the `license.txt` method, you get your first `license.txt` file from Canonical and manually upload the file to your server: `/etc/landscape/license.txt`. You’ll need to re-upload your license every time you renew, but you can download your new license in your Landscape account from `https://landscape.canonical.com/account/<account_id>/self-hosted`.
 
-```{tip}
-New `license.txt` files become available on their start date. For renewal customers, this is the day after your old licenses expire.
-```
-
-## Pro Client Method
-
-For the Pro Client Method customers running Landscape version 23.03 or newer and landscape-client version 23.03 or newer you can use this method.
-
-1. Ensure the Pro client is installed and attached to your Pro token on the system you wish to register to Landscape. See {ref}`how-to-attach-ubuntu-pro` for more details.
-
-2. Then enable Landscape to initiate the registration process. See {ref}`how-to-ubuntu-pro-enable-landscape`.
-
-3. Landscape will detect your Pro entitlement via the Pro token and create a license for your machine.
-
+Note that new `license.txt` files become available on their start date. For renewal customers, the start date is the day after your old licenses expire.
 
 ## Ubuntu Pro Licensing Method
 
@@ -34,9 +31,9 @@ Along with the `license.txt` method and Ubuntu Pro subscription, Landscape intro
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
 ```
 
-## Legacy License types
+## License types (classic web portal)
 
-You can view the number of seats used per license type for each computer in the classic web portal. This functionality is in the **Licenses** tab.
+In the classic web portal, you can view the number of seats used per license type for each computer from the **Licenses** tab.
 
 Here’s a summary of the different license types in Landscape and what they indicate:
 
