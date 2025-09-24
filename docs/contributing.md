@@ -90,8 +90,6 @@ To run a clean build:
 make clean html
 ```
 
-If your build succeeded, you can move on to previewing and testing the documentation. If it doesn't succeed, you need to fix the issues before moving forward.
-
 #### Preview
 
 After your build succeeds, preview it locally to see how the published documentation will look:
