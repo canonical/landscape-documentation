@@ -29,6 +29,10 @@ sudo apt install landscape-ubuntu-installer-attach
 
 ## Configure the proxy
 
+```{note}
+If you're using Juju to deploy Landscape with HAProxy, you do not need to complete this section. The required configuration will happen automatically when using the `landscape-server` charm at revision 162 or greater.
+```
+
 This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination.
 
 ### Requirements
