@@ -264,6 +264,7 @@ sslmode
 sssd
 stateful
 STIG
+Subiquity
 subkeys
 submodule
 subpaths
