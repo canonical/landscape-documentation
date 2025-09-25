@@ -95,6 +95,7 @@ grpcio
 filesystem
 frontend
 HAProxy
+HashiCorp
 hardcoded
 Hashicorp
 hashid
@@ -279,6 +280,7 @@ Ubuntu
 UCA
 udeb
 udebs
+UIs
 unactivated
 uncomment
 unhold
