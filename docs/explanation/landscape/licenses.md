@@ -23,14 +23,6 @@ For the `license.txt` method, you get your first `license.txt` file from Canonic
 
 Note that new `license.txt` files become available on their start date. For renewal customers, the start date is the day after your old licenses expire.
 
-## Ubuntu Pro Licensing Method
-
-Along with the `license.txt` method and Ubuntu Pro subscription, Landscape introduced a feature to accept clients without any valid licensing available in versions `25.10x` or newer. This will place clients into an `unlicensed` state where they are unable to be managed however, you can run an activity on the client to attach a Pro token, in turn licensing the instance. License management activities are only available for `landscape-client` versions `25.08.3` and newer. For more details see {ref}`reference-rest-api-license-management`.
-
-```{note}
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
-```
-
 ## License types (classic web portal)
 
 In the classic web portal, you can view the number of seats used per license type for each computer from the **Licenses** tab.
@@ -45,12 +37,17 @@ Here’s a summary of the different license types in Landscape and what they ind
     * These don't require the `license.txt` file to be installed or have available seats on the Landscape server
     * Requires `landscape-client` 23.x or higher to report the Pro attachment information to the Landscape server
 
-## License types for Ubuntu Pro Licensing
-- **Unlicensed:** Computers that are not licensed and cannot be managed outside of license management.
+## New licensing states
+
+For Landscape Server versions `25.10x` or greater there will be new licensing states. These states will allow for a user to register a client with Landscape without having any proper licensing mechanisms (e.g., Ubuntu Pro and `license.txt`). In this new unlicensed state client machine management will be limited, only allowing for operations to license that instance. This will allow for users to register client machines with Landscape, then attach Ubuntu Pro to desired client machines without needing to perform operation on each individual instance.
+
+```{note}
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
+```
+
+### Client states
+
+- **Unlicensed:** Computers that are not licensed and cannot be managed outside of license management operations.
 - **Free Pro:** Computers that are licensed through an Ubuntu Pro Free Subscription.
 - **Pro:** Computers that are licensed through Ubuntu Pro.
 - **Legacy:** Computers that are licensed through a `license.txt` file.
-
-```{note}
-A max of 5 Free Pro client machines are allowed per account or deployment.
-```

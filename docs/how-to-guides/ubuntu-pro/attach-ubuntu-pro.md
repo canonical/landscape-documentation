@@ -11,7 +11,9 @@ The following instructions explain how to attach your Ubuntu Pro subscription to
 Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
 ```
 
-## Step 1: Install the Ubuntu Pro Client
+## Manual attachment
+
+### Step 1: Install the Ubuntu Pro Client
 
 ```{note}
 You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
@@ -27,7 +29,7 @@ sudo apt update && sudo apt install ubuntu-advantage-tools
 
 If you already have `ubuntu-advantage-tools` installed, this install command will upgrade the package to the latest version.
 
-## Step 2: Attach your subscription
+### Step 2: Attach your subscription
 
 To attach your machine to a subscription, run the following command in your terminal:
 
@@ -74,6 +76,23 @@ This machine is now attached to 'Ubuntu Pro - free personal subscription'
 When the machine has successfully been attached, you will also see a summary of which services are enabled and information about your subscription.
 
 Available services can be enabled or disabled on the command line with `pro enable <service name>` and `pro disable <service name>` after you have attached.
+
+## Through Landscape Server
+
+### Ubuntu Pro licensing method
+
+Outside of manually attaching Pro to a client machine, Landscape introduced a feature to attach Pro to client machines at scale. To do this navigate to `Pro Services` on the `instances` page and select attach pro. This will create an activity on the client machines to attach a pro token and when it succeeds it will properly license the instance. License management activities are only available for `landscape-client` versions `25.08.3` and newer and is not limited to unlicensed instances. For more details see {ref}`reference-rest-api-license-management`.
+
+```{note}
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
+```
+
+### Licensing states for clients
+
+- **Unlicensed:** Computers that are not licensed and cannot be managed outside of license management.
+- **Free Pro:** Computers that are licensed through an Ubuntu Pro Free Subscription.
+- **Pro:** Computers that are licensed through Ubuntu Pro.
+- **Legacy:** Computers that are licensed through a `license.txt` file.
 
 ## Related topics
 
