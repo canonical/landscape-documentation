@@ -13,7 +13,7 @@ Optional parameters:
 
 - `description`: Description of the repository profile.
 - `access_group`: Name of the access group in which to create the profile. Defaults to `"global"`.
-- `tags`: Tags with which the profile will be associated.
+- `tags`: Tags the profile will be associated with.
 - `all_computers`: If `true`, the profile is associated with all computers. Defaults to `false`.
 - `apt_sources`: The IDs of the APT sources to add.
 - `pockets`: The IDs of the pockets to add.
