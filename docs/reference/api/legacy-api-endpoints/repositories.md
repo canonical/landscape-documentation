@@ -581,9 +581,9 @@ The following errors may be raised:
 
 Create a repository profiles in the account.
 
-`title`: The title of the repository profile. It must start with an alphanumeric character and only contain lowercase letters, numbers and `-` or `+` signs.
-`description`: Description of the repository profile. (optional)
-`access_group`: The repository profile will be created within this access group. If not specified, the access group the user belongs to will be used.
+- `title`: The title of the repository profile. It must start with an alphanumeric character and only contain lowercase letters, numbers and `-` or `+` signs.
+- `description`: Description of the repository profile. (optional)
+- `access_group`: The repository profile will be created within this access group. If not specified, the access group the user belongs to will be used. (optional)
 
 Example of a valid request:
 
@@ -1321,4 +1321,3 @@ The method returns JSON serialized info of the pocket:
     ]
 }
 ```
-
