@@ -25,9 +25,9 @@ curl -X POST "https://landscape.canonical.com/api/v2/repositoryprofiles" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Jammy Repo Profile",
-    "description": "Repository profile for jammy instances",
-    "tags": ["jammy"],
+    "title": "Noble Repo Profile",
+    "description": "Repository profile for noble instances",
+    "tags": ["noble"],
     "apt_sources": [1, 2],
     "pockets": [3]
 }'
@@ -39,24 +39,24 @@ Example output:
 {
   "id": 6,
   "access_group": "global",
-  "name": "jammy-repo-profile",
-  "title": "Jammy Repo Profile",
-  "description": "Repository profile for jammy instances",
+  "name": "noble-repo-profile",
+  "title": "Noble Repo Profile",
+  "description": "Repository profile for noble instances",
   "all_computers": false,
-  "tags": ["jammy"],
+  "tags": ["noble"],
   "pockets": [
     {
       "id": 3,
-      "name": "jammy-updates",
+      "name": "noble-updates",
       "creation_time": "2025-09-24T23:10:47Z",
       "mode": "mirror",
       "gpg_key": null,
       "components": ["main"],
       "architectures": ["amd64"],
       "include_udeb": false,
-      "apt_source_line": "deb http://10.1.77.207:8080/repository/onward/ubuntu jammy-updates main",
+      "apt_source_line": "deb http://10.1.77.207:8080/repository/onward/ubuntu noble-updates main",
       "series": {
-        "name": "jammy",
+        "name": "noble",
         "creation_time": "2025-09-24T23:10:47Z"
       },
       "distribution": {
@@ -80,7 +80,7 @@ Updates an existing repository profile.
 
 Path parameters:
 
-- `profile_name`: The `name` of the repository profile to update.
+- `profile_name`: The URL-safe identifier (`name`) for the repository profile.
 
 Required parameters:
 
@@ -91,20 +91,20 @@ Optional parameters:
 - `description`: Description of the repository profile.
 - `access_group`: Name of the access group in which the profile is stored.
 - `tags`: Tags with which the profile will be associated.
-- `all_computers`: If `true`, the profile is associated with all computers.
+- `all_computers`: If `true`, the profile is associated with all computers. Defaults to `false`.
 - `apt_sources`: The IDs of the APT sources to add.
 - `pockets`: The IDs of the pockets to add.
 
 Example request:
 
 ```bash
-curl -X PUT "https://landscape.canonical.com/api/v2/repositoryprofiles/jammy-repo-profile" \
+curl -X PUT "https://landscape.canonical.com/api/v2/repositoryprofiles/noble-repo-profile" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Jammy Repo Profile",
+    "title": "Noble Repo Profile",
     "description": "Updated description",
-    "tags": ["jammy"],
+    "tags": ["noble"],
     "apt_sources": [4],
     "pockets": [2]
 }'
@@ -116,24 +116,24 @@ Example output:
 {
   "id": 6,
   "access_group": "global",
-  "name": "jammy-repo-profile",
-  "title": "Jammy Repo Profile",
+  "name": "noble-repo-profile",
+  "title": "Noble Repo Profile",
   "description": "Updated description",
   "all_computers": false,
-  "tags": ["jammy"],
+  "tags": ["noble"],
   "pockets": [
     {
       "id": 2,
-      "name": "jammy-security",
+      "name": "noble-security",
       "creation_time": "2025-09-24T23:10:47Z",
       "mode": "upload",
       "gpg_key": null,
       "components": ["main"],
       "architectures": ["amd64", "source"],
       "include_udeb": false,
-      "apt_source_line": "deb http://10.1.77.207:8080/repository/onward/ubuntu jammy-security main",
+      "apt_source_line": "deb http://10.1.77.207:8080/repository/onward/ubuntu noble-security main",
       "series": {
-        "name": "jammy",
+        "name": "noble",
         "creation_time": "2025-09-24T23:10:47Z"
       },
       "distribution": {
@@ -166,7 +166,7 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X GET "https://landscape.canonical.com/api/v2/repositoryprofiles?limit=2&search=jammy" -H "Authorization: Bearer $JWT"
+curl -X GET "https://landscape.canonical.com/api/v2/repositoryprofiles?limit=2&search=noble" -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
@@ -178,24 +178,24 @@ Example output:
     {
       "id": 6,
       "access_group": "global",
-      "name": "jammy-repo-profile",
-      "title": "Jammy Repo Profile",
+      "name": "noble-repo-profile",
+      "title": "Noble Repo Profile",
       "description": "Updated description",
       "all_computers": false,
-      "tags": ["jammy"],
+      "tags": ["noble"],
       "pockets": [
         {
           "id": 2,
-          "name": "jammy-security",
+          "name": "noble-security",
           "creation_time": "2025-09-24T23:10:47Z",
           "mode": "upload",
           "gpg_key": null,
           "components": ["main"],
           "architectures": ["amd64", "source"],
           "include_udeb": false,
-          "apt_source_line": "deb http://10.1.77.207:8080/repository/onward/ubuntu jammy-security main",
+          "apt_source_line": "deb http://10.1.77.207:8080/repository/onward/ubuntu noble-security main",
           "series": {
-            "name": "jammy",
+            "name": "noble",
             "creation_time": "2025-09-24T23:10:47Z"
           },
           "distribution": {
@@ -212,17 +212,17 @@ Example output:
     {
       "id": 7,
       "access_group": "global",
-      "name": "jammy-dev-profile",
-      "title": "Jammy Development Profile",
-      "description": "Repository profile for jammy development systems",
+      "name": "noble-dev-profile",
+      "title": "Noble Development Profile",
+      "description": "Repository profile for noble development systems",
       "all_computers": false,
-      "tags": ["jammy", "dev"],
+      "tags": ["noble", "dev"],
       "pockets": [],
       "apt_sources": [],
       "pending_count": 1
     }
   ],
-  "next": "/api/v2/repositoryprofiles?limit=2&search=jammy&offset=2",
+  "next": "/api/v2/repositoryprofiles?limit=2&search=noble&offset=2",
   "previous": null
 }
 ```
