@@ -34,7 +34,7 @@ To connect, you must first define a suitable plug in your `snapcraft.yaml` file:
 plugs:
  annotations:
    interface: content
-   target: $SNAP_DATA/annotations
+   target: $SNAP_COMMON/annotations
 ```
 
 After you've installed your snap, you'll need to connect the content interface:
@@ -43,7 +43,7 @@ After you've installed your snap, you'll need to connect the content interface:
 snap connect <your-snap>:annotations landscape-client:annotations
 ```
 
-You'll then be able to access the annotations directory from your own snap in the `$SNAP_DATA/annotations` path. Any updates to this folder will be picked up by Landscape Client and sent to the server.
+You'll then be able to access the annotations directory from your own snap in the `$SNAP_COMMON/annotations` path. Any updates to this folder will be picked up by Landscape Client and sent to the server.
 
 ## Use annotations in the web portal
 
