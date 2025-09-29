@@ -14,7 +14,7 @@ Each annotation consists of a key-value pair. Annotations for the client snap ar
 You can also access the path from within the snap:
 
 ```bash
-$SNAP_DATA/var/lib/landscape/client/annotations.d
+$SNAP_COMMON/var/lib/landscape/client/annotations.d
 ```
 ## Create an annotation
 
