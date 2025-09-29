@@ -8,13 +8,13 @@ Annotations in Landscape provide a mechanism for sending custom metadata from a 
 Each annotation consists of a key-value pair. Annotations for the client snap are stored in the following directory:
 
 ```bash
-/var/snap/landscape-client/<version>/var/lib/landscape/client/annotations.d`
+/var/snap/landscape-client/common/var/lib/landscape/client/annotations.d`
 ```
 
-Where `<version>` is the version number of the client. You can also access the path from within the snap:
+You can also access the path from within the snap:
 
 ```bash
-$SNAP_DATA/var/lib/landscape/client/annotations.d
+$SNAP_COMMON/var/lib/landscape/client/annotations.d
 ```
 ## Create an annotation
 
@@ -34,7 +34,7 @@ To connect, you must first define a suitable plug in your `snapcraft.yaml` file:
 plugs:
  annotations:
    interface: content
-   target: $SNAP_DATA/annotations
+   target: $SNAP_COMMON/annotations
 ```
 
 After you've installed your snap, you'll need to connect the content interface:
@@ -43,7 +43,7 @@ After you've installed your snap, you'll need to connect the content interface:
 snap connect <your-snap>:annotations landscape-client:annotations
 ```
 
-You'll then be able to access the annotations directory from your own snap in the `$SNAP_DATA/annotations` path. Any updates to this folder will be picked up by Landscape Client and sent to the server.
+You'll then be able to access the annotations directory from your own snap in the `$SNAP_COMMON/annotations` path. Any updates to this folder will be picked up by Landscape Client and sent to the server.
 
 ## Use annotations in the web portal
 
