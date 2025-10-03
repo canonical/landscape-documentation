@@ -101,7 +101,7 @@ html_context = {
     # Docs branch in the repo; used in links for viewing the source files
     # 'github_version': 'main',
     # Docs location in the repo; used in links for viewing the source files
-    "github_folder": "/docs/",
+    "repo_folder": "/docs/",
 
     # To enable or disable the Previous / Next buttons at the bottom of pages
     # Valid options: none, prev, next, both
@@ -109,6 +109,8 @@ html_context = {
 
     # Enabling GH issues so the feedback button shows up
     'github_issues': 'enabled',
+
+    "repo_default_branch": "main",
 }
 
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
@@ -116,7 +118,7 @@ html_context = {
 # If your documentation is hosted on https://docs.ubuntu.com/,
 #       uncomment and update as needed.
 
-# slug = ''
+slug = 'landscape'
 
 # Template and asset locations
 
@@ -134,6 +136,7 @@ linkcheck_ignore = [
     "https://github.com/canonical/landscape-documentation/*",
     "https://ubuntu.com/pro/dashboard",
     "https://support.canonical.com/",
+    "https://support-portal.canonical.com/",
     "https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html",
     "https://wiki.ubuntu.com/Membership",
     "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
@@ -187,7 +190,8 @@ extensions = [
     "canonical_sphinx",
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
-    "sphinx_sitemap"
+    "sphinx_sitemap",
+    "sphinxext.rediraffe"
 ]
 
 
@@ -275,19 +279,18 @@ sitemap_url_scheme = "{link}"
 # Redirects #
 #############
 
-# To set up redirects: https://documatt.gitlab.io/sphinx-reredirects/usage.html
-# For example: 'explanation/old-name.html': '../how-to/prettify.html',
+## Rediraffe extension
+rediraffe_branch = "main"
+rediraffe_redirects = "redirects.txt"
 
-# To set up redirects in the Read the Docs project dashboard:
-# https://docs.readthedocs.io/en/stable/guides/redirects.html
-
-# NOTE: If undefined, set to None, or empty,
-#       the sphinx_reredirects extension will be disabled.
-
+## Reredirects extension 
+## NOTE: We've moved to use rediraffe as our main redirects extension.
+## The following are ones we already had in place, but haven't migrated
 redirects = {
     'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
     'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure',
     'how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment': '../../repository-mirrors/manage-repositories-in-an-air-gapped-or-offline-environment',
     'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment',
-    'getting-started-with-landscape': '/tutorial'
+    'explanation/repository-mirroring/repository-mirroring': '../../features/repository-mirroring',
+    'reference/known-issues/known-issues': '../../known-issues'
 }

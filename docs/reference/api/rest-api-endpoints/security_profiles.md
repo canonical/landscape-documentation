@@ -1,3 +1,4 @@
+(reference-rest-api-security-profiles)=
 # Security Profiles
 
 The endpoints available here are related to management of security profiles.

@@ -7,6 +7,7 @@ Our explanatory and conceptual guides can provide better understanding of how La
 :titlesonly:
 :maxdepth: 2
 Landscape <landscape/index>
+Features <features/index>
 security/index
-Repositories <repository-mirroring/index>
+Related tools <related-tools/index>
 ```
