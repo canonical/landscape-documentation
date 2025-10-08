@@ -141,7 +141,8 @@ linkcheck_ignore = [
     "https://wiki.ubuntu.com/Membership",
     "https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server",
     "https://ubuntu.com/aws#get-in-touch",
-    "http://nfs.sourceforge.net/#faq_d2"
+    "http://nfs.sourceforge.net/#faq_d2",
+    "https://www.hashicorp.com/en/products/vault"
 ]
 
 
