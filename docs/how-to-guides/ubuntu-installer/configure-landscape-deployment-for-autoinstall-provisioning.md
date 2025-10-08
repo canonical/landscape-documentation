@@ -43,7 +43,7 @@ juju run landscape-server/<N> disable-ubuntu-installer-attach
 
 ## On a manual install
 
-## Install the `landscape-ubuntu-installer-attach` package
+### Install the `landscape-ubuntu-installer-attach` package
 
 Landscape requires an additional service for the Ubuntu installer attach experience. This example uses the Landscape Beta PPA.
 
@@ -53,17 +53,17 @@ sudo apt update
 sudo apt install landscape-ubuntu-installer-attach
 ```
 
-## Configure the proxy
+### Configure the proxy
 
 This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination.
 
-### Requirements
+#### Requirements
 
 - The installer connects to the proxy on port 50051.
 - The installer connects using HTTPS.
-- The `ubuntu-installer-attach` service listens on port 53354 by default.
+- The `landscape-ubuntu-installer-attach` service listens on port 53354 by default.
 
-### Example configuration (HAProxy)
+#### Example configuration (HAProxy)
 
 For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
 
