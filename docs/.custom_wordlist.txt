@@ -150,6 +150,7 @@ logfile
 localhost
 loopback
 lsctl
+LUKS
 LXC
 LXD
 lxd
