@@ -4,7 +4,7 @@
 
 The endpoints available here are related to account management.
 
-## POST `/account`
+## POST `/accounts`
 
 Create an account for the current user. If the user already has an account, or self-service account creation is disabled, the request will fail.
 
