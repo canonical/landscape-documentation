@@ -96,25 +96,25 @@ The shared service settings are not mutually exclusive with the shared store set
 - ENV name: `LANDSCAPE_SERVICE__SOFT_TIMEOUT`
 - Default: `None`
 
-### `ssl_client_cert`
+### `ssl_server_cert`
 
-- Purpose: Sets the path to the certificate to use for mTLS. If set, `ssl_client_private_key` must also be set.
+- Purpose: Sets the path to the certificate to use when listening with mTLS. If set, `ssl_server_private_key` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__SSL_CLIENT_CERT`
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_CERT`
 - Default: `None`
 
-### `ssl_client_private_key`
+### `ssl_server_private_key`
 
-- Purpose: Sets the path to the private key to use for mTLS. If set, `ssl_client_cert` must also be set.
+- Purpose: Sets the path to the private key to use when listening with mTLS. If set, `ssl_server_cert` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__SSL_CLIENT_PRIVATE_KEY`
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_PRIVATE_KEY`
 - Default: `None`
 
-### `ssl_client_ca_cert`
+### `ssl_server_ca_cert`
 
-- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_client_private_key` and `ssl_client_cert` must also be set.
+- Purpose: Sets the path to the CA certificate to use when listening with mTLS. If set, both `ssl_server_private_key` and `ssl_server_cert` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__SSL_CLIENT_CA_CERT`
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_CA_CERT`
 - Default: `None`
 
 ### `threads`
@@ -187,6 +187,32 @@ The shared store settings are not mutually exclusive with the shared service set
 - Purpose: The stores the service should use.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SECTION__STORES`
+- Default: `None`
+
+(shared-tls-client-settings)=
+## Shared TLS client settings
+
+These are generic TLS client certificate settings to connect to external services, such as RabbitMQ and HashiCorp Vault, with mTLS, where `SECTION` in the ENV name matches the (uppercase) name of the section.
+
+### `ssl_client_cert`
+
+- Purpose: Path to the client certificate to use for an mTLS connection to the external server. Required along with `ssl_client_private_key` for mTLS connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSL_CLIENT_CERT`
+- Default: `None`
+
+### `ssl_client_private_key`
+
+- Purpose: Path to the private key to use for an mTLS connection to the external server. Required along with `ssl_client_cert` for mTLS connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSL_CLIENT_PRIVATE_KEY`
+- Default: `None`
+
+### `ssl_client_ca_cert`
+
+- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_client_private_key` and `ssl_client_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSL_CLIENT_CA_CERT`
 - Default: `None`
 
 ## The `[api]` section
@@ -364,7 +390,7 @@ In practice, only the `base_port` setting needs to be configured for the service
 
 ## The `[broker]` section
 
-The `[broker]` section contains configurations that describe how services connect to our AMQP broker (RabbitMQ).
+The `[broker]` section contains configurations that describe how services connect to our AMQP broker (RabbitMQ). In addition to the following, this section can use the {ref}`shared TLS client settings <shared-tls-client-settings>` to connect to a RabbitMQ server with mTLS.
 
 ### `host`
 
@@ -414,27 +440,6 @@ The `[broker]` section contains configurations that describe how services connec
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_BROKER__PORT`
 - Default: `5672`
-
-### `ssl_client_cert`
-
-- Purpose: Path to the client certificate to use for an SSL connection to the AMQP broker. Required along with `ssl_client_private_key` for mTLS connections.
-- Deprecated key name: N/A
-- ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_CERT`
-- Default: `None`
-
-### `ssl_client_private_key`
-
-- Purpose: Path to the private key to use for an SSL connection to the AMQP broker. Required along with `ssl_client_cert` for mTLS connections.
-- Deprecated key name: N/A
-- ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_PRIVATE_KEY`
-- Default: `None`
-
-### `ssl_client_ca_cert`
-
-- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_client_private_key` and `ssl_client_cert` must also be set.
-- Deprecated key name: N/A
-- ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_CA_CERT`
-- Default: `None`
 
 ### `user`
 
@@ -696,7 +701,7 @@ The `[scripts]` section contains configurations for scripts. The section contain
 
 ## The `[secrets]` section
 
-The `[secrets]` section contains configurations for the secrets service, such as vault connection settings. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+The `[secrets]` section contains configurations for the secrets service, such as HashiCorp Vault connection settings. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>`, the {ref}`shared store settings <shared-store-settings>`, and the {ref}`shared TLS client settings <shared-tls-client-settings>` to connect to a Vault server with mTLS.
 
 ### `service_url`
 
