@@ -1,26 +1,30 @@
 (reference-service-conf)=
-
 # The `service.conf` file
 
 All Landscape service configurations are defined in the `service.conf` file. This file follows the `INI` file format. The default location for this file is `/etc/landscape/service.conf`. You can override that by setting the `LANDSCAPE_SERVICE_CONF` environment variable with the file path location of the `service.conf` file.
 
-Changes to the `service.conf` file only take affect once you restart the relevant service(s).
+Changes to the `service.conf` file only take affect once you restart the relevant service(s). Any file paths referenced throughout this document must be readable by the `landscape` system user.
 
 Starting with Landscape 25.10, every entry in the `service.conf` file can be overridden by a corresponding environment variable. These variables have the following general structure: `LANDSCAPE_SECTION_NAME__KEY_NAME`.
 
 The sections below contain information about the key-value pairs that can be set in each section, the corresponding environment variable, the default value (if any), and the purpose of the entry.
 
 ```{note}
-The usage of the `-` character in section names and key names is deprecated in Landscape Server 25.10 in favor of the `_` character. Support for the `-` character will be removed in Landscape Server 26.04.
+The usage of the `-` character in section names and key names was deprecated in Landscape Server 25.10 in favor of the `_` character. Support for the `-` character is expected to be removed in Landscape Server 26.04 LTS.
 
-In addition, the names of some sections of the `service.conf` file are deprecated in Landscape Server 25.10. The new names are detailed below. Support for the deprecated names will be removed in Landscape Server 26.04.
+In addition, the names of some sections of the `service.conf` file were deprecated in Landscape Server 25.10. These sections and their new names are detailed below. Support for the deprecated names is expected to be removed in Landscape Server 26.04 LTS.
+
+Upgrades to Landscape Server 25.10 or later will include migrating these names.
 ```
 
 (shared-service-settings)=
-
 ## Shared service settings
 
 There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service.
+
+```{important}
+The shared service settings are not mutually exclusive with the shared store settings; services can use both, if specified.
+```
 
 ### `allowed_interfaces`
 
@@ -35,13 +39,6 @@ There are a set of generic settings that all services can set, where `SERVICE` i
 - Deprecated key name: `base-port`
 - ENV name: `LANDSCAPE_SERVICE__BASE_PORT`
 - Default: `8090`
-
-### `devmode`
-
-- Purpose: To control development mode configuration. This setting should not be configured in production environments.
-- Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__DEVMODE`
-- Default: `None`
 
 ### `enable_metrics`
 
@@ -66,7 +63,7 @@ There are a set of generic settings that all services can set, where `SERVICE` i
 
 ### `mailer`
 
-- Purpose: If set to `queue` the mailer will use the queue specified by the `mailer_path`. If set to `default` the queue will be at `/tmp/landscape-mail-queue`. If unset, no mailer will be configured for the service. Production deployments do not need to modify this setting.
+- Purpose: If set to `queue`, the mailer will use the queue specified by the `mailer_path`. If set to `default`, the queue will be at `/tmp/landscape-mail-queue`. If unset, no mailer will be configured for the service. Production deployments do not need to modify this setting.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SERVICE__MAILER`
 - Default: `None`
@@ -99,25 +96,25 @@ There are a set of generic settings that all services can set, where `SERVICE` i
 - ENV name: `LANDSCAPE_SERVICE__SOFT_TIMEOUT`
 - Default: `None`
 
-### `ssl_server_cert`
+### `ssl_client_cert`
 
-- Purpose: Sets the path to the certificate to use for mTLS. If set, `ssl_private_key` must also be set.
+- Purpose: Sets the path to the certificate to use for mTLS. If set, `ssl_client_private_key` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_CERT`
+- ENV name: `LANDSCAPE_SERVICE__SSL_CLIENT_CERT`
 - Default: `None`
 
-### `ssl_private_key`
+### `ssl_client_private_key`
 
-- Purpose: Sets the path to the private key to use for mTLS. If set, `ssl_server_cert` must also be set.
+- Purpose: Sets the path to the private key to use for mTLS. If set, `ssl_client_cert` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__SSL_PRIVATE_KEY`
+- ENV name: `LANDSCAPE_SERVICE__SSL_CLIENT_PRIVATE_KEY`
 - Default: `None`
 
-### `ssl_ca_cert`
+### `ssl_client_ca_cert`
 
-- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_private_key` and `ssl_server_cert` must also be set.
+- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_client_private_key` and `ssl_client_cert` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SERVICE__SSL_CA_CERT`
+- ENV name: `LANDSCAPE_SERVICE__SSL_CLIENT_CA_CERT`
 - Default: `None`
 
 ### `threads`
@@ -134,15 +131,14 @@ There are a set of generic settings that all services can set, where `SERVICE` i
 - ENV name: `LANDSCAPE_SERVICE__WORKERS`
 - Default: `None`
 
-```{important}
-The shared service settings are not mutually exclusive with the shared store settings; services can use both, if specified.
-```
-
 (shared-store-settings)=
-
 ## Shared store settings
 
-There are a set of generic settings related to databases and SSL connections to Postgres that several sections can set, where `SECTION` in the ENV name matches the (uppercase) name of the section:
+There are a set of generic settings related to databases and SSL connections to Postgres that several sections can set, where `SECTION` in the ENV name matches the (uppercase) name of the section.
+
+```{important}
+The shared store settings are not mutually exclusive with the shared service settings; services can use both, if specified.
+```
 
 ### `sslcert`
 
@@ -160,7 +156,7 @@ There are a set of generic settings related to databases and SSL connections to 
 
 ### `sslmode`
 
-- Purpose: SSL mode to use when connecting to Postgres, for example `verify-full`.
+- Purpose: SSL mode to use when connecting to Postgres, for example `verify-full`. See [PostgreSQL's documentation for the list of valid options](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS).
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SECTION__SSLMODE`
 - Default: `None`
@@ -174,14 +170,14 @@ There are a set of generic settings related to databases and SSL connections to 
 
 ### `store_password`
 
-- Purpose: Overrides the store password set in the `store` settings.
+- Purpose: Overrides the store password set in the `stores` settings.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SECTION__STORE_PASSWORD`
 - Default: `None`
 
 ### `store_user`
 
-- Purpose: Overrides the store username set in the `store` settings.
+- Purpose: Overrides the store username set in the `stores` settings.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SECTION__STORE_USER`
 - Default: `None`
@@ -192,10 +188,6 @@ There are a set of generic settings related to databases and SSL connections to 
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SECTION__STORES`
 - Default: `None`
-
-```{important}
-The shared store settings are not mutually exclusive with the shared service settings; services can use both, if specified.
-```
 
 ## The `[api]` section
 
@@ -220,7 +212,7 @@ The `[api]` section contains configurations for the Landscape API service, inclu
 
 ### `snap_store_api_url`
 
-- Purpose: The API for a Snap Store Proxy. By default, this is the Canonical Snap Store.
+- Purpose: The API for an Enterprise Store (formerly known as Snap Store Proxy). By default, this is the Canonical Snap Store.
 - Deprecated key name: `snap-store-api-url`
 - ENV name: `LANDSCAPE_API__SNAP_STORE_API_URL`
 - Default: `https://api.snapcraft.io/v2`
@@ -228,21 +220,21 @@ The `[api]` section contains configurations for the Landscape API service, inclu
 ## The `[appserver]` section
 
 ```{note}
-The `[landscape]` section name is deprecated. The `[appserver]` section replaces the `[landscape]` section.
+The `[landscape]` section name was deprecated in Landscape Server 25.10. The `[appserver]` section replaces the `[landscape]` section.
 ```
 
 The `[appserver]` section contains configurations for the Landscape application server, including storage paths and authentication providers. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 ### Moved Configuration Keys
 
-The following keys have moved from the `[appserver]` section to the `[system]` section in Landscape 25.10:
+Beginning in Landscape Server 25.10, the following keys have moved from the `[appserver]` section to the `[system]` section:
 
 - `enable-password-authentication` → `enable_password_authentication` in `[system]`
 - `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
 - `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
 - `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
 
-These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape 26.04, when support will be removed and they must be configured in the `[system]` section.
+These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape Server 26.04 LTS, when support is expected to be removed and they must be configured in the `[system]` section. Note that upgrades of Landscape Server 25.10 and later includes automated migration of these names.
 
 ### Authentication providers
 
@@ -257,7 +249,7 @@ OIDC:
 
 ### `blob_storage_root`
 
-- Purpose: Root directory for blob storage used for USG reports.
+- Purpose: Root directory for blob storage used for Ubuntu Security Guide (USG) reports.
 - Deprecated key name: `blob-storage-root`
 - ENV name: `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT`
 - Default: `/var/lib/landscape/blobs`
@@ -320,7 +312,7 @@ OIDC:
 
 ### `openid_provider_url`
 
-- Purpose: OpenID logout URL. Required along with `openid_logout_url` when using OpenID authentication.
+- Purpose: OpenID provider URL. Required along with `openid_logout_url` when using OpenID authentication.
 - Deprecated key name: `openid-provider-url`
 - ENV name: `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL`
 - Default: `None`
@@ -334,7 +326,7 @@ OIDC:
 
 ### `reprepro_binary`
 
-- Purpose: Path to the reprepro binary executable. If unset the binary installed at `/usr/bin/reprepro` is used.
+- Purpose: Path to the reprepro binary executable. If unset, the binary installed at `/usr/bin/reprepro` is used.
 - Deprecated key name: `reprepro-binary`
 - ENV name: `LANDSCAPE_APPSERVER__REPREPRO_BINARY`
 - Default: `None`
@@ -363,7 +355,7 @@ OIDC:
 ## The `[async_frontend]` section
 
 ```{note}
-The `[async-frontend]` section name is deprecated. The `[async_frontend]` section replaces the `[async-frontend]` section.
+The `[async-frontend]` section name was deprecated in Landscape Server 25.10. The `[async_frontend]` section replaces the `[async-frontend]` section.
 ```
 
 The `[async_frontend]` section contains configurations that apply to the `landscape-async-frontend` service which handles AJAX requests from the Legacy UI. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
@@ -425,23 +417,23 @@ The `[broker]` section contains configurations that describe how services connec
 
 ### `ssl_client_cert`
 
-- Purpose: Path to the client certificate to use for an SSL connection to the AMQP broker. Required along with `ssl_private_key` for mTLS connections.
+- Purpose: Path to the client certificate to use for an SSL connection to the AMQP broker. Required along with `ssl_client_private_key` for mTLS connections.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_CERT`
 - Default: `None`
 
-### `ssl_private_key`
+### `ssl_client_private_key`
 
 - Purpose: Path to the private key to use for an SSL connection to the AMQP broker. Required along with `ssl_client_cert` for mTLS connections.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_BROKER__SSL_PRIVATE_KEY`
+- ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_PRIVATE_KEY`
 - Default: `None`
 
-### `ssl_ca_cert`
+### `ssl_client_ca_cert`
 
-- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_private_key` and `ssl_server_cert` must also be set.
+- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_client_private_key` and `ssl_client_cert` must also be set.
 - Deprecated key name: N/A
-- ENV name: `LANDSCAPE_BROKER__SSL_CA_CERT`
+- ENV name: `LANDSCAPE_BROKER__SSL_CLIENT_CA_CERT`
 - Default: `None`
 
 ### `user`
@@ -461,7 +453,7 @@ The `[broker]` section contains configurations that describe how services connec
 ## The `[job_handler]` section
 
 ```{note}
-The `[job-handler]` section name is deprecated. The `[job_handler]` section replaces the `[job-handler]` section.
+The `[job-handler]` section name was deprecated in Landscape Server 25.10. The `[job_handler]` section replaces the `[job-handler]` section.
 ```
 
 The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
@@ -471,7 +463,7 @@ In practice, only the `base_port` setting needs to be configured for the service
 ## The `[load_shaper]` section
 
 ```{note}
-The `[load-shaper]` section name is deprecated. The `[load_shaper]` section replaces the `[load-shaper]` section.
+The `[load-shaper]` section name was deprecated in Landscape Server 25.10. The `[load_shaper]` section replaces the `[load-shaper]` section.
 ```
 
 The `[load_shaper]` section contains configurations for controlling how many messages are processed in each message exchange. It allots a time window for message processing based on the current database load.
@@ -508,11 +500,9 @@ The `[maintenance]` section contains configurations for running maintenance scri
 ## The `[message_server]` section
 
 ```{note}
-The `[message-server]` section name is deprecated. The `[message_server]` section replaces the `[message-server]` section.
-```
+The `[message-server]` section name was deprecated in Landscape Server 25.10. The `[message_server]` section replaces the `[message-server]` section.
 
-```{note}
-The `[backoff]` section is deprecated. The settings have been moved to the `[message_server]` section.
+The `[backoff]` section was also deprecated in Landscape Server 25.10. The settings have been moved to the `[message_server]` section.
 ```
 
 The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
@@ -584,14 +574,10 @@ The `[oops]` section contains configurations for the OOPS error reporting and de
 - ENV name: `LANDSCAPE_OOPS__PATH`
 - Default: `None`
 
-## The `[schema]` section
-
-The `[schema]` section contains configurations for updating the database schema. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
-
 ## The `[package_upload]` section
 
 ```{note}
-The `[package-upload]` section name is deprecated. The `[package_upload]` section replaces the `[package-upload]` section.
+The `[package-upload]` section name was deprecated in Landscape Server 25.10. The `[package_upload]` section replaces the `[package-upload]` section.
 ```
 
 The `[package_upload]` section contains configurations for the package upload service, including service connection settings, database store configurations, and SSL options. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
@@ -609,6 +595,17 @@ The `[package_upload]` section contains configurations for the package upload se
 - Deprecated key name: `root-url`
 - ENV name: `LANDSCAPE_PACKAGE_UPLOAD__SERVICE_PATH`
 - Default: `/upload/`
+
+## The `[schema]` section
+
+The `[schema]` section contains configurations for updating the database schema. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `store_superuser`
+
+- Purpose: If the set_user PostgreSQL extension is installed, Landscape will connect to PG as the `store_user`, then escalate to the `store_superuser`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SCHEMA__STORE_SUPERUSER`
+- Default: None
 
 ## The `[scripts]` section
 
@@ -641,7 +638,7 @@ The `[secrets]` section contains configurations for the secrets service, such as
 
 ## The `[stores]` section
 
-The `[stores]` section contains configurations for database store names and connections. In addition, the this section can use the {ref}`shared store settings <shared-store-settings>`.
+The `[stores]` section contains configurations for database store names and connections. In addition, this section can use the {ref}`shared store settings <shared-store-settings>`.
 
 ### `account_1`
 
@@ -649,13 +646,6 @@ The `[stores]` section contains configurations for database store names and conn
 - Deprecated key name: `account-1`
 - ENV name: `LANDSCAPE_STORES__ACCOUNT_1`
 - Default: `landscape-standalone-account-1`
-
-### `account_2`
-
-- Purpose: The second account database store name. In practice this settings should be left unset as it is used only by tests.
-- Deprecated key name: `account-2`
-- ENV name: `LANDSCAPE_STORES__ACCOUNT_2`
-- Default: `None`
 
 ### `host`
 
@@ -666,7 +656,11 @@ The `[stores]` section contains configurations for database store names and conn
 
 ### `knowledge`
 
-- Purpose: The knowledge database name. The knowledge database is deprecated and will be dropped in a future release of Landscape Server.
+```{note}
+The knowledge database was deprecated in Landscape Server 25.10 and will be dropped in a future release of Landscape Server.
+```
+
+- Purpose: The knowledge database name. 
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_STORES__KNOWLEDGE`
 - Default: `landscape-standalone-knowledge`
@@ -699,13 +693,6 @@ The `[stores]` section contains configurations for database store names and conn
 - ENV name: `LANDSCAPE_STORES__RESOURCE_1`
 - Default: `landscape-standalone-resource-1`
 
-### `resource_2`
-
-- Purpose: The second resource database name. In practice this settings should be left unset as it is used only by tests.
-- Deprecated key name: `resource-2`
-- ENV name: `LANDSCAPE_STORES__RESOURCE_2`
-- Default: `None`
-
 ### `session`
 
 - Purpose: The session database name.
@@ -723,14 +710,14 @@ The `[stores]` section contains configurations for database store names and conn
 ### `user`
 
 - Purpose: The username for database connections.
-- Deprecated key name: `session-autocommit`
+- Deprecated key name: N/A
 - ENV name: `LANDSCAPE_STORES__USER`
 - Default: `landscape`
 
 ## The `[system]` section
 
 ```{note}
-The `[global]` section name is deprecated. The `[system]` section replaces the `[global]` section.
+The `[global]` section name was deprecated in Landscape Server 25.10. The `[system]` section replaces the `[global]` section.
 ```
 
 The `[system]` section contains configurations that apply across many or all of Landscape's services.
@@ -758,7 +745,11 @@ The `[system]` section contains configurations that apply across many or all of 
 
 ### `deployment_mode`
 
-- Purpose: Used only for development. The default value is appropriate for self-hosted Landscape Server.
+```{note}
+**Do not change the `deployment_mode` default value.**
+```
+
+- Purpose: Used only for development. The default value is appropriate for self-hosted Landscape Server. Users should never change this setting.
 - Deprecated key name: `deployment-mode`
 - ENV name: `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE`
 - Default: `standalone`
@@ -770,23 +761,16 @@ The `[system]` section contains configurations that apply across many or all of 
 - ENV name: `LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION`
 - Default: `False`
 
-### `enable_query_debug`
-
-- Purpose: Whether to enable query introspection and debugging middleware or not. The default value is appropriate for self-hosted Landscape Server.
-- Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SYSTEM__ENABLE_QUERY_DEBUG`
-- Default: `False`
-
 ### `enable_saas_metrics`
 
-- Purpose: Whether to enable metrics on SaaS or not. The default value is appropriate for self-hosted Landscape Server.
+- Purpose: Whether to enable metrics on SaaS or not. The default value is appropriate for self-hosted Landscape Server. Users generally shouldn't change this setting.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SYSTEM__ENABLE_SAAS_METRICS`
 - Default: `False`
 
 ### `enable_subdomain_accounts`
 
-- Purpose: Whether to enable subdomain accounts or not. The default value is appropriate for self-hosted Landscape Server.
+- Purpose: Whether to enable subdomain accounts or not. The default value is appropriate for self-hosted Landscape Server. Users generally shouldn't change this setting.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS`
 - Default: `False`
@@ -807,7 +791,7 @@ The `[system]` section contains configurations that apply across many or all of 
 
 ### `license_file`
 
-- Purpose: The file path location of the license file. The `landscape` system user must be able to read this file.
+- Purpose: The file path location of the legacy license file. Ubuntu Pro users don't need to set this. The `landscape` system user must be able to read this file.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SYSTEM__LICENSE_FILE`
 - Default: `/etc/landscape/license.txt`
@@ -818,13 +802,6 @@ The `[system]` section contains configurations that apply across many or all of 
 - Deprecated key name: `max-service-memory`
 - ENV name: `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY`
 - Default: `0`
-
-### `middleware`
-
-- Purpose: The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. This setting should remain unset in production environments.
-- Deprecated key name: N/A
-- ENV name: `LANDSCAPE_SYSTEM__MIDDLEWARE`
-- Default: `None`
 
 ### `offline`
 
@@ -854,11 +831,9 @@ The `[system]` section contains configurations that apply across many or all of 
 - ENV name: `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS`
 - Default: `/dev/log`
 
-<!-- This setting is technically available, but the relevant feature is not yet implemented.
 ### `ubuntu_pro_contract_server_url`
 
 - Purpose: The URL of the Ubuntu Pro contract server, used to verify Ubuntu Pro tokens.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SYSTEM__UBUNTU_PRO_CONTRACT_SERVER_URL`
 - Default: `https://contracts.canonical.com/`
--->
