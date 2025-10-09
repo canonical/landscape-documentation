@@ -20,7 +20,7 @@ Upgrades to Landscape Server 25.10 or later will include migrating these names.
 (shared-service-settings)=
 ## Shared service settings
 
-There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service.
+There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service. For example, the `LANDSCAPE_PINGSERVER__BASE_PORT` sets the `base_port` for the `[pingserver]` service, whereas the `LANDSCAPE_API__BASE_PORT` sets the `base_port` for the `[api]` service.
 
 ```{important}
 The shared service settings are not mutually exclusive with the shared store settings; services can use both, if specified.
@@ -653,6 +653,31 @@ The `[package_upload]` section contains configurations for the package upload se
 - Deprecated key name: `root-url`
 - ENV name: `LANDSCAPE_PACKAGE_UPLOAD__SERVICE_PATH`
 - Default: `/upload/`
+
+## The `[pingserver]` section
+
+The `[pingserver]` section contains configurations for the `pingserver` service that communicates with registered clients, notifying the clients about available messages. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `database_check_interval`
+
+- Purpose: Interval in seconds to check the database for computers with outstanding messages.
+- Deprecated key name: `database-check-interval`
+- ENV name: `LANDSCAPE_PINGSERVER__DATABASE_CHECK_INTERVAL`
+- Default: `30`
+
+### `database_write_interval`
+
+- Purpose: Interval in seconds between database writes of accumulated pings.
+- Deprecated key name: `database-write-interval`
+- ENV name: `LANDSCAPE_PINGSERVER__DATABASE_WRITE_INTERVAL`
+- Default: `60`
+
+### `ping_url`
+
+- Purpose: The `pingserver` service handles HTTP request from this URL. If unset, the http version of the configured root URL appended by `ping` is used.
+- Deprecated key name: `ping-url`
+- ENV name: `LANDSCAPE_PINGSERVER__PING_URL`
+- Default: `None`
 
 ## The `[schema]` section
 
