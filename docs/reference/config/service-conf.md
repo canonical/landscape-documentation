@@ -450,6 +450,26 @@ The `[broker]` section contains configurations that describe how services connec
 - ENV name: `LANDSCAPE_BROKER__VHOST`
 - Default: `landscape`
 
+## The `[hostagent_consumer]` section
+
+```{note}
+The `[hostagent-consumer]` section name is deprecated. The `[hostagent_consumer]` section replaces the `[hostagent-consumer]` section.
+```
+
+The `[hostagent_consumer]` section contains settings for the `landscape-hostagent-consumer` service that processes messages related to Ubuntu Pro for WSL. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+This entire section is optional. Omitting the `[hostagent_consumer]` section entirely will cause the `landscape-hostagent-consumer` service to stop immediately after it starts.
+
+## The `[hostagent_messenger]` section
+
+```{note}
+The `[hostagent-messenger]` section name is deprecated. The `[hostagent_messenger]` section replaces the `[hostagent-messenger]` section.
+```
+
+The `[hostagent_messenger]` section contains settings for the `landscape-hostagent-messenger` service that communicates with Ubuntu Pro for WSL. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+This entire section is optional. Omitting the `[hostagent_messenger]` section entirely will cause the `landscape-hostagent-messenger` service to stop immediately after it starts.
+
 ## The `[job_handler]` section
 
 ```{note}
