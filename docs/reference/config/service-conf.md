@@ -594,6 +594,44 @@ The `[oops]` section contains configurations for the OOPS error reporting and de
 - ENV name: `LANDSCAPE_OOPS__PATH`
 - Default: `None`
 
+## The `[package_search]` section
+
+```{note}
+The `[package-search]` section name is deprecated. The `[package_search]` section replaces the `[package-search]` section.
+```
+
+The `[package_search]` section contains the configuration for the package search service. In a manual installation, the pre-configured settings should suffice. In a Juju deployment, many of these settings are managed by the Landscape Server charm.
+
+In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `account_threshold`
+
+- Purpose: The number of registered computers in an account required for the account to use the package search service. Self-hosted Landscape Server deployments should keep the default value to ensure the package search service is always used.
+- Deprecated key name: `account-threshold`
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__ACCOUNT_THRESHOLD`
+- Default: `0`
+
+### `host`
+
+- Purpose: The hostname or IP address of the machine where the package search service runs.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__HOST`
+- Default: `localhost`
+
+### `pid_path`
+
+- Purpose: The file path for the `.pid` file for the package search service. The `landscape` system user must have read/write access to this file.
+- Deprecated key name: `pid-path`
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__PID_PATH`
+- Default: `/var/run/landscape-packagesearch-1.pid`
+
+### `port`
+
+- Purpose: The port the package search service will listen on. This setting has no default value and is required.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__PORT`
+- Default: There is no default value. One must be set for the system to run.
+
 ## The `[package_upload]` section
 
 ```{note}
