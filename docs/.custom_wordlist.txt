@@ -101,7 +101,7 @@ frontend
 HAProxy
 HashiCorp
 hardcoded
-Hashicorp
+HashiCorp’s
 hashid
 Hashids
 heredoc
