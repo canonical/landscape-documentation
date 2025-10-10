@@ -6,4 +6,5 @@
 :maxdepth: 2
 :glob:
 
+internal-network-requirements
 network-firewall
