@@ -77,7 +77,7 @@ When the machine has successfully been attached, you will also see a summary of 
 
 Available services can be enabled or disabled on the command line with `pro enable <service name>` and `pro disable <service name>` after you have attached.
 
-## Through Landscape Server
+## Automated attachment across multiple clients
 
 ### Ubuntu Pro licensing method
 
