@@ -87,12 +87,6 @@ Outside of manually attaching Pro to a client machine, Landscape introduced a fe
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
 ```
 
-### Licensing states for clients
-
-- **Unlicensed:** Computers that are not licensed and cannot be managed outside of license management.
-- **Free Pro:** Computers that are licensed through an Ubuntu Pro Free Subscription.
-- **Pro:** Computers that are licensed through Ubuntu Pro.
-- **Legacy:** Computers that are licensed through a `license.txt` file.
 
 ## Related topics
 
