@@ -45,8 +45,6 @@ For Landscape Server versions `25.10` and later, there are the following license
 The **Unlicensed** license type is available for self-hosted 25.10 and later and **select accounts on SaaS**. License management activities associated with this type are unavailable for the Landscape Client snap, Core devices, and offline Client deployments.
 ```
 
-### Client states
-
 - **Unlicensed:** Computers that are not licensed and cannot be managed outside of license management operations.
 - **Free Pro:** Computers that are licensed through an Ubuntu Pro Free Subscription.
 - **Pro:** Computers that are licensed through Ubuntu Pro.
