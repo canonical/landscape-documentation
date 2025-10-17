@@ -41,12 +41,13 @@ Example response:
         "summary": "Attach a pro token to computers",
         "type": "ActivityGroup"
     },
-    "invalid_computer_ids": []
+    "invalid_computer_ids": [],
+    "nonexistent_computer_ids": []
 }
 ```
 
 ```{note}
-"invalid_computer_ids" in the response are for computers that do not accept the proper message type to attach pro (e.g., older client versions) or a computer id that don't exist. This activity is only available for client versions 25.08.3 and newer.
+This activity is only available for client versions 25.08.2+git6481 and newer.
 ```
 
 ## POST `/detach-token`
@@ -93,12 +94,13 @@ Example response:
         "summary": "Detach pro token from computers",
         "type": "ActivityGroup"
     },
-    "invalid_computer_ids": []
+    "invalid_computer_ids": [],
+    "nonexistent_computer_ids": []
 }
 ```
 
 ```{note}
-"invalid_computer_ids" in the response are for computers that do not accept the proper message type to attach pro (e.g., older client versions) or a computer id that don't exist. This activity is only available for client versions 25.08.3 and newer.
+This activity is only available for client versions 25.08.2+git6481 and newer.
 ```
 
 ## GET `/legacy-licenses`

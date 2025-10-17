@@ -36,6 +36,7 @@ Query parameters:
   - `contract:<contract-id>`: Instances associated with the specified `<contract-id>`.
   - `contract-expires-within-days:<days>`: Instances associated with a Ubuntu Pro contract that expires within `<days>` days.
   - `license-expires-within-days:<days>`: Instances associated with a Legacy License that expires within `<days>` days.
+  - `has-pro-management:<option>`: Instances with pro management enabled if `<option>` is a truthy value or disbaled if falsy.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 - `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.

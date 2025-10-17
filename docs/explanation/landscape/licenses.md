@@ -36,16 +36,3 @@ Here’s a summary of the different license types in Landscape and what they ind
 - **Pro:** License for any client machine that's attached to Ubuntu Pro under an active contract (Physical or Virtual)
     * These don't require the `license.txt` file to be installed or have available seats on the Landscape server
     * Requires `landscape-client` 23.x or higher to report the Pro attachment information to the Landscape server
-
-## License types
-
-For Landscape Server versions `25.10` and later, there are the following license types. 
-
-```{note}
-The **Unlicensed** license type is available for self-hosted 25.10 and later and **select accounts on SaaS**. License management activities associated with this type are unavailable for the Landscape Client snap, Core devices, and offline Client deployments.
-```
-
-- **Unlicensed:** Computers that are not licensed and cannot be managed outside of license management operations.
-- **Free Pro:** Computers that are licensed through an Ubuntu Pro Free Subscription.
-- **Pro:** Computers that are licensed through Ubuntu Pro.
-- **Legacy:** Computers that are licensed through a `license.txt` file.

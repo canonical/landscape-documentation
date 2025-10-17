@@ -11,7 +11,7 @@ The following instructions explain how to attach your Ubuntu Pro subscription to
 Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
 ```
 
-## Manual attachment
+## Manual attachment per-client
 
 ### Step 1: Install the Ubuntu Pro Client
 
@@ -79,9 +79,17 @@ Available services can be enabled or disabled on the command line with `pro enab
 
 ## Automated attachment across multiple clients
 
-### Ubuntu Pro licensing method
+### Step 1: Register clients with landscape server
 
-Outside of manually attaching Pro to a client machine, Landscape introduced a feature to attach Pro to client machines at scale. To do this navigate to `Pro Services` on the `instances` page and select attach pro. This will create an activity on the client machines to attach a pro token and when it succeeds it will properly license the instance. License management activities are only available for `landscape-client` versions `25.08.3` and newer and is not limited to unlicensed instances. For more details see {ref}`reference-rest-api-license-management`.
+```{note}
+You must be running Landscape Server 25.10 or above and Landscape Client 25.10 or above to use automated attachment on clients for licensing.
+```
+
+This step will place clients into an unlicensed state where Landscape is aware of the instance to manage Ubuntu Pro.
+
+### Step 2: Attach Ubuntu Pro to instances.
+
+Navigate to the instances page and select instances you would like to attach an Ubuntu Pro subscription to. Select `Pro Services` in the UI and select `Attach Token`, then providing your token and selecting `Attach`. This will then send an activity to the client to attach Ubuntu Pro and on success will properly license the instance.
 
 ```{note}
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and core devices.
