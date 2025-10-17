@@ -11,7 +11,7 @@ External clients communicate with Landscape Server over the internet. These clie
 
 The first point of contact for all of this traffic is the reverse proxy, which also acts as a load-balancer and performs TLS termination. In most Landscape Server deployments, this role is filled by [HAProxy](https://www.haproxy.org/), but in some deployments, it may be [Apache Server](https://httpd.apache.org/).
 
-All external network traffic to and from Landscape uses HTTP. Consequently, TCP ports 80 and 443 (for HTTPS) on the reverse proxy must be exposed to the wide area network. In addition, port 6554 must be exposed for gRPC (HTTP/2) communication with [Ubuntu Pro for WSL](https://documentation.ubuntu.com/wsl/stable/).
+All external network traffic to and from Landscape uses HTTP or HTTPS. Consequently, TCP ports 80 and 443 on the reverse proxy must be exposed to the wide area network. In addition, port 6554 must be exposed for gRPC over HTTP/2 communication with [Ubuntu Pro for WSL](https://documentation.ubuntu.com/wsl/stable/).
 
 ## Internal network traffic
 
