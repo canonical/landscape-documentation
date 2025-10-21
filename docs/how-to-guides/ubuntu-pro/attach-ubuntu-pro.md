@@ -77,7 +77,7 @@ Available services can be enabled or disabled on the command line with `pro enab
 
 ## Automated attachment across multiple clients
 
-### Step 1: Register clients with landscape server
+### Step 1: Register clients with Landscape Server
 
 ```{note}
 You must be running Landscape Server 25.10 or above and Landscape Client 25.10 or above to use automated attachment on clients for licensing.
