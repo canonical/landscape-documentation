@@ -85,7 +85,7 @@ You must be running Landscape Server 25.10 or above and Landscape Client 25.10 o
 
 This step will place clients into an unlicensed state where Landscape is aware of the instance to manage Ubuntu Pro.
 
-### Step 2: Attach Ubuntu Pro to instances.
+### Step 2: Attach Ubuntu Pro to instances
 
 Navigate to the instances page and select instances you would like to attach an Ubuntu Pro subscription to. Select `Pro Services` in the UI and select `Attach Token`, then providing your token and selecting `Attach`. This will then send an activity to the client to attach Ubuntu Pro and on success will properly license the instance.
 
