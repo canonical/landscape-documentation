@@ -870,6 +870,15 @@ The `[system]` section contains configurations that apply across many or all of 
 - ENV name: `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION`
 - Default: `False`
 
+(service-conf-system-enforce-password-strength)=
+
+### `enforce_password_strength`
+
+- Purpose: Whether to enforce password strength when creating the administrator of a standalone account. If set to True, the password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, and one digit.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENFORCE_PASSWORD_STRENGTH`
+- Default: `True`
+
 ### `gpg_home_dir`
 
 - Purpose: The directory containing GnuPG config files and the keyrings.
