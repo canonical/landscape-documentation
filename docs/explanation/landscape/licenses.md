@@ -17,7 +17,7 @@ To use Ubuntu Pro with Landscape, you must be running Landscape Server version 2
 
 After you've enabled Landscape, Landscape will detect your Pro entitlement via the Pro token and create a license for your machine.
 
-## License.txt method
+## (Legacy) License.txt method
 
 For the `license.txt` method, you get your first `license.txt` file from Canonical and manually upload the file to your server: `/etc/landscape/license.txt`. You’ll need to re-upload your license every time you renew, but you can download your new license in your Landscape account from `https://landscape.canonical.com/account/<account_id>/self-hosted`.
 

@@ -3,21 +3,19 @@
 
 > See also: [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/)
 
+```{note}
+You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
+```
+
 Attaching the [Ubuntu Pro](https://ubuntu.com/pro) subscription to Ubuntu brings you the [enterprise lifecycle](https://ubuntu.com/about/release-cycle), including [Linux kernel livepatching](https://ubuntu.com/security/livepatch), access to [FIPS-validated packages](https://ubuntu.com/security/fips), and [compliance with security profiles](https://ubuntu.com/security/certifications) such as CIS. This is not required for Ubuntu Pro instances [through public clouds](https://ubuntu.com/public-cloud) such as [AWS](https://ubuntu.com/aws/pro), [Azure](https://ubuntu.com/azure/pro) or [GCP](https://ubuntu.com/gcp/pro), since these are automatically attached from launch.
 
 The following instructions explain how to attach your Ubuntu Pro subscription to your Ubuntu systems.
 
-```{note}
-Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
-```
+Note that Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
 
 ## Manual attachment per-client
 
 ### Step 1: Install the Ubuntu Pro Client
-
-```{note}
-You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
-```
 
 This step is necessary for Ubuntu Pro users or holders of personal subscriptions. If you are an Ubuntu Pro user through a public cloud offering, your subscription is already attached and you can skip these instructions.
 
