@@ -20,6 +20,7 @@ autoinstall
 AutoPilot
 autoremove
 amd
+backend
 backport
 Backport
 backtrace
@@ -65,6 +66,7 @@ CVEs
 datetime
 debian
 decrypt
+deterministically
 DirectoryAPI
 DISA
 distros
@@ -93,7 +95,9 @@ grpcio
 filesystem
 frontend
 HAProxy
+HashiCorp
 hardcoded
+Hashicorp
 hashid
 Hashids
 heredoc
@@ -139,6 +143,7 @@ livepatching
 logfile
 loopback
 lsctl
+LUKS
 LXC
 LXD
 lxd
@@ -159,6 +164,7 @@ Multipass
 Nagios
 nagios
 netinstall
+netmask
 NFS
 NIC
 NID
@@ -251,6 +257,7 @@ sslmode
 sssd
 stateful
 STIG
+Subiquity
 subkeys
 submodule
 subpaths
@@ -275,6 +282,7 @@ Ubuntu
 UCA
 udeb
 udebs
+UIs
 unactivated
 uncomment
 unhold
@@ -282,6 +290,7 @@ Unhold
 unscalable
 untrusted
 uploader
+uploaders
 uptime
 URI
 URIs

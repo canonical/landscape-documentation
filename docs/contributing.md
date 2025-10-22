@@ -14,11 +14,6 @@ We warmly welcome your engagement with the Landscape community and appreciate al
 - **Learn more about Landscape**
     
     Contributing to the Landscape documentation can help you broaden your understanding of Landscape and its related technologies. Writing documentation often involves exploring new features and investigating potential problems or challenges users may face, which can help you learn more about how Landscape works and how users interact with it.
-    
-- **Connect with the Landscape community**
-    
-    As a member of the Landscape community, you’re encouraged to collaborate with others and participate in discussions in the Discourse forum. Contributing to the documentation is a great way to connect with others in the community and learn from their experiences.
-
 
 We believe that everyone has something valuable to contribute, no matter your level of experience, and we hope to make it as easy as possible to contribute. If you find any part of our process doesn't work well for you, please let us know!
 
@@ -60,6 +55,66 @@ Most Landscape documentation contributions are made on GitHub. There are several
 - Report a bug or provide feedback by [creating an issue](https://github.com/canonical/landscape-documentation/issues/new) in GitHub
 - Ask a question or help other Landscape community members on [Discourse](https://discourse.ubuntu.com/c/project/landscape/89)
 
-If you're new to contributing with Git and the command line, see the [Getting Started guide](https://documentationacademy.org/docs/howto/get-started/using_git/) from the Canonical Open Documentation Academy for an overview.
+## How to contribute
+
+If you're new to contributing with Git/GitHub or the command line, see the [Getting Started guide](https://canonical-open-documentation-academy.readthedocs.io/en/latest/docs/howto/get-started/using_git/) from the Canonical Open Documentation Academy for an overview.
+
+This section provides basic instructions of how to contribute to our documentation and build locally using GitHub and the command line.
+
+### Prerequisites
+
+To build the documentation locally, you will first need to install some necessary dependencies on your system with the following commands:
+
+```bash
+sudo apt update
+sudo apt install make python3 python3-venv python3-pip
+```
+
+### Build, preview, and test the documentation
+
+We use `make` to build, preview, and test the documentation. You can see all the options in the Makefile, but here's the basic process:
+
+#### Build
+
+To build the docs:
+
+```bash
+make html
+```
+
+The first time you run this command, it'll build everything. This includes installing all of the Python dependencies into the Python virtual environment. When you run it again, it'll only update the changed files. This is usually fine, but sometimes causes issues if you've made a lot of structural changes to the documentation. You can also run a clean build, which deletes the existing output files and the Python environment, and then builds the full documentation again.
+
+To run a clean build:
+
+```bash
+make clean html
+```
+
+#### Preview
+
+After your build succeeds, preview it locally to see how the published documentation will look:
+
+```bash
+make run
+```
+
+This command builds the documentation and serves it at `http://127.0.0.1:8000/`. When you change a documentation file and save it, the documentation will be automatically rebuilt and refreshed in the browser.
+
+Previewing the docs makes it easier to see how the finalized, published documentation will look. For most changes, you should preview your docs so you can make sure everything (especially the formatting) looks as you expected it to.
+
+#### Test
+
+You can do this before or after previewing the docs. We have two main tests which need to pass for our documentation:
+
+```bash
+make spelling
+make linkcheck
+```
+
+These tests make sure everything is spelled correctly and that all links go to a valid URL. Note that these tests will also be run automatically on your pull request in GitHub.
+
+### Submit a pull request
+
+Once you've finished creating and testing your changes, create a pull request against the Landscape documentation repository.
 
 Your submitted issues and pull requests will be reviewed in due time. If you submit a PR, we have some automatic checks that will run against your PR to check for consistent style and language. However, don't let this be a barrier to your contribution. You can still submit contributions to the best of your ability, and if something is inconsistent, we'll help you fix it.
