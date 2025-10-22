@@ -81,18 +81,22 @@ Available services can be enabled or disabled on the command line with `pro enab
 
 ```{note}
 You must be running Landscape Server 25.10 or above and Landscape Client 25.10 or above to use automated attachment on clients for licensing.
+
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and Core devices.
 ```
 
 This step will place clients into an unlicensed state where Landscape is aware of the instance to manage Ubuntu Pro.
 
-### Step 2: Attach Ubuntu Pro to instances
+### Step 2: Attach Ubuntu Pro to registered clients
 
-Navigate to the instances page and select instances you would like to attach an Ubuntu Pro subscription to. Select `Pro Services` in the UI and select `Attach Token`, then providing your token and selecting `Attach`. This will then send an activity to the client to attach Ubuntu Pro and on success will properly license the instance.
+To attach Ubuntu Pro in the web portal:
 
-```{note}
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and Core devices.
-```
+1. Go to **Instances**
+1. Select your instance(s) that you want to attach an Ubuntu Pro subscription to
+1. Click **Attach Token** 
+1. Provide your token and complete the remaining prompts
 
+This will send a separate activity to each client to attach Ubuntu Pro. After the activity succeeds, that client will become licensed.
 
 ## Related topics
 
