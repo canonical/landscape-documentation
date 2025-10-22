@@ -67,7 +67,7 @@ sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={
 ```
 
 (howto-heading-repository-configuration-enforcement)=
-## Repository configuration enforcement
+## Control repository configurations
 
 By default, when a Repository Profile is applied to a machine, it enforces the `/etc/sources.list` configuration on the Ubuntu instance to match exactly what is specified in Landscape Server. The Repository Profile configurations are applied once, and are not validated on an ongoing basis. Instead of replacing repository configurations in /etc/sources.list, Landscape Client can append the additional repository configurations defined the Repository Profile, if the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` is set to false.
 
