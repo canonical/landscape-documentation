@@ -77,15 +77,15 @@ Available services can be enabled or disabled on the command line with `pro enab
 
 ## Automated attachment across multiple clients
 
-### Step 1: Register clients with Landscape Server
-
 ```{note}
 You must be running Landscape Server 25.10 or above and Landscape Client 25.10 or above to use automated attachment on clients for licensing.
 
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and the licensing management activities are unavailable for offline client deployments as well as snap and Core devices.
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and is unavailable for offline client deployments as well as snap and Core devices.
 ```
 
-This step will place clients into an unlicensed state where Landscape is aware of the instance to manage Ubuntu Pro.
+### Step 1: Register clients with Landscape Server
+
+You first need to register your client machines with Landscape Server. At this stage, your clients will be considered "unlicensed". Landscape will be aware of the client, but Ubuntu Pro must be added for Landscape to fully license and manage the client.
 
 ### Step 2: Attach Ubuntu Pro to registered clients
 
