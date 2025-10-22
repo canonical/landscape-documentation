@@ -49,6 +49,30 @@ Example response:
 }
 ```
 
+## GET `/standalone-account`
+
+An endpoint to indicate whether or not the standalone account has been created in a standalone deployment. This endpoint will always return a 404 in any deployment other than a standalone deployment (e.g. SaaS).
+
+Path parameters:
+
+- None
+
+Required parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET https://landscape.example.com/api/v2/standalone-account
+```
+
+Example response:
+
+```json
+{"exists": true}
+```
+
 ## POST `/standalone-account`
 
 Create a standalone account with the first administrator. If this is not a standalone deployment or a standalone account already exists, the request will fail.
