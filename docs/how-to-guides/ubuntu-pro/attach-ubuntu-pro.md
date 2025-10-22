@@ -83,11 +83,33 @@ You must be running Landscape Server 25.10 or above and Landscape Client 25.10 o
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and is unavailable for offline client deployments as well as snap and Core devices.
 ```
 
-### Step 1: Register clients with Landscape Server
+### Step 1: Enable Ubuntu Pro management on Landscape Client
+
+On each instance you want to manage, do the following:
+
+1. Edit the client configuration file `/etc/landscape/client.conf`, add this line:
+
+    ```
+    include_manager_plugins = ProManagement
+    ```
+
+    If your `client.conf` already includes an `include_manager_plugins` line, then add `ProManagement` to it. For example:
+
+    ```
+    include_manager_plugins = ScriptExecution,ProManagement
+    ```
+
+2. Restart Landscape Client:
+
+    ```
+    sudo systemctl restart landscape-client
+    ```
+
+### Step 2: Register clients with Landscape Server
 
 You first need to register your client machines with Landscape Server. At this stage, your clients will be considered "unlicensed". Landscape will be aware of the client, but Ubuntu Pro must be added for Landscape to fully license and manage the client.
 
-### Step 2: Attach Ubuntu Pro to registered clients
+### Step 3: Attach Ubuntu Pro to registered clients
 
 To attach Ubuntu Pro in the web portal:
 

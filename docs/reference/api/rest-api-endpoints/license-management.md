@@ -1,6 +1,10 @@
 (reference-rest-api-license-management)=
 # License Management
 
+The following endpoints available here are related to the management of Ubuntu Pro and are available only on self-hosted deployments and **select** SaaS accounts.
+
+- `/detach-token`
+
 ## POST `/attach-token`
 
 Attach a provided Ubuntu Pro token to the provided computer ids. This will create an activity on each client and place them into the proper license state if the activity succeeds.
@@ -47,16 +51,12 @@ Example response:
 ```
 
 ```{note}
-This activity is only available for client versions 25.08.2+git6481 and newer.
+This activity is only available for client versions 25.10 and newer.
 ```
 
 ## POST `/detach-token`
 
 Detach an Ubuntu Pro subscription from the provided computer ids. This will create an activity on each client and place them into the proper license state if the activity succeeds.
-
-```{note}
-This endpoint is feature flagged behind `ubuntu_pro_licensing`.
-```
 
 Required parameters:
 
@@ -100,7 +100,7 @@ Example response:
 ```
 
 ```{note}
-This activity is only available for client versions 25.08.2+git6481 and newer.
+This activity is only available for client versions 25.10 and newer.
 ```
 
 ## GET `/legacy-licenses`
