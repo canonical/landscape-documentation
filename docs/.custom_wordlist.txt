@@ -143,6 +143,7 @@ livepatching
 logfile
 loopback
 lsctl
+LUKS
 LXC
 LXD
 lxd
@@ -163,6 +164,7 @@ Multipass
 Nagios
 nagios
 netinstall
+netmask
 NFS
 NIC
 NID
@@ -288,6 +290,7 @@ Unhold
 unscalable
 untrusted
 uploader
+uploaders
 uptime
 URI
 URIs

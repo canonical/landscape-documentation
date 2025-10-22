@@ -17,7 +17,33 @@ This feature is available on self-hosted and **select accounts on SaaS**. It is 
 
 See the [Ubuntu installation (Subiquity) documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html) for more information.
 
-## Install the `landscape-ubuntu-installer-attach` package
+## On a Juju deployment
+
+Enable the service for a Landscape unit with the Juju action:
+
+```sh
+juju run landscape-server/<N> enable-ubuntu-installer-attach
+```
+
+If you have multiple Landscape server units, you can enable the service on each unit:
+
+```sh
+juju run landscape-server/0 enable-ubuntu-installer-attach
+juju run landscape-server/1 enable-ubuntu-installer-attach
+juju run landscape-server/2 enable-ubuntu-installer-attach
+...
+juju run landscape-server/<N> enable-ubuntu-installer-attach
+```
+
+To disable the service on a unit, run the following Juju action:
+
+```sh
+juju run landscape-server/<N> disable-ubuntu-installer-attach
+```
+
+## On a manual install
+
+### Install the `landscape-ubuntu-installer-attach` package
 
 Landscape requires an additional service for the Ubuntu installer attach experience. This example uses the Landscape Beta PPA.
 
@@ -27,17 +53,17 @@ sudo apt update
 sudo apt install landscape-ubuntu-installer-attach
 ```
 
-## Configure the proxy
+### Configure the proxy
 
 This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination.
 
-### Requirements
+#### Requirements
 
 - The installer connects to the proxy on port 50051.
 - The installer connects using HTTPS.
-- The `ubuntu-installer-attach` service listens on port 53354 by default.
+- The `landscape-ubuntu-installer-attach` service listens on port 53354 by default.
 
-### Example configuration (HAProxy)
+#### Example configuration (HAProxy)
 
 For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
 

@@ -57,7 +57,7 @@ Most Landscape documentation contributions are made on GitHub. There are several
 
 ## How to contribute
 
-If you're new to contributing with Git/GitHub or the command line, see the [Getting Started guide](https://documentationacademy.org/docs/howto/get-started/using_git/) from the Canonical Open Documentation Academy for an overview.
+If you're new to contributing with Git/GitHub or the command line, see the [Getting Started guide](https://canonical-open-documentation-academy.readthedocs.io/en/latest/docs/howto/get-started/using_git/) from the Canonical Open Documentation Academy for an overview.
 
 This section provides basic instructions of how to contribute to our documentation and build locally using GitHub and the command line.
 

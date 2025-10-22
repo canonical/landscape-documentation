@@ -1,3 +1,4 @@
+(explanation-server-architecture)=
 # Landscape Server architecture
 
 Landscape Server is the server-side component of the Landscape ecosystem. It is made up of a collection of services. This document explains these services, their purposes, and their relationships to each other and external components.
@@ -38,6 +39,7 @@ There is also one optional third-party component:
 
 Landscape Server's individual services are long-running processes that provide different aspects of Landscape's functionality. This section describes each service in detail.
 
+(explanation-server-architecture-api)=
 ### API
 
 The API service responds to HTTP requests with JSON-encoded responses. Requests made to Landscape Server's `/api` endpoint are routed by the reverse proxy to this service. It is intended for use by Landscape Administrators. It interacts with all third-party components and most other Landscape Server services.
@@ -58,6 +60,7 @@ HTTP requests made to `/api` are routed to the Legacy API.
   * [How to use the legacy API](/how-to-guides/api/use-the-legacy-api)
   * [Legacy API endpoint reference](/reference/api/legacy-api-endpoints/index)
 
+(explanation-server-architecture-appserver)=
 ### Appserver
 
 The Appserver service responds to HTTP requests that are not routed to another service. It either responds directly to requests, or routes them again to other services. When responding directly to requests, responses are generally in the form of HTML, but it also serves JavaScript and CSS for the new and legacy Landscape UIs. It interacts with all third-party components and most other Landscape Server services.
@@ -70,10 +73,12 @@ The Async frontend service supports live status updates in the legacy Landscape 
 
 The Job handler service processes periodic, long-running, or background tasks – usually produced by the API, Appserver, or Message system services. It primarily interacts with PostgreSQL, RabbitMQ Server, and other Landscape Server services.
 
+(explanation-server-architecture-message-system)=
 ### Message system
 
 The Message system service responds to HTTP requests from Landscape Client, accepting incoming messages and responding with outgoing messages. It updates Landscape Server's view of the Client's state, and delivers Activities to be performed by the Client. Other than Clients, it primarily interacts with the PostgreSQL databases.
 
+(explanation-server-architecture-pingserver)=
 ### Pingserver
 
 The Pingserver service responds to HTTP requests from Landscape Clients, alerting them when they have pending outgoing messages from Landscape Server. It also updates Clients "last ping" times, which are used to alert for offline Clients. It primarily interacts with the PostgreSQL databases.
@@ -82,14 +87,17 @@ The Pingserver service responds to HTTP requests from Landscape Clients, alertin
 
 The Hostagent consumer service processes tasks from WSL-related queues. This supports actions related to managed Windows machines and their WSL instances. It primarily interacts with the PostgreSQL databases and RabbitMQ Server.
 
+(explanation-server-architecture-hostagent-messenger)=
 ### Hostagent messenger
 
 The Hostagent messenger service communicates with Ubuntu Pro for WSL on managed Windows machines. It does this using a persistent GRPC connection. It sends WSL-related activities to managed Windows machines and processes incoming messages from them onto the WSL-related task queues to be processed by [Hostagent consumer](#hostagent-consumer). It primarily interacts with RabbitMQ Server.
 
+(explanation-server-architecture-package-search)=
 ### Package search
 
 The Package search service responds to internal HTTP requests with the Debian package state information of instances. It acts as an in-memory cache of this information, improving the performance of package queries. Without it, package queries go directly to the database. It primarily interacts with the PostgreSQL database.
 
+(explanation-server-architecture-package-upload)=
 ### Package upload
 
 The Package upload service responds to dput or FTP requests to upload Debian packages to Landscape-managed package repositories. It maintains a queue of package uploads and processes them into the appropriate repositories. It primarily interacts with the PostgreSQL database and the filesystem.
