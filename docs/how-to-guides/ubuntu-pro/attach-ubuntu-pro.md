@@ -100,6 +100,6 @@ This will send a separate activity to each client to attach Ubuntu Pro. After th
 
 ## Related topics
 
-- [Ubuntu Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/)
-- [Ubuntu Pro Client documentation on basic commands](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/tutorials/basic_commands.html)
+- [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/en/latest/)
+- [Ubuntu Pro Client documentation on basic commands](https://documentation.ubuntu.com/pro-client/en/latest/tutorials/basic_commands/)
 
