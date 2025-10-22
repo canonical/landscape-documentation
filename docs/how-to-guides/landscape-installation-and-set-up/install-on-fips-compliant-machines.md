@@ -1,7 +1,9 @@
 (how-to-install-fips-compliant)=
 # How to install on FIPS-compliant machines
 
-This document provides the Landscape-specific steps needed for a FIPS-compliant Landscape deployment. The FIPS-compliant process is quite similar to the standard installation process. Single machine deployments, such as Landscape Quickstart, are not suitable for managing Ubuntu estates larger than several hundred machines when FIPS is enabled. The FIPS compliant openssl 3.0 package has a security configuration that incorporates delays, which introduces an upper bound to Landscape's ability to communicate with many machines when FIPS is enabled. When deploying Landscape with Juju, the openssl 3.0 component can be deployed in a horizontally scalable manner, removing the upper bound associated with a single machine deployment.
+This document provides the Landscape-specific steps needed for a FIPS-compliant Landscape deployment. The FIPS-compliant process is quite similar to the standard installation process. 
+
+Note that for FIPS-compliant deployments, Landscape Quickstart isn't suitable for large estates (over a few hundred machines). This is due to some performance configuration introduced by the `openssl` 3.0 package which incorporates delays. To manage a large, FIPS-compliant estate, use the Juju deployment method, which allows for horizontal scaling to overcome this limitation.
 
 ## Install and configure Landscape for FIPS-compliant deployments
 
