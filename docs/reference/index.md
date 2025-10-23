@@ -14,5 +14,6 @@ config/index
 logs/index
 networking/index
 terms/index
+database
 known-issues
 lsctl

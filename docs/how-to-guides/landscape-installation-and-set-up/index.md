@@ -13,6 +13,7 @@ Juju installation <juju-installation>
 Juju HA installation <juju-ha-installation>
 Install in a LXD container <install-in-a-lxd-container>
 Install on FIPS-compliant machines <install-on-fips-compliant-machines>
+Install in a DISA STIG compliant environment <disa-stig>
 Install in an airgapped environment <install-landscape-in-an-air-gapped-or-offline-environment>
 Install Landscape Client <install-landscape-client>
 Configure Landscape Client <configure-landscape-client>
