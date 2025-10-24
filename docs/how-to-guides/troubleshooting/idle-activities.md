@@ -11,7 +11,7 @@ Guidance on when to contact [Canonical Support](https://support-portal.canonical
 
 There are two main activity states that can become stuck: **Queued** and **In progress**.
 
-Queued activities can get stuck if the client is waiting to pick them up from the server, or if the server hasn't received a message from the client indicating the activity was picked up. This is often caused by either the client being too busy to perform the activity, or the server being too busy to accept new messages from the client. Although there can be other underlying issues, such as no network connectivity.
+Queued activities can get stuck if the client is waiting to pick them up from the server, or if the server hasn't received a message from the client indicating the activity was picked up. This is often caused by either the client being too busy to perform the activity, a large message backlog, or the server being too busy to accept new messages from the client. Although there can be other underlying issues, such as no network connectivity.
 
 In progress activities can get stuck when the client acknowledged the task but failed to send a response back. This can be caused by many different reasons, such as loss of connectivity, networking issues, misconfigurations, or the Landscape Client service restarting.
 
