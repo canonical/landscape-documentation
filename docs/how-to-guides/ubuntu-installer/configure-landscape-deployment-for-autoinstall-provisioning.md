@@ -19,6 +19,10 @@ See the [Ubuntu installation (Subiquity) documentation](https://canonical-subiqu
 
 ## On a Juju deployment
 
+```{note}
+This action is available on charm revision 189 and later.
+```
+
 Enable the service for a Landscape unit with the Juju action:
 
 ```sh
@@ -77,10 +81,9 @@ threads = 1
 base_port = 53354
 ```
 
-Include the following feature flag in your `[features]` section:
+Include the following feature flag in the `[features]` section of your `service.conf`:
 
 ```ini
-...
 [features]
 employee_management = true
 ```
