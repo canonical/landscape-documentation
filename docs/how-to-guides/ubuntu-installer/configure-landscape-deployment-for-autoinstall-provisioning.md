@@ -81,7 +81,7 @@ threads = 1
 base_port = 53354
 ```
 
-Include the following feature flag in the `[features]` section of your `service.conf`:
+Include the following configuration in the `[features]` section of your `service.conf`:
 
 ```ini
 [features]
