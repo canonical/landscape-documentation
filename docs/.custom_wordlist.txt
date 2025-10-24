@@ -157,6 +157,7 @@ middleware
 milli
 mis
 miscategorized
+misconfigured
 misconfigurations
 Mitaka
 MTU
@@ -220,6 +221,7 @@ PyJWT
 QEMU
 RabbitMQ
 rabbitmq
+RabbitMQ’s
 radosgw
 RBAC
 reconnections
