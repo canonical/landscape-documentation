@@ -11,7 +11,7 @@ Guidance on when to contact [Canonical Support](https://support-portal.canonical
 
 There are two main activity states that can become stuck: **Queued** and **In progress**.
 
-Queued activities can get stuck if the client is waiting to pick them up from the server, or if the server hasn't received a message from the client indicating the activity was picked up. This can be caused by either the client being too busy to perform the activity, or the server being too busy to accept new messages from the client.
+Queued activities can get stuck if the client is waiting to pick them up from the server, or if the server hasn't received a message from the client indicating the activity was picked up. This is often caused by either the client being too busy to perform the activity, or the server being too busy to accept new messages from the client. Although there can be other underlying issues, such as no network connectivity.
 
 In progress activities can get stuck when the client acknowledged the task but failed to send a response back. This can be caused by many different reasons, such as loss of connectivity, networking issues, misconfigurations, or the Landscape Client service restarting.
 
@@ -39,6 +39,6 @@ If you've investigated with these steps and still have issues with your activiti
 
 ## In progress activities
 
-If activities are stuck in progress, this means the client received the activity, but the client has not yet sent a response back to the server. This could be for many different reasons, such as a timeout, loss of connectivity, the Landscape Client service restarted, or the activity taking longer than expected to complete.
+If activities are stuck in progress, this means the client received the activity, but the client has not yet sent a response back to the server. This could be for many different reasons, such as a timeout, network issues, the Landscape Client service restarted, a large message backlog on the client, slow message processing on the server, or the activity taking longer than expected to complete.
 
 For those with Support contracts, we recommend you contact [Support](https://support-portal.canonical.com/) if you observe idle "in progress" activities because the underlying issues can have many different root causes.
