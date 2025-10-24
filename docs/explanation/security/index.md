@@ -11,3 +11,4 @@ Cryptographic technology <cryptographic-technology>
 Disclosure and reporting <disclosure-and-reporting>
 Data handling <data-handling>
 AppArmor <apparmor>
+Authentication and authorization <authentication-and-authorization>
