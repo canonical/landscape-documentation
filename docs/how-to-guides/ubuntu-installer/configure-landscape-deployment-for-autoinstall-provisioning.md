@@ -35,6 +35,19 @@ juju run landscape-server/2 enable-ubuntu-installer-attach
 juju run landscape-server/<N> enable-ubuntu-installer-attach
 ```
 
+You'll need to provide additional configuration to the Landscape server units to enable
+the feature and set minimal service configuration:
+
+```sh
+juju config landscape-server additional_service_config='[ubuntu_installer_attach]
+stores = main account-1
+threads = 1
+base_port = 53354
+[features]
+employee_management = true
+'
+```
+
 To disable the service on a unit, run the following Juju action:
 
 ```sh
@@ -51,6 +64,25 @@ Landscape requires an additional service for the Ubuntu installer attach experie
 sudo add-apt-repository ppa:landscape/self-hosted-beta
 sudo apt update
 sudo apt install landscape-ubuntu-installer-attach
+```
+
+### Set configuration
+
+In your `service.conf`, include the following section if not already present:
+
+```ini
+[ubuntu_installer_attach]
+stores = main account-1
+threads = 1
+base_port = 53354
+```
+
+Include the following feature flag in your `[features]` section:
+
+```ini
+...
+[features]
+employee_management = true
 ```
 
 ### Configure the proxy
@@ -96,16 +128,6 @@ frontend haproxy-0-grpc-ubuntu-installer
     http-request set-var(req.full_fqdn) hdr(authority) if !host_found
     http-request set-var(req.full_fqdn) hdr(host) if host_found
     http-request set-header X-FQDN %[var(req.full_fqdn)]
-```
-
-## Enable the feature
-
-Set the following configuration in your `service.conf`:
-
-```ini
-[features]
-[...]
-employee_management = true
 ```
 
 ## Verify the connection
