@@ -774,6 +774,13 @@ The knowledge database was deprecated in Landscape Server 25.10 and will be drop
 - ENV name: `LANDSCAPE_STORES__PASSWORD`
 - Default: `None`
 
+### `port`
+
+- Purpose: The port to access the database server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__PORT`
+- Default: `None`
+
 ### `resource_1`
 
 - Purpose: The resource database name.
