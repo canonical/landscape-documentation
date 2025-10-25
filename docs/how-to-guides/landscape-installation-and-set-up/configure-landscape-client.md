@@ -66,6 +66,25 @@ Once you’ve defined a registration key and enabled the auto-registration featu
 sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={COMPUTER_TITLE} --registration-key={KEY}
 ```
 
+(howto-heading-repository-configuration-enforcement)=
+## Control repository configurations
+
+By default, when a repository profile is applied to a machine, Landscape enforces the exact `/etc/apt/sources.list` configuration as defined in the profile. This configuration is applied once when the profile is applied, and is not revalidated or enforced on an ongoing basis. 
+
+If you want Landscape to append the repository configurations instead of replacing the existing ones in `/etc/apt/sources.list`, you can configure Landscape to use `/etc/apt/sources.list.d` instead by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
+
+Manually edit `/etc/landscape/client.conf` and add this line:
+
+```text
+manage_sources_list_d = false
+```
+
+To apply this configuration change, restart Landscape Client with:
+
+```bash
+sudo service landscape-client restart
+```
+
 (howto-heading-client-enable-script-execution)=
 ## Enable script execution
 
