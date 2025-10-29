@@ -3,19 +3,19 @@
 
 > See also: [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/)
 
+```{note}
+You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
+```
+
 Attaching the [Ubuntu Pro](https://ubuntu.com/pro) subscription to Ubuntu brings you the [enterprise lifecycle](https://ubuntu.com/about/release-cycle), including [Linux kernel livepatching](https://ubuntu.com/security/livepatch), access to [FIPS-validated packages](https://ubuntu.com/security/fips), and [compliance with security profiles](https://ubuntu.com/security/certifications) such as CIS. This is not required for Ubuntu Pro instances [through public clouds](https://ubuntu.com/public-cloud) such as [AWS](https://ubuntu.com/aws/pro), [Azure](https://ubuntu.com/azure/pro) or [GCP](https://ubuntu.com/gcp/pro), since these are automatically attached from launch.
 
 The following instructions explain how to attach your Ubuntu Pro subscription to your Ubuntu systems.
 
-```{note}
-Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
-```
+Note that Ubuntu Pro isn't just for enterprise customers. Anyone can get [a personal Ubuntu Pro subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
 
-## Step 1: Install the Ubuntu Pro Client
+## Manual attachment per-client
 
-```{note}
-You must be running Landscape Server 23.03 or above and Landscape Client 23.02 or above to use the Ubuntu Pro Client to attach your Pro subscription to Landscape.
-```
+### Step 1: Install the Ubuntu Pro Client
 
 This step is necessary for Ubuntu Pro users or holders of personal subscriptions. If you are an Ubuntu Pro user through a public cloud offering, your subscription is already attached and you can skip these instructions.
 
@@ -27,7 +27,7 @@ sudo apt update && sudo apt install ubuntu-advantage-tools
 
 If you already have `ubuntu-advantage-tools` installed, this install command will upgrade the package to the latest version.
 
-## Step 2: Attach your subscription
+### Step 2: Attach your subscription
 
 To attach your machine to a subscription, run the following command in your terminal:
 
@@ -75,8 +75,53 @@ When the machine has successfully been attached, you will also see a summary of 
 
 Available services can be enabled or disabled on the command line with `pro enable <service name>` and `pro disable <service name>` after you have attached.
 
+## Automated attachment across multiple clients
+
+```{note}
+You must be running Landscape Server 25.10 or above and Landscape Client 25.10 or above to use automated attachment on clients for licensing.
+
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and is unavailable for offline client deployments as well as snap and Core devices.
+```
+
+### Step 1: Enable Ubuntu Pro management on Landscape Client
+
+On each instance you want to manage, do the following:
+
+1. Edit the client configuration file `/etc/landscape/client.conf`, add this line:
+
+    ```
+    include_manager_plugins = ProManagement
+    ```
+
+    If your `client.conf` already includes an `include_manager_plugins` line, then add `ProManagement` to it. For example:
+
+    ```
+    include_manager_plugins = ScriptExecution,ProManagement
+    ```
+
+2. Restart Landscape Client:
+
+    ```
+    sudo systemctl restart landscape-client
+    ```
+
+### Step 2: Register clients with Landscape Server
+
+You first need to register your client machines with Landscape Server. At this stage, your clients will be considered "unlicensed". Landscape will be aware of the client, but Ubuntu Pro must be added for Landscape to fully license and manage the client.
+
+### Step 3: Attach Ubuntu Pro to registered clients
+
+To attach Ubuntu Pro in the web portal:
+
+1. Go to **Instances**
+1. Select your instance(s) that you want to attach an Ubuntu Pro subscription to
+1. Click **Attach Token** 
+1. Provide your token and complete the remaining prompts
+
+This will send a separate activity to each client to attach Ubuntu Pro. After the activity succeeds, that client will become licensed.
+
 ## Related topics
 
-- [Ubuntu Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/)
-- [Ubuntu Pro Client documentation on basic commands](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/tutorials/basic_commands.html)
+- [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/en/latest/)
+- [Ubuntu Pro Client documentation on basic commands](https://documentation.ubuntu.com/pro-client/en/latest/tutorials/basic_commands/)
 

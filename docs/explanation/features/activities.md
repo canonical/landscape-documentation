@@ -95,3 +95,4 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 - `GenerateUsgReportActivity`
 - `RemoveComputerActivity`
 - `AttachProRequest`
+- `DetachProRequest`

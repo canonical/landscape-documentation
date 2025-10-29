@@ -1,31 +1,145 @@
 (reference-immutable-settings)=
-
 # Immutable configuration settings
 
-The following immutable configurations can be set in `service.conf` or through environment variables:
+The following immutable configurations can be set in `service.conf` or through environment variables.
 
-| Deprecated ENV name | New ENV name | Deprecated section of `service.conf` | Section of `service.conf` | Deprecated key name in `service.conf` | Key name in `service.conf`  | Default value | Purpose |
-| :---- | :---- | :---- | :---- | :---- | :---- | :---- | :---- |
-| `LANDSCAPE_ANALYTICS_ID` | `LANDSCAPE_SYSTEM__ANALYTICS_ID` | `N/A` | `system` | `N/A` | `analytics_id` | `UA-1018242-60` | Google Analytics tracker ID for the deployment. |
-| `LANDSCAPE_APT_PORT` | `LANDSCAPE_SYSTEM__APT_PORT` | `N/A` | `system` | `N/A` | `apt_port` | 8085 | The port the `landscape_apt` service should use. |
-| `LANDSCAPE_ENABLE_PASSWORD_AUTHENTICATION` | `LANDSCAPE_FEATURES__ENABLE_PASSWORD_AUTHENTICATION` | `landscape` | `features` | `enable-password-authentication` | `enable_password_authentication` | `False` | Whether users are allowed to log in with email/password or not.  |
-| `LANDSCAPE_ENABLE_SUBDOMAIN_ACCOUNTS` | `LANDSCAPE_FEATURES__ENABLE_SUBDOMAIN_ACCOUNTS` | `landscape` | `features` | `enable-subdomain-accounts` | `enable_subdomain_accounts` | `False` | Whether subdomain-based functionality is enabled or not. |
-| `LANDSCAPE_ENABLE_TAG_SCRIPT_EXECUTION` | `LANDSCAPE_FEATURES__ENABLE_TAG_SCRIPT_EXECUTION` | `landscape` | `features` | `enable-tag-script-execution` | `enable_tag_script_execution` | `False` | Whether to enable tag-based script execution. |
-| `LANDSCAPE_FQDN` | `LANDSCAPE_SYSTEM__FQDN` | `N/A` | `system` | `N/A` | `fqdn` | `None` | Sets the root URL using the FQDN. |
-| `LANDSCAPE_GPG_HOME` | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `N/A` | `system` | `N/A` | `gpg_home_dir` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
-| `LANDSCAPE_LICENSE_FILE` | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `N/A` | `system` | `N/A` | `license_file` | `/etc/landscape/license.txt` | The file path location of the license file. |
-| `LANDSCAPE_MESSAGE_URL` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_URL` | `N/A` | `message_system` | `N/A` | `message_system_url` | The HTTP version of the root URL with `/message-system` appended.  | The message system URL to use. |
-| `LANDSCAPE_MIDDLEWARE` | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `N/A` | `system` | `N/A` | `middleware` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
-| `LANDSCAPE_OFFLINE` | `LANDSCAPE_FEATURES__ENABLE_OFFLINE` | `global` | `features` | `offline` | `enable_offline` | `False` | Whether offline mode is set or not (only relevant for standalone setups). |
-| `LANDSCAPE_QUERY_DEBUG` | `LANDSCAPE_OOPS__QUERY_DEBUG` | `N/A` | `oops` | `N/A` | `enable_query_debug` | `False` | Whether to enable query introspection and debugging middleware for Landscape or not. |
-| `LANDSCAPE_ROOT_URL` | `LANDSCAPE_SYSTEM__ROOT_URL` | `global` | `system` | `root-url` | `root_url` | `None` | The Landscape Server’s root URL path. HTTP requests are expected to be made to this path. |
-| `LANDSCAPE_TESTRUN` | `LANDSCAPE_TESTING__TESTRUN` | `N/A` | `testing` | `N/A` | `test_run` | `False` | If true, do not replace the importer with the import guardian to speed up the tests. |
-| `LANDSCAPE_TEST_RUNNER` | `LANDSCAPE_TESTING__TEST_RUNNER` | `N/A` | `testing` | `N/A` | `test_runner` | `trial` | The `twisted` test runner to use for the `trial` script in `/dev`. |
-| `VAULT_ADDR` | `LANDSCAPE_SECRETS__VAULT_URL` | `secrets` | `secrets` | `secrets-url` | `vault_url` | `http://localhost:8200` | The address of the vault to use for the secrets service. |
-| `VAULT_TOKEN` | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `N/A` | `secrets` | `N/A` | `vault_token` | `None` | The token to use for the vault instead of getting it from the secrets service. |
+## `LANDSCAPE_CONFIG_FILE`
 
-The following immutable configurations can be set through environment variables only:
+```{note}
+This configuration can be set through environment variables only.
+```
 
-| ENV name | Default value | Purpose |
-| :---- | :---- | :---- |
-| `LANDSCAPE_CONFIG_FILE` | `/etc/landscape/service.conf` | File path location of the `service.conf` file. |
+- Purpose: File path location of the `service.conf` file. The `landscape` user must have read/write privileges to the file.
+- Default value: `/etc/landscape/service.conf`
+
+## `LANDSCAPE_MESSAGE_SERVER__MESSAGE_URL`
+
+- Purpose: The message system URL to use.
+- Default value: The HTTP version of the root URL with `/message-system` appended.
+- Section: `message_system`
+- Key: `message_system_url`
+- Deprecated ENV name: `LANDSCAPE_MESSAGE_URL`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+## `LANDSCAPE_SYSTEM__ANALYTICS_ID`
+
+- Purpose: The Google Analytics ID for the deployment.
+- Default value: `UA-1018242-60`
+- Section: `system`
+- Key: `analytics_id`
+- Deprecated ENV name: `LANDSCAPE_ANALYTICS_ID`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+## `LANDSCAPE_SYSTEM__APT_PORT`
+
+- Purpose: The port the `landscape_apt` service should use.
+- Default value: 8085
+- Section: `system`
+- Key: `apt_port`
+- Deprecated ENV name: `LANDSCAPE_APT_PORT`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+## `LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION`
+
+- Purpose: Whether users are allowed to log in with email/password or not.
+- Default value: `False`
+- Section: `system`
+- Key: `enable_password_authentication`
+- Deprecated ENV name: `LANDSCAPE_ENABLE_PASSWORD_AUTHENTICATION`
+- Deprecated section:  `landscape`
+- Deprecated key: `enable-password-authentication`
+
+## `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS`
+
+- Purpose: Whether subdomain-based functionality is enabled or not.
+- Default value: `False`
+- Section: `system`
+- Key: `enable_subdomain_accounts`
+- Deprecated ENV name: `LANDSCAPE_ENABLE_SUBDOMAIN_ACCOUNTS`
+- Deprecated section:  `landscape`
+- Deprecated key: `enable-subdomain-accounts`
+
+## `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION`
+
+- Purpose: Whether to enable tag-based script execution.
+- Default value: `False`
+- Section: `system`
+- Key: `enable_tag_script_execution`
+- Deprecated ENV name: `LANDSCAPE_ENABLE_TAG_SCRIPT_EXECUTION`
+- Deprecated section:  `landscape`
+- Deprecated key: `enable-tag-script-execution`
+
+## `LANDSCAPE_SYSTEM__FQDN`
+
+- Purpose: Sets the root URL using the FQDN.
+- Default value: `None`
+- Section: `system`
+- Key: `fqdn`
+- Deprecated ENV name: `LANDSCAPE_FQDN`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+## `LANDSCAPE_SYSTEM__GPG_HOME_DIR`
+
+- Purpose: The directory containing GnuPG config files and the keyrings. The `landscape` user must have read/write privileges to the directory.
+- Default value: `/var/lib/landscape-server/gnupg`
+- Section: `system`
+- Key: `gpg_home_dir`
+- Deprecated ENV name: `LANDSCAPE_GPG_HOME`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+## `LANDSCAPE_SYSTEM__LICENSE_FILE`
+
+- Purpose: The file path location of the legacy license file. The `landscape` user must have read/write privileges to the file.
+- Default value: `/etc/landscape/license.txt`
+- Section: `system`
+- Key: `license_file`
+- Deprecated ENV name: `LANDSCAPE_LICENSE_FILE`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+## `LANDSCAPE_SYSTEM__OFFLINE`
+
+- Purpose: Whether offline mode is set or not (only relevant for standalone setups).
+- Default value: `None`
+- Section: `system`
+- Key: `offline`
+- Deprecated ENV name: `LANDSCAPE_OFFLINE`
+- Deprecated section: `global`
+- Deprecated key: `offline`
+
+## `LANDSCAPE_SYSTEM__ROOT_URL`
+
+- Purpose: The Landscape Server’s root URL path. HTTP requests are expected to be made to this path.
+- Default value: `None`
+- Section: `system`
+- Key: `root_url`
+- Deprecated ENV name: `LANDSCAPE_ROOT_URL`
+- Deprecated section: `global`
+- Deprecated key: `root-url`
+
+## `LANDSCAPE_SECRETS__VAULT_URL`
+
+- Purpose: The address of the vault to use for the Secrets service.
+- Default value: `http://localhost:8200`
+- Section: `secrets`
+- Key: `vault_url`
+- Deprecated ENV name: `VAULT_ADDR`
+- Deprecated section: N/A
+- Deprecated key: `secrets-url`
+
+## `LANDSCAPE_SECRETS__VAULT_TOKEN`
+
+- Purpose: The token to use for the vault instead of getting it from the secrets service.
+- Default value: `None`
+- Section: `secrets`
+- Key: `vault_token`
+- Deprecated ENV name: `VAULT_TOKEN`
+- Deprecated section: N/A
+- Deprecated key: N/A
+
+

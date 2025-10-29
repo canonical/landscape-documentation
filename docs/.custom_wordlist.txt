@@ -7,6 +7,7 @@ ajax
 allowlist
 allowlists
 amongst
+AMQP
 Ansible
 Apache
 apache
@@ -16,6 +17,7 @@ appserver
 ascii
 async
 auth
+autocommit
 autoinstall
 AutoPilot
 autoremove
@@ -31,8 +33,10 @@ bugfix
 Bugfixes
 bytestring
 Cancelled
+CAC
 CAs
 canonicalized
+CDP
 Ceph
 ceph
 Certbot
@@ -48,11 +52,14 @@ CISOs
 CLA
 CLI's
 Cognito
+conf
 config
 configs
 conformant
 conntrack
+CORS
 createseries
+CRL
 Cron
 cron
 cronjob
@@ -66,6 +73,7 @@ CVEs
 datetime
 debian
 decrypt
+deprivileged
 deterministically
 DirectoryAPI
 DISA
@@ -73,11 +81,15 @@ distros
 DMARC
 DNS
 DSA
+DoD
+DoS
 dpkg
 dput
 Entra
+EPMD
 epoll
 ESM
+Fernet
 FIPS
 FQDN
 gapped
@@ -97,7 +109,8 @@ frontend
 HAProxy
 HashiCorp
 hardcoded
-Hashicorp
+HashiCorp’s
+HashiCorp's
 hashid
 Hashids
 heredoc
@@ -106,15 +119,17 @@ HMAC
 HmacSHA
 hostagent
 hostname
+hostnames
 html
 http
 HTTPS
 https
-init
 incrementation
+init
 IoT
 Iot
 ip
+IPv
 jQuery
 Juju's
 Juju
@@ -127,6 +142,7 @@ Keycloak
 KeyError
 Kudu
 KVM
+keyrings
 kvm
 kwarg
 labelled
@@ -152,6 +168,7 @@ MAAS
 maas
 Mailjet
 ManualInstallation
+mebibytes
 microSD
 middleware
 milli
@@ -160,6 +177,8 @@ miscategorized
 misconfigured
 misconfigurations
 Mitaka
+MITM
+mTLS
 MTU
 MTUs
 Multipass
@@ -189,6 +208,7 @@ openid
 OPL
 organization’s
 organizational
+queueing
 quickstart
 packagesearch
 PAYG
@@ -217,6 +237,7 @@ PPAs
 prem
 prepended
 PyCurl
+Pydantic
 PyJWT
 QEMU
 RabbitMQ
@@ -224,6 +245,8 @@ rabbitmq
 RabbitMQ’s
 radosgw
 RBAC
+reauthenticate
+reauthentication
 reconnections
 reimplement
 ReleaseNotes
@@ -240,6 +263,7 @@ rsyslog
 rsyslogd
 SaaS
 Sanitization
+sanitization
 scalable
 scalability
 SDK
@@ -247,6 +271,7 @@ SendGrid
 servername
 ServerTeam
 SHA
+SIEM
 signup
 SimpleStreams
 SLA
@@ -271,6 +296,7 @@ systemd
 SES
 SSL
 SSO
+STIGed
 Syslog
 TCP
 teardown
@@ -278,6 +304,7 @@ timeframe
 TLD
 TLS
 TLSv
+traceback
 transactional
 UA
 ubuntu

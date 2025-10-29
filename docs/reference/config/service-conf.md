@@ -1,61 +1,266 @@
 (reference-service-conf)=
-
 # The `service.conf` file
 
 All Landscape service configurations are defined in the `service.conf` file. This file follows the `INI` file format. The default location for this file is `/etc/landscape/service.conf`. You can override that by setting the `LANDSCAPE_SERVICE_CONF` environment variable with the file path location of the `service.conf` file.
 
-Changes to the `service.conf` file only take affect once you restart the relevant service(s).
+Changes to the `service.conf` file only take affect once you restart the relevant service(s). Any file paths referenced throughout this document must be readable by the `landscape` system user.
 
 Starting with Landscape 25.10, every entry in the `service.conf` file can be overridden by a corresponding environment variable. These variables have the following general structure: `LANDSCAPE_SECTION_NAME__KEY_NAME`.
 
 The sections below contain information about the key-value pairs that can be set in each section, the corresponding environment variable, the default value (if any), and the purpose of the entry.
 
 ```{note}
-The usage of the `-` character in section names and key names is deprecated in Landscape Server 25.10 in favor of the `_` character. Support for the `-` character will be removed in Landscape Server 26.04.
+The usage of the `-` character in section names and key names was deprecated in Landscape Server 25.10 in favor of the `_` character. Support for the `-` character is expected to be removed in Landscape Server 26.04 LTS.
 
-In addition, the names of some sections of the `service.conf` file are deprecated in Landscape Server 25.10. The new names are detailed below. Support for the deprecated names will be removed in Landscape Server 26.04.
+In addition, the names of some sections of the `service.conf` file were deprecated in Landscape Server 25.10. These sections and their new names are detailed below. Support for the deprecated names is expected to be removed in Landscape Server 26.04 LTS.
+
+Upgrades to Landscape Server 25.10 or later will include migrating these names.
 ```
+
+(shared-service-settings)=
+## Shared service settings
+
+There are a set of generic settings that all services can set, where `SERVICE` in the ENV name matches the (uppercase) name of the service. For example, the `LANDSCAPE_PINGSERVER__BASE_PORT` sets the `base_port` for the `[pingserver]` service, whereas the `LANDSCAPE_API__BASE_PORT` sets the `base_port` for the `[api]` service.
+
+```{important}
+The shared service settings are not mutually exclusive with the shared store settings; services can use both, if specified.
+```
+
+### `allowed_interfaces`
+
+- Purpose: A list of allowed IP addresses or hostnames for the service.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__ALLOWED_INTERFACES`
+- Default: `None`
+
+### `base_port`
+
+- Purpose: Workers for the service will run on ports incrementing from this base port.
+- Deprecated key name: `base-port`
+- ENV name: `LANDSCAPE_SERVICE__BASE_PORT`
+- Default: `8090`
+
+### `enable_metrics`
+
+- Purpose: Whether to enable metrics collection for the service.
+- Deprecated key name: `enable-metrics`
+- ENV name: `LANDSCAPE_SERVICE__ENABLE_METRICS`
+- Default: `False`
+
+### `gpg_home_path`
+
+- Purpose: Sets the path to the GPG home directory.
+- Deprecated key name: `gpg-home-path`
+- ENV name: `LANDSCAPE_SERVICE__GPG_HOME_PATH`
+- Default: `None`
+
+### `gpg_passphrase_path`
+
+- Purpose: Sets the path to the GPG passphrase file. Required if `gpg_home_path` is set.
+- Deprecated key name: `gpg-passphrase-path`
+- ENV name: `LANDSCAPE_SERVICE__GPG_PASSPHRASE_PATH`
+- Default: `None`
+
+### `mailer`
+
+- Purpose: If set to `queue`, the mailer will use the queue specified by the `mailer_path`. If set to `default`, the queue will be at `/tmp/landscape-mail-queue`. If unset, no mailer will be configured for the service. Production deployments do not need to modify this setting.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__MAILER`
+- Default: `None`
+
+### `mailer_path`
+
+- Purpose: Path to the mail queue. Required if `mailer` is set.
+- Deprecated key name: `mailer-path`
+- ENV name: `LANDSCAPE_SERVICE__MAILER_PATH`
+- Default: `None`
+
+### `oops_key`
+
+- Purpose: Key for OOPS error reporting system. Production deployments do not need to modify this setting.
+- Deprecated key name: `oops-key`
+- ENV name: `LANDSCAPE_SERVICE__OOPS_KEY`
+- Default: `None`
+
+### `root_url`
+
+- Purpose: The URL for the service.
+- Deprecated key name: `root-url`
+- ENV name: `LANDSCAPE_SERVICE__ROOT_URL`
+- Default: `None`
+
+### `soft_timeout`
+
+- Purpose: Soft timeout value in seconds for the OOPS reporter.
+- Deprecated key name: `soft-timeout`
+- ENV name: `LANDSCAPE_SERVICE__SOFT_TIMEOUT`
+- Default: `None`
+
+### `ssl_server_cert`
+
+- Purpose: Sets the path to the certificate to use when listening with mTLS. If set, `ssl_server_private_key` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_CERT`
+- Default: `None`
+
+### `ssl_server_private_key`
+
+- Purpose: Sets the path to the private key to use when listening with mTLS. If set, `ssl_server_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_PRIVATE_KEY`
+- Default: `None`
+
+### `ssl_server_ca_cert`
+
+- Purpose: Sets the path to the CA certificate to use when listening with mTLS. If set, both `ssl_server_private_key` and `ssl_server_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__SSL_SERVER_CA_CERT`
+- Default: `None`
+
+### `threads`
+
+- Purpose: Number of threads for the service to use. This setting only applies to Twisted services.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__THREADS`
+- Default: `None`
+
+### `workers`
+
+- Purpose: Number of worker processes for the service. If unset, the service will have a single worker.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SERVICE__WORKERS`
+- Default: `None`
+
+(shared-store-settings)=
+## Shared store settings
+
+There are a set of generic settings related to databases and SSL connections to Postgres that several sections can set, where `SECTION` in the ENV name matches the (uppercase) name of the section.
+
+```{important}
+The shared store settings are not mutually exclusive with the shared service settings; services can use both, if specified.
+```
+
+### `sslcert`
+
+- Purpose: Path to the client certificate to use for SSL connection to Postgres. Landscape Server will set this as the `PGSSLCERT` environment variable for Postgres to consume.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLCERT`
+- Default: `None`
+
+### `sslkey`
+
+- Purpose: Path to the private key to use for SSL connection to Postgres. Landscape Server will set this as the `PGSSLKEY` environment variable for Postgres to consume.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLKEY`
+- Default: `None`
+
+### `sslmode`
+
+- Purpose: SSL mode to use when connecting to Postgres, for example `verify-full`. See [PostgreSQL's documentation for the list of valid options](https://www.postgresql.org/docs/current/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS).
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLMODE`
+- Default: `None`
+
+### `sslrootcert`
+
+- Purpose: Path to the root CA certificate to use for SSL connection to Postgres. Landscape Server will set this as the `PGSSLROOTCERT` environment variable for Postgres to consume.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSLROOTCERT`
+- Default: `None`
+
+### `store_password`
+
+- Purpose: Overrides the store password set in the `stores` settings.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__STORE_PASSWORD`
+- Default: `None`
+
+### `store_user`
+
+- Purpose: Overrides the store username set in the `stores` settings.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__STORE_USER`
+- Default: `None`
+
+### `stores`
+
+- Purpose: The stores the service should use.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__STORES`
+- Default: `None`
+
+(shared-tls-client-settings)=
+## Shared TLS client settings
+
+These are generic TLS client certificate settings to connect to external services, such as RabbitMQ and HashiCorp Vault, with mTLS, where `SECTION` in the ENV name matches the (uppercase) name of the section.
+
+### `ssl_client_cert`
+
+- Purpose: Path to the client certificate to use for an mTLS connection to the external server. Required along with `ssl_client_private_key` for mTLS connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSL_CLIENT_CERT`
+- Default: `None`
+
+### `ssl_client_private_key`
+
+- Purpose: Path to the private key to use for an mTLS connection to the external server. Required along with `ssl_client_cert` for mTLS connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSL_CLIENT_PRIVATE_KEY`
+- Default: `None`
+
+### `ssl_client_ca_cert`
+
+- Purpose: Sets the path to the CA to use for mTLS. If set, both `ssl_client_private_key` and `ssl_client_cert` must also be set.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECTION__SSL_CLIENT_CA_CERT`
+- Default: `None`
+
+## The `[api]` section
+
+The `[api]` section contains configurations for the Landscape API service, including service connection settings and database store configurations. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `cookie_encryption_key`
+
+- Purpose: The key used to encrypt state and nonce cookies. Must be 32 url-safe, base64-encoded bytes. If unset, Landscape will generate and set a key using the Fernet symmetric encryption algorithm. If the key is invalid, the `landscape-api` service will fail to start.
+- Deprecated key name: `cookie-encryption-key`
+- ENV name: `LANDSCAPE_API__COOKIE_ENCRYPTION_KEY`
+- Default: `None`
+
+### `cors_allow_all`
+
+- Purpose: This setting should only be enabled in a development environment. If `True`, the following headers will be set in HTTP responses from the API service:
+  - `Access-Control-Allow-Origin: *`
+  - `Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS`
+  - `Access-Control-Allow-Credentials: true`
+- Deprecated key name: `cors-allow-all`
+- ENV name: `LANDSCAPE_API__CORS_ALLOW_ALL`
+- Default: `False`
+
+### `snap_store_api_url`
+
+- Purpose: The API for an Enterprise Store (formerly known as Snap Store Proxy). By default, this is the Canonical Snap Store.
+- Deprecated key name: `snap-store-api-url`
+- ENV name: `LANDSCAPE_API__SNAP_STORE_API_URL`
+- Default: `https://api.snapcraft.io/v2`
 
 ## The `[appserver]` section
 
 ```{note}
-The `[landscape]` section name is deprecated. The `[appserver]` section replaces the `[landscape]` section.
+The `[landscape]` section name was deprecated in Landscape Server 25.10. The `[appserver]` section replaces the `[landscape]` section.
 ```
 
-The `[appserver]` section contains configurations for the Landscape application server, including storage paths, authentication providers, and security settings.
+The `[appserver]` section contains configurations for the Landscape application server, including storage paths and authentication providers. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `access_log` | `access-log` | `LANDSCAPE_APPSERVER__ACCESS_LOG` | `None` | Path to access log file for this service. |
-| `allowed_interfaces` | | `LANDSCAPE_APPSERVER__ALLOWED_INTERFACES` | `None` | Network interfaces allowed for connections. |
-| `base_port` | `base-port` | `LANDSCAPE_APPSERVER__BASE_PORT` | `8090` | Base port number for the service. |
-| `blob_storage_root` | `blob-storage-root` | `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT` | `/var/lib/landscape/blobs` | Root directory for blob storage. |
-| `devmode` | | `LANDSCAPE_APPSERVER__DEVMODE` | `None` | Development mode settings. |
-| `display_consent_banner_at_each_login` | `display-consent-banner-at-each-login` | `LANDSCAPE_APPSERVER__DISPLAY_CONSENT_BANNER_AT_EACH_LOGIN` | `False` | Whether to display consent banner at each login. |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_APPSERVER__ENABLE_METRICS` | `False` | Whether to enable metrics collection. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_APPSERVER__GPG_HOME_PATH` | `None` | Path to GPG home directory. Must be used with `gpg_passphrase_path`. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_APPSERVER__GPG_PASSPHRASE_PATH` | `None` | Path to GPG passphrase file. Required when `gpg_home_path` is set. |
-| `juju_homes_path` | `juju-homes-path` | `LANDSCAPE_APPSERVER__JUJU_HOMES_PATH` | `/var/tmp/juju-homes` | Path to Juju home directories. |
-| `known_proxies` | `known-proxies` | `LANDSCAPE_APPSERVER__KNOWN_PROXIES` | `None` | Comma-separated names of known proxies. |
-| `mailer` | | `LANDSCAPE_APPSERVER__MAILER` | `None` | Mailer type specification. Must be used with `mailer_path`. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_APPSERVER__MAILER_PATH` | `None` | Path to mailer executable. Required when `mailer` is set. |
-| `oidc_client_id` | `oidc-client-id` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_ID` | `None` | OIDC client identifier. Required when using OIDC authentication. |
-| `oidc_client_secret` | `oidc-client-secret` | `LANDSCAPE_APPSERVER__OIDC_CLIENT_SECRET` | `None` | OIDC client secret. Required when using OIDC authentication. |
-| `oidc_issuer` | `oidc-issuer` | `LANDSCAPE_APPSERVER__OIDC_ISSUER` | `None` | OIDC issuer URL. Required when using OIDC authentication. |
-| `oidc_provider` | `oidc-provider` | `LANDSCAPE_APPSERVER__OIDC_PROVIDER` | `unspecified` | The name of OIDC provider to use. Must be either `google`, `okta`, or `unspecified`. |
-| `oidc_redirect_uri` | `oidc-redirect-uri` | `LANDSCAPE_APPSERVER__OIDC_REDIRECT_URI` | `None` | OIDC redirect URI for authentication callbacks. |
-| `oops_key` | `oops-key` | `LANDSCAPE_APPSERVER__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
-| `openid_logout_url` | `openid-logout-url` | `LANDSCAPE_APPSERVER__OPENID_LOGOUT_URL` | `None` | OpenID logout URL. Required when using OpenID authentication. |
-| `openid_provider_url` | `openid-provider-url` | `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL` | `None` | OpenID provider URL. Required when using OpenID authentication. |
-| `repository_path` | `repository-path` | `LANDSCAPE_APPSERVER__REPOSITORY_PATH` | `/tmp/landscape-repository` | Path to the package repository. |
-| `reprepro_binary` | `reprepro-binary` | `LANDSCAPE_APPSERVER__REPREPRO_BINARY` | `None` | Path to the reprepro binary executable. |
-| `sanitize_delay` | `sanitize-delay` | `LANDSCAPE_APPSERVER__SANITIZE_DELAY` | `3600` | Delay in seconds for data {spellexception}`sanitization` operations. |
-| `secret_token` | `secret-token` | `LANDSCAPE_APPSERVER__SECRET_TOKEN` | `None` | Secret token for application security. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_APPSERVER__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `threads` | | `LANDSCAPE_APPSERVER__THREADS` | `None` | Number of threads for the service. |
-| `ubuntu_images_path` | `ubuntu-images-path` | `LANDSCAPE_APPSERVER__UBUNTU_IMAGES_PATH` | `/var/tmp/ubuntu-images` | Path to Ubuntu images directory. |
-| `ubuntu_one_redirect_url` | `ubuntu-one-redirect-url` | `LANDSCAPE_APPSERVER__UBUNTU_ONE_REDIRECT_URL` | `None` | Ubuntu One redirect URL for authentication. |
-| `workers` | | `LANDSCAPE_APPSERVER__WORKERS` | `None` | Number of worker processes for the service. |
+### Moved Configuration Keys
+
+Beginning in Landscape Server 25.10, the following keys have moved from the `[appserver]` section to the `[system]` section:
+
+- `enable-password-authentication` → `enable_password_authentication` in `[system]`
+- `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
+- `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
+- `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
+
+These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape Server 26.04 LTS, when support is expected to be removed and they must be configured in the `[system]` section. Note that upgrades of Landscape Server 25.10 and later includes automated migration of these names.
 
 ### Authentication providers
 
@@ -68,176 +273,671 @@ OIDC:
 
 - Requires `oidc_issuer`, `oidc_client_id`, and `oidc_client_secret` to be configured
 
-### Moved Configuration Keys
+### `blob_storage_root`
 
-The following keys have moved from the `[appserver]` section to the `[system]` section in Landscape 25.10:
+- Purpose: Root directory for blob storage used for Ubuntu Security Guide (USG) reports.
+- Deprecated key name: `blob-storage-root`
+- ENV name: `LANDSCAPE_APPSERVER__BLOB_STORAGE_ROOT`
+- Default: `/var/lib/landscape/blobs`
 
-- `enable-password-authentication` → `enable_password_authentication` in `[system]`
-- `enable-subdomain-accounts` → `enable_subdomain_accounts` in `[system]`
-- `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
+### `display_consent_banner_at_each_login`
 
-These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape 26.04, when support will be removed and they must be configured in the `[system]` section.
+- Purpose: This setting should only be enabled in DISA STIG environments. Whether to display consent banner at each login.
+- Deprecated key name: `display-consent-banner-at-each-login`
+- ENV name: `LANDSCAPE_APPSERVER__DISPLAY_CONSENT_BANNER_AT_EACH_LOGIN`
+- Default: `False`
+
+### `known_proxies`
+
+- Purpose: Comma-separated names of known proxies to consider when updating an administrator's last login host.
+- Deprecated key name: `known-proxies`
+- ENV name: `LANDSCAPE_APPSERVER__KNOWN_PROXIES`
+- Default: `None`
+
+### `oidc_client_id`
+
+- Purpose: OIDC client identifier. Required along with `oidc_client_secret` and `oidc_issuer` when using OIDC authentication.
+- Deprecated key name: `oidc-client-id`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_CLIENT_ID`
+- Default: `None`
+
+### `oidc_client_secret`
+
+- Purpose: OIDC client secret. Required along with `oidc_client_id` and `oidc_issuer` when using OIDC authentication.
+- Deprecated key name: `oidc-client-secret`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_CLIENT_SECRET`
+- Default: `None`
+
+### `oidc_issuer`
+
+- Purpose: OIDC issuer URL. Required along with `oidc_client_secret` and `oidc_client_id` when using OIDC authentication.
+- Deprecated key name: `oidc-issuer`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_ISSUER`
+- Default: `None`
+
+### `oidc_provider`
+
+- Purpose: The name of OIDC provider to use. Must be either `google`, `okta`, or `unspecified`.
+- Deprecated key name: `oidc-provider`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_PROVIDER`
+- Default: `unspecified`
+
+### `oidc_redirect_uri`
+
+- Purpose: OIDC redirect URI for authentication callbacks.
+- Deprecated key name: `oidc-redirect-uri`
+- ENV name: `LANDSCAPE_APPSERVER__OIDC_REDIRECT_URI`
+- Default: `None`
+
+### `openid_logout_url`
+
+- Purpose: OpenID logout URL. Required along with `openid_provider_url` when using OpenID authentication.
+- Deprecated key name: `openid-logout-url`
+- ENV name: `LANDSCAPE_APPSERVER__OPENID_LOGOUT_URL`
+- Default: `None`
+
+### `openid_provider_url`
+
+- Purpose: OpenID provider URL. Required along with `openid_logout_url` when using OpenID authentication.
+- Deprecated key name: `openid-provider-url`
+- ENV name: `LANDSCAPE_APPSERVER__OPENID_PROVIDER_URL`
+- Default: `None`
+
+### `repository_path`
+
+- Purpose: Path to the package repository directory. The `landscape` system user must have read and write privileges for that directory.
+- Deprecated key name: `repository-path`
+- ENV name: `LANDSCAPE_APPSERVER__REPOSITORY_PATH`
+- Default: `/tmp/landscape-repository`
+
+### `reprepro_binary`
+
+- Purpose: Path to the reprepro binary executable. If unset, the binary installed at `/usr/bin/reprepro` is used.
+- Deprecated key name: `reprepro-binary`
+- ENV name: `LANDSCAPE_APPSERVER__REPREPRO_BINARY`
+- Default: `None`
+
+### `sanitize_delay`
+
+- Purpose: Delay in seconds before a sanitize activity is sent to a registered instance.
+- Deprecated key name: `sanitize-delay`
+- ENV name: `LANDSCAPE_APPSERVER__SANITIZE_DELAY`
+- Default: `3600`
+
+### `secret_token`
+
+- Purpose: Secret token used as the secret key for symmetric encryption of JWTs.
+- Deprecated key name: `secret-token`
+- ENV name: `LANDSCAPE_APPSERVER__SECRET_TOKEN`
+- Default: `None`
+
+### `ubuntu_one_redirect_url`
+
+- Purpose: Ubuntu One redirect URL for authentication.
+- Deprecated key name: `ubuntu-one-redirect-url`
+- ENV name: `LANDSCAPE_APPSERVER__UBUNTU_ONE_REDIRECT_URL`
+- Default: `None`
 
 ## The `[async_frontend]` section
 
 ```{note}
-The `[async-frontend]` section name is deprecated. The `[async_frontend]` section replaces the `[async-frontend]` section.
+The `[async-frontend]` section name was deprecated in Landscape Server 25.10. The `[async_frontend]` section replaces the `[async-frontend]` section.
 ```
 
-The `[async_frontend]` section contains configurations that apply to the `landscape-async-frontend` service which handles AJAX requests from the Legacy UI. It has no settings beyond those shared by all services.
+The `[async_frontend]` section contains configurations that apply to the `landscape-async-frontend` service which handles AJAX requests from the Legacy UI. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
 
 ## The `[broker]` section
 
-The `[broker]` section contains configurations that describe how services connect to our message queues.
+The `[broker]` section contains configurations that describe how services connect to our AMQP broker (RabbitMQ). In addition to the following, this section can use the {ref}`shared TLS client settings <shared-tls-client-settings>` to connect to a RabbitMQ server with mTLS.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `host` | - | `LANDSCAPE_BROKER__HOST` | `localhost` | The hostname or IP address of the message broker server. |
-| `hostagent_command_status_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_COMMAND_STATUS_QUEUE` | `landscape-server-hostagent-command-status-queue` | Queue for sending command status updates from the hostagent server to the hostagent consumer. |
-| `hostagent_ping_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_PING_QUEUE` | `landscape-server-hostagent-ping-queue` | Queue for sending pings from the hostagent server to the hostagent consumer. |
-| `hostagent_task_queue` | - | `LANDSCAPE_BROKER__HOSTAGENT_TASK_QUEUE` | `landscape-server-hostagent-task-queue` | Queue for sending tasks from the hostagent consumer to the hostagent server. |
-| `hostagent_virtual_host` | - | `LANDSCAPE_BROKER__HOSTAGENT_VIRTUAL_HOST` | `landscape-hostagent` | The virtual host of message queues for the hostagent message server and consumer. This provides support for Landscape integration with Ubuntu Pro for WSL. |
-| `password` | - | `LANDSCAPE_BROKER__PASSWORD` | `guest` | Password used to authenticate with the message broker. |
-| `port` | - | `LANDSCAPE_BROKER__PORT` | 5672 | Network port where message broker server is listening. |
-| `user` | - | `LANDSCAPE_BROKER__USER` | `guest` | Username used to authenticate with the message broker. |
-| `vhost` | - | `LANDSCAPE_BROKER__VHOST` | `landscape` | The virtual host namespace. |
+### `host`
+
+- Purpose: The hostname or IP address of the AMQP broker server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOST`
+- Default: `localhost`
+
+### `hostagent_command_status_queue`
+
+- Purpose: Queue for sending command status updates from the hostagent server to the hostagent consumer.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_COMMAND_STATUS_QUEUE`
+- Default: `landscape-server-hostagent-command-status-queue`
+
+### `hostagent_ping_queue`
+
+- Purpose: Queue for pings from registered Windows instances.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_PING_QUEUE`
+- Default: `landscape-server-hostagent-ping-queue`
+
+### `hostagent_task_queue`
+
+- Purpose: Queue for messages received from registered Windows instances.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_TASK_QUEUE`
+- Default: `landscape-server-hostagent-task-queue`
+
+### `hostagent_virtual_host`
+
+- Purpose: The virtual host of message queues for the hostagent message server and consumer. This provides support for Landscape integration with Ubuntu Pro for WSL.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__HOSTAGENT_VIRTUAL_HOST`
+- Default: `landscape-hostagent`
+
+### `password`
+
+- Purpose: Password used to authenticate with the AMQP broker.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__PASSWORD`
+- Default: `guest`
+
+### `port`
+
+- Purpose: Network port where the AMQP broker is listening.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__PORT`
+- Default: `5672`
+
+### `user`
+
+- Purpose: Username used to authenticate with the message broker.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__USER`
+- Default: `guest`
+
+### `vhost`
+
+- Purpose: The virtual host namespace used by most of the Landscape services.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_BROKER__VHOST`
+- Default: `landscape`
+
+## The `[hostagent_consumer]` section
+
+```{note}
+The `[hostagent-consumer]` section name is deprecated. The `[hostagent_consumer]` section replaces the `[hostagent-consumer]` section.
+```
+
+The `[hostagent_consumer]` section contains settings for the `landscape-hostagent-consumer` service that processes messages related to Ubuntu Pro for WSL. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+This entire section is optional. Omitting the `[hostagent_consumer]` section entirely will cause the `landscape-hostagent-consumer` service to stop immediately after it starts.
+
+## The `[hostagent_messenger]` section
+
+```{note}
+The `[hostagent-messenger]` section name is deprecated. The `[hostagent_messenger]` section replaces the `[hostagent-messenger]` section.
+```
+
+The `[hostagent_messenger]` section contains settings for the `landscape-hostagent-messenger` service that communicates with Ubuntu Pro for WSL. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+This entire section is optional. Omitting the `[hostagent_messenger]` section entirely will cause the `landscape-hostagent-messenger` service to stop immediately after it starts.
 
 ## The `[job_handler]` section
 
 ```{note}
-The `[job-handler]` section name is deprecated. The `[job_handler]` section replaces the `[job-handler]` section.
+The `[job-handler]` section name was deprecated in Landscape Server 25.10. The `[job_handler]` section replaces the `[job-handler]` section.
 ```
 
-The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond those shared by all services.
+The `[job_handler]` section contains configurations for the `landscape-job-handler` service which runs background jobs. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 In practice, only the `base_port` setting needs to be configured for the service to operate correctly.
+
+## The `[load_shaper]` section
+
+```{note}
+The `[load-shaper]` section name was deprecated in Landscape Server 25.10. The `[load_shaper]` section replaces the `[load-shaper]` section.
+```
+
+The `[load_shaper]` section contains configurations for controlling how many messages are processed in each message exchange. It allots a time window for message processing based on the current database load.
+
+```{caution}
+The default values have been chosen based on the underlying algorithm and typical workloads. Modifying these values is not advisable unless you have thoroughly tested the impact on your specific system, as changes can significantly affect performance and system stability.
+```
+
+### `critical_load`
+
+- Purpose: A float representing the database load threshold at which message processing time is reduced to zero. When load reaches this value, no time slice is allocated for processing.
+- Deprecated key name: `critical-load`
+- ENV name: `LANDSCAPE_LOAD_SHAPER__CRITICAL_LOAD`
+- Default: `10.0`
+
+### `good_duration`
+
+- Purpose: A float representing the baseline time slice (in seconds) allocated for message processing when the database load is at the good load threshold. This duration is scaled up or down based on current load.
+- Deprecated key name: `good-duration`
+- ENV name: `LANDSCAPE_LOAD_SHAPER__GOOD_DURATION`
+- Default: `60.0`
+
+### `good_load`
+
+- Purpose: A float representing the optimal database load threshold. When load is at this value, the full good duration time slice is allocated. Load below this increases the time slice, load above this decreases it.
+- Deprecated key name: `good-load`
+- ENV name: `LANDSCAPE_LOAD_SHAPER__GOOD_LOAD`
+- Default: `3.0`
+
+## The `[maintenance]` section
+
+The `[maintenance]` section contains configurations for running maintenance scripts. It has no settings beyond the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 ## The `[message_server]` section
 
 ```{note}
-The `[message-server]` section name is deprecated. The `[message_server]` section replaces the `[message-server]` section.
+The `[message-server]` section name was deprecated in Landscape Server 25.10. The `[message_server]` section replaces the `[message-server]` section.
+
+The `[backoff]` section was also deprecated in Landscape Server 25.10. The settings have been moved to the `[message_server]` section.
 ```
+
+The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `backoff_dir`
+
+- Purpose: The directory to hold the `backoff.txt` file the server uses to indicate it should back off requests. If `None`, a `config` directory within the `landscape` directory will be used.
+- Deprecated key name: `backoff-dirpath`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__BACKOFF_DIR`
+- Default: `None`
+
+### `check_interval`
+
+- Purpose: The interval in seconds at which to update knowledge of computers with outstanding messages from the database.
+- Deprecated key name: `check-interval`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__CHECK_INTERVAL`
+- Default: `1200`
+
+### `max_msg_size_bytes`
+
+- Purpose: The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected.
+- Deprecated key name: `max-msg-size-bytes`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES`
+- Default: `30000000` (30MB)
+
+### `message_snippet_bytes`
+
+- Purpose: When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message.
+- Deprecated key name: `message-snippet-bytes`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES`
+- Default: `1000`
+
+### `message_system_url`
+
+- Purpose: The message system URL to use. If not set, the system root url appended with `/message-system` is used.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL`
+- Default: `None`
+
+### `ping_interval`
+
+- Purpose: Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds. If unset, each registered client will use the value set in its own Landscape Client configuration.
+- Deprecated key name: `ping-interval`
+- ENV name: `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL`
+- Default: `None`
+
+## The `[oops]` section
+
+The `[oops]` section contains configurations for the OOPS error reporting and debugging system used for logging and traceback collection.
+
+### `amqp_exchange`
+
+- Purpose: AMQP exchange name for error reporting.
+- Deprecated key name: `amqp-exchange`
+- ENV name: `LANDSCAPE_OOPS__AMQP_EXCHANGE`
+- Default: `""`
+
+### `amqp_key`
+
+- Purpose: AMQP routing key for error messages. Requires `amqp_exchange` to be set.
+- Deprecated key name: `amqp-key`
+- ENV name: `LANDSCAPE_OOPS__AMQP_KEY`
+- Default: `landscape-oops`
+
+### `path`
+
+- Purpose: File path for local OOPS publishing. If set, overrides the value set by `LANDSCAPE_SYSTEM__OOPS_PATH`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_OOPS__PATH`
+- Default: `None`
+
+## The `[package_search]` section
 
 ```{note}
-The `[backoff]` section is deprecated. The settings have been moved to the `[message_server]` section.
+The `[package-search]` section name is deprecated. The `[package_search]` section replaces the `[package-search]` section.
 ```
 
-The `[message_server]` section contains configurations that apply to the `landscape-message-server` service that handles messages from instances running Landscape Client.
+The `[package_search]` section contains the configuration for the package search service. In a manual installation, the pre-configured settings should suffice. In a Juju deployment, many of these settings are managed by the Landscape Server charm.
 
-It has the following settings beyond those shared by all services.
+In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `backoff_dir` | `backoff-dirpath` | `LANDSCAPE_MESSAGE_SERVER__BACKOFF_DIR` | `None` | The directory to hold the `backoff.txt` file the server uses to indicate it should back off requests. If `None`, a `config` directory within the `landscape` directory will be used. |
-| `max_msg_size_bytes` | `max-msg-size-bytes` | `LANDSCAPE_MESSAGE_SERVER__MAX_MSG_SIZE_BYTES` | 30000000 (30 MB) | The maximum size, in bytes, of a message from Landscape Client that Landscape Server will accept. Messages larger than this size will be rejected. |
-| `message_snippet_bytes` | `message-snippet-bytes` | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SNIPPET_BYTES` | 1000 | When Landscape Server receives a message larger than `max_msg_size_bytes`, it will log an error including the first `message_snippet_bytes` of the message. |
-| `message_system_url` | - | `LANDSCAPE_MESSAGE_SERVER__MESSAGE_SYSTEM_URL` | `None` | The message system URL to use. |
-| `ping_interval` | `ping-interval` | `LANDSCAPE_MESSAGE_SERVER__PING_INTERVAL` | `None` | Landscape Server will instruct Landscape Client to send a ping message every `ping_interval` seconds.  |
+### `account_threshold`
+
+- Purpose: The number of registered computers in an account required for the account to use the package search service. Self-hosted Landscape Server deployments should keep the default value to ensure the package search service is always used.
+- Deprecated key name: `account-threshold`
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__ACCOUNT_THRESHOLD`
+- Default: `0`
+
+### `host`
+
+- Purpose: The hostname or IP address of the machine where the package search service runs.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__HOST`
+- Default: `localhost`
+
+### `pid_path`
+
+- Purpose: The file path for the `.pid` file for the package search service. The `landscape` system user must have read/write access to this file.
+- Deprecated key name: `pid-path`
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__PID_PATH`
+- Default: `/var/run/landscape-packagesearch-1.pid`
+
+### `port`
+
+- Purpose: The port the package search service will listen on. This setting has no default value and is required.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_PACKAGE_SEARCH__PORT`
+- Default: There is no default value. One must be set for the system to run.
+
+## The `[package_upload]` section
+
+```{note}
+The `[package-upload]` section name was deprecated in Landscape Server 25.10. The `[package_upload]` section replaces the `[package-upload]` section.
+```
+
+The `[package_upload]` section contains configurations for the package upload service, including service connection settings, database store configurations, and SSL options. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `base_port`
+
+- Purpose: Workers for the service will run on ports incrementing from this base port.
+- Deprecated key names: `port`, `base-port`
+- ENV name: `LANDSCAPE_PACKAGE_UPLOAD__BASE_PORT`
+- Default: `9100`
+
+### `service_path`
+
+- Purpose: The relative path portion to use for the service URL.
+- Deprecated key name: `root-url`
+- ENV name: `LANDSCAPE_PACKAGE_UPLOAD__SERVICE_PATH`
+- Default: `/upload/`
+
+## The `[pingserver]` section
+
+The `[pingserver]` section contains configurations for the `pingserver` service that communicates with registered clients, notifying the clients about available messages. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `database_check_interval`
+
+- Purpose: Interval in seconds to check the database for computers with outstanding messages.
+- Deprecated key name: `database-check-interval`
+- ENV name: `LANDSCAPE_PINGSERVER__DATABASE_CHECK_INTERVAL`
+- Default: `30`
+
+### `database_write_interval`
+
+- Purpose: Interval in seconds between database writes of accumulated pings.
+- Deprecated key name: `database-write-interval`
+- ENV name: `LANDSCAPE_PINGSERVER__DATABASE_WRITE_INTERVAL`
+- Default: `60`
+
+### `ping_url`
+
+- Purpose: The `pingserver` service handles HTTP request from this URL. If unset, the http version of the configured root URL appended by `ping` is used.
+- Deprecated key name: `ping-url`
+- ENV name: `LANDSCAPE_PINGSERVER__PING_URL`
+- Default: `None`
+
+## The `[schema]` section
+
+The `[schema]` section contains configurations for updating the database schema. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
+
+### `store_superuser`
+
+- Purpose: If the set_user PostgreSQL extension is installed, Landscape will connect to PG as the `store_user`, then escalate to the `store_superuser`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SCHEMA__STORE_SUPERUSER`
+- Default: None
 
 ## The `[scripts]` section
 
-The `[scripts]` section contains configurations for the scripts service, including service operation settings, database store configurations, and SSL options.
-
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
-| `base_port` | `base-port` | `LANDSCAPE_SCRIPTS__BASE_PORT` | `8090` | Base port number for the service. |
-| `devmode` | - | `LANDSCAPE_SCRIPTS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SCRIPTS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SCRIPTS__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SCRIPTS__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_SCRIPTS__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_SCRIPTS__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_SCRIPTS__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SCRIPTS__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `sslcert` | - | `LANDSCAPE_SCRIPTS__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_SCRIPTS__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_SCRIPTS__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_SCRIPTS__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_SCRIPTS__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_SCRIPTS__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_SCRIPTS__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_SCRIPTS__THREADS` | `None` | Number of threads for the service. |
-| `workers` | - | `LANDSCAPE_SCRIPTS__WORKERS` | `None` | Number of worker processes for the service. |
+The `[scripts]` section contains configurations for scripts. The section contains only the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
 ## The `[secrets]` section
 
-The `[secrets]` section contains configurations for the secrets service, including vault connection settings, service URLs, database store configurations, and SSL options.
+The `[secrets]` section contains configurations for the secrets service, such as HashiCorp Vault connection settings. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>`, the {ref}`shared store settings <shared-store-settings>`, and the {ref}`shared TLS client settings <shared-tls-client-settings>` to connect to a Vault server with mTLS.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `allowed_interfaces` | - | `LANDSCAPE_SECRETS__ALLOWED_INTERFACES` | `None` | A list of allowed IP addresses or {spellexception}`hostnames` for the service. |
-| `base_port` | `base-port` | `LANDSCAPE_SECRETS__BASE_PORT` | `8090` | Base port number for the service. |
-| `devmode` | - | `LANDSCAPE_SECRETS__DEVMODE` | `None` | Development mode configuration (ex. `on`). |
-| `enable_metrics` | `enable-metrics` | `LANDSCAPE_SECRETS__ENABLE_METRICS` | `False` | Whether to enable metrics collection for the service. |
-| `gpg_home_path` | `gpg-home-path` | `LANDSCAPE_SECRETS__GPG_HOME_PATH` | `None` | Path to the GPG home directory. |
-| `gpg_passphrase_path` | `gpg-passphrase-path` | `LANDSCAPE_SECRETS__GPG_PASSPHRASE_PATH` | `None` | Path to the GPG passphrase file. Required if `gpg_home_path` is set. |
-| `mailer` | - | `LANDSCAPE_SECRETS__MAILER` | `None` | Mailer service configuration. |
-| `mailer_path` | `mailer-path` | `LANDSCAPE_SECRETS__MAILER_PATH` | `None` | Path to the mailer executable. Required if `mailer` is set. |
-| `oops_key` | `oops-key` | `LANDSCAPE_SECRETS__OOPS_KEY` | `None` | Key for OOPS error reporting system. |
-| `service_url` | `secrets-service-url` | `LANDSCAPE_SECRETS__SERVICE_URL` | `None` | The URL to use for the secrets service. Must include a port. |
-| `soft_timeout` | `soft-timeout` | `LANDSCAPE_SECRETS__SOFT_TIMEOUT` | `None` | Soft timeout value in seconds for service operations. |
-| `sslcert` | - | `LANDSCAPE_SECRETS__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_SECRETS__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_SECRETS__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_SECRETS__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_SECRETS__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_SECRETS__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_SECRETS__STORES` | `None` | The stores the service should use. |
-| `threads` | - | `LANDSCAPE_SECRETS__THREADS` | `None` | Number of threads for the service. |
-| `vault_token` | - | `LANDSCAPE_SECRETS__VAULT_TOKEN` | `None` | The token to use for the vault instead of getting it from the secrets service. |
-| `vault_url` | `secrets-url` | `LANDSCAPE_SECRETS__VAULT_URL` | `http://localhost:8200` | The address of the vault to use for the secrets service. |
-| `workers` | - | `LANDSCAPE_SECRETS__WORKERS` | `None` | Number of worker processes for the service. |
+### `service_url`
+
+- Purpose: The URL to use for the secrets service. Must include a port.
+- Deprecated key name: `secrets-service-url`
+- ENV name: `LANDSCAPE_SECRETS__SERVICE_URL`
+- Default: `None`
+
+### `vault_token`
+
+- Purpose: The token to use for the vault instead of getting it from the secrets service.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SECRETS__VAULT_TOKEN`
+- Default: `None`
+
+### `vault_url`
+
+- Purpose: The address of the vault to use for the secrets service.
+- Deprecated key name: `secrets-url`
+- ENV name: `LANDSCAPE_SECRETS__VAULT_URL`
+- Default: `http://localhost:8200`
 
 ## The `[stores]` section
 
-The `[stores]` section contains configurations for database store connections and SSL settings used across Landscape services.
+The `[stores]` section contains configurations for database store names and connections. In addition, this section can use the {ref}`shared store settings <shared-store-settings>`.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `account_1` | `account-1` | `LANDSCAPE_STORES__ACCOUNT_1` | `landscape-standalone-account-1` | The first account database store name. |
-| `account_2` | `account-2` | `LANDSCAPE_STORES__ACCOUNT_2` | `None` | The second account database store name. Optional. |
-| `host` | - | `LANDSCAPE_STORES__HOST` | `localhost` | The hostname or IP address of the database server. |
-| `knowledge` | - | `LANDSCAPE_STORES__KNOWLEDGE` | `landscape-standalone-knowledge` | The knowledge database name. |
-| `main` | - | `LANDSCAPE_STORES__MAIN` | `landscape-standalone-main` | The main database name. |
-| `package` | - | `LANDSCAPE_STORES__PACKAGE` | `landscape-standalone-package` | The package database name. |
-| `password` | - | `LANDSCAPE_STORES__PASSWORD` | `None` | The password for database connections. |
-| `resource_1` | `resource-1` | `LANDSCAPE_STORES__RESOURCE_1` | `landscape-standalone-resource-1` | The first resource database name. |
-| `resource_2` | `resource-2` | `LANDSCAPE_STORES__RESOURCE_2` | `None` | The second resource database name. Optional and used for testing only. |
-| `session` | - | `LANDSCAPE_STORES__SESSION` | `landscape-standalone-session` | The session database name. |
-| `session_autocommit` | `session-autocommit` | `LANDSCAPE_STORES__SESSION_AUTOCOMMIT` | `landscape-standalone-session` | The name of the session database with {spellexception}`autocommit` isolation. |
-| `sslcert` | - | `LANDSCAPE_STORES__SSLCERT` | `None` | Path to the client certificate to use for SSL connection to Postgres (becomes `PGSSLCERT`). |
-| `sslkey` | - | `LANDSCAPE_STORES__SSLKEY` | `None` | Path to the private key to use for SSL connection to Postgres (becomes `PGSSLKEY`). |
-| `sslmode` | - | `LANDSCAPE_STORES__SSLMODE` | `None` | SSL mode when connecting to Postgres, for example `verify-full`. |
-| `sslrootcert` | - | `LANDSCAPE_STORES__SSLROOTCERT` | `None` | Path to the root CA certificate to use for SSL connection to Postgres (becomes `PGSSLROOTCERT`). |
-| `store_password` | - | `LANDSCAPE_STORES__STORE_PASSWORD` | `None` | Overrides the store password. |
-| `store_user` | - | `LANDSCAPE_STORES__STORE_USER` | `None` | Overrides the store username. |
-| `stores` | - | `LANDSCAPE_STORES__STORES` | `None` | The stores the service should use. |
-| `user` | - | `LANDSCAPE_STORES__USER` | `landscape` | The username for database connections. |
+### `account_1`
+
+- Purpose: The account database store name.
+- Deprecated key name: `account-1`
+- ENV name: `LANDSCAPE_STORES__ACCOUNT_1`
+- Default: `landscape-standalone-account-1`
+
+### `host`
+
+- Purpose: The hostname or IP address of the database server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__HOST`
+- Default: `localhost`
+
+### `knowledge`
+
+```{note}
+The knowledge database was deprecated in Landscape Server 25.10 and will be dropped in a future release of Landscape Server.
+```
+
+- Purpose: The knowledge database name. 
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__KNOWLEDGE`
+- Default: `landscape-standalone-knowledge`
+
+### `main`
+
+- Purpose: The main database name.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__MAIN`
+- Default: `landscape-standalone-main`
+
+### `package`
+
+- Purpose: The package database name.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__PACKAGE`
+- Default: `landscape-standalone-package`
+
+### `password`
+
+- Purpose: The password for database connections by the configured `user`.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__PASSWORD`
+- Default: `None`
+
+### `port`
+
+- Purpose: The port to access the database server.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__PORT`
+- Default: `None`
+
+### `resource_1`
+
+- Purpose: The resource database name.
+- Deprecated key name: `resource-1`
+- ENV name: `LANDSCAPE_STORES__RESOURCE_1`
+- Default: `landscape-standalone-resource-1`
+
+### `session`
+
+- Purpose: The session database name.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__SESSION`
+- Default: `landscape-standalone-session`
+
+### `session_autocommit`
+
+- Purpose: The name of the session database with `autocommit` isolation.
+- Deprecated key name: `session-autocommit`
+- ENV name: `LANDSCAPE_STORES__SESSION_AUTOCOMMIT`
+- Default: `landscape-standalone-session`
+
+### `user`
+
+- Purpose: The username for database connections.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_STORES__USER`
+- Default: `landscape`
 
 ## The `[system]` section
 
 ```{note}
-The `[global]` section name is deprecated. The `[system]` section replaces the `[global]` section.
+The `[global]` section name was deprecated in Landscape Server 25.10. The `[system]` section replaces the `[global]` section.
 ```
 
 The `[system]` section contains configurations that apply across many or all of Landscape's services.
 
-| Key name | Deprecated key name | ENV name | Default | Purpose |
-| :------- | :------------------ | :------- | :------ | :------ |
-| `analytics_id` | - | `LANDSCAPE_SYSTEM__ANALYTICS_ID` | `UA-1018242-60` | Google Analytics tracker ID for the deployment. |
-| `apt_port` | - | `LANDSCAPE_SYSTEM__APT_PORT` | 8085 | The port the `landscape_apt` service should use. |
-| `audit_retention_period` | `audit-retention-period` | `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD` | `-1` | The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely. |
-| `deployment_mode` | `deployment-mode` | `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE` | `standalone` | Used only for development. The default value is appropriate for self-hosted Landscape. |
-| `fqdn` | - | `LANDSCAPE_SYSTEM__FQDN` | `None` | Sets the root URL using the FQDN. |
-| `gpg_home_dir` | - | `LANDSCAPE_SYSTEM__GPG_HOME_DIR` | `/var/lib/landscape-server/gnupg` | The directory containing GnuPG config files and the {spellexception}`keyrings`. |
-| `license_file` | - | `LANDSCAPE_SYSTEM__LICENSE_FILE` | `/etc/landscape/license.txt` | The file path location of the license file. |
-| {spellexception}`pidfile_directory` | {spellexception}`pidfile-directory` | {spellexception}`LANDSCAPE_SYSTEM__PIDFILE_DIRECTORY` | `/tmp/landscape` | Unused |
-| `max_service_memory` | `max-service-memory` | `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY` | `0` | An upper limit (in {spellexception}`mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit. |
-| `middleware` | - | `LANDSCAPE_SYSTEM__MIDDLEWARE` | `None` | The python dotted name to the middleware function or class to use. Multiple values can be provided by separating them with a comma. |
-| `offline` | - | `LANDSCAPE_SYSTEM__OFFLINE` | `None` | Set `True` if Landscape is deployed in an air-gapped environment. |
-| `oops_path` | `oops-path` | `LANDSCAPE_SYSTEM__OOPS_PATH` | `/var/lib/landscape/landscape-oops` | The directory where OOPS reports are stored. The `landscape` system user must have read/write access to the specified directory. |
-| `root_url` | `root-url` | `LANDSCAPE_SYSTEM__ROOT_URL` | `http://localhost:8080` | Landscape Server's root URL path. |
-| `syslog_address` | `syslog-address` | `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS` | `/dev/log` | Path to the system's syslog logger. |
+### `analytics_id`
+
+- Purpose: Google Analytics tracker ID for the deployment.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ANALYTICS_ID`
+- Default: `UA-1018242-60`
+
+### `apt_port`
+
+- Purpose: The port the `landscape_apt` service should use.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__APT_PORT`
+- Default: `8085`
+
+### `audit_retention_period`
+
+- Purpose: The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely.
+- Deprecated key name: `audit-retention-period`
+- ENV name: `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD`
+- Default: `-1`
+
+### `deployment_mode`
+
+```{note}
+**Do not change the `deployment_mode` default value.**
+```
+
+- Purpose: Used only for development. The default value is appropriate for self-hosted Landscape Server. Users should never change this setting.
+- Deprecated key name: `deployment-mode`
+- ENV name: `LANDSCAPE_SYSTEM__DEPLOYMENT_MODE`
+- Default: `standalone`
+
+### `enable_password_authentication`
+
+- Purpose: Whether to enable password-based authentication or not.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION`
+- Default: `False`
+
+### `enable_saas_metrics`
+
+- Purpose: Whether to enable metrics on SaaS or not. The default value is appropriate for self-hosted Landscape Server. Users generally shouldn't change this setting.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_SAAS_METRICS`
+- Default: `False`
+
+### `enable_subdomain_accounts`
+
+- Purpose: Whether to enable subdomain accounts or not. The default value is appropriate for self-hosted Landscape Server. Users generally shouldn't change this setting.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_SUBDOMAIN_ACCOUNTS`
+- Default: `False`
+
+### `enable_tag_script_execution`
+
+- Purpose: Whether to enable tag-based script execution or not.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENABLE_TAG_SCRIPT_EXECUTION`
+- Default: `False`
+
+(service-conf-system-enforce-password-strength)=
+
+### `enforce_password_strength`
+
+- Purpose: Whether to enforce password strength when creating the administrator of a standalone account. If set to True, the password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, and one digit.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__ENFORCE_PASSWORD_STRENGTH`
+- Default: `True`
+
+### `gpg_home_dir`
+
+- Purpose: The directory containing GnuPG config files and the keyrings.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__GPG_HOME_DIR`
+- Default: `/var/lib/landscape-server/gnupg`
+
+### `license_file`
+
+- Purpose: The file path location of the legacy license file. Ubuntu Pro users don't need to set this. The `landscape` system user must be able to read this file.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__LICENSE_FILE`
+- Default: `/etc/landscape/license.txt`
+
+### `max_service_memory`
+
+- Purpose: An upper limit (in `mebibytes`) for the memory usage by a Landscape service. Services exceeding this limit will restart. A value of `0` means there is no limit.
+- Deprecated key name: `max-service-memory`
+- ENV name: `LANDSCAPE_SYSTEM__MAX_SERVICE_MEMORY`
+- Default: `0`
+
+### `offline`
+
+- Purpose: Set `True` if Landscape is deployed in an air-gapped environment.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__OFFLINE`
+- Default: `None`
+
+### `oops_path`
+
+- Purpose: The directory where OOPS reports are stored. The `landscape` system user must have read/write access to the specified directory.
+- Deprecated key name: `oops-path`
+- ENV name: `LANDSCAPE_SYSTEM__OOPS_PATH`
+- Default: `/var/lib/landscape/landscape-oops`
+
+### `root_url`
+
+- Purpose: Landscape Server's root URL path.
+- Deprecated key name: `root-url`
+- ENV name: `LANDSCAPE_SYSTEM__ROOT_URL`
+- Default: `http://localhost:8080`
+
+### `syslog_address`
+
+- Purpose: Path to the system's syslog logger.
+- Deprecated key name: `syslog-address`
+- ENV name: `LANDSCAPE_SYSTEM__SYSLOG_ADDRESS`
+- Default: `/dev/log`
+
+### `ubuntu_pro_contract_server_url`
+
+- Purpose: The URL of the Ubuntu Pro contract server, used to verify Ubuntu Pro tokens.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_SYSTEM__UBUNTU_PRO_CONTRACT_SERVER_URL`
+- Default: `https://contracts.canonical.com/`
