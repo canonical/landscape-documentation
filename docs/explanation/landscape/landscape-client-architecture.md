@@ -47,7 +47,7 @@ The Package changer process is a distinguished manager that is invoked when Land
 
 ### Config
 
-The Config process is used to configure the Landscape Client. It's responsible for registering the client with Landscape Server. It is an interactive process that saves information required to connect to Landscape Server, along with other configuration values. For a more details, refer to {ref}`how-to-configure-landscape-client`.
+The Config process is used to configure the Landscape Client. It's responsible for registering the client with Landscape Server. It is an interactive process that saves information required to connect to Landscape Server, along with other configuration values. For more details, refer to {ref}`how-to-configure-landscape-client`.
 
 ### Release upgrade manager
 
