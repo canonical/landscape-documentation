@@ -39,15 +39,15 @@ The Manager service acts as a top-level scheduler for specific managers. A manag
 
 ### Package reporter
 
-The Package reporter process is a distinguished monitor that is periodically invoked by the Monitor service. It collects information about the client's [package states](explanation-package-reporting-package-state) and reports these changes to the Landscape Server via the Broker service. For a more detailed explanation, refer to [Package reporting internals](explanation-package-reporting).
+The Package reporter process is a distinguished monitor that is periodically invoked by the Monitor service. It collects information about the client's {ref}`explanation-package-reporting-package-state` and reports these changes to the Landscape Server via the Broker service. For a more detailed explanation, refer to {ref}`Package reporting internals <explanation-package-reporting>`.
 
 ### Package changer
 
-The Package changer process is a distinguished manager that is invoked when Landscape Server requests package changes on the client. It applies the requested package operations (such as installations, removals, ...) and queues the results to be relayed back to the server via the Broker service.
+The Package changer process is a distinguished manager that is invoked when Landscape Server requests package changes on the client. It applies the requested package operations (such as installations, removals, etc.) and queues the results to be relayed back to the server via the Broker service.
 
 ### Config
 
-The Config process is used to configure the Landscape Client. It's responsible for registering the client with Landscape Server. It is an interactive process that saves information required to connect to Landscape Server, along with other configuration values. For a more detailed explanation, refer to [How to configure Landscape Client](how-to-configure-landscape-client).
+The Config process is used to configure the Landscape Client. It's responsible for registering the client with Landscape Server. It is an interactive process that saves information required to connect to Landscape Server, along with other configuration values. For a more details, refer to {ref}`how-to-configure-landscape-client`.
 
 ### Release upgrade manager
 
