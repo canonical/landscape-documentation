@@ -56,7 +56,7 @@ Managers require elevated privileges (i.e. run as `root`).
 
 The Package reporter process is a distinguised monitor that is periodically invoked by the Monitor service.
 It collects information about the client's package states (installed, removed, ...) and reports these changes to the Landscape Server via the Broker service.
-For a more detailed explanation, refer to [Package reporting internals](#explanation-package-reporting).
+For a more detailed explanation, refer to [Package reporting internals](explanation-package-reporting).
 
 ### Package changer
 
