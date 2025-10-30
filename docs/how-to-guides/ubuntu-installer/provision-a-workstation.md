@@ -5,13 +5,9 @@ The Ubuntu installer (26.04 and later) can use Landscape to serve an autoinstall
 
 ```{note}
 This feature is available from Landscape server `25.10~beta.4` onwards.
-```
 
-```{note}
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
-```
 
-```{note}
 This feature is available as an experimental feature in the Ubuntu installer for 25.04 and later.
 ```
 
