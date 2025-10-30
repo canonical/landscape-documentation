@@ -17,7 +17,7 @@ There are also important processes that run either periodically or on demand:
   * [Package reporter](#package-reporter) - reports the status of packages on the client
   * [Package changer](#package-changer) - applies package changes
   * [Config](#config) - configures the client
-  * [Release upgrader](#release-upgrader) — upgrades the operating system to a new Ubuntu release
+  * [Release upgrade manager](#release-upgrade-manager) — upgrades the operating system to a new Ubuntu release
 
 ## Process description
 
@@ -70,7 +70,7 @@ The Config process is used to configure the Landscape Client.
 It is an interactive process that saves information required to connect to Landscape Server, along with other configuration values.
 It is responsible for registering the client with Landscape Server.
 
-### Release upgrader
+### Release upgrade manager
 
-The Release upgrader process is a distinguished manager that is invoked to perform an Ubuntu upgrade on the client.
+The Release upgrade manager process is a distinguished manager that is invoked to perform an Ubuntu upgrade on the client.
 Like the Package reporter and Package changer, its results are queued and sent via the Broker service.
