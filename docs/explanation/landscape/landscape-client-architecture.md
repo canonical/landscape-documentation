@@ -36,7 +36,7 @@ The Broker service communicates with Landscape Server in two ways.
 It sends HTTP requests to the Landscape Server's message system service, relaying information and
 receiving activities to be performed on the client.
 It also periodically sends HTTP heartbeats to the Landscape Server ping service.
-This serves both as a heartbeat and as notfication for pending messages from the server.
+This serves both as a heartbeat and as notification for pending messages from the server.
 
 ### Monitor
 
@@ -54,7 +54,7 @@ Managers require elevated privileges (i.e. run as `root`).
 
 ### Package reporter
 
-The Package reporter process is a distinguised monitor that is periodically invoked by the Monitor service.
+The Package reporter process is a distinguished monitor that is periodically invoked by the Monitor service.
 It collects information about the client's package states (installed, removed, ...) and reports these changes to the Landscape Server via the Broker service.
 For a more detailed explanation, refer to [Package reporting internals](explanation-package-reporting).
 
