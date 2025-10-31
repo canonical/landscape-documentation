@@ -216,6 +216,7 @@ PPAs
 prem
 prepended
 PyCurl
+Pydantic
 PyJWT
 QEMU
 RabbitMQ
