@@ -146,7 +146,14 @@ If your Windows host machine doesn’t appear as a pending computer in your Land
     [host]
     url = landscape-server.domain.com:6554
     ```
-    
+
+- **Check that the `enable-wsl-child-instance-profiles` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**
+
+    ```bash
+    [features]
+    enable-wsl-child-instance-profiles = true
+    ```
+
 - **Ensure your firewall settings are configured appropriately**
 
    > See also: [Ubuntu Pro for WSL documentation on firewall requirements](https://canonical-ubuntu-pro-for-wsl.readthedocs-hosted.com/en/latest/reference/firewall_requirements/)

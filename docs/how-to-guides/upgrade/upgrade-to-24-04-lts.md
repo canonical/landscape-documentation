@@ -22,9 +22,6 @@ Add the following lines to your `service.conf` file. This is commonly located in
 hostagent_virtual_host = landscape-hostagent
 hostagent_task_queue = landscape-server-hostagent-task-queue
 
-[grpc]
-grpc.max_connection_age_ms = 2592000000 # 30 days
-
 [hostagent-message-consumer]
 threads = 1
 stores = main account-1
@@ -52,4 +49,3 @@ If you're upgrading a Landscape Server instance that was manually installed (ins
 
 - In your `service.conf` file, add an entry for `secret-token` in the `[landscape]` section and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`.
 - Update your Apache vhost if it wasn't already auto-upgraded
-

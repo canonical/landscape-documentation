@@ -1,4 +1,5 @@
 (reference-api-legacy-api-endpoints-index)=
+
 # Legacy API endpoints
 
 ```{toctree}

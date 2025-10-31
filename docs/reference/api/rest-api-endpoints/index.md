@@ -1,4 +1,5 @@
 (reference-api-rest-api-endpoints-index)=
+
 # Rest API endpoints
 
 ```{toctree}

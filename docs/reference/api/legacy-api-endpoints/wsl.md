@@ -7,6 +7,15 @@ The methods available here are for managing Windows Subsystem for Linux (WSL) cl
 These API methods only apply to Landscape Beta at this time.
 ```
 
+To enable WSL features in self-hosted Landscape, add:
+
+```bash
+[features]
+enable-wsl-child-instance-profiles = true
+```
+
+to the `service.conf` file.
+
 ## CreateChildComputer
 
 Create child computer instances on a parent host machine. 

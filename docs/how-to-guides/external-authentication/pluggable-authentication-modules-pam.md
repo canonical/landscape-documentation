@@ -14,7 +14,7 @@ Once these are in place, restart Landscape Server and it should be possible to l
 
 If you use PAM to authenticate, the user details stored in Landscape are associated with the PAM identity supplied. PAM authentication has been tested against an LDAP server running on Ubuntu, and also with Active Directory running on Windows.
 
-For more information on PAM authentication see [PAM Tutorial](http://wpollock.com/AUnix2/PAM-Help.htm).
+For more information on PAM authentication see [PAM Tutorial](https://wpollock.com/AUnix2/PAM-Help.htm).
 
 ```{note}
 Landscape uses PAM only for authentication decisions.

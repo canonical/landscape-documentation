@@ -69,3 +69,161 @@ Ubuntu LTS releases with Ubuntu Pro can take advantage of the [Ubuntu Security G
 ## Harden Juju
 
 If you used Juju to deploy Landscape, you can follow [Juju's hardening guide](https://documentation.ubuntu.com/juju/3.6/howto/manage-your-juju-deployment/harden-your-juju-deployment/#harden-your-deployment) to harden the Juju aspects of your deployment.
+
+## mTLS in Landscape
+
+The transport-layer security (TLS) protocol secures communication by requiring the server to present a certificate and private key. With mutual TLS (mTLS), clients must also present a certificate issued by the same certificate authority (CA), so both sides authenticate each other.
+
+Landscape can be configured to use mTLS for its internal services, and for connections to external services like RabbitMQ and HashiCorp Vault.
+
+<!--TODO: remove when we add standard TLS (verify-none) support-->
+```{note}
+Standard TLS connections that do not enforce mTLS are not supported.
+```
+
+### CA Certificate
+
+You will need the CA certificate used to sign your certificates. Ensure it has the following permissions:
+
+```sh
+sudo chmod 644 /path/to/ca/ca-cert.pem  
+sudo chown root:root /path/to/ca/ca-cert.pem
+```
+
+### RabbitMQ
+
+Obtain TLS server credentials and the CA certificate for the RabbitMQ server and provide their paths in `/etc/rabbitmq/rabbitmq.conf`, along with other required fields:
+
+```ini
+listeners.tcp = none
+listeners.ssl.default = 5672
+ssl_options.certfile = /path/to/rabbitmq/server-cert.pem
+ssl_options.keyfile = /path/to/rabbitmq/server-key.pem
+ssl_options.cacertfile = /path/to/ca/ca-cert.pem
+ssl_options.verify = verify_peer
+ssl_options.fail_if_no_peer_cert = true
+auth_mechanisms.1 = EXTERNAL
+ssl_cert_login_from = common_name
+```
+
+Additionally, edit `/etc/rabbitmq/enabled_plugins`:
+
+```ini
+[rabbitmq_auth_mechanism_ssl].
+```
+
+Set ownership and permissions:
+
+```sh
+sudo chown rabbitmq:rabbitmq /path/to/rabbitmq/server-cert.pem /path/to/rabbitmq/server-key.pem
+sudo chmod 600 /path/to/rabbitmq/server-key.pem
+sudo chmod 644 /path/to/rabbitmq/server-cert.pem
+```
+
+Restart RabbitMQ:
+
+```sh
+sudo systemctl restart rabbitmq-server
+```
+
+Landscape connects to RabbitMQ via the credentials defined in the `[broker]` section of your `service.conf` file.
+Since RabbitMQ is listening using mTLS, delete the `password` field from the section if present and provide the paths to TLS credentials to enable TLS certificate-based authentication:
+
+```ini
+[broker]
+ssl_client_cert = /path/to/broker/client-cert.pem
+ssl_client_private_key = /path/to/broker/client-key.pem
+ssl_client_ca_cert = /path/to/ca/ca-cert.pem
+```
+
+Ensure the broker credentials are owned by the `landscape` user:
+
+```sh
+sudo chown landscape:landscape /path/to/broker/client-cert.pem /path/to/broker/client-key.pem
+sudo chmod 600 /path/to/broker/client-key.pem
+sudo chmod 644 /path/to/broker/client-cert.pem
+```
+
+Restart Landscape:
+
+```sh
+sudo lsctl restart
+```
+
+### Landscape services
+
+The following Landscape services can be configured to use mTLS:
+
+* `landscape-async-frontend`
+* `landscape-secrets-service`
+
+Each service can have its own server certificate and can be configured to require clients to authenticate via their own TLS credentials.
+The `secrets-service` can additionally be configured to connect to HashiCorp Vault as a client via mTLS.
+
+#### Async Frontend
+
+The `async-frontend` service can listen using mTLS for incoming connections.
+
+Obtain TLS server credentials, and add the paths in the `[async_frontend]` section in `service.conf`:
+
+```ini
+ssl_server_cert = /path/to/async_frontend/server-cert.pem
+ssl_server_private_key = /path/to/async_frontend/server-key.pem
+ssl_server_ca_cert = /path/to/ca/ca-cert.pem
+```
+
+Set ownership and permissions:
+
+```sh
+sudo chown landscape:landscape /path/to/async_frontend/server-cert.pem /path/to/async_frontend/server-key.pem
+sudo chmod 600 /path/to/async_frontend/server-key.pem
+sudo chmod 644 /path/to/async_frontend/server-cert.pem
+```
+
+Restart Landscape:
+
+```sh
+sudo lsctl restart
+```
+
+#### Secrets Service (with HashiCorp Vault)
+
+The `secrets-service` can listen using mTLS for incoming connections, and it can connect to a Vault server using mTLS. See HashiCorp's guide on [hardening your Vault server](https://developer.hashicorp.com/vault/docs/concepts/production-hardening).
+
+Update the `vault_url` field in the `[secrets]` section of your `service.conf`, and make sure both URLs are using HTTPS:
+
+```ini
+[secrets]
+service_url = https://localhost:26155
+vault_url = https://localhost:8200
+```
+
+Since Vault is enforcing mTLS, you must also obtain or generate client TLS credentials issued by the same CA and append them to the section:
+
+```ini
+ssl_client_private_key = /path/to/client/client-key.pem
+ssl_client_cert = /path/to/client/client-cert.pem
+ssl_client_ca_cert = /path/to/ca/ca-cert.pem
+```
+
+To make the Secrets Service listen using mTLS, provide the paths to the certificate and the private key in the `[secrets]` section of your `service.conf`:
+
+```ini
+ssl_server_private_key = /path/to/secrets/server-key.pem
+ssl_server_cert = /path/to/secrets/server-cert.pem
+ssl_server_ca_cert = /path/to/ca/ca-cert.pem
+```
+
+Set ownership and permissions:
+
+```sh
+sudo chown landscape:landscape /path/to/secrets/server-cert.pem /path/to/secrets/server-key.pem
+sudo chmod 600 /path/to/secrets/server-key.pem
+sudo chmod 644 /path/to/secrets/server-cert.pem
+```
+
+Restart Landscape:
+
+```sh
+sudo lsctl restart
+```

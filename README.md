@@ -22,7 +22,7 @@ Landscape is used by system administrators, security teams, IT managers, and com
 
 ## Project and community
 
-Landscape is a member of the Ubuntu family. It welcomes community contributions, suggestions, fixes and constructive feedback. 
+Landscape is a member of the Ubuntu family. It welcomes community contributions, suggestions, fixes and constructive feedback.
 
 * [Our Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct)
 * [Get support](https://ubuntu.com/support/community-support)

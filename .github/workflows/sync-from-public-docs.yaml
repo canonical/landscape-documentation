@@ -1,0 +1,35 @@
+# .github/workflows/sync-from-public.yml
+name: Sync from Public Repo
+
+on:
+  repository_dispatch:
+    types: [sync-public-main]
+
+jobs:
+  sync-public:
+    if: ${{ github.repository == 'canonical/landscape-docs-staging' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout private staging repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+          fetch-depth: '0'
+
+      - name: Add public repo as upstream and merge
+        run: |
+          git config user.name "landscape-github-actions[bot]"
+          git config user.email "landscape-github-actions[bot]@users.noreply.github.com"
+          git remote add upstream https://github.com/canonical/landscape-documentation.git
+          git fetch upstream
+          git merge --allow-unrelated-histories upstream/main -Xtheirs --no-commit
+          git restore --staged .github
+          git commit -m "merge: sync from public docs"
+          git push origin main
+
+      - name: Merge main into develop
+        run: |
+          git checkout develop
+          git merge main -m "merge: sync from main"
+          git push origin develop

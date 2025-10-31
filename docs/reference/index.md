@@ -10,8 +10,10 @@ This section includes technical information you may need to reference when using
 
 api/index
 release-notes/index
+config/index
 logs/index
 networking/index
 terms/index
+database
 known-issues
 lsctl
