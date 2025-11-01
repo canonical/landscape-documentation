@@ -18,6 +18,7 @@ Landscape Server installs a few scheduled tasks, defined in the `/etc/cron.d/lan
 * `/opt/canonical/landscape/scripts/report_anonymous_metrics.sh`
     - This task reports some anonymous metrics, such as the installed Landscape Server version.
 
+These scripts depend on a PID file located in `/run/landscape/` to prevent multiple instances of a script from running concurrently. This directory is created at boot by a systemd tmpfiles configuration located at `/etc/tmpfiles.d/landscape-server-tmpfile.conf`.
 
 ## Optional Cleaning of Activity History
 

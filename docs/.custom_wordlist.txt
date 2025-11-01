@@ -216,6 +216,7 @@ PCI
 perf
 perfs
 performant
+PID
 PITR
 pgSQL
 pgtune
@@ -304,6 +305,7 @@ timeframe
 TLD
 TLS
 TLSv
+tmpfiles
 traceback
 transactional
 UA
