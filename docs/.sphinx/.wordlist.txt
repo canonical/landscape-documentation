@@ -55,9 +55,13 @@ reStructuredText
 Resynchronization
 resynchronize
 roadmap
+rootfs
+Rootfs
 RTD
 subdirectories
 subfolders
+Subiquity
+subiquity
 subtree
 TODO
 Ubuntu
