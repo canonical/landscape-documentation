@@ -151,7 +151,7 @@ Query parameters:
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/activities/parents?limit=2 -H "Authorization: Bearer $JWT
+curl -X GET https://landscape.canonical.com/api/v2/activities/parents?limit=2 -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
