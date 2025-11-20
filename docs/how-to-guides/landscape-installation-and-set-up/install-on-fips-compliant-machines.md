@@ -5,7 +5,7 @@ This document provides the Landscape-specific steps needed for a FIPS-compliant 
 
 Note that for FIPS-compliant deployments, Landscape Quickstart isn't suitable for large estates (over a few hundred machines). This is due to some performance configuration introduced by the `openssl` 3.0 package which incorporates delays. To manage a large, FIPS-compliant estate, use the Juju deployment method, which allows for horizontal scaling to overcome this limitation.
 
-## The FIPS-compliant Landscape Quickstart checklist
+## The FIPS-compliant Landscape Quickstart deployment checklist
 
 Use the {ref}`Quickstart <how-to-quickstart-installation>` or {ref}`Manual <how-to-manual-installation>` installation guides, with the following changes:
 
@@ -25,7 +25,7 @@ If you're {ref}`configuring Postfix for emails <how-to-configure-postfix>`, add 
 
     By default, Postfix uses MD5 hashes with the TLS for backward compatibility. In FIPS mode, the MD5 hashing function is not available. SHA-256 is a secure cryptographic hash function that can be used with FIPS.
 
-## The FIPS-compliant Juju Landscape deployment checklist
+## The FIPS-compliant Landscape Juju deployment checklist
 
 - Specify that FIPS should be enabled within a cloud-init.yaml file
     
