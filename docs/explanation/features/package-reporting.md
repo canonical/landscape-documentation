@@ -36,6 +36,7 @@ Landscape Server and Landscape Client both store package reporting state. Here's
   - Client `package` database: a SQLite database file that mirrors the `computer_packages` database on Server. It has one table for each [package state](#package-state) with one column of [Landscape package IDs](#landscape-package-id). It also contains some state regarding the current package reporting progress.
   - `hash-id` database file: one of Server's `hash-id` database files, downloaded from Server and matching the Client's Ubuntu series and CPU architecture. 
 
+(explanation-package-reporting-package-state)=
 ## Package state
 
 Before we go into package reporting details step-by-step, it's important to understand what package reporting is actually reporting.
