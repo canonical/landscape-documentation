@@ -1,7 +1,7 @@
 (how-to-ubuntu-installer-configure-landscape-deployment)=
 # How to configure your Landscape deployment to provision workstations with Autoinstall via the Ubuntu installer
 
-The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
+The Ubuntu installer (26.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
 
 ```{note}
 This feature is available from Landscape server `25.10~beta.4` onwards.
@@ -19,6 +19,10 @@ See the [Ubuntu installation (Subiquity) documentation](https://canonical-subiqu
 
 ## On a Juju deployment
 
+```{note}
+This action is available on charm revision 189 and later.
+```
+
 Enable the service for a Landscape unit with the Juju action:
 
 ```sh
@@ -33,6 +37,19 @@ juju run landscape-server/1 enable-ubuntu-installer-attach
 juju run landscape-server/2 enable-ubuntu-installer-attach
 ...
 juju run landscape-server/<N> enable-ubuntu-installer-attach
+```
+
+You'll need to provide additional configuration to the Landscape server units to enable
+the feature and set minimal service configuration:
+
+```sh
+juju config landscape-server additional_service_config='[ubuntu_installer_attach]
+stores = main account-1
+threads = 1
+base_port = 53354
+[features]
+employee_management = true
+'
 ```
 
 To disable the service on a unit, run the following Juju action:
@@ -51,6 +68,24 @@ Landscape requires an additional service for the Ubuntu installer attach experie
 sudo add-apt-repository ppa:landscape/self-hosted-beta
 sudo apt update
 sudo apt install landscape-ubuntu-installer-attach
+```
+
+### Set configuration
+
+In your `service.conf`, include the following section if not already present:
+
+```ini
+[ubuntu_installer_attach]
+stores = main account-1
+threads = 1
+base_port = 53354
+```
+
+Include the following configuration in the `[features]` section of your `service.conf`:
+
+```ini
+[features]
+employee_management = true
 ```
 
 ### Configure the proxy
@@ -96,16 +131,6 @@ frontend haproxy-0-grpc-ubuntu-installer
     http-request set-var(req.full_fqdn) hdr(authority) if !host_found
     http-request set-var(req.full_fqdn) hdr(host) if host_found
     http-request set-header X-FQDN %[var(req.full_fqdn)]
-```
-
-## Enable the feature
-
-Set the following configuration in your `service.conf`:
-
-```ini
-[features]
-[...]
-employee_management = true
 ```
 
 ## Verify the connection
