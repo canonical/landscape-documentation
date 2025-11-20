@@ -1,5 +1,5 @@
 (how-to-install-fips-compliant)=
-# How to install on FIPS-compliant machines
+# How to install a FIPS-compliant Landscape Server
 
 This document provides the Landscape-specific steps needed for a FIPS-compliant Landscape deployment. The FIPS-compliant process is quite similar to the standard installation process. 
 
