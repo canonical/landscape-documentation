@@ -10,7 +10,7 @@ The [Landscape Server charm](https://charmhub.io/landscape-server) can be deploy
 
 For a recommended charm bundle configuration and more information about deploying Landscape Server with Juju, see {ref}`How to install Landscape Server with Juju <how-to-juju-installation>`.
 
-Outside of charm base (e.g., `ubuntu@24.04`) or platform (e.g., `amd64`) incompatibility, there can be breaking changes to the interfaces of the required charms that make them incompatible for integration with specific or all revisions and channels of the Landscape Server charm.
+Outside of charm base (e.g., `ubuntu@24.04`) or architecture (e.g., `amd64`) incompatibility, there can be breaking changes to the interfaces of the required charms that make them incompatible for integration with specific or all revisions and channels of the Landscape Server charm.
 
 ```{tip}
 Learn more about [Juju integrations](https://canonical.com/juju/integrations).
