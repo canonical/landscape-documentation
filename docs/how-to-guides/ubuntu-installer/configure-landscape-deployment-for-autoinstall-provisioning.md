@@ -23,7 +23,7 @@ See the [Ubuntu installation (Subiquity) documentation](https://canonical-subiqu
 This configuration is available in the `25.10/beta` channel beginning with revision 209.
 ```
 
-Enable the service for a Landscape unit:
+Enable the service by setting `enable_ubuntu_installer_attach` to `true`:
 
 ```sh
 juju config landscape-server enable_ubuntu_installer_attach=true
@@ -42,7 +42,7 @@ employee_management = true
 '
 ```
 
-To disable the service, set the configuration to `false`:
+Disable the service by setting `enable_ubuntu_installer_attach` to `false`:
 
 ```sh
 juju config landscape-server enable_ubuntu_installer_attach=false
