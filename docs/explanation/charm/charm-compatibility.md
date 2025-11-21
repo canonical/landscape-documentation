@@ -2,7 +2,7 @@
 
 # Landscape Server charm integration compatibility
 
-The [Landscape Server charm](https://charmhub.io/landscape-server) can be deployed with Juju when related to at least the following charms:
+The [Landscape Server charm](https://charmhub.io/landscape-server) can be deployed with Juju when integrated with at least the following charms:
 
 - `haproxy`
 - `postgresql`
@@ -36,6 +36,6 @@ The Landscape Server charm can be integrated to any of the `latest/x` or `14/x` 
 
 ## RabbitMQ Server
 
-There are no charm integration incompatibilities between the Landscape Server charm and the RabbitMQ server charm.
+There are no charm integration incompatibilities between the Landscape Server charm and the RabbitMQ Server charm.
 
 - [RabbitMQ Server on Charmhub](https://charmhub.io/rabbitmq-server)
