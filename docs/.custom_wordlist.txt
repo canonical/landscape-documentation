@@ -124,6 +124,7 @@ html
 http
 HTTPS
 https
+integrations
 incrementation
 init
 IoT
