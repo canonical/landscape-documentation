@@ -8,7 +8,7 @@ This feature is available from Landscape server `25.10` onwards.
 ```
 
 ```{note}
-This feature is available on self-hosted only.
+This feature is available only on self-hosted deployments.
 ```
 
 ## Background information
