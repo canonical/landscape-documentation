@@ -4,11 +4,11 @@
 The Ubuntu installer (26.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
 
 ```{note}
-This feature is available from Landscape server `25.10~beta.4` onwards.
+This feature is available from Landscape server `25.10` onwards.
 ```
 
 ```{note}
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
+This feature is available on self-hosted only.
 ```
 
 ## Background information
