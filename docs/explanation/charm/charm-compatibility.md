@@ -18,7 +18,7 @@ Learn more about [Juju integrations](https://canonical.com/juju/integrations).
 
 ## K8s Operators
 
-Landscape Server is currently only distributed as a machine (VM) charm and cannot be directly integrated with the any version of K8S charm operators like the HAProxy K8s operator or the Charmed PostgreSQL K8s operator.
+Landscape Server is currently only distributed as a machine (VM) charm and cannot be directly integrated with any version of K8S charm operators like the HAProxy K8s operator or the Charmed PostgreSQL K8s operator.
 
 ## HAProxy
 
