@@ -20,23 +20,13 @@ See the [Ubuntu installation (Subiquity) documentation](https://canonical-subiqu
 ## On a Juju deployment
 
 ```{note}
-This action is available on charm revision 189 and later.
+This configuration is available in the `25.10/beta` channel beginning with revision 209.
 ```
 
-Enable the service for a Landscape unit with the Juju action:
+Enable the service for a Landscape unit:
 
 ```sh
-juju run landscape-server/<N> enable-ubuntu-installer-attach
-```
-
-If you have multiple Landscape server units, you can enable the service on each unit:
-
-```sh
-juju run landscape-server/0 enable-ubuntu-installer-attach
-juju run landscape-server/1 enable-ubuntu-installer-attach
-juju run landscape-server/2 enable-ubuntu-installer-attach
-...
-juju run landscape-server/<N> enable-ubuntu-installer-attach
+juju config landscape-server enable_ubuntu_installer_attach=true
 ```
 
 You'll need to provide additional configuration to the Landscape server units to enable
@@ -52,10 +42,10 @@ employee_management = true
 '
 ```
 
-To disable the service on a unit, run the following Juju action:
+To disable the service, set the configuration to `false`:
 
 ```sh
-juju run landscape-server/<N> disable-ubuntu-installer-attach
+juju config landscape-server enable_ubuntu_installer_attach=false
 ```
 
 ## On a manual install
