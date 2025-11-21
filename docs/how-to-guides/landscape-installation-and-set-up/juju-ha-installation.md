@@ -255,7 +255,7 @@ applications:
 relations:
     - [landscape-server, rabbitmq-server]
     - [landscape-server, haproxy]
-    - [landscape-server:db, postgresql:db-admin]
+    - [landscape-server:database, postgresql:database]
 ```
 
 #### Step 3: Deploy the `bundle.yaml` file
@@ -385,4 +385,3 @@ juju config haproxy ssl_cert="$(base64 fullchain.pem)" ssl_key="$(base64 privkey
 ```
 
 Once your SSL certificate is in place, your Landscape Clients and browser should trust HTTPS connections to your Landscape Server deployment, so long as your certificate remains valid.
-
