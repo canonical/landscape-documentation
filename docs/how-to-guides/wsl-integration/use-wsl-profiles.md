@@ -33,7 +33,14 @@ Then complete the relevant fields:
 - **Access group**: The access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
 - **rootfs image**: The rootfs image to be installed. These correspond to the available WSL Ubuntu releases on the Microsoft Store. The Ubuntu image corresponds to the latest release available on the store and will give the WSL instance the ability to upgrade to the next release when it's available. If you have a custom rootfs image, you can provide the URL instead by selecting **From URL**. If you want multiple copies of the same rootfs image, you must use the **From URL** selection and provide a unique name.
   - **Image name**: The name of the rootfs image that will be installed on the WSL instance.
-  - **rootfs image URL**: The URL of the rootfs image that will be installed on the WSL instance. This URL must be reachable by the affected WSL instances. For instructions on ensuring the WSL instance can reach the provided rootfs image URL, see {ref}`how-to-wsl-use-specific-image-source`.
+  - **rootfs image URL**: The URL of the rootfs image that will be installed on the WSL instance. This URL must be reachable by the affected WSL instances. Available rootfs images are listed in an `Ubuntu` array, within a `ModernDistributions` object, in a [manifest.json](https://raw.githubusercontent.com/wiki/canonical/ubuntu-pro-for-wsl/beta/manifest.json) file. Adding a manifest.json to a Windows machine's registry makes those WSL rootfs images available for self-service install using the `wsl --install` command, from within the Command Prompt, Powershell, or Windows Terminal:
+    ```
+    $distributionListUrl = "https://raw.githubusercontent.com/wiki/canonical/ubuntu-pro-for-wsl/beta/manifest.json"
+    Set-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss" -Name DistributionListUrl -Value "$distributionListUrl" -Type String -Force
+    ```
+    Alternatively, rootfs images can be self-hosted within a corporate network, and the appropriate URLs can be set as the rootfs image URL in Landscape. You can build your own images, or use these:
+      - Jammy: https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_22.04.wsl
+      - Noble: https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_24.04.wsl
 - **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
