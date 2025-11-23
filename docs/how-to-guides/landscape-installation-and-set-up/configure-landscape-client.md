@@ -71,9 +71,7 @@ sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={
 
 By default, when a repository profile is applied to a machine, Landscape enforces the exact `/etc/apt/sources.list` configuration as defined in the profile. This configuration is applied once when the profile is applied, and is not revalidated or enforced on an ongoing basis. 
 
-If you want Landscape to append the repository configurations instead of replacing the existing ones in `/etc/apt/sources.list`, you can configure Landscape to use `/etc/apt/sources.list.d` instead by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
-
-If you do not want Landscape to delete the repository configurations in `/etc/apt/sources.list.d`, you can configure Landscape Client to only modify `/etc/apt/sources.list` instead by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
+If you do not want to move all the repository configurations in `/etc/apt/sources.list.d` to a backup and replace it with what you have defined in Landscape, you can configure Landscape Client to modify `/etc/apt/sources.list`. This is achieved by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
 
 Manually edit `/etc/landscape/client.conf` and add this line:
 
