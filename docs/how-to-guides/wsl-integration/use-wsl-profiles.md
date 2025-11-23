@@ -34,7 +34,7 @@ Then complete the relevant fields:
 - **Rootfs image**: The rootfs image to be installed. These correspond to the available WSL Ubuntu releases on the Microsoft Store. The Ubuntu image corresponds to the latest release available on the store and will give the WSL instance the ability to upgrade to the next release when it's available. If you have a custom rootfs image, you can provide the URL instead by selecting **From URL**. If you want multiple copies of the same rootfs image, you must use the **From URL** selection and provide a unique name.
   - **Image name**: The name of the rootfs image that will be installed on the WSL instance.
   - **Rootfs image URL**: The URL of the rootfs image that will be installed on the WSL instance. This URL must be reachable by the affected WSL instances. For instructions on ensuring the WSL instance can reach the provided rootfs image URL, see {ref}`how-to-wsl-use-specific-image-source`.
-- **Cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text.
+- **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
