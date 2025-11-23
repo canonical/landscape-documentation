@@ -37,7 +37,7 @@ Then complete the relevant fields:
 - **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
-  - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
+  - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected. Leaving tags blank, and not selecting **Associate to all instances** will result in zero machines being associated with the WSL Profile.
 
 After you've added your WSL profile, activities will be created to install the specified WSL instance on the associated Windows host machines.
 
