@@ -73,6 +73,8 @@ By default, when a repository profile is applied to a machine, Landscape enforce
 
 If you want Landscape to append the repository configurations instead of replacing the existing ones in `/etc/apt/sources.list`, you can configure Landscape to use `/etc/apt/sources.list.d` instead by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
 
+If you do not want Landscape to delete the repository configurations in `/etc/apt/sources.list.d`, you can configure Landscape Client to only modify `/etc/apt/sources.list` instead by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
+
 Manually edit `/etc/landscape/client.conf` and add this line:
 
 ```text
