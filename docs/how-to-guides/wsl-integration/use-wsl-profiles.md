@@ -39,8 +39,8 @@ Then complete the relevant fields:
     Set-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss" -Name DistributionListUrl -Value "$distributionListUrl" -Type String -Force
     ```
     Alternatively, rootfs images can be self-hosted within a corporate network, and the appropriate URLs can be set as the rootfs image URL in Landscape. You can build your own images, or use these:
-      - Jammy: https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_22.04.wsl
-      - Noble: https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_24.04.wsl
+      - Jammy (beta): https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_22.04.wsl
+      - Noble (beta): https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_24.04.wsl
 - **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text. If you don't include a cloud-init file, the rootfs image will be applied without any additional configuration.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
