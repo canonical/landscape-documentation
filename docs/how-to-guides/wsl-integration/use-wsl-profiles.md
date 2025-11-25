@@ -28,16 +28,23 @@ To create a new WSL profile from the Landscape web portal, go to **Profiles** > 
 
 Then complete the relevant fields:
 
-- **Title**: A title for the profile. For example, "Ubuntu 24.04"
-- **Description**: A description for the profile. For example, "Install 24.04 LTS WSL instance"
+- **Title**: A title for the profile. For example, "Web Developer workspace"
+- **Description**: A summary of what the profile configures. For example, "Install NodeJS and NPM"
 - **Access group**: The access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
-- **Rootfs image**: The rootfs image to be installed. These correspond to the available WSL Ubuntu releases on the Microsoft Store. The Ubuntu image corresponds to the latest release available on the store and will give the WSL instance the ability to upgrade to the next release when it's available. If you have a custom rootfs image, you can provide the URL instead by selecting **From URL**. If you want multiple copies of the same rootfs image, you must use the **From URL** selection and provide a unique name.
+- **rootfs image**: The rootfs image to be installed. These correspond to the available WSL Ubuntu releases on the Microsoft Store. The Ubuntu image corresponds to the latest release available on the store and will give the WSL instance the ability to upgrade to the next release when it's available. If you have a custom rootfs image, you can provide the URL instead by selecting **From URL**. If you want multiple copies of the same rootfs image, you must use the **From URL** selection and provide a unique name.
   - **Image name**: The name of the rootfs image that will be installed on the WSL instance.
-  - **Rootfs image URL**: The URL of the rootfs image that will be installed on the WSL instance. This URL must be reachable by the affected WSL instances.
-- **Cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text.
+  - **rootfs image URL**: The URL of the rootfs image that will be installed on the WSL instance. This URL must be reachable by the Windows host machine. Available rootfs images are listed in an `Ubuntu` array, within a `ModernDistributions` object, in this [https://raw.githubusercontent.com/wiki/canonical/ubuntu-pro-for-wsl/beta/manifest.json](https://raw.githubusercontent.com/wiki/canonical/ubuntu-pro-for-wsl/beta/manifest.json) file. These custom images include support for cloud-init, the latest stable landscape-client, and also the wsl-pro-service packages from Canonical PPAs. Adding this manifest.json to a Windows machine's registry makes only the Ubuntu WSL rootfs images that are compatible with Landscape's WSL Profiles, available for self-service install using the `wsl --install` command, from within the Command Prompt, PowerShell, or Windows Terminal.
+    ```powershell
+    $distributionListUrl = "https://raw.githubusercontent.com/wiki/canonical/ubuntu-pro-for-wsl/beta/manifest.json"
+    Set-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss" -Name DistributionListUrl -Value "$distributionListUrl" -Type String -Force
+    ```
+    Alternatively, rootfs images can be self-hosted within a corporate network, and the appropriate URLs can be set as the rootfs image URL in Landscape. You can build your own images, or use these:
+      - Jammy (beta): https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_22.04.wsl
+      - Noble (beta): https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_24.04.wsl
+- **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text. If you don't include a cloud-init file, the rootfs image will be applied without any additional configuration.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
-  - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
+  - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected. Leaving tags blank, and not selecting **Associate to all instances** will result in zero machines being associated with the WSL Profile.
 
 After you've added your WSL profile, activities will be created to install the specified WSL instance on the associated Windows host machines.
 
