@@ -13,3 +13,5 @@
 # redirect/from/file/ redirect/to/file/
 
 getting-started-with-landscape tutorial/
+
+how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
