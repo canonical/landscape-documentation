@@ -28,7 +28,7 @@ To create a new WSL profile from the Landscape web portal, go to **Profiles** > 
 
 Then complete the relevant fields:
 
-- **Title**: A title for the profile. For example, "Contoso Web Developer"
+- **Title**: A title for the profile. For example, "Web Developer workspace"
 - **Description**: A summary of what the profile configures. For example, "Install NodeJS and NPM"
 - **Access group**: The access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
 - **rootfs image**: The rootfs image to be installed. These correspond to the available WSL Ubuntu releases on the Microsoft Store. The Ubuntu image corresponds to the latest release available on the store and will give the WSL instance the ability to upgrade to the next release when it's available. If you have a custom rootfs image, you can provide the URL instead by selecting **From URL**. If you want multiple copies of the same rootfs image, you must use the **From URL** selection and provide a unique name.
