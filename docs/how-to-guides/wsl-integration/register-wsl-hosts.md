@@ -8,7 +8,7 @@ Ubuntu Pro for WSL is **not available yet** for everyone in the Microsoft Store.
 ```
 
 ```{note}
-If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-beta`.
+If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
 ```
 
 This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts (Windows machines) to Landscape.
@@ -138,7 +138,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
     [features]
     enable-wsl-child-instance-profiles = true
     ```
-    This setting didn't exist in older installations of Landscape. See {ref}`how-to-wsl-configure-landscape-beta`.
+    This setting didn't exist in older installations of Landscape. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
 
 - **Ensure your firewall settings are configured appropriately**
 

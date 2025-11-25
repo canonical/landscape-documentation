@@ -1,4 +1,4 @@
-(how-to-wsl-configure-landscape-beta)=
+(how-to-wsl-configure-landscape-after-upgrade)=
 # How to configure WSL-related services after upgrading Landscape
 
 ```{note}

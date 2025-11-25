@@ -13,3 +13,5 @@
 # redirect/from/file/ redirect/to/file/
 
 getting-started-with-landscape tutorial/
+
+how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integration/configure-landscape-after-upgrade/
