@@ -245,7 +245,7 @@ Example outputs:
     }
 ]
 ```
-
+(reference-legacy-api-wsl-set-default-child-computer)=
 ## SetDefaultChildComputer
 
 Set the child computer instance with the provided ID as the default instance for the host parent. This is the default instance you log into if you run `wsl` in PowerShell from the Windows host.
