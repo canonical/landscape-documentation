@@ -41,7 +41,7 @@ Then complete the relevant fields:
     Alternatively, rootfs images can be self-hosted within a corporate network, and the appropriate URLs can be set as the rootfs image URL in Landscape. You can build your own images, or use these:
       - Jammy: https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_22.04.wsl
       - Noble: https://up4w.blob.core.windows.net/beta/wsl_images/ubuntu_24.04.wsl
-- **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text.
+- **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text. If you don't include a cloud-init file, the rootfs image will be applied without any additional configuration.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected. Leaving tags blank, and not selecting **Associate to all instances** will result in zero machines being associated with the WSL Profile.
