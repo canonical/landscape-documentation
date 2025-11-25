@@ -2,14 +2,14 @@
 # How to configure WSL-related services after upgrading Landscape
 
 ```{note}
-This guide is only for those who've upgraded from Landscape 23.10 or earlier.
+This guide is only for upgrades from **Landscape 23.10** or earlier. Note that the WSL integration is still a beta feature in Landscape and not widely available yet.
 ```
 
-This guide describes how to configure an upgraded Landscape beta version to enable WSL-related services. This applies to users upgrading from an existing beta version or stable version. If this is your first time installing Landscape Beta, you don’t need to perform these steps.
+This guide describes how to configure WSL-related services if you've upgraded from an older version of Landscape (23.10 or earlier). If this is your first time installing Landscape, you don’t need to perform these steps.
 
 ## Update the `service.conf` file
 
-Open the `service.conf` file located in the `/etc/landscape` directory and add the following lines:
+Open the `service.conf` file located in the `/etc/landscape` directory and add:
 
 ```bash
 [broker]
@@ -26,7 +26,7 @@ enable-wsl-child-instance-profiles = true
 
 ## Update your Apache config
 
-Open your Apache config (commonly located in `/etc/apache2/sites-available/{hostname}.conf`) and add the following lines at the end:
+Open your Apache config (commonly located in `/etc/apache2/sites-available/{hostname}.conf`) and add the following at the end:
 
 ```bash
 Listen 6554
@@ -66,7 +66,7 @@ You can see a full Apache config example with details in our {ref}`how to config
 
 ## Add a virtual host to RabbitMQ
 
-Add a new virtual host to RabbitMQ using the following commands:
+Add a new virtual host to RabbitMQ:
 
 ```bash
 sudo rabbitmqctl add_vhost landscape-hostagent
@@ -84,4 +84,4 @@ sudo service landscape-hostagent-messenger restart
 sudo service landscape-hostagent-consumer restart
 ```
 
-Done! Now you're ready to use WSL with Landscape. If you want instructions on setting up your environment, see {ref}`how-to-wsl-set-up-environment`. If you already have a Windows machine set up with WSL and Ubuntu, see {ref}`how-to-register-wsl-hosts`.
+Now, you're ready to use WSL with Landscape. See {ref}`how-to-register-wsl-hosts`.
