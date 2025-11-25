@@ -15,3 +15,5 @@
 getting-started-with-landscape tutorial/
 
 how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integration/configure-landscape-after-upgrade/
+
+how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
