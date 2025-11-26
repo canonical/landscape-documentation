@@ -43,6 +43,8 @@ curl -X POST "https://landscape.canonical.com/api/v2/login" -d '{"email": "john@
 
 ## POST `/login/access-key`
 
+**Landscape version:** 24.10 and later
+
 Authenticates an SSO user, returning user details and an authentication token.
 
 **Required parameters:**
