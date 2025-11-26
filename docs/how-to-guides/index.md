@@ -89,7 +89,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 - {ref}`Set up an environment <how-to-wsl-set-up-environment>`
 - {ref}`Register WSL hosts <how-to-register-wsl-hosts>`
 - {ref}`Manage WSL instances <how-to-manage-wsl-instances>`
-- {ref}`Use a specific image source <how-to-wsl-use-specific-image-source>`
+- {ref}`Use WSL profiles <how-to-use-wsl-profiles>`
 - {ref}`Perform common tasks <how-to-wsl-perform-common-tasks>`
 - {ref}`Get support <how-to-wsl-get-support>`
 
