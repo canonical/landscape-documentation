@@ -95,6 +95,7 @@ FQDN
 gapped
 GCP
 Github
+githubusercontent
 GlobalAdmin
 GlobalAdministrator
 GPG
@@ -193,6 +194,8 @@ NID
 NSG
 NVMe
 noreply
+NodeJS
+NPM
 OAuth
 Ocata
 oidc
