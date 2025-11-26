@@ -3,30 +3,20 @@
 
 > See also: {ref}`reference-legacy-api-wsl`
 
-```{note}
-This guide assumes that a registered WSL host and WSL instance already exist in Landscape. For more information, visit {ref}`how-to-register-wsl-hosts` and {ref}`how-to-manage-wsl-instances`.
-```
+This guide describes some common tasks you may perform with Landscape for managed WSL instances and Windows hosts.
 
+If you haven't registered your WSL hosts or WSL instances yet with Landscape, see {ref}`how-to-register-wsl-hosts` and {ref}`how-to-manage-wsl-instances`.
+
+Note that you need your computer IDs for many of these calls. If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
 ## Start WSL instances registered in your Landscape account
 
-You can remotely start a list of one or more WSL instances via the Landscape API. To start WSL instances, or child computers, by ID, make an API call such as:
-
-```bash
-?action=StartChildComputers&computer_id.1=21&computer_id.2=22
-```
-
-If you don’t know the IDs of your child computers, see {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
+You can remotely start a list of one or more WSL instances via the Landscape API. To start a WSL instance, you need the **legacy** API. See {ref}`Start Child Computers (Legacy API) <reference-legacy-api-wsl-start-child-computer>`.
 
 ## Shutdown WSL instances registered in your Landscape account
 
-You can remotely shutdown a list of one or more WSL instances via the Landscape API. To shutdown WSL instances, or child computers, by ID, make an API call such as:
+You can remotely shutdown a list of one or more WSL instances via the Landscape API. To shutdown WSL instances, you need the **legacy** API. See {ref}`Stop Child Computers (Legacy API) <reference-legacy-api-wsl-stop-child-computer>`.
 
-```bash
-?action=StopChildComputers&computer_id.1=21&computer_id.2=22
-```
-
-If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 ## Set a default WSL instance
 
 The "default instance" is the instance you log into if you run `wsl` in PowerShell from the Windows host. You can set your default child computer in the Landscape web portal or via the API.
@@ -40,7 +30,7 @@ This queues an activity to set that instance as default.
 
 ### API
 
-Within Landscape, you can only set a WSL instance as default with the **legacy** API. See {ref}`reference-legacy-api-wsl-set-default-child-computer`.
+Within Landscape, you can only set a WSL instance as default with the **legacy** API. See {ref}`Set Default Child Computer (Legacy API) <reference-legacy-api-wsl-set-default-child-computer>`.
 
 ## Remove a WSL instance
 
@@ -55,20 +45,15 @@ If you remove a WSL instance from its Windows host machine outside of Landscape,
 
 ### API
 
-To remove a WSL instance via the API, you need the **legacy** API. See {ref}`Computers (Legacy API)<reference-legacy-api-wsl>`.
-
-If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
+To remove a WSL instance via the API, you need the **legacy** API. See {ref}`Delete Child Computers (Legacy API) <reference-legacy-api-wsl-delete-child-computer>`.
 
 (howto-heading-wsl-view-computers)=
 ## View WSL host machines and child computers
 
-From the Landscape web portal, you can view all WSL host machines and their associated WSL instances, or child computers. All machines associated with WSL indicate their status next to their name in the **Select computers** table. WSL child instances also display their parent Windows machine next to their name.
+From the Landscape web portal, you can view all WSL host machines and their associated WSL instances (child computers). 
+
+To view all WSL host machines, go to **Instances** > **Filters** > **OS** > **Windows**
+
+To view the WSL instances associated with a specific WSL host, go to **Instances** > Open the Windows host machine > **WSL** tab. 
 
 If you only want to view WSL machines, you can do this by applying tags to those machines. For more information, visit {ref}`how to apply tags to computers <howto-heading-manage-computers-appy-tags>`.
-
-You can also get a list of all WSL hosts via the Landscape API. To do this, make an API call such as:
-
-```bash
-?action=GetWSLHosts
-```
-
