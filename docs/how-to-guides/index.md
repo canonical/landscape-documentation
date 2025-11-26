@@ -85,7 +85,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 (how-to-index-heading-wsl)=
 ## WSL integration
 
-- {ref}`Configure Landscape Beta <how-to-wsl-configure-landscape-beta>`
+- {ref}`Configure Landscape after upgrade <how-to-wsl-configure-landscape-after-upgrade>`
 - {ref}`Set up an environment <how-to-wsl-set-up-environment>`
 - {ref}`Register WSL hosts <how-to-register-wsl-hosts>`
 - {ref}`Manage WSL instances <how-to-manage-wsl-instances>`
