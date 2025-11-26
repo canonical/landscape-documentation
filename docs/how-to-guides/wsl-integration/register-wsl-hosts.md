@@ -77,21 +77,21 @@ From your Windows machine:
     
     Replace these values:
     
-    - `<HOST_URL:PORT>`: The FQDN and port of your Landscape server. Port 6554 is the default for Landscape Quickstart installations. For example, `landscape-server.domain.com:6554`.
-    - `<CLIENT_URL>`: The main URL for the Landscape server to connect this client to. This defaults to the URL of your Landscape account suffixed with `/message-system`, although you may be using a different URL. For example, `https://landscape-server.domain.com/message-system`.
-    - `<PING_URL>`: The ping URL you want this client to report to. This defaults to the URL of your Landscape account suffixed with `/ping`, although you may be using a different URL. For example, `http://landscape-server.domain.com/ping`. Your ping URL uses HTTP (not HTTPS) by default.
+    - `<HOST_URL:PORT>`: The FQDN and port of your Landscape server. Port 6554 is the default for Landscape Quickstart installations. For example, `landscape-server.example.com:6554`.
+    - `<CLIENT_URL>`: The main URL for the Landscape server to connect this client to. This defaults to the URL of your Landscape account suffixed with `/message-system`, although you may be using a different URL. For example, `https://landscape-server.example.com/message-system`.
+    - `<PING_URL>`: The ping URL you want this client to report to. This defaults to the URL of your Landscape account suffixed with `/ping`, although you may be using a different URL. For example, `http://landscape-server.example.com/ping`. Your ping URL uses HTTP (not HTTPS) by default.
    - `<SSL_CERT>` (optional): Path to the Landscape server's public certificate on your Windows machine. For example, `C:\Users\username\Downloads\landscape_server.pem`. Note that Ubuntu Pro for WSL follows the Windows OS certificate stores. You only need to specify the certificate if the machine running your Landscape server isn't trusted on your network.
 
     Example `LandscapeConfig`:
     
     ```bash
     [host]
-    url = landscape-server.domain.com:6554
+    url = landscape-server.example.com:6554
     
     [client]
-    url = https://landscape-server.domain.com/message-system
+    url = https://landscape-server.example.com/message-system
     log_level = debug
-    ping_url = http://landscape-server.domain.com/ping
+    ping_url = http://landscape-server.example.com/ping
     ssl_public_key = C:\Users\username\Downloads\landscape_server.pem
     ```
     
@@ -131,7 +131,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
     
     ```bash
     [host]
-    url = landscape-server.domain.com:6554
+    url = landscape-server.example.com:6554
     ```
 
 - **Check that the `enable-wsl-child-instance-profiles` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**

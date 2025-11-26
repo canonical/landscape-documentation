@@ -1,18 +1,18 @@
 (how-to-wsl-get-support)=
-# How to get support for WSL machines that connect to Landscape
+# How to get support for WSL instances that connect to Landscape
 
-This document describes multiple ways to get support for WSL machines that connect to Landscape and troubleshoot some basic issues.
+This document describes multiple ways to get support for WSL instances that connect to Landscape and troubleshoot some basic issues.
 
 ## Check minimum requirements
 
-The following minimum requirements are needed to register WSL machines with Landscape:
+The following minimum requirements are needed to register WSL instances with Landscape:
 
-- A machine that meets all WSL requirements. For more information, visit [Microsoft’s WSL documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
+- An instance that meets all WSL requirements. For more information, visit [Microsoft’s WSL documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
 - Self-hosted Landscape Server in a public cloud or on premise with the following specifications:
     - **Minimum:** A dual-core 2 GHz processor, 4 GB of RAM, and 20 GB of disk space
     - **Recommended:** 4 CPU cores, 8 GB of RAM, and 100 GB of disk space
 
-If you don't meet these minimum requirements, you will encounter issues when attempting to register WSL machines with Landscape.
+If you don't meet these minimum requirements, you will encounter issues when attempting to register WSL instances with Landscape.
 
 ## Troubleshoot basic issues and misconfigurations
 
@@ -20,7 +20,7 @@ You will encounter issues with the following scenarios.
 
 - **Attempting to use WSL 1**
     
-    You must use WSL 2 to register and use WSL machines with Landscape. For more information on the difference between WSL 1 and WSL 2, visit [Microsoft’s guide on comparing WSL 1 and WSL 2](https://learn.microsoft.com/en-us/windows/wsl/compare-versions). To learn how to upgrade from WSL 1 to WSL 2, visit [Microsoft’s guide on upgrading from WSL 1 to WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
+    You must use WSL 2 to register and use WSL instances with Landscape. For more information on the difference between WSL 1 and WSL 2, visit [Microsoft’s guide on comparing WSL 1 and WSL 2](https://learn.microsoft.com/en-us/windows/wsl/compare-versions). To learn how to upgrade from WSL 1 to WSL 2, visit [Microsoft’s guide on upgrading from WSL 1 to WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
     
 - **Attempting to use Landscape SaaS**
     
