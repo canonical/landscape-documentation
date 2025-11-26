@@ -8,4 +8,4 @@ These are the explanations for the [Landscape Server charm](https://charmhub.io/
 :titlesonly:
 :maxdepth: 2
 
-Landscape Server charm integration compatibility <charm-compatibility>
+Charm integration compatibility <charm-compatibility>

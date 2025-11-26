@@ -22,14 +22,12 @@ Landscape Server is currently only distributed as a machine (VM) charm and canno
 
 ## HAProxy
 
-<!--TODO: update when support for the modern HAProxy charm/interface gets released-->
 The Landscape Server charm can be integrated to any of the `latest/x` channels of the HAProxy charm. However, it cannot yet be related to any of the `2.8/x` channels of the HAProxy charm due to a complete rewrite of the charm and its interfaces.
 
 - [HAProxy on Charmhub](https://charmhub.io/haproxy)
 
 ## Charmed PostgreSQL
 
-<!--TODO: update when support for the modern PG interface gets released-->
 The Landscape Server charm can be integrated to any of the `latest/x` or `14/x` channels of the PostgreSQL charm. However, it cannot yet be related to any of the `16/x` channels of the PostgreSQL charm due to the charm interface being restructured.
 
 - [Charmed PostgreSQL VM on Charmhub](https://charmhub.io/postgresql)
