@@ -24,7 +24,9 @@ A Windows host machine is considered **compliant** with a WSL profile if it meet
   
 A Windows machine that doesn't meet either of these criteria is considered **non-compliant** with the WSL profile.
 
-## Create a WSL profile in the Landscape web portal
+## Create a WSL profile
+
+### Web portal
 
 To create a new WSL profile from the Landscape web portal, go to **Profiles** > **WSL profiles** > **Add WSL profile**.
 
@@ -49,41 +51,29 @@ After you've added your WSL profile, activities will be created to install the s
 
 You can edit or remove the profile using the dot menu under **Actions**. You can also see the number of associated parents and the number of compliant or non-compliant Windows host machines.
 
-## Create a WSL profile using the Landscape API
+### REST API
 
-To create a WSL profile via Landscape's REST API, see the following example command:
+To create a WSL profile via Landscape's REST API, see {ref}`reference-rest-api-child-instance-profiles`.
 
-```bash
-curl -X POST https://your-landscape.domain.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "NobleProfile", "description": "Noble", "image_name": "Ubuntu-24.04", "all_computers": "true"}'
-```
+## Reapply a WSL profile to the Windows host
 
-## Reapply a WSL profile using the Landscape API
+Activities to install the corresponding WSL instance are automatically created when a Windows host machine is associated with a WSL profile. If you want to fix any non-compliant Windows host machines, you can reapply a WSL profile via Landscape's REST API. See {ref}`reference-rest-api-child-instance-profiles`.
 
-Activities to install the corresponding WSL instance are automatically created when a Windows host machine is associated with a WSL profile. If you want to fix any non-compliant Windows host machines, you can reapply a WSL profile via Landscape's REST API. See the following example command:
+## Apply all WSL profiles per Windows host
 
-```bash
-curl -X POST https://your-landscape.domain.com/api/v2/child-instance-profiles/NobleProfile:reapply -H "Authorization: Bearer $JWT"
-```
-
-## Apply all WSL profiles by Windows host machine in the Landscape web portal
+### Web portal
 
 You can apply all WSL profiles that are associated to a Windows host machine from the Landscape web portal. To do this:
 
-1. Find the Windows machine that you want to apply WSL profiles. To find this, click the link under **Associated parents** in the **WSL profiles** page, or by going to the **Instances** page.
-2. Click the name of the Windows machine that you want to make compliant.
-3. Click on the **WSL** tab.
-4. Click **Make compliant** and complete the prompt.
+1. Find the Windows machine that you want to apply WSL profiles. To find this, click the link under **Associated parents** in the **WSL profiles** page, or find your instance from the **Instances** page.
+1. Click the Windows machine that you want to make compliant > **WSL** tab > **Make compliant**
+1. Complete the prompt
 
 This will create activities to provision WSL instances on specified Windows host machines for all associated WSL profiles.
 
 ```{note}
 The **Make compliant** button is hidden for Windows machines that have no associated WSL profiles.
 ```
+### REST API
 
-## Apply all WSL profiles by Windows host machine using the Landscape API
-
-To reapply all WSL profiles on specified Windows host machines via Landscape's REST API, see the following example command:
-
-```bash
-curl -X POST https://your-landscape.domain.com/api/v2/child-instance-profiles/make-hosts-compliant -H "Authorization: Bearer $JWT" -d '{"host_computer_ids": [6, 15]}'
-```
+To apply all WSL profiles on specified Windows host machines via Landscape's REST API, see {ref}`reference-rest-api-child-instance-profiles`.
