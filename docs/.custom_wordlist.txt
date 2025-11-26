@@ -189,8 +189,10 @@ netmask
 NFS
 NIC
 NID
+NPM
 NSG
 NVMe
+NodeJS
 noreply
 OAuth
 Ocata
@@ -270,6 +272,7 @@ SDK
 SendGrid
 servername
 ServerTeam
+SetDefaultChildComputer
 SHA
 SIEM
 signup

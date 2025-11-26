@@ -48,4 +48,3 @@ If you remove a WSL instance from its Windows host machine outside of Landscape,
 You can use WSL profiles to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images. These WSL instances can be configured with cloud-init at the time of provisioning.
 
 For more information, see {ref}`how-to-use-wsl-profiles`.
-
