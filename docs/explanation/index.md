@@ -1,4 +1,5 @@
 (explanation-index)=
+
 # Explanation
 
 Our explanatory and conceptual guides can provide better understanding of how Landscape works and can be used.
@@ -7,6 +8,7 @@ Our explanatory and conceptual guides can provide better understanding of how La
 :titlesonly:
 :maxdepth: 2
 Landscape <landscape/index>
+Landscape Server Charm <charm/index>
 Features <features/index>
 security/index
 Related tools <related-tools/index>
