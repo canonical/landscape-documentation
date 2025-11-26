@@ -27,60 +27,35 @@ You can remotely shutdown a list of one or more WSL instances via the Landscape 
 ```
 
 If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
-
 ## Set a default WSL instance
 
-You can set a specific WSL instance as the default child computer. This will be the default instance you log into if you run `wsl` in PowerShell from the Windows host. You can set your default child computer in the Landscape web portal or via the API.
+The "default instance" is the instance you log into if you run `wsl` in PowerShell from the Windows host. You can set your default child computer in the Landscape web portal or via the API.
 
-To set your default child computer in the Landscape web portal:
+### Web portal
 
-1. Navigate to the **Computers** page in the header
+1. Go to **Instances** > Open the Windows host machine > **WSL** tab
+1. Select the instance you want to make default > Open the dot menu > **Set as default**
 
-2. Click the name of the Windows machine that you want to set a default instance on
+This queues an activity to set that instance as default.
 
-3. Click **Set as default** near the name of the child computer you want to set as default
+### API
 
-To set your default child computer via the Landscape API, make an API call such as:
+Within Landscape, you can only set a WSL instance as default with the **legacy** API. See {ref}`reference-legacy-api-wsl-set-default-child-computer`.
 
-```bash
-?action=SetDefaultChildComputer&parent_id=30&child_id=32
-```
+## Remove a WSL instance
 
-If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
+### Web portal
 
-## Log in to any WSL instance
+To remove a WSL instance in the web portal:
 
-You can log into any WSL instance that is a child computer from your Windows host. To do this, run the following in PowerShell. Replace `{CHILD_COMPUTER_NAME}` with your specific computer name.
+1. Go to **Instances** > Open the Windows host (parent) machine > **WSL** tab
+1. Select your instance, and click **Uninstall**
 
-```powershell
-wsl -d {CHILD_COMPUTER_NAME}
-```
+If you remove a WSL instance from its Windows host machine outside of Landscape, the WSL instance will also be removed from your Landscape account.
 
-An example command could be:
+### API
 
-```powershell
-wsl -d Ubuntu-22.04
-```
-
-If you’re logging into your default child computer, you only need to run `wsl` in PowerShell.
-
-## Delete a WSL instance
-
-You can delete, or uninstall, any WSL instances from the Landscape web portal or via the API.
-
-To delete a WSL instance from the Landscape web portal:
-
-1. Navigate to the **Computers** page in the header
-
-2. Click the name of the Windows machine that hosts the WSL instance you will delete
-
-3. Click **Uninstall** near the name of the WSL instance you want to delete
-
-To delete a WSL instance via the API, make an API call such as:
-
-```bash
-?action=DeleteChildComputers&computer_id.1=21
-```
+To remove a WSL instance via the API, you need the **legacy** API. See {ref}`Computers (Legacy API)<reference-legacy-api-wsl>`.
 
 If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
