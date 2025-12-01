@@ -60,6 +60,10 @@ This method is for those using password authentication to login.
 
 ## SSO: Make a REST API request with `curl`
 
+```{note}
+This feature is available in Landscape 24.10 and later.
+```
+
 This method is for those using SSO (such as Ubuntu One or an external authentication provider) to login. This includes Landscape SaaS.  
 
 To make a REST API request with `curl`:
