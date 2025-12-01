@@ -1,14 +1,14 @@
 (how-to-ubuntu-installer-configure-landscape-deployment)=
 # How to configure your Landscape deployment to provision workstations with Autoinstall via the Ubuntu installer
 
-The Ubuntu installer (24.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
+The Ubuntu installer (26.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
 
 ```{note}
-This feature is available from Landscape server `25.10~beta.4` onwards.
+This feature is available from Landscape server `25.10` onwards.
 ```
 
 ```{note}
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
+This feature is available only on self-hosted deployments.
 ```
 
 ## Background information
@@ -19,26 +19,33 @@ See the [Ubuntu installation (Subiquity) documentation](https://canonical-subiqu
 
 ## On a Juju deployment
 
-Enable the service for a Landscape unit with the Juju action:
-
-```sh
-juju run landscape-server/<N> enable-ubuntu-installer-attach
+```{note}
+This configuration is available in the `25.10/beta` channel beginning with revision 209.
 ```
 
-If you have multiple Landscape server units, you can enable the service on each unit:
+Enable the service by setting `enable_ubuntu_installer_attach` to `true`:
 
 ```sh
-juju run landscape-server/0 enable-ubuntu-installer-attach
-juju run landscape-server/1 enable-ubuntu-installer-attach
-juju run landscape-server/2 enable-ubuntu-installer-attach
-...
-juju run landscape-server/<N> enable-ubuntu-installer-attach
+juju config landscape-server enable_ubuntu_installer_attach=true
 ```
 
-To disable the service on a unit, run the following Juju action:
+You'll need to provide additional configuration to the Landscape server units to enable
+the feature and set minimal service configuration:
 
 ```sh
-juju run landscape-server/<N> disable-ubuntu-installer-attach
+juju config landscape-server additional_service_config='[ubuntu_installer_attach]
+stores = main account-1
+threads = 1
+base_port = 53354
+[features]
+employee_management = true
+'
+```
+
+Disable the service by setting `enable_ubuntu_installer_attach` to `false`:
+
+```sh
+juju config landscape-server enable_ubuntu_installer_attach=false
 ```
 
 ## On a manual install
@@ -51,6 +58,24 @@ Landscape requires an additional service for the Ubuntu installer attach experie
 sudo add-apt-repository ppa:landscape/self-hosted-beta
 sudo apt update
 sudo apt install landscape-ubuntu-installer-attach
+```
+
+### Set configuration
+
+In your `service.conf`, include the following section if not already present:
+
+```ini
+[ubuntu_installer_attach]
+stores = main account-1
+threads = 1
+base_port = 53354
+```
+
+Include the following configuration in the `[features]` section of your `service.conf`:
+
+```ini
+[features]
+employee_management = true
 ```
 
 ### Configure the proxy
@@ -96,16 +121,6 @@ frontend haproxy-0-grpc-ubuntu-installer
     http-request set-var(req.full_fqdn) hdr(authority) if !host_found
     http-request set-var(req.full_fqdn) hdr(host) if host_found
     http-request set-header X-FQDN %[var(req.full_fqdn)]
-```
-
-## Enable the feature
-
-Set the following configuration in your `service.conf`:
-
-```ini
-[features]
-[...]
-employee_management = true
 ```
 
 ## Verify the connection

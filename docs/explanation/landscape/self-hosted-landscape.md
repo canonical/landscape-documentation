@@ -10,7 +10,7 @@ The following table applies to {ref}`Quickstart <how-to-quickstart-installation>
 | **Major version**                | **Release date** | **Standard Support** | **Expanded security maintenance (ESM)** | **Installs on Ubuntu LTS version**  |
 | ----------------------           | ---------------- | ------------------- | ------------------- | ---------------------  |
 | {ref}`reference-release-notes-24-04-lts`     | 2024-Apr   | **2029-Apr**     |  **2036-Apr**   | 22.04 LTS or 24.04 LTS |
-| {ref}`reference-release-notes-25-04` | 2025-May | **2025-Oct** | No ESM | 22.04 LTS or 24.04 LTS 
+| {ref}`reference-release-notes-25-10`  | 2025-Oct         | **2026-Apr**        | No ESM              | 22.04 LTS or 24.04 LTS             |
 | {ref}`reference-release-notes-23-03`  | 2023-Mar         | **2025-Apr**        | **2030-Apr**        | 20.04 LTS or 22.04 LTS             |
 
 The [Landscape Server charm](https://charmhub.io/landscape-server) typically follows the same release cycles, although there can be some differences.
@@ -81,13 +81,20 @@ The machine(s) running as the application server will also need the following ex
  * HTTPS access to `usn.ubuntu.com` in order to download the USN database and detect security updates. Without this, the available updates won't be distinguished between security related and regular updates
  * HTTP access to the public Ubuntu archives and `changelogs.ubuntu.com`, in order to update the hash-id-database files and detect new distribution releases. Without this, the release upgrade feature won't work
  * HTTPS access to `landscape.canonical.com` in order to query for available self-hosted Landscape releases. If this access is not given, the only drawback is that Landscape won't display a note about the available releases in the account page.
+ * HTTPS access to `ppa.launchpadcontent.net` if using the Landscape quickstart PPA
+ * HTTPS access to `contracts.canonical.com` for Ubuntu Pro authentication
+ * HTTPS access to `esm.ubuntu.com` for Ubuntu Pro APT package-based services
+ * HTTPS access to `livepatch.canonical.com` and `livepatch-files.canonical.com` for Livepatch
+ * HTTPS access to `ubuntu.com/security` for fetching security information
+ * HTTPS access to `api.snapcraft.io`, `dashboard.snapcraft.io`, `login.ubuntu.com`, and `*.snapcraftcontent.com` if using or downloading snaps (e.g., `landscape-api`)
 
 If this external network access is unavailable, Canonical's professional services include assistance with setting up Landscape in a fully air-gapped environment.
 
 ## Unsupported Versions
 | **major version**                | **Release date** | **Support expired on** | **Version of Ubuntu**  |
 | ----------------------           | ---------------- | ------------------------ | ---------------------  |
-| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | 22.04 LTS or 24.04 LTS
+| {ref}`reference-release-notes-25-04` | 2025-May | **2025-Oct** | 22.04 LTS or 24.04 LTS |
+| {ref}`reference-release-notes-24-10` | 2024-Nov | **2025-Apr** | 22.04 LTS or 24.04 LTS |
 | {ref}`reference-release-notes-23-10`      | 2023-Oct    | **2024-Apr**     | 20.04 LTS or 22.04 LTS |
 | {ref}`reference-release-notes-19-10`  | 2019-Oct         | **2023-May-31**        |  18.04 LTS              |
 | {ref}`reference-release-notes-19-01`  | 2019-Jan         | **2020-Jan**             | 18.04 LTS              |

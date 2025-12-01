@@ -115,6 +115,38 @@ sudo service landscape-client restart
 ```
 Setting `script_users = ALL` (or passing `ALL` to the `--script-users` parameter of `landscape-config`) will allow any system user to run scripts. If `script_users` is not set, then scripts can only be run by the `nobody` user.
 
+### Use a custom working directory
+
+```{note}
+Using a custom working directory for script execution is available in Landscape Client 25.04+6542 and later.
+```
+
+Landscape defaults to using `/tmp` as a working directory for script execution. If you want to use a different directory, set `script_tempdir` to your custom directory:
+
+```ini
+[client]
+...
+script_tempdir = <CUSTOM_TEMPDIR>
+```
+
+After you've set `script_tempdir`, Landscape will use the `script_tempdir` when creating scripts and script attachments. You'll need to ensure that whichever user(s) you run scripts as have write and execute privileges on the directory. For example, to set these permissions for only the `landscape` user:
+
+```sh
+mkdir -p <CUSTOM_TEMPDIR>
+
+sudo chown landscape:landscape <CUSTOM_TEMPDIR>
+sudo chmod 700 <CUSTOM_TEMPDIR>
+```
+
+Or, to set these permissions for all users on the system:
+
+```sh
+mkdir -p <CUSTOM_TEMPDIR>
+
+sudo chown landscape:landscape <CUSTOM_TEMPDIR>
+sudo chmod 777 <CUSTOM_TEMPDIR>
+```
+
 ## Landscape clients with configuration management tools
 
 If you want to manage `landscape-client` through a configuration management tool such as Puppet or Ansible, you can avoid getting duplicate computers by writing the `/etc/landscape/client.conf` and `/etc/default/landscape-client` files, and then restarting the `landscape-client` service.

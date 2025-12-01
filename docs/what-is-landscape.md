@@ -46,7 +46,7 @@ Organizations interested in using Landscape SaaS at enterprise-scale should [con
 (header-what-is-landscape-managed)=
 ### Managed Landscape
 
-Managed Landscape is a single-tenant version of Landscape with dedicated resources that’s hosted by Canonical and comes with an SLA. It’s for organizations that want private, dedicated resources but don’t want to manage their own infrastructure. With Managed Landscape, you get your own private Landscape instance that’s managed by Canonical but customized to your organization’s needs.
+Managed Landscape is a single-tenant edition of Landscape where the infrastructure is hosted in your environment, but Canonical is responsible for operating, maintaining, and supporting the Landscape service under an SLA. This edition of Landscape provides dedicated resources while offloading routine management tasks and troubleshooting to Canonical. With Managed Landscape, your instance remains private and is customized to your organization’s needs.
 
 The Managed Landscape offering comes with all Landscape features, including {ref}`explanation-repo-mirroring` and configuring custom external identity providers.
 
@@ -72,3 +72,9 @@ For self-hosted installations, there are multiple ways to install Landscape Serv
 
 For more details on self-hosted Landscape installations, see our {ref}`explanation-about-self-hosted` page. Organizations interested in using self-hosted Landscape at enterprise-scale should [contact Canonical Sales](https://ubuntu.com/landscape#get-in-touch).
 
+
+## Useful Links
+
+- [Knowledge Base - Landscape Section](https://support-portal.canonical.com/knowledge-base?topic=Landscape): Content published by Canonical Support, typically addressing FAQs and providing workarounds for bugs. You need to have a Support contract to access this content.
+
+- [GitHub - script repository for Landscape](https://github.com/canonical/landscape-scripts): A collection of scripts to make Landscape more powerful.

@@ -1,9 +1,10 @@
 (reference-rest-api-computers)=
+
 # Computers
 
 ## GET `/computers`
 
-Get information on a list of computers associated with the account. 
+Get information on a list of computers associated with the account.
 
 Path parameters:
 
@@ -26,52 +27,72 @@ Query parameters:
   - `license-id`: Search for computers licensed to the specified `license-id`.
   - `needs:license` OR `license-id:none`: Search for computers that do not have a Landscape license, and, as a result, are not managed.
   - `annotation`: Search for computers which define the specified annotation key. Optionally specify `annotation:<key>:<string>` which will only return computers whose key matches and value also contains the `<string>` specified.
-  - `OR`: Search for computers matching term A or term B. `OR` must be in all-caps.
-  - `NOT`: search for computers not matching the next term. `NOT` must be in all-caps.
+  - `profile:<profile-type>:<profile-id>`: Instances associated with the specified profile. The `<profile-type>` must be one of `security`, `script`, `repository`, `package`, `upgrade`, `reboot`, `removal`, or `wsl`. The `<profile-id>` is the database id of the profile.
+  - `profile:security:<profile-id>:<status>`: Instances associated with the specified USG security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
+  - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
+  - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
+  - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.
+  - `license-type:<license-type>`: Instances associated with the specified `<license-type>`. The `license-type` must be one of `unlicensed`, `pro`, `free_pro`, `legacy`.
+  - `contract:<contract-id>`: Instances associated with the specified `<contract-id>`.
+  - `contract-expires-within-days:<days>`: Instances associated with a Ubuntu Pro contract that expires within `<days>` days.
+  - `license-expires-within-days:<days>`: Instances associated with a Legacy License that expires within `<days>` days.
+  - `has-pro-management:<option>`: Instances with pro management enabled if `<option>` is a truthy value or disbaled if falsy.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
-- `with_network`: If true, include the details of all network devices attached to the computer.
-- `with_hardware`: If true, include the details of all hardware information known.
-- `with_annotations`: If true, include the details of all custom annotation information known.
+- `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.
+- `with_upgrades`: If true, includes how many regular and security upgrades that computer has. Defaults to false.
+- `with_reboot_packages`: Show packages needing reboot. Defaults to false.
+- `with_network`: If true, include the details of all network devices attached to the computer. Defaults to false.
+- `with_all_network`: If true, include the details of all active and inactive network devices attached to the computer. Defaults to false.
+- `with_hardware`: If true, include the details of all hardware information known. Defaults to false.
+- `with_annotations`: If true, include the details of all custom annotation information known. Defaults to false.
+- `with_grouped_hardware`: If true, include the details of all known hardware information grouped by device category. Defaults to false.
+- `with_wsl_profiles`: If true, include WSL profiles associated with Windows computers. Defaults to false.
+- `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
+- `root_only`: Whether or not to include only the root member of a computer family tree. Defaults to true. If false, all computers will be included.
+- `wsl_parents`: If true, restrict the result to WSL parent instances (i.e. Windows machines). This parameter can be used in conjunction with the `wsl_children` parameter. Defaults to false (no additional filtering).
+- `wsl_children`: If true, restrict the result to WSL child instances. This parameter can be used in conjunction with the `wsl_parents` parameter. This parameter requires the `root_only` flag be set to false. Defaults to false (no additional filtering).
 
 Example request:
+
 ```bash
 curl -X GET https://landscape.canonical.com/api/v2/computers?limit=1 -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
-```bash
+
+```json
 {
   "count": 13,
   "results": [
-        {
-          "id": 1,
-          "title": "Application Server 1",
-          "comment": "",
-          "hostname": "appserv1",
-          "total_memory": 1024,
-          "total_swap": 1024,
-          "reboot_required_flag": false,
-          "update_manager_prompt": "normal",
-          "clone_id": null,
-          "secrets_name": null,
-          "last_exchange_time": null,
-          "last_ping_time": "2024-02-07T21:21:41Z",
-          "tags": [
-            "lucid",
-            "server",
-            "webfarm"
-          ],
-          "access_group": "server",
-          "distribution": "10.04",
-          "cloud_instance_metadata": {},
-          "vm_info": null,
-          "container_info": null,
-          "ubuntu_pro_info": null,
-          "is_wsl_instance": false,
-          "children": [],
-          "parent": null
-        }
+    {
+      "id": 1,
+      "title": "Application Server 1",
+      "comment": "",
+      "hostname": "appserv1",
+      "total_memory": 1024,
+      "total_swap": 1024,
+      "reboot_required_flag": false,
+      "update_manager_prompt": "normal",
+      "clone_id": null,
+      "secrets_name": null,
+      "last_exchange_time": null,
+      "last_ping_time": "2024-02-07T21:21:41Z",
+      "tags": [
+        "lucid",
+        "server",
+        "webfarm"
+      ],
+      "access_group": "server",
+      "distribution": "10.04",
+      "cloud_instance_metadata": {},
+      "vm_info": null,
+      "container_info": null,
+      "ubuntu_pro_info": null,
+      "is_wsl_instance": false,
+      "children": [],
+      "parent": null
+    }
   ],
   "next": "https://landscape.canonical.com/api/v2/computers?limit=1&offset=1",
   "previous": null
@@ -79,13 +100,14 @@ Example output:
 ```
 
 Example request:
+
 ```bash
 curl -X GET https://landscape.canonical.com/api/v2/computers?query=id:1%20OR%20id:2 -H "Authorization: Bearer $JWT" -H "Authorization: Bearer $JWT"
 ```
 
 Example output:
 
-```bash
+```json
 {
   "count": 2,
   "results": [
@@ -153,12 +175,121 @@ Example output:
   "next": null,
   "previous": null
 }
+```
 
+Example request:
+
+```bash
+curl -X GET https://landscape.canonical.com/api/v2/computers/?query=profile:wsl:1:compliant&with_wsl_profiles=true -H "Authorization: Bearer $JWT"
+```
+
+Example output:
+
+```json
+{
+  "count": 1,
+  "results": [
+    {
+      "id": 6,
+      "title": "Jane's Windows Laptop",
+      "comment": "",
+      "hostname": "jane",
+      "total_memory": 1024,
+      "total_swap": 1024,
+      "reboot_required_flag": false,
+      "update_manager_prompt": "normal",
+      "clone_id": null,
+      "secrets_name": null,
+      "last_exchange_time": null,
+      "last_ping_time": "2024-02-07T21:16:41Z",
+      "tags": [
+        "laptop",
+        "windows"
+      ],
+      "access_group": "server",
+      "distribution": "10 / 11",
+      "cloud_instance_metadata": {},
+      "vm_info": null,
+      "container_info": null,
+      "ubuntu_pro_info": null,
+      "is_wsl_instance": false,
+      "children": [
+        {
+          "id": 11,
+          "title": "Bionic WSL",
+          "comment": "",
+          "hostname": "bionic-wsl",
+          "total_memory": 1024,
+          "total_swap": 1024,
+          "reboot_required_flag": false,
+          "update_manager_prompt": "normal",
+          "clone_id": null,
+          "secrets_name": null,
+          "last_exchange_time": null,
+          "last_ping_time": "2024-02-07T21:11:41Z",
+          "tags": [
+            "bionic",
+            "wsl"
+          ],
+          "access_group": "global",
+          "distribution": "18.04",
+          "cloud_instance_metadata": {},
+          "vm_info": null,
+          "container_info": null,
+          "ubuntu_pro_info": null,
+          "is_wsl_instance": true
+        },
+        {
+          "id": 12,
+          "title": "Focal WSL",
+          "comment": "",
+          "hostname": "focal-wsl",
+          "total_memory": 1024,
+          "total_swap": 1024,
+          "reboot_required_flag": false,
+          "update_manager_prompt": "normal",
+          "clone_id": null,
+          "secrets_name": null,
+          "last_exchange_time": null,
+          "last_ping_time": "2024-02-07T21:10:41Z",
+          "tags": [
+            "focal",
+            "wsl"
+          ],
+          "access_group": "global",
+          "distribution": "20.04",
+          "cloud_instance_metadata": {},
+          "vm_info": null,
+          "container_info": null,
+          "ubuntu_pro_info": null,
+          "is_wsl_instance": true
+        }
+      ],
+      "parent": null,
+      "wsl_profiles": [
+        {
+          "id": 1,
+          "name": "Bionic WSL",
+          "title": "Bionic Profile",
+          "type": "wsl"
+        },
+        {
+          "id": 2,
+          "name": "Focal WSL",
+          "title": "Focal Profile",
+          "type": "wsl"
+        }
+      ]
+    }
+  ],
+  "next": null,
+  "previous": null
+}
 ```
 
 ## GET `/computers/<int:computer_id>`
 
-Get information on a specific computer in the account. 
+Get information on a specific computer in the account.
 
 Path parameters:
 
@@ -170,16 +301,98 @@ Query parameters:
 - `with_grouped_hardware`: If true, include the details of all hardware information known, grouped by hardware  type.
 - `with_hardware`: If true, include the details of all hardware information known.
 - `with_network`: If true, include the details of all network devices attached to the computer.
+- `with_profiles`: If true, include details about all profiles the computer is associated with.
 
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_grouped_hardware=true -H "Authorization: Bearer $JWT" 
+curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_profiles=true -H "Authorization: Bearer $JWT" 
+```
+
+Example response:
+
+```json
+{
+  "access_group": "server",
+  "archived": false,
+  "children": [],
+  "clone_id": null,
+  "cloud_init": {
+    "availability_zone": "us-east-1"
+  },
+  "cloud_instance_metadata": {},
+  "comment": "",
+  "container_info": null,
+  "default_child": null,
+  "distribution": "10.04",
+  "distribution_info": {
+    "code_name": "lucid",
+    "description": "Ubuntu 10.04 LTS",
+    "distributor": "Ubuntu",
+    "release": "10.04"
+  },
+  "employee_id": null,
+  "hostname": "appserv1",
+  "id": 1,
+  "is_default_child": null,
+  "is_wsl_instance": false,
+  "last_exchange_time": null,
+  "last_ping_time": "2025-06-27T21:17:37Z",
+  "livepatch_info": null,
+  "num_child": 0,
+  "parent": null,
+  "profiles": [
+    {
+      "id": 7,
+      "name": "desktop-packages",
+      "title": "Desktop Packages",
+      "type": "package"
+    },
+    {
+      "id": 7,
+      "name": "engineering-repos",
+      "title": "Engineering Repos",
+      "type": "repository"
+    },
+    {
+      "id": 22,
+      "name": "one-month-removal",
+      "title": "One Month Removal",
+      "type": "removal"
+    }
+    {
+      "id": 4,
+      "name": "server-packages",
+      "title": "Server Packages",
+      "type": "package",
+    },
+  ],
+  "reboot_required_flag": false,
+  "secrets_name": null,
+  "tags": [
+    "lucid",
+    "server",
+    "webfarm"
+  ],
+  "title": "Application Server 1",
+  "total_memory": 1024,
+  "total_swap": 1024,
+  "ubuntu_pro_info": null,
+  "ubuntu_pro_reboot_required_info": null,
+  "update_manager_prompt": "normal",
+  "vm_info": null
+}
+```
+
+Example request:
+
+```bash
+curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_grouped_hardware=true&with_annotations=true -H "Authorization: Bearer $JWT" 
 ```
 
 Example output:
 
-```text
+```json
 {
   "id": 1,
   "title": "Application Server 1",
@@ -188,6 +401,7 @@ Example output:
   "total_memory": 1024,
   "total_swap": 1024,
   "reboot_required_flag": false,
+  "registered_at": "2024-07-10T22:22:16Z",
   "update_manager_prompt": "normal",
   "clone_id": null,
   "secrets_name": null,
@@ -198,6 +412,9 @@ Example output:
     "server",
     "webfarm"
   ],
+  "annotations": {
+    "code": "Ymv1YjUL"
+  },
   "access_group": "server",
   "distribution": "10.04",
   "cloud_instance_metadata": {},
@@ -657,182 +874,6 @@ Example output:
 }
 ```
 
-## GET `/computers/activities`
-
-Get details of the activities for specified computer(s).
-
-Path parameters:
-
-- None
-
-Query parameters:
-
-- (Required) `computer_ids`: An ID assigned to a specific computer.
-- `limit`: The maximum number of results returned by the method. It defaults to 1000.
-- `offset`: The offset inside the list of results.
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1" -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-
-```bash
-{
-  "count": 26,
-  "results": [
-        {
-          "id": 143,
-          "creation_time": "2024-03-01T20:58:14Z",
-          "creator": {
-            "name": "John Smith",
-            "email": "john@example.com",
-            "id": 1
-          },
-          "type": "ChangePackagesRequest",
-          "summary": "Remove package abs-guide",
-          "result_text": null,
-          "computer_id": 1,
-          "approval_time": null,
-          "delivery_time": null,
-          "deliver_after_time": null,
-          "deliver_before_time": null,
-          "package_ids": [
-            73
-          ],
-          "changes": [
-            {
-              "package": "abs-guide",
-              "complemented": false,
-              "type": "remove",
-              "version": "10-3"
-            }
-          ],
-          "parent_id": 142,
-          "modification_time": "2024-03-01T20:58:14Z",
-          "completion_time": null,
-          "schedule_before_time": null,
-          "schedule_after_time": null,
-          "result_code": null,
-          "activity_status": "undelivered",
-          "children": []
-        }
-  ],
-  "next": "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1&offset=1",
-  "previous": null
-}
-```
-
-## GET `/computers/wsl-hosts`
-
-Gets a list of Windows computers that are hosting at least one WSL instance.
-
-Path parameters:
-
-- None
-
-Query parameters:
-
-- `query`: A query string with space-separated tokens used to filter the returned computers. Words provided as search parameters are treated as keywords, matching the hostname or the computer title. Selector prefixes can be used to further customize the search.
-
-Example request:
-
-```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers/wsl-hosts -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-
-```bash
-{
-  "count": 1,
-  "results": [
-        {
-          "id": 6,
-          "title": "Jane's Windows Laptop",
-          "comment": "",
-          "hostname": "jane",
-          "total_memory": 1024,
-          "total_swap": 1024,
-          "reboot_required_flag": false,
-          "update_manager_prompt": "normal",
-          "clone_id": null,
-          "secrets_name": null,
-          "last_exchange_time": null,
-          "last_ping_time": "2024-02-07T21:16:41Z",
-          "tags": [
-            "laptop",
-            "windows"
-          ],
-          "access_group": "server",
-          "distribution": "10 / 11",
-          "cloud_instance_metadata": {},
-          "vm_info": null,
-          "container_info": null,
-          "ubuntu_pro_info": null,
-          "is_wsl_instance": false,
-          "children": [
-            {
-              "id": 11,
-              "title": "Bionic WSL",
-              "comment": "",
-              "hostname": "bionic-wsl",
-              "total_memory": 1024,
-              "total_swap": 1024,
-              "reboot_required_flag": false,
-              "update_manager_prompt": "normal",
-              "clone_id": null,
-              "secrets_name": null,
-              "last_exchange_time": null,
-              "last_ping_time": "2024-02-07T21:11:41Z",
-              "tags": [
-                "bionic",
-                "wsl"
-              ],
-              "access_group": "global",
-              "distribution": "18.04",
-              "cloud_instance_metadata": {},
-              "vm_info": null,
-              "container_info": null,
-              "ubuntu_pro_info": null,
-              "is_wsl_instance": true
-            },
-            {
-              "id": 12,
-              "title": "Focal WSL",
-              "comment": "",
-              "hostname": "focal-wsl",
-              "total_memory": 1024,
-              "total_swap": 1024,
-              "reboot_required_flag": false,
-              "update_manager_prompt": "normal",
-              "clone_id": null,
-              "secrets_name": null,
-              "last_exchange_time": null,
-              "last_ping_time": "2024-02-07T21:10:41Z",
-              "tags": [
-                "focal",
-                "wsl"
-              ],
-              "access_group": "global",
-              "distribution": "20.04",
-              "cloud_instance_metadata": {},
-              "vm_info": null,
-              "container_info": null,
-              "ubuntu_pro_info": null,
-              "is_wsl_instance": true
-            }
-          ],
-          "parent": null
-        }
-  ],
-  "next": null,
-  "previous": null
-}
-```
-
 ## GET `/computers/<int:computer_id>/groups`
 
 Get all user groups for the provided computer ID.
@@ -873,7 +914,7 @@ curl -X GET "https://landscape.canonical.com/api/v2/computers/23/packages?limit=
 
 Example output:
 
-```bash
+```json
 {
   "count": 92372,
   "results": [
@@ -894,109 +935,6 @@ Example output:
   ],
   "next": "https://landscape.canonical.com/api/v2/computers/23/packages?limit=2&offset=2",
   "previous": null
-}
-```
-
-## GET `/computers/<int:computer_id>/snaps/installed`
-
-List all installed snaps on a single computer.
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-
-Query parameters:
-
-- `limit`: The maximum number of results returned by the method. It defaults to 1000.
-- `offset`: The offset inside the list of results.
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/22/snaps/installed?limit=2" -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-
-```bash
-{
-  "count": 4,
-  "results": [
-        {
-          "version": "4.0.9-a29c6f1",
-          "revision": "24061",
-          "tracking_channel": "4.0/stable/ubuntu-20.04",
-          "held_until": null,
-          "confinement": "strict",
-          "snap": {
-            "id": "J60k4GY0HppDwOeW8dZdWc8obX0xujRu",
-            "name": "lxd",
-            "publisher": {
-              "username": "canonical",
-              "validation": "verified"
-            },
-            "summary": "LXD - container and VM manager"
-          }
-        },
-        {
-          "version": "2.61.1",
-          "revision": "20671",
-          "tracking_channel": "latest/stable",
-          "held_until": null,
-          "confinement": "strict",
-          "snap": {
-            "id": "PM2rV4ml8uWu4RDBT8dSGnJUYbevVhc4",
-            "name": "snapd",
-            "publisher": {
-              "username": "canonical",
-              "validation": "verified"
-            },
-            "summary": "Daemon and tooling that enable snap packages"
-          }
-        }
-  ],
-  "next": "https://landscape.canonical.com/api/v2/computers/22/snaps/installed?limit=2&offset=2",
-  "previous": null
-}
-
-```
-
-## GET `/computers/<int:computer_id>/users/<string:username>/groups`
-
-Get all the groups for the provided username on the given computer ID.
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-- `username`: The username of the account.
-
-Query parameters:
-
-- None
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/ubuntu/groups" -H "Authorization: Bearer $JWT"
-```
-
-Example output:
-```bash
-{
-  "groups": [
-        {
-          "id": 1020,
-          "computer_id": 22,
-          "gid": 4,
-          "name": "adm"
-        },
-        {
-          "id": 1022,
-          "computer_id": 22,
-          "gid": 29,
-          "name": "audio"
-        },
-  ]
 }
 ```
 
@@ -1021,34 +959,140 @@ curl -X GET "https://landscape.canonical.com/api/v2/computers/22/processes?limit
 
 Example output:
 
-```bash
+```json
 {
   "count": 84,
   "results": [
-        {
-          "id": 2551,
-          "computer_id": 22,
-          "pid": 1525,
-          "gid": 1000,
-          "name": "(sd-pam)",
-          "state": "S",
-          "start_time": "2024-02-07T20:26:55Z",
-          "vm_size": 104024,
-          "cpu_utilisation": 0
-        },
-        {
-          "id": 2552,
-          "computer_id": 22,
-          "pid": 1530,
-          "gid": 1000,
-          "name": "-bash",
-          "state": "S",
-          "start_time": "2024-02-07T20:26:55Z",
-          "vm_size": 10032,
-          "cpu_utilisation": 0
-        }
+    {
+      "id": 2551,
+      "computer_id": 22,
+      "pid": 1525,
+      "gid": 1000,
+      "name": "(sd-pam)",
+      "state": "S",
+      "start_time": "2024-02-07T20:26:55Z",
+      "vm_size": 104024,
+      "cpu_utilisation": 0
+    },
+    {
+      "id": 2552,
+      "computer_id": 22,
+      "pid": 1530,
+      "gid": 1000,
+      "name": "-bash",
+      "state": "S",
+      "start_time": "2024-02-07T20:26:55Z",
+      "vm_size": 10032,
+      "cpu_utilisation": 0
+    }
   ],
   "next": "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2&offset=2",
+  "previous": null
+}
+```
+
+## POST `/computers/<int:computer_id>/restart`
+
+Restarts the specified computer
+
+Path parameters:
+
+- `computer_id`: An ID assigned to a specific computer.
+
+Optional query parameters:
+
+- `deliver_after`: A time in the future to deliver the reboot activity
+- `deliver_delay_window`: Randomize delivery within the given time frame (minutes)
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/computers/29/restart" \
+  -H "Authorization: Bearer $JWT" \
+```
+
+Example response:
+
+```json
+{
+  "activity_status": "undelivered",
+  "approval_time": null,
+  "completion_time": null,
+  "creation_time": "2024-11-22T00:01:18Z",
+  "creator": {
+    "email": "john@example.com",
+    "id": 1,
+    "name": "John Smith"
+  },
+  "deliver_delay_window": 0,
+  "id": 2225,
+  "parent_id": null,
+  "result_code": null,
+  "result_text": null,
+  "summary": "Restart computer",
+  "type": "ActivityGroup"
+}
+```
+
+## GET `/computers/<int:computer_id>/snaps/installed`
+
+List all installed snaps on a single computer.
+
+Path parameters:
+
+- `computer_id`: An ID assigned to a specific computer.
+
+Query parameters:
+
+- `limit`: The maximum number of results returned by the method. It defaults to 1000.
+- `offset`: The offset inside the list of results.
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/22/snaps/installed?limit=2" -H "Authorization: Bearer $JWT"
+```
+
+Example output:
+
+```json
+{
+  "count": 4,
+  "results": [
+    {
+      "version": "4.0.9-a29c6f1",
+      "revision": "24061",
+      "tracking_channel": "4.0/stable/ubuntu-20.04",
+      "held_until": null,
+      "confinement": "strict",
+      "snap": {
+        "id": "J60k4GY0HppDwOeW8dZdWc8obX0xujRu",
+        "name": "lxd",
+        "publisher": {
+          "username": "canonical",
+          "validation": "verified"
+        },
+        "summary": "LXD - container and VM manager"
+      }
+    },
+    {
+      "version": "2.61.1",
+      "revision": "20671",
+      "tracking_channel": "latest/stable",
+      "held_until": null,
+      "confinement": "strict",
+      "snap": {
+        "id": "PM2rV4ml8uWu4RDBT8dSGnJUYbevVhc4",
+        "name": "snapd",
+        "publisher": {
+          "username": "canonical",
+          "validation": "verified"
+        },
+        "summary": "Daemon and tooling that enable snap packages"
+      }
+    }
+  ],
+  "next": "https://landscape.canonical.com/api/v2/computers/22/snaps/installed?limit=2&offset=2",
   "previous": null
 }
 ```
@@ -1072,12 +1116,14 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/computers/1/usergroups/update_bulk" -H "Authorization: Bearer $JWT"  -d '{"action": "add", "usernames": ["john", "jane"], "groupnames": ["finance", "admin"]}'
 ```
 
 Example output:
-```bash
+
+```json
 {
   "id": 407,
   "creation_time": "2024-03-21T21:52:12Z",
@@ -1097,46 +1143,111 @@ Example output:
 }
 ```
 
-## POST `/computers/<computer_id>/restart`
+## GET `/computers/<int:computer_id>/users/<string:username>/groups`
 
-Restarts the specified computer
+Get all the groups for the provided username on the given computer ID.
 
 Path parameters:
 
 - `computer_id`: An ID assigned to a specific computer.
+- `username`: The username of the account.
 
-Optional query parameters:
+Query parameters:
 
-- `deliver_after`: A time in the future to deliver the reboot activity
-- `deliver_delay_window`: Randomize delivery within the given time frame (minutes)
+- None
 
 Example request:
 
-```
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/restart" \
- 	-H "Authorization: Bearer $JWT" \
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/ubuntu/groups" -H "Authorization: Bearer $JWT"
 ```
 
-Example response:
+Example output:
 
-```
+```json
 {
-	"activity_status": "undelivered",
-	"approval_time": null,
-	"completion_time": null,
-	"creation_time": "2024-11-22T00:01:18Z",
-	"creator": {
-    	"email": "john@example.com",
-    	"id": 1,
-    	"name": "John Smith"
-	},
-	"deliver_delay_window": 0,
-	"id": 2225,
-	"parent_id": null,
-	"result_code": null,
-	"result_text": null,
-	"summary": "Restart computer",
-	"type": "ActivityGroup"
+  "groups": [
+    {
+      "id": 1020,
+      "computer_id": 22,
+      "gid": 4,
+      "name": "adm"
+    },
+    {
+      "id": 1022,
+      "computer_id": 22,
+      "gid": 29,
+      "name": "audio"
+    },
+  ]
+}
+```
+
+## GET `/computers/activities`
+
+Get details of the activities for specified computer(s).
+
+Path parameters:
+
+- None
+
+Query parameters:
+
+- (Required) `computer_ids`: An ID assigned to a specific computer.
+- `limit`: The maximum number of results returned by the method. It defaults to 1000.
+- `offset`: The offset inside the list of results.
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1" -H "Authorization: Bearer $JWT"
+```
+
+Example output:
+
+```json
+{
+  "count": 26,
+  "results": [
+    {
+      "id": 143,
+      "creation_time": "2024-03-01T20:58:14Z",
+      "creator": {
+        "name": "John Smith",
+        "email": "john@example.com",
+        "id": 1
+      },
+      "type": "ChangePackagesRequest",
+      "summary": "Remove package abs-guide",
+      "result_text": null,
+      "computer_id": 1,
+      "approval_time": null,
+      "delivery_time": null,
+      "deliver_after_time": null,
+      "deliver_before_time": null,
+      "package_ids": [
+        73
+      ],
+      "changes": [
+        {
+          "package": "abs-guide",
+          "complemented": false,
+          "type": "remove",
+          "version": "10-3"
+        }
+      ],
+      "parent_id": 142,
+      "modification_time": "2024-03-01T20:58:14Z",
+      "completion_time": null,
+      "schedule_before_time": null,
+      "schedule_after_time": null,
+      "result_code": null,
+      "activity_status": "undelivered",
+      "children": []
+    }
+  ],
+  "next": "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1&offset=1",
+  "previous": null
 }
 ```
 

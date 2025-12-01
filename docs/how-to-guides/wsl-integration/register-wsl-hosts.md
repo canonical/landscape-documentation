@@ -24,7 +24,7 @@ To use the WSL-Landscape integration, you must have the following applications d
 - [Windows Subsystem for Linux](https://apps.microsoft.com/detail/9P9TQF7MRM4R)
 - An Ubuntu application, such as [Ubuntu 24.04 LTS](https://apps.microsoft.com/detail/9nz3klhxdjp5?)
 
-If you don't want to download your Ubuntu image from the Microsoft Store, you can manually specify a different image source instead. See {ref}`how-to-wsl-use-specific-image-source`.
+If you don't want to download your Ubuntu image from the Microsoft Store, you can use WSL profiles to specify a different image source instead. See {ref}`how-to-use-wsl-profiles`.
 
 Also, you must have WSL 2 installed instead of WSL 1. If you've just now installed WSL from the Microsoft store, then you've installed WSL 2 and can proceed to the next steps. If you've previously installed WSL and aren't sure if it's WSL 1 or WSL 2, run `wsl -l -v` in PowerShell or Command Prompt to get the version. If you have WSL 1, you need to upgrade to WSL 2. For more information, see [Microsoft's guide on upgrading from WSL 1 to WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
 
@@ -146,7 +146,14 @@ If your Windows host machine doesn’t appear as a pending computer in your Land
     [host]
     url = landscape-server.domain.com:6554
     ```
-    
+
+- **Check that the `enable-wsl-child-instance-profiles` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**
+
+    ```bash
+    [features]
+    enable-wsl-child-instance-profiles = true
+    ```
+
 - **Ensure your firewall settings are configured appropriately**
 
    > See also: [Ubuntu Pro for WSL documentation on firewall requirements](https://canonical-ubuntu-pro-for-wsl.readthedocs-hosted.com/en/latest/reference/firewall_requirements/)
