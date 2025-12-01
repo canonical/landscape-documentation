@@ -95,6 +95,7 @@ FQDN
 gapped
 GCP
 Github
+githubusercontent
 GlobalAdmin
 GlobalAdministrator
 GPG
@@ -124,6 +125,7 @@ html
 http
 HTTPS
 https
+integrations
 incrementation
 init
 IoT
@@ -194,6 +196,8 @@ NSG
 NVMe
 NodeJS
 noreply
+NodeJS
+NPM
 OAuth
 Ocata
 oidc
