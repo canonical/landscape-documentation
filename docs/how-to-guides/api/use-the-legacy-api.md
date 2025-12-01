@@ -23,3 +23,8 @@ If you use a custom Certificate Authority (CA), you also need to export the path
 export LANDSCAPE_API_SSL_CA_FILE="/path/to/ca/file"
 ```
 
+## Use the legacy API with a JWT
+
+While the `landscape-api` command-line tool requires an API Key and Secret, the API endpoint itself accepts JSON Web Tokens (JWT) for authentication. This is useful for custom scripts or third-party integrations that make direct HTTP requests.
+
+For details on how to use a JWT with the legacy API, see {ref}`how-to-use-legacy-api-http`.

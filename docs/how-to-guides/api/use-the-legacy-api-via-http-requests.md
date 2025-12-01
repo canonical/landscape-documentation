@@ -6,7 +6,7 @@
 
 API requests are HTTPS requests that use the HTTP verb GET or POST and a query parameter named action. To be able to make a request, you’ll need to know which endpoint to use, what the action is, and what parameters it takes.
 
-All methods take a list of mandatory arguments which you need to pass every time:
+All methods take a list of mandatory arguments which you need to pass every time (unless using JWT authentication, where only `action` and `version` are required):
 
 - `action`: The name of the method you want to call
 - `access_key_id`: The access key given to you in the Landscape Web UI. You need to go to your settings section in Landscape to be able to generate it along with the secret key.
@@ -14,6 +14,34 @@ All methods take a list of mandatory arguments which you need to pass every time
 - `signature_version`: The version of the signature mechanism, always 2 for now.
 - `timestamp`: The time in UTC in ISO 8601 format, used to indicate the validity of the signature.
 - `version`: The version of the API, 2011-08-01 being the current one. It’s in the form of a date.
+
+## Authentication
+
+You can authenticate your requests using either an API Key/Secret (HMAC signature) or a JSON Web Token (JWT).
+
+### Using a JWT
+
+If you use a JWT, you do not need to sign your requests or provide the `access_key_id`, `signature_method`, `signature_version`, or `timestamp` parameters.
+
+Example:
+
+1.  Obtain a JWT:
+
+    ```bash
+    TOKEN=$(curl -s -X POST "https://<LANDSCAPE-HOSTNAME>/api/v2/login" \
+      -H "Content-Type: application/json" \
+      -d '{"email": "<YOUR-EMAIL>", "password": "<YOUR-PASSWORD>"}' | jq -r '.token')
+    ```
+2.  Include the token in the `Authorization` header of your request.
+    ```bash
+    curl -X GET "https://<LANDSCAPE-HOSTNAME>/api/?action=GetComputers&version=<VERSION-NUMBER>" \
+      -H "Authorization: Bearer <YOUR_TOKEN>"
+    ```
+> **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
+
+### Using API Key and Secret (HMAC Signature)
+
+If you are not using a JWT, you must sign every request.
 
 Here’s an example request:
 
