@@ -35,7 +35,7 @@ Here’s an example request:
 2.  Include the token in the `Authorization` header of your request.
     ```bash
     curl -X GET "https://<LANDSCAPE-HOSTNAME>/api/?action=GetComputers&version=<VERSION-NUMBER>" \
-      -H "Authorization: Bearer <TOKEN>"
+      -H "Authorization: Bearer $TOKEN"
     ```
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
 
