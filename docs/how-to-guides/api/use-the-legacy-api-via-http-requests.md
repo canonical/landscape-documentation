@@ -19,11 +19,11 @@ All methods take a list of mandatory arguments which you need to pass every time
 
 You can authenticate your requests using either an API Key/Secret (HMAC signature) or a JSON Web Token (JWT).
 
-### Using a JWT
+### Using JWT
 
 If you use a JWT, you do not need to sign your requests or provide the `access_key_id`, `signature_method`, `signature_version`, or `timestamp` parameters.
 
-Example:
+Here’s an example request:
 
 1.  Obtain a JWT:
 
@@ -35,7 +35,7 @@ Example:
 2.  Include the token in the `Authorization` header of your request.
     ```bash
     curl -X GET "https://<LANDSCAPE-HOSTNAME>/api/?action=GetComputers&version=<VERSION-NUMBER>" \
-      -H "Authorization: Bearer <YOUR_TOKEN>"
+      -H "Authorization: Bearer <TOKEN>"
     ```
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
 
