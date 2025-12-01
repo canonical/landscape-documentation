@@ -5,7 +5,7 @@
 :titlesonly:
 :maxdepth: 2
 
-Configure Landscape Beta <configure-landscape-beta>
+Configure Landscape after upgrade <configure-landscape-after-upgrade>
 Set up an environment <set-up-an-environment>
 Register WSL hosts <register-wsl-hosts>
 Manage WSL instances <manage-wsl-instances>
