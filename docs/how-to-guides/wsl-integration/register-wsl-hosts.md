@@ -17,8 +17,6 @@ This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts
 
 ```{note}
 You must be running Windows 11 to use Ubuntu Pro for WSL.
-
-If you're using Landscape SaaS, you must also change a system configuration, see the {ref}`howto-register-wsl-hosts-prereq-saas` section.
 ```
 
 To use the WSL-Landscape integration, you must an [Ubuntu Pro account](https://ubuntu.com/pro) and the following applications from the Microsoft Store:
@@ -29,31 +27,6 @@ To use the WSL-Landscape integration, you must an [Ubuntu Pro account](https://u
 If you don't want to download your Ubuntu image from the Microsoft Store, you can use WSL profiles to specify a different image source instead. See {ref}`how-to-use-wsl-profiles`.
 
 Also, you must have WSL 2 installed instead of WSL 1. If you've just now installed WSL from the Microsoft store, then you've installed WSL 2 and can proceed to the next steps. If you've previously installed WSL and aren't sure if it's WSL 1 or WSL 2, run `wsl -l -v` in PowerShell or Command Prompt to get the version. If you have WSL 1, you need to upgrade to WSL 2. For more information, see [Microsoft's guide on upgrading from WSL 1 to WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
-
-(howto-register-wsl-hosts-prereq-saas)=
-### Landscape SaaS-only: Disable gRPC ALPN enforcement
-
-The Ubuntu Pro for WSL agent uses gRPC to communicate with Landscape. The current gRPC version included in Ubuntu Pro for WSL enforces the ALPN protocol by default, but Landscape SaaS (`landscape.canonical.com`) does not yet support ALPN. As a workaround, you need to disable ALPN enforcement to successfully register Windows hosts with Landscape.
-
-On your Windows host machine, run PowerShell as Administrator and set:
-
-```powershell
-[System.Environment]::SetEnvironmentVariable("GRPC_ENFORCE_ALPN_ENABLED", "false", "Machine")
-```
-
-To confirm that the setting was applied:
-
-```powershell
-[System.Environment]::GetEnvironmentVariable("GRPC_ENFORCE_ALPN_ENABLED", "Machine")
-```
-
-This command should output:
-
-```powershell
-false
-```
-
-Note that this is a **temporary workaround**. Once Landscape SaaS supports ALPN, you'll need to remove this setting or set it to `true`.
 
 ## Install and configure Ubuntu Pro for WSL
 
