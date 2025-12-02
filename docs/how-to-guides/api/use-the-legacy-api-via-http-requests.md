@@ -1,5 +1,5 @@
 (how-to-use-legacy-api-http)=
-# How to use the legacy API via HTTP requests
+# How to use the legacy API via HTTPS requests
 
 
 ## Making a request
