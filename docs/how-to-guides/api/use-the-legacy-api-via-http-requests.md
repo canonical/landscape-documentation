@@ -44,7 +44,7 @@ Here's an example request:
     ```
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
 
-### API key & secret
+### API key and secret
 
 If you're not using a JWT, you must sign every request using your API key and secret. This is the method used by the `landscape-api` CLI and the Python `landscape_api` module.
 
