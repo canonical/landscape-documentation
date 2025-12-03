@@ -70,7 +70,7 @@ You need to create an HMAC signature for requests authenticated with the API Key
 To create the signature:
 
 - Create the canonicalized query string that you need later in this procedure:
-- Sort the UTF-8 query string components by parameter name with natural byte ordering. The parameters can come from the GET URI or from the POST body (when Content-Type is application/x-www-form-urlencoded). URL encode the parameter name and values according to the following rules:
+- Sort the UTF-8 query string components by parameter name with natural byte ordering. The parameters can come from the GET URI or from the POST body (when `Content-Type` is `application/x-www-form-urlencoded`). URL encode the parameter name and values according to the following rules:
 - Do not URL encode any of the unreserved characters that RFC 3986 defines. These unreserved characters are `A-Z`, `a-z`, `0-9`, hyphen (`-`), underscore (`_`), period (`.`), and tilde (`~`).
 - Percent encode all other characters with `%XY`, where `X` and `Y` are hex characters `0-9` and uppercase `A-F`.
 - Percent encode extended UTF-8 characters in the form `%XY%ZA....`
@@ -84,7 +84,7 @@ StringToSign = HTTPVerb + "\n" +
                 HTTPRequestURI + "\n" +
                 CanonicalizedQueryString <from the preceding step>
 ```
-- The HTTPRequestURI component is the HTTP absolute path component of the URI up to, but not including, the query string. If the HTTPRequestURI is empty, use a forward slash (`/`).
+- The `HTTPRequestURI` component is the HTTP absolute path component of the URI up to, but not including, the query string. If the `HTTPRequestURI` is empty, use a forward slash (`/`).
 - Calculate an RFC 2104-compliant HMAC with the string you just created, your secret key as the key, and SHA256 as the hash algorithm. For more information, go to [http://www.ietf.org/rfc/rfc2104.txt](http://www.ietf.org/rfc/rfc2104.txt).
 - Convert the resulting value to base64.
 - Use the resulting value as the value of the signature request parameter. Here is an example string to sign:
