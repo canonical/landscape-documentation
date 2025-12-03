@@ -17,3 +17,9 @@ getting-started-with-landscape tutorial/
 how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integration/configure-landscape-after-upgrade/
 
 how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
+
+reference/terms/profiles/package-profile/ reference/terms/profiles/
+
+reference/terms/profiles/removal-profile/ reference/terms/profiles/
+
+reference/terms/profiles/upgrade-profile/ reference/terms/profiles/
