@@ -7,4 +7,4 @@ Landscape's API lets you perform many Landscape tasks from the command line, she
 
 For details on how to use a JWT with the legacy API, see {ref}`how-to-use-legacy-api-http`.
 
-For details on how to use the legacy API command-line client, see {ref}`how-to-use-legacy-api-cli`.
+For details on how to use the legacy API command-line client (snap), see {ref}`how-to-use-legacy-api-cli`.
