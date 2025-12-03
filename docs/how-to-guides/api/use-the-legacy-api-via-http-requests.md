@@ -19,8 +19,8 @@ All methods take a list of mandatory arguments which you need to pass every time
 
 The legacy API accepts two authentication methods:
 
-- **JWT** — JSON Web Token. The server accepts either a token or a Landscape session JWT cookie on the legacy endpoint.
-- **API Key / HMAC** — the API Key/Secret method that requires signing requests.
+- **JWT**: JSON Web Token. The legacy API endpoing accepts either a token or a Landscape session JWT cookie.
+- **API key & secret**: the API Key/Secret method that requires signing requests.
 
 ### JWT
 
@@ -42,9 +42,9 @@ Here's an example request:
     ```
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
 
-### API Key / HMAC
+### API key & secret
 
-If you're not using a JWT, you must sign every request using your API Key and Secret. This is the method used by the `landscape-api` CLI and the Python `landscape_api` module.
+If you're not using a JWT, you must sign every request using your API key and secret. This is the method used by the `landscape-api` CLI and the Python `landscape_api` module.
 
 Here's an example request:
 
