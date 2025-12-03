@@ -4,8 +4,6 @@
 
 ## Making a legacy API request
 
-This page documents the legacy Landscape API. For the newer REST API (v2), see {ref}`how-to-rest-api-request`.
-
 API requests to the legacy endpoint are HTTPS requests that use the HTTP verb GET or POST and a query parameter named `action`. To be able to make a request, you’ll need to know which endpoint to use, what the action is, and what parameters it takes.
 
 All methods take a list of mandatory arguments which you need to pass every time (unless using JWT authentication, where only `action` and `version` are required):
