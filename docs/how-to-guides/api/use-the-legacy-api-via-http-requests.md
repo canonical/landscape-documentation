@@ -2,28 +2,33 @@
 # How to use the legacy API via HTTPS requests
 
 
-## Making a request
+## Making a request (legacy API)
 
-API requests are HTTPS requests that use the HTTP verb GET or POST and a query parameter named action. To be able to make a request, you’ll need to know which endpoint to use, what the action is, and what parameters it takes.
+This page documents the legacy Landscape API (the older, RPC-style API accessible under `/api/`). For the newer REST API (v2) and token login examples, see {ref}`how-to-rest-api-request`.
+
+API requests to the legacy endpoint are HTTPS requests that use the HTTP verb GET or POST and a query parameter named `action`. To be able to make a request, you’ll need to know which endpoint to use, what the action is, and what parameters it takes.
 
 All methods take a list of mandatory arguments which you need to pass every time (unless using JWT authentication, where only `action` and `version` are required):
 
 - `action`: The name of the method you want to call
 - `access_key_id`: The access key given to you in the Landscape Web UI. You need to go to your settings section in Landscape to be able to generate it along with the secret key.
-- `signature_method`: The method used to signed the request, always HmacSHA256 for now.
-- `signature_version`: The version of the signature mechanism, always 2 for now.
-- `timestamp`: The time in UTC in ISO 8601 format, used to indicate the validity of the signature.
-- `version`: The version of the API, 2011-08-01 being the current one. It’s in the form of a date.
+- `signature_method`: The method used to sign the request, always `HmacSHA256` for HMAC requests.
+- `signature_version`: The version of the signature mechanism, always `2` for HMAC requests.
+- `timestamp`: The time in UTC in ISO 8601 format, used to indicate the validity of the signature (HMAC only).
+- `version`: The version of the API. `2011-08-01` is the default legacy API version used in the client, but any legacy-style date string matching `YYYY-MM-DD` is treated as a legacy API version by the server and will work if that version is registered.
 
 ## Authentication
 
-You can authenticate your requests using either an API Key/Secret (HMAC signature) or a JSON Web Token (JWT).
+The legacy API accepts two authentication methods:
 
-### Using JWT
+- **JWT** — JSON Web Token. The server accepts either a token or a Landscape session JWT cookie on the legacy endpoint.
+- **API Key / HMAC** — the API Key/Secret method that requires signing requests.
+
+### JWT
 
 If you use a JWT, you do not need to sign your requests or provide the `access_key_id`, `signature_method`, `signature_version`, or `timestamp` parameters.
 
-Here’s an example request:
+Here's an example request:
 
 1.  Obtain a JWT:
 
@@ -39,11 +44,11 @@ Here’s an example request:
     ```
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
 
-### Using API Key and Secret (HMAC Signature)
+### API Key / HMAC
 
-If you are not using a JWT, you must sign every request.
+If you're not using a JWT, you must sign every request using your API Key and Secret. This is the method used by the `landscape-api` CLI and the Python `landscape_api` module.
 
-Here’s an example request:
+Here's an example request:
 
 ```text
 https://landscape.canonical.com/api/
@@ -56,9 +61,11 @@ https://landscape.canonical.com/api/
     signature=W1TCDh39uBCk9MlaZo941Z8%2BTWqRtdgnbCueBrx%2BtvA%3D
 ```
 
-Note that all the parameters must be URL encoded (like timestamp here). It may be skipped in the documentation to make it easier to read. The mandatory arguments will be skipped too for simplicity.
+> **Note**: All parameters must be URL encoded (for example the timestamp). The sections below explain how to construct the signature and other encoding rules.
 
-## Creating a signature
+#### Creating an HMAC signature
+
+The following section applies only to requests authenticated with API Key/Secret (HMAC). If you are using JWT, you can skip this section.
 
 To create the signature:
 
@@ -93,19 +100,22 @@ access_key_id=0GS7553JW74RRM612K02EXAMPLE
 &version=2023-08-01
 ```
 
-## Passing list of values
+## Formatting request parameters
 
-Some actions takes list of parameters. These lists are specified using the param.# notation. Values of # are integers starting from 1, and need to be specified even if there is only one value. For example:
+These parameter formatting rules apply to the legacy API and are the same whether you authenticate using JWT or HMAC.
+
+### Lists
+
+Some actions takes list of parameters. These lists are specified using the `param.#` notation. Values of `#` are integers starting from 1, and need to be specified even if there is only one value. For example:
 
 ```text
 action=AddTagsToComputers&tags.1=web&tags.2=server
 ```
 
-## Passing files
+### Files
 
-Some actions take files as parameters. The contents of the file should be base64-encoded, and should be prepended with the filename. Since base64 cannot generate it “$$” is used as a separator. For example:
+Some actions take files as parameters. The contents of the file should be base64-encoded, and should be prepended with the filename. Separate the filename and the base64 content with the separator `$$`. For example:
 
 ```text
 action=CreateScriptAttachment&filename=bucket.txt$$SSBhbSBhIGJ1Y2tldCE=
 ```
-
