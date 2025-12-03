@@ -59,7 +59,7 @@ https://landscape.canonical.com/api/
     signature=W1TCDh39uBCk9MlaZo941Z8%2BTWqRtdgnbCueBrx%2BtvA%3D
 ```
 
-> **Note**: All parameters must be URL encoded (for example the timestamp). The sections below explain how to construct the signature and other encoding rules.
+> **Note**: All parameters must be URL encoded (for example the timestamp). The sections below may show unencoded parameters and omit mandatory arguments for simplicity and readability.
 
 #### Creating an HMAC signature
 
