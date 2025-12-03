@@ -106,7 +106,7 @@ These parameter formatting rules apply to the legacy API and are the same whethe
 
 ### Lists
 
-Some actions takes list of parameters. These lists are specified using the `param.#` notation. Values of `#` are integers starting from 1, and need to be specified even if there is only one value. For example:
+Some actions take lists of parameters. These lists are specified using the `param.#` notation. Values of `#` are integers starting from 1, and need to be specified even if there is only one value. For example:
 
 ```text
 action=AddTagsToComputers&tags.1=web&tags.2=server
