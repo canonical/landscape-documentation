@@ -260,6 +260,7 @@ ReleaseNotes
 repo
 reprepro
 restorable
+revalidated
 RewriteRule
 RHEL
 rollout
