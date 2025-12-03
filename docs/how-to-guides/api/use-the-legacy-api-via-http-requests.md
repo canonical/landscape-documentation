@@ -2,7 +2,9 @@
 # How to use the legacy API via HTTPS requests
 
 
-## Making a legacy API request
+This guide describes how to call the Landscape legacy API using standard HTTPS requests and the parameters required for each request.
+
+## Make a legacy API request
 
 API requests to the legacy endpoint are HTTPS requests that use the HTTP verb GET or POST and a query parameter named `action`. To be able to make a request, you’ll need to know which endpoint to use, what the action is, and what parameters it takes.
 
