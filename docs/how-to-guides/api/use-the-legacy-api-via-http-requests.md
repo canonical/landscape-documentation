@@ -63,7 +63,7 @@ https://landscape.canonical.com/api/
 
 #### Creating an HMAC signature
 
-The following section applies only to requests authenticated with API Key/Secret (HMAC). If you are using JWT, you can skip this section.
+The following section applies only to requests authenticated with API Key & Secret method. If you are using JWT, you can skip this section.
 
 To create the signature:
 
