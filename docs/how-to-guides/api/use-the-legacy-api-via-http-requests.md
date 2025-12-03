@@ -21,7 +21,7 @@ All methods take a list of mandatory arguments which you need to pass every time
 
 The legacy API accepts two authentication methods:
 
-- **JWT**: JSON Web Token. The legacy API endpoing accepts either a token or a Landscape session JWT cookie.
+- **JWT**: JSON Web Token. The legacy API endpoint accepts either a token or a Landscape session JWT cookie.
 - **API key & secret**: the API Key/Secret method that requires signing requests.
 
 ### JWT
