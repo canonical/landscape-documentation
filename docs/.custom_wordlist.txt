@@ -1,5 +1,6 @@
 AArch
 AES
+ALPN
 Agentless
 agentless
 airgapped
@@ -191,8 +192,10 @@ netmask
 NFS
 NIC
 NID
+NPM
 NSG
 NVMe
+NodeJS
 noreply
 NodeJS
 NPM
@@ -274,6 +277,7 @@ SDK
 SendGrid
 servername
 ServerTeam
+SetDefaultChildComputer
 SHA
 SIEM
 signup
