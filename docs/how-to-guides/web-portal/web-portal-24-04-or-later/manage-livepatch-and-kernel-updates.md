@@ -1,6 +1,10 @@
 (how-to-web-portal-manage-livepatch)=
 # How to manage Livepatch and kernel updates from the Landscape web portal
 
+```{note}
+The **Kernel** tab is available in the web portal in **Landscape 24.10** and later.
+```
+
 You can view and manage kernel and Livepatch information from the **Kernel** tab. To access this tab, go to **Instances** > Select your instance > **Kernel**.
 
 **Current kernel version** shows the kernel version installed on your instance, and you can upgrade/downgrade with **Upgrade kernel** or **Downgrade kernel**.  

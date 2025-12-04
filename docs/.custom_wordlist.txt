@@ -1,5 +1,6 @@
 AArch
 AES
+ALPN
 Agentless
 agentless
 airgapped
@@ -95,6 +96,7 @@ FQDN
 gapped
 GCP
 Github
+githubusercontent
 GlobalAdmin
 GlobalAdministrator
 GPG
@@ -124,6 +126,7 @@ html
 http
 HTTPS
 https
+integrations
 incrementation
 init
 IoT
@@ -189,9 +192,13 @@ netmask
 NFS
 NIC
 NID
+NPM
 NSG
 NVMe
+NodeJS
 noreply
+NodeJS
+NPM
 OAuth
 Ocata
 oidc
@@ -254,6 +261,7 @@ ReleaseNotes
 repo
 reprepro
 restorable
+revalidated
 RewriteRule
 RHEL
 rollout
@@ -271,6 +279,7 @@ SDK
 SendGrid
 servername
 ServerTeam
+SetDefaultChildComputer
 SHA
 SIEM
 signup
@@ -317,6 +326,7 @@ udebs
 UIs
 unactivated
 uncomment
+unencoded
 unhold
 Unhold
 unscalable
