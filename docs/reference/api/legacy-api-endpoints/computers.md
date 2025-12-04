@@ -364,6 +364,10 @@ landscape-api reject-pending-computers 1,2
 
 ## CreateCloudOtps
 
+```{warning}
+CreateCloudOtps is no longer available from Landscape Server 25.04 onwards
+```
+
 Create one-time passwords used for registration of cloud instances:
 
 ```text
