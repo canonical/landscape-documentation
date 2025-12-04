@@ -77,6 +77,7 @@ Example output:
 }
 ```
 
+(reference-legacy-api-wsl-delete-child-computer)=
 ## DeleteChildComputers
 
 Delete a list of child computers by ID.
@@ -245,7 +246,7 @@ Example outputs:
     }
 ]
 ```
-
+(reference-legacy-api-wsl-set-default-child-computer)=
 ## SetDefaultChildComputer
 
 Set the child computer instance with the provided ID as the default instance for the host parent. This is the default instance you log into if you run `wsl` in PowerShell from the Windows host.
@@ -319,6 +320,7 @@ Example output:
 }
 ```
 
+(reference-legacy-api-wsl-start-child-computer)=
 ## StartChildComputers
 
 Start a list of child computers by ID.
@@ -379,6 +381,7 @@ Example outputs:
 }
 ```
 
+(reference-legacy-api-wsl-stop-child-computer)=
 ## StopChildComputers
 
 Stop a list of child computers by ID.

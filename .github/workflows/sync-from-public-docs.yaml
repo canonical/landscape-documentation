@@ -7,6 +7,7 @@ on:
 
 jobs:
   sync-public:
+    if: ${{ github.repository == 'canonical/landscape-docs-staging' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout private staging repo
