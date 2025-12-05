@@ -33,7 +33,7 @@ Here's an example request:
 1.  Obtain a JWT:
 
     ```bash
-    TOKEN=$(curl -s -X POST "https://<LANDSCAPE-HOSTNAME>/api/v2/login" \
+    TOKEN=$(curl -s -X POST "https://<LANDSCAPE-HOSTNAME>/api/login" \
       -H "Content-Type: application/json" \
       -d '{"email": "<YOUR-EMAIL>", "password": "<YOUR-PASSWORD>"}' | jq -r '.token')
     ```
