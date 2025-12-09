@@ -39,7 +39,7 @@ The following image demonstrates an example hierarchy of the previous terms, sho
 
 The following diagram provides an example of how packages from the Ubuntu repository can get distributed to specific client machines. To understand the example, you should be familiar with these additional terms:
 
-- **Profile:** A configuration that can be applied to managed machines. Profiles are sometimes called “repository profiles” in the context of repository mirroring, and they enable you to enforce certain repository configurations on your machines. For example, you may have a `test` and `production` profile which you later distribute to various machines.
+- **Profile:** A configuration that can be applied to managed machines. {ref}`Profiles <reference-terms-profiles>` are sometimes called “repository profiles” in the context of repository mirroring, and they enable you to enforce certain repository configurations on your machines. For example, you may have a `test` and `production` profile which you later distribute to various machines.
 - **Tags:** Tags are labels you can apply to groups of machines, and they’re used with profiles when mirroring repositories. For example, if you had a repository profile named `test-profile`, you could associate it with a tag named `test-tag`, and the configuration in this profile would then be applied to all machines tagged with `test-tag`.
 
 **Repository mirroring process**

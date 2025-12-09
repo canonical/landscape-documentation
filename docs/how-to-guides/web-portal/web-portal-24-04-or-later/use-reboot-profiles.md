@@ -1,7 +1,7 @@
 (how-to-web-portal-use-reboot-profiles)=
 # How to use reboot profiles
 
-You can use reboot profiles to automatically restart specific Landscape Client instances on a scheduled basis. 
+You can use reboot profiles to automatically restart specific Landscape Client instances on a scheduled basis.
 
 ```{note}
 This feature is only available in **Landscape 25.04** and later.

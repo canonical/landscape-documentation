@@ -579,7 +579,7 @@ The following errors may be raised:
 
 ## CreateRepositoryProfile
 
-Create a repository profiles in the account.
+Create a repository profile in the account.
 
 - `title`: The title of the repository profile. It must start with an alphanumeric character and only contain lowercase letters, numbers and `-` or `+` signs.
 - `description`: Description of the repository profile. (optional)
