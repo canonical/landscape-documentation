@@ -34,7 +34,7 @@ DB,False,Every hour at 30 minutes past the hour,Not present
 
 ## GetComputersNotUpgraded
 
-Get the ids of computers that are not currently covered by an upgrade profile..
+Get the ids of computers that are not currently covered by an upgrade profile.
 
 This method takes one optional argument:
 

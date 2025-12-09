@@ -1,7 +1,6 @@
 (reference-legacy-api-removal-profiles)=
 # Removal Profiles
 
-
 Landscape can be configured to automatically remove computers that have not contacted the server within a set period of time.
 
 ## CreateRemovalProfile

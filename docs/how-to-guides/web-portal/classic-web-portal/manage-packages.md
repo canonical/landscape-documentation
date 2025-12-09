@@ -31,8 +31,9 @@ To add a {ref}`reference-terms-package-profile`:
 5. Enter the requested information
 6. Click **Save**
 
-Package constraints are packages that this profile depends on or conflicts with. They are optional to include. The constraints dropdown menu lets you add constraints in three ways: 
--  Based on a computer's installed packages
+Package constraints are packages that this profile depends on or conflicts with. They are optional to include. The constraints dropdown menu lets you add constraints in three ways:
+
+- Based on a computer's installed packages
 - Imported from a previously exported CSV file or the output of the `dpkg --get-selections` command
 - Manually added
 

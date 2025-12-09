@@ -1,7 +1,11 @@
 (reference-terms-profiles)=
 # Profiles
 
-**Profiles** in Landscape are reusable sets of configuration rules that define how Landscape should manage certain instances (machines and devices). Profiles are usually applied to groups of instances.
+**Profiles** in Landscape are reusable sets of rules that define how Landscape should manage certain instances (machines and devices). Profiles are usually applied to groups of instances matching the tags and/or access group of the profile. Landscape automatically applies any relevant existing profiles to newly accepted instances. When an administrator modifies the tags or access group for an instance, Landscape automatically updates the set of profiles associated with that instance accordingly.
+
+Once a profile is created, the access group associated with the profile cannot be edited.
+
+Many profiles have a notion of **compliance**. When an instance becomes associated with a profile, Landscape will created activities to bring that instance into compliance with any profile associated with that instance.
 
 Landscape has multiple types of profiles.
 

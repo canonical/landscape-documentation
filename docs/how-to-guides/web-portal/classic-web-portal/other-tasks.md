@@ -37,7 +37,7 @@ Starting the upgrade:
 
 Note: While the upgrade tasks are now in the queue, they will not be executed until you approve them. To approve the tasks, click **All**, then click **Approve**.
 
-##  Keep a set of machines automatically up to date
+## Keep a set of machines automatically up to date
 
 The best way is to use {ref}`reference-terms-upgrade-profile`, which rely on {ref}`reference-terms-access-groups`. If an access group is already set up for the group of machines you want to keep updated automatically, click on its name. If not, you must create an access group for them:
 

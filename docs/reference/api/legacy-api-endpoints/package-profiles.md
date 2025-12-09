@@ -1,7 +1,6 @@
 (reference-legacy-api-package-profiles)=
 # Package Profiles
 
-
 A package profile is a set of package constraints that can be applied to managed computers.
 
 The methods available are related to package profile management. The user can search, create, copy, read, update and delete profiles associated with the account.
