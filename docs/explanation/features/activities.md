@@ -22,7 +22,7 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 
 ### Life cycle of a client activity
 
-1. An activity is created for an instance (e.g., by an admin action or scheduled profile).
+1. An activity is created for an instance (e.g., by an admin action or scheduled {ref}`profile <reference-terms-profiles>`).
 1. The instance starts a message exchange with Landscape Server.
 1. Landscape moves the activity from `Queued` or `Scheduled` to `In Progress`.
 1. The activity is sent to the instance as a message containing an `operation-id`.

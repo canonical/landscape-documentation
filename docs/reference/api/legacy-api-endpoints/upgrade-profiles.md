@@ -1,7 +1,6 @@
 (reference-legacy-api-upgrade-profiles)=
 # Upgrade Profiles
 
-
 The methods defined here let you schedule automatic upgrades.
 
 ## AssociateUpgradeProfile
