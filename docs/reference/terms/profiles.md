@@ -5,7 +5,7 @@
 
 Once a profile is created, the access group associated with the profile cannot be edited.
 
-Many profiles have a notion of **compliance**. When an instance becomes associated with a profile, Landscape will created activities to bring that instance into compliance with any profile associated with that instance.
+Many profiles have a notion of **compliance**. When an instance becomes associated with a profile, Landscape will create activities to bring that instance into compliance with any profile associated with that instance.
 
 Landscape has multiple types of profiles.
 
