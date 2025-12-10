@@ -8,21 +8,9 @@
 This feature is currently in beta.
 ```
 
-This guide describes how to use WSL profiles to provision WSL instances and manage them with Landscape.
+This guide describes how to use {ref}`WSL profiles <reference-terms-wsl-profile>` to provision WSL instances and manage them with Landscape.
 
 To use WSL profiles, your Windows host **must not** have any WSL child instances that aren't registered with Landscape. If you want to use WSL profiles but you have WSL instances that aren't managed by Landscape, you need to remove them from your Windows host, or re-register a new Windows host with only the Landscape-managed WSL instances.
-
-## Background information
-
-In Landscape, a child instance profile is a configuration that defines the virtual instances, such as containers or VMs, that run on a machine registered with Landscape. Currently, WSL profiles are the only type of child instance profile supported.
-
-WSL profiles specify the WSL instance to be provisioned on a Windows host machine. Each WSL profile corresponds to a single WSL instance with a unique rootfs image name. You also have the option to configure your WSL instance with a cloud-init file.
-
-A Windows host machine is considered **compliant** with a WSL profile if it meets one of these criteria:
-  - It has an installed WSL instance that's registered with Landscape and matches the profile, or
-  - It has an activity to provision and register the corresponding WSL instance.
-  
-A Windows machine that doesn't meet either of these criteria is considered **non-compliant** with the WSL profile.
 
 ## Create a WSL profile
 
@@ -38,11 +26,14 @@ Then complete the relevant fields:
 - **rootfs image**: The rootfs image to be installed. These correspond to the available WSL Ubuntu releases on the Microsoft Store. The Ubuntu image corresponds to the latest release available on the store and will give the WSL instance the ability to upgrade to the next release when it's available. If you have a custom rootfs image, you can provide the URL instead by selecting **From URL**. If you want multiple copies of the same rootfs image, you must use the **From URL** selection and provide a unique name.
   - **Image name**: The name of the rootfs image that will be installed on the WSL instance.
   - **rootfs image URL**: The URL of the rootfs image that will be installed on the WSL instance. This URL must be reachable by the Windows host machine. Organizations can also host their own custom rootfs images and reference them here. If your environment uses a WSL `manifest.json` file to define which distributions are available for `wsl --install`, you can point Windows to your own manifest URL. This is optional and independent of Landscape, but it allows administrators to present a controlled list of distributions to end users. For example (using a beta manifest URL):
+
     ```powershell
     $distributionListUrl = "https://raw.githubusercontent.com/wiki/canonical/ubuntu-pro-for-wsl/beta/manifest.json"
     Set-ItemProperty -Path "HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss" -Name DistributionListUrl -Value "$distributionListUrl" -Type String -Force
     ```
+
 - **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text. If you don't include a cloud-init file, the rootfs image will be applied without any additional configuration.
+- **Compliance settings** : Whether or not the associated Windows instances should only have WSL instances that were created through Landscape.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected. Leaving tags blank, and not selecting **Associate to all instances** will result in zero machines being associated with the WSL Profile.
@@ -74,6 +65,7 @@ This will create activities to provision WSL instances on specified Windows host
 ```{note}
 The **Make compliant** button is hidden for Windows machines that have no associated WSL profiles.
 ```
+
 ### REST API
 
 To apply all WSL profiles on specified Windows host machines via Landscape's REST API, see {ref}`reference-rest-api-child-instance-profiles`.

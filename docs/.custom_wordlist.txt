@@ -9,6 +9,7 @@ allowlist
 allowlists
 amongst
 AMQP
+Analytics
 Ansible
 Apache
 apache
@@ -128,6 +129,7 @@ HTTPS
 https
 integrations
 incrementation
+incrementing
 init
 IoT
 Iot
