@@ -8,7 +8,7 @@ Child Instance Profiles are in beta testing. The API endpoints below may not be 
 
 To enable WSL features in self-hosted Landscape, add:
 
-```bash
+```ini
 [features]
 enable-wsl-child-instance-profiles = true
 ```
@@ -293,7 +293,6 @@ curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/stoc
 Example response:
 
 ```json
-
 {
   "id": 118,
   "creation_time": "2024-08-05T16:38:52Z",
@@ -315,7 +314,7 @@ Example response:
 
 ## POST `/child-instance-profiles/make-hosts-compliant`
 
-Make the given Windows host computers compliant with all of their WSL profiles by reapplying them if needed.
+Make the given Windows host computers compliant with all of their {ref}`WSL profiles <reference-terms-wsl-profile>` by reapplying them if needed.
 
 Required parameters:
 
