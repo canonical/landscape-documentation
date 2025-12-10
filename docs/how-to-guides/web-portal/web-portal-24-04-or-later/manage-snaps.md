@@ -22,7 +22,7 @@ To install snaps for a specific computer, navigate to the **Snaps** tab and:
 1. Click **Install**
 2. Start typing the snap name. A drop-down list appears with matching snaps.
 3. Click on the snap in the list you want to download and select the channel/revision and architecture you want to install
-4. Click **Add** 
+4. Click **Add**
 5. (Optional) To add any additional snaps, repeat steps 2-4.
 6. Click **Install snaps**
 
