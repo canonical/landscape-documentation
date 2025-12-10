@@ -315,7 +315,7 @@ Example response:
 
 ## POST `/child-instance-profiles/make-hosts-compliant`
 
-Make the given Windows host computers compliant with all of their WSL profiles by reapplying them if needed.
+Make the given Windows host computers compliant with all of their {ref}`WSL profiles <reference-terms-wsl-profile>` by reapplying them if needed.
 
 Required parameters:
 

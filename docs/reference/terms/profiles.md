@@ -25,3 +25,15 @@ A **removal profile** defines a maximum number of days that a computer can go wi
 ## Upgrade profile
 
 An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more computers with each upgrade profile via tags to install packages on those computers. You can also associate an upgrade profile with an access group, which limits its use to only computers within the specified access group. You can manage upgrade profiles from the **Profiles** tab in your organization's home page.
+
+(reference-terms-wsl-profile)=
+## WSL profile
+
+A **WSL profile** defines what Ubuntu WSL instances should be installed on Windows instances associated with a specific access group. You can associate zero or more Windows instances with each WSL profile via tags to install Ubuntu WSL instances on those Windows instances. Each WSL profile defines a single Ubuntu WSL instance that should be present on associated Windows instances. The profile can specify which Ubuntu distribution to install, either from the Windows store or from a custom image, optionally configured with with cloud init. You can also configure the WSL profile to be **strict** which requires the Windows instance to only have Ubuntu WSL instance that are created through Landscape.
+
+WSL profiles are evaluated periodically for **compliance**. A Windows instance is deemed to be **compliant** if both of the following are true:
+
+- Landscape has installed a WSL instance on that Windows instance as specified by each of its associated WSL profiles, or the installation is in progress
+- all Ubuntu WSL instances installed on that Windows instance were create through Landscape if any associated WSL profile is strict.
+
+Landscape will alert you when a registered Windows instance is out of compliance with any of its WSL profiles. You can then take action to bring any non-compliant Windows instances into compliance with their WSL profiles.
