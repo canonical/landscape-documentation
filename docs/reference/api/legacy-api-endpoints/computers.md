@@ -1,7 +1,6 @@
 (reference-legacy-api-computers)=
 # Computers
 
-
 The methods available here give the ability to retrieve computers and to do basic operations on them, such as tagging.
 
 ## GetComputers
@@ -72,7 +71,7 @@ The method returns a JSON serialized list of computers:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 [
     {
         "access_group": "global",
@@ -205,7 +204,7 @@ The method returns a JSON serialized list of computers in the selection which ha
 
 The JSON equivalent of this output is:
 
-```text
+```json
 [
     {
         "access_group": "server",
@@ -268,7 +267,7 @@ Get a list of pending computers associated with the account used for authenticat
 
 The method returns a JSON serialized list of pending computers:
 
-```text
+```json
 [
     {
         "id": 12345,
@@ -314,7 +313,7 @@ The method returns a JSON serialized list of accepted computers:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 [
     {
         "id": 12345,
@@ -344,7 +343,6 @@ The following errors may be raised:
 - `InsufficientLicenses`: Insufficient licenses available to accept new computers.
 - `UnknownComputer`: The provided computers are not known or have been already accepted or rejected.
 - `UnknownAccessGroup`: The access group is not known or the person is not authorized to accept pending computers into the access group.
-
 
 ## RejectPendingComputers
 
@@ -376,7 +374,7 @@ Create one-time passwords used for registration of cloud instances:
 
 The method returns a JSON serialized list of one-time passwords, one for each requested:
 
-```text
+```json
 ["otp1", "otp2", "otp3"]
 ```
 
@@ -421,7 +419,7 @@ The method returns a JSON serialized activity:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 {
     "computer_id": "None",
     "creation_time": "2012-11-19T18:11:51Z",
@@ -476,7 +474,7 @@ The method returns a JSON serialized activity:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 {
     "computer_id": "None",
     "creation_time": "2012-11-19T18:14:19Z",
@@ -505,4 +503,3 @@ This is an example of a valid request:
 ```text
 ?action=RenameComputers&computer_titles.30:newname
 ```
-

@@ -9,10 +9,10 @@ Get scripts associated with the current account.
 
 Optional query parameters:
 
-  - `script_type`: the status of the script to filter by. Can be one of `v2`, `active`, `archived`, 
-    `redacted`, `all`, and `v1` (deprecated). Defaults to `active`.
-  - `offset`: The offset inside the list of results, used for pagination.
-  - `limit`: The maximum number of results returned, defaults to 1000.
+- `script_type`: the status of the script to filter by. Can be one of `v2`, `active`, `archived`, 
+  `redacted`, `all`, and `v1` (deprecated). Defaults to `active`.
+- `offset`: The offset inside the list of results, used for pagination.
+- `limit`: The maximum number of results returned, defaults to 1000.
 
 Example request:
 
@@ -21,7 +21,7 @@ curl -X GET https://landscape.canonical.com/api/v2/scripts -H "Authorization: Be
 curl -X GET https://landscape.canonical.com/api/v2/scripts?script_type=v2&limit=2 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -96,7 +96,7 @@ Get a script defined by `id`.
 
 Path parameters:
 
-  - `id`: The identification number of the script.
+- `id`: The identification number of the script.
 
 Example request:
 
@@ -104,7 +104,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/scripts/40 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -146,9 +146,9 @@ Get all versions associated with a script ordered by creation time.
 
 Path parameters:
 
-  - `id`: The identification number of the script.
-  - `offset`: The offset inside the list of results, used for pagination.
-  - `limit`: The maximum number of results returned, defaults to 1000.
+- `id`: The identification number of the script.
+- `offset`: The offset inside the list of results, used for pagination.
+- `limit`: The maximum number of results returned, defaults to 1000.
 
 Example request:
 
@@ -156,7 +156,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/scripts/34?limit=3 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -210,8 +210,8 @@ Get a specific version of a script.
 
 Path parameters:
 
-  - `id`: The identification number of the script.
-  - `version_number`: The version number of the script.
+- `id`: The identification number of the script.
+- `version_number`: The version number of the script.
 
 Example request:
 
@@ -219,7 +219,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/scripts/34/versions/3 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -242,8 +242,8 @@ Get the attachment associated with a script.
 
 Path parameters:
 
-  - `id`: The identification number of the script.
-  - `attachment_id`: The identification number of the attachment belonging to the script.
+- `id`: The identification number of the script.
+- `attachment_id`: The identification number of the attachment belonging to the script.
 
 Example request:
 
@@ -251,9 +251,9 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/scripts/40/attachments/18 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
-```
+```text
 #!/bin/bash
 if test -f /var/run/reboot-required
 then
@@ -270,9 +270,9 @@ Get all the script profiles associated with a script.
 
 Path parameters:
 
-  - `id`: The identification number of the script.
-  - `offset`: The offset inside the list of results, used for pagination.
-  - `limit`: The maximum number of results returned, defaults to 1000.
+- `id`: The identification number of the script.
+- `offset`: The offset inside the list of results, used for pagination.
+- `limit`: The maximum number of results returned, defaults to 1000.
 
 Example request:
 
@@ -280,7 +280,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/scripts/34/script-profiles -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -332,7 +332,7 @@ Redacted scripts cannot be archived.
 
 Path parameters:
 
-  - `id`: The identification number of the script to archive.
+- `id`: The identification number of the script to archive.
 
 Example request:
 
@@ -348,7 +348,7 @@ similar to a `DELETE` instead.
 
 Path parameters:
 
-  - `id`: The identification number of the script to redact.
+- `id`: The identification number of the script to redact.
 
 Example request:
 

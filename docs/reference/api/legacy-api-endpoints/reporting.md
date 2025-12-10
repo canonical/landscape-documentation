@@ -1,7 +1,6 @@
 (reference-legacy-api-reporting)=
 # Reporting
 
-
 The methods available here give the ability to do reporting on selections of computers.
 
 ## GetCSVComplianceData
@@ -24,7 +23,7 @@ For example, the following request will query for all machines running Ubuntu 12
 
 An example output looks like this:
 
-```text
+```csv
 name,is_pinging,schedule,USN 1234-12 (2012-08-19 14:51)
 Server 1,False,Every hour at 30 minutes past the hour,Not present
 Server 2,False,Every hour at 30 minutes past the hour,Not present
@@ -48,7 +47,7 @@ For example, the following request will query for all machines running Ubuntu 12
 
 An example output looks like this:
 
-```text
+```json
 [1, 3, 39, 500]
 ```
 
@@ -70,7 +69,7 @@ For example, the following request will query for all machines running Ubuntu 12
 
 An example output looks like this:
 
-```text
+```json
 [44, 343, 5463]
 ```
 
@@ -106,7 +105,7 @@ This example request will return statistics for unpatched times on USNs released
 
 Example output looks like:
 
-```text
+```json
 {
     "30": [
         1,
@@ -162,7 +161,7 @@ For example, the following request will query for all machines running Ubuntu 12
 
 Example output looks like:
 
-```text
+```json
 {
     "Every hour at 30 minutes past the hour": [
         1,
@@ -174,4 +173,3 @@ Example output looks like:
     ]
 }
 ```
-

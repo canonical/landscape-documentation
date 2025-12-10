@@ -8,7 +8,7 @@ Child Instance Profiles are in beta testing. The API endpoints below may not be 
 
 To enable WSL features in self-hosted Landscape, add:
 
-```bash
+```ini
 [features]
 enable-wsl-child-instance-profiles = true
 ```
@@ -33,7 +33,7 @@ Example request:
 curl -X GET -H "Authorization: Bearer $JWT" "https://landscape.canonical.com/api/v2/child-instance-profile-types"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -67,7 +67,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/child-instance-profiles?search=ubuntu -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -130,7 +130,7 @@ curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "
 curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "Custom Rootfs Image", "description": "My custom image", "image_name": "CustomUbuntu", "image_source": "https://example.com/myimage.tar.gz"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -175,7 +175,7 @@ Example request:
 curl -X DELETE https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 Empty response.
 
@@ -197,7 +197,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -246,7 +246,7 @@ Example request:
 curl -X PATCH https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT" -d '{"description": "The stock image from the store", "tags": ["windows_laptops"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -327,7 +327,7 @@ Example requests:
 curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/make-hosts-compliant -H "Authorization: Bearer $JWT" -d '{"host_computer_ids": [6, 15]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {

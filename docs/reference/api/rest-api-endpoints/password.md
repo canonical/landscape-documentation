@@ -18,9 +18,8 @@ Optional parameters:
 
 - None
 
-Example request
+Example request:
 
 ```bash
 curl -X PUT "https://landscape.canonical.com/api/v2/password" -d '{"password": "pwd", "new_password": "more_secure_pwd"}' -H Authorization:"Bearer $JWT"
 ```
-

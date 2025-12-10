@@ -8,9 +8,9 @@ Get script profiles associated with the current account, ordered by creation tim
 
 Optional query parameters:
 
-  - `archived`: the status of the script profile to filter by. Can be one of `archived`, `active` or `all`. Defaults to `active`.
-  - `offset`: The offset inside the list of results, used for pagination.
-  - `limit`: The maximum number of results returned, defaults to 1000.
+- `archived`: the status of the script profile to filter by. Can be one of `archived`, `active` or `all`. Defaults to `active`.
+- `offset`: The offset inside the list of results, used for pagination.
+- `limit`: The maximum number of results returned, defaults to 1000.
 
 Example request:
 
@@ -19,7 +19,7 @@ curl -X GET https://landscape.canonical.com/api/v2/script-profiles?archived=all 
 curl -X GET https://landscape.canonical.com/api/v2/script-profiles -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -143,7 +143,7 @@ Get a script profile by `id`.
 
 Path parameters:
 
-  - `id`: The identification number of the profile.
+- `id`: The identification number of the profile.
 
 Example request:
 
@@ -151,7 +151,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/script-profiles/116782 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -194,14 +194,14 @@ Create a script profile.
 
 Required parameters:
 
-  - `title`: The display name of the profile.
-  - `script_id`: The id of the script this profile is associated with, must be a `v2` script.
-  - `all_computers`: If `true`, the profile will be applied to all instances in the script's `access_group`, regardless of `tags`.
-  - `tags`: An array of tag strings. The profile will be applied only to instances with these tags in the script's `access_group`.
-  - `time_limit`: The time, in seconds, after which the script is considered defunct.
-                  The process will be killed, and the script execution will be marked as failed after this limit expires.
-  - `username`: The username to execute the script as on the client.
-  - `trigger`: Defined as a [trigger](#trigger) based on which the profile should execute.
+- `title`: The display name of the profile.
+- `script_id`: The id of the script this profile is associated with, must be a `v2` script.
+- `all_computers`: If `true`, the profile will be applied to all instances in the script's `access_group`, regardless of `tags`.
+- `tags`: An array of tag strings. The profile will be applied only to instances with these tags in the script's `access_group`.
+- `time_limit`: The time, in seconds, after which the script is considered defunct.
+                The process will be killed, and the script execution will be marked as failed after this limit expires.
+- `username`: The username to execute the script as on the client.
+- `trigger`: Defined as a [trigger](#trigger) based on which the profile should execute.
 
 Example request:
 
@@ -221,7 +221,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/script-profiles" -H "Author
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -256,23 +256,24 @@ Example output:
 ### Trigger
 
 Required parameters:
-  - `trigger_type`: Either of `event`, `one_time`, `recurring`.
+
+- `trigger_type`: Either of `event`, `one_time`, `recurring`.
 
 Each `trigger_type` has corresponding required parameters.
 
 #### Event
 
-   - `event_type`: Currently only the `post_enrollment` event is available, which triggers after a computer is enrolled in an account.
+- `event_type`: Currently only the `post_enrollment` event is available, which triggers after a computer is enrolled in an account.
 
 #### One Time
 
-  - `timestamp`: An ISO 8601-formatted datestamp that sets when the profile should execute.
+- `timestamp`: An ISO 8601-formatted datestamp that sets when the profile should execute.
                  If it is in the past, the profile will start its first run immediately.
 
 #### Recurring
 
-  - `start_after`: An ISO 8601-formatted datestamp that sets the earliest time after which the profile should be scheduled to execute.
-  - `interval`: A 5 digit, [Cron](https://en.wikipedia.org/wiki/Cron) string.
+- `start_after`: An ISO 8601-formatted datestamp that sets the earliest time after which the profile should be scheduled to execute.
+- `interval`: A 5 digit, [Cron](https://en.wikipedia.org/wiki/Cron) string.
 
 ## PATCH `/script-profiles/<id>`
 
@@ -280,17 +281,16 @@ Update a script profile.
 
 Path parameters:
 
-  - `id`: The identification number of the profile to update.
+- `id`: The identification number of the profile to update.
 
 Optional parameters:
 
-  - `title`: The display name of the profile.
-  - `all_computers`: If `true`, the profile will be applied to all instances in the script's `access_group`, regardless of `tags`.
-  - `tags`: An array of tag strings. The profile will be applied only to instances with these tags in the script's `access_group`.
-  - `time_limit`: The time, in seconds, after which the script is considered defunct.
-                  The process will be killed, and the script execution will be marked as failed after this limit expires.
-  - `username`: The username to execute the script as on the client.
-  - `trigger`: Defined as a [trigger](#trigger) based on which the profile should execute.
+- `title`: The display name of the profile.
+- `all_computers`: If `true`, the profile will be applied to all instances in the script's `access_group`, regardless of `tags`.
+- `tags`: An array of tag strings. The profile will be applied only to instances with these tags in the script's `access_group`.
+- `time_limit`: The time, in seconds, after which the script is considered defunct. The process will be killed, and the script execution will be marked as failed after this limit expires.
+- `username`: The username to execute the script as on the client.
+- `trigger`: Defined as a [trigger](#trigger) based on which the profile should execute.
 
 Example request:
 
@@ -302,10 +302,11 @@ curl -X PATCH "https://landscape.canonical.com/api/v2/script-profiles/176892" -H
   "time_limit": 270,
   "tags": ["server"],
   "all_computers": false'
-}
+}'
+
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -345,7 +346,7 @@ Archive a script profile. This makes it inactive.
 
 Path parameters:
 
-  - `id`: The identification number of the profile to archive.
+- `id`: The identification number of the profile to archive.
 
 Example request:
 
@@ -359,9 +360,9 @@ Get parent activities associated with a script profile ordered by creation time.
 
 Path parameters:
 
-  - `id`: The identification number of the profile.
-  - `offset`: The offset inside the list of results, used for pagination.
-  - `limit`: The maximum number of results returned, defaults to 1000.
+- `id`: The identification number of the profile.
+- `offset`: The offset inside the list of results, used for pagination.
+- `limit`: The maximum number of results returned, defaults to 1000.
 
 Example request:
 
@@ -369,7 +370,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/script-profiles/176892/activities" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -408,7 +409,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/script-profile-limits" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -418,4 +419,4 @@ Example output:
 }
 ```
 
-  - `min_interval`: The minimum time, in minutes, between execution of recurring script profiles that Landscape enforces.
+- `min_interval`: The minimum time, in minutes, between execution of recurring script profiles that Landscape enforces.

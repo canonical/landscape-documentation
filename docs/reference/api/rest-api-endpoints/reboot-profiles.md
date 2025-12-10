@@ -38,7 +38,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/rebootprofiles"  \
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -93,7 +93,7 @@ curl -X PATCH "https://landscape.canonical.com/api/v2/rebootprofiles/11" \
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -130,7 +130,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/rebootprofiles?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -190,6 +190,6 @@ Example request:
 curl -X DELETE "https://landscape.canonical.com/api/v2/rebootprofiles/1" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
-_(empty response)_
+(empty response)

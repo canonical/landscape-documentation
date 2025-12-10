@@ -1,7 +1,6 @@
 (reference-legacy-api-alerts)=
 # Alerts
 
-
 Methods for retrieving or editing alerts for an account.
 
 ## AlertTagAssociationMethod
@@ -59,7 +58,7 @@ The following errors may be raised:
 - `UnknownAlertTypeError`: No alert with the specified name exists.
 - `UnknownTag`: No tag with the specified name exists.
 - `InvalidParameterCombination`: Some tags were specified and a ‘true’ value for ‘all_computers’ was passed.
-- `InvalidAlertTypeError`: Raised when trying to discassociate tags with an alert with account scope instead of computer scope.
+- `InvalidAlertTypeError`: Raised when trying to disassociate tags with an alert with account scope instead of computer scope.
 
 The state of the alert will be returned.
 
@@ -77,7 +76,7 @@ Example of a valid request:
 
 The method returns a JSON serialized list of the alert subscribers:
 
-```text
+```json
 [{u'email': u'person1@example.com',
   u'name': u'Person',
   u'id': 1},
@@ -88,7 +87,7 @@ The method returns a JSON serialized list of the alert subscribers:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 [
     {
         "email": "person1@example.com",
@@ -117,7 +116,7 @@ Example of a valid request:
 ?action=GetAlerts
 ```
 
-The method returns a JSON serialised list of the alerts:
+The method returns a JSON serialized list of the alerts:
 
 ```text
 [{u'alert_type': u'PackageReporterAlert',
@@ -134,7 +133,7 @@ The method returns a JSON serialised list of the alerts:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 [
     {
         "alert_type": "PackageReporterAlert",
@@ -184,4 +183,3 @@ Example of a valid request:
 The following errors may be raised:
 
 - `UnknownAlertTypeError`: If an unknown `alert_type` is passed.
-

@@ -20,7 +20,7 @@ Optional parameters:
 
 Example request:
 
-```sh
+```bash
 curl -X POST "https://landscape.canonical.com/api/v2/repositoryprofiles" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
@@ -33,7 +33,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/repositoryprofiles" \
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -110,7 +110,7 @@ curl -X PUT "https://landscape.canonical.com/api/v2/repositoryprofiles/noble-rep
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -169,7 +169,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/repositoryprofiles?limit=2&search=noble" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {

@@ -16,32 +16,34 @@ Query parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X GET https://landscape.canonical.com/api/v2/alerts -H "Authorization: Bearer $JWT" 
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 [
   {
-	"alert_type": "ComputerDuplicateAlert",
-	"description": "Alert when a duplicate computer exists",
-	"subscribed": true,
-	"status": "Alerted",
-	"scope": "computer",
-	"all_computers": true,
-	"tags": [],
-	"label": "Computer Duplicate Alert"
+  "alert_type": "ComputerDuplicateAlert",
+  "description": "Alert when a duplicate computer exists",
+  "subscribed": true,
+  "status": "Alerted",
+  "scope": "computer",
+  "all_computers": true,
+  "tags": [],
+  "label": "Computer Duplicate Alert"
   },
   {
-	"alert_type": "ComputerOfflineAlert",
-	"description": "Alert when computer has not contacted Landscape for some time",
-	"subscribed": true,
-	"status": "Alerted",
-	"scope": "computer",
-	"all_computers": true,
-	"tags": [],
-	"label": "Computer Offline Alert"
+  "alert_type": "ComputerOfflineAlert",
+  "description": "Alert when computer has not contacted Landscape for some time",
+  "subscribed": true,
+  "status": "Alerted",
+  "scope": "computer",
+  "all_computers": true,
+  "tags": [],
+  "label": "Computer Offline Alert"
   },
 ]
 ```
@@ -59,12 +61,14 @@ Query parameters:
 - `include_inactive`: Include inactive alerts
 
 Example request:
+
 ```bash
 curl -X GET https://landscape.canonical.com/api/v2/alerts/summary -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "alerts_summary": [
     {
@@ -80,4 +84,3 @@ Example output:
   ]
 }
 ```
-
