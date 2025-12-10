@@ -1353,7 +1353,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" -H "
 
 Example output:
 
-```bash
+```json
 {
  "id": 119,
  "activity_status": "scheduled",
