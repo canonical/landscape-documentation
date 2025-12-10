@@ -27,14 +27,7 @@ Landscape uses OIDC authentication for the workstation provisioning experience.
 
 Only users that are known to the OIDC provider will be able to use the provisioning experience. A local Landscape user that logs in with username/password will not.
 
-### Self-hosted
-
 See {ref}`how-to-external-auth-oidc`.
-
-### SaaS
-
-1. Navigate to **Org settings > Identity providers**.
-2. Configure an OIDC provider.
 
 ## Create and test your autoinstall file
 
