@@ -1,7 +1,6 @@
 (how-to-use-legacy-api-http)=
 # How to use the legacy API via HTTPS requests
 
-
 This guide describes how to call the Landscape legacy API using standard HTTPS requests and the parameters required for each request.
 
 ## Make a legacy API request
@@ -30,18 +29,21 @@ If you use a JWT, you do not need to sign your requests or provide the `access_k
 
 Here's an example request:
 
-1.  Obtain a JWT:
+1. Obtain a JWT:
 
     ```bash
     TOKEN=$(curl -s -X POST "https://<LANDSCAPE-HOSTNAME>/api/login" \
       -H "Content-Type: application/json" \
       -d '{"email": "<YOUR-EMAIL>", "password": "<YOUR-PASSWORD>"}' | jq -r '.token')
     ```
-2.  Include the token in the `Authorization` header of your request.
+
+2. Include the token in the `Authorization` header of your request.
+
     ```bash
     curl -X GET "https://<LANDSCAPE-HOSTNAME>/api/?action=GetComputers&version=<VERSION-NUMBER>" \
       -H "Authorization: Bearer $TOKEN"
     ```
+
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.
 
 ### API key and secret
@@ -78,27 +80,30 @@ To create the signature:
 - Separate the encoded parameter names from their encoded values with the equals sign (`=`) (ASCII character `61`), even if the parameter value is empty.
 - Separate the name-value pairs with an ampersand (`&`) (ASCII code `38`).
 - Create the string to sign according to the following pseudo-grammar (the “`\n`” represents an ASCII newline):
-```text
-StringToSign = HTTPVerb + "\n" +
-                ValueOfHostHeaderInLowercase + "\n" +
-                HTTPRequestURI + "\n" +
-                CanonicalizedQueryString <from the preceding step>
-```
+
+    ```text
+    StringToSign = HTTPVerb + "\n" +
+                    ValueOfHostHeaderInLowercase + "\n" +
+                    HTTPRequestURI + "\n" +
+                    CanonicalizedQueryString <from the preceding step>
+    ```
+
 - The `HTTPRequestURI` component is the HTTP absolute path component of the URI up to, but not including, the query string. If the `HTTPRequestURI` is empty, use a forward slash (`/`).
 - Calculate an RFC 2104-compliant HMAC with the string you just created, your secret key as the key, and SHA256 as the hash algorithm. For more information, go to [http://www.ietf.org/rfc/rfc2104.txt](http://www.ietf.org/rfc/rfc2104.txt).
 - Convert the resulting value to base64.
 - Use the resulting value as the value of the signature request parameter. Here is an example string to sign:
-```text
-GET\n
-landscape.canonical.com\n
-/api/\n
-access_key_id=0GS7553JW74RRM612K02EXAMPLE
-&action=GetComputers
-&signature_method=HmacSHA256
-&signature_version=2
-&timestamp=2023-08-18T08%3A07%3A00Z
-&version=2023-08-01
-```
+
+    ```text
+    GET\n
+    landscape.canonical.com\n
+    /api/\n
+    access_key_id=0GS7553JW74RRM612K02EXAMPLE
+    &action=GetComputers
+    &signature_method=HmacSHA256
+    &signature_version=2
+    &timestamp=2023-08-18T08%3A07%3A00Z
+    &version=2023-08-01
+    ```
 
 ## Formatting request parameters
 

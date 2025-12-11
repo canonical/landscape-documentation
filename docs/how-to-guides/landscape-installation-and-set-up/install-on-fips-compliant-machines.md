@@ -30,4 +30,3 @@ Outside of Landscape, there are additional steps you may need when setting up yo
 - [Ubuntu Security | FIPS for Ubuntu](https://ubuntu.com/security/fips)
 - [Ubuntu Security | FIPS for Ubuntu 22.04](https://ubuntu.com/security/certifications/docs/2204/fips)
 - [Ubuntu Pro | How to manage FIPS](https://documentation.ubuntu.com/pro/pro-client/enable_fips/)
-

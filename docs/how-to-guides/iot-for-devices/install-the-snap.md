@@ -25,16 +25,17 @@ The installation of the snap will also automatically connect the necessary inter
 
 After you’ve installed `landscape-client` snap, you’ll need to provide some basic configuration values to finish setting up the snap. There are three possible methods to configure the snap.
 
-**Method #1: Use the configuration wizard**
+#### Method #1: Use the configuration wizard
 
 You can use the configuration wizard to guide you through the configuration process. To do this, run:
 
 ```bash
 sudo landscape-client.config
 ```
+
 Then follow the prompts and provide an requested information.
 
-**Method #2: Provide the information as parameters**
+#### Method #2: Provide the information as parameters
 
 You can provide any necessary information directly as parameters. To do this, run:
 
@@ -70,21 +71,13 @@ snap restart landscape-client
 The options you can set with snap `set` are:
 
 - `account-name`
-
 - `computer-title`
-
 - `landscape-url`
-
 - `log-level`
-
 - `script-users`
-
 - `manager-plugins`
-
 - `monitor-plugins`
-
 - `access-group`
-
 - `registration-key`
 
 ### Accept the registration
@@ -98,10 +91,7 @@ If you didn’t specify a registration key, you’ll need to accept the registra
 To accept the registration from the alerts menu in the header:
 
 1. Click on the alert
-
 2. Confirm that the device attempting to enroll is your device
-
 3. Click **Accept**
 
 Your device will then appear in your list of computers, which is found in the **Computers** page in the header. It may take a few minutes to start populating information.
-

@@ -2,6 +2,7 @@
 # Landscape installation and set-up
 
 There are multiple different ways to install and configure Landscape.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2

@@ -9,19 +9,17 @@ The only application in your Landscape server deployment that should be exposed 
 
 If you're using Landscape's repository mirroring features, Landscape Server may need outgoing network access depending on the location of the repositories you're pulling from.
 
-Port 80 is only needed for Landscape's repository mirroring features. If you don't use these
-features, then you don't need to expose Port 80. In this case, you would configure your Landscape clients to use HTTPS for all traffic:
+Port 80 is only needed for Landscape's repository mirroring features. If you don't use these features, then you don't need to expose Port 80. In this case, you would configure your Landscape clients to use HTTPS for all traffic:
 
-  1. Edit `/etc/landscape/client.conf` to ensure that the entries for `url`, `package_hash_id_url`,
-     and `ping_url` all start with `https` instead of `http`
-  1. Restart Landscape client: `sudo systemctl restart landscape-client`
-  
+1. Edit `/etc/landscape/client.conf` to ensure that the entries for `url`, `package_hash_id_url`, and `ping_url` all start with `https` instead of `http`
+1. Restart Landscape client: `sudo systemctl restart landscape-client`
+
 The other applications in your deployment only require enough network access to communicate with each other. Using the default configuration, applications listen on these ports for incoming traffic:
 
-  * Landscape server: 6554, and 8080-9100, inclusive
-  * PostgreSQL: 5432
-  * RabbitMQ server: 5672
-  
+- Landscape server: 6554, and 8080-9100, inclusive
+- PostgreSQL: 5432
+- RabbitMQ server: 5672
+
 Make sure these ports are exposed for internal traffic between the applications. **None of these ports should be exposed to external traffic.**
 
 ## Secure external traffic
@@ -46,10 +44,10 @@ If you use Landscape's script execution features, you can restrict what users La
 
 If you want to further restrict Landscape Client's access to the system, configure it to run in "Monitor-only" mode:
 
-  1. Add the line `monitor_only = True` to `/etc/landscape/client.conf`
-  1. Create or edit the file `/etc/default/landscape-client` to include `DAEMON_USER=landscape`
-  1. Restart Landscape Client: `sudo systemctl restart landscape-client`
-  
+1. Add the line `monitor_only = True` to `/etc/landscape/client.conf`
+1. Create or edit the file `/etc/default/landscape-client` to include `DAEMON_USER=landscape`
+1. Restart Landscape Client: `sudo systemctl restart landscape-client`
+
 Keep in mind that management features will be unavailable in Monitor-only mode.
 
 ## Secure your GPG keys
@@ -154,8 +152,8 @@ sudo lsctl restart
 
 The following Landscape services can be configured to use mTLS:
 
-* `landscape-async-frontend`
-* `landscape-secrets-service`
+- `landscape-async-frontend`
+- `landscape-secrets-service`
 
 Each service can have its own server certificate and can be configured to require clients to authenticate via their own TLS credentials.
 The `secrets-service` can additionally be configured to connect to HashiCorp Vault as a client via mTLS.

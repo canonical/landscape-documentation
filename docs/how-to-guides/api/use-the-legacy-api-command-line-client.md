@@ -1,7 +1,6 @@
 (how-to-use-legacy-api-cli)=
 # How to use the legacy API command-line client
 
-
 The **landscape-api** package is available as a snap package, and also in the same PPA repository as Landscape Server.
 
 Install the package as a self updating snap, by running:
@@ -155,4 +154,3 @@ Would produce JSON output that looks like:
     }
 ]
 ```
-

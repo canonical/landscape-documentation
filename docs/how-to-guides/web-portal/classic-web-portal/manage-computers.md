@@ -13,7 +13,7 @@ This link provides the complete instructions for registering client computers wi
 (how-to-heading-classic-portal-select-computers)=
 ## Select computers
 
-You can select computers by selecting them individually, using searches or using {ref}`reference-terms-tags`. 
+You can select computers by selecting them individually, using searches or using {ref}`reference-terms-tags`.
 
 To select computers individually:
 
@@ -51,22 +51,20 @@ To apply {ref}`reference-terms-tags` to computers:
 
 From the **Computers** page, you can get information about selected computers by clicking on tabs in the navigation menu. Commonly used tabs are described here.
 
-* The **Activities** tab displays information about actions that may be applied to computers. You can filter by specific activities in the activity log by clicking **All**, **Pending**, **Unapproved** or **Failed**. You can also click on each activity in the list to display a screen with details about the activity. On that screen, you can **Approve**, **Cancel**, **Undo** or **Redo** the activity by clicking on the relevant button.
-
-* The **Hardware** tab displays information about the selected computer's processor, memory, network, storage, audio, video, PCI and USB hardware, as well as BIOS information and CPU flags.
-
-* The **Monitoring** tab displays graphs of key performance statistics, such as CPU load, memory use, disk use and network traffic.
+- The **Activities** tab displays information about actions that may be applied to computers. You can filter by specific activities in the activity log by clicking **All**, **Pending**, **Unapproved** or **Failed**. You can also click on each activity in the list to display a screen with details about the activity. On that screen, you can **Approve**, **Cancel**, **Undo** or **Redo** the activity by clicking on the relevant button.
+- The **Hardware** tab displays information about the selected computer's processor, memory, network, storage, audio, video, PCI and USB hardware, as well as BIOS information and CPU flags.
+- The **Monitoring** tab displays graphs of key performance statistics, such as CPU load, memory use, disk use and network traffic.
 
   You can also create custom graphs to display at the top of the page by clicking **Create some now!**. A dropdown menu at the top of the screen lets you specify the timeframe the graph data covers: one day, three days, one week,or four weeks. You can download the data for each graph by clicking the relevant button under the graph.
 
-* The **Processes** tab displays information about all processes running on a computer at the last time it contacted the Landscape server, and lets you end or kill processes by selecting them and clicking on the relevant buttons.
+- The **Processes** tab displays information about all processes running on a computer at the last time it contacted the Landscape server, and lets you end or kill processes by selecting them and clicking on the relevant buttons.
 
-* The **Reports** tab displays seven visualizations that show what percentage of computers:
+- The **Reports** tab displays seven visualizations that show what percentage of computers:
 
-  * are securely patched
-  * are covered by upgrade profiles
-  * have contacted the server within the last five minutes
-  * have applied security updates - four visualizations show computers that have applied Ubuntu Security Notices within the last two, 14, 30, and 60+ days
+  - are securely patched
+  - are covered by upgrade profiles
+  - have contacted the server within the last five minutes
+  - have applied security updates - four visualizations show computers that have applied Ubuntu Security Notices within the last two, 14, 30, and 60+ days
 
 (howto-heading-manage-computers-get-ids)=
 ## Get computer IDs
@@ -75,9 +73,9 @@ There are two ways to locate the IDs for a specific computer:
 
 - **Landscape API**: You can make a web request with `GetComputers` or use `get-computers` in the `landscape-api` command-line package. These methods output a list of all computers with information that includes their ID. For more information on using these methods, see [API Methods: Computers](https://ubuntu.com/landscape/docs/api-computers) and [using the landscape-api package](https://ubuntu.com/landscape/docs/command-line-client).
 - **Landscape dashboard URL**: You can find the computer ID in the URL of the specific computer’s information page. The computer’s ID comes after `/computer` and before `/info`. For example, the computer ID would be 20 in the following URL: `https://landscape-server/account/standalone/computer/20/info`.
-    
+
     To navigate to a specific computer’s information page:
-    
+
     1. Click the **Computers** tab
     2. Locate and click the name of the specific computer you want the ID for
 
@@ -87,13 +85,13 @@ The **Activities** tab in the **Computers** page shows the status of Landscape a
 
 You can view details on an individual activity by clicking on its description. Each activity is labelled with a status. Possible values are:
 
-* Succeeded
-* In progress
-* Scheduled
-* Queued
-* Unapproved
-* Cancelled
-* Failed
+- Succeeded
+- In progress
+- Scheduled
+- Queued
+- Unapproved
+- Cancelled
+- Failed
 
 You can select a subset to view by clicking **All**, **Pending**, **Unapproved**, or **Failed** above the table.
 
@@ -109,9 +107,9 @@ You must specify the person's name, a username and a passphrase. You may also sp
 
 You may also select a checkbox to delete the user's home folders as well. Click **Delete** at the bottom of the screen to complete the operation.
 
-* **Edit** displays a **User details** page that lets you change details, including **Person's name**, **Primary Group**, **Passphrase**, **Location**, **Work phone** and **Home phone**. You can also click **Add** to add a user or **Remove** to remove a user from groups on the selected computers.
-* The LOCK button prevents the selected users from logging into their accounts.
-* The UNLOCK button unlocks previously locked accounts.
+- **Edit** displays a **User details** page that lets you change details, including **Person's name**, **Primary Group**, **Passphrase**, **Location**, **Work phone** and **Home phone**. You can also click **Add** to add a user or **Remove** to remove a user from groups on the selected computers.
+- The LOCK button prevents the selected users from logging into their accounts.
+- The UNLOCK button unlocks previously locked accounts.
 
 ## Manage roles
 
@@ -141,15 +139,15 @@ To assign a role to a new user or edit the role(s) of an existing user:
 
 Landscape uses {ref}`reference-terms-alerts` to notify administrators of conditions that require attention. The following types of alerts are available:
 
-* when a pending computer needs to be accepted or rejected
-* when you are exceeding your license entitlements for Landscape Dedicated Server (This alert does not apply to the hosted version of Landscape.)
-* when new package updates are available for computers
-* when new security updates are available for computers
-* when a package profile is not applied
-* when package reporting fails (Each client runs the command `apt-get update` every 60 minutes. Anything that prevents that command from succeeding is considered a package reporting failure.)
-* when an activity requires explicit administrator acceptance or rejection
-* when a computer has not contacted the Landscape server for more than five minutes
-* when computers need to be rebooted in order for a package update (such as a kernel update) to take effect
+- when a pending computer needs to be accepted or rejected
+- when you are exceeding your license entitlements for Landscape Dedicated Server (This alert does not apply to the hosted version of Landscape.)
+- when new package updates are available for computers
+- when new security updates are available for computers
+- when a package profile is not applied
+- when package reporting fails (Each client runs the command `apt-get update` every 60 minutes. Anything that prevents that command from succeeding is considered a package reporting failure.)
+- when an activity requires explicit administrator acceptance or rejection
+- when a computer has not contacted the Landscape server for more than five minutes
+- when computers need to be rebooted in order for a package update (such as a kernel update) to take effect
 
 To configure alerts, navigate to your organization's home page and click **Configure alerts** or the **Alerts** tab. Select the checkbox next to each type of alert you want to subscribe to, or click  **All** or **None** at the top of the table, then click **Subscribe** or **Unsubscribe**.
 
@@ -202,4 +200,3 @@ To add a removal profile, click **Add removal profile**.
 On the resulting **Create a removal profile** page, you must enter a title for the removal profile. Specify the access group to which the removal profile belongs from a dropdown menu. Finally, specify the number of days without exchange that computers will be allowed without contact before they are automatically removed and their license seat is released. If a computer doesn't contact Landscape within that number of days, it will be removed. Click **Save** to save the new removal profile.
 
 To delete one or more removal profiles, select the checkbox next to the removal profiles' names, then click **Remove**.
-

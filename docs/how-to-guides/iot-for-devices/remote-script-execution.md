@@ -3,7 +3,7 @@
 
 > See also: [Landscape's scripts repository on GitHub](https://github.com/canonical/landscape-scripts)
 
-The Landscape Client snap allows remote script execution, but its behavior differs slightly from the Landscape Client deb package. This is because the Landscape Client snap is typically used on Ubuntu Core, and Ubuntu Core devices don’t use the same user model as desktop and server devices. 
+The Landscape Client snap allows remote script execution, but its behavior differs slightly from the Landscape Client deb package. This is because the Landscape Client snap is typically used on Ubuntu Core, and Ubuntu Core devices don’t use the same user model as desktop and server devices.
 
 This document describes some differences and gives examples of how remote script execution can be used with the snap.
 
@@ -223,4 +223,3 @@ pprint.pprint(response.json())
 EOF
 } &> /tmp/scriptoutput
 ```
-

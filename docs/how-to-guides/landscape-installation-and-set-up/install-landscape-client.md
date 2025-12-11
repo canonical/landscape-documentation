@@ -52,6 +52,7 @@ This method is suitable when performing the installation through a terminal or s
    ```bash
    sudo add-apt-repository -y {LANDSCAPE_PPA}
    ```
+
     - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
 1. Install the `landscape-client` package:
@@ -78,7 +79,7 @@ This method is suitable when performing the installation through a terminal or s
 
 1. Configure:
 
-   ```
+   ```bash
    sudo landscape-config --silent --account-name="${LANDSCAPE_ACCOUNT_NAME}" --computer-title="${LANDSCAPE_COMPUTER_TITLE}" --tags='' --script-users='nobody,landscape,root' --ping-url="http://${LANDSCAPE_FQDN}/ping" --url="https://${LANDSCAPE_FQDN}/message-system"
    ```
 
@@ -121,7 +122,7 @@ This method is suitable if it’s available during a machine’s provisioning st
 
 1. Install `landscape-client` from a PPA:
 
-   ```bash
+   ```yaml
    apt:
      sources:
        trunk-testing-ppa:
@@ -130,7 +131,7 @@ This method is suitable if it’s available during a machine’s provisioning st
 
 1. Configure `landscape-client`. Landscape SaaS users should omit `url` and `ping_url`:
 
-   ```
+   ```yaml
    landscape:
      client:
        account_name: {ACCOUNT_NAME}
@@ -160,4 +161,3 @@ You must be running a self-hosted Landscape server version 23.10 or later (or be
 ```
 
 The snap is generally used for Ubuntu Core devices. You can install the Landscape Client snap from the [Snap Store](https://snapcraft.io/landscape-client) or the command line. For more detailed instructions and information on the snap's limitations, see {ref}`how-to-install-the-client-snap`.
-

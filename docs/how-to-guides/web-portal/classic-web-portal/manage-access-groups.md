@@ -37,7 +37,7 @@ To delete an existing access group:
 2. Click the **Access groups** tab
 3. Click the name of the access group you want to delete
 4. Click **Edit access group**
-5. Click **Delete** 
+5. Click **Delete**
    - You will be asked to confirm this operation.
 6. Click **Confirm** to confirm the group's deletion
 
@@ -95,4 +95,3 @@ To associate a role with one or more access groups:
 5. Click **Save**
 
 Note that you cannot modify the GlobalAdmin role, so there is no link associated with that label.
-
