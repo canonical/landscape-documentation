@@ -941,27 +941,7 @@ Example of a valid request:
     &apt_sources.1=lucid-mirror&apt_sources.2=lucid-extra
 ```
 
-The method returns JSON serialized info of the profile status:
-
-```text
-{"name": "lucide-example",
- "id": 178,
- "description": "A profile for ubuntu lucid",
- "tags": ["desktop", "my-computers"],
- "all_computers": False,
- "pockets": [],
- "apt_sources": [
-     {"line": "deb http://example.com/ubuntu lucid main,
-      "gpg_key": None,
-      "id": 919,
-      "name": "lucid-main"},
-     {"line": u'deb http://example.com/ubuntu lucid universe",
-      "'gpg_key": None,
-      "id": 920,
-      "name": "lucid-universe"}]}
-```
-
-The JSON equivalent output is:
+Example response:
 
 ```json
 {
