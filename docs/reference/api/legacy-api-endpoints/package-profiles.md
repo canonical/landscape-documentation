@@ -106,7 +106,7 @@ The following errors may be raised:
 - `UnknownPackageProfileName`: source package profile name does not exist.
 - `DuplicatePackageProfile`: destination package profile name already exists.
 - `UnknownAccessGroup`: The given access group is not known.
-- `Unauthorised`: The person is not authorised to copy package profiles in the given access group.
+- `Unauthorised`: The person is not authorized to copy package profiles in the given access group.
 
 ## CreatePackageProfile
 
@@ -169,7 +169,7 @@ The following errors may be raised:
 - `InvalidPackageProfileMaterial`: The material passed could not be parsed.
 - `NoFoundPackages`: The specified computer did not have any package data
 - `UnknownAccessGroup`: The given access group is not known.
-- `Unauthorised`: The person is not authorised to create package profiles in the given access group. profile with no constraints. At least one valid constraint must be provided.
+- `Unauthorised`: The person is not authorized to create package profiles in the given access group. profile with no constraints. At least one valid constraint must be provided.
 
 ## RemovePackageProfile
 
@@ -263,4 +263,3 @@ The following errors may be raised:
 - `EmptyPackageProfile`: Cannot remove constraints as it leaves a profile with no constraints. An empty package profile should be removed instead.
 
 The state of the profile will be returned.
-

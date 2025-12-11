@@ -1,7 +1,6 @@
 (reference-legacy-api-activities)=
 # Activities
 
-
 The methods available here are related to activity management. This includes searching activities, cancelling activities and approving activities.
 
 ## GetActivities
@@ -11,16 +10,18 @@ Retrieve activities associated with the current account, ordered by creation tim
 Arguments:
 
 - `query`: A query string used to filter the returned activities. It can be one of the following space-separated criteria:
-    - `id:N`: Search for activities with a specific ID.
-    - `parent-id:N`: Search for children activities of a specific ID.
-    - `status:STATUS_NAME`: Search for activities by status. The available values are undelivered, unapproved, delivered, canceled, failed, succeeded, and scheduled.
-    - `created-after:DATE`: Search for activities created after a specific date or time, specified with the ISO-8601 format. The precision depends on how far you specify, for example `2011-01`, `2011-01-01`, `2011-01-01T10:30` are valid values.
-    - `created-before`: Search for activities created before a specific date or time. The format is the same as created-after.
-    - `creator:EMAIL`: Search for activities created by a particular person (specified by email address).
-    - `computer:CRITERIA`: Search for activities related to the given computers. The criteria is itself another query argument to search computers. See Computer Queries for details.
-    - `type:TYPE`: Search for activities of a specific type.
-    - `OR`: This specific keyword can be used to combine criteria non-exclusively.
-    - `NOT`: This specific keyword can be used to match the opposite of a criteria.
+
+  - `id:N`: Search for activities with a specific ID.
+  - `parent-id:N`: Search for children activities of a specific ID.
+  - `status:STATUS_NAME`: Search for activities by status. The available values are undelivered, unapproved, delivered, canceled, failed, succeeded, and scheduled.
+  - `created-after:DATE`: Search for activities created after a specific date or time, specified with the ISO-8601 format. The precision depends on how far you specify, for example `2011-01`, `2011-01-01`, `2011-01-01T10:30` are valid values.
+  - `created-before`: Search for activities created before a specific date or time. The format is the same as created-after.
+  - `creator:EMAIL`: Search for activities created by a particular person (specified by email address).
+  - `computer:CRITERIA`: Search for activities related to the given computers. The criteria is itself another query argument to search computers. See Computer Queries for details.
+  - `type:TYPE`: Search for activities of a specific type.
+  - `OR`: This specific keyword can be used to combine criteria non-exclusively.
+  - `NOT`: This specific keyword can be used to match the opposite of a criteria.
+
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 
@@ -33,7 +34,7 @@ For example, the following request looks for the succeeded activities on the com
 
 The method returns a JSON serialized list of activities with a limit of 20. The output would be similar to the following:
 
-```text
+```json
 [
     {
         "id": 86,
@@ -86,7 +87,7 @@ Common examples of activities with a `progress` field would be syncing a pocket 
 
 For example, the a `GetActivities` request that reports activities with ongoing progress could output something like:
 
-```text
+```json
 [
     {
         "id": 73,
@@ -119,7 +120,7 @@ For example, the following request gets a list of all possible activity types:
 
 The method returns a JSON serialized list of activity types, like the following result:
 
-```text
+```json
 [
     "RestartRequest",
     "EditUserRequest",
@@ -177,4 +178,3 @@ If any of the selected activities cannot be approved, an HTTP 400 error is retur
 activity id => message 
 activity id => message 
 ```
-
