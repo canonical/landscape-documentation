@@ -30,3 +30,21 @@ A **script profile** defines how and when a script is automatically executed on 
 ## Upgrade profile
 
 An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more computers with each upgrade profile via tags to install packages on those computers. You can also associate an upgrade profile with an access group, which limits its use to only computers within the specified access group. You can manage upgrade profiles from the **Profiles** tab in your organization's home page.
+
+(reference-terms-wsl-profile)=
+## WSL profile
+
+A **WSL profile** defines a single Ubuntu WSL instance that Landscape should install on Windows instances (host machines) in a given access group. You associate Windows instances with WSL profiles using tags. A profile can specify:
+
+- Which Ubuntu distribution to install, either from the Microsoft store or from a custom image
+- cloud-init configuration (optional)
+- Compliance settings that specify how to interact with any WSL instances that were not created by Landscape
+
+ Each Windows instance can be associated with zero or more WSL profiles.
+
+WSL profiles are evaluated periodically for compliance. A Windows instance is considered **compliant** if the following are true:
+
+- Landscape has installed a WSL instance on that Windows instance as specified by each of its associated WSL profiles, or the installation is in progress
+- All Ubuntu WSL instances installed on that Windows instance were created through Landscape if any associated WSL profiles use this compliance settings
+
+Landscape will alert you when a registered Windows instance is out of compliance with any of its WSL profiles. You can then take action to bring any non-compliant Windows instances into compliance with their WSL profiles.
