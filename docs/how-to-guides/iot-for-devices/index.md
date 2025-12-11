@@ -35,16 +35,16 @@ Manage snaps with validation sets <manage-snaps-with-validation-sets>
 IoT devices come with their own unique characteristics and challenges. Therefore, we recommend the following best practices to make their management as easy, safe and secure as possible.
 
 - **IoT devices should be deployed without any users configured**
-    - Users are not necessary and provide an attack vector
-    - Adding users can be achieved remotely via Landscape and can be time-scoped
+  - Users are not necessary and provide an attack vector
+  - Adding users can be achieved remotely via Landscape and can be time-scoped
 - **Automatic refresh timer should be disabled**
-    - This will prevent all snaps from automatically updating when a new version becomes available
-    - Chose when and which snaps to update from Landscape to suit your maintenance windows
-    - Use groups and tags to control your updates
-        - Deploy to test groups first to ensure functionality after upgrade
-        - Choose regional rollout strategies to match local maintenance windows
+  - This will prevent all snaps from automatically updating when a new version becomes available
+  - Chose when and which snaps to update from Landscape to suit your maintenance windows
+  - Use groups and tags to control your updates
+    - Deploy to test groups first to ensure functionality after upgrade
+    - Choose regional rollout strategies to match local maintenance windows
 - **Use remote scripting to debug**
-    - Use Landscape’s remote scripting interface to collect and parse various logs from your devices to help debug issues
+  - Use Landscape’s remote scripting interface to collect and parse various logs from your devices to help debug issues
 
 ## Limitations of the Landscape Client snap
 
@@ -54,11 +54,11 @@ There are some limitations to be aware of when using the Landscape Client snap a
 
 You may encounter these limitations when using the Landscape Client snap on Ubuntu Core:
 
-**Remote script execution**
+#### Remote script execution
 
 You can use remote script execution in the Landscape Client snap, but the functionality is limited by the confinement of the snap. The automatically connected interfaces allow for extensive system configuration and management via script execution, but it may be necessary to do this in a snap interface-friendly manner. For more information, see [how to use remote script execution](/how-to-guides/iot-for-devices/remote-script-execution) and the [Landscape Scripts repository on GitHub](https://github.com/canonical/landscape-scripts).
 
-**User management**
+#### User management
 
 Adding users through Ubuntu One SSO and system user assertions is supported by the client snap but not yet implemented on Landscape Server and its web portal. It’s possible to perform these actions using a custom script.
 
@@ -66,13 +66,13 @@ Deleting users works since the user is removed from the device but the status is
 
 Some actions like locking and editing users are unsupported by the [Snapd REST API](https://snapcraft.io/docs/snapd-api).
 
-**Snap services management**
+#### Snap services management
 
 Snap services management is supported on the client snap but not yet implemented on Landscape Server and its web portal. It’s possible to perform these actions using a custom script.
 
 Possible service actions include: start, enable, stop, disable, restart and reload. These can be performed on individual snap services or on a batch of snap services.
 
-**Snap configuration**
+#### Snap configuration
 
 Setting snap configuration is supported on the client snap but not yet implemented on Landscape Server and its web portal. It’s possible to perform this action using a custom script.
 
@@ -80,23 +80,23 @@ Setting snap configuration is supported on the client snap but not yet implement
 
 You may encounter these limitations when using the Landscape Client snap on Ubuntu Classic:
 
-**User management**
+#### User management
 
 You can list users, but tasks that require writing directly to files in `/etc` and `/home` aren’t possible with the Landscape Client snap’s confinement on Ubuntu Classic.
 
-**Package management**
+#### Package management
 
 Snap confinement doesn’t currently allow the snap to access APT for Debian package management.
 
-**Does not support Ubuntu Pro**
+#### Does not support Ubuntu Pro
 
 The client snap does not support Ubuntu Pro yet. Reporting of Ubuntu Pro status through the `UbuntuProInfo` plugin is currently disabled on the snap. This is due to it requiring access to the APT package management system, which is not available from the snap.
 
-**Snap services management**
+#### Snap services management
 
 The same issues that affect snap services management on Ubuntu Core also apply to Ubuntu Classic. See the previous section on Ubuntu Core and snap services management.
 
-**Snap configuration**
+#### Snap configuration
 
 The same issues that affect snap configuration on Ubuntu Core also apply to Ubuntu Classic. See the previous section on Ubuntu Core and snap configuration.
 

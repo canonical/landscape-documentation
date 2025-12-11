@@ -13,8 +13,8 @@ To use Landscape’s repository management feature within an air-gapped environm
 
 There are two possible configurations for your air-gapped environment:
 
-* **Restricted network air-gap** (One-way controlled access): The inside (offline) server doesn’t have direct access to the public internet, but it’s allowed to communicate with the outside (online) server through a controlled endpoint. In this configuration, the inside server can still receive updates and data from the outside server in a secure, controlled way. The client machines do not have access outside the air-gapped environment. This reduces the manual effort required to transfer data into the air-gapped environment with physical media.
-* **Fully disconnected air-gap** (Manual data transfer): The inside (offline) server has no network connectivity to the outside (online) server or the public internet. Any updates or data must be manually transferred into the air-gapped environment using physical media.
+- **Restricted network air-gap** (One-way controlled access): The inside (offline) server doesn’t have direct access to the public internet, but it’s allowed to communicate with the outside (online) server through a controlled endpoint. In this configuration, the inside server can still receive updates and data from the outside server in a secure, controlled way. The client machines do not have access outside the air-gapped environment. This reduces the manual effort required to transfer data into the air-gapped environment with physical media.
+- **Fully disconnected air-gap** (Manual data transfer): The inside (offline) server has no network connectivity to the outside (online) server or the public internet. Any updates or data must be manually transferred into the air-gapped environment using physical media.
 
 Using a restricted network air-gap drastically simplifies the Landscape repository management process, although managing repositories in a fully disconnected air-gap is still possible.
 

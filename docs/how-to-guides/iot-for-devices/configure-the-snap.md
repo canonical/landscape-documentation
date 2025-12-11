@@ -30,6 +30,7 @@ landscape-client.config --help
 ### SSL certificates
 
 If you’re using Ubuntu Core and require your own SSL certificates, you must place the certificate in `/var/snap/landscape-client/` and provide the full path to the `--ssl-public-key` option. For example, if you place the CA file in `/var/snap/landscape-client/ssl/server.pem`, then you can register the computer with:
+
 ```bash
 sudo landscape-client.config --ssl-public-key /var/snap/landscape-client/ssl/server.pem
 ```
@@ -86,7 +87,7 @@ This setting is recommended for IoT devices where it's often important to contro
 
 To enable this setting, run the following command: (note this will only work if you have the Landscape client snap installed)
 
-```
+```bash
 sudo snap set system refresh.timer="managed"
 ```
 
@@ -97,17 +98,17 @@ The Landscape Client Snap includes built-in log rotation with similar configurat
 To view the daemon’s logs, run:
 
 ```bash
-$ snap logs landscape-client.logrotate
+snap logs landscape-client.logrotate
 ```
 
 To disable log rotation, run:
 
 ```bash
-$ snap stop --disable landscape-client.logrotate
+snap stop --disable landscape-client.logrotate
 ```
 
 To enable log rotation, run:
 
 ```bash
-$ snap start --enable landscape-client.logrotate
+snap start --enable landscape-client.logrotate
 ```
