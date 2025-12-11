@@ -23,7 +23,7 @@ For example, the following request will query for all machines running Ubuntu 12
 
 An example output looks like this:
 
-```csv
+```text
 name,is_pinging,schedule,USN 1234-12 (2012-08-19 14:51)
 Server 1,False,Every hour at 30 minutes past the hour,Not present
 Server 2,False,Every hour at 30 minutes past the hour,Not present

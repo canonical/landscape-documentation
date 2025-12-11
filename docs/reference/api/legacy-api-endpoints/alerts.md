@@ -76,7 +76,7 @@ Example of a valid request:
 
 The method returns a JSON serialized list of the alert subscribers:
 
-```json
+```text
 [{u'email': u'person1@example.com',
   u'name': u'Person',
   u'id': 1},

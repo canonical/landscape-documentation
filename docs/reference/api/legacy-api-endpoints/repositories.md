@@ -846,7 +846,7 @@ The method returns JSON serialized info of the profile status:
 
 The JSON equivalent output is:
 
-```json
+```text
 {
     "name": "lucide-example",
     "id": 178,
@@ -856,7 +856,8 @@ The JSON equivalent output is:
         "my-computers"
     ],
     "all_computers": false,
-    "pockets": [ ...
+    "pockets": [
+        ...
     ],
     "apt_sources": []
 }
@@ -957,7 +958,7 @@ The method returns JSON serialized info of the profile status:
      {"line": u'deb http://example.com/ubuntu lucid universe",
       "'gpg_key": None,
       "id": 920,
-      "name": "lucid-universe"}]}}
+      "name": "lucid-universe"}]}
 ```
 
 The JSON equivalent output is:
@@ -975,13 +976,14 @@ The JSON equivalent output is:
     "pockets": [],
     "apt_sources": [
         {
-            "line": "deb http://example.com/ubuntu lucid main,"gpg_key": None,
+            "line": "deb http://example.com/ubuntu lucid main",
+            "gpg_key": null,
             "id": 919,
             "name": "lucid-main"
         },
         {
-            "line": u'deb http: //example.com/ubuntu lucid universe",
-            "'gpg_key": None,
+            "line": "deb http://example.com/ubuntu lucid universe",
+            "gpg_key": null,
             "id": 920,
             "name": "lucid-universe"
         }
