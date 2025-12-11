@@ -41,28 +41,29 @@ You can access self-hosted Landscape from one of our PPAs:
 
 Self-hosted Landscape consists of two parts:
 
-* **Database server**
-* **Application server**
+- **Database server**
+- **Application server**
 
 Depending on your deployment method, these may exist on the same machine or different machines. Here is how you can get started:
 
 ### Quickstart
 
-* **{ref}`Quickstart installation <how-to-quickstart-installation>`**, for when you don't have Juju but quickly want to check out self-hosted Landscape. Not recommended for production environments when having more than 500 clients.
+- **{ref}`Quickstart installation <how-to-quickstart-installation>`**, for when you don't have Juju but quickly want to check out self-hosted Landscape. Not recommended for production environments when having more than 500 clients.
 
 ### Juju deployed
 
-* **{ref}`Juju installation <how-to-juju-installation>`** for a truly scalable deployment.
+- **{ref}`Juju installation <how-to-juju-installation>`** for a truly scalable deployment.
 
 ### Manual installation
 
-* **{ref}`Manual installation <how-to-manual-installation>`**: for when you don't have a suitable Juju environment but need a scalable deployment.
+- **{ref}`Manual installation <how-to-manual-installation>`**: for when you don't have a suitable Juju environment but need a scalable deployment.
 
 ## Installation requirements
 
 ### System Requirements
 
 The bare minimum compute power required to run Landscape is 4 GB of RAM and 20 GB of disk space.
+
 - The `landscape-server-quickstart` package requires 2 vCPUs or one dual core processor
 - The Juju-based installation can be deployed on a single vCPU, but a minimum of 2 is recommended.
 
@@ -78,19 +79,20 @@ Any machines you manage with Landscape should be able to access your Landscape i
 
 The machine(s) running as the application server will also need the following external network access:
 
- * HTTPS access to `usn.ubuntu.com` in order to download the USN database and detect security updates. Without this, the available updates won't be distinguished between security related and regular updates
- * HTTP access to the public Ubuntu archives and `changelogs.ubuntu.com`, in order to update the hash-id-database files and detect new distribution releases. Without this, the release upgrade feature won't work
- * HTTPS access to `landscape.canonical.com` in order to query for available self-hosted Landscape releases. If this access is not given, the only drawback is that Landscape won't display a note about the available releases in the account page.
- * HTTPS access to `ppa.launchpadcontent.net` if using the Landscape quickstart PPA
- * HTTPS access to `contracts.canonical.com` for Ubuntu Pro authentication
- * HTTPS access to `esm.ubuntu.com` for Ubuntu Pro APT package-based services
- * HTTPS access to `livepatch.canonical.com` and `livepatch-files.canonical.com` for Livepatch
- * HTTPS access to `ubuntu.com/security` for fetching security information
- * HTTPS access to `api.snapcraft.io`, `dashboard.snapcraft.io`, `login.ubuntu.com`, and `*.snapcraftcontent.com` if using or downloading snaps (e.g., `landscape-api`)
+- HTTPS access to `usn.ubuntu.com` in order to download the USN database and detect security updates. Without this, the available updates won't be distinguished between security related and regular updates
+- HTTP access to the public Ubuntu archives and `changelogs.ubuntu.com`, in order to update the hash-id-database files and detect new distribution releases. Without this, the release upgrade feature won't work
+- HTTPS access to `landscape.canonical.com` in order to query for available self-hosted Landscape releases. If this access is not given, the only drawback is that Landscape won't display a note about the available releases in the account page.
+- HTTPS access to `ppa.launchpadcontent.net` if using the Landscape quickstart PPA
+- HTTPS access to `contracts.canonical.com` for Ubuntu Pro authentication
+- HTTPS access to `esm.ubuntu.com` for Ubuntu Pro APT package-based services
+- HTTPS access to `livepatch.canonical.com` and `livepatch-files.canonical.com` for Livepatch
+- HTTPS access to `ubuntu.com/security` for fetching security information
+- HTTPS access to `api.snapcraft.io`, `dashboard.snapcraft.io`, `login.ubuntu.com`, and `*.snapcraftcontent.com` if using or downloading snaps (e.g., `landscape-api`)
 
 If this external network access is unavailable, Canonical's professional services include assistance with setting up Landscape in a fully air-gapped environment.
 
 ## Unsupported Versions
+
 | **major version**                | **Release date** | **Support expired on** | **Version of Ubuntu**  |
 | ----------------------           | ---------------- | ------------------------ | ---------------------  |
 | {ref}`reference-release-notes-25-04` | 2025-May | **2025-Oct** | 22.04 LTS or 24.04 LTS |
@@ -102,4 +104,3 @@ If this external network access is unavailable, Canonical's professional service
 | {ref}`reference-release-notes-17-03`  | 2017-Mar         | **2019-Mar**             | 16.04 LTS              |
 | {ref}`reference-release-notes-16-06`  | 2016-Jul         | **2017-Dec**             | 14.04 LTS or 16.04 LTS |
 | {ref}`reference-release-notes-16-03`  | 2016-Apr         | **2017-Apr**             | 14.04 LTS              |
-
