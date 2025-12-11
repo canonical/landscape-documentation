@@ -21,6 +21,11 @@ Package profiles are evaluated periodically, and can be used for ensuring compli
 
 A **removal profile** defines a maximum number of days that a computer can go without exchanging data with the Landscape server before it is automatically removed. If more days pass than the profile’s “Days without exchange”, that computer will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired computer data for long periods of time. You can associate zero or more computers with each removal profile via tags to ensure those computers are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only computers within the specified access group. You can manage removal profiles from the **Profiles** tab in your organization's home page.
 
+(reference-terms-script-profile)=
+## Script profile
+
+A **script profile** defines how and when a script is automatically executed on managed computers in Landscape. Script profiles associate a script with a set of computers using tags and an access group, specify the user account that executes the script, and define a time limit for execution and a trigger that determines when the script runs. Script profiles can apply to zero or more computers identified by tags, or to all computers within the script’s access group. You can manage script profiles from the **Profiles** tab in your organization's home page.
+
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
 
