@@ -45,13 +45,16 @@ Landscape Server logs are located in `/var/log/landscape-server/`.
 
 Landscape also relies on the following third-party infrastructure: HAProxy (if used), PostgreSQL, and RabbitMQ. The typical locations for these logs are:
 
-**HAProxy**: 
+### HAProxy
+
 - `/var/log/haproxy.log`
 
-**PostgreSQL**: 
+### PostgreSQL
+
 - `/var/log/postgresql/postgresql-<VERSION>-main.log`
 
-**RabbitMQ**:
+### RabbitMQ
+
 - `/var/log/rabbitmq/rabbitmq-server.log`
 - `/var/log/rabbitmq/rabbit@<HOSTNAME>.log`
 - `/var/log/rabbitmq/rabbitmq-server.error.log`

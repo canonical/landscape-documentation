@@ -141,5 +141,3 @@ This configuration can be set through environment variables only.
 - Deprecated ENV name: `VAULT_TOKEN`
 - Deprecated section: N/A
 - Deprecated key: N/A
-
-

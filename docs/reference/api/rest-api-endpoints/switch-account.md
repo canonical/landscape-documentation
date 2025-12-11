@@ -14,16 +14,17 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
-curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
-	"account_name": "upside"
+curl -X POST -H "Authorization: Bearer $JWT" -d '{
+  "account_name": "upside"
   }'   https://landscape.canonical.com/api/v2/switch-account
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIXzI1NiJ9.eyJleHAiOjE3MTI4NzqzNzMsImehdCI6MTcxMjc5MTk3My"
 }
 ```
-

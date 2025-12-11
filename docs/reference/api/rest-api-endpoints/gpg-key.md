@@ -25,14 +25,14 @@ curl -X POST -H "Authorization: Bearer $JWT" -d '{
 }' https://landscape.canonical.com/api/v2/gpg-key
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
-"id": 10617,
-"name": "gpg-mirror-key",
-"key_id": "40V648A95FD69F40",
-"fingerprint": "b6a7:2bb0:2a06:be5a:0d05:0beb:49a6:33a9:5fa2:9f40",
-"has_secret": false
+  "id": 10617,
+  "name": "gpg-mirror-key",
+  "key_id": "40V648A95FD69F40",
+  "fingerprint": "b6a7:2bb0:2a06:be5a:0d05:0beb:49a6:33a9:5fa2:9f40",
+  "has_secret": false
 }
 ```
-

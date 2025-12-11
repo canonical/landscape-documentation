@@ -14,9 +14,5 @@ The following is a list of example Landscape API methods that require the distri
 - **Reporting Methods**: These methods allow you to do reporting on selections of computers. They usually take the distribution as a query parameter. For more information, see the [API methods on reporting](https://ubuntu.com/landscape/docs/api-reporting).
 
 - **Computers**: The methods under Computers help you retrieve computers and do basic operations such as tagging. With these methods, you can reference the distribution by using either the version number or the code name. For more information, see the [API methods on computers](https://ubuntu.com/landscape/docs/api-computers).
-<br>
-<br>
-<br>
 
 > *Thanks to the following contributor(s): [@ade555](https://github.com/ade555)*
-

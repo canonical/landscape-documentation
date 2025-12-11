@@ -1,7 +1,6 @@
 (reference-legacy-api-packages)=
 # Packages
 
-
 The methods available here are related to package management operations.
 
 ## GetPackages
@@ -14,7 +13,11 @@ Query parameters:
 - `search`: A string to restrict the search to (optional). All fields are searched, not just those returned. (e.g., description)
 - `names`: Restrict the search to these package names. Multiple names can be specified by numbering the names with `names.1`, `names.2`, etc.
 - `installed`: If true only packages in the installed state will be returned, if false only packages not installed will be returned. If not given both installed and not installed packages will be returned.
-    - **Note:** setting `installed` to `false` will only return computers where the given package is `available` but not `installed`, and will not work for arbitrary package names that have not been reported by Landscape Client. For example, using a non-existent package name for `names` will not return all computers.
+
+    ```{note}
+    Setting `installed` to `false` will only return computers where the given package is `available` but not `installed`, and will not work for arbitrary package names that have not been reported by Landscape Client. For example, using a non-existent package name for `names` will not return all computers.
+    ```
+
 - `available`: If true only packages in the available state will be returned, if false only packages not available will be returned. If not given both available and not available packages will be returned.
 - `upgrade`: If true, only installable packages that are upgrades for an installed one are returned. If false, only installable packages that are not upgrades are returned. If not given, packages will be returned regardless of whether they are upgrades or not.
 - `held`: If true, only installed packages that are held on computers are returned. If false, only packages that are not held on computers are returned. If not given, packages will be returned regardless of the held state.
@@ -82,7 +85,7 @@ Request the installation of named packages on a selection of computers.
 `query`: A qualified criteria to be used in the search. (See `query` under `GetComputers` for additional details.)
 `packages.#`: The list of package names to be installed, multiple names can be supplied.
 `deliver_after`: Package installs will only take place when the computer contacts Landscape after this time (optional).
-`deliver_delay_window`: Randomise delivery within the given time frame specified in minutes (optional).
+`deliver_delay_window`: Randomize delivery within the given time frame specified in minutes (optional).
 
 Example of a valid request:
 
@@ -109,7 +112,7 @@ The method returns a JSON serialized list of the parent activity created:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 {
     "activity_status": "undelivered",
     "computer_id": "None",
@@ -136,7 +139,7 @@ Request the removal of named packages on a selection of computers.
 - `query`: A qualified criteria to be used in the search. (See `query` under `GetComputers` for additional details.)
 - `packages.#`: The package names to be removed, multiple package names can be supplied.
 - `deliver_after`: The removal will only take place when the computer contacts Landscape after this time (optional).
-- `deliver_delay_window`: Randomise delivery within the given time frame specified in minutes (optional).
+- `deliver_delay_window`: Randomize delivery within the given time frame specified in minutes (optional).
 
 Example of a valid request:
 
@@ -163,7 +166,7 @@ The method returns a JSON serialized list of the activity created:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 {
     "activity_status": "undelivered",
     "computer_id": "None",
@@ -189,7 +192,7 @@ Request upgrading of all packages identified as being upgradable, on all compute
 - `packages.#`: A string to restrict the upgraded packages to install (optional). Multiple package names can be supplied.
 - `security_only`: If ‘true’ then only packages with USNs or from the security pocket, i.e. security upgrades will be applied (optional).
 - `deliver_after`: The upgrade will only take place when the computer contacts Landscape after this time (optional).
-- `deliver_delay_window`: Randomise delivery within the given time frame specified in minutes (optional).
+- `deliver_delay_window`: Randomize delivery within the given time frame specified in minutes (optional).
 
 Example of a valid request:
 
@@ -213,7 +216,7 @@ The method returns a JSON serialized list of the activity created:
 
 The JSON equivalent of this output is:
 
-```text
+```json
 {
     "computer_id": "None",
     "creation_time": "2011-07-18T15:30:13Z",
@@ -229,4 +232,3 @@ The JSON equivalent of this output is:
     "type": "ActivityGroup"
 }
 ```
-

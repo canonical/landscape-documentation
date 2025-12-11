@@ -1,7 +1,6 @@
 (reference-legacy-api-scripts)=
 # Scripts
 
-
 The methods available here are related to stored scripts.
 
 ## GetScripts
@@ -90,7 +89,7 @@ For example, the following request will execute the Script with Id 19000 on all 
 
 The method returns a JSON structure with the activity that was created:
 
-```text
+```json
 {
     "computer_id": "None",
     "creation_time": "2012-11-26T23: 36: 20Z",
@@ -252,7 +251,7 @@ For example, the following request creates a script from an existing script:
 
 The method returns a JSON serialized representation of the new script:
 
-```text
+```json
 {
     "creator": {
         "name": "John Smith",
@@ -320,4 +319,3 @@ The method returns the newly created attachment’s filename:
 ```text
 ‘foo.txt’
 ```
-

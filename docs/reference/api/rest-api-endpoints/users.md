@@ -15,28 +15,30 @@ Optional query parameters:
 - `delete_home`: The user's home directory will also be deleted.
 
 Example request:
+
 ```bash
 curl -X DELETE   -H "Authorization: Bearer $JWT" "landscape.canonical.comapi/users?computer_ids=1&usernames=john"
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
-	"activity_status": "undelivered",
-	"completion_time": null,
-	"creation_time": "2024-04-11T15:50:26Z",
-	"creator": {
-    	"email": "john@example.com",
-    	"id": 1,
-    	"name": "John Allen Smith"
-	},
-	"deliver_delay_window": 0,
-	"id": 218,
-	"parent_id": null,
-	"result_code": null,
-	"result_text": null,
-	"summary": "Delete user john (UID 1000)",
-	"type": "ActivityGroup"
+  "activity_status": "undelivered",
+  "completion_time": null,
+  "creation_time": "2024-04-11T15:50:26Z",
+  "creator": {
+      "email": "john@example.com",
+      "id": 1,
+      "name": "John Allen Smith"
+  },
+  "deliver_delay_window": 0,
+  "id": 218,
+  "parent_id": null,
+  "result_code": null,
+  "result_text": null,
+  "summary": "Delete user john (UID 1000)",
+  "type": "ActivityGroup"
 }
 ```
 
@@ -53,36 +55,37 @@ Query parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X GET   -H "Authorization: Bearer $JWT" "landscape.canonical.com/api/users?computer_id=23"
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "count": 2,
   "results": [
-	{
-  	"enabled": true,
-  	"home_phone": null,
-  	"location": null,
-  	"name": null,
-  	"primary_gid": 65534,
-  	"uid": 105,
-  	"username": "_apt",
-  	"work_phone": null
-	},
-	{
-  	"enabled": true,
-  	"home_phone": null,
-  	"location": null,
-  	"name": "backup",
-  	"primary_gid": 34,
-  	"uid": 34,
-  	"username": "backup",
-  	"work_phone": null
-	}
-
+  {
+    "enabled": true,
+    "home_phone": null,
+    "location": null,
+    "name": null,
+    "primary_gid": 65534,
+    "uid": 105,
+    "username": "_apt",
+    "work_phone": null
+  },
+  {
+    "enabled": true,
+    "home_phone": null,
+    "location": null,
+    "name": "backup",
+    "primary_gid": 34,
+    "uid": 34,
+    "username": "backup",
+    "work_phone": null
+  }
 }
 ```
 
@@ -137,25 +140,27 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X POST \
   -H "Authorization: Bearer $JWT" \
   -d '{
-	"computer_ids": [1],
-	"usernames": ["john"]
+  "computer_ids": [1],
+  "usernames": ["john"]
   }' \
   https://landscape.canonical.com/api/v2/users/lock
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "id": 226,
   "creation_time": "2024-04-11T15:56:29Z",
   "creator": {
-	"name": "John Allen Smith",
-	"email": "john@example.com",
-	"id": 1
+    "name": "John Allen Smith",
+    "email": "john@example.com",
+    "id": 1
   },
   "type": "ActivityGroup",
   "summary": "Lock out user john (UID 1000)",
@@ -182,22 +187,24 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
-	"computer_ids": [1],
-	"usernames": ["john"]
+  "computer_ids": [1],
+  "usernames": ["john"]
   }'   https://landscape.canonical.com/api/v2/users/unlock
 ```
 
-Example output:
-```bash
+
+Example response:
+```json
 {
   "id": 228,
   "creation_time": "2024-04-11T15:58:15Z",
   "creator": {
-	"name": "John Allen Smith",
-	"email": "john@example.com",
-	"id": 1
+    "name": "John Allen Smith",
+    "email": "john@example.com",
+    "id": 1
   },
   "type": "ActivityGroup",
   "summary": "Unlock user john (UID 1000)",
@@ -209,4 +216,3 @@ Example output:
   "activity_status": "undelivered"
 }
 ```
-

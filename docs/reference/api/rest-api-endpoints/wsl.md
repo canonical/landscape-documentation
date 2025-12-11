@@ -8,7 +8,7 @@ WSL features are in beta testing. The API endpoints below may not be available t
 
 To enable WSL features in self-hosted Landscape, add:
 
-```bash
+```ini
 [features]
 enable-wsl-child-instance-profiles = true
 ```
@@ -155,7 +155,7 @@ curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Au
 curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d "{\"computer_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < ~/cloud_init.yaml)\"}"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -183,7 +183,7 @@ Example request:
 curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Custom-WSL-Image", "cloud_init": "<b64 encoded cloud_init file contents>", "rootfs_url": "https://example.com/custom_wsl_image.tar.gz"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -228,7 +228,7 @@ Example request:
 curl -X POST -H "Authorization: Bearer $JWT" "https://landscape.canonical.com/api/v2/computers/6/delete-children" -d '{"computer_names": ["child_one", "child_two"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -271,7 +271,7 @@ Example request:
 curl -X GET -H "Authorization: Bearer $JWT" "https://landscape.canonical.com/api/v2/computers/wsl-hosts"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -453,7 +453,7 @@ Example request:
 curl -X GET -H "Authorization: Bearer $JWT" "https://landscape.canonical.com/api/v2/wsl-instance-names"
 ```
 
-Example output:
+Example response:
 
 ```json
 [

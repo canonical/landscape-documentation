@@ -1,7 +1,6 @@
 (reference-legacy-api-role-based-access-control)=
 # Role Based Access Control
 
-
 Methods for managing role based access control (RBAC) within Landscape.
 
 Central to RBAC is the concept of a role. Roles can have permissions, access groups and administrators associated with them.
@@ -30,7 +29,7 @@ For example, the following request adds the access group ‘my-group’ to the r
 
 The method returns a JSON serialized representation of the edited role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "MyRole",
@@ -66,7 +65,7 @@ For example, the following request adds the ‘ExecuteScript’ permission to th
 
 The method returns a JSON serialized representation of the edited role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "MyRole",
@@ -93,7 +92,7 @@ The following errors may be raised:
 - `UnknownRole`: No role with the specified name was found.
 - `UnknownPersons`: One or more of the given emails are unknown.
 
-For example, the following request grants the role named ‘MyRole’ to the person in the account with email 'john@example.com‘:
+For example, the following request grants the role named ‘MyRole’ to the person in the account with email `john@example.com`:
 
 ```text
 ?action=AddPersonsToRole&name=MyRole&persons.1=john@example.com
@@ -101,7 +100,7 @@ For example, the following request grants the role named ‘MyRole’ to the per
 
 The method returns a JSON serialized representation of the edited role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "MyRole",
@@ -138,7 +137,7 @@ For example, the following request creates a role named ‘BaseRole1’ from Bas
 
 The method returns a JSON serialized representation of the new role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "BaseRole1",
@@ -172,7 +171,7 @@ For example, the following request creates an access group named ‘Production�
 
 The method returns a JSON serialized representation of the new access group:
 
-```text
+```json
 {
     "title": "MyAccessGroup",
     "parent": "ParentAccessGroup",
@@ -229,7 +228,7 @@ For example, the following request fetches all access groups in the caller’s a
 
 The method returns a JSON serialized representation of the account access groups:
 
-```text
+```json
 [
     {
         "name": "MyAccessGroup",
@@ -252,7 +251,7 @@ Example of valid call:
 
 The method returns a JSON serialized list of permissions:
 
-```text
+```json
 [
     {
         "name": "ViewComputer",
@@ -282,7 +281,7 @@ For example, the following request fetches all roles in the caller’s account:
 
 The method returns a JSON serialized representation of the account roles:
 
-```text
+```json
 [
     {
         "key": 1012,
@@ -312,7 +311,7 @@ For example, the following request removes an access group named ‘MyAccessGrou
 
 The method returns a JSON serialized representation of the state of the parent access group after the child is removed:
 
-```text
+```json
 {
     "name": "ParentAccessGroup",
     "title": "parent",
@@ -339,7 +338,7 @@ For example, the following request removes the access group ‘my-group’ from 
 
 The method returns a JSON serialized representation of the edited role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "MyRole",
@@ -374,7 +373,7 @@ For example, the following request will remove the ‘ExecuteScript’ permissio
 
 The method returns a JSON serialized representation of the edited role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "MyRole",
@@ -399,7 +398,7 @@ The following errors may be raised:
 - `UnknownRole`: No role with the specified name was found.
 - `UnknownPersons`: One or more of the given email addresses are unknown.
 
-For example, the following request removes the role named ‘MyRole’ from the person in the account with email 'john@example.com‘:
+For example, the following request removes the role named ‘MyRole’ from the person in the account with email `john@example.com`:
 
 ```text
 ?action=RemovePersonsFromRole&name=MyRole&persons.1=john@example.com
@@ -407,7 +406,7 @@ For example, the following request removes the role named ‘MyRole’ from the 
 
 The method returns a JSON serialized representation of the edited role:
 
-```text
+```json
 {
     "key": 1012,
     "name": "MyRole",
@@ -437,9 +436,8 @@ For example, the following request removes a role named ‘MyRole’:
 ?action=RemoveRole&name=MyRole
 ```
 
-An empty response is returned is the role is successfully removed:
+An empty response is returned if the role is successfully removed:
 
-```text
+```json
 {}
 ```
-

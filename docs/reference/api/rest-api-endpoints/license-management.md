@@ -19,10 +19,11 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST https://your-landscape-domain.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2], "token": "<ubuntu-pro-token>"}'
+curl -X POST https://landscape.example.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2], "token": "<ubuntu-pro-token>"}'
 ```
 
 Example response:
+
 ```json
 {
     "activity": {
@@ -69,7 +70,7 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST https://your-landscape-domain.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2]}'
+curl -X POST https://landscape.example.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2]}'
 ```
 
 Example response:
@@ -119,7 +120,7 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X GET https://your-landscape-domain.com/api/v2/legacy-licenses -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.example.com/api/v2/legacy-licenses -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -165,7 +166,7 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X GET https://your-landscape-domain.com/api/v2/legacy-licenses/8 -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.example.com/api/v2/legacy-licenses/8 -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -193,7 +194,7 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X GET https://your-landscape-domain.com/api/v2/contracts -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.example.com/api/v2/contracts -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -239,7 +240,7 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X GET https://your-landscape-domain.com/api/v2/contracts/contract-id-1 -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.example.com/api/v2/contracts/contract-id-1 -H "Authorization: Bearer $JWT"
 ```
 
 Example response:

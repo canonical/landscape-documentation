@@ -29,7 +29,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the profile status:
 
-```text
+```json
 {
     "name": "test-1",
     "id": 178,
@@ -56,10 +56,10 @@ Arguments:
 - `at_hour`: The hour, in 24h format, at which the upgrade profile will be run.
 - `at_minute`: The minute of the hour (`0-59`) at which the upgrade profile will be run.
 - `deliver_within`: An optional number of hours within which the upgrade task should be delivered to computers. The window will be from the time specified by this API call (`on_days`, `at_hour`, `at_minute`) until the provided number of hours later. Defaults to 1 hour.
-- `deliver_delay_window`: Randomise delivery within the given timeframe specified in minutes. (optional)
+- `deliver_delay_window`: Randomize delivery within the given timeframe specified in minutes. (optional)
 - `security_upgrade`: Optional, defaults to False. Whether this upgrade is a security upgrade or not. Deprecated, use upgrade_type instead.
 - `upgrade_type`: This profile should apply to all package upgrades or only security upgrades. Must be either `security` or `all`.
-- `autoremove`: Optional, defaults to False. Whether the upgrade profile should also perform an autoremove of old packages.
+- `autoremove`: Optional, defaults to False. Whether the upgrade profile should also perform an autoremov of old packages.
 - `access_group`: An optional name of the access group to create the profile into.
 
 The following errors may be raised:
@@ -67,7 +67,7 @@ The following errors may be raised:
 - `InvalidScheduleFormat`: The given schedule string is not valid.
 - `InvalidParameterCombination`: The set of arguments are not compatible when specified together.
 - `UnknownAccessGroup`: The given access group is not known.
-- `Unauthorised`: The person is not authorised to copy upgrade profiles in the given access group.
+- `Unauthorised`: The person is not authorized to copy upgrade profiles in the given access group.
 
 For example, the following request creates an upgrade profile schedule that updates all packages every Monday and Sunday at 1:30pm:
 
@@ -78,7 +78,7 @@ For example, the following request creates an upgrade profile schedule that upda
 
 The method returns a JSON serialized representation of the newly created object:
 
-```text
+```json
 [
     {
         "id": 1,
@@ -126,7 +126,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the profile status:
 
-```text
+```json
 {
     "name": "test-1",
     "id": 178,
@@ -171,7 +171,7 @@ For example, the following is a request to update the example created in `Create
 
 The method returns a JSON serialized representation of the modified object:
 
-```text
+```json
 [
     {
         "id": 1,
@@ -254,4 +254,3 @@ The method returns a JSON serialized representation of the list:
     }
 ]
 ```
-

@@ -16,4 +16,3 @@ You should only permit access to the following URIs:
 The URIs listed follow your Landscape FQDN. For example, `https://landscape-server.example.com/ping`.
 
 The paths `/repository`, `/attachments` and `/hash-id-databases` contain several subpaths. Depending on your specific purpose, you can choose to restrict access to one or more of these subpaths. For example, in single-tenant architectures, access to the path `/repository` can be limited exclusively to `/repository/standalone/*`.
-

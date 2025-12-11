@@ -1,7 +1,6 @@
 (reference-legacy-api-repositories)=
 # Repositories
 
-
 These methods give access to repository management.
 
 ## CreateDistribution
@@ -27,7 +26,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the created distribution:
 
-```text
+```json
 {
     "name": "ubuntu",
     "access_group": "global",
@@ -52,7 +51,7 @@ For example, the following request returns info about a distribution named ‘ub
 
 The method returns JSON serialized info on the distributions:
 
-```text
+```json
 [
     {
         "creation_time": "2011-07-19T12:51:18Z",
@@ -153,7 +152,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the created series:
 
-```text
+```json
 {
     "name": "lucid",
     "pockets": [],
@@ -209,7 +208,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the derived series:
 
-```text
+```json
 {
     "creation_time": "2011-07-26T15:15:17Z",
     "name": "lucid-staging",
@@ -289,7 +288,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the created pocket:
 
-```text
+```json
 {
     "name": "updates",
     "architectures": [
@@ -406,7 +405,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of changed packages between pockets for each component/architecture pair:
 
-```text
+```json
 {
     "main/i386": {
         "update": [
@@ -470,7 +469,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the packages in the pocket, for each section and architecture:
 
-```text
+```json
 {
     "main/i386": [
         [
@@ -533,7 +532,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the pocket state:
 
-```text
+```json
 {
     "name": "updates",
     "architectures": [
@@ -594,11 +593,11 @@ Example of a valid request:
 
 The following errors may be raised:
 
-- `Unauthorised`: The person is not authorised to create repository profiles.
+- `Unauthorised`: The person is not authorized to create repository profiles.
 
 The method returns a JSON representation of the created repository profile:
 
-```text
+```json
 {
     "all_computers": false,
     "description": "Example Lucid profile",
@@ -622,7 +621,7 @@ Example of a valid request:
 
 The method returns a JSON serialized list of the repository profiles:
 
-```text
+```json
 [
     {
         "all_computers": false,
@@ -650,7 +649,7 @@ Example of a valid request:
 
 The method returns a JSON serialized list of the APT sources:
 
-```text
+```json
 [
     {
         "id": 100,
@@ -680,7 +679,7 @@ Example of a valid request:
 
 The method returns a JSON serialized list of the created APT source:
 
-```text
+```json
 {
     "id": 100,
     "name": "lucid-mirror",
@@ -747,7 +746,7 @@ The method returns JSON serialized info of the profile status:
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "name": "lucide-example",
     "id": 178,
@@ -777,7 +776,7 @@ If all_computers=true, the profile will be unflagged as applying to all computer
 Example of a valid request:
 
 ```text
-?action=DisssociateRepositoryProfile&name=lucid-example
+?action=DisassociateRepositoryProfile&name=lucid-example
     &tags.1=server&tags.2=natty
 ```
 
@@ -800,7 +799,7 @@ The method returns JSON serialized info of the profile status:
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "name": "lucide-example",
     "id": 178,
@@ -857,7 +856,8 @@ The JSON equivalent output is:
         "my-computers"
     ],
     "all_computers": false,
-    "pockets": [ ...
+    "pockets": [
+        ...
     ],
     "apt_sources": []
 }
@@ -903,7 +903,7 @@ The method returns JSON serialized info of the profile status:
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "name": "lucide-example",
     "id": 178,
@@ -958,12 +958,12 @@ The method returns JSON serialized info of the profile status:
      {"line": u'deb http://example.com/ubuntu lucid universe",
       "'gpg_key": None,
       "id": 920,
-      "name": "lucid-universe"}]}}
+      "name": "lucid-universe"}]}
 ```
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "name": "lucide-example",
     "id": 178,
@@ -976,13 +976,14 @@ The JSON equivalent output is:
     "pockets": [],
     "apt_sources": [
         {
-            "line": "deb http://example.com/ubuntu lucid main,"gpg_key": None,
+            "line": "deb http://example.com/ubuntu lucid main",
+            "gpg_key": null,
             "id": 919,
             "name": "lucid-main"
         },
         {
-            "line": u'deb http: //example.com/ubuntu lucid universe",
-            "'gpg_key": None,
+            "line": "deb http://example.com/ubuntu lucid universe",
+            "gpg_key": null,
             "id": 920,
             "name": "lucid-universe"
         }
@@ -1039,7 +1040,7 @@ The method returns JSON serialized info of the profile status:
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "name": "lucide-example",
     "id": 178,
@@ -1109,7 +1110,7 @@ The method returns a JSON serialized dictionary of the repository profile:
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "all_computers": false,
     "description": "Example Lucid profile",
@@ -1163,7 +1164,7 @@ The method returns JSON serialized info of the pocket:
 
 The JSON equivalent output is:
 
-```text
+```json
 {
     "name": "devel",
     "architectures": [
@@ -1213,7 +1214,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the pocket:
 
-```text
+```json
 {
     "name": "devel",
     "architectures": [
@@ -1256,7 +1257,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the pocket:
 
-```text
+```json
 {
     "name": "devel",
     "architectures": [
@@ -1303,7 +1304,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the pocket:
 
-```text
+```json
 {
     "name": "devel",
     "architectures": [
