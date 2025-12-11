@@ -10,11 +10,11 @@
 ## Highlights
 
 - **New web portal:** Use Landscape’s new, early-access web portal built with Canonical’s [Vanilla Framework](https://vanillaframework.io). 
-    
+
     ![Landscape 24.04 LTS new web portal](https://assets.ubuntu.com/v1/ef0d70d5-24.04LandscapeWebPortal.png)
 
     This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal. The first time you use the portal, you may need to generate new API credentials to access the portal. For more information, see {ref}`how to generate API credentials <howto-heading-manage-repos-web-portal-generate-api-credentials>`.
-    
+
 - **Web-based repository management**: Manage and mirror your repositories locally with Landscape’s new web-based repository management. For more information, see {ref}`how-to-manage-repos-web-portal` and an {ref}`explanation-repo-mirroring`.
 
 - **REST API for self-hosted users**: Use the new REST API that supports JSON Web Tokens for authentication. For more information, see {ref}`how-to-rest-api-request` and the available REST API endpoints.

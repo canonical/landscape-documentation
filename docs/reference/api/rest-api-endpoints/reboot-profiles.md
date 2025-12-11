@@ -38,7 +38,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/rebootprofiles"  \
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -79,7 +79,6 @@ Optional parameters:
 - `all_computers`: Whether to apply this reboot profile to all computers.
 - `deliver_within`: Number of hours within which the task should be delivered.
 - `deliver_delay_window`: Randomize delivery within this number of minutes.
-- `access_group`: The access group name where the profile is stored.
 - `tags`: A list of computer tags to target instead of `all_computers`.
 
 Example request:
@@ -93,7 +92,7 @@ curl -X PATCH "https://landscape.canonical.com/api/v2/rebootprofiles/11" \
 }'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -130,7 +129,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/rebootprofiles?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -190,6 +189,4 @@ Example request:
 curl -X DELETE "https://landscape.canonical.com/api/v2/rebootprofiles/1" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
-
-_(empty response)_
+This endpoint returns an empty response.

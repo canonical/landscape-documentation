@@ -33,6 +33,6 @@ Note that you'll need IDs for many of the requests. If you don’t know the ID o
 
 ## Use WSL profiles
 
-You can use WSL profiles to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images. These WSL instances can be configured with cloud-init at the time of provisioning.
+You can use {ref}`WSL profiles <reference-terms-wsl-profile>` to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images. These WSL instances can be configured with cloud-init at the time of provisioning.
 
 For more information, see {ref}`how-to-use-wsl-profiles`.

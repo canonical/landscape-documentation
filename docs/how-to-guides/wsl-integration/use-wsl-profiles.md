@@ -8,22 +8,9 @@
 This feature is currently in beta.
 ```
 
-This guide describes how to use WSL profiles to provision WSL instances and manage them with Landscape.
+This guide describes how to use {ref}`WSL profiles <reference-terms-wsl-profile>` to provision WSL instances and manage them with Landscape.
 
 To use WSL profiles, your Windows host **must not** have any WSL child instances that aren't registered with Landscape. If you want to use WSL profiles but you have WSL instances that aren't managed by Landscape, you need to remove them from your Windows host, or re-register a new Windows host with only the Landscape-managed WSL instances.
-
-## Background information
-
-In Landscape, a child instance profile is a configuration that defines the virtual instances, such as containers or VMs, that run on a machine registered with Landscape. Currently, WSL profiles are the only type of child instance profile supported.
-
-WSL profiles specify the WSL instance to be provisioned on a Windows host machine. Each WSL profile corresponds to a single WSL instance with a unique rootfs image name. You also have the option to configure your WSL instance with a cloud-init file.
-
-A Windows host machine is considered **compliant** with a WSL profile if it meets one of these criteria:
-
-- It has an installed WSL instance that's registered with Landscape and matches the profile, or
-- It has an activity to provision and register the corresponding WSL instance.
-
-A Windows machine that doesn't meet either of these criteria is considered **non-compliant** with the WSL profile.
 
 ## Create a WSL profile
 
@@ -46,6 +33,7 @@ Then complete the relevant fields:
     ```
 
 - **cloud-init** (optional): The contents of the cloud-init to be supplied to the WSL instance. This can be uploaded as a file or inputted as text. If you don't include a cloud-init file, the rootfs image will be applied without any additional configuration.
+- **Compliance settings** : Whether or not the associated Windows instances should only have WSL instances that were created through Landscape.
 - **Association** (optional):
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile.
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected. Leaving tags blank, and not selecting **Associate to all instances** will result in zero machines being associated with the WSL Profile.

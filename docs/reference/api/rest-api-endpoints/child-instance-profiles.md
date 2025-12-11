@@ -8,7 +8,7 @@ Child Instance Profiles are in beta testing. The API endpoints below may not be 
 
 To enable WSL features in self-hosted Landscape, add:
 
-```bash
+```ini
 [features]
 enable-wsl-child-instance-profiles = true
 ```
@@ -33,7 +33,7 @@ Example request:
 curl -X GET -H "Authorization: Bearer $JWT" "https://landscape.canonical.com/api/v2/child-instance-profile-types"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -67,7 +67,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/child-instance-profiles?search=ubuntu -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -130,7 +130,7 @@ curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "
 curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "Custom Rootfs Image", "description": "My custom image", "image_name": "CustomUbuntu", "image_source": "https://example.com/myimage.tar.gz"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -175,9 +175,7 @@ Example request:
 curl -X DELETE https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
-
-Empty response.
+This endpoint returns an empty response.
 
 ## GET `/child-instance-profiles/<string:profile_name>`
 
@@ -197,7 +195,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -236,7 +234,6 @@ Optional parameters:
 
 - `title`: A title for the profile.
 - `description`: A human readable description for the profile.
-- `access_group`: Name of the access group for the profile under.
 - `tags`: A list of tag names to associate with the profile.
 - `all_computers`: Whether or not to associate this profile with all computers.
 
@@ -246,7 +243,7 @@ Example request:
 curl -X PATCH https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT" -d '{"description": "The stock image from the store", "tags": ["windows_laptops"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -293,7 +290,6 @@ curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/stoc
 Example response:
 
 ```json
-
 {
   "id": 118,
   "creation_time": "2024-08-05T16:38:52Z",
@@ -315,7 +311,7 @@ Example response:
 
 ## POST `/child-instance-profiles/make-hosts-compliant`
 
-Make the given Windows host computers compliant with all of their WSL profiles by reapplying them if needed.
+Make the given Windows host computers compliant with all of their {ref}`WSL profiles <reference-terms-wsl-profile>` by reapplying them if needed.
 
 Required parameters:
 
@@ -327,7 +323,7 @@ Example requests:
 curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/make-hosts-compliant -H "Authorization: Bearer $JWT" -d '{"host_computer_ids": [6, 15]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
