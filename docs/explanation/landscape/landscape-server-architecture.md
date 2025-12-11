@@ -7,33 +7,33 @@ Landscape Server is the server-side component of the Landscape ecosystem. It is 
 
 A Landscape Server deployment has six required services:
 
-  * [API](#api) - serves REST API and Legacy API requests
-  * [Appserver](#appserver) - serves Legacy UI and static files for the new UI
-  * [Async frontend](#async-frontend) - serves Legacy UI notifications
-  * [Job handler](#job-handler) - runs background jobs such as repository mirror syncs
-  * [Message system](#message-system) - exchanges messages with Landscape Clients
-  * [Pingserver](#pingserver) - records Landscape Client heartbeat pings
+* [API](#api) - serves REST API and Legacy API requests
+* [Appserver](#appserver) - serves Legacy UI and static files for the new UI
+* [Async frontend](#async-frontend) - serves Legacy UI notifications
+* [Job handler](#job-handler) - runs background jobs such as repository mirror syncs
+* [Message system](#message-system) - exchanges messages with Landscape Clients
+* [Pingserver](#pingserver) - records Landscape Client heartbeat pings
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
-  * [Hostagent consumer](#hostagent-consumer) - for WSL instance management
-  * [Hostagent messenger](#hostagent-messenger) - for WSL instance management
-  * [Package search](#package-search) - for improved package management performance
-  * [Package upload](#package-upload) - for upload pocket repository management
-  * [Secrets](#secrets) - for HashiCorp Vault-backed secrets storage
+* [Hostagent consumer](#hostagent-consumer) - for WSL instance management
+* [Hostagent messenger](#hostagent-messenger) - for WSL instance management
+* [Package search](#package-search) - for improved package management performance
+* [Package upload](#package-upload) - for upload pocket repository management
+* [Secrets](#secrets) - for HashiCorp Vault-backed secrets storage
 
 A deployment requires a number of third-party components as well:
 
-  * cron - for scheduled tasks such as Landscape Profiles, cleanup of old or stale records, and updating Landscape Alerts
-  * reverse proxy and load-balancer - usually [HAProxy](https://www.haproxy.org/) or [Apache Server](https://httpd.apache.org/), listens for external connections and forwards them to the responsible core service
-  * [PostgreSQL](https://www.postgresql.org/) - database, the main store of Landscape data regarding accounts, users, packages, and managed instances
-  * [RabbitMQ Server](https://www.rabbitmq.com/) - message-broker, used between services for background tasks and asynchronous communication
-  * reprepro - repository-mirroring utility, used to create, manage, and sync Landscape-managed Debian repository mirrors
-  * [systemd](https://systemd.io/) - service manager, used to start, stop, restart, enable, and disable the Landscape services
+* cron - for scheduled tasks such as Landscape Profiles, cleanup of old or stale records, and updating Landscape Alerts
+* reverse proxy and load-balancer - usually [HAProxy](https://www.haproxy.org/) or [Apache Server](https://httpd.apache.org/), listens for external connections and forwards them to the responsible core service
+* [PostgreSQL](https://www.postgresql.org/) - database, the main store of Landscape data regarding accounts, users, packages, and managed instances
+* [RabbitMQ Server](https://www.rabbitmq.com/) - message-broker, used between services for background tasks and asynchronous communication
+* reprepro - repository-mirroring utility, used to create, manage, and sync Landscape-managed Debian repository mirrors
+* [systemd](https://systemd.io/) - service manager, used to start, stop, restart, enable, and disable the Landscape services
 
 There is also one optional third-party component:
 
-  * [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) - secrets storage, used to store sensitive data for delivery to managed instances. Alternatively, secrets can be encrypted for storage in the PostgreSQL database.
+* [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) - secrets storage, used to store sensitive data for delivery to managed instances. Alternatively, secrets can be encrypted for storage in the PostgreSQL database.
 
 ## Service descriptions
 
@@ -50,15 +50,15 @@ The API service currently supports two versions: the REST API and the Legacy API
 
 HTTP requests made to `/api/v2` are routed to the REST API. This API only supports JWT authentication. The REST API can be interacted with directly, but also acts as the back-end for the new Landscape UI.
 
-  * [Make a REST API request](/how-to-guides/api/make-a-rest-api-request)
-  * [REST API endpoint reference](/reference/api/rest-api-endpoints/index)
+* [Make a REST API request](/how-to-guides/api/make-a-rest-api-request)
+* [REST API endpoint reference](/reference/api/rest-api-endpoints/index)
 
 #### Legacy API
 
 HTTP requests made to `/api` are routed to the Legacy API.
 
-  * [How to use the legacy API](/how-to-guides/api/use-the-legacy-api)
-  * [Legacy API endpoint reference](/reference/api/legacy-api-endpoints/index)
+* [How to use the legacy API](/how-to-guides/api/use-the-legacy-api)
+* [Legacy API endpoint reference](/reference/api/legacy-api-endpoints/index)
 
 (explanation-server-architecture-appserver)=
 ### Appserver
