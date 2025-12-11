@@ -175,9 +175,7 @@ Example request:
 curl -X DELETE https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT"
 ```
 
-Example response:
-
-Empty response.
+This endpoint returns an empty response.
 
 ## GET `/child-instance-profiles/<string:profile_name>`
 
@@ -236,7 +234,6 @@ Optional parameters:
 
 - `title`: A title for the profile.
 - `description`: A human readable description for the profile.
-- `access_group`: Name of the access group for the profile under.
 - `tags`: A list of tag names to associate with the profile.
 - `all_computers`: Whether or not to associate this profile with all computers.
 
@@ -293,7 +290,6 @@ curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/stoc
 Example response:
 
 ```json
-
 {
   "id": 118,
   "creation_time": "2024-08-05T16:38:52Z",
@@ -315,7 +311,7 @@ Example response:
 
 ## POST `/child-instance-profiles/make-hosts-compliant`
 
-Make the given Windows host computers compliant with all of their WSL profiles by reapplying them if needed.
+Make the given Windows host computers compliant with all of their {ref}`WSL profiles <reference-terms-wsl-profile>` by reapplying them if needed.
 
 Required parameters:
 

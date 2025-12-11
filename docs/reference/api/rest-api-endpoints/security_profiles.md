@@ -10,16 +10,11 @@ Get security profiles associated with the current account, paginated and ordered
 Optional query parameters:
 
 - `search`: filters profiles to only those with titles containing the provided string.
-- `status`: must be either `archived` or `active`. Filters profiles to those with the selected
-    status.
-- `pass_rate_from`: an integer from 0 to 100. Filters profiles to those with a pass rate at or
-    above the value.
-- `pass_rate_to`: an integer from 0 to 100. Filters profiles to those with a pass rate at or below
-    the value.
-- `limit`: a positive integer used for pagination. Limits the results to the given number of
-    profiles.
-- `offset`: a non-negative integer used for pagination. Offsets the start of the results by the
-    given number of profiles.
+- `status`: must be either `archived` or `active`. Filters profiles to those with the selected status.
+- `pass_rate_from`: an integer from 0 to 100. Filters profiles to those with a pass rate at or above the value.
+- `pass_rate_to`: an integer from 0 to 100. Filters profiles to those with a pass rate at or below the value.
+- `limit`: a positive integer used for pagination. Limits the results to the given number of profiles.
+- `offset`: a non-negative integer used for pagination. Offsets the start of the results by the given number of profiles.
 
 Example request:
 
@@ -111,8 +106,7 @@ Required parameters:
 - `mode`: The run mode of the profile. One of `"audit"`, `"fix-audit"`, or `"fix-restart-audit"`.
 - `schedule`: An [RFC 5545 "Recurrence Rule"](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10), determining how frequently the profile will audit its instances. Cannot be more frequent than weekly.
 - `title`: The display name of the profile.
-- `start_date`: An ISO 8601-formatted datestamp that sets the first run time of the profile. If
-    it is the current date or in the past, the profile will start its first run immediately.
+- `start_date`: An ISO 8601-formatted datestamp that sets the first run time of the profile. If it is the current date or in the past, the profile will start its first run immediately.
 
 Optional parameters:
 
@@ -141,7 +135,7 @@ curl -X POST "https://landscape.canonical.com/api/v2/security-profiles" -H "Auth
 }'
 ```
 
-Example output, the profile's state:
+Example response, the profile's state:
 
 ```json
 {
@@ -188,7 +182,6 @@ Path parameters:
 
 Optional parameters:
 
-- `access_group`: The instance access group to apply the profile to.
 - `all_computers`: If `true`, the profile will be applied to all instances in `access_group`, regardless of `tags`.
 - `restart_deliver_delay`: If `mode` is `"fix-restart-audit"`, delays the delivery of restart activities by this many hours after fix.
 - `restart_deliver_delay_window`: If `mode` is `"fix-restart-audit"`, randomizes delivery of restart activities within the number of minutes provided
@@ -341,15 +334,12 @@ Path parameters:
 
 Required query parameters:
 
-- `start_date`: the start time for the data that the report should include. If it is the only
-  parameter provided, then only data from the run at this time will be included.
-  
+- `start_date`: the start time for the data that the report should include. If it is the only parameter provided, then only data from the run at this time will be included.
+
 Optional query parameters:
 
-- `end_date`: the end time for the data that the report should include. If it is provided, then
-  data from runs that occurred from `start_date` to `end_date` will be included.
-- `detailed`: if `true`, then a detailed report will be provided instead of a summary report.
-  Defaults to `false`.
+- `end_date`: the end time for the data that the report should include. If it is provided, then data from runs that occurred from `start_date` to `end_date` will be included.
+- `detailed`: if `true`, then a detailed report will be provided instead of a summary report. Defaults to `false`.
 
 Example requests:
 
@@ -359,7 +349,7 @@ curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/1/report?s
 curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/1/report?start_date=2025-02-26&end_date=2025-03-02&detailed=true" -H "Authorization: Bearer $JWT"
 ```
 
-Example output (when a report already exists):
+Example response (when a report already exists):
 
 ```json
 {
@@ -370,7 +360,7 @@ Example output (when a report already exists):
 }
 ```
 
-Example output (when a report will be created):
+Example response (when a report will be created):
 
 ```json
 {
@@ -429,8 +419,7 @@ Returns the file for the given `path`. This could be a compliance report or a ta
 
 Required query parameters:
 
-- `path`: the path of the file, as retrieved from `/security-profiles/<id>/report` or the status
-  of a security profile from `/security-profiles` or `/security-profiles/<id>`.
+- `path`: the path of the file, as retrieved from `/security-profiles/<id>/report` or the status of a security profile from `/security-profiles` or `/security-profiles/<id>`.
 
 Example request:
 

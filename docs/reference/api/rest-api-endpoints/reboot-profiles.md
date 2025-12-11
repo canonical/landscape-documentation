@@ -79,7 +79,6 @@ Optional parameters:
 - `all_computers`: Whether to apply this reboot profile to all computers.
 - `deliver_within`: Number of hours within which the task should be delivered.
 - `deliver_delay_window`: Randomize delivery within this number of minutes.
-- `access_group`: The access group name where the profile is stored.
 - `tags`: A list of computer tags to target instead of `all_computers`.
 
 Example request:
@@ -190,6 +189,4 @@ Example request:
 curl -X DELETE "https://landscape.canonical.com/api/v2/rebootprofiles/1" -H "Authorization: Bearer $JWT"
 ```
 
-Example response:
-
-(empty response)
+This endpoint returns an empty response.

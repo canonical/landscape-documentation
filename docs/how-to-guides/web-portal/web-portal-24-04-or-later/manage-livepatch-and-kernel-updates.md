@@ -23,4 +23,3 @@ Note that if you upgrade or downgrade to a new version of the kernel, you’ll n
 **Livepatch coverage** shows the date until the current kernel is supported or indicates if it has expired. Sometimes the kernel expiration date won’t be known or has not yet been reported by the Landscape client.
 
 The **Patches discovered since last restart** table lists the patches applied by Livepatch to the current running kernel and their status.
-

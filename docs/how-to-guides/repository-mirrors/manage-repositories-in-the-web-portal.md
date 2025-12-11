@@ -50,21 +50,21 @@ You need to create a secret GPG key in your terminal before importing it into th
 To create the GPG key:
 
 1. Install and run `rngd` to improve the efficiency of generating the GPG key:
-    
+
     ```bash
     sudo apt-get install rng-tools && sudo rngd -r /dev/urandom
     ```
-    
+
 2. Create the GPG key using one of the following commands. The `--gen-key` command creates a GPG key that sets a two year expiration date, and `--full-gen-key` creates a GPG key that does not expire.
-    
+
     ```bash
     gpg --gen-key
     ```
-    
+
     ```bash
     gpg --full-gen-key
     ```
-    
+
 3. If you’re prompted to provide information about the key, click **Enter** to choose the default options or make selections based on your system configuration. If you’re unsure what to select, the default options work for most configurations.
 4. Enter **Y** when prompted with `Is this correct? (y/N)`
 5. When you’re prompted with “Please confirm that you do not want to have any protection on your key,” choose **Yes, protection is not needed**. You’ll be prompted and need to confirm this twice.
@@ -72,20 +72,20 @@ To create the GPG key:
 Your GPG key should now be created. To import the GPG key into Landscape:
 
 1. List the key in the command line:
-    
+
     ```bash
     gpg -K
     ```
-    
+
 2. Copy the secret key ID from the output. It should look similar to `A1234B5678C9101112D12141516E17181920FGH0`.
 3. Export the key to an `.asc` file:
-    
+
     ```bash
     gpg -a --export-secret-keys {SECRET_KEY_ID} > mirror-key.asc
     ```
-    
+
     Replacing `{SECRET_KEY_ID}` with your ID from the previous step. You can also change the `mirror-key.asc` file name and location if preferred, although that file will be deleted shortly.
-    
+
 4. In your Landscape web portal, navigate to the GPG Keys page (**Repositories** > **GPG Keys**).
 5. Click **Import key**
 6. In the **Name** field, provide a name for your key. For example, `mirror-key`.
@@ -122,7 +122,7 @@ To create a mirror using the distribution you previously made:
 1. In the **Series name** field, enter a name for your series. For example, “jammy”.
 1. In the **Mirror GPG key** dropdown menu, you can leave this blank if mirroring an Ubuntu repository. The Ubuntu public mirror GPG key is already configured in Landscape.
 1. In the **GPG key** dropdown menu, select your private key which you previously generated.
-1. Review the selections under **Pockets**, **Components** and **Architectures**. Either use the defaults or change the options as needed to customize your mirror. 
+1. Review the selections under **Pockets**, **Components** and **Architectures**. Either use the defaults or change the options as needed to customize your mirror.
 1. Click **Add mirror**
 
 (how-to-heading-manage-repos-sync-pockets)=
@@ -187,4 +187,3 @@ To update your pull pocket:
 1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate your pull pocket
 2. In the same row, click the <img src="https://assets.ubuntu.com/v1/e8b73774-sync.png" alt="two arrows creating a circle" width="32"/> arrow to update your pocket. This activity may take awhile to complete.
     - If you hover your cursor over the icon, it says **Sync** for mirrored pockets and **Pull** for pull pockets.
-

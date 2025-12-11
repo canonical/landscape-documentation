@@ -198,8 +198,7 @@ Required parameters:
 - `script_id`: The id of the script this profile is associated with, must be a `v2` script.
 - `all_computers`: If `true`, the profile will be applied to all instances in the script's `access_group`, regardless of `tags`.
 - `tags`: An array of tag strings. The profile will be applied only to instances with these tags in the script's `access_group`.
-- `time_limit`: The time, in seconds, after which the script is considered defunct.
-                The process will be killed, and the script execution will be marked as failed after this limit expires.
+- `time_limit`: The time, in seconds, after which the script is considered defunct. The process will be killed, and the script execution will be marked as failed after this limit expires.
 - `username`: The username to execute the script as on the client.
 - `trigger`: Defined as a [trigger](#trigger) based on which the profile should execute.
 
@@ -267,8 +266,7 @@ Each `trigger_type` has corresponding required parameters.
 
 #### One Time
 
-- `timestamp`: An ISO 8601-formatted datestamp that sets when the profile should execute.
-                 If it is in the past, the profile will start its first run immediately.
+- `timestamp`: An ISO 8601-formatted datestamp that sets when the profile should execute. If it is in the past, the profile will start its first run immediately.
 
 #### Recurring
 
