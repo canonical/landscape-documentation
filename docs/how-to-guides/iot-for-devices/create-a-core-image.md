@@ -106,7 +106,7 @@ To create and configure your gadget snap:
 1. Fork the official [Ubuntu Core 22 gadget snap repository](https://github.com/snapcore/pi-gadget/) to your local environment.
     - Other reference gadget snaps are available for different architectures from the [Snapcore GitHub account](https://github.com/snapcore/). Search for repositories with “gadget” in the name.
 2. Append the following configuration at the bottom of the `gadget.yaml` file that defines the gadget snap:
-    
+
     ```text
     defaults:
       # landscape client
@@ -119,15 +119,15 @@ To create and configure your gadget snap:
           computer-title-pattern: test-${model:7}-${serial:0:8}
           wait-for-serial-as: true
     ```
-    
+
     Replacing the following values with the relevant configuration values:
-    
-    - `{LANDSCAPE_ACCOUNT_URL}`: The full URL of your Landscape account. Canonical’s Landscape URL is https://landscape.canonical.com
+
+    - `{LANDSCAPE_ACCOUNT_URL}`: The full URL of your Landscape account. Canonical’s Landscape URL is [https://landscape.canonical.com](https://landscape.canonical.com).
     - `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`.
     - `{REGISTRATION_KEY}`: Your registration key.
-    
+
     Now, you’ve finished configuring the details of your Landscape server instance. In the `auto-register` section, you’ll likely want to change `computer-title-pattern` to your preferred method of identifying devices. For more information on these parameters, see {ref}`header-explanation-auto-reg-process-gadget-snap` located in this guide.
-    
+
 These details will be the same for all devices that run this image.
 
 ## Build the gadget and update your model assertion
@@ -144,17 +144,17 @@ Now, you have your snap. This is the snap you want to include in your model asse
 
 ### Update the model assertion
 
-If you have your own brand store, publish your custom gadget snap there and update the name and ID of the gadget snap in your model assertion. 
+If you have your own brand store, publish your custom gadget snap there and update the name and ID of the gadget snap in your model assertion.
 
 If you don’t have a brand store, you’ll need to use your local **`.json`** file instead. This is because it’s not permitted to upload custom gadget snaps to the global snap store. To reference your custom gadget snap in your model assertion:
 
-1. Open your `.json` file and set the grade of the snap to “dangerous” as it hasn’t been signed by a store. 
+1. Open your `.json` file and set the grade of the snap to “dangerous” as it hasn’t been signed by a store.
 2. Remove the **`snap-id`** and **`default-channel`** values.
 3. Update the name to that of your snap filename.
 
 This section of your local `.json` file should look similar to the following example.
 
-```bash
+```json
   "grade": "dangerous",
     "snaps": [
         {
@@ -174,7 +174,7 @@ snapcraft create-key {KEY_NAME}
 Next, sign the model assertion:
 
 ```bash
-$ snap sign -k {KEY_NAME} model.json > landscape.model
+snap sign -k {KEY_NAME} model.json > landscape.model
 ```
 
 ## Build the custom Ubuntu Core image
@@ -183,11 +183,11 @@ Now, you need to build a custom Ubuntu Core image from the signed model using th
 
 1. If you don’t have the `ubuntu-image` tool, install it with `snap install ubuntu-image --classic`.
 2. Build the custom Ubuntu Core image from the signed model using the `ubuntu-image` tool. Use the `--snap` flag to specify the location of your local snap file. Your command should be similar to the following:
-    
+
     ```bash
     ubuntu-image snap --snap pi-22-2-arm64.snap landscape.model
     ```
-    
+
 If done successfully, this will produce the image `pi.img` which is ready to be written to an SD card and inserted into your Raspberry Pi.
 
 ## Write the image to an SD card
@@ -235,19 +235,19 @@ defaults:
 In this example, there are three parameters within the `auto-register` section. They are:
 
 - **`enabled`**
-    
+
     When `true`, this turns on the auto-registration feature. This means that the device will attempt to register itself with the Landscape server when it’s booted for the first time.
-    
+
 - **`computer-title-pattern`**
-    
+
     This allows you to define how the computer title will be generated for this specific device. The pattern uses the bash shell parameter expansion format to manipulate the available parameters. For more information, see [GNU’s documentation on shell parameter expansion](https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html).
-    
+
     In this example, the computer title is set to the string `test-` followed by the device model starting from the eighth character (see your model assertion) and then the first eight characters of the device serial number taken from its serial assertion.
-    
+
     In this case, the `computer-title-pattern` would be similar to: **test-core-22-pi-arm64-f6ec1539**
-    
+
     The available parameters to use with `computer-title-pattern` are:
-    
+
     | Parameter | Description |
     | --- | --- |
     | `serial` | Serial from device’s serial assertion |
@@ -261,11 +261,10 @@ In this example, there are three parameters within the `auto-register` section. 
     | `datetime` | date/time of auto-enrollment |
 
 - **`wait-for-serial-as`**
-    
+
     When `true`, this tells the auto-registration function to wait until the device has been able to obtain its serial assertion from a serial vault before trying to create the title and perform the registration.
 
     If you don't have your own serial vault deployed, you can request a serial assertion from the global snap store by adding `"serial-authority": [ "generic" ]` to your model assertion. Without a serial authority specified, the device will wait indefinitely and not register with the Landscape Server.
-    
 
 ### Step-by-step process
 
@@ -276,4 +275,3 @@ When a client with the previous auto-registration parameters starts for the firs
 3. Once the serial assertion is obtained, the client generates a computer title based on the `computer-title-pattern` parameter.
 4. The client registers itself with the Landscape server, using the generated computer title and Landscape account details provided earlier in the configuration (URL, account name)
 5. The device is ready to be managed remotely through the Landscape server
-

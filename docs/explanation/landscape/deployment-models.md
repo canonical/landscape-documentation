@@ -42,4 +42,4 @@ The following products are also sometimes used in large-scale deployments that i
 - [**MAAS (Metal as a Service)**](https://maas.io/docs): Provisions and configures bare-metal Ubuntu servers.
 - [**COS (Canonical Observability Stack)**](https://charmhub.io/topics/canonical-observability-stack): Monitors the full deployment.
 
-There are many other [Canonical products](https://canonical.com/) that may complement your full deployment. This section only mentions the products that are most commonly used alongside Landscape. 
+There are many other [Canonical products](https://canonical.com/) that may complement your full deployment. This section only mentions the products that are most commonly used alongside Landscape.

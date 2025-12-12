@@ -1,7 +1,6 @@
 (reference-legacy-api-administrators)=
 # Administrators
 
-
 The methods available here help you invite, list and disable administrators in your account.
 
 ## InviteAdministrator
@@ -24,7 +23,7 @@ Retrieve the list of administrators in the account.
 
 Here’s an example output:
 
-```text
+```json
 [
     {
         "email": "john@example.com",
@@ -46,4 +45,3 @@ For example:
 ```text
 ?action=DisableAdministrator&email=john@example.com
 ```
-

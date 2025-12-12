@@ -3,7 +3,7 @@
 
 > See also: [Landscape Server charm (Charmhub)](https://charmhub.io/landscape-server)
 
-You can deploy Landscape in a scalable way with Juju. This document provides a very high-level overview. 
+You can deploy Landscape in a scalable way with Juju. This document provides a very high-level overview.
 
 For detailed instructions on deploying Landscape with Juju in a high-availability environment, see {ref}`how-to-juju-ha-installation`.
 
@@ -20,7 +20,6 @@ To learn more about Juju and to bootstrap a Juju controller, check out their [ge
 ## Deploy self-hosted Landscape Server
 
 When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires.
-
 
 ### landscape-scalable bundle
 

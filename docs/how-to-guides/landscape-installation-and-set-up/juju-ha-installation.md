@@ -21,7 +21,7 @@ Before you can deploy the Landscape Scalable charm bundle, you need to:
 These steps lay the groundwork for using Juju to deploy [machine charms](https://juju.is/charms-architecture).
 
 Machine charms are Juju-managed applications deployed on bare-metal servers, virtual machines, or system containers such as [LXD](https://canonical.com/lxd). Landscape is only one of many charms that can be deployed from [Charmhub](https://charmhub.io/) and managed by Juju. Juju handles installing the applications and configuring them to work together.
- 
+
 ## Deploy the charm bundle
 
 You can deploy the Landscape Scalable charm bundle using one of two main methods. The methods are:
@@ -65,7 +65,7 @@ juju status
 
 At first, the `juju status` output will indicate that all units are waiting for machines to become available:
 
-```
+```text
 Model                  Controller           Cloud/Region         Version  SLA          Timestamp
 landscape-self-hosted  localhost-localhost  localhost/localhost  3.5.5    unsupported  15:12:31-08:00
 
@@ -90,7 +90,7 @@ Machine  State    Address  Inst id  Base          AZ  Message
 
 Once everything is installed and settled, the `Status` for every application will be `active`:
 
-```
+```text
 Model                  Controller           Cloud/Region         Version  SLA          Timestamp
 landscape-self-hosted  localhost-localhost  localhost/localhost  3.5.5    unsupported  15:28:30-08:00
 
@@ -128,7 +128,7 @@ The charms for each application handle relationships between the units. The unit
 
 After the new units are given machines and the charm installation and setup is complete, the result is a high availability deployment:
 
-```
+```text
 Model                  Controller           Cloud/Region         Version  SLA          Timestamp
 landscape-self-hosted  localhost-localhost  localhost/localhost  3.5.5    unsupported  15:49:11-08:00
 
@@ -181,7 +181,7 @@ juju download landscape-scalable
 
 You'll get output similar to:
 
-```
+```text
 Fetching bundle "landscape-scalable" revision 37 using "stable" channel and base "amd64/ubuntu/22.04"
 Install the "landscape-scalable" bundle with:
     juju deploy ./landscape-scalable_r37.bundle
@@ -195,7 +195,7 @@ unzip ./landscape-scalable_r37.bundle
 
 You'll get output similar to:
 
-```
+```text
 Archive:  ./landscape-scalable_r37.bundle
   inflating: bundle.yaml
   inflating: README.md
@@ -205,7 +205,6 @@ Archive:  ./landscape-scalable_r37.bundle
 #### Step 2: Edit the `bundle.yaml` file
 
 You need to increase the `num_units` for each application to turn your deployment into a high availability deployment. In this example, we set each service to `num_units: 3`. This means there will be three units of each Landscape Server, HAProxy, PostgreSQL, and RabbitMQ.
-
 
 ```yaml
 description: Landscape Scalable
@@ -280,7 +279,7 @@ juju status
 
 At first, the `juju status` output will indicate that all units are waiting for machines to become available:
 
-```
+```text
 Model                  Controller           Cloud/Region         Version  SLA          Timestamp
 landscape-self-hosted  localhost-localhost  localhost/localhost  3.5.5    unsupported  16:20:40-08:00
 
@@ -321,7 +320,7 @@ Machine  State    Address  Inst id  Base          AZ  Message
 
 Once everything is installed and settled, the `Status` for every application will be `active`:
 
-```
+```text
 Model                  Controller           Cloud/Region         Version  SLA          Timestamp
 landscape-self-hosted  localhost-localhost  localhost/localhost  3.5.5    unsupported  16:30:52-08:00
 
@@ -362,7 +361,6 @@ Machine  State    Address        Inst id         Base          AZ  Message
 
 You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
-
 ## Create a SSL certificate with LetsEncrypt (Optional)
 
 If your Landscape instance has a public IP, and your FQDN resolves to that public IP, run the following code to get a valid SSL certificate from LetsEncrypt. Replace `<EMAIL@EXAMPLE.COM>` with an email address where certificate renewal reminders can be sent.
@@ -385,4 +383,3 @@ juju config haproxy ssl_cert="$(base64 fullchain.pem)" ssl_key="$(base64 privkey
 ```
 
 Once your SSL certificate is in place, your Landscape Clients and browser should trust HTTPS connections to your Landscape Server deployment, so long as your certificate remains valid.
-

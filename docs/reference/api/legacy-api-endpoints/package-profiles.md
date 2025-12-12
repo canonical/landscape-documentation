@@ -19,7 +19,7 @@ For example, the following command limits the results to return the single packa
 
 The method returns a JSON representation of the package profiles. It includes a list of computers which are constrained by this profile as well as a list of constrained computers which are non-compliant:
 
-```text
+```json
 [
     {
         "id": 2,
@@ -42,10 +42,15 @@ The method returns a JSON representation of the package profiles. It includes a 
             "server",
             "desktop"
         ],
-        "constraints": [("depends",
-            "mysql >= 5.1.0"),
-                    ("conflicts",
-            "python-mysqldb < 1.2.2")
+        "constraints": [
+            [
+                "depends",
+                "mysql >= 5.1.0"
+            ],
+            [
+                "conflicts",
+                "python-mysqldb < 1.2.2"
+            ]
         ],
         "name": "mysqlprofile",
         "title": "MySQL Profile"
@@ -72,7 +77,7 @@ For example, the following command copies the package profile ‘mysqlprofile’
 
 The method returns a JSON representation of the copied package profile:
 
-```text
+```json
 [
     {
         "id": 3,
@@ -91,10 +96,15 @@ The method returns a JSON representation of the copied package profile:
         "modification_time": "2012-03-06T18:52:09Z",
         "description": "Package profile to lock down mysql to >= 5.1.0",
         "version": "2",
-        "constraints": [("depends",
-            "mysql >= 5.1.0"),
-                    ("conflicts",
-            "python-mysqldb < 1.2.2")
+        "constraints": [
+            [
+                "depends",
+                "mysql >= 5.1.0"
+            ],
+            [
+                "conflicts",
+                "python-mysqldb < 1.2.2"
+            ]
         ],
         "name": "copiedprofilename"
     }
@@ -106,7 +116,7 @@ The following errors may be raised:
 - `UnknownPackageProfileName`: source package profile name does not exist.
 - `DuplicatePackageProfile`: destination package profile name already exists.
 - `UnknownAccessGroup`: The given access group is not known.
-- `Unauthorised`: The person is not authorised to copy package profiles in the given access group.
+- `Unauthorised`: The person is not authorized to copy package profiles in the given access group.
 
 ## CreatePackageProfile
 
@@ -131,7 +141,7 @@ For example, the following command creates a package profile ‘newprofile’ ba
 
 The method returns a JSON representation of the created package profile:
 
-```text
+```json
 [
     {
         "id": 3,
@@ -150,10 +160,15 @@ The method returns a JSON representation of the created package profile:
         "modification_time": "2012-03-06T18:52:09Z",
         "description": "New profile",
         "version": "1",
-        "constraints": [("depends",
-            "mysql >= 5.1.0"),
-                    ("conflicts",
-            "python-mysqldb < 1.2.2")
+        "constraints": [
+            [
+                "depends",
+                "mysql >= 5.1.0"
+            ],
+            [
+                "conflicts",
+                "python-mysqldb < 1.2.2"
+            ]
         ],
         "name": "new-profile",
         "title": "New profile"
@@ -169,7 +184,7 @@ The following errors may be raised:
 - `InvalidPackageProfileMaterial`: The material passed could not be parsed.
 - `NoFoundPackages`: The specified computer did not have any package data
 - `UnknownAccessGroup`: The given access group is not known.
-- `Unauthorised`: The person is not authorised to create package profiles in the given access group. profile with no constraints. At least one valid constraint must be provided.
+- `Unauthorised`: The person is not authorized to create package profiles in the given access group. profile with no constraints. At least one valid constraint must be provided.
 
 ## RemovePackageProfile
 
@@ -263,4 +278,3 @@ The following errors may be raised:
 - `EmptyPackageProfile`: Cannot remove constraints as it leaves a profile with no constraints. An empty package profile should be removed instead.
 
 The state of the profile will be returned.
-

@@ -54,4 +54,3 @@ annotation:timezone:est
 You can also save this search to re-use it and check for any changes.
 
 **Note**: Annotations and searching for keys and values are case-sensitive.
-
