@@ -24,7 +24,7 @@ A **removal profile** defines a maximum number of days that a computer can go wi
 (reference-terms-script-profile)=
 ## Script profile
 
-A **script profile** defines how and when a script is automatically executed on managed computers in Landscape. Script profiles associate a script with a set of computers using tags and an access group, specify the user account that executes the script, and define a time limit for execution and a trigger that determines when the script runs. Script profiles can apply to zero or more computers identified by tags, or to all computers within the script’s access group. You can manage script profiles from the **Profiles** tab in your organization's home page.
+A **script profile** defines how and when a script is automatically executed on managed instances based on specific triggers. It specifies the script, the user account that executes the script, the time limit, and a trigger that determines when the script runs. A script profile also defines which instances the script applies to, either through tags or to all instances within an access group. You can manage script profiles from **Scripts** > **Profiles** tab.
 
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
