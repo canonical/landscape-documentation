@@ -16,6 +16,10 @@ A **package profile**, or meta-package, comprises a set of one or more packages,
 
 Package profiles are evaluated periodically, and can be used for ensuring compliance over time. If package profiles are used to install packages, it is important to ensure any prerequisite repository configurations have been applied so the package can be downloaded, otherwise the package profile will fail to install the package, and report the machine as non-compliant.
 
+(reference-terms-reboot-profile)=
+## Reboot profile
+A **reboot profile** defines how and when Landscape executes system reboots on managed instances. Reboot profiles can automatically restart instances on select days of the week with a frequency of no more than once per week. Reboots can be staggered by configuring the delivery window. Reboot profiles are associated with instances using tags and an access group. You can manage reboot profiles from the **Profiles** page.
+
 (reference-terms-removal-profile)=
 ## Removal profile
 
