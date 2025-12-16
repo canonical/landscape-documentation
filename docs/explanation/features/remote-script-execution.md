@@ -1,7 +1,7 @@
 (explanation-remote-script-execution)=
 # Remote script execution
 
-Landscape has a remote script execution feature that allows administrators to run scripts on registered client machines from Landscape Server. You must have {ref}`script execution enabled <howto-heading-client-enable-script-execution>` to use this feature.
+Landscape has a remote script execution feature that allows administrators to run scripts on registered client machines from Landscape Server. You must have {ref}`script execution enabled <howto-heading-client-enable-script-execution>` to use this feature. Your scripts can be in any language, as long as an appropriate interpreter is available on the clients where they will run.
 
 This document explains how Landscape Client executes scripts.
 
