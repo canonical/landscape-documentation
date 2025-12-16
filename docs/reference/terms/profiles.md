@@ -30,6 +30,12 @@ A **removal profile** defines a maximum number of days that a computer can go wi
 
 A **script profile** defines how and when a script is automatically executed on managed instances based on specific triggers. It specifies the script, the user account that executes the script, the time limit, and a trigger that determines when the script runs. A script profile also defines which instances the script applies to, either through tags or to all instances within an access group. You can manage script profiles from **Scripts** > **Profiles** page.
 
+(reference-terms-security-profile)=
+## Security profile
+
+A **security profile** defines how Landscape should monitor and manage security compliance on managed instances using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/compliance/usg/). Security profiles evaluate instances against established security benchmarks, such as CIS and DISA-STIG, to collect compliance data on a scheduled basis. With additional configuration, security profiles can attempt to resolve detected compliance issues. Security profiles are associated with instances using tags and an access group. You can manage security profiles from the **Profiles** page.
+
+
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
 
