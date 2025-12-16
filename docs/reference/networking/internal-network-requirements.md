@@ -26,13 +26,13 @@ The reverse proxy accepts external HTTP traffic originating from clients and pro
 
 These are the current port ranges for each internal component that accepts traffic from the reverse proxy. Each range is inclusive.
 
-  - 8070-8079: {ref}`explanation-server-architecture-appserver`
-  - 8080-8089: {ref}`explanation-server-architecture-pingserver`
-  - 8090-9079: {ref}`explanation-server-architecture-message-system`
-  - 9080-9098: {ref}`explanation-server-architecture-api`
-  - 9099: {ref}`explanation-server-architecture-package-search`
-  - 9100: {ref}`explanation-server-architecture-package-upload`
-  - 50052: {ref}`explanation-server-architecture-hostagent-messenger`
+- 8070-8079: {ref}`explanation-server-architecture-appserver`
+- 8080-8089: {ref}`explanation-server-architecture-pingserver`
+- 8090-9079: {ref}`explanation-server-architecture-message-system`
+- 9080-9098: {ref}`explanation-server-architecture-api`
+- 9099: {ref}`explanation-server-architecture-package-search`
+- 9100: {ref}`explanation-server-architecture-package-upload`
+- 50052: {ref}`explanation-server-architecture-hostagent-messenger`
   
 ### Third-party components
 
@@ -40,9 +40,9 @@ Third-party components are internal components that receive traffic from the com
 
 These components are generally configured to accept traffic on the default ports for their respective services:
 
-  - 5432: PostgreSQL
-  - 5672: RabbitMQ Server
-  - 8200: HashiCorp Vault
+- 5432: PostgreSQL
+- 5672: RabbitMQ Server
+- 8200: HashiCorp Vault
 
 ## Client instance networking information
 

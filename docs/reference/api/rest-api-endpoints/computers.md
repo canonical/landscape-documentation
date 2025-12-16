@@ -36,7 +36,7 @@ Query parameters:
   - `contract:<contract-id>`: Instances associated with the specified `<contract-id>`.
   - `contract-expires-within-days:<days>`: Instances associated with a Ubuntu Pro contract that expires within `<days>` days.
   - `license-expires-within-days:<days>`: Instances associated with a Legacy License that expires within `<days>` days.
-  - `has-pro-management:<option>`: Instances with pro management enabled if `<option>` is a truthy value or disbaled if falsy.
+  - `has-pro-management:<option>`: Instances with pro management enabled if `<option>` is a truthy value or disabled if falsy.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 - `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.
@@ -47,7 +47,7 @@ Query parameters:
 - `with_hardware`: If true, include the details of all hardware information known. Defaults to false.
 - `with_annotations`: If true, include the details of all custom annotation information known. Defaults to false.
 - `with_grouped_hardware`: If true, include the details of all known hardware information grouped by device category. Defaults to false.
-- `with_wsl_profiles`: If true, include WSL profiles associated with Windows computers. Defaults to false.
+- `with_wsl_profiles`: If true, include {ref}`WSL profiles <reference-terms-wsl-profile>` associated with Windows computers. Defaults to false.
 - `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
 - `root_only`: Whether or not to include only the root member of a computer family tree. Defaults to true. If false, all computers will be included.
 - `wsl_parents`: If true, restrict the result to WSL parent instances (i.e. Windows machines). This parameter can be used in conjunction with the `wsl_children` parameter. Defaults to false (no additional filtering).
@@ -59,7 +59,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers?limit=1 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -105,7 +105,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers?query=id:1%20OR%20id:2 -H "Authorization: Bearer $JWT" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -183,7 +183,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers/?query=profile:wsl:1:compliant&with_wsl_profiles=true -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -390,7 +390,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_grouped_hardware=true&with_annotations=true -H "Authorization: Bearer $JWT" 
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -912,7 +912,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/23/packages?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -957,7 +957,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1053,7 +1053,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/22/snaps/installed?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1121,7 +1121,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/computers/1/usergroups/update_bulk" -H "Authorization: Bearer $JWT"  -d '{"action": "add", "usernames": ["john", "jane"], "groupnames": ["finance", "admin"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1162,7 +1162,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/ubuntu/groups" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1203,7 +1203,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1269,7 +1269,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/archive" -H "Authorization: Bearer $JWT" -d '{"computer_title": "test computer"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1306,7 +1306,7 @@ Example request:
 curl -X POST https://landscape.canonical.com/api/v2/computers/20/delete-children -H "Authorization: Bearer $JWT" -d '{"computer_names": ["Ubuntu-24.04", "Focal WSL"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1351,9 +1351,9 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" -H "Authorization: Bearer $JWT" -d '{"computer_title": "test computer"}'
 ```
 
-Example output:
+Example response:
 
-```bash
+```json
 {
  "id": 119,
  "activity_status": "scheduled",

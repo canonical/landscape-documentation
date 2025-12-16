@@ -25,17 +25,16 @@ Example request:
 curl -X PUT https://landscape.canonical.com/api/v2/administrators/6 -H "Authorization: Bearer $JWT" -H "Content-Type: application/json" -d '{"roles": ["ServerAdmin", "DesktopAdmin"]}'
 ```
 
-Example output:
+Example response:
 
-```text
+```json
 {
   "email": "robert@example.com",
   "id": 6,
   "name": "Robert Frost",
   "roles": [
-	"DesktopAdmin",
-	"ServerAdmin"
+  "DesktopAdmin",
+  "ServerAdmin"
   ]
 }
 ```
-

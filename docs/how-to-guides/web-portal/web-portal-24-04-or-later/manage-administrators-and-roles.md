@@ -7,7 +7,7 @@ See also: {ref}`reference-terms-administrators`, {ref}`reference-terms-roles`
 You must be an administrator to perform these tasks.
 ```
 
-These guides describe how to manage additional administrators and roles. 
+These guides describe how to manage additional administrators and roles.
 
 ## Invite administrators
 
@@ -46,4 +46,3 @@ To add a new role:
 When you add a role, you also specify a set of one or more access groups to which the role applies, and what permissions you want the role to have.
 
 By specifying different permission levels and different access groups, you can create roles and associate them with administrators to get a granular level of control over sets of computers.
-

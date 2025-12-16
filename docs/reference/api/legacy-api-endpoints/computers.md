@@ -1,7 +1,6 @@
 (reference-legacy-api-computers)=
 # Computers
 
-
 The methods available here give the ability to retrieve computers and to do basic operations on them, such as tagging.
 
 ## GetComputers
@@ -48,31 +47,9 @@ For example, the following request searches for all computers with the tag "serv
 ?action=GetComputers&query=tag:server&limit=20&with_network=true
 ```
 
-The method returns a JSON serialized list of computers:
+Example response:
 
-```text
-[{"access_group": "global",
-  "comment": u"",
-  "distribution": u"22.04",
-  "hostname": u"a_comp.example.com",
-  "id": 12345,
-  "last_ping_time": None,
-  "last_exchange_time": "2023-06-3017:59Z",
-  "title": u"A Computer",
-  "reboot_required_flag": False,
-  "tags": ["server"],
-  "total_memory": None,
-  "total_swap": None,
-  "network_devices": [{"broadcast_address": "192.168.1.255",
-                       "interface": "eth0",
-                       "ip_address": "192.168.1.2",
-                       "mac_address": "00:1e:c9:6c:b8:de",
-                       "netmask": "255.255.255.0"}]}]
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 [
     {
         "access_group": "global",
@@ -182,30 +159,9 @@ action=ChangeComputersAccessGroup&query=tag:new-servers
     &access_group=server
 ```
 
-The method returns a JSON serialized list of computers in the selection which have successfully changed access group:
+Example response:
 
-```text
-[{"access_group": "server",
-  "id": 12345,
-  "title": u"A Computer",
-  "comment": u"",
-  "total_memory": None,
-  "total_swap": None,
-  "reboot_required_flag": False,
-  "hostname": u"a_comp.example.com",
-  "last_ping_time": None,
-  "last_exchange_time": "2011-06-3017:59Z",
-  "tags": ["server"],
-  "network_devices": [{"broadcast_address": "192.168.1.255",
-                       "interface": "eth0",
-                       "ip_address": "192.168.1.2",
-                       "mac_address": "00:1e:c9:6c:b8:de",
-                       "netmask": "255.255.255.0"}]}]
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 [
     {
         "access_group": "server",
@@ -268,7 +224,7 @@ Get a list of pending computers associated with the account used for authenticat
 
 The method returns a JSON serialized list of pending computers:
 
-```text
+```json
 [
     {
         "id": 12345,
@@ -302,19 +258,9 @@ The equivalent CLI command is:
 landscape-api accept-pending-computers 1,2
 ```
 
-The method returns a JSON serialized list of accepted computers:
+Example response:
 
-```text
-[{"id": 12345,
-  "title": u"A Computer",
-  "comment": u"",
-  "hostname": u"a_comp.example.com",
-  "last_exchange_time": "2011-06-3017:59Z"}]
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 [
     {
         "id": 12345,
@@ -344,7 +290,6 @@ The following errors may be raised:
 - `InsufficientLicenses`: Insufficient licenses available to accept new computers.
 - `UnknownComputer`: The provided computers are not known or have been already accepted or rejected.
 - `UnknownAccessGroup`: The access group is not known or the person is not authorized to accept pending computers into the access group.
-
 
 ## RejectPendingComputers
 
@@ -376,7 +321,7 @@ Create one-time passwords used for registration of cloud instances:
 
 The method returns a JSON serialized list of one-time passwords, one for each requested:
 
-```text
+```json
 ["otp1", "otp2", "otp3"]
 ```
 
@@ -406,22 +351,9 @@ The equivalent CLI command is:
 landscape-api reboot-computers 30,43
 ```
 
-The method returns a JSON serialized activity:
+Example response:
 
-```text
-{u'computer_id': None,
- u'creation_time': u'2012-11-19T18:11:51Z',
- u'creator': {u'email': u'john@example.com', u'id': 3,
-              u'name': u'John Smith'},
- u'id': 141,
- u'parent_id': None,
- u'summary': u'Restart computer',
- u'type': u'ActivityGroup'}
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 {
     "computer_id": "None",
     "creation_time": "2012-11-19T18:11:51Z",
@@ -461,22 +393,9 @@ The equivalent CLI command is:
 landscape-api shutdown-computers 30,43
 ```
 
-The method returns a JSON serialized activity:
+Example response:
 
-```text
-{u'computer_id': None,
- u'creation_time': u'2012-11-19T18:14:19Z',
- u'creator': {u'email': u'john@example.com', u'id': 3,
-              u'name': u'John Smith'},
- u'id': 147,
- u'parent_id': None,
- u'summary': u'Shutdown computer',
- u'type': u'ActivityGroup'}
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 {
     "computer_id": "None",
     "creation_time": "2012-11-19T18:14:19Z",
@@ -505,4 +424,3 @@ This is an example of a valid request:
 ```text
 ?action=RenameComputers&computer_titles.30:newname
 ```
-

@@ -7,7 +7,7 @@ This guide describes how to remove duplicate instances.
 
 ## Option #1: Manual removal in the web portal
 
-If you have any duplicate client instances, you can manually remove them one-by-one in the web portal. 
+If you have any duplicate client instances, you can manually remove them one-by-one in the web portal.
 
 ### Web portal (24.04 LTS and later)
 
@@ -21,7 +21,7 @@ If you have any duplicate instances, you'll see them as an alert, "\<n\> compute
 
 You can use a removal profile to automatically remove instances that haven't contacted the Landscape server after a set amount of time (days). Instances with a duplicate registration have their pings associated with their most recent registration, so the old registration will appear offline and can be automatically removed by the removal profile.
 
-You can create and manage your removal profiles in **Profiles** > **Removal profiles**. Once you've created the profile, the duplicate registrations in the given access group will be removed after the provided number of days, 
+You can create and manage your removal profiles in **Profiles** > **Removal profiles**. Once you've created the profile, the duplicate registrations in the given access group will be removed after the provided number of days.
 
 ## Option #3: Automated removal with the API
 

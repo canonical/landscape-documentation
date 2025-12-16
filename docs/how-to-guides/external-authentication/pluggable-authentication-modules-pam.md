@@ -4,7 +4,8 @@
 If you want to use Pluggable Authentication Modules (PAM) to authenticate users in your self-hosted Landscape server, you must create the file `/etc/pam.d/landscape` with the appropriate PAM configuration.
 
 The simplest possible file is:
-```
+
+```text
 #%PAM-1.0
 auth required pam_ldap.so
 account required pam_ldap.so

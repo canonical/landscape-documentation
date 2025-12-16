@@ -56,7 +56,7 @@ Once you have pasted your code and chosen the subscription you want to attach yo
 
 The attach process will then continue in the terminal window, and you should eventually be presented with the following message:
 
-```
+```text
 Attaching the machine...
 Enabling default service esm-apps
 Updating Ubuntu Pro: ESM Apps package lists
@@ -89,19 +89,19 @@ On each instance you want to manage, do the following:
 
 1. Edit the client configuration file `/etc/landscape/client.conf`, add this line:
 
-    ```
+    ```ini
     include_manager_plugins = ProManagement
     ```
 
     If your `client.conf` already includes an `include_manager_plugins` line, then add `ProManagement` to it. For example:
 
-    ```
+    ```ini
     include_manager_plugins = ScriptExecution,ProManagement
     ```
 
 2. Restart Landscape Client:
 
-    ```
+    ```ini
     sudo systemctl restart landscape-client
     ```
 
@@ -115,7 +115,7 @@ To attach Ubuntu Pro in the web portal:
 
 1. Go to **Instances**
 1. Select your instance(s) that you want to attach an Ubuntu Pro subscription to
-1. Click **Attach Token** 
+1. Click **Attach Token**
 1. Provide your token and complete the remaining prompts
 
 This will send a separate activity to each client to attach Ubuntu Pro. After the activity succeeds, that client will become licensed.
@@ -124,4 +124,3 @@ This will send a separate activity to each client to attach Ubuntu Pro. After th
 
 - [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/en/latest/)
 - [Ubuntu Pro Client documentation on basic commands](https://documentation.ubuntu.com/pro-client/en/latest/tutorials/basic_commands/)
-

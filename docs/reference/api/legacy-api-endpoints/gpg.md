@@ -1,7 +1,6 @@
 (reference-legacy-api-gpg)=
 # GPG
 
-
 The methods available here are for GPG key handling.
 
 ## GetGPGKeys
@@ -20,7 +19,7 @@ Example call:
 
 The method returns JSON serialized info on the keys:
 
-```text
+```json
 [
     {
         "fingerprint": "aa65:abfd:ffa4:327a:6fa0:6bb1:faa1:83c3:534a:91ee",
@@ -67,7 +66,7 @@ The following error may be raised:
 
 The method returns a JSON representation of the stored key:
 
-```text
+```json
 {
     "fingerprint": "a404:34a3:e40c:1add:94fa:31b4:30a7:5431:a2eb:521a",
     "key_id": "30A75431A2EB521A",
@@ -93,4 +92,3 @@ The following error may be raised:
 
 - `UnknownGPGKey`: No GPG key with the specified name exists.
 - `GPGKeyInUse`: The GPG key is currently used by a pocket and can’t be removed.
-

@@ -16,7 +16,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/accept-invitation" -H "Authorization: Bearer $JWT" -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -43,7 +43,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/invitations" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -90,7 +90,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/invitations" -H "Authorization: Bearer $JWT" -d '{"name": "Bobby", "email": "bobby@ubuntu.com", "roles": ["Auditor", "SupportAnalyst"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -135,7 +135,7 @@ Example request:
 curl -X GET  "https://landscape.canonical.com/api/v2/invitations/2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {

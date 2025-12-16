@@ -1,7 +1,6 @@
 (how-to-rest-api-request)=
 # How to make a REST API request
 
-
 > See also: {ref}`reference-rest-api-login`
 
 This guide demonstrates how to login and make a request using the Landscape REST API. You need Landscape 24.04 LTS (or higher) to use the REST API. This guide provides general steps and examples using `curl`.
@@ -45,14 +44,13 @@ This method is for those using password authentication to login.
     }
     ```
 
-2. Copy your token from the output and assign it to a new variable, such as `JWT`:
-
+1. Copy your token from the output and assign it to a new variable, such as `JWT`:
 
     ```bash
     JWT="qkJ0eXAiOiJKV1QiLCJhbGciOiJskdi296MTcxMDM2MTQxNiwic3ViIjoieWFuaXNhLnNjaGVyYmVyQGNhbm9uaWNhbC5jb20iLCJhY2MiOiJzdGFuZGFsb2i93nboPRfXp50"
     ```
 
-4. Make your API request, using your token as authorization. For example:
+1. Make your API request, using your token as authorization. For example:
 
     ```bash
     curl -X GET https://your-landscape.domain.com/api/v2/activities -H "Authorization: Bearer $JWT"
@@ -68,7 +66,6 @@ This method is for those using SSO (such as Ubuntu One or an external authentica
 
 To make a REST API request with `curl`:
 
-
 1. Provide an access and secret key to login with `POST`. You get your access and secret keys from your administrator settings page (e.g., [https://landscape.canonical.com/settings](https://landscape.canonical.com/settings)), or by clicking your user name from your Landscape portal.
 
     Your request will be similar to the following
@@ -79,7 +76,7 @@ To make a REST API request with `curl`:
     -d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
     ```
 
-	And you’ll receive output similar to
+    And you’ll receive output similar to
 
     ```json
     {
@@ -103,15 +100,14 @@ To make a REST API request with `curl`:
     }
     ```
 
-2. Copy your token from the output and assign it to a new variable, such as `JWT`:
+1. Copy your token from the output and assign it to a new variable, such as `JWT`:
 
     ```bash
     JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjUwMzkyNzYsImlhdCI6MTcyNDk1Mjg3Niwic3ViIjoiam9obkBleGFtcGxlLmNvbSIsImFjYyI6Im9ud2FyZCIsImlkIjoxfQ.8rWW_GN1jRzKownpg4k1Zp4iZMmn_lfLjy0cX-DLh_g"
     ```
 
-4. Make your API request, using your token as authorization. For example:
+1. Make your API request, using your token as authorization. For example:
 
     ```bash
     curl -X GET https://your-landscape.domain.com/api/v2/activities -H "Authorization: Bearer $JWT"
     ```
-

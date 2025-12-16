@@ -78,4 +78,3 @@ For repository mirroring, administrators also generate a private key to sign and
 ## Cryptographic technology available to users
 
 Landscape doesn’t provide cryptography services for external uses, so users can't use Landscape to perform their own cryptographic actions, such as signing files or encrypting uploaded data. However, users can change the cryptographic settings in Landscape that would impact the security of their Landscape deployments. See the earlier section on {ref}`header-recommended-usage-and-settings` for guidance.
-

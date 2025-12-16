@@ -22,55 +22,54 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/activities?limit=2 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
-```bash
+```json
 {
   "count": 89,
   "results": [
-		{
-	  	"id": 71666950,
-	  	"creation_time": "2024-02-07T17:30:05Z",
-	  	"creator": {
-	    	"name": "Jane Smith",
-	    	"email": "jane@example.com",
-	    	"id": 115669
-	  	},
-	  	"type": "ChangePackagesRequest",
-	  	"summary": "Downgrade package apt-transport-https",
-	  	"result_text": null,
-	  	"computer_id": 365829,
-	  	"approval_time": null,
-	  	"delivery_time": null,
-	  	"deliver_after_time": null,
-	  	"deliver_before_time": null,
-	  	"package_ids": [
-	    	7085390,
-	    	7915181
-	  	],
-	  	"changes": [
-	    	{
-	      	"package": "apt-transport-https",
-	      	"complemented": false,
-	      	"type": "downgrade",
-	      	"install_version": "1.0.1ubuntu2.19",
-	      	"remove_version": "1.0.1ubuntu2.24"
-	    	}
-	  	],
-	  	"parent_id": 71666947,
-	  	"modification_time": "2024-02-07T17:30:16Z",
-	  	"completion_time": "2024-02-07T17:30:16Z",
-	  	"schedule_before_time": null,
-	  	"schedule_after_time": null,
-	  	"result_code": null,
-	  	"activity_status": "canceled",
-	  	"children": []
-		}
+    {
+      "id": 71666950,
+      "creation_time": "2024-02-07T17:30:05Z",
+      "creator": {
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "id": 115669
+      },
+      "type": "ChangePackagesRequest",
+      "summary": "Downgrade package apt-transport-https",
+      "result_text": null,
+      "computer_id": 365829,
+      "approval_time": null,
+      "delivery_time": null,
+      "deliver_after_time": null,
+      "deliver_before_time": null,
+      "package_ids": [
+        7085390,
+        7915181
+      ],
+      "changes": [
+        {
+          "package": "apt-transport-https",
+          "complemented": false,
+          "type": "downgrade",
+          "install_version": "1.0.1ubuntu2.19",
+          "remove_version": "1.0.1ubuntu2.24"
+        }
+      ],
+      "parent_id": 71666947,
+      "modification_time": "2024-02-07T17:30:16Z",
+      "completion_time": "2024-02-07T17:30:16Z",
+      "schedule_before_time": null,
+      "schedule_after_time": null,
+      "result_code": null,
+      "activity_status": "canceled",
+      "children": []
+    }
   ],
   "next": "https://landscape.canonical.com/api/v2/activities?limit=2&offset=2",
   "previous": null
 }
-
 ```
 
 ## GET `/activities/<int:id>`
@@ -91,16 +90,16 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/activities/71666950 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
-```bash
+```json
 {
   "id": 71666950,
   "creation_time": "2024-02-07T17:30:05Z",
   "creator": {
-	"name": "Jane Smith",
-	"email": "jane.smith@example.com",
-	"id": 115669
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "id": 115669
   },
   "type": "ChangePackagesRequest",
   "summary": "Downgrade package apt-transport-https",
@@ -111,17 +110,17 @@ Example output:
   "deliver_after_time": null,
   "deliver_before_time": null,
   "package_ids": [
-	7085390,
-	7915181
+  7085390,
+  7915181
   ],
   "changes": [
-	{
-  	"package": "apt-transport-https",
-  	"complemented": false,
-  	"type": "downgrade",
-  	"install_version": "1.0.1ubuntu2.19",
-  	"remove_version": "1.0.1ubuntu2.24"
-	}
+  {
+    "package": "apt-transport-https",
+    "complemented": false,
+    "type": "downgrade",
+    "install_version": "1.0.1ubuntu2.19",
+    "remove_version": "1.0.1ubuntu2.24"
+  }
   ],
   "parent_id": 71666947,
   "modification_time": "2024-02-07T17:30:16Z",
@@ -132,7 +131,6 @@ Example output:
   "activity_status": "canceled",
   "children": []
 }
-
 ```
 
 ## GET `/activities/parents`
@@ -154,67 +152,66 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/activities/parents?limit=2 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
-```bash
+```json
 {
   "count": 87,
   "results": [
-	{
-  	"id": 71666947,
-  	"creation_time": "2024-02-07T17:30:05Z",
-  	"creator": {
-    	"name": "Jane Smith",
-    	"email": "jane@example.com",
-    	"id": 115669
-  	},
-  	"type": "ActivityGroup",
-  	"summary": "Downgrade package apt-transport-https",
-  	"completion_time": "2024-02-07T17:30:16Z",
-  	"parent_id": null,
-  	"deliver_delay_window": 0,
-  	"result_text": null,
-  	"result_code": null,
-  	"activity_status": "canceled",
-  	"children_count": 2,
-  	"children_statuses": {
-    	"good": 0,
-    	"warning": 0,
-    	"bad": 2
-  	},
-  	"computer_count": 2,
-  	"computer": null
-	},
-	{
-  	"id": 71666936,
-  	"creation_time": "2024-02-07T17:29:27Z",
-  	"creator": {
-    	"name": "Jane Smith",
-    	"email": "jane@example.com",
-    	"id": 115669
-  	},
-  	"type": "ActivityGroup",
-  	"summary": "Downgrade package apt-transport-https",
-  	"completion_time": "2024-02-07T17:29:34Z",
-  	"parent_id": null,
-  	"deliver_delay_window": 0,
-  	"result_text": null,
-  	"result_code": null,
-  	"activity_status": "canceled",
-  	"children_count": 2,
-  	"children_statuses": {
-    	"good": 0,
-    	"warning": 0,
-    	"bad": 2
-  	},
-  	"computer_count": 2,
-  	"computer": null
-	}
+  {
+    "id": 71666947,
+    "creation_time": "2024-02-07T17:30:05Z",
+    "creator": {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "id": 115669
+    },
+    "type": "ActivityGroup",
+    "summary": "Downgrade package apt-transport-https",
+    "completion_time": "2024-02-07T17:30:16Z",
+    "parent_id": null,
+    "deliver_delay_window": 0,
+    "result_text": null,
+    "result_code": null,
+    "activity_status": "canceled",
+    "children_count": 2,
+    "children_statuses": {
+      "good": 0,
+      "warning": 0,
+      "bad": 2
+    },
+    "computer_count": 2,
+    "computer": null
+  },
+  {
+    "id": 71666936,
+    "creation_time": "2024-02-07T17:29:27Z",
+    "creator": {
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "id": 115669
+    },
+    "type": "ActivityGroup",
+    "summary": "Downgrade package apt-transport-https",
+    "completion_time": "2024-02-07T17:29:34Z",
+    "parent_id": null,
+    "deliver_delay_window": 0,
+    "result_text": null,
+    "result_code": null,
+    "activity_status": "canceled",
+    "children_count": 2,
+    "children_statuses": {
+      "good": 0,
+      "warning": 0,
+      "bad": 2
+    },
+    "computer_count": 2,
+    "computer": null
+  }
   ],
   "next": "https://landscape.canonical.com/api/v2/activities/parents?limit=2&offset=2",
   "previous": null
 }
-
 ```
 
 ## POST `/activities/reapply`
@@ -240,4 +237,3 @@ Required parameters:
 Optional parameters:
 
 - None
-

@@ -18,7 +18,8 @@ To install the Azure CLI, refer to the [Install Azure CLI on Ubuntu](https://doc
 ### Connect Azure with your Microsoft Azure account
 
 The Azure CLI's default authentication method for logins uses a web browser and access token to sign in. To login, run:
-```
+
+```bash
 az login
 ```
 
@@ -26,18 +27,19 @@ If the Azure CLI can open your default browser, it will open the default browser
 
 Sign in with your account credentials in the browser. For more information on signing in with the Azure CLI, see [Microsoft's documentation on signing in interactively with the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli-interactively).
 
-
 ## Provision Azure resources
 
 ### Create a resource group
 
 Create a resource group to contain all the Azure resources for deploying the VM.  The following command creates a resource group named `Landscape-rg` in the `eastus` location:
-```
+
+```bash
 az group create --name Landscape-rg --location eastus
 ```
 
 Output will be displayed in JSON format:
-```
+
+```json
 {
   "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/Landscape-rg",
   "location": "eastus",
@@ -54,16 +56,18 @@ Output will be displayed in JSON format:
 ### Create public-ip address resource
 
 Create a static IP address in the `Landscape-rg` resource group:
-```
+
+```bash
 az network public-ip create \
-	--resource-group Landscape-rg \
+    --resource-group Landscape-rg \
     --name LandscapePublicIP \
     --location eastus \
     --allocation-method Static
 ```
 
 Output will be displayed in JSON format and will show the static IP address:
-```
+
+```json
 "ipAddress": "34.XXX.XXX.XXX",
 "ipTags": [],
 "location": "eastus",
@@ -78,22 +82,22 @@ Copy the IP address and set it as the A record value for the domain or subdomain
 
 Verify the A record using `nslookup`. Replace `{landscape.domain.com}` with your FQDN:
 
-```
+```bash
 nslookup {landscape.domain.com}
 ```
 
 You’ll receive output similar to:
-```
-Server:		127.0.0.53
+
+```text
+Server:  127.0.0.53
 Address: 127.0.0.53#53
   
 Non-authoritative answer:
-Name:	landscape.domain.com
+Name:    landscape.domain.com
 Address: 34.XXX.XXX.XXX
 ```
 
 If the address value in the `nslookup` output matches the value of the `LandscapePublicIP` static IP address, the LetsEncrypt SSL provisioning step defined in the cloud-init configuration automation template will succeed.
-
 
 ## Deploy Landscape Server VM with cloud-init
 
@@ -105,30 +109,33 @@ Once you’ve chosen your configuration template, complete the following steps.
 
 1. Set the `IMAGE_FAMILY` environment variable based on the cloud-init configuration you chose.
 
-   If you’re using `cloud-init-quickstart.yaml`, run:
-   ```
-   curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart.yaml -o cloud-init.yaml 
-   IMAGE_FAMILY=Canonical:0001-com-ubuntu-pro-jammy:pro-22_04-lts-gen2:latest
-   ```
+    If you’re using `cloud-init-quickstart.yaml`, run:
 
-   If you’re using `cloud-init-quickstart-fips.yaml`, run:
-   ```
-   curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart-fips.yaml -o cloud-init.yaml
-   IMAGE_FAMILY=Canonical:0001-com-ubuntu-pro-focal-fips:pro-fips-20_04-gen2:latest
-   ```
+    ```bash
+    curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart.yaml -o cloud-init.yaml 
+    IMAGE_FAMILY=Canonical:0001-com-ubuntu-pro-jammy:pro-22_04-lts-gen2:latest
+    ```
+
+    If you’re using `cloud-init-quickstart-fips.yaml`, run:
+
+    ```bash
+    curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart-fips.yaml -o cloud-init.yaml
+    IMAGE_FAMILY=Canonical:0001-com-ubuntu-pro-focal-fips:pro-fips-20_04-gen2:latest
+    ```
 
 2. Open the downloaded cloud-init YAML file in an editor, determine which configuration parameters need to be changed between lines 4 and 32 and change these parameters.
 
 The `HOSTNAME` on line 16 and `DOMAIN` on line 19 must be changed. Updating `EMAIL` on line 9, and adding your SendGrid API key on line 29 as the `SMTP_PASSWORD` are optional.
 
-
 ### Create VM
+
  ```{note}
 Microsoft recommends not storing sensitive data in custom data such as cloud-init. For more information, see [Microsoft's documentation on custom data and cloud-init for virtual machines](https://learn.microsoft.com/en-us/azure/virtual-machines/custom-data).
 ```
 
 Run the following commands to create a VM and add a security rule to the network security group (NSG) to open port 80 and 443.  These ports are required to be open to allow the LetsEncrypt SSL provisioning step defined in the cloud-init to succeed.  The `--generate-ssh-keys` parameter causes the CLI to look for an available ssh key in `~/.ssh`. If one is found, that key is used. If not, one is generated and stored in `~/.ssh`.  The `--custom-data` parameter to pass in the cloud-init config file. Provide the full path to the `cloud-init.yaml` config if you saved the file outside of your present working directory:
-```
+
+```bash
 az vm create \
     --resource-group Landscape-rg \
     --name LandscapeVM \
@@ -139,10 +146,10 @@ az vm create \
     --public-ip-address LandscapePublicIP \
     --custom-data cloud-init.yaml
 az vm open-port \
-	--resource-group Landscape-rg \
-	--name LandscapeVM \
-	--port 80,443 \
-	--priority 100
+    --resource-group Landscape-rg \
+    --name LandscapeVM \
+    --port 80,443 \
+    --priority 100
 ```
 
 It usually takes a few minutes to create the VM and supporting resources.
@@ -153,29 +160,31 @@ When creating the VM an error may occur with the code `MarketplacePurchaseEligib
 
 The cloud-init process can take several minutes to complete. You can observe the process by tailing the `cloud-init-output.log` file. Replace `{landscape.domain.com}` with your FQDN or static IP address:
 
-```
+```bash
 ssh azureuser@{landscape.domain.com} 'tail -f /var/log/cloud-init-output.log'
 ```
 
 A reboot may be required during the cloud-init process. If a reboot is required, you’ll receive output similar to:
-```
+
+```text
 2023-08-20 17:30:04,721 - cc_package_update_upgrade_install.py[WARNING]: Rebooting after upgrade or install per /var/run/reboot-required
 ```
 
 If the `IMAGE_FAMILY` specified earlier contained all the security patches, this reboot step may not occur.
 
 Repeat the following code if a reboot was necessary to continue observing the log file:
-```
+
+```bash
 ssh azureuser@{landscape.domain.com} 'tail -f /var/log/cloud-init-output.log'
 ```
 
 Wait until the cloud-init process is complete. When it’s complete, you’ll receive output similar to:
-```
+
+```text
 cloud-init v. 23.2.2-0ubuntu0~22.04.1 finished at Sun, 20 Aug 2023 17:30:56 +0000. Datasource DataSourceAzure [seed=/dev/sr0].  Up 37.35 seconds
 ```
 
 Press `CTRL + C` to terminate the tail process in your terminal window.
-
 
 ## Configure Landscape
 
@@ -187,18 +196,18 @@ If the email address Landscape sends emails from should not be a subdomain based
 
 Alerts and administrator invitations sent via email are less likely to fail SPF or DMARC checks if the system email address is configured in a way the email service provider expects. If the email service provider sends emails which fail SPF and DMARC checks, mail delivery can be delayed or miscategorized as spam.
 
-
 ## (Optional) Perform a complete teardown
 
 When no longer needed, you can delete the resource group to remove all the related resources used to create the Landscape Server VM.
 
 To check the resources in the `Landscape-rg` resource group, run:
-```
+
+```bash
 az resource list --resource-group Landscape-rg --output table
 ```
 
 To delete the resource group, run:
-```
+
+```bash
 az group delete --name Landscape-rg
 ```
-
