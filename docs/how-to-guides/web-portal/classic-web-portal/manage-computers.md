@@ -159,11 +159,13 @@ For some alerts, you can download a list of affected computers as a CSV file. Cl
 
 ## Manage scripts
 
+> See also: {ref}`explanation-remote-script-execution`
+
 ```{note}
 You must have remote script execution enabled to run scripts on the target Landscape Client. For more information, visit {ref}`how to enable script execution <howto-heading-client-enable-script-execution>`.
 ```
 
-You can run {ref}`reference-terms-scripts` on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.
+You can run scripts on the computers registered in your account. The scripts can be in any language, but an interpreter for that language must be present on the computers they're run on.
 
 From your organization's home page, click the **Scripts** tab to display a list of existing scripts, the access group they belong to, and the creator. To add a new script, click **Add script**. On the next page, you must enter a title, interpreter, the script code, the time within which the script must complete, and the access group to which the script belongs. You may enter a default user to run the script. If you don't, you'll have to specify the user when you choose to run the script. You may also attach up to five files with a maximum of 1MB in total size. On each computer on which a script runs, attachments are placed in the directory specified by the environment variable LANDSCAPE_ATTACHMENTS, and are deleted once the script has been run. After specifying all the information for a stored script, click **Save** to save it.
 
