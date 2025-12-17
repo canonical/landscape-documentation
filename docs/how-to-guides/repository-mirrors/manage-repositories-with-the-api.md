@@ -1,6 +1,8 @@
 (how-to-manage-repos-api)=
 # How to manage and mirror repositories with the API
 
+> See also: {ref}`explanation-repo-mirroring`
+
 ```{note}
 Repository mirroring is available for self-hosted users.
 ```
@@ -9,10 +11,10 @@ Repository management requires the use of the Landscape {ref}`API <how-to-use-le
 
 In the following instructions we will use:
 
-- **{ref}`reference-terms-distribution`**: ubuntu
-- **{ref}`reference-terms-series`**: bionic
-- **{ref}`reference-terms-pocket`**: release, updates, security
-- **{ref}`reference-terms-components`**: main, restricted, universe, multiverse
+- **Distribution**: ubuntu
+- **Series**: bionic
+- **Pocket**: release, updates, security
+- **Components**: main, restricted, universe, multiverse
 - **{ref}`reference-terms-tags`**: example-tag
 - **repository profile**: example-profile
 - **mirror-key**: the name of the gpg key used by Landscape to sign your repository
