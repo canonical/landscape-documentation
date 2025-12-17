@@ -1,5 +1,5 @@
 (howto-create-saas-account)=
-# How to create a free, personal SaaS account and register your first client
+# How to create a SaaS account and register your first client
 
 Landscape SaaS lets you manage your Ubuntu instances without having to maintain your own Landscape infrastructure. This guide describes how to create a Landscape SaaS account and register your first Landscape client machine.
 
@@ -29,7 +29,7 @@ After account creation, you can access Landscape SaaS anytime at: [landscape.can
 
 You'll need an Ubuntu Pro subscription to register your first Landscape Client instance. You can get a free Ubuntu Pro subscriptions for up to 5 machines.
 
-1. If you don't already have an Ubuntu Pro subscription, sign up for a [free, personal Ubuntu Pro account](https://ubuntu.com/pro).
+1. If you don't already have an Ubuntu Pro subscription, sign up for an [Ubuntu Pro account](https://ubuntu.com/pro).
 
 1. Get your Ubuntu Pro token from your [Ubuntu Pro dashboard](https://ubuntu.com/pro/dashboard).
 
