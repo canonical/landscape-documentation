@@ -17,7 +17,7 @@ Optional query parameters:
 Example request:
 
 ```bash
-curl -X DELETE   -H "Authorization: Bearer $JWT" "landscape.canonical.comapi/users?computer_ids=1&usernames=john"
+curl -X DELETE   -H "Authorization: Bearer $JWT" "landscape.canonical.com/api/users?computer_ids=1&usernames=john"
 ```
 
 Example response:
