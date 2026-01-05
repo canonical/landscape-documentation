@@ -82,7 +82,6 @@ Example response:
         "image_name": "Ubuntu-24.04",
         "image_source": null,
         "cloud_init_contents": null,
-        "cloud_init_secret_name": null,
         "tags": [
             "windows_desktops",
             "windows_laptops"
@@ -142,7 +141,6 @@ Example response:
     "image_name": "Ubuntu-24.04",
     "image_source": null,
     "cloud_init_contents": "********",
-    "cloud_init_secret_name": null,
     "tags": [
         "windows_desktops",
         "windows_laptops"
@@ -207,7 +205,6 @@ Example response:
   "image_name": "Ubuntu-24.04",
   "image_source": null,
   "cloud_init_contents": null,
-  "cloud_init_secret_name": null,
   "tags": [
     "windows_desktops",
     "windows_laptops"
@@ -255,7 +252,6 @@ Example response:
   "image_name": "Ubuntu-24.04",
   "image_source": null,
   "cloud_init_contents": null,
-  "cloud_init_secret_name": null,
   "tags": [
     "windows_laptops"
   ],

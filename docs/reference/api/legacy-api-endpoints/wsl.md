@@ -28,17 +28,11 @@ Required arguments:
 Optional arguments:
 
 - `cloud_init`: The b64 encoded cloud-init file contents.
-- `data_id`: The name of the vault secret containing the cloud-init file.
-- `token`: The authentication token to be passed to the secrets manager.
 
-If `cloud_init` or `data_id` is provided, the new instance will be created according to the cloud-init file specified or the file stored with the specified vault secret.
+If `cloud_init` is provided, the new instance will be created according to the cloud-init file specified.
 
 ```{note}
 Cloud-init configuration isn't supported yet by Ubuntu Pro for Windows. This feature is planned in a future beta release.
-```
-
-```{note}
-Specifying both a cloud-init file and a vault secret will result in an error.
 ```
 
 Example calls:
@@ -49,10 +43,6 @@ Example calls:
 
 ```bash
 ?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&cloud_init=<b64 encoded cloud_init file>
-```
-
-```bash
-?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&data_id=data-id&token=vault-token
 ```
 
 Example response:
@@ -188,7 +178,6 @@ Example outputs:
         "last_exchange_time": null,
         "last_ping_time": "2023-10-25T18:45:37Z",
         "reboot_required_flag": false,
-        "secrets_name": null,
         "tags": [
             "laptop",
             "windows"
@@ -211,7 +200,6 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:21:43Z",
         "reboot_required_flag": false,
-        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
@@ -236,7 +224,6 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:22:30Z",
         "reboot_required_flag": false,
-        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
