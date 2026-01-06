@@ -1,4 +1,5 @@
 (how-to-backup-and-restore)=
+
 # How to backup and restore Landscape
 
 Self-hosted Landscape consists of several stateful components that must be roughly synchronized to guarantee correct functioning of the system as a whole. These include:
@@ -10,6 +11,7 @@ Landscape Server only supports backup to the latest possible state. So, the only
 
 We strongly recommend that administrators of a self-hosted Landscape instance familiarize themselves with PITR facilities and PostgreSQL's archived logging, also called write-ahead logging (WAL). Some syntactic configuration changes have occurred across PostgreSQL versions, so you should select the documentation for your particular PostgreSQL server version:
 
+- [PostgreSQL 16](https://www.postgresql.org/docs/16/continuous-archiving.html) (Ubuntu 24.04 LTS)
 - [PostgreSQL 14](https://www.postgresql.org/docs/14/continuous-archiving.html) (Ubuntu 22.04 LTS)
 - [PostgreSQL 12](https://www.postgresql.org/docs/12/continuous-archiving.html) (Ubuntu 20.04 LTS)
 - [PostgreSQL 10](https://www.postgresql.org/docs/10/static/continuous-archiving.html) (Ubuntu 18.04 LTS)
@@ -17,7 +19,7 @@ We strongly recommend that administrators of a self-hosted Landscape instance fa
 Given the wide variety of clients (from physical hardware, to VMs, to containers, some of which may be permanent and others merely temporary), backup of Landscape Clients (if required at all) isn't covered in this guide.
 
 ```{note}
-The database guidelines here don't apply to juju deployments with [Charmed PostgreSQL](https://canonical.com/data/docs/postgresql/iaas). Charmed PostgreSQL was introduced in the [Landscape 24.04 LTS charm](https://charmhub.io/landscape-server). See [Charmed PostgreSQL's backup and restore documentation](https://canonical.com/data/docs/postgresql/iaas/h-create-backup) for information on backing up and restoring your charmed database.
+The database guidelines here don't apply to Juju deployments with [Charmed PostgreSQL](https://canonical.com/data/docs/postgresql/iaas). Charmed PostgreSQL was introduced in the [Landscape 24.04 LTS charm](https://charmhub.io/landscape-server). See [Charmed PostgreSQL's backup and restore documentation](https://canonical.com/data/docs/postgresql/iaas/h-create-backup) for information on backing up and restoring your charmed database.
 ```
 
 ## Define a backup and retention policy
@@ -33,18 +35,18 @@ Before configuring your PostgreSQL instance for continuous archiving and PITR, i
 4. Where should base backups be stored?
     - Recommended: The same machine as the WAL archive so that all materials necessary for restoration are available in one place.
 
-Although it's possible to backup and archive on the same machine as the PostgreSQL server, we recommend that you use a separate machine for base backup and archived log storage. This is to allow restoration in case the server becomes inaccessible for any reason. We also recommend that any other files needed to restore the Landscape application server (such as the configuration files listed in a following section) are also copied to this location to allow recovery of the entire service from one location.
+Although it's possible to backup and archive on the same machine as the PostgreSQL server, it is recommend that you use a separate machine for base backup and archived log storage. This is to allow restoration in case the server becomes inaccessible for any reason. We also recommend that any other files needed to restore the Landscape application server (such as the configuration files listed in a following section) are also copied to this location to allow recovery of the entire service from one location.
 
 ## Configure PostgreSQL
 
 To configure PostgreSQL:
 
-1. In the `postgresql.conf` configuration file, set `wal_level`, `archive_mode`, and `archive_command` according to the PostgreSQL documentation for your server's version. 
+1. In the `postgresql.conf` configuration file, set `wal_level`, `archive_mode`, and `archive_command` according to the PostgreSQL documentation for your server's version.
 2. Test that your `archive_command` operates correctly in all circumstances, including returning the correct exit codes.
 3. Once you're confident the configuration is correct, restart the PostgreSQL service to activate archived logging.
 4. Monitor the archive destination to ensure logs begin to appear there.
 5. (Optional) If your server has very low traffic, you may want to use the `archive_timeout` setting to force archiving of partial logs after a timeout.
-6. When WAL logs are being archived successfully, construct a script that executes `pg_basebackup` and stores the result in your base backup storage destination. 
+6. When WAL logs are being archived successfully, construct a script that executes `pg_basebackup` and stores the result in your base backup storage destination.
 7. Test that this operates correctly as the cluster owner (typically `postgres`).
 8. Add a cronjob to periodically execute this script (as the cluster owner).
 
@@ -77,8 +79,10 @@ To test the recovery procedures:
 2. Stop the Landscape application server, and the PostgreSQL cluster on the spare
 3. Copy configuration files (see prior section) to the spare; you may wish to keep a script handy to perform this task in your backup location
 4. If your spare isn't installed from scratch (e.g. if it is installed from an image), remove everything under `/var/lib/landscape/hash-id-databases`
-5. Restore a recent PostgreSQL base-backup onto the spare; this usually involves (re)moving the existing PostgreSQL cluster's data directory (e.g. /var/lib/postgresql/9.5/main) and replacing it with the contents of the base-backup (or un-tarring the base-backup into it, if tar format was chosen); ensure file ownership and modes are preserved!
-6. Construct an appropriate `recovery.conf` file in the new PostgreSQL cluster's data directory; a template for this can be found in `/usr/share/postgresql/<pg-version>/main/recovery.conf.sample`
-7. Start the PostgreSQL cluster on the spare and watch the PostgreSQL logs to ensure recovery proceeds by retrieving and replaying WAL logs
-8. Once recovery is complete, run `/opt/canonical/landscape/scripts/hash-id-databases.sh` to regenerate the hash databases cache
+5. Restore a recent PostgreSQL base-backup onto the spare; this usually involves (re)moving the existing PostgreSQL cluster's data directory (e.g. `/var/lib/postgresql/<pg-version>/main`) and replacing it with the contents of the base-backup (or un-tarring the base-backup into it, if tar format was chosen); ensure file ownership and modes are preserved!
+6. Configure recovery settings in the PostgreSQL cluster's data directory. The method varies by PostgreSQL version:
+    - **PostgreSQL 10 (Ubuntu 18.04 LTS):** Create a `recovery.conf` file with appropriate recovery settings; a template can be found at `/usr/share/postgresql/10/recovery.conf.sample`
+    - **PostgreSQL 12 (Ubuntu 20.04 LTS) and later:** Set recovery configuration in `postgresql.conf` or `postgresql.auto.conf` (e.g., `restore_command`). See the "Archive Recovery" docstring section in `postgresql.conf` for examples and documentation of recovery settings. Then, create an empty `recovery.signal` file in the cluster data directory to trigger recovery mode.
+7. Start the PostgreSQL cluster on the spare and watch the PostgreSQL logs to ensure recovery proceeds by retrieving and replaying WAL logs. Upon completion, PostgreSQL 12+ will automatically remove the `recovery.signal` file, while PostgreSQL 10 renames `recovery.conf` to `recovery.done`.
+8. Once recovery is complete, run `/opt/canonical/landscape/hash-id-databases` to regenerate the hash databases cache
 9. Finally, start the Landscape application server on the spare and test it to verify correct operation
