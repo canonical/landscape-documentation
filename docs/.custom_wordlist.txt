@@ -83,6 +83,7 @@ distros
 DMARC
 DNS
 DSA
+docstring
 DoD
 DoS
 dpkg
