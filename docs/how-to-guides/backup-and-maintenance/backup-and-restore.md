@@ -35,7 +35,7 @@ Before configuring your PostgreSQL instance for continuous archiving and PITR, i
 4. Where should base backups be stored?
     - Recommended: The same machine as the WAL archive so that all materials necessary for restoration are available in one place.
 
-Although it's possible to backup and archive on the same machine as the PostgreSQL server, it is recommend that you use a separate machine for base backup and archived log storage. This is to allow restoration in case the server becomes inaccessible for any reason. We also recommend that any other files needed to restore the Landscape application server (such as the configuration files listed in a following section) are also copied to this location to allow recovery of the entire service from one location.
+Although it's possible to backup and archive on the same machine as the PostgreSQL server, it is recommended that you use a separate machine for base backup and archived log storage. This is to allow restoration in case the server becomes inaccessible for any reason. We also recommend that any other files needed to restore the Landscape application server (such as the configuration files listed in a following section) are also copied to this location to allow recovery of the entire service from one location.
 
 ## Configure PostgreSQL
 
