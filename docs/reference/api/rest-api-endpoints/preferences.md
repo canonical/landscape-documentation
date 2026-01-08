@@ -19,8 +19,7 @@ Optional parameters:
 - `ubuntu_one`: Enable or disable Ubuntu One as an identity provider.
 
 ```{note}
-- `registration_password` has three states: omitted, a valid string, or `null`.
-- When provided as a string it must be 3–50 characters and single-line (no newlines). Empty strings are rejected.
+- `registration_password` has three states: omitted (no change), a non-empty valid string (set), or null (clear/unset).
 - If the `auto_register_new_computers` is `true` and registration key is `null`, the request returns an error (HTTP 400).
 ```
 
