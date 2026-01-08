@@ -13,6 +13,7 @@ Manage administrators and roles <manage-administrators-and-roles>
 Manage access groups <manage-access-groups>
 Use annotations <use-annotations>
 Manage Livepatch and kernel updates <manage-livepatch-and-kernel-updates>
+Manage saved searches <manage-saved-searches>
 Sanitize instances <sanitize-instances>
 Use reboot profiles <use-reboot-profiles>
 Use script profiles <use-script-profiles>
