@@ -12,15 +12,14 @@ Required parameters:
 
 Optional parameters:
 
-- `audit_retention_period`: Audit log retention period in days.
-- `auto_register_new_computers`: Whether to automatically register new computers.
-- `registration_password`: Registration key for auto-registering computers. 
+- `audit_retention_period`: The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely.
+- `auto_register_new_computers`: Toggle to automatically register new computers.
+- `registration_password`: Registration key for auto-registering computers. A valid input is a non-empty string (3-50 chars, single line). To clear the value, explicitly set to `null`; this clearing behavior is unique to only this field. `auto_register_new_computers` must be false in order to clear the registration key (null).
 - `title`: The title of organization name.
 - `ubuntu_one`: Enable or disable Ubuntu One as an identity provider.
 
 ```{note}
-- `registration_password` has three states: omitted (no change), a non-empty valid string (set), or null (clear/unset).
-- If the `auto_register_new_computers` is `true` and registration key is `null`, the request returns an error (HTTP 400).
+- If you don't provide a value for any field in the request, the current value is unchanged.
 ```
 
 Example request:
