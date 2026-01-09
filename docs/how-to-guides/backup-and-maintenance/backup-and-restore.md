@@ -51,7 +51,9 @@ To configure PostgreSQL:
 
     - Force a WAL switch, then verify a new WAL file appears in your archive location:
 
+    ```sh
         sudo -u postgres psql -c "SELECT pg_switch_wal();"
+    ```
 
     - Check the PostgreSQL logs for archiving messages and ensure the archive command completed successfully (exit code is 0).
 
