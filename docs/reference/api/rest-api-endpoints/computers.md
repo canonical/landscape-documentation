@@ -75,7 +75,6 @@ Example response:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-02-07T21:21:41Z",
       "tags": [
@@ -121,7 +120,6 @@ Example response:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-07-10T23:32:16Z",
       "tags": [
@@ -151,7 +149,6 @@ Example response:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-07-10T23:31:16Z",
       "tags": [
@@ -199,7 +196,6 @@ Example response:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-02-07T21:16:41Z",
       "tags": [
@@ -224,7 +220,6 @@ Example response:
           "reboot_required_flag": false,
           "update_manager_prompt": "normal",
           "clone_id": null,
-          "secrets_name": null,
           "last_exchange_time": null,
           "last_ping_time": "2024-02-07T21:11:41Z",
           "tags": [
@@ -249,7 +244,6 @@ Example response:
           "reboot_required_flag": false,
           "update_manager_prompt": "normal",
           "clone_id": null,
-          "secrets_name": null,
           "last_exchange_time": null,
           "last_ping_time": "2024-02-07T21:10:41Z",
           "tags": [
@@ -368,7 +362,6 @@ Example response:
     },
   ],
   "reboot_required_flag": false,
-  "secrets_name": null,
   "tags": [
     "lucid",
     "server",
@@ -404,7 +397,6 @@ Example response:
   "registered_at": "2024-07-10T22:22:16Z",
   "update_manager_prompt": "normal",
   "clone_id": null,
-  "secrets_name": null,
   "last_exchange_time": null,
   "last_ping_time": "2024-07-10T23:32:16Z",
   "tags": [
