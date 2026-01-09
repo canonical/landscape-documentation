@@ -1,17 +1,10 @@
 (reference-rest-api-preferences)=
 # Preferences
+The endpoint(s) here are for account preferences.
 
 ## PATCH `/preferences`
 
 Updates account preferences using [JSON Merge Patch](https://datatracker.ietf.org/doc/html/rfc7386) semantics. This endpoint allows you to modify specific fields while leaving others unchanged.
-
-Path parameters:
-
-- None
-
-Query parameters:
-
-- None
 
 Required parameters:
 
