@@ -25,8 +25,15 @@ Optional parameters:
 
 Example request
 
-```sh
-http PATCH localhost:9091/api/preferences auto_register_new_computers=false registration_password:=null title="changed_title"  Authorization:"Bearer $JWT"
+```bash
+curl -X PATCH "https://landscape.canonical.com/api/v2/preferences"  \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "auto_register_new_computers": false,
+    "registration_password": null,
+    "title": "changed_title"
+  }'
 ```
 
 Example response:
