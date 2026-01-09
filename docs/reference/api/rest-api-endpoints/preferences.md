@@ -1,10 +1,17 @@
 (reference-rest-api-preferences)=
 # Preferences
-The endpoint(s) here are for account preferences.
 
 ## PATCH `/preferences`
 
 Updates account preferences using [JSON Merge Patch](https://datatracker.ietf.org/doc/html/rfc7386) semantics. This endpoint allows you to modify specific fields while leaving others unchanged.
+
+Path parameters:
+
+- None
+
+Query parameters:
+
+- None
 
 Required parameters:
 
@@ -23,7 +30,7 @@ Optional parameters:
 - If the `auto_register_new_computers` is `true` and registration key is `null`, the request returns an error (HTTP 400).
 ```
 
-Example request
+Example request:
 
 ```bash
 curl -X PATCH "https://landscape.canonical.com/api/v2/preferences"  \
