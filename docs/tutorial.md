@@ -5,7 +5,9 @@
 
 This tutorial guides you through the process of installing Landscape Server on a Multipass virtual machine, configuring it, registering a client instance to Landscape, and running a script on your client instance. At the end, you'll also be guided through how to teardown your environment.
 
-This tutorial should take about 45 minutes to complete.
+Note that this tutorial guides you through creating a *test* environment for learning and experimentation. It's not intended for real, production deployments. If you're setting up a production deployment, see {ref}`how-to-guides-landscape-installation-and-set-up-index`.
+
+Completing this tutorial should take approximately 45 minutes.
 
 ## Prerequisites
 
@@ -225,12 +227,23 @@ exit
 
 ## Cleanup
 
-Congratulations! You now have successfully installed Landscape Server on a Multipass VM, registered another Multipass VM running Landscape Client, and executed a script on that VM. Feel free to explore the other management features that Landscape Server has to offer.
+Congratulations! You now have successfully installed Landscape Server on a Multipass VM, registered another Multipass VM running Landscape Client, and executed a script on that VM. You can continue to explore the web portal and other management features that Landscape has to offer.
 
-When you're done, don't forget to remove the Multipass VMs from your host machine:
+When you're done exploring Landscape, don't forget to remove the Multipass VMs from your host machine:
 
 ```bash
 multipass delete tutorial-landscape-server-noble
 multipass delete tutorial-landscape-client-jammy
 multipass purge
 ```
+
+## Summary
+
+In this tutorial, you set up a basic self-hosted Landscape installation, registered a client instance, and used the web portal to execute a script remotely. Now, you have a high-level understanding of Landscape's client-server architecture and some of the fundamental workflows for managing Ubuntu systems with Landscape.
+
+From here, you have several options:
+
+- **Explore the web portal**: Continue experimenting with the environment you've created to discover more of Landscape's management features. See the {ref}`how-to-guides-web-portal-classic-web-portal-index` and {ref}`how-to-guides-web-portal-web-portal-24-04-or-later-index` for more information on available features.
+- **Learn more about Landscape**: See the {ref}`explanation-index` section to learn more about Landscape and its features.
+- **Set up a production installation**: If you're ready to deploy Landscape for real systems, see {ref}`how-to-guides-landscape-installation-and-set-up-index` for installation guides.
+- **Use Landscape SaaS**: To continue exploring Landscpae without the self-hosted infrastructure, see {ref}`howto-create-saas-account`.
