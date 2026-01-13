@@ -1,6 +1,8 @@
 (how-to-install-landscape-client)=
 # How to install Landscape Client
 
+> See also: {ref}`how-to-attach-ubuntu-pro`, {ref}`how-to-ubuntu-pro-enable-landscape`
+
 There are multiple ways to install Landscape Client. This document describes each method.
 
 ## Install Landscape Client from Ubuntu's `main` repository
