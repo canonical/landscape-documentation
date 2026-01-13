@@ -3,14 +3,14 @@
 # WSL
 
 ```{note}
-WSL features are in beta testing. The API endpoints below may not be available to all accounts.
+WSL features are available starting in Landscape 25.10.
 ```
 
 To enable WSL features in self-hosted Landscape, add:
 
 ```ini
 [features]
-enable-wsl-child-instance-profiles = true
+wsl_management = true
 ```
 
 to the `service.conf` file.
@@ -141,16 +141,12 @@ Required parameters:
 Optional parameters:
 
 - `cloud_init`
-- `data_id`
-- `token`
 - `rootfs_url`
 
 Example requests:
 
 ```bash
 curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Ubuntu-24.04"}'
-
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Ubuntu-24.04", "data_id": "data-id", "token": "vault-token"}'
 
 curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d "{\"computer_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < ~/cloud_init.yaml)\"}"
 ```
@@ -207,8 +203,9 @@ Example response:
 
 Notes:
 
-1. Sending both `cloud_init` and `data_id` will produce a 400 response.
-1. If `rootfs_url` is specified, then a 400 response is returned if the computer name matches any of the following case-insensitive patterns: `Ubuntu`, `Ubuntu-Preview`, `Ubuntu-XY.ZW`.
+```{note}
+If `rootfs_url` is specified, then a 400 response is returned if the computer name matches any of the following case-insensitive patterns: `Ubuntu`, `Ubuntu-Preview`, `Ubuntu-XY.ZW`.
+```
 
 ## POST `/computers/<computer_id>/delete-children`
 
@@ -287,7 +284,6 @@ Example response:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2025-06-10T22:00:30Z",
       "tags": [
@@ -325,7 +321,6 @@ Example response:
           "reboot_required_flag": false,
           "update_manager_prompt": "normal",
           "clone_id": null,
-          "secrets_name": null,
           "last_exchange_time": null,
           "last_ping_time": "2025-06-10T21:59:30Z",
           "tags": [
@@ -364,7 +359,6 @@ Example response:
           "reboot_required_flag": false,
           "update_manager_prompt": "normal",
           "clone_id": null,
-          "secrets_name": null,
           "last_exchange_time": null,
           "last_ping_time": "2025-06-10T21:58:30Z",
           "tags": [
