@@ -246,4 +246,4 @@ From here, you have several options:
 - **Explore the web portal**: Continue experimenting with the environment you've created to discover more of Landscape's management features. See the {ref}`how-to-guides-web-portal-classic-web-portal-index` and {ref}`how-to-guides-web-portal-web-portal-24-04-or-later-index` for more information on available features.
 - **Learn more about Landscape**: See the {ref}`explanation-index` section to learn more about Landscape and its features.
 - **Set up a production installation**: If you're ready to deploy Landscape for real systems, see {ref}`how-to-guides-landscape-installation-and-set-up-index` for installation guides.
-- **Use Landscape SaaS**: To continue exploring Landscpae without the self-hosted infrastructure, see {ref}`howto-create-saas-account`.
+- **Use Landscape SaaS**: To continue exploring Landscape without the self-hosted infrastructure, see {ref}`howto-create-saas-account`.
