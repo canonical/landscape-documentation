@@ -4,21 +4,21 @@
 The methods available here are for managing Windows Subsystem for Linux (WSL) clients registered with Landscape.
 
 ```{note}
-These API methods only apply to Landscape Beta at this time.
+WSL features are available starting in Landscape 25.10.
 ```
 
 To enable WSL features in self-hosted Landscape, add:
 
 ```ini
 [features]
-enable-wsl-child-instance-profiles = true
+wsl_management = true
 ```
 
 to the `service.conf` file.
 
 ## CreateChildComputer
 
-Create child computer instances on a parent host machine. 
+Create child computer instances on a parent host machine.
 
 Required arguments:
 
@@ -30,10 +30,6 @@ Optional arguments:
 - `cloud_init`: The b64 encoded cloud-init file contents.
 
 If `cloud_init` is provided, the new instance will be created according to the cloud-init file specified.
-
-```{note}
-Cloud-init configuration isn't supported yet by Ubuntu Pro for Windows. This feature is planned in a future beta release.
-```
 
 Example calls:
 

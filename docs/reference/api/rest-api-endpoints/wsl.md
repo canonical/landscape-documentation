@@ -3,14 +3,14 @@
 # WSL
 
 ```{note}
-WSL features are in beta testing. The API endpoints below may not be available to all accounts.
+WSL features are available starting in Landscape 25.10.
 ```
 
 To enable WSL features in self-hosted Landscape, add:
 
 ```ini
 [features]
-enable-wsl-child-instance-profiles = true
+wsl_management = true
 ```
 
 to the `service.conf` file.
