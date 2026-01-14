@@ -1,11 +1,9 @@
 (how-to-quickstart-installation)=
 # How to install Landscape Server with quickstart mode
 
-The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments.
+The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments. 
 
-```{note}
-If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
-```
+If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
 ## Check minimum requirements
 
@@ -127,3 +125,12 @@ By default, the email address will be pre-filled with `noreply@HOST_NAME.DOMAIN`
 ## (Optional) Configure Postfix for email
 
 You can configure Postfix to handle Landscape Server email notifications and alerts. For details, see {ref}`how-to-configure-postfix`.
+
+## Next step: Register your clients
+
+Your Landscape Server is now ready to manage client instances. To register clients:
+
+1. See {ref}`how-to-install-landscape-client` for instructions on installation and registration.
+2. When registering clients, attach an Ubuntu Pro token to each machine to enable Pro services. If you don't have a token, you can get a free personal Ubuntu Pro subscription at [ubuntu.com/pro](https://ubuntu.com/pro).
+
+For more details, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
