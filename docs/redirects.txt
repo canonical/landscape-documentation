@@ -20,6 +20,8 @@ how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integr
 
 how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
 
+how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/backup-and-maintenance/manage-maintenance-cron-jobs/
+
 # Reference
 
 reference/terms/profiles/package-profile/ reference/terms/profiles/
@@ -39,5 +41,3 @@ reference/terms/distribution/ explanation/features/repository-mirroring/
 reference/terms/repositories/ explanation/features/repository-mirroring/
 
 reference/terms/scripts/ explanation/features/remote-script-execution/
-
-how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/backup-and-maintenance/manage-maintenance-cron-jobs/
