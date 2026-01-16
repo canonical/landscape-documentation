@@ -30,7 +30,8 @@ The following are automatically scheduled cron jobs. These scripts are all locat
 
 Landscape includes some basic cleanup tasks in the `maintenance.sh` job. You may want to create additional jobs to limit old activities and events to a defined retention period. 
 
-### Setting Up Optional Cleanup Tasks
+### Set up optional cleanup tasks
+
 Create a `/etc/cron.d/ls_maintenance` file and add the following:
 
 ```bash
