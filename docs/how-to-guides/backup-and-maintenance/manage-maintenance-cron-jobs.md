@@ -1,5 +1,5 @@
 (how-to-manage-maintenance-cron-jobs)=
-# How to Manage Maintenance Cron Jobs
+# How to manage maintenance cron jobs
 
 Landscape Server installs and manages a set of maintenance cron jobs that are enabled by default. These jobs are essential for normal operation and are defined in the `/etc/cron.d/landscape-server` file.
 
