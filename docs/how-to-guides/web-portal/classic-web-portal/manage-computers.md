@@ -71,7 +71,7 @@ From the **Computers** page, you can get information about selected computers by
 
 There are two ways to locate the IDs for a specific computer:
 
-- **Landscape API**: You can make a web request with `GetComputers` or use `get-computers` in the `landscape-api` command-line package. These methods output a list of all computers with information that includes their ID. For more information on using these methods, see [API Methods: Computers](https://ubuntu.com/landscape/docs/api-computers) and [using the landscape-api package](https://ubuntu.com/landscape/docs/command-line-client).
+- **Landscape API**: You can make a web request with `GetComputers` or use `get-computers` in the `landscape-api` command-line package. These methods output a list of all computers with information that includes their ID. For more information on using these methods, see {ref}' computers <docs/reference/api/rest-api-endpoints/computers.md> and {ref}' legacy API command-line client <docs/how-to-guides/api/use-the-legacy-api-command-line-client.md>.
 - **Landscape dashboard URL**: You can find the computer ID in the URL of the specific computer’s information page. The computer’s ID comes after `/computer` and before `/info`. For example, the computer ID would be 20 in the following URL: `https://landscape-server/account/standalone/computer/20/info`.
 
     To navigate to a specific computer’s information page:
