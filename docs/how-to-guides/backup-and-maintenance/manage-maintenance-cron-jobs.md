@@ -3,7 +3,7 @@
 
 Landscape Server installs and manages a set of maintenance cron jobs that are enabled by default. These jobs are essential for normal operation and are defined in the `/etc/cron.d/landscape-server` file.
 
-## Default Maintenance Cron Jobs
+## Default maintenance cron jobs
 
 The following are automatically scheduled cron jobs. These scripts are all located in the `/opt/canonical/landscape/scripts` directory.
 
