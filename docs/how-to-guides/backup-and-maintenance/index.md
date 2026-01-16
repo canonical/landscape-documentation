@@ -6,5 +6,5 @@
 :maxdepth: 2
 
 Backup and restore <backup-and-restore>
-Manage maintenance tasks <manage-maintenance-tasks>
+Manage maintenance cron jobs <manage-maintenance-cron-jobs>
 Remove duplicate instances <remove-duplicate-instances>
