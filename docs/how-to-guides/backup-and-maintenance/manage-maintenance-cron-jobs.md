@@ -46,7 +46,7 @@ This will schedule two tasks:
 - `cleanup-events.sh`
   - Removes events older than 90 days. Runs every day at 03:30 UTC.
 
-### Viewing Cleanup Task Logs
+### View cleanup task logs
 
 Cleanup tasks will log their output to syslog. To view them:
 
