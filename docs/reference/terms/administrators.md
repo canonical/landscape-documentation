@@ -3,7 +3,7 @@
 
 **Administrators** are people who are authorized to manage computers using Landscape. 
 
-If you're running self-hosted Landscape, the first user you create automatically becomes an administrator of your account. If you're using Landscape SaaS, Canonical sends you an administrator invitation when your account is created. After that, you must create additional administrators yourself. You're encouraged to carefully consider who you make an administrator because administrators have elevated permissions and can make changes that affect users and the entire system.
+If you're running self-hosted Landscape, the first user you create automatically becomes an administrator of your account. If you're using Landscape SaaS, Canonical sends you an administrator invitation when your account is created. After that, you must invite additional administrators yourself. You're encouraged to carefully consider who you make an administrator because administrators have elevated permissions and can make changes that affect users and the entire system.
 
 ## Managing administrators
 ### In the new web portal
