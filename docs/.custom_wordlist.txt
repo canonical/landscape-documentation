@@ -92,6 +92,7 @@ EPMD
 epoll
 ESM
 FDE
+FDERecoveryKeyManager
 Fernet
 FIPS
 FQDN
@@ -149,6 +150,7 @@ KeyError
 Kudu
 KVM
 keyrings
+keyslot
 kvm
 kwarg
 labelled
@@ -318,6 +320,7 @@ TLD
 TLS
 TLSv
 tmpfiles
+TPM
 traceback
 transactional
 UA
