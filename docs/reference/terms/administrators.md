@@ -8,10 +8,10 @@ If you're running self-hosted Landscape, the first user you create automatically
 ## Managing administrators
 
 ### In the new web portal
-You can manage administrators under **Org. settings** > **Administrators**. From this view you can add, remove, and invite administrators. You can also grant or revoke [roles](/reference/terms/roles) for each administrator. 
+You can manage administrators under **Org. settings** > **Administrators**. From this view you can add, remove, and invite administrators. You can also grant or revoke {ref}`roles <reference-terms-roles>` for each administrator. 
 
 ### In the classic web portal
-On the **Administrators** tab in your organization's homepage, you can see a list of administrators and their email addresses. Further down, you can also view pending administrator invitations and invite more administrators. In the **Roles** tab you can adjust administrators' permissions with a membership matrix. For more details on roles, see the [reference page](/reference/terms/roles).
+On the **Administrators** tab in your organization's homepage, you can see a list of administrators and their email addresses. Further down, you can also view pending administrator invitations and invite more administrators. In the **Roles** tab you can adjust administrators' permissions with a membership matrix. For more details on roles, see the {ref}`reference page <reference-terms-roles>`.
 
 ### Via the API
-See the API reference for interacting with administrators through the [REST API](/reference/api/rest-api-endpoints/administrators) and [legacy API](/reference/api/legacy-api-endpoints/administrators)
+See the API reference for interacting with administrators through the {ref}`REST API <reference-rest-api-administrators>` and {ref}`legacy API <reference-legacy-api-administrators>`
