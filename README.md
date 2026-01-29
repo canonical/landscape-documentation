@@ -17,12 +17,13 @@ Landscape is used by system administrators, security teams, IT managers, and com
 |                    |                                                                     |
 |--------------------|---------------------------------------------------------------------|
 | **Getting started** | {ref}`Tutorial <getting-started-with-landscape>` • {ref}`What is Landscape? <what-is-landscape>` |
-| **Deployment** | {ref}`Quickstart installation <how-to-quickstart-installation>` • {ref}`Manual installation <how-to-manual-installation>` • {ref}`Juju installation <how-to-juju-installation>` • {ref}`Cloud providers <how-to-guides-landscape-installation-and-set-up-cloud-index>` • {ref}`Offline environments <how-to-install-airgapped>` |
-| **Administration** | {ref}`Web portal <how-to-guides-web-portal-index>` • {ref}`Security patches and updates <how-to-apply-security-updates>` • {ref}`OIDC <how-to-external-auth-oidc>` • {ref}`PAM <how-to-external-auth-pam>` |
+| **Deployment** | {ref}`Quickstart installation <how-to-quickstart-installation>` • {ref}`Manual installation <how-to-manual-installation>` • {ref}`Juju installation <how-to-juju-installation>` • {ref}`High availability <how-to-juju-ha-installation>` • {ref}`Cloud providers <how-to-guides-landscape-installation-and-set-up-cloud-index>` • {ref}`Offline environments <how-to-install-airgapped>` |
+| **Administration** | {ref}`Web portal guides <how-to-guides-web-portal-index>` • {ref}`Script execution <explanation-remote-script-execution>` • {ref}`OIDC <how-to-external-auth-oidc>` • {ref}`PAM <how-to-external-auth-pam>` |
 | **Repositories** | {ref}`Manage repositories <how-to-manage-repos-web-portal>` • {ref}`Explanation <explanation-repo-mirroring>` |
+| **Security** | {ref}`Security patches and updates <how-to-apply-security-updates>` • {ref}`Hardening <how-to-harden-deployment>` • {ref}`Security overview <explanation-security-overview>` • {ref}`Cryptographic technology <explanation-cryptographic-technology>` |
 | **Reference** | {ref}`API <reference-api-index>` • {ref}`Release notes <reference-release-notes-index>` |
 
-## How the documentation is organised
+## How the documentation is organized
 
 {ref}`Tutorial <getting-started-with-landscape>`: For new users needing to learn how to use Landscape <br>
 {ref}`How-to guides <how-to-guides-index>`: For users needing step-by-step instructions to achieve a practical goal <br>
