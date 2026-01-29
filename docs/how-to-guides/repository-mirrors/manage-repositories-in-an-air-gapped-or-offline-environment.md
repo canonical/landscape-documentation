@@ -9,7 +9,7 @@ This guide assumes you already have Landscape installed and set up in your air-g
 
 ## Background information
 
-To use Landscape's repository management feature within an air-gapped environment, you need Landscape server connectivity that allows it to reach the necessary endpoints. Depending on your network architecture, this can be achieved in different ways:
+To use Landscape's repository management feature within an air-gapped environment, you need Landscape server connectivity that allows it to reach the necessary endpoints. For details on required external network access, see {ref}`Network access <explanation-network-access>`. Depending on your network architecture, this can be achieved in different ways:
 
 - **Single server inside the environment**: You can run one Landscape Server inside the air-gapped environment if your firewall rules allow it to reach external endpoints for repository updates.
 - **Single server outside the environment**: You can run one Landscape Server outside the environment with all client machines configured to communicate with it.
