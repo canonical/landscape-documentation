@@ -73,11 +73,12 @@ One machine with these specifications will run the landscape-server-quickstart p
 
 The operating system to run Landscape Server and its dependencies are Ubuntu Server 22.04 LTS or 24.04 LTS on amd64, arm64, s390x, or ppc64el CPU architectures.
 
+(explanation-network-access)=
 ### Network access
 
-Any machines you manage with Landscape should be able to access your Landscape installation over network ports 80/TCP (HTTP) and 443/TCP (HTTPS). You can optionally open port 22/TCP (SSH) as well for maintenance of your Landscape installation.
+Any client machines you manage with Landscape should be able to access your Landscape Server installation over network ports 80/TCP (HTTP) and 443/TCP (HTTPS). You can optionally open port 22/TCP (SSH) as well for maintenance of your Landscape Server.
 
-The machine(s) running as the application server will also need the following external network access:
+Your Landscape Server will also need the following external network access:
 
 - HTTPS access to `usn.ubuntu.com` in order to download the USN database and detect security updates. Without this, the available updates won't be distinguished between security related and regular updates
 - HTTP access to the public Ubuntu archives and `changelogs.ubuntu.com`, in order to update the hash-id-database files and detect new distribution releases. Without this, the release upgrade feature won't work
