@@ -148,7 +148,7 @@ The `service.conf` file is generated automatically by the Landscape Server charm
     juju status
     ```
 
-    1. Set environment variables for the new database credentials:
+1. Set environment variables for the new database credentials:
 
     ```sh
     export PG_PASSWORD="<operator-password>"
