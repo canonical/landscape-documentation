@@ -66,17 +66,25 @@ Back up the configuration and database data for a charmed Landscape deployment.
     cd backup
     ```
 
-1. Set `PG_PASSWORD` to the operator password you recorded and `PG_HOST` to the leader IP you noted.
+1. Set `PG_PASSWORD` to the operator password you recorded and `PG_HOST` to the leader IP you noted. For example:
+
+ ```sh
+ export PG_PASSWORD="<operator-password>"
+ export PG_HOST="<postgres-ip>"
+ ```
 
 1. Dump each database:
 
  ```sh
- DB_NAME="landscape-standalone-main"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
- DB_NAME="landscape-standalone-package"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
- DB_NAME="landscape-standalone-account-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
- DB_NAME="landscape-standalone-resource-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
- DB_NAME="landscape-standalone-knowledge"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
- DB_NAME="landscape-standalone-session"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ for DB_NAME in \
+     landscape-standalone-main \
+     landscape-standalone-package \
+     landscape-standalone-account-1 \
+     landscape-standalone-resource-1 \
+     landscape-standalone-knowledge \
+     landscape-standalone-session; do
+     sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ done
  ```
 
 1. Confirm that each dump directory contains data:
@@ -115,12 +123,15 @@ Restore the deployment from the backup.
 1. Restore each database:
 
  ```sh
- DB_NAME="landscape-standalone-main"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
- DB_NAME="landscape-standalone-package"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
- DB_NAME="landscape-standalone-account-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
- DB_NAME="landscape-standalone-resource-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
- DB_NAME="landscape-standalone-knowledge"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
- DB_NAME="landscape-standalone-session"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ for DB_NAME in \
+     landscape-standalone-main \
+     landscape-standalone-package \
+     landscape-standalone-account-1 \
+     landscape-standalone-resource-1 \
+     landscape-standalone-knowledge \
+     landscape-standalone-session; do
+     sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ done
  ```
 
 1. Scale PostgreSQL to the desired number of units.
