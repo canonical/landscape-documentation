@@ -49,56 +49,43 @@ Back up the configuration and database data for a charmed Landscape deployment.
 1. Note the IP address of the primary PostgreSQL unit.
 1. SSH into the leader unit:
 
-  ```sh
-  juju ssh postgresql/leader
-  ```
+    ```sh
+    juju ssh postgresql/leader
+    ```
 
- 1. Change to the snap data directory (the only directory the snap can access):
+1. Change to the snap data directory (the only directory the snap can access):
 
-  ```sh
-  cd /var/snap/charmed-postgresql/current
-  ```
+    ```sh
+    cd /var/snap/charmed-postgresql/current
+    ```
 
- 1. Create a backup directory and move into it:
+1. Create a backup directory and move into it:
 
-  ```sh
-  sudo mkdir backup
-  cd backup
-  ```
+    ```sh
+    sudo mkdir backup
+    cd backup
+    ```
 
- 1. Set the operator password and PostgreSQL host:
+1. Set `PG_PASSWORD` to the operator password you recorded and `PG_HOST` to the leader IP you noted.
 
-  ```sh
-  export PG_PASSWORD="<operator-password>"
-  export PG_HOST="<postgres-ip>"
-  ```
-
- 1. Dump each database:
-
-  ```sh
-  DB_NAME="landscape-test-main"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
-  ```
-
-  Repeat for all six databases:
-
-- `landscape-standalone-main`
-- `landscape-standalone-package`
-- `landscape-standalone-account-1`
-- `landscape-standalone-resource-1`
-- `landscape-standalone-knowledge`
-- `landscape-standalone-session`
-
- 1. Confirm that each dump directory contains data:
-
-  ```sh
-  du -sh */
-  ```
-
-1. Export the backup files. This step varies by setup. For LXC, for example:
+1. Dump each database:
 
  ```sh
- lxc file pull juju-c4b624-2/var/snap/charmed-postgresql/current/backup -r .
+ DB_NAME="landscape-standalone-main"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ DB_NAME="landscape-standalone-package"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ DB_NAME="landscape-standalone-account-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ DB_NAME="landscape-standalone-resource-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ DB_NAME="landscape-standalone-knowledge"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+ DB_NAME="landscape-standalone-session"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
  ```
+
+1. Confirm that each dump directory contains data:
+
+ ```sh
+ du -sh */
+ ```
+
+1. Export the backup files from the PostgreSQL unit to your backup location using your environment's file transfer method.
 
 ## Restore
 
@@ -116,13 +103,9 @@ Restore the deployment from the backup.
 
 1. Verify that the `service.conf` in the new model closely matches your backup. Passwords and keys will differ because the model is new.
 
-2. Import the database files to the new PostgreSQL leader unit. This varies by setup. For LXC, for example:
+2. Import the database files to the new PostgreSQL leader unit using your environment's file transfer method.
 
- ```sh
- lxc file push ./backup juju-e66e50-2/home/ubuntu/ -r
- ```
-
-1. Copy the backup files into the snap-accessible path and change into the backup directory:
+3. Copy the backup files into the snap-accessible path and change into the backup directory:
 
  ```sh
  sudo cp ./backup /var/snap/charmed-postgresql/current/. -r
@@ -132,10 +115,13 @@ Restore the deployment from the backup.
 1. Restore each database:
 
  ```sh
- DB_NAME="landscape-test-main"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ DB_NAME="landscape-standalone-main"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ DB_NAME="landscape-standalone-package"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ DB_NAME="landscape-standalone-account-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ DB_NAME="landscape-standalone-resource-1"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ DB_NAME="landscape-standalone-knowledge"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+ DB_NAME="landscape-standalone-session"; sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
  ```
-
- Repeat for all six databases.
 
 1. Scale PostgreSQL to the desired number of units.
 
