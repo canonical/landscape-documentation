@@ -1,6 +1,6 @@
-(how-to-tear-down-and-restore-charmed-deployment)=
+(how-to-back-up-restore-tear-down-charmed-deployment)=
 
-# Tearing down and restoring a charmed deployment
+# Backing up, restoring, and tearing down a charmed deployment
 
 This guide covers the complete process of backing up, tearing down, and restoring a charmed Landscape deployment. This is useful when you need to rebuild your deployment, migrate to a new environment, or recover from a failure.
 
@@ -52,32 +52,21 @@ If the service resumes during the process, connected clients may lose data. Alwa
 1. Dump the database data:
 
 1. Note the IP address of the PostgreSQL leader unit from `juju status`.
-1. SSH into the PostgreSQL leader unit:
+
+1. Create a backup directory on the PostgreSQL leader unit:
 
 ```sh
-juju ssh postgresql/leader
+juju ssh postgresql/leader -- "sudo mkdir -p /var/snap/charmed-postgresql/current/backup && sudo chmod 755 /var/snap/charmed-postgresql/current/backup"
 ```
 
-1. Change to the snap data directory (the only directory the snap can access):
-
-```sh
-cd /var/snap/charmed-postgresql/current
-```
-
-1. Create a backup directory and move into it:
-
-```sh
-sudo mkdir -p backup
-sudo chmod 755 backup
-cd backup
-```
-
-1. Set `PG_PASSWORD` to the operator password you recorded and `PG_HOST` to the PostgreSQL leader unit's IP address:
+1. Set environment variables for the database credentials:
 
 ```sh
 export PG_PASSWORD="<operator-password>"
 export PG_HOST="<postgres-ip>"
 ```
+
+Replace `<operator-password>` with the password you recorded and `<postgres-ip>` with the PostgreSQL leader IP.
 
 1. Dump each database:
 
@@ -89,22 +78,20 @@ for DB_NAME in \
     landscape-standalone-resource-1 \
     landscape-standalone-knowledge \
     landscape-standalone-session; do
-    sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f $DB_NAME.dump -F directory
+    juju ssh postgresql/leader -- "sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f /var/snap/charmed-postgresql/current/backup/$DB_NAME.dump -F directory"
 done
 ```
 
 1. Confirm that each dump directory contains data:
 
 ```sh
-sudo du -sh */
+juju ssh postgresql/leader -- "sudo du -sh /var/snap/charmed-postgresql/current/backup/*/"
 ```
 
 1. Change ownership of the backup directory so it can be copied:
 
 ```sh
-cd ..
-sudo chown -R ubuntu:ubuntu backup
-exit
+juju ssh postgresql/leader -- "sudo chown -R ubuntu:ubuntu /var/snap/charmed-postgresql/current/backup"
 ```
 
 1. Export the backup files from the PostgreSQL unit to your local backup location:
@@ -119,6 +106,10 @@ Restore the deployment from the backup.
 
 1. Create a new Landscape model and deploy Landscape the same way you did originally. Keep the Juju configuration consistent with your backup. Start with a single PostgreSQL unit and scale later if needed.
 
+```{note}
+The `service.conf` file is generated automatically by the Landscape Server charm based on its configuration. The backup you created earlier is for reference only and the new deployment will have different passwords, endpoints, and database connection details. If your original deployment had custom settings in `service.conf`, you can add them to the new deployment using the [`additional_service_config`](https://charmhub.io/landscape-server/configurations#additional_service_config) charm configuration option.
+```
+
 1. Wait for the model to settle. All units should reach active status:
 
 ```sh
@@ -127,10 +118,16 @@ juju wait-for model <new-model-name> --timeout 3600s --query='forEach(units, uni
 
 This waits up to 1 hour for all units to become active. Adjust the timeout as needed for your deployment.
 
+1. Switch to the new model:
+
+```sh
+juju switch <new-model-name>
+```
+
 1. Pause Landscape Server on all units:
 
 ```sh
-juju run landscape-server/0 -m <new-model-name> pause
+juju run landscape-server/0 pause
 ```
 
 Repeat for each unit if your deployment has multiple `landscape-server` units.
@@ -138,30 +135,39 @@ Repeat for each unit if your deployment has multiple `landscape-server` units.
 1. Import the database backup files to the PostgreSQL leader unit:
 
 ```sh
-juju scp -m <new-model-name> -- -r backup postgresql/leader:/tmp/
+juju scp -- -r backup postgresql/leader:/tmp/
 ```
 
 1. Copy the backup files into the snap-accessible path:
 
 ```sh
-juju ssh -m <new-model-name> postgresql/leader "sudo cp -r /tmp/backup /var/snap/charmed-postgresql/current/"
+juju ssh postgresql/leader -- "sudo cp -r /tmp/backup /var/snap/charmed-postgresql/current/"
 ```
 
 1. Get the new PostgreSQL credentials:
 
 ```sh
-juju run -m <new-model-name> postgresql/leader get-password username=operator
+juju run postgresql/leader get-password username=operator
 ```
 
-Note the password. Get the PostgreSQL leader unit's IP address from `juju show-unit -m <new-model-name> postgresql/0`.
-
-1. Restore each database by connecting to the PostgreSQL leader unit:
+Note the password returned, and get the PostgreSQL leader unit's IP address:
 
 ```sh
-juju ssh -m <new-model-name> postgresql/0
-cd /var/snap/charmed-postgresql/current/backup
+juju status
+```
+
+1. Set environment variables for the new database credentials:
+
+```sh
 export PG_PASSWORD="<operator-password>"
 export PG_HOST="<postgres-ip>"
+```
+
+Replace `<operator-password>` with the new password and `<postgres-ip>` with the new PostgreSQL leader IP.
+
+1. Restore each database:
+
+```sh
 for DB_NAME in \
     landscape-standalone-main \
     landscape-standalone-package \
@@ -169,17 +175,14 @@ for DB_NAME in \
     landscape-standalone-resource-1 \
     landscape-standalone-knowledge \
     landscape-standalone-session; do
-    sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME $DB_NAME.dump -c
+    juju ssh postgresql/leader -- "sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME /var/snap/charmed-postgresql/current/backup/$DB_NAME.dump -c"
 done
-exit
 ```
-
-Replace `0` with the unit number of your PostgreSQL leader unit.
 
 1. Scale PostgreSQL to the desired number of units (if needed):
 
  ```sh
- juju add-unit postgresql -m <new-model-name> -n <num-units>
+ juju add-unit postgresql -n <num-units>
  ```
 
 1. Wait for all units to become active again:
@@ -191,48 +194,51 @@ Replace `0` with the unit number of your PostgreSQL leader unit.
 1. Clear the hash ID databases and regenerate them:
 
  ```sh
- juju ssh -m <new-model-name> landscape-server/leader "sudo rm -rf /var/lib/landscape/hash-id-databases/*"
- juju run -m <new-model-name> landscape-server/leader hash-id-databases --wait=30m
+ juju ssh landscape-server/leader -- "sudo rm -rf /var/lib/landscape/hash-id-databases/*"
+ juju run landscape-server/leader hash-id-databases --wait=30m
  ```
 
 1. Resume Landscape on all units:
 
- ```sh
- juju run -m <new-model-name> landscape-server/0 resume
- ```
+```sh
+juju run landscape-server/0 resume
+```
 
 Repeat for each unit if your model has multiple `landscape-server` units.
 
 1. Verify that the deployment is healthy:
 
 ```sh
-juju status -m <new-model-name>
+juju status
 ```
 
 The `landscape-server` unit(s) should be active.
 
 1. Confirm the restore was successful:
 
-Check that all services are running
+Check that all services are running:
 
 ```sh
-juju exec -m <new-model-name> --unit landscape-server/leader -- sudo systemctl status landscape-appserver landscape-api landscape-msgserver
+juju ssh landscape-server/leader -- "sudo lsctl status"
 ```
 
-Verify `service.conf` has been updated:
+Compare the new `service.conf` with your backed up version to verify configuration:
 
 ```sh
-juju exec -m <new-model-name> --unit landscape-server/leader -- sudo cat /etc/landscape/service.conf
+juju ssh landscape-server/leader -- "sudo cat /etc/landscape/service.conf"
 ```
 
-Check that data was restored by querying the database
+Remember the `service.conf` file is automatically generated by the charm and won't match your backup exactly (it will have different passwords, hosts, etc.).
+
+Check that data was restored by querying the database:
 
 ```sh
-juju ssh -m <new-model-name> postgresql/0
 export PG_PASSWORD="<operator-password>"
 export PG_HOST="<postgres-ip>"
-echo "SELECT COUNT(*) FROM computer;" | sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.psql -U operator -h $PG_HOST -d landscape-standalone-main
-exit
+```
+
+```sh
+juju ssh postgresql/leader -- "echo 'SELECT COUNT(*) FROM account;' | sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.psql -U operator -h $PG_HOST -d landscape-standalone-main"
 ```
 
 If you had registered computers before the backup, they should appear in the count. Access the Landscape web interface to verify your data is present.
@@ -247,4 +253,4 @@ Remove the original deployment after confirming the restore was successful.
 juju destroy-model <original-model-name>
 ```
 
-This removes all deployed applications and units from the original model. Only do this after confirming your restored deployment is working correctly.
+This removes all deployed applications and units from the original model. Only do this after confirming your restored deployment is working correctly and all data has been transferred.

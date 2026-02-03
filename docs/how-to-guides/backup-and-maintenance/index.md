@@ -9,4 +9,4 @@
 Backup and restore <backup-and-restore>
 Manage maintenance cron jobs <manage-maintenance-cron-jobs>
 Remove duplicate instances <remove-duplicate-instances>
-Tear down and restore a charmed deployment <tear-down-and-restore-charmed-deployment>
+Backup, restore, and tear down a charmed deployment <back-up-restore-tear-down-charmed-deployment>
