@@ -1,6 +1,6 @@
-(how-to-tear-down-and-restore-charm-deployment)=
+(how-to-tear-down-and-restore-charmed-deployment)=
 
-# Tearing down and restoring a charm deployment
+# Tearing down and restoring a charmed deployment
 
 ## Backup
 
