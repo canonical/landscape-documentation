@@ -111,6 +111,7 @@ For example, the following request removes the annotation key `location` from al
 ?action=RemoveAnnotationFromComputers&query=tag:server&key=location
 ```
 
+(header-add-tags-to-computers)=
 ## AddTagsToComputers
 
 Add tags to a selection of computers.
@@ -127,6 +128,7 @@ For example, the following request will add the tags “server” and “jammy�
     &tags.2=jammy
 ```
 
+(header-remove-tags-from-computers)=
 ## RemoveTagsFromComputers
 
 Remove tags from a selection of computers.

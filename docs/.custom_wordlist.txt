@@ -91,6 +91,7 @@ Entra
 EPMD
 epoll
 ESM
+eu
 Fernet
 FIPS
 FQDN
