@@ -2,17 +2,9 @@
 
 # Backing up, restoring, and tearing down a charmed deployment
 
-This guide covers the complete process of backing up, tearing down, and restoring a charmed Landscape deployment. This is useful when you need to rebuild your deployment, migrate to a new environment, or recover from a failure.
-
-The process involves three main phases:
-
-1. **Backup**: Collecting configuration, passwords, and database data from the running deployment
-2. **Restore**: Creating a new deployment and restoring all data and configuration
-3. **Tear down**: Destroying the old model (after confirming the restore was successful)
+This guide covers the complete process of backing up, restoring, and tearing down a deployment with the Landscape Server charm and Charmed PostgreSQL 14.
 
 ## Backup
-
-Back up the configuration and database data for a Landscape Server deployment .
 
 1. Save the configuration for the Juju model:
 
@@ -101,8 +93,6 @@ juju scp -- -r postgresql/leader:/var/snap/charmed-postgresql/current/backup .
 ```
 
 ## Restore
-
-Restore the deployment from the backup.
 
 1. Create a new Landscape model and deploy Landscape the same way you did originally. Keep the Juju configuration consistent with your backup. Start with a single PostgreSQL unit and scale later if needed.
 
@@ -243,11 +233,9 @@ juju ssh postgresql/leader -- "echo 'SELECT COUNT(*) FROM account;' | sudo PGPAS
 
 If you had registered computers before the backup, they should appear in the count. Access the Landscape web interface to verify your data is present.
 
-## Tear down
+## Tear down (optional)
 
-Remove the original deployment after confirming the restore was successful.
-
-1. Destroy the original model:
+1. If desired, destroy the original model:
 
 ```sh
 juju destroy-model <original-model-name>
