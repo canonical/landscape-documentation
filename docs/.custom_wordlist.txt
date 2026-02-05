@@ -37,6 +37,7 @@ bytestring
 Cancelled
 CAC
 CAs
+Canonical('s)?
 canonicalized
 CDP
 Ceph
