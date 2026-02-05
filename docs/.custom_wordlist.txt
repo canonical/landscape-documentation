@@ -23,6 +23,7 @@ autocommit
 autoinstall
 AutoPilot
 autoremove
+Autoremovable
 amd
 backend
 backport
@@ -60,6 +61,7 @@ config
 configs
 conformant
 conntrack
+copiedprofilename
 CORS
 createseries
 CRL
@@ -74,8 +76,11 @@ customizable
 CVE
 CVEs
 datetime
+datestamp
 debian
+decodeable
 decrypt
+deduplication
 deprivileged
 deterministically
 DirectoryAPI
@@ -93,6 +98,7 @@ EPMD
 epoll
 ESM
 eu
+falsy
 Fernet
 FIPS
 FQDN
@@ -147,6 +153,7 @@ JWT
 JWTs
 Keycloak
 KeyError
+keyslots
 Kudu
 KVM
 keyrings
@@ -174,6 +181,7 @@ lxd
 MAAS
 maas
 Mailjet
+Makefile
 ManualInstallation
 mebibytes
 microSD
@@ -188,11 +196,13 @@ MITM
 mTLS
 MTU
 MTUs
+mysqlprofile
 Multipass
 Nagios
 nagios
 netinstall
 netmask
+newprofile
 NFS
 NIC
 NID
@@ -209,6 +219,7 @@ oidc
 OIDC
 Okta
 onwards
+OTPs
 OpenStack
 Openstack
 OpenStackCharms
@@ -227,6 +238,7 @@ PCI
 perf
 perfs
 performant
+PIDs
 PITR
 pgSQL
 pgtune
@@ -268,6 +280,7 @@ revalidated
 RewriteRule
 RHEL
 rollout
+rootfs
 routable
 RSA
 RSS
@@ -302,6 +315,7 @@ Subiquity
 subkeys
 submodule
 subpaths
+substring
 superclass
 SupportAnalyst
 syslog
@@ -319,6 +333,7 @@ TLS
 TLSv
 traceback
 transactional
+truthy
 UA
 ubuntu
 Ubuntu
@@ -331,6 +346,9 @@ uncomment
 unencoded
 unhold
 Unhold
+unflagged
+unholding
+unpatched
 unscalable
 untrusted
 uploader

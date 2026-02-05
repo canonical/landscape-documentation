@@ -150,7 +150,7 @@ The following errors may be raised:
 - `DuplicateScript`: A script with this title already exists in the account.
 - `ScriptEncoding`: The code (script body) is not UTF-8 decodeable.
 - `EmptyScriptCode`: The code (script body) is of zero length or commented.
-- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (eg: `#!/bin/bash`)
+- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (e.g.,: `#!/bin/bash`)
 - `UnknownAccessContext`: The specified access context could not be found for the current script.
 - `Unauthorised`: The user doesn’t have permission to create the specified script.
 
@@ -200,7 +200,7 @@ The following errors may be raised:
 - `DuplicateScript`: A script with this title already exists in the account.
 - `ScriptEncoding`: The code (script body) is not UTF-8 decodeable.
 - `EmptyScriptCode`: The code (script body) is of zero length or commented.
-- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (eg: `#!/bin/bash`)
+- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (e.g.,: `#!/bin/bash`)
 - `Unauthorised`: The user doesn’t have permission to remove the specified script.
 
 The method returns a JSON serialized description of the new script, like the following result:
