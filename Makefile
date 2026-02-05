@@ -29,4 +29,4 @@ help:
 
 %:
 	cd docs && \
-	$(MAKE) -f Makefile.sp sp-$@
+	$(MAKE) -f Makefile $@ 
