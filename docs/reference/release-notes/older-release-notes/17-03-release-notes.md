@@ -56,6 +56,7 @@ landscape-api get-juju-environments
 landscape-api remove-juju-environment <environment_name>
 ```
 
+
 It's also recommended to destroy and re-deploy your cloud if you want to continue to use the management features of the OpenStack Autopilot.
 
 ### Portable URLs - SAAS
@@ -76,15 +77,21 @@ To upgrade a Landscape 16.06 running on Ubuntu 14.04 LTS ("trusty") to Landscape
 If you used the landscape-server-quickstart package to install Landscape 16.06 then you can use this method to upgrade it.
 
 If you are a [Landscape](https://landscape.canonical.com) customer, you can select new version of Landscape in your hosted account at [https://landscape.canonical.com](https://landscape.canonical.com) and then run:
+
 ```
 sudo apt-get update
 sudo apt-get dist-upgrade
 ```
+
+
 Alternatively, just add the Landscape 17.03 PPA and run the same commands as above:
+
 ```
 sudo add-apt-repository -u ppa:landscape/17.03
 sudo apt-get dist-upgrade
 ```
+
+
 When prompted, reply with `N` to any dpkg questions about configuration files so the existing files stay untouched. The quickstart package will make any needed modifications to your configuration files automatically.
 
 ## Non-quickstart upgrade
@@ -92,19 +99,25 @@ When prompted, reply with `N` to any dpkg questions about configuration files so
 Follow these steps to perform a non-quickstart upgrade, that is, you did not use the landscape-server-quickstart package when installing Landscape 16.06:
 
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service:
+
  ```
  sudo lsctl stop
  ```
+
  * double check that `UPGRADE_SCHEMA` is set to what you want in `/etc/default/landscape-server`
  * disable all the landscape-server cron jobs from `/etc/cron.d/landscape-server` in all app servers
  * Update the Landscape apache vhost as follows:
   * Add a `Location </static>` definition to both the HTTP and HTTPS vhosts like this:
+
 ```
   <Location "/static">
     Header always append X-Frame-Options SAMEORIGIN
   </Location>
 ```
+
+
   * Add the following SSL directives to the HTTPS vhost:
+
 ```
 # Disable to avoid POODLE attack
   SSLProtocol all -SSLv3 -SSLv2
@@ -113,7 +126,10 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
   # Disable old/vulnerable ciphers. Note: one very long line
   SSLCipherSuite EECDH+AESGCM+AES128:EDH+AESGCM+AES128:EECDH+AES128:EDH+AES128:ECDH+AESGCM+AES128:aRSA+AESGCM+AES128:ECDH+AES128:DH+AES128:aRSA+AES128:EECDH+AESGCM:EDH+AESGCM:EECDH:EDH:ECDH+AESGCM:aRSA+AESGCM:ECDH:DH:aRSA:HIGH:!MEDIUM:!aNULL:!NULL:!LOW:!3DES:!DSS:!EXP:!PSK:!SRP:!CAMELLIA:!DHE-RSA-AES128-SHA:!DHE-RSA-AES256-SHA:!aECDH
 ```
+
+
   * Update the existing `RewriteCond` regular expressions in the HTTP vhost like shown in this diff:
+
 ```
 -    RewriteCond %{REQUEST_URI} !/server-status
 -    RewriteCond %{REQUEST_URI} !/icons
@@ -128,12 +144,18 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
 +    RewriteCond %{REQUEST_URI} !^/repository/
 +    RewriteCond %{REQUEST_URI} !^/message-system
 ```
+
+
   * Remove the `[L]` flag from the first `RewriteRule` in the HTTP vhost like shown in this diff:
+
 ```
 -    RewriteRule ^/r/([^/]+)/(.*) /$2 [L]
 +    RewriteRule ^/r/([^/]+)/(.*) /$2
 ```
+
+
   * Update the existing `RewriteCond` regular expressions in the HTTPS vhost like shown in this diff:
+
 ```
 -    RewriteCond %{REQUEST_URI} !/robots.txt
 -    RewriteCond %{REQUEST_URI} !/favicon.ico
@@ -147,28 +169,45 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
 -    RewriteCond %{REQUEST_URI} !/hash-id-databases
 +    RewriteCond %{REQUEST_URI} !^/hash-id-databases/
 ```
+
+
  * Restart apache using
+
 ```
 sudo service apache2 restart
 ```
+
+
  * add the Landscape 17.03 PPA:
+
 ```
 sudo add-apt-repository -u ppa:landscape/17.03
 ```
+
+
  * update and upgrade:
+
 ```
 sudo apt-get update && apt-get dist-upgrade
 ```
+
+
  * answer with `N` to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command:
+
 ```
 sudo setup-landscape-server
 ```
+
+
   After all these steps are completed, the Landscape services can be started:
+
 ```
 sudo lsctl restart
 ```
+
+
  * re-enable the landscape-server cron jobs in `/etc/cron.d/landscape-server` in all app servers
 
 ## Charm upgrade
@@ -195,6 +234,7 @@ juju run-action landscape-server/0 migrate-schema
 juju run-action landscape-server/0 resume
 ```
 
+
 For multiple landscape-server units, you should pause all of them,
 upgrade one by one, run the migrate-schema command on only one, and
 then resume all units.
@@ -209,6 +249,7 @@ juju action fetch <uuid>
 # Juju 2.x:
 juju show-action-output --wait 0 <uuid>
 ```
+
 
 For example:
 
@@ -234,6 +275,7 @@ timing:
   started: 2017-03-24 04:27:47 +0000 UTC
 ```
 
+
 As an example of when it fails and what kind of output to expect, here
 we are trying to upgrade a unit that hasn't been paused before, other
 than command line structure, this has not changed in Juju 2.x:
@@ -254,11 +296,16 @@ timing:
 
 ## Other changes of note
 
+
  * Landscape will send back anonymous usage data to Canonical to help
+
  improve the product. You may opt-out of this behavior globally in the
  settings page.
+
  * Copying package profiles no longer applies the copied profile to the
+
  same set of computers by default -- it applies to no computers instead.
+
  * The minimum recommended machine specs for an OpenStack node is:
     * 64G of Ram
     * 4 cores
@@ -282,6 +329,7 @@ This section describes some relevant known issues that might affect your usage o
  * When the landscape-server package is installed or upgraded, its postinst step runs a `chown landscape:landscape -R /var/lib/landscape` command. If you have the repository management files mounted via NFS in the default location `/var/lib/landscape/landscape-repository` and with the NFS `root_squash` option set, then this command will fail. There are two workarounds:
     * temporarily enable the `no_root_squash` option on the NFS server, which will allow the command to complete
     * mount the repository elsewhere, outside of the `/var/lib/landscape` tree. For example, to mount it under `/landscape-repository`, follow these steps:
+
 ```
     sudo mkdir -m 0755 /landscape-repository
     sudo chown landscape:landscape /landscape-repository
@@ -296,8 +344,10 @@ This section describes some relevant known issues that might affect your usage o
     sudo lsctl start
     # update /etc/fstab regarding the new mount point, to avoid surprises after a reboot
 ```
+
  * Also due to the `chown` command run during postinst explained above, the upgrade can take a long time if the repository files are mounted somewhere `/var/lib/landscape`, depending on the size of the repository. On an experiment with two machines on the same gigabit switch and a 150Gb repository mounted via NFS, a test upgrade spent about 30min just in that `chown` command. While that happens, the service is down. This is being tracked as an internal bug and until a fix is explicitly mentioned in the release notes, we suggest the same workaround as for the previous case: mount the repository outside of the `/var/lib/landscape/` tree.
 
 ## In 17.03.2 only
+
  * The API documentation was not re-generated for this build. This means that the new `include_udeb` options are not documented in the included API docs visible on the server under the `static/doc/api/repositories.html` URL path component. The help output of the updated landscape-api 17.03.2 package, however, has the updated documentation and can be used as a reference in the meantime. Additionally, as soon as [landscape.canonical.com](https://landscape.canonical.com) gets the same code updates, the API documentation available on that site will also contain the updated API call description.
 

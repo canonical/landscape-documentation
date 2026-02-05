@@ -5,9 +5,9 @@
             "enabled": true,
             "style": "atx"
         },
-        "commands-show-output": {
-            "enabled": true
-        },
+        // "commands-show-output": {
+        //     "enabled": true
+        // },
         "no-missing-space-atx": {
             "enabled": true
         },
