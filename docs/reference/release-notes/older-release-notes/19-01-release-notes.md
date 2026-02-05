@@ -10,7 +10,7 @@
  * ComputerOfflineAlert flapping when exchanges are not happening
  * Option to randomize delivery of manual upgrade requests
  * Activity scheduling widget should reject dates in the past
- * Landscape appears to hang after hitting 'remove computer'
+ * Landscape appears to stall after hitting 'remove computer'
  * Segmentation fault in `landscape-env.sh`
  * Can't run a script on more than 100 clients using the API
  * last_exchange_time should be visible in a couple key places

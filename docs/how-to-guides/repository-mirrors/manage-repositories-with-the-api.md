@@ -392,7 +392,7 @@ landscape-api edit-pocket staging bionic ubuntu --upload-allow-unsigned=true
 
 ## Pull pockets
 
-Pull mode pockets are meant to "stage" packages coming from another pocket, for example if you want to exclude some packages from that pocket, you can use filters (blacklist/whitelist) and then pull packages in the pocket again. Note that since pull operations don't really fetch packages, but just builds repository indices, you can also remove and recreate pull pockets very quickly if you want to start from scratch with filters. When creating the pull type pocket, you have to specify if you want a whitelist or blacklist for filtering.
+Pull mode pockets are meant to "stage" packages coming from another pocket, for example if you want to exclude some packages from that pocket, you can use filters (blocklist/allowlist) and then pull packages in the pocket again. Note that since pull operations don't really fetch packages, but just builds repository indices, you can also remove and recreate pull pockets very quickly if you want to start from scratch with filters. When creating the pull type pocket, you have to specify if you want a allowlist or blocklist for filtering.
 
 ```bash
 landscape-api create-pocket \
@@ -402,7 +402,7 @@ landscape-api create-pocket \
  --filter-type=whitelist
 ```
 
-The blacklist only works only for pull type repositories, but those don't support syncing from upstream archives, only from local ones.
+The blocklist only works only for pull type repositories, but those don't support syncing from upstream archives, only from local ones.
 
 ## Repository management mirroring tips
 
