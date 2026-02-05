@@ -1,27 +1,31 @@
 (how-to-back-up-restore-tear-down-charmed-deployment)=
 
-# Backing up, restoring, and tearing down a charmed deployment
+# How to back up and restore a charmed deployment
 
-This guide covers the complete process of backing up, restoring, and tearing down a deployment with the Landscape Server charm and [Charmed PostgreSQL 14](https://charmhub.io/postgresql).
+This guide covers the complete process of backing up and restoring a Landscape deployment to a new Juju model using the Landscape Server charm and Charmed PostgreSQL. This guide uses Charmed PostgreSQL 14 because it is {ref}`compatible with the 24.04 LTS version of the Landscape Server charm <how-to-juju-installation>`.
+
+You might use this process when migrating your Landscape deployment to new infrastructure, performing a major upgrade, or moving to a different cloud environment.
+
+For general backup and restore operations within an existing deployment, see [Backup and restore](backup-and-restore).
 
 ## Backup
 
-1. Save the configuration for the Juju model:
+### Prepare your deployment
+
+1. Export the current Juju model configuration:
 
     ```sh
     juju export-bundle | tee bundle.yaml
     ```
 
-    This will write a Juju bundle representing the current model to `bundle.yaml`.
+    This writes the bundle to `bundle.yaml`.
 
-1. Back up the `service.conf` file on each `landscape-server` unit:
+1. Back up the `service.conf` file on each `landscape-server` unit, replacing `<unit-id>` with the actual unit ID (e.g., 0, 1, 2):
 
     ```sh
     mkdir -p service-conf
-    juju ssh landscape-server/0 -- sudo cat /etc/landscape/service.conf > service-conf/0.conf
+    juju ssh landscape-server/<unit-id> -- sudo cat /etc/landscape/service.conf > service-conf/<unit-id>.conf
     ```
-
-    Replacing `0` with the unit ID.
 
 1. Record the PostgreSQL `operator` password:
 
@@ -29,7 +33,13 @@ This guide covers the complete process of backing up, restoring, and tearing dow
     juju run postgresql/leader get-password username=operator
     ```
 
-    We need this to dump and restore the databases.
+    You need this later to dump and restore the databases.
+
+1. Get the PostgreSQL leader unit's IP address:
+
+    ```sh
+    juju status
+    ```
 
 1. Pause all of the Landscape Server units and keep them paused for the entire backup and restore procedure:
 
@@ -41,11 +51,7 @@ This guide covers the complete process of backing up, restoring, and tearing dow
 
     If the service resumes during the process, connected clients may lose data.
 
-1. Get the PostgreSQL leader unit's IP address:
-
-    ```sh
-    juju status
-    ```
+### Back up the databases
 
 1. Create a backup directory on the PostgreSQL leader unit:
 
@@ -62,7 +68,7 @@ This guide covers the complete process of backing up, restoring, and tearing dow
 
     Replace `<operator-password>` with the password you recorded and `<postgres-ip>` with the PostgreSQL leader IP.
 
-1. Dump each database:
+1. Dump each database. This operation is performed for each database listed:
 
     ```sh
     for DB_NAME in \
@@ -96,6 +102,8 @@ This guide covers the complete process of backing up, restoring, and tearing dow
 
 ## Restore
 
+### Create a new deployment
+
 1. Create a new Landscape model and deploy Landscape the same way you did originally. Keep the Juju configuration consistent with your backup. Start with a single PostgreSQL unit and scale later if needed.
 
 ```{note}
@@ -123,6 +131,8 @@ The `service.conf` file is generated automatically by the Landscape Server charm
     ```
 
     Repeat for each unit if your deployment has multiple `landscape-server` units.
+
+### Restore the databases
 
 1. Import the database backup files to the PostgreSQL leader unit:
 
@@ -157,7 +167,7 @@ The `service.conf` file is generated automatically by the Landscape Server charm
 
     Replace `<operator-password>` with the new password and `<postgres-ip>` with the new PostgreSQL leader IP.
 
-1. Restore each database:
+1. Restore each database. This operation is performed for each database listed:
 
     ```sh
     for DB_NAME in \
@@ -198,6 +208,8 @@ The `service.conf` file is generated automatically by the Landscape Server charm
 
     Repeat for each unit if your model has multiple `landscape-server` units.
 
+### Verify the restore was successful
+
 1. Verify that the deployment is healthy:
 
     ```sh
@@ -235,7 +247,7 @@ The `service.conf` file is generated automatically by the Landscape Server charm
 
     Access the Landscape UI to verify your data is present.
 
-## Tear down (optional)
+## Tear down the old model (optional)
 
 After confirming your restored deployment is working correctly and all data has been transferred, you can safely destroy the original model:
 
