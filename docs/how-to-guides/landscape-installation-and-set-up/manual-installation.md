@@ -110,7 +110,7 @@ The following parameters at a minimum should be touched:
 - [`wal_buffers`](http://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-WAL-BUFFERS)
 - [`max_connections`](https://www.postgresql.org/docs/15/runtime-config-connection.html#GUC-MAX-CONNECTIONS)
 
-A good starting value for `max_connections` is 200, even on modest hardware. As your needs grow, this number should be adjusted and re-evaluated carefully. It may be helpful to use a tuning tool like [pgtune](https://pgtune.leopard.in.ua/).
+A good starting value for `max_connections` is 400, even on modest hardware. As your needs grow, this number should be adjusted and re-evaluated carefully. It may be helpful to use a tuning tool like [pgtune](https://pgtune.leopard.in.ua/).
 
 When you adjust `max_connections`, you are likely to overrun shared memory allowed by the kernel (per process) and may need to increase the [`SHMMAX`](https://www.postgresql.org/docs/current/kernel-resources.html#SYSVIPC) parameter.
 
@@ -141,7 +141,6 @@ Landscape is distributed in a public PPA. You can add it to the system with thes
 
 ```bash
 sudo add-apt-repository {LANDSCAPE_PPA}
-sudo apt-get update
 ```
 
 - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
@@ -169,7 +168,7 @@ If you have no such file, Landscape will manage machines with Ubuntu Pro subscri
 ### Configure rabbitmq
 
 ```{note}
-If you're installing Landscape on Jammy 22.04 or later, you may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see {ref}`how-to-configure-rabbitmq`.
+You may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see {ref}`how-to-configure-rabbitmq`.
 ```
 
 Just run the following commands, replacing `<password>` with a password of your choice. It will be needed later.
@@ -506,15 +505,15 @@ If you are using a custom certificate authority for your SSL certificate, then y
 Listen 6554
 
 <VirtualHost *:6554>
-  ServerName ${hostname}
-  ServerAdmin webmaster@${hostname}
+  ServerName @hostname@
+  ServerAdmin webmaster@@hostname@
 
   ErrorLog /var/log/apache2/landscape_error.log
   CustomLog /var/log/apache2/landscape_access.log combined
 
   SSLEngine On
-  SSLCertificateFile ${ssl_certificate_crt}
-  SSLCertificateKeyFile ${ssl_certificate_key}
+  SSLCertificateFile @certfile@
+  SSLCertificateKeyFile @keyfile@
   # Disable to avoid POODLE attack
   SSLProtocol all -SSLv3 -SSLv2 -TLSv1
   SSLHonorCipherOrder On
