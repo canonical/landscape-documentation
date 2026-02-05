@@ -26,6 +26,7 @@ autoremove
 Autoremovable
 amd
 backend
+balancer
 backport
 Backport
 backtrace
@@ -46,6 +47,7 @@ ceph
 Certbot
 certbot
 centralized
+Charmhub
 Charmhub's
 changelog
 checkboxes
@@ -84,6 +86,7 @@ deduplication
 deprivileged
 deterministically
 DirectoryAPI
+Diátaxis
 DISA
 distros
 DMARC
@@ -208,6 +211,7 @@ NIC
 NID
 NPM
 NSG
+Numbat
 NVMe
 NodeJS
 noreply
@@ -230,8 +234,7 @@ openid
 OPL
 organization’s
 organizational
-queueing
-quickstart
+queueingQuickstartquickstart
 packagesearch
 PAYG
 PCI
