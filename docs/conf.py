@@ -1,5 +1,6 @@
 import datetime
-import ast
+import os
+import yaml
 
 # Configuration for the Sphinx documentation builder.
 # All configuration specific to your project should be done in this file.
@@ -110,7 +111,24 @@ html_context = {
     # Required for feedback button
     'github_issues': 'enabled',
 
+}
 
+html_extra_path = []
+
+# Allow opt-in build of the OpenAPI "Hello" example so docs stay clean by default.
+# if os.getenv("OPENAPI", ""):
+#     tags.add("openapi")
+#     html_extra_path.append("how-to/assets/openapi.yaml")
+
+# To enable the edit button on pages, uncomment and change the link to a
+# public repository on GitHub or Launchpad. Any of the following link domains
+# are accepted:
+# - https://github.com/example-org/example"
+# - https://launchpad.net/example
+# - https://git.launchpad.net/example
+#
+html_theme_options = {
+'source_edit_link': 'https://github.com/canonical/landscape-documentation',
 }
 
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
@@ -126,7 +144,7 @@ slug = 'landscape'
 
 # Use RTD canonical URL to ensure duplicate pages have a specific canonical URL
 
-html_baseurl = "https://documentation.ubuntu.com/landscape/"
+html_baseurl = os.environ.get("https://documentation.ubuntu.com/landscape/", "/")
 
 # sphinx-sitemap uses html_baseurl to generate the full URL for each page:
 
@@ -151,8 +169,8 @@ sitemap_excludes = [
 # Template and asset locations
 #######################
 
-html_static_path = [".sphinx/_static"]
-templates_path = [".sphinx/_templates"]
+html_static_path = ["_static"]
+templates_path = ["_templates"]
 
 ###########################
 # Link checker exceptions #
@@ -180,6 +198,8 @@ linkcheck_ignore = [
 linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*",
                                     r"https://ubuntu.com/landscape"]
 
+# give linkcheck multiple tries on failure
+# linkcheck_timeout = 30
 linkcheck_retries = 3
 
 ########################
@@ -202,24 +222,26 @@ myst_heading_anchors = 4
 # https://www.sphinx-doc.org/en/master/usage/extensions/index.html
 
 # NOTE: The canonical_sphinx extension is required for the starter pack.
-#       It automatically enables the following extensions:
-#       - custom-rst-roles
-#       - myst_parser
-#       - notfound.extension
-#       - related-links
-#       - sphinx_copybutton
-#       - sphinx_design
-#       - sphinx_reredirects
-#       - sphinx_tabs.tabs
-#       - sphinxcontrib.jquery
-#       - sphinxext.opengraph
-#       - terminal-output
-#       - youtube-links
 
 extensions = [
     "canonical_sphinx",
+    "notfound.extension",
+    "sphinx_design",
+    "sphinx_reredirects",
+    "sphinx_tabs.tabs",
+    "sphinxcontrib.jquery",
+    "sphinxext.opengraph",
+    "sphinx_config_options",
+    "sphinx_contributor_listing",
+    "sphinx_filtered_toctree",
+    "sphinx_related_links",
+    "sphinx_roles",
+    "sphinx_terminal",
+    "sphinx_ubuntu_images",
+    "sphinx_youtube_links",
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
+    "sphinx.ext.intersphinx",
     "sphinx_sitemap",
     "sphinxext.rediraffe"
 ]
@@ -246,10 +268,11 @@ html_js_files = [
 # Specifies a reST snippet to be appended to each .rst file
 rst_epilog = """
 .. include:: /reuse/links.txt
+.. include:: /reuse/substitutions.txt
 """
 
 # Feedback button at the top; enabled by default
-disable_feedback_button = False
+# disable_feedback_button = True
 
 
 # Your manpage URL
@@ -268,12 +291,29 @@ rst_prolog = """
    :class: align-center
 .. role:: h2
     :class: hclass2
+.. role:: woke-ignore
+    :class: woke-ignore
+.. role:: vale-ignore
+    :class: vale-ignore
 """
 
 # Workaround for https://github.com/canonical/canonical-sphinx/issues/34
 
 if "discourse_prefix" not in html_context and "discourse" in html_context:
     html_context["discourse_prefix"] = html_context["discourse"] + "/t/"
+
+# Workaround for substitutions.yaml
+
+if os.path.exists('./reuse/substitutions.yaml'):
+    with open('./reuse/substitutions.yaml', 'r') as fd:
+        myst_substitutions = yaml.safe_load(fd.read())
+
+# Add configuration for intersphinx mapping
+
+# intersphinx_mapping = {
+#     'starter-pack': ('https://canonical-example-product-documentation.readthedocs-hosted.com/en/latest', None),
+#     'sphinxcontrib-mermaid': ('https://sphinxcontrib-mermaid-demo.readthedocs.io/en/latest', None)
+# }
 
 #####################
 # PDF configuration #
