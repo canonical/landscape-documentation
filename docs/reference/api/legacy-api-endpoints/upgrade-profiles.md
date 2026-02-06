@@ -59,7 +59,7 @@ Arguments:
 - `deliver_delay_window`: Randomize delivery within the given timeframe specified in minutes. (optional)
 - `security_upgrade`: Optional, defaults to False. Whether this upgrade is a security upgrade or not. Deprecated, use upgrade_type instead.
 - `upgrade_type`: This profile should apply to all package upgrades or only security upgrades. Must be either `security` or `all`.
-- `autoremove`: Optional, defaults to False. Whether the upgrade profile should also perform an autoremov of old packages.
+- `autoremove`: Optional, defaults to False. Whether the upgrade profile should also perform an autoremove of old packages.
 - `access_group`: An optional name of the access group to create the profile into.
 
 The following errors may be raised:

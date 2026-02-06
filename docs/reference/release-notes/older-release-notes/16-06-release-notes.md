@@ -5,6 +5,7 @@ These are the release notes for Landscape 16.06.
 
 ## Highlights
   
+
  - **Landscape 16.06.1 point release:**
    - [16.07 OpenStack charms]
  - Automatic update of Ubuntu images in the cloud (trusty and xenial)
@@ -46,6 +47,8 @@ and then run:
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
+
 Alternatively, just add the Landscape 16.06 PPA and run the same commands as 
 above:
 
@@ -54,6 +57,8 @@ above:
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
+
 When prompted, reply with `N` to any dpkg questions about configuration files so 
 the existing files stay untouched. The quickstart package will make any needed 
 modifications to your configuration files automatically. 
@@ -80,12 +85,15 @@ the landscape-server-quickstart package when installing Landscape 16.03:
 sudo setup-landscape-server
 ```
 
+
 After all these steps are completed, the Landscape services can be started: 
+
 ```bash
 sudo lsctl start
 ```
 
 ### Charm upgrade 
+
 
 Starting with Landscape 15.10, Juju deployed Landscape can be upgraded in place. 
 
@@ -100,6 +108,7 @@ juju action do landscape-server/0 migrate-schema
 juju action do landscape-server/0 resume
 ```
 
+
 For multiple landscape-server units, you should pause all of them, upgrade one 
 by one, run the migrate-schema command on only one, and then resume all units.
 
@@ -109,6 +118,7 @@ the fetch command before running the next action:
 ```bash
 juju action fetch <uuid>
 ```
+
 
 For example:
 
@@ -122,6 +132,7 @@ timing:
   enqueued: 2015-06-23 19:24:32 +0000 UTC
   started: 2015-06-23 19:24:33 +0000 UTC
 ```
+
 
 As an example of when it fails, here we are trying to upgrade a unit that hasn't 
 been paused before:
@@ -138,6 +149,7 @@ timing:
   started: 2015-06-23 19:26:38 +0000 UTC
 ```
 
+
 Also, you may want to keep this open in another window, to get an idea of when 
 the system goes back to idle between each step:
 
@@ -149,6 +161,7 @@ watch juju status --format=tabular
 
 
 ### Ubuntu release upgrade 
+
 You can take advantage of the fact that Landscape 16.06 supports both Ubuntu 
 14.04 LTS ("trusty") and Ubuntu 16.04 LTS ("xenial") and upgrade your Landscape 
 deployment from "trusty" to "xenial". This section details the upgrade procedure 
@@ -156,21 +169,29 @@ depending on how you deployed Landscape.
 
 #### Release upgrade for quickstart deployments 
 Follow these steps in order:
+
  * Upgrade Landscape 16.03 to 16.06 while still on Ubuntu 14.04 LTS ("trusty") 
+
 using the quickstart upgrade method.
+
  * Configure the release update manager to keep third-party repositories enabled 
+
 by running this command:
 
 ```bash
 echo -e "[Sources]\nAllowThirdParty=yes" | sudo tee 
 /etc/update-manager/release-upgrades.d/allow.cfg
 ```
+
+
  * Upgrade Ubuntu 14.04 LTS ("trusty") to Ubuntu 16.04 LTS ("xenial") using the 
+
 `do-release-upgrade` tool. First try using the tool as is:
 
 ```bash
 sudo do-release-upgrade
 ```
+
 
 If it tells you that no new releases are available, try adding the `-d` 
 parameter:
@@ -178,13 +199,18 @@ parameter:
 ```bash
 sudo do-release-upgrade -d
 ```
+
+
 Pay close attention to its output: it should say that it is starting an upgrade 
 to "xenial". Reboot after the upgrade is done.
+
  * Stop all Landscape services:
 
 ```bash
 sudo lsctl stop
 ```
+
+
  * Install the 9.5 postgresql packages:
 
 ```bash
@@ -192,13 +218,16 @@ sudo apt install postgresql-9.5 postgresql-plpython-9.5 postgresql-contrib-9.5
 postgresql-client-9.5 postgresql-9.5-debversion
 ```
 
+
 If you get a warning about `/etc/postgresql-common/createcluster.conf` while 
 configuring `postgresql-common`, select to keep the local version.
+
  * Drop the newly created 9.5 cluster:
 
 ```bash
 sudo pg_dropcluster 9.5 main --stop
 ```
+
 
  * Upgrade the 9.3 cluster:
 
@@ -206,13 +235,17 @@ sudo pg_dropcluster 9.5 main --stop
 sudo pg_upgradecluster 9.3 main
 ```
 
+
  * Start Landscape services:
 
 ```bash
 sudo lsctl start
 ```
+
+
  * Verify that Landscape is working correctly.
  * If you are happy with the upgrade results, the previous 9.3 cluster can be 
+
 dropped:
 
 ```bash
@@ -221,33 +254,49 @@ sudo pg_dropcluster 9.3 main
 
 #### Release upgrade for manual (non-quickstart) deployments 
 
+
 The release upgrade process for the manual non-quickstart deployment is a bit 
 more complicated and needs to be done in steps.
 
 Upgrade the APP server first:
+
  - Upgrade Landscape 16.03 to 16.06 in the APP server, still on Ubuntu 14.04 LTS ("trusty"), 
+
  following the steps outlined in the non-quickstart upgrade section.
+
  - Configure the release update manager to keep third-party repositories enabled by running this command:  
+
 ```bash
 echo -e "[Sources]\nAllowThirdParty=yes" | sudo tee 
 /etc/update-manager/release-upgrades.d/allow.cfg
 ```
+
+
  - Upgrade Ubuntu 14.04 LTS ("trusty") to Ubuntu 16.04 LTS ("xenial") using the 
+
 `do-release-upgrade` tool. First try using the tool as is:
+
 ```bash
 sudo do-release-upgrade
 ```
+
+
   - If you get a message that no new releases are available, try adding the `-d` parameter:
+
 ```bash
 sudo do-release-upgrade -d
 ```
+
+
   Pay close attention to its output: it should say that it is starting an upgrade 
   to "xenial". Reboot after the upgrade is done.
   - Verify that Landscape is still operating normally.
   - Stop all Landscape services:
+
 ```bash
 sudo lsctl stop
 ```
+
 
 Now we will upgrade the database server:
 
@@ -255,10 +304,13 @@ Now we will upgrade the database server:
   ("trusty") to Ubuntu 16.04 LTS ("xenial") using the `do-release-upgrade` tool 
   just like before.
  - Install the 9.5 postgresql packages:
+
 ```bash
 sudo apt install postgresql-9.5 postgresql-plpython-9.5 postgresql-contrib-9.5  
 postgresql-client-9.5 postgresql-9.5-debversion
 ```
+
+
   If you get a warning about `/etc/postgresql-common/createcluster.conf` while 
   configuring `postgresql-common`, select to keep the local version.
  -  Drop the newly created 9.5 cluster:
@@ -266,16 +318,22 @@ postgresql-client-9.5 postgresql-9.5-debversion
 ```bash
 sudo pg_dropcluster 9.5 main --stop
 ```
+
+
  - Upgrade the 9.3 cluster:
 
 ```bash
 sudo pg_upgradecluster 9.3 main
 ```
+
+
  - Start the Landscape services:
 
 ```bash
 sudo lsctl start
 ```
+
+
  - Verify that Landscape is working correctly.
  - If you are happy with the upgrade results, the previous 9.3 cluster can be dropped:
 
@@ -285,6 +343,7 @@ sudo pg_dropcluster 9.3 main
 
 
 ### Release upgrade for Juju deployments
+
 Upgrading the Ubuntu release of servers within a Juju deployment is not 
 supported at this time.
 
@@ -325,6 +384,7 @@ To fix this, please run this command:
 ```bash
     sudo systemctl enable landscape-package-search
 ```
+
 And start the service up manually one last time:
 
 ```bash
@@ -332,6 +392,7 @@ And start the service up manually one last time:
 ```
 
 #### Ceph as object autopilot failures 
+
 When Ceph is used as object storage (ceph-radosgw), sometimes a bug can be hit 
 where the radosgw service won't be running. This will 
 usually manifest itself in the Autopilot as a "Wait for SimpleStreams to sync an 
@@ -353,30 +414,46 @@ Here are some examples on how to do that depending on how Landscape itself was
 deployed:
 
 ##### Juju deployed Landscape 
+
  * First, get to the landscape-server/0 unit inside the proper environment. Run 
+
 this from wherever you deployed the Landscape bundle  (this is one long line):
+
 ```bash
 juju ssh landscape-server/0 sudo 'JUJU_HOME=/var/lib/landscape/juju-homes/`sudo 
 ls -rt /var/lib/landscape/juju-homes/ | tail -1` sudo -u landscape -E bash'
 ```
+
+
  * Once there, you will have access to the OpenStack environment. Now it's just 
+
 a matter of issuing the restart command to all swift-storage units:
+
 ```bash
 juju run --service swift-storage 'sudo service landscape-client restart'
 ```
 
 #### Quickstart and Manual (non-quickstart) 
+
+
  * First you have to ssh into the Landscape server. Something like this:
+
 ```bash
 ssh ubuntu@<server-ip>
 ```
+
  * Now enter the landscape user in the right juju environment (this is one long 
+
 line):
+
 ```bash
 sudo JUJU_HOME=/var/lib/landscape/juju-homes/`sudo ls -rt 
 /var/lib/landscape/juju-homes/ | tail -1` sudo -u landscape -E bash
 ```
+
+
  * And now restart the client service in all swift-storage units:
+
 ```bash
 juju run --service swift-storage 'sudo service landscape-client restart'
 ```

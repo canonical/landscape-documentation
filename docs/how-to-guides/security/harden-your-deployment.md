@@ -75,6 +75,7 @@ The transport-layer security (TLS) protocol secures communication by requiring t
 Landscape can be configured to use mTLS for its internal services, and for connections to external services like RabbitMQ and HashiCorp Vault.
 
 <!--TODO: remove when we add standard TLS (verify-none) support-->
+
 ```{note}
 Standard TLS connections that do not enforce mTLS are not supported.
 ```

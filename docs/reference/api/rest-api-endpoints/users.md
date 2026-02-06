@@ -197,6 +197,7 @@ curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
 
 
 Example response:
+
 ```json
 {
   "id": 228,

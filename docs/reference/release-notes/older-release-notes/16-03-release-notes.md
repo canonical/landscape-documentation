@@ -2,6 +2,7 @@
 # 16.03 release notes
 
 ## Highlights
+
  * Machine roles
  * Nagios
  * New charms
@@ -35,38 +36,50 @@ OPL 16.03 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded from OPL
 If you used the landscape-server-quickstart package to install OPL 15.11 then you can use this method to upgrade it.
 
 If you are a https://landscape.canonical.com customer, you can select new version of OPL in your hosted account at https://landscape.canonical.com and then run:
+
 ```text
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
 Alternatively, just add the OPL 16.03 PPA and run the same commands as above:
+
 ```text
     sudo add-apt-repository ppa:landscape/16.03
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
 When prompted, reply with `N` to any dpkg questions about configuration files so the existing files stay untouched. The quickstart package will make any needed modifications to your configuration files automatically. 
 
 ## Non-quickstart upgrade
 Follow these steps to perform a non-quickstart upgrade, that is, you did not use the landscape-server-quickstart package when installing OPL 15.11:
+
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service: `sudo lsctl stop`
  * add the OPL 16.03 PPA: `sudo add-apt-repository ppa:landscape/16.03`
  * refresh the apt database and upgrade: `sudo apt-get update && sudo apt-get dist-upgrade`
  * answer with `N` to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command: 
+
 ```text
     sudo setup-landscape-server
 ```
+
  * Modify one of the `RewriteCond` lines in `/etc/apache2/sites-available/landscape.conf`. You should see a single line which reads:
+
 ```text
     RewriteCond %{REQUEST_URI} !/config
 ```
+
   it must be changed to:
+
 ```text
     RewriteCond %{REQUEST_URI} !^/config/
 ```
+
   After all these steps are completed, the Landscape services can be started: 
+
 ```text
     sudo lsctl start
 ```
@@ -134,25 +147,34 @@ Clouds deployed with a previous version of Landscape will not be correctly handl
 
 ### Repository management "weak digest"
 Starting with Ubuntu 16.04 LTS ("xenial"), apt will complain when a repository was signed using a "weak digest". The error or warning is similar to this:
+
 ```text
 W: http://<server>/path/foo/Release.gpg: Signature by key <somekey> uses weak digest algorithm (SHA1)
 ```
+
 Repositories created by Landscape 16.03 and earlier will exhibit this behavior. To fix this without upgrading to Landscape 16.05, follow these steps on the Landscape server machine, as root:
+
  * obtain the `repository-path` value:
+
 ```text
 # grep repository /etc/landscape/service.conf 
 repository-path # /var/lib/landscape/landscape-repository
 ```
+
  * update the `gpg` configuration file, using the directory above:
+
 ```text
 cd /var/lib/landscape/landscape-repository/standalone
 echo "personal-digest-preferences SHA512 SHA384 SHA256 SHA224" > .gnupg/gpg.conf
 chown landscape:landscape .gnupg/gpg.conf
 ```
+
  * Regenerate the index files for a distribution:
+
 ```text
 cd /var/lib/landscape/landscape-repository/standalone/<distribution>
 reprepro export
 ```
+
 Repeat the above for each distribution that you have created via the Landscape repository management API.
 
