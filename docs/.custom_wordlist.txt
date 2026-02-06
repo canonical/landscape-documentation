@@ -103,6 +103,7 @@ ESM
 FDE
 eu
 falsy
+FDERecoveryKeyManager
 Fernet
 FIPS
 FQDN
@@ -161,6 +162,7 @@ keyslots
 Kudu
 KVM
 keyrings
+keyslot
 kvm
 kwarg
 labelled
@@ -337,6 +339,7 @@ TLD
 TLS
 TLSv
 tmpfiles
+TPM
 traceback
 transactional
 truthy

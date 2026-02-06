@@ -8,6 +8,7 @@ We have the following explanations for certain features in Landscape.
 :maxdepth: 2
 
 activities
+Full Disk Encryption recovery keys <fde-recovery-key>
 repository-mirroring
 Package reporting <package-reporting>
 Remote script execution <remote-script-execution>

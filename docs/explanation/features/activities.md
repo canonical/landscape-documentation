@@ -1,4 +1,5 @@
 (explanation-activities)=
+
 # Activities
 
 Landscape tracks the progress of various tasks using activities, such as script execution and installing packages. There are two types of activities: client activities and server activities. This document explains how each type of activity is tracked and their possible states.
@@ -96,3 +97,4 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 - `RemoveComputerActivity`
 - `AttachProRequest`
 - `DetachProRequest`
+- `GenerateFDERecoveryKeyRequest`
