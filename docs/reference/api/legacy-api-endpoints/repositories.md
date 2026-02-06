@@ -561,7 +561,7 @@ This method takes 4 mandatory arguments:
 - `name`: The name of the pocket to remove packages from.
 - `packages.#`: The names of the packages to be removed from the pockets.
 
-For example, the following request removes packages named haskel and golang from a pocket named ‘updates’ in the ‘natty-staging’ series of the ‘ubuntu’ distribution:
+For example, the following request removes packages named `haskel` and `golang` from a pocket named ‘updates’ in the ‘natty-staging’ series of the ‘ubuntu’ distribution:
 
 ```text
 ?action=RemovePackagesFromPockets&name=updates&series=natty-staging

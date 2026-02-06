@@ -5,10 +5,12 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    paths:
+      - 'docs/**'   # Only run on changes to the docs directory
 
+  workflow_call:
   workflow_dispatch:
     # Manual trigger
-
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

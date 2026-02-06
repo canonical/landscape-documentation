@@ -57,7 +57,7 @@
 }
 \fancypagestyle{titlepage}{%
     \fancyhf{}
-    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© 2024 Canonical Ltd. All rights reserved.}}
+    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© 2026 Canonical Ltd. All rights reserved.}}
 }
 \newcommand\sphinxbackoftitlepage{\thispagestyle{titlepage}}
 \titleformat{\chapter}[block]{\Huge \color{title} \bfseries\filright}{\thechapter .}{1.5ex}{}
@@ -93,7 +93,7 @@
 
 \begin{adjustwidth}{8cm}{0pt}
 \begin{tabularx}{0.5\textwidth}{ l l }
-    \textcolor{lightgray}{© 2024 Canonical Ltd.}  & \hspace{3cm} \\
+    \textcolor{lightgray}{© 2026 Canonical Ltd.}  & \hspace{3cm} \\
     \textcolor{lightgray}{All rights reserved.}   & \hspace{3cm} \\
                                                   & \hspace{3cm} \\
                                                   & \hspace{3cm} \\
