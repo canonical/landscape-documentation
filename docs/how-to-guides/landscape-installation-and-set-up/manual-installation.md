@@ -99,7 +99,7 @@ sudo systemctl restart postgresql
 
 ### Tune PostgreSQL
 
-It is strongly recommended to fine tune this PostgreSQL installation according to the hardware of the server. Keeping the default settings (especially of `max_connections`) is known to be problematic.  For more information, visit [PostgreSQL's guide on tuning your PostgreSQL server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server).
+It is strongly recommended to fine tune this PostgreSQL installation according to the hardware of the server. Keeping the default settings (especially of `max_connections`) is known to be problematic. For more information, visit [PostgreSQL's guide on tuning your PostgreSQL server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server).
 
 #### Landscape-specific tips for tuning PostgreSQL
 
@@ -137,13 +137,13 @@ Additionally, other services needed by Landscape will also be running on this ma
 
 ### Add the Landscape package archive
 
-Landscape is distributed in a public PPA. You can add it to the system with these commands, replacing `{LANDSCAPE_PPA}` with the appropriate repository:
+Landscape is distributed in a public PPA. You can add it to the system with these commands, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
 
 ```bash
-sudo add-apt-repository {LANDSCAPE_PPA}
+sudo add-apt-repository <LANDSCAPE_PPA>
 ```
 
-- `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+- `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
 ### Install the server package
 
@@ -201,7 +201,7 @@ Please make the following changes:
 
 Section `[stores]`:
 
-- `host`: the IP or hostname of the database server.  If not the default PostgreSQL port (5432), add a :NNNN port definition after the hostname (e.g., 10.0.1.5:3232)
+- `host`: the IP or hostname of the database server. If not the default PostgreSQL port (`5432`), add a `:NNNN` port definition after the hostname (e.g., `10.0.1.5:3232`)
 - Ensure a strong password is set for user landscape (this differs from landscape_superuser password from earlier and will be created when setup script is executed)
 
 Section `[broker]`:
@@ -219,8 +219,8 @@ Section `[landscape]`:
 
 If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names. For example, to only allow connections on localhost, you may have a configuration like the following:
 
-```bash
-allowed_interfaces  = localhost 127.0.0.1 ::1
+```ini
+allowed_interfaces = localhost 127.0.0.1 ::1
 ```
 
 ### Run the Landscape setup script
@@ -248,7 +248,7 @@ RUN_ALL="yes"
 If more performance and availability are needed out of Landscape Server, it's possible to spread out the services amongst several machines. In that case, for example, one could run message servers in one machine, application servers in another one, etc.
 ```
 
-The message, application and ping services can be configured to run multiple instances. If your hardware has several cores and enough memory (4Gb or more), running two or more of each will improve performance. To run multiple instances of a service, just set the value in the respective `RUN_` line to the number of instances. For example, if you want to run two message servers, just set:
+The message, application and ping services can be configured to run multiple instances. If your hardware has several cores and enough memory (4GB or more), running two or more of each will improve performance. To run multiple instances of a service, just set the value in the respective `RUN_` line to the number of instances. For example, if you want to run two message servers, just set:
 
 ```ini
 RUN_MSGSERVER="2"
@@ -283,13 +283,13 @@ Landscape uses Apache to, among other things, redirect requests to each service 
 
 Below is a suggested configuration file that does just that. Install it as `/etc/apache2/sites-available/landscape.conf` and change the following values:
 
-- `@hostname@`: the FQDN of the hostname the clients (browser and machines) will use to connect to Landscape Server. This is what will be in the URL, and it needs to be resolvable via DNS. For example, `lds.example.com`
+- `@hostname@`: the FQDN of the hostname the clients (browser and machines) will use to connect to Landscape Server. This is what will be in the URL, and it needs to be resolvable via DNS. For example, `landscape.example.com`
 - `@certfile@`: the full filesystem path to where the SSL certificate for this server is installed. For example, `/etc/ssl/certs/landscape_server.pem`
 - `@keyfile@`: the full filesystem path to where the corresponding private key of that certificate is installed. For example, `/etc/ssl/private/landscape_server.key`
 
-If you are using a custom certificate authority for your SSL certificate, then you **MUST** put the CA public certificate in the file `/etc/ssl/certs/landscape_server_ca.crt` and uncomment the `SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt` line.
+If you are using a custom certificate authority for your SSL certificate, then you **must** put the CA public certificate in the `/etc/ssl/certs/landscape_server_ca.crt` file and uncomment the `SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt` line.
 
- Make sure the user apache runs as can read those files! Also, make sure the private key can only be read by root and that same apache user.
+ Make sure the `www-data` user can read those files. Also, make sure the private key can only be read by root and the `ssl-cert` group.
 
 ```apache
 <VirtualHost *:80>
@@ -536,19 +536,19 @@ We now need to enable some modules:
 for module in rewrite proxy_http ssl headers expires proxy_http2; do sudo a2enmod $module; done
 ```
 
-Unless you require it and take necessary steps to secure that endpoint, it is recommended to disable mod-status:
+Unless you require it and take necessary steps to secure that endpoint, it is recommended to disable the `mod_status` module:
 
 ```bash
 sudo a2dismod status
 ```
 
-Disable the default http vhost:
+Disable the default site:
 
 ```bash
 sudo a2dissite 000-default
 ```
 
-Finally we can enable the new site:
+Finally, enable the new site:
 
 ```bash
 sudo a2ensite landscape.conf
@@ -565,7 +565,7 @@ sudo lsctl restart
 
 ### Create the first user
 
-The first user that is created in Landscape automatically becomes the administrator of the "standalone" account. To create it, please go to https://\<servername\> and fill in the requested information.
+The first user that is created in Landscape automatically becomes the administrator of the "standalone" account. To create it, please go to `https://<servername>` and fill in the requested information.
 
 ### Configure the first client
 
@@ -581,7 +581,7 @@ If you are using the self-signed certificate on your Landscape Server, download 
 echo -n | openssl s_client -connect LANDSCAPE-SERVER-IP:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
 ```
 
-To configure the Landscape Client package, run:
+To configure the Landscape Client package, run the following command, replacing `<servername>` with the address of the server:
 
 ```bash
 sudo landscape-config --computer-title "My First Computer" --account-name standalone --url https://<servername>/message-system --ping-url http://<servername>/ping
