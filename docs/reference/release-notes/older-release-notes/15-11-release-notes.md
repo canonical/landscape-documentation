@@ -2,6 +2,7 @@
 # 15.11 release notes
 
 ## Highlights
+
  * --(OpenStack Liberty cloud deployment)-- '''NOTE: in order to use the Autopilot to deploy OpenStack clouds, please use a more recent version of Landscape.'''
  * '''LDS 15.11.3 point release''':
   * This replaces LDS 15.11.2 in the 15.11 PPA
@@ -36,30 +37,38 @@ LDS 15.11 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded from LDS
 If you used the landscape-server-quickstart package to install LDS 15.10.X or an earlier LDS 15.11 then you can use this method to upgrade it.
 
 If you are a https://landscape.canonical.com customer, you can select new version of LDS in your hosted account at https://landscape.canonical.com and then run:
+
 ```text
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
 Alternatively, just add the LDS 15.11 PPA and run the same commands as above:
+
 ```text
     sudo add-apt-repository ppa:landscape/15.11
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
 When prompted, reply with N to any dpkg questions about configuration files so the existing files stay untouched. The quickstart package will make any needed modifications to your configuration files automatically. 
 
 ## Non-quickstart upgrade
 Follow these steps to perform a non-quickstart upgrade, that is, you did not use the landscape-server-quickstart package when installing LDS 15.10.X or an earlier LDS 15.11:
+
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service: `sudo lsctl stop`
  * add the LDS 15.11 PPA: `sudo add-apt-repository ppa:landscape/15.11`
  * refresh the apt database and upgrade: `sudo apt-get update && sudo apt-get dist-upgrade`
  * answer with "N" to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command: 
+
 ```text
     sudo setup-landscape-server
 ```
+
   after it succeeds, the Landscape services can be started: 
+
 ```text
     sudo lsctl start
 ```

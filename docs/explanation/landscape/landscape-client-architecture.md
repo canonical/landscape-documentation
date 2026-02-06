@@ -5,17 +5,17 @@ Landscape Client is the client-side component of the Landscape ecosystem. It is 
 
 A Landscape Client has four main services:
 
-  * [Broker](#broker) - exchanges messages with Landscape Server
-  * [Manager](#manager) - performs actions and applies side effects on the client
-  * [Monitor](#monitor) - collects information from the client
-  * [Watchdog](#watchdog) - initializes and supervises other long-running processes
+* [Broker](#broker) - exchanges messages with Landscape Server
+* [Manager](#manager) - performs actions and applies side effects on the client
+* [Monitor](#monitor) - collects information from the client
+* [Watchdog](#watchdog) - initializes and supervises other long-running processes
 
 There are also important processes that run either periodically or on demand:
 
-  * [Config](#config) - configures the client
-  * [Package changer](#package-changer) - applies package changes
-  * [Package reporter](#package-reporter) - reports the status of packages on the client
-  * [Release upgrade manager](#release-upgrade-manager) - upgrades the operating system to a new Ubuntu release
+* [Config](#config) - configures the client
+* [Package changer](#package-changer) - applies package changes
+* [Package reporter](#package-reporter) - reports the status of packages on the client
+* [Release upgrade manager](#release-upgrade-manager) - upgrades the operating system to a new Ubuntu release
 
 ## Process description
 

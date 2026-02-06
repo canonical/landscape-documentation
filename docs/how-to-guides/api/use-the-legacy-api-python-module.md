@@ -1,7 +1,6 @@
 (how-to-use-legacy-api-python)=
 # How to use the legacy API Python module
 
-
 The **landscape-api** package also has a Python module to use the Landscape API. Once the package is installed, the `API` class can be imported.
 
 In a similar way as happened with the command-line client, the API methods are slightly mangled here. The method names are converted to lowercase and an underscore (“`_`”) is used as a word separator. For example, instead of using `GetComputers`, the method defined in the `API` class is called `get_computers`.
@@ -28,7 +27,7 @@ Get a list of computers associated with the account.
 >>> help(API.get_computers)
 Help on method get_computers in module landscape_api.base:
 
-get_computers(self, query=u'', limit=1000, offset=0, with_network=False, ...
+get_computers(self, query="", limit=1000, offset=0, with_network=False, ...
 ...
 ```
 
@@ -73,4 +72,3 @@ Note that API methods will return python objects by default. To return the raw J
 ```python
 api = API(uri, key, secret, ca, json=True)
 ```
-

@@ -8,11 +8,11 @@ This guide provides an overview of how to install Landscape in a DISA STIG compl
 
 Ensure you meet the following requirements before installing Landscape:
 
-* Ubuntu Server install media for the version of Ubuntu (Jammy 22.04 or Noble 24.04)
-* Ubuntu Pro subscription
-* Server X509 certificates and keys, signed by a DoD Certificate Authority, and issued for the FQDN hostname of the application server, database server, and message queuing server.
-* DISA STIG compliant Ubuntu system with the FIPS OpenSSL package installed and with FIPS enabled for all Landscape nodes.
-* Limits on directory sizes
+- Ubuntu Server install media for the version of Ubuntu (Jammy 22.04 or Noble 24.04)
+- Ubuntu Pro subscription
+- Server X509 certificates and keys, signed by a DoD Certificate Authority, and issued for the FQDN hostname of the application server, database server, and message queuing server.
+- DISA STIG compliant Ubuntu system with the FIPS OpenSSL package installed and with FIPS enabled for all Landscape nodes.
+- Limits on directory sizes
 
 ### Limiting `/etc` and `/var` directory sizes
 
@@ -158,11 +158,11 @@ sudo chmod 444 /etc/crl.crl
 
 ### Certificates for PostgreSQL
 
-**Ubuntu 22.04 (Jammy) database server**
+#### Ubuntu 22.04 (Jammy) database server
 
 For an Ubuntu 22.04 database server, you'll need three certificates and their corresponding keys:
 
-* Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
+- Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
 
     ```bash
     sudo chown landscape:landscape /etc/landscape/postgres_client.pem
@@ -171,7 +171,7 @@ For an Ubuntu 22.04 database server, you'll need three certificates and their co
     sudo chmod 400 /etc/landscape/postgres_client.key
     ```
 
-* Client authentication certificate for the `landscape_superuser` PostgreSQL user. The common name must be `landscape_superuser`. The SAN must contain the DNS or IP address of the Landscape server.
+- Client authentication certificate for the `landscape_superuser` PostgreSQL user. The common name must be `landscape_superuser`. The SAN must contain the DNS or IP address of the Landscape server.
 
     ```bash
     sudo chown landscape:landscape /etc/landscape/postgres_client_superuser.pem
@@ -180,7 +180,7 @@ For an Ubuntu 22.04 database server, you'll need three certificates and their co
     sudo chmod 400 /etc/landscape/postgres_client_superuser.key
     ```
 
-* Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
+- Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
 
     ```bash
     sudo chown postgres:postgres /etc/postgresql/postgres_server.pem
@@ -189,11 +189,11 @@ For an Ubuntu 22.04 database server, you'll need three certificates and their co
     sudo chmod 400 /etc/postgresql/postgres_server.key
     ```
 
-**Ubuntu 24.04 (Noble) database server**
+#### Ubuntu 24.04 (Noble) database server
 
 For an Ubuntu 24.04 database server, you'll need four certificates and their corresponding keys:
 
-* Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
+- Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
 
     ```bash
     sudo chown landscape:landscape /etc/landscape/postgres_client.pem
@@ -202,7 +202,7 @@ For an Ubuntu 24.04 database server, you'll need four certificates and their cor
     sudo chmod 400 /etc/landscape/postgres_client.key
     ```
 
-* Client authentication certificate for the `landscape_superuser` PostgreSQL user. The common name must be `landscape_superuser`. The SAN must contain the DNS or IP address of the Landscape server.
+- Client authentication certificate for the `landscape_superuser` PostgreSQL user. The common name must be `landscape_superuser`. The SAN must contain the DNS or IP address of the Landscape server.
 
     ```bash
     sudo chown landscape:landscape /etc/landscape/postgres_client_superuser.pem
@@ -211,7 +211,7 @@ For an Ubuntu 24.04 database server, you'll need four certificates and their cor
     sudo chmod 400 /etc/landscape/postgres_client_superuser.key
     ```
 
-* Client authentication certificate for the `landscape_maintenance` PostgreSQL user. The common name must be `landscape_maintenance`. The SAN must contain the DNS or IP address of the Landscape server.
+- Client authentication certificate for the `landscape_maintenance` PostgreSQL user. The common name must be `landscape_maintenance`. The SAN must contain the DNS or IP address of the Landscape server.
 
     ```bash
     sudo chown landscape:landscape /etc/landscape/postgres_client_maintenance.pem
@@ -220,7 +220,7 @@ For an Ubuntu 24.04 database server, you'll need four certificates and their cor
     sudo chmod 400 /etc/landscape/postgres_client_maintenance.key
     ```
 
-* Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
+- Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
 
     ```bash
     sudo chown postgres:postgres /etc/postgresql/postgres_server.pem
@@ -233,7 +233,7 @@ For an Ubuntu 24.04 database server, you'll need four certificates and their cor
 
 For RabbitMQ, you'll need two certificates and their corresponding keys:
 
-* Client authentication certificate for the `landscape` RabbitMQ user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server. Additionally, the CDP must be an `http` link to the CRL file.
+- Client authentication certificate for the `landscape` RabbitMQ user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server. Additionally, the CDP must be an `http` link to the CRL file.
 
     ```bash
     sudo chown landscape:landscape /etc/landscape/rabbitmq_client.pem
@@ -242,7 +242,7 @@ For RabbitMQ, you'll need two certificates and their corresponding keys:
     sudo chmod 400 /etc/landscape/rabbitmq_client.key
     ```
 
-* Server authentication certificate. The SAN must contain the DNS or IP address of the RabbitMQ server.
+- Server authentication certificate. The SAN must contain the DNS or IP address of the RabbitMQ server.
 
     ```bash
     sudo chown rabbitmq:rabbitmq /etc/rabbitmq/rabbitmq_server.pem
@@ -255,7 +255,7 @@ For RabbitMQ, you'll need two certificates and their corresponding keys:
 
 For Apache, you'll need one certificate and its corresponding key:
 
-* Server authentication certificate. The common name must be the `root_url` of your Landscape instance. The SAN must contain the DNS or IP address of the Apache server and the `root_url` of your Landscape instance.
+- Server authentication certificate. The common name must be the `root_url` of your Landscape instance. The SAN must contain the DNS or IP address of the Apache server and the `root_url` of your Landscape instance.
 
     ```bash
     sudo chown root:root /etc/apache2/apache_server.pem
@@ -493,9 +493,9 @@ sudo systemctl restart postgresql
 
 Click on the links to download the following sample files. Remember to replace any placeholder values with the correct ones for your configuration.
 
-* [`/etc/postgresql/<VERSION>/main/postgresql.conf`](/assets/disa-stig/postgresql.conf)
-* [`/etc/postgresql/<VERSION>/main/pg_hba.conf`](/assets/disa-stig/pg_hba.conf)
-* [`/etc/rsyslog.d/10-postgresql.conf`](/assets/disa-stig/10-postgresql.conf)
+- [`/etc/postgresql/<VERSION>/main/postgresql.conf`](/assets/disa-stig/postgresql.conf)
+- [`/etc/postgresql/<VERSION>/main/pg_hba.conf`](/assets/disa-stig/pg_hba.conf)
+- [`/etc/rsyslog.d/10-postgresql.conf`](/assets/disa-stig/10-postgresql.conf)
 
 ## Configure PostgreSQL for Landscape
 
@@ -884,17 +884,12 @@ Replace `<USERNAME>` with a RabbitMQ user that will have administrative privileg
 
 Click on the links to download the following sample files. Remember to replace any placeholder values with the correct ones for your configuration.
 
-* [`/etc/rabbitmq/rabbitmq.conf`](/assets/disa-stig/rabbitmq.conf)
-
-* [`/etc/rabbitmq/rabbitmq-env.conf`](/assets/disa-stig/rabbitmq-env.conf)
-
-* [`/etc/rabbitmq/enabled_plugins`](/assets/disa-stig/enabled_plugins)
-
-* [`/etc/rabbitmq/advanced.config`](/assets/disa-stig/advanced.config)
-
-* [`/etc/rsyslog.d/15-rabbitmq.conf`](/assets/disa-stig/15-rabbitmq.conf)
-
-* [`/lib/systemd/system/epmd.socket`](/assets/disa-stig/epmd.socket)
+- [`/etc/rabbitmq/rabbitmq.conf`](/assets/disa-stig/rabbitmq.conf)
+- [`/etc/rabbitmq/rabbitmq-env.conf`](/assets/disa-stig/rabbitmq-env.conf)
+- [`/etc/rabbitmq/enabled_plugins`](/assets/disa-stig/enabled_plugins)
+- [`/etc/rabbitmq/advanced.config`](/assets/disa-stig/advanced.config)
+- [`/etc/rsyslog.d/15-rabbitmq.conf`](/assets/disa-stig/15-rabbitmq.conf)
+- [`/lib/systemd/system/epmd.socket`](/assets/disa-stig/epmd.socket)
 
 ## Configure RabbitMQ for Landscape
 
@@ -925,17 +920,17 @@ Landscape leverages Apache as the front-end web service to access Landscape Serv
 
 Modify the configuration file `/etc/apache2/apache2.conf`. See the sample provided here {ref}`header-sample-apache2-files`. The following modifications are changed from the default `/etc/apache2/apache2.conf` file:
 
-* The common log format is modified to:
+- The common log format is modified to:
 
     ```ini
     LogFormat "%a %A %h %H %l %m %s %t %u %U \"%{Referer}i\" "
     ```
 
-* `HTTPOnly` and `Secure` headers are added to prevent all cookies from access to client-side scripting to reduce XSS and session hijacking.
-* The `Timeout` directive is set to `60` to prevent DoS attacks from indefinite session connections.
-* The `TraceEnable` directive is set to `off` to prevent access to trace information.
-* The `RequestReadTimeout` directive is set to `handshake=5 header=10 body=30` to prevent indefinite session hijacking.
-* Session cookie protection directives are enabled to ensure cookies are encrypted before transmission:
+- `HTTPOnly` and `Secure` headers are added to prevent all cookies from access to client-side scripting to reduce XSS and session hijacking.
+- The `Timeout` directive is set to `60` to prevent DoS attacks from indefinite session connections.
+- The `TraceEnable` directive is set to `off` to prevent access to trace information.
+- The `RequestReadTimeout` directive is set to `handshake=5 header=10 body=30` to prevent indefinite session hijacking.
+- Session cookie protection directives are enabled to ensure cookies are encrypted before transmission:
 
     ```ini
     Session On
@@ -948,18 +943,18 @@ Modify the configuration file `/etc/apache2/apache2.conf`. See the sample provid
 
 Modify the default configuration file `/etc/apache2/ports.conf`. See the template provided here {ref}`header-sample-apache2-files` and replace the following placeholder:
 
-* `<LANDSCAPE_IP_ADDRESS>` : the IP address of Landscape Server. For example, `192.168.1.250`
+- `<LANDSCAPE_IP_ADDRESS>` : the IP address of Landscape Server. For example, `192.168.1.250`
 
 ### Edit Apache2 site configuration for Landscape
 
 Add the configuration file `/etc/apache2/sites-available/landscape.conf`. See the template provided here {ref}`header-sample-apache2-files` and replace the following placeholders:
 
-* `<IP_ADDRESS>` : the IP address of Landscape Server. For example, `192.168.1.250`
-* `<HOSTNAME>`: the FQDN of the hostname the clients (browser and machines) will use to connect to Landscape Server. This must be resolvable via DNS. For example, `lds.example.com`
-* `<CERTFILE>`: the full filesystem path to the SSL certificate for this server. For example, `/etc/apache2/apache_server.pem`
-* `<KEYFILE>`: the full filesystem path to the private key corresponding to the SSL certificate. For example, `/etc/apache2/apache_server.key`
-* `<CA_CERTFILE>`: the full filesystem path to the DoD CA chain file for this server. For example, `/etc/ca-certificates.crt`
-* `<CRL_FILE>`: the full filesystem path to the DoD CRL file for revoked certificates. For example, `/etc/crl.crl`
+- `<IP_ADDRESS>` : the IP address of Landscape Server. For example, `192.168.1.250`
+- `<HOSTNAME>`: the FQDN of the hostname the clients (browser and machines) will use to connect to Landscape Server. This must be resolvable via DNS. For example, `lds.example.com`
+- `<CERTFILE>`: the full filesystem path to the SSL certificate for this server. For example, `/etc/apache2/apache_server.pem`
+- `<KEYFILE>`: the full filesystem path to the private key corresponding to the SSL certificate. For example, `/etc/apache2/apache_server.key`
+- `<CA_CERTFILE>`: the full filesystem path to the DoD CA chain file for this server. For example, `/etc/ca-certificates.crt`
+- `<CRL_FILE>`: the full filesystem path to the DoD CRL file for revoked certificates. For example, `/etc/crl.crl`
 
 ### Set permissions for Apache2 files
 
@@ -1007,30 +1002,28 @@ sudo chown root:root /etc/apache2/sites-available/landscape.conf
 
 Click on the links to download the following sample files. Remember to replace any placeholder values with the correct ones for your configuration.
 
-* [`/etc/apache2/sites-available/landscape.conf`](/assets/disa-stig/landscape.conf)
-
-* [`/etc/apache2/apache2.conf`](/assets/disa-stig/apache2.conf)
-
-* [`/etc/apache2/ports.conf`](/assets/disa-stig/ports.conf)
+- [`/etc/apache2/sites-available/landscape.conf`](/assets/disa-stig/landscape.conf)
+- [`/etc/apache2/apache2.conf`](/assets/disa-stig/apache2.conf)
+- [`/etc/apache2/ports.conf`](/assets/disa-stig/ports.conf)
 
 ## Install the application server
 
 The application server will host the following Landscape services:
 
-* application server
-* message server
-* ping server
-* job handler
-* async-frontend
-* combo loader
-* api server
-* package upload service
-* package search
+- application server
+- message server
+- ping server
+- job handler
+- async-frontend
+- combo loader
+- api server
+- package upload service
+- package search
 
 Additionally, other services needed by Landscape will also be running on this machine, such as:
 
-* apache
-* rabbitmq-server
+- apache
+- rabbitmq-server
 
 ### Add the Landscape package archive
 
@@ -1040,7 +1033,7 @@ Landscape is distributed in a public PPA. You can add it to the system with thes
 sudo add-apt-repository <LANDSCAPE_PPA>
 ```
 
-* `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+- `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
 ### Fix Pydantic Settings for FIPS
 
@@ -1068,9 +1061,9 @@ sudo apt install landscape-server
 
 Landscape does not support password-based authentication for administrators under DISA STIG compliance. Instead, you must configure one of the supported alternative authentication methods:
 
-* {ref}`Active Directory <how-to-external-auth-active-directory>`
-* {ref}`OIDC <how-to-external-auth-oidc>`
-* {ref}`PAM <how-to-external-auth-pam>`
+- {ref}`Active Directory <how-to-external-auth-active-directory>`
+- {ref}`OIDC <how-to-external-auth-oidc>`
+- {ref}`PAM <how-to-external-auth-pam>`
 
 Be sure to set up and verify your chosen authentication method before proceeding with this guide.
 
@@ -1258,7 +1251,7 @@ sudo chmod 600 /etc/landscape/service.conf
 
 Click on the link to download the following sample file. Remember to replace any placeholder values with the correct ones for your configuration.
 
-* [`/etc/landscape/service.conf`](/assets/disa-stig/service.conf)
+- [`/etc/landscape/service.conf`](/assets/disa-stig/service.conf)
 
 ### Run the Landscape setup script
 
@@ -1285,9 +1278,9 @@ sudo systemctl mask landscape-hostagent-consumer.service landscape-hostagent-mes
 
 In the `/etc/default/landscape-server` file, the `UPGRADE_SCHEMA` option needs to be reviewed. If set to `yes`, whenever the package `landscape-server` is updated, it will attempt to update the database schema too. It is a very convenient setting, but consider the following before enabling it:
 
-* schema updates can take several minutes
-* if the package is updated while the database is offline, or unreachable, the update will fail
-* you should have a backup of the database before updating the package
+- schema updates can take several minutes
+- if the package is updated while the database is offline, or unreachable, the update will fail
+- you should have a backup of the database before updating the package
 
 Without this setting enabled, a package update might result in services that won't start anymore because of a needed schema change. In that case:
 
@@ -1363,9 +1356,9 @@ ufw allow in on <INTERFACE_NAME> from <SOURCE_RANGE> to <IP_ADDRESS> port 25672 
 
 Where:
 
-* `<INTERFACE_NAME` is the name of the network interface. For example, `enp0s1`.
-* `<SOURCE_RANGE>` is the IP range allowed for connections. For example,`192.168.1.0/24`
-* `<IP_ADDRESS>` is the IP address of Landscape Server’s Apache web server.
+- `<INTERFACE_NAME` is the name of the network interface. For example, `enp0s1`.
+- `<SOURCE_RANGE>` is the IP range allowed for connections. For example,`192.168.1.0/24`
+- `<IP_ADDRESS>` is the IP address of Landscape Server’s Apache web server.
 
 ### (Optional) Add an email alias
 

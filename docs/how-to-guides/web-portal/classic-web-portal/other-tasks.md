@@ -50,9 +50,11 @@ You must then add computers to the access group:
 
 1. Click **Computers** in the header
 2. Select all of the machines you want to keep updated by:
-   * using a tag if one exists
-   * using search to find the machines
-   * selecting them individually
+
+   - using a tag if one exists
+   - using search to find the machines
+   - selecting them individually
+
 3. Click **Info**
 4. In the **Access group** section, select the access group you want to move the machines to
 5. Click **Update access group**.
@@ -62,24 +64,26 @@ You must then add computers to the access group:
 Once you've added machines to an access group, you'll need to create an upgrade profile:
 
 1. Click on your organization's name in the header
-2. Click **Profiles**
-2. Click **Upgrade Profiles**
-3. Click **Add upgrade profile**
-3. Complete the **Create an upgrade profile** form, defining:
-   * name
-   * the upgrade settings you want to use
-   * an access group
-   * the schedule you want to use
-4. Click **Save**
+1. Click **Profiles**
+1. Click **Upgrade Profiles**
+1. Click **Add upgrade profile**
+1. Complete the **Create an upgrade profile** form, defining:
+
+   - name
+   - the upgrade settings you want to use
+   - an access group
+   - the schedule you want to use
+
+1. Click **Save**
 
 ## Keep Landscape from upgrading a certain package on one of my servers
 
 1. Click **Computers** in the header
-2. Click **Packages**
-2. Use the search box at the top of the screen to find the package you want.
-3. Click the triangle on the left of the listing line of the package you want to hold, which expands the information for that package.
-4. Now click on the icon to the left of the package name. A new icon with a lock will replace the old icon, indicating that this package is to be held during upgrades.
-5. Click **Apply changes**
+1. Click **Packages**
+1. Use the search box at the top of the screen to find the package you want.
+1. Click the triangle on the left of the listing line of the package you want to hold, which expands the information for that package.
+1. Now click on the icon to the left of the package name. A new icon with a lock will replace the old icon, indicating that this package is to be held during upgrades.
+1. Click **Apply changes**
 
 ![Locked packages](https://assets.ubuntu.com/v1/d34df398-usecases2.png)
 
@@ -88,18 +92,21 @@ Once you've added machines to an access group, you'll need to create an upgrade 
 Suppose you want to monitor the size of the PostgreSQL database on your database servers, you may use tags to group these machines together. Now you can create a graph to provide information from all of these servers:
 
 1. Click on your organization's name in the header
-2. Click **Graphs**
-2. Click **Add graph**
-3. Complete the **Create graph** form. In our example, we could do something like:
-   * Title: `PostgreSQL database size`
-   * Provide a "Y-axis title" and define the machines you want the graph created for.
-   * Run as user: `postgres`
-   * Code:
-        ```
+1. Click **Graphs**
+1. Click **Add graph**
+1. Complete the **Create graph** form. In our example, we could do something like:
+
+   - Title: `PostgreSQL database size`
+   - Provide a "Y-axis title" and define the machines you want the graph created for.
+   - Run as user: `postgres`
+   - Code:
+
+        ```bash
         #!/bin/bash
         psql -tAc "select pg_database_size('postgres')"
         ```
-4. Click **Save**
+
+1. Click **Save**
 
 ![Create custom graph](https://assets.ubuntu.com/v1/53b56b4f-usecases3.png)
 
@@ -108,4 +115,3 @@ To view the graph, click **Computers** in the header, then click **Monitoring**.
 ## Ensure all computers with a given tag have a common list of packages installed
 
 Manage them via a {ref}`reference-terms-package-profile`.
-

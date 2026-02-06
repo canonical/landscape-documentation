@@ -23,8 +23,10 @@ autocommit
 autoinstall
 AutoPilot
 autoremove
+Autoremovable
 amd
 backend
+balancer
 backport
 Backport
 backtrace
@@ -37,6 +39,7 @@ bytestring
 Cancelled
 CAC
 CAs
+Canonical('s)?
 canonicalized
 CDP
 Ceph
@@ -44,6 +47,7 @@ ceph
 Certbot
 certbot
 centralized
+Charmhub
 Charmhub's
 changelog
 checkboxes
@@ -59,6 +63,7 @@ config
 configs
 conformant
 conntrack
+copiedprofilename
 CORS
 createseries
 CRL
@@ -73,11 +78,15 @@ customizable
 CVE
 CVEs
 datetime
+datestamp
 debian
+decodeable
 decrypt
+deduplication
 deprivileged
 deterministically
 DirectoryAPI
+Diátaxis
 DISA
 distros
 DMARC
@@ -92,6 +101,8 @@ EPMD
 epoll
 ESM
 FDE
+eu
+falsy
 FDERecoveryKeyManager
 Fernet
 FIPS
@@ -147,6 +158,7 @@ JWT
 JWTs
 Keycloak
 KeyError
+keyslots
 Kudu
 KVM
 keyrings
@@ -175,6 +187,7 @@ lxd
 MAAS
 maas
 Mailjet
+Makefile
 ManualInstallation
 mebibytes
 microSD
@@ -189,16 +202,19 @@ MITM
 mTLS
 MTU
 MTUs
+mysqlprofile
 Multipass
 Nagios
 nagios
 netinstall
 netmask
+newprofile
 NFS
 NIC
 NID
 NPM
 NSG
+Numbat
 NVMe
 NodeJS
 noreply
@@ -210,6 +226,7 @@ oidc
 OIDC
 Okta
 onwards
+OTPs
 OpenStack
 Openstack
 OpenStackCharms
@@ -220,8 +237,7 @@ openid
 OPL
 organization’s
 organizational
-queueing
-quickstart
+queueingQuickstartquickstart
 packagesearch
 PAYG
 PCI
@@ -229,6 +245,7 @@ perf
 perfs
 performant
 PID
+PIDs
 PITR
 pgSQL
 pgtune
@@ -270,6 +287,7 @@ revalidated
 RewriteRule
 RHEL
 rollout
+rootfs
 routable
 RSA
 RSS
@@ -304,6 +322,7 @@ Subiquity
 subkeys
 submodule
 subpaths
+substring
 superclass
 SupportAnalyst
 syslog
@@ -323,6 +342,7 @@ tmpfiles
 TPM
 traceback
 transactional
+truthy
 UA
 ubuntu
 Ubuntu
@@ -335,6 +355,9 @@ uncomment
 unencoded
 unhold
 Unhold
+unflagged
+unholding
+unpatched
 unscalable
 untrusted
 uploader

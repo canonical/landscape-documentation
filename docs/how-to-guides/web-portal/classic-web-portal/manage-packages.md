@@ -59,7 +59,7 @@ To export a {ref}`reference-terms-package-profile`:
 
 To modify a {ref}`reference-terms-package-profile`:
 
-1.  Navigate to your organization's home page
+1. Navigate to your organization's home page
 2. Click the **Profiles** tab
 3. Click **Package Profiles**
 4. Click the name of the package profile you want to modify
@@ -77,4 +77,3 @@ To delete a {ref}`reference-terms-package-profile`:
 5. Click **Remove**
 
 The package profile is deleted immediately. There is no prompt to confirm the action.
-

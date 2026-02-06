@@ -1,7 +1,6 @@
 (reference-legacy-api-alerts)=
 # Alerts
 
-
 Methods for retrieving or editing alerts for an account.
 
 ## AlertTagAssociationMethod
@@ -59,7 +58,7 @@ The following errors may be raised:
 - `UnknownAlertTypeError`: No alert with the specified name exists.
 - `UnknownTag`: No tag with the specified name exists.
 - `InvalidParameterCombination`: Some tags were specified and a ‘true’ value for ‘all_computers’ was passed.
-- `InvalidAlertTypeError`: Raised when trying to discassociate tags with an alert with account scope instead of computer scope.
+- `InvalidAlertTypeError`: Raised when trying to disassociate tags with an alert with account scope instead of computer scope.
 
 The state of the alert will be returned.
 
@@ -75,20 +74,9 @@ Example of a valid request:
 ?action=GetAlertSubscribers&alert_type=ComputerOfflineAlert
 ```
 
-The method returns a JSON serialized list of the alert subscribers:
+Example response:
 
-```text
-[{u'email': u'person1@example.com',
-  u'name': u'Person',
-  u'id': 1},
- {u'email': u'person2@example.com',
-  u'name': u'Person',
-  u'id': 2}]
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 [
     {
         "email": "person1@example.com",
@@ -117,24 +105,9 @@ Example of a valid request:
 ?action=GetAlerts
 ```
 
-The method returns a JSON serialised list of the alerts:
+Example response:
 
-```text
-[{u'alert_type': u'PackageReporterAlert',
-  u'all_computers': True,
-  u'description': u'Alert when package reporting fails',
-  u'scope': u'computer',
-  u'status': u'OK',
-  u'subscribed': u'Yes',
-  u'tags': [u'file-server',
-            u'web-server',
-            u'desktop',
-            u'laptop']},]
-```
-
-The JSON equivalent of this output is:
-
-```text
+```json
 [
     {
         "alert_type": "PackageReporterAlert",
@@ -184,4 +157,3 @@ Example of a valid request:
 The following errors may be raised:
 
 - `UnknownAlertTypeError`: If an unknown `alert_type` is passed.
-

@@ -22,7 +22,7 @@ For example, the following request creates a saved search associated with the ac
 
 The method returns a JSON serialized version of the new saved search, like the following result:
 
-```text
+```json
 {
     "name": "first",
     "title": "First Computer",
@@ -48,7 +48,7 @@ For example, the following request edits the title of a saved search associated 
 
 The method returns a JSON serialized version of the new saved search, like the following result:
 
-```text
+```json
 {
     "name": "first",
     "title": "First Computer",
@@ -73,7 +73,7 @@ For example, the following request looks for saved searches associated with the 
 
 The method returns a JSON serialized list of saved searches, like the following result:
 
-```text
+```json
 [
     {
         "name": "first",
@@ -96,4 +96,3 @@ For example, the following request removes a saved search associated with the ac
 ```text
 ?action=RemoveSavedSearch&name=name1
 ```
-

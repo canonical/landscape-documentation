@@ -4,21 +4,21 @@
 The methods available here are for managing Windows Subsystem for Linux (WSL) clients registered with Landscape.
 
 ```{note}
-These API methods only apply to Landscape Beta at this time.
+WSL features are available starting in Landscape 25.10.
 ```
 
 To enable WSL features in self-hosted Landscape, add:
 
-```bash
+```ini
 [features]
-enable-wsl-child-instance-profiles = true
+wsl_management = true
 ```
 
 to the `service.conf` file.
 
 ## CreateChildComputer
 
-Create child computer instances on a parent host machine. 
+Create child computer instances on a parent host machine.
 
 Required arguments:
 
@@ -28,18 +28,8 @@ Required arguments:
 Optional arguments:
 
 - `cloud_init`: The b64 encoded cloud-init file contents.
-- `data_id`: The name of the vault secret containing the cloud-init file.
-- `token`: The authentication token to be passed to the secrets manager.
 
-If `cloud_init` or `data_id` is provided, the new instance will be created according to the cloud-init file specified or the file stored with the specified vault secret. 
-
-```{note}
-Cloud-init configuration isn't supported yet by Ubuntu Pro for Windows. This feature is planned in a future beta release.
-```
-
-```{note}
-Specifying both a cloud-init file and a vault secret will result in an error.
-```
+If `cloud_init` is provided, the new instance will be created according to the cloud-init file specified.
 
 Example calls:
 
@@ -51,13 +41,9 @@ Example calls:
 ?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&cloud_init=<b64 encoded cloud_init file>
 ```
 
-```bash
-?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&data_id=data-id&token=vault-token
-```
+Example response:
 
-Example output:
-
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -98,7 +84,7 @@ Example calls:
 
 Example outputs:
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -118,7 +104,7 @@ Example outputs:
 }
 ```
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -174,7 +160,7 @@ Example calls:
 
 Example outputs:
 
-```bash
+```json
 [
     {
         "access_group": "server",
@@ -188,7 +174,6 @@ Example outputs:
         "last_exchange_time": null,
         "last_ping_time": "2023-10-25T18:45:37Z",
         "reboot_required_flag": false,
-        "secrets_name": null,
         "tags": [
             "laptop",
             "windows"
@@ -211,7 +196,6 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:21:43Z",
         "reboot_required_flag": false,
-        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
@@ -222,7 +206,7 @@ Example outputs:
 ]
 ```
 
-```bash
+```json
 [
     {
         "access_group": "desktop",
@@ -236,7 +220,6 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:22:30Z",
         "reboot_required_flag": false,
-        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
@@ -246,6 +229,7 @@ Example outputs:
     }
 ]
 ```
+
 (reference-legacy-api-wsl-set-default-child-computer)=
 ## SetDefaultChildComputer
 
@@ -262,9 +246,9 @@ Example call:
 ?action=SetDefaultChildComputer&parent_id=30&child_id=32
 ```
 
-Example output:
+Example response:
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -298,9 +282,9 @@ Example call:
 ?action=ShutdownHostComputer&parent_id=20
 ```
 
-Example output:
+Example response:
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -341,7 +325,7 @@ Example calls:
 
 Example outputs:
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -361,7 +345,7 @@ Example outputs:
 }
 ```
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -402,7 +386,7 @@ Example calls:
 
 Example outputs:
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -422,7 +406,7 @@ Example outputs:
 }
 ```
 
-```bash
+```json
 {
     "activity_status": "delivered",
     "completion_time": null,
@@ -441,4 +425,3 @@ Example outputs:
     "type": "ActivityGroup"
 }
 ```
-

@@ -57,4 +57,3 @@ That command will install `landscape-client` and pass the provided parameters af
 After successfully running `pro enable landscape`, either interactively or non-interactively, an administrator of your Landscape account will need to go to the "Pending Computers" page in Landscape to accept the machine you just registered.
 
 And that's it! The machine should now appear in the Landscape web portal for management.
-

@@ -2,6 +2,7 @@
 # 14.10 release notes
 
 ## Major changes from previous stable release
+
  * OpenStack Autopilot Beta
  * Juju integration
  * Throttled package updates
@@ -26,6 +27,7 @@ This section describes the changes and new features in more detail.
 
 ## LDS 14.10.1
 This is a maintenance point release that only has changes for the !OpenStack Autopilot:
+
  * should a cloud deployment fail, Landscape will automatically collect the necessary logs and allow the administrator to optionally file a bug about it
  * the connection limit for the MySQL service used by !OpenStack has been raised to allow for bigger cloud deployments
 
@@ -46,6 +48,7 @@ Starting with LDS 14.10, a demonstration license for 10 full seats plus 10 virtu
 
 ## Public package repository
 LDS 14.10 is also available through a public package repository. To install the repository, run these commands:
+
 ```
     sudo add-apt-repository ppa:landscape/14.10
     sudo apt-get update
@@ -63,6 +66,7 @@ MAAS provisioning has been changed and is now available only as part of the Open
 
 ## API incompatibilities
 Some API incompatibilities are being introduced in this release of LDS:
+
  * UnknownAccessGroupsError was changed to UnknownAccessGroupError (plural to singular)
  * New field `access_group` in pending computers API call
  * Call to register a new MAAS controller is now RegisterMAASRegionController
@@ -80,6 +84,7 @@ Some database schema changes required by LDS 14.10 might take a while to run dep
 If you used the `landscape-server-quickstart` package to install LDS 13.09.X, then you can use this method to upgrade it.
 
 Select new version of LDS in your hosted account at https://landscape.canonical.com and then run:
+
 ```
 sudo apt-get update
 sudo apt-get dist-upgrade
@@ -89,17 +94,21 @@ When prompted, reply with `N `to any dpkg questions about configuration files so
 
 ## Non-quickstart upgrade
 Follow these steps to perform a non-quickstart upgrade, that is, you did not use the `landscape-server-quickstart` package when installing LDS 13.09.X:
+
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service
  * on the database server, edit `/etc/postgresql/<version>/main/postgresql.conf` (replace `<version>` with your postgresql version) and set `max_prepared_transactions` to the same value as `max_connections`. Then restart the database services with `sudo postgresql restart`.
  * edit `/etc/landscape/service.conf` on all machines except the database and remove `store_user` and `store_password` from the `[maintenance]` section
  * select the new version of LDS in your hosted account at https://landscape.canonical.com. Alternatively, you can just add the LDS 14.10 PPA directly instead with `sudo add-apt-repository ppa:landscape/14.10`.
  * update the LDS packages via `sudo apt-get update && sudo apt-get dist-upgrade`. '''Important:''' reply with N to any dpkg questions regarding configuration files, so the original file is kept in place.
  * if `UPGRADE_SCHEMA` was disabled in `/etc/default/landscape-server`, services will fail to start after the packages are upgraded. That's normal. Run the schema upgrade command manually now '''on one machine only''':
+
 ```
   sudo setup-landscape-server
   sudo lsctl start
 ```
+
  * start the landscape services on the remaining machines:
+
 ```
   sudo lsctl start
 ```

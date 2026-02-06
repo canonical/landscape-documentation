@@ -18,7 +18,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/repository/apt-source?ids=100,101" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {

@@ -39,4 +39,3 @@ To manage snaps on a specific computer:
   - Note: “Holding” a snap prevents the snap from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually refresh (upgrade) the snap.
 - Specify the delivery information located after the table
 - Click **Apply changes**
-

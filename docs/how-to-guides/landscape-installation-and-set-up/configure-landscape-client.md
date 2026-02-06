@@ -3,7 +3,7 @@
 
 > See also: {ref}`how-to-install-landscape-client`
 
-This guide describes how to configure the Landscape Client Debian package in multiple ways. 
+This guide describes how to configure the Landscape Client Debian package in multiple ways.
 
 If you're using the snap instead of the Debian package, see {ref}`how-to-configure-the-client-snap`.
 
@@ -31,7 +31,7 @@ man landscape-config
 
 ## Update the `client.conf` file
 
-See the Landscape Client GitHub project for an [example `client.conf` file](https://github.com/canonical/landscape-client/blob/main/example.conf). This file contains all the existing configuration options available. 
+See the Landscape Client GitHub project for an [example `client.conf` file](https://github.com/canonical/landscape-client/blob/main/example.conf). This file contains all the existing configuration options available.
 
 The Landscape Client configuration file is located in `/etc/landscape/client.conf` for the Debian package. If you change any configurations in this file, you’ll need to restart Landscape Client:
 
@@ -51,11 +51,8 @@ You can automatically register new Landscape Client computers when they’re con
 To use this feature in the Landscape web portal:
 
 1. Navigate to your **Account** tab
-
 2. If the **Registration key** field is blank, set a new registration key. You can set the registration key to be whatever you want, but trailing spaces, semi-colon (**;**) or hash (**#**) characters are not allowed.
-
 3. Select **Auto register new computers** if it’s not already selected. Clearing this checkbox will disable the auto-registration feature.
-
 4. Click **Save**
 
 When this feature is enabled, new computers must be enrolled using the key that’s defined in the **Registration key** field. You can’t auto-register new computers if there is no registration key provided.
@@ -69,7 +66,7 @@ sudo landscape-config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={
 (howto-heading-repository-configuration-enforcement)=
 ## Control repository configurations
 
-By default, when a repository profile is applied to a machine, Landscape enforces the exact `/etc/apt/sources.list` configuration as defined in the profile. This configuration is applied once when the profile is applied, and is not revalidated or enforced on an ongoing basis. 
+By default, when a repository profile is applied to a machine, Landscape enforces the exact `/etc/apt/sources.list` configuration as defined in the profile. This configuration is applied once when the profile is applied, and is not revalidated or enforced on an ongoing basis.
 
 If you do not want to move all the repository configurations in `/etc/apt/sources.list.d` to a backup and replace it with what you have defined in Landscape, you can configure Landscape Client to modify `/etc/apt/sources.list`. This is achieved by setting the `manage_sources_list_d` configuration in `/etc/landscape/client.conf` to false.
 
@@ -87,7 +84,6 @@ sudo service landscape-client restart
 
 (howto-heading-client-enable-script-execution)=
 ## Enable script execution
-
 
 > See also: [Landscape's scripts repository on GitHub](https://github.com/canonical/landscape-scripts)
 
@@ -113,6 +109,7 @@ After you’ve enabled script execution using one of these options, the system u
 ```bash
 sudo service landscape-client restart
 ```
+
 Setting `script_users = ALL` (or passing `ALL` to the `--script-users` parameter of `landscape-config`) will allow any system user to run scripts. If `script_users` is not set, then scripts can only be run by the `nobody` user.
 
 ### Use a custom working directory
@@ -152,7 +149,8 @@ sudo chmod 777 <CUSTOM_TEMPDIR>
 If you want to manage `landscape-client` through a configuration management tool such as Puppet or Ansible, you can avoid getting duplicate computers by writing the `/etc/landscape/client.conf` and `/etc/default/landscape-client` files, and then restarting the `landscape-client` service.
 
 In `/etc/landscape/client.conf`:
-```
+
+```ini
 [client]
 log_level = info 
 url = https://landscape.canonical.com/message-system
@@ -164,10 +162,13 @@ account_name = myaccount
 include_manager_plugins = ScriptExecution
 script_users = root,landscape,nobody
 ```
+
 In `/etc/default/landscape-client`:
-```
+
+```bash
 RUN=1
 ```
+
 The advantage over calling `landscape-config` is that this will request a registration only if the client is not already registered against `landscape-server`. Be aware that some configuration options (namely `computer_title`, `tags`, `access_group`) are only sent to `landscape-server` on registration.
 
 ## Log rotation
@@ -181,6 +182,5 @@ Log rotation is automatically done through the system’s daily cron jobs, speci
 To manually trigger log rotation, run:
 
 ```bash
-$ logrotate --force /etc/logrotate.d/landscape-client
+logrotate --force /etc/logrotate.d/landscape-client
 ```
-

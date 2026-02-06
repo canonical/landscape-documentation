@@ -3,14 +3,14 @@
 # Child Instance Profiles
 
 ```{note}
-Child Instance Profiles are in beta testing. The API endpoints below may not be available to all accounts.
+Child Instance Profiles are available starting in Landscape 25.10.
 ```
 
 To enable WSL features in self-hosted Landscape, add:
 
 ```ini
 [features]
-enable-wsl-child-instance-profiles = true
+wsl_management = true
 ```
 
 to the `service.conf` file.
@@ -82,7 +82,6 @@ Example response:
         "image_name": "Ubuntu-24.04",
         "image_source": null,
         "cloud_init_contents": null,
-        "cloud_init_secret_name": null,
         "tags": [
             "windows_desktops",
             "windows_laptops"
@@ -142,7 +141,6 @@ Example response:
     "image_name": "Ubuntu-24.04",
     "image_source": null,
     "cloud_init_contents": "********",
-    "cloud_init_secret_name": null,
     "tags": [
         "windows_desktops",
         "windows_laptops"
@@ -207,7 +205,6 @@ Example response:
   "image_name": "Ubuntu-24.04",
   "image_source": null,
   "cloud_init_contents": null,
-  "cloud_init_secret_name": null,
   "tags": [
     "windows_desktops",
     "windows_laptops"
@@ -255,7 +252,6 @@ Example response:
   "image_name": "Ubuntu-24.04",
   "image_source": null,
   "cloud_init_contents": null,
-  "cloud_init_secret_name": null,
   "tags": [
     "windows_laptops"
   ],

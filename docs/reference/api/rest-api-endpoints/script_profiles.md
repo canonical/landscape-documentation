@@ -299,8 +299,9 @@ curl -X PATCH "https://landscape.canonical.com/api/v2/script-profiles/176892" -H
   "username": "landscape",
   "time_limit": 270,
   "tags": ["server"],
-  "all_computers": false'
-}
+  "all_computers": false
+}'
+
 ```
 
 Example response:

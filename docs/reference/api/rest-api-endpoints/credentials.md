@@ -14,12 +14,14 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X GET "https://landscape.canonical.com/api/v2/credentials" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "credentials": [
     {
@@ -40,7 +42,6 @@ Example output:
     }
   ]
 }
-
 ```
 
 ## POST `/credentials`
@@ -56,12 +57,14 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/credentials" -H "Authorization: Bearer $JWT" -d '{"account": "onward"}'
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "access_key": "DZ6FA1GT9HHHHHHHJA4Q4",
   "account_name": "onward",
@@ -70,6 +73,4 @@ Example output:
   "exports": "export LANDSCAPE_API_URI='https://landscape.canonical.com/api/'\nexport LANDSCAPE_API_KEY='DZ6FA1GTTTTTTTTTNYJA4Q4'\nexport LANDSCAPE_API_SECRET='tBXlssS1AuQ/2ZSj3P22222222222222WdHIaX2Vrd'",
   "secret_key": "tBXlssS1AuQ/2ZSj3PdGgI222222222222uwWdHIaX2Vrd"
 }
-
 ```
-

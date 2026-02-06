@@ -1,7 +1,6 @@
 (reference-legacy-api-event-log)=
 # Event Log
 
-
 Methods for retrieving or exporting an account’s Event Log
 
 ## GetEventLog
@@ -20,7 +19,7 @@ For example, the following returns the last 7 days for event log entries in the 
 
 The method returns a JSON representation of the log entries returned:
 
-```text
+```json
 [
     {
         "creation_time": "2014-09-16T18: 37: 45Z",
@@ -35,4 +34,3 @@ The method returns a JSON representation of the log entries returned:
     "..."
 ]
 ```
-

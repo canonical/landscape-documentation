@@ -14,17 +14,19 @@ Query parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X GET -I  -H "Authorization: Bearer $JWT" https://landscape.canonical.com/api/v2/person
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "allowable_emails": [
-	"john@example.com",
-	"klee123@yahoo.com",
-	"klee123@hotmail.com"
+  "john@example.com",
+  "klee123@yahoo.com",
+  "klee123@hotmail.com"
   ],
   "name": "John Smith",
   "email": "john@example.com",
@@ -52,19 +54,21 @@ Optional parameters:
 - `preferred_account`
 
 Example request:
+
 ```bash
-curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
-	"name": "John Allen Smith"
+curl -X POST -H "Authorization: Bearer $JWT"   -d '{
+  "name": "John Allen Smith"
   }'   https://landscape.canonical.com/api/v2/person
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "allowable_emails": [
-	"john@example.com",
-	"klee123@yahoo.com",
-	"klee123@hotmail.com"
+  "john@example.com",
+  "klee123@yahoo.com",
+  "klee123@hotmail.com"
   ],
   "name": "John Allen Smith",
   "email": "john@example.com",
@@ -75,4 +79,3 @@ Example output:
   "preferred_account": null
 }
 ```
-
