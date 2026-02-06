@@ -17,26 +17,28 @@ Optional parameters:
 - `deliver_after_window`
 
 Example request:
+
 ```bash
 curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
-	"action": "install",
-	"computer_ids": [23],
-	"snaps": [
-    	{"name": "hello"},
-    	{"name": "spotify"}
-	]
+  "action": "install",
+  "computer_ids": [23],
+  "snaps": [
+      {"name": "hello"},
+      {"name": "spotify"}
+  ]
   }'   https://landscape.canonical.com/api/v2/snaps
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "id": 214,
   "creation_time": "2024-04-10T23:29:25Z",
   "creator": {
-	"name": "John Allen Smith",
-	"email": "john@example.com",
-	"id": 1
+    "name": "John Allen Smith",
+    "email": "john@example.com",
+    "id": 1
   },
   "type": "ActivityGroup",
   "summary": "Install snaps on computer",
@@ -48,4 +50,3 @@ Example output:
   "activity_status": "undelivered"
 }
 ```
-

@@ -34,5 +34,5 @@ Here’s a summary of the different license types in Landscape and what they ind
 - **LDS:** License for a physical machine using self-hosted Landscape (self-hosted equivalent for Full)
 - **LDS-Virtual:** License for a VM or container for Landscape self-hosted (self-hosted equivalent for Virtual)
 - **Pro:** License for any client machine that's attached to Ubuntu Pro under an active contract (Physical or Virtual)
-    * These don't require the `license.txt` file to be installed or have available seats on the Landscape server
-    * Requires `landscape-client` 23.x or higher to report the Pro attachment information to the Landscape server
+  - These don't require the `license.txt` file to be installed or have available seats on the Landscape server
+  - Requires `landscape-client` 23.x or higher to report the Pro attachment information to the Landscape server

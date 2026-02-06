@@ -2,6 +2,7 @@
 # 15.01 release notes
 
 ## Major changes from previous stable release
+
  * less machines required for !AutoPilot cloud deployments
  * syslog support
  * audit logs replaced by event logs
@@ -28,6 +29,7 @@ LDS 15.01 introduces a new deployment layout where we require less machines to d
 LDS 15.01 now uses rsyslog for its logging. A new configuration file is installed as `/etc/rsyslog.d/20-landscape.conf` which directs all Landscape logging to `/var/log/landscape-server/`. Logging from multiple processes of the same kind is aggregated into one file only. For example, if you have 4 message servers, instead of having one log file for each process, all will log to the same `message-server.log` file.
 
 Landscape can also be instructed to log to another machine. To do that, just change the `syslog-address` line in `/etc/landscape/service.conf` to point at the server and port where you have a syslog-compatible server running. For example:
+
 ```text
     [global]
     oops-path # /var/lib/landscape/landscape-oops
@@ -36,6 +38,7 @@ Landscape can also be instructed to log to another machine. To do that, just cha
 
 ### Logging format changes
 The logging format changed quite significantly. If you have scripts that parse the Landscape logs, they will need fixing. Here is what changed:
+
  * new log files
  * filename changes
  * format change
@@ -57,6 +60,7 @@ A new service is available with this release to speed up package related operati
 Package search significantly increases the speed by which Landscape processes package information, but at a cost: it will use roughly 0.5Gb of RSS RAM per thousand registered computers.
 
 If you have more than 800 registered computers and not enough RAM, you can disable package-search by changing the `account-threshold` value in the `[package-search]` section of `/etc/landscape/service.conf` to a higher value and restarting all services with `sudo lsctl restart`. For example:
+
 ```text
    [package-search]
    port # 9099
@@ -64,6 +68,7 @@ If you have more than 800 registered computers and not enough RAM, you can disab
    pid-path # /var/run/landscape/landscape-package-search-1.pid
    account-threshold # 100000
 ```
+
 That value of 100000 means that the `package-search` service will only kick into action when your account has more than 100k computers.
 
 
@@ -80,12 +85,14 @@ All existing audit log activities will be deleted during the upgrade to LDS 15.0
 If you used the `landscape-server-quickstart` package to install LDS 14.10.X then you can use this method to upgrade it.
 
 If you are a landscape.canonical.com customer, you can select new version of LDS in your hosted account at https://landscape.canonical.com and then run:
+
 ```text
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
 
 Alternatively, just add the LDS 15.01 PPA and run the same commands as above:
+
 ```text
     sudo add-apt-repository ppa:landscape/15.01
     sudo apt-get update
@@ -98,6 +105,7 @@ During quickstart upgrades, you will see a backtrace about a "bad interpolation"
 
 ## Non-quickstart upgrade
 Follow these steps to perform a non-quickstart upgrade, that is, you did not use the landscape-server-quickstart package when installing LDS 15.01: 
+
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service: `sudo lsctl stop`
  * on the database server, edit `/etc/postgresql/<version>/main/postgresql.conf` (replace `<version>` with your postgresql version) and set `max_prepared_transactions` to the same value as `max_connections` if it's not like that already. Then restart the database services with `sudo postgresql restart`.
  * edit `/etc/landscape/service.conf` on all machines except the database and perform these changes:
@@ -112,6 +120,7 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
   * Add this proxy pass rule to the https (*:443) virtual host '''only''' alongside the existing ones: `ProxyPass /offline !`
  * Restart apache with `sudo service apache2 restart`
  * Run this script on all machines except the database:
+
 ```text
     #!/bin/bash
     BASEDIR=/var/lib/landscape
@@ -121,8 +130,10 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
     done
     rm -rf $BASEDIR/landscape-mail-queue-*
 ```
+
  * grab the landscape user password for the rabbitmq-server from `/etc/landscape/service.conf`. It's in the `[broker]` section
  * run these commands on the machine where rabbitmq-server is running, usually your APP server. Replace `<password>` with the rabbitmq-server password for the landscape user grabbed above:
+
 ```text
     sudo rabbitmqctl stop_app
     sudo rabbitmqctl reset
@@ -131,15 +142,19 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
     sudo rabbitmqctl add_vhost landscape
     sudo rabbitmqctl set_permissions -p landscape landscape ".*" ".*" ".*"
 ```
+
  * add the LDS 15.01 PPA: `sudo add-apt-repository ppa:landscape/15.01`
  * refresh the apt database and upgrade: `sudo apt-get update && sudo apt-get dist-upgrade`
  * answer with "N" to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command:
+
 ```text
     sudo setup-landscape-server
 ```
+
  * after it succeeds, the Landscape services can be started:
+
 ```text
     sudo lsctl start
 ```

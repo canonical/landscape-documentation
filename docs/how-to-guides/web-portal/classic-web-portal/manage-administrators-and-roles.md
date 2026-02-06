@@ -11,7 +11,7 @@ This document describes how to manage additional administrators and roles.
 
 ## Invite administrators
 
-You can make someone an administrator by sending them an invitation via email. To invite an administrator: 
+You can make someone an administrator by sending them an invitation via email. To invite an administrator:
 
 1. Navigate to your organization's home page
 2. Click the **Administrators** tab
@@ -48,4 +48,3 @@ To add a role:
 When you add a role, you also specify a set of one or more access groups to which the role applies, and what permissions you want the role to have.
 
 By specifying different permission levels and different access groups, you can create roles and associate them with administrators to get a granular level of control over sets of computers.
-

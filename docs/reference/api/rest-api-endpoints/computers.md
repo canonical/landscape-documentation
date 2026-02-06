@@ -59,7 +59,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers?limit=1 -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -75,7 +75,6 @@ Example output:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-02-07T21:21:41Z",
       "tags": [
@@ -105,7 +104,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers?query=id:1%20OR%20id:2 -H "Authorization: Bearer $JWT" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -121,7 +120,6 @@ Example output:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-07-10T23:32:16Z",
       "tags": [
@@ -151,7 +149,6 @@ Example output:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-07-10T23:31:16Z",
       "tags": [
@@ -183,7 +180,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers/?query=profile:wsl:1:compliant&with_wsl_profiles=true -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -199,7 +196,6 @@ Example output:
       "reboot_required_flag": false,
       "update_manager_prompt": "normal",
       "clone_id": null,
-      "secrets_name": null,
       "last_exchange_time": null,
       "last_ping_time": "2024-02-07T21:16:41Z",
       "tags": [
@@ -224,7 +220,6 @@ Example output:
           "reboot_required_flag": false,
           "update_manager_prompt": "normal",
           "clone_id": null,
-          "secrets_name": null,
           "last_exchange_time": null,
           "last_ping_time": "2024-02-07T21:11:41Z",
           "tags": [
@@ -249,7 +244,6 @@ Example output:
           "reboot_required_flag": false,
           "update_manager_prompt": "normal",
           "clone_id": null,
-          "secrets_name": null,
           "last_exchange_time": null,
           "last_ping_time": "2024-02-07T21:10:41Z",
           "tags": [
@@ -368,7 +362,6 @@ Example response:
     },
   ],
   "reboot_required_flag": false,
-  "secrets_name": null,
   "tags": [
     "lucid",
     "server",
@@ -390,7 +383,7 @@ Example request:
 curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_grouped_hardware=true&with_annotations=true -H "Authorization: Bearer $JWT" 
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -404,7 +397,6 @@ Example output:
   "registered_at": "2024-07-10T22:22:16Z",
   "update_manager_prompt": "normal",
   "clone_id": null,
-  "secrets_name": null,
   "last_exchange_time": null,
   "last_ping_time": "2024-07-10T23:32:16Z",
   "tags": [
@@ -912,7 +904,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/23/packages?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -957,7 +949,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/22/processes?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1053,7 +1045,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/22/snaps/installed?limit=2" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1121,7 +1113,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/computers/1/usergroups/update_bulk" -H "Authorization: Bearer $JWT"  -d '{"action": "add", "usernames": ["john", "jane"], "groupnames": ["finance", "admin"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1162,7 +1154,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/ubuntu/groups" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1203,7 +1195,7 @@ Example request:
 curl -X GET "https://landscape.canonical.com/api/v2/computers/activities?limit=1&computer_ids=1" -H "Authorization: Bearer $JWT"
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1269,7 +1261,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/archive" -H "Authorization: Bearer $JWT" -d '{"computer_title": "test computer"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1306,7 +1298,7 @@ Example request:
 curl -X POST https://landscape.canonical.com/api/v2/computers/20/delete-children -H "Authorization: Bearer $JWT" -d '{"computer_names": ["Ubuntu-24.04", "Focal WSL"]}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {
@@ -1351,7 +1343,7 @@ Example request:
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" -H "Authorization: Bearer $JWT" -d '{"computer_title": "test computer"}'
 ```
 
-Example output:
+Example response:
 
 ```json
 {

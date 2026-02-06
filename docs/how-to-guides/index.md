@@ -30,7 +30,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 ## Backup and maintenance
 
 - {ref}`Backup and restore <how-to-backup-and-restore>`
-- {ref}`Manage maintenance tasks <how-to-manage-maintenance>`
+- {ref}`Manage maintenance cron jobs <how-to-manage-maintenance-cron-jobs>`
 
 (how-to-index-heading-ubuntu-pro)=
 ## Ubuntu Pro

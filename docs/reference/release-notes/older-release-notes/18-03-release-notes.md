@@ -42,6 +42,7 @@ sudo apt-get update
 sudo apt-get dist-upgrade
 ```
 
+
 Alternatively, just add
 the Landscape 18.03 PPA and run the same commands as above:
 
@@ -49,6 +50,7 @@ the Landscape 18.03 PPA and run the same commands as above:
 sudo add-apt-repository -u ppa:landscape/18.03
 sudo apt-get dist-upgrade
 ```
+
 
 When prompted, reply with \`N\` to any dpkg questions about configuration files so the existing files stay untouched. The quickstart package will make any needed modifications to your configuration files automatically.
 
@@ -65,21 +67,29 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
  * answer with `N` to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command:
+
 ```
 sudo setup-landscape-server
 ```
+
+
   After all these steps are completed, the Landscape services can be started:
+
 ```
 sudo lsctl restart
 ```
+
+
  * re-enable the landscape-server cron jobs in `/etc/cron.d/landscape-server` in all app servers
 
  * It is also recommended to disable TLSv1.0 as it is deprecated. Add the `-TLSv1` to the list of disabled protocols in the HTTPS vhost configuration like so:
+
 ```
 SSLProtocol all -TLSv1 -SSLv3 -SSLv2
 ```
 
 ## Charm upgrade
+
 Starting with Landscape 15.10, juju deployed Landscape can be upgraded
 in place.  If you have just one landscape server unit, please follow
 this procedure:
@@ -102,6 +112,7 @@ juju run-action landscape-server/0 migrate-schema
 juju run-action landscape-server/0 resume
 ```
 
+
 For multiple landscape-server units, you should pause all of them,
 upgrade one by one, run the migrate-schema command on only one, and
 then resume all units.
@@ -116,6 +127,7 @@ juju action fetch <uuid>
 # Juju 2.x:
 juju show-action-output --wait 0 <uuid>
 ```
+
 
 For example:
 
@@ -141,6 +153,7 @@ timing:
   started: 2018-03-24 04:27:47 +0000 UTC
 ```
 
+
 As an example of when it fails and what kind of output to expect, here
 we are trying to upgrade a unit that hasn't been paused before, other
 than command line structure, this has not changed in Juju 2.x:
@@ -162,6 +175,7 @@ timing:
 
 ## Ubuntu release upgrade
 
+
 You can take advantage of the fact that Landscape 18.03 supports both Ubuntu 16.04 LTS ("xenial") and Ubuntu 18.04 LTS ("bionic") to upgrade your Landscape deployment from "xenial" to "bionic". This section details the upgrade procedure depending on how you deployed Landscape.
 
 ### Release upgrade for quickstart deployments
@@ -170,49 +184,69 @@ Follow these steps in order:
 
  * Upgrade Landscape 17.03 to 18.03 while still on Ubuntu 16.04 LTS ("xenial") using the quickstart upgrade method.
  * Configure the release update manager to keep third-party repositories enabled by running this command:
+
 ```
 echo -e "[Sources]\nAllowThirdParty=yes" | sudo tee /etc/update-manager/release-upgrades.d/allow.cfg
 ```
+
  * Upgrade Ubuntu 16.04 LTS ("xenial") to Ubuntu 18.04 LTS ("bionic") using the `do-release-upgrade` tool. First try using the tool as is:
+
 ```
 sudo do-release-upgrade
 ```
+
+
 If it tells you that no new releases are available, try adding the `-d` parameter:
+
 ```
 sudo do-release-upgrade -d
 ```
+
 Pay close attention to its output: it should say that it is starting an upgrade to "bionic". Reboot after the upgrade is done.
 
  * Stop all Landscape services:
+
 ```
 sudo lsctl stop
 ```
+
  * Install the 10 postgresql packages:
+
 ```
 sudo apt install postgresql-10 postgresql-plpython-10 postgresql-contrib-10 postgresql-client-10 postgresql-10-debversion
 ```
+
+
 !!! Note:
     If you get a warning about `/etc/postgresql-common/createcluster.conf` while configuring `postgresql-common`, select to keep the local version.
 
  * Drop the newly created 10 cluster:
+
 ```
 sudo pg_dropcluster 10 main --stop
 ```
+
  * Upgrade the 9.5 cluster:
+
 ```
 sudo pg_upgradecluster 9.5 main
 ```
+
  * Start Landscape services:
+
 ```
 sudo lsctl start
 ```
+
  * Verify that Landscape is working correctly.
  * If you are happy with the upgrade results, the previous 9.5 cluster can be dropped:
+
 ```
 sudo pg_dropcluster 9.5 main
 ```
 
 ### Release upgrade for manual (non-quickstart) deployments
+
 The release upgrade process for the manual non-quickstart deployment is a bit more complicated and needs to be done in steps. A summary is shown in the table below, in the order the steps should happen:
 
 
@@ -228,61 +262,86 @@ Upgrade the APP server first:
 
  * Upgrade Landscape 17.03 to 18.03 in the APP server, still on Ubuntu 16.04 LTS ("xenial"), following the steps outlined in the non-quickstart upgrade section.
  * Configure the release update manager to keep third-party repositories enabled by running this command:
+
 ```
 echo -e "[Sources]\nAllowThirdParty=yes" | sudo tee /etc/update-manager/release-upgrades.d/allow.cfg
 ```
+
  * Upgrade Ubuntu 16.04 LTS ("xenial") to Ubuntu 18.04 LTS ("bionic") using the `do-release-upgrade` tool. First try using the tool as is:
+
 ```
 sudo do-release-upgrade
 ```
+
  * If it tells you that no new releases are available, try adding the `-d` parameter:
+
 ```
 sudo do-release-upgrade -d
 ```
+
+
 !!! Note:
     Pay close attention to its output: it should say that it is starting an upgrade to "bionic".
 
  * Reboot after the upgrade is done:
+
 ```
 sudo reboot
 ```
+
  * Stop all Landscape services:
+
 ```
 sudo lsctl stop
 ```
+
+
 Now we will upgrade the database server:
 
  * While still on postgresql 9.5, upgrade the server from Ubuntu 16.04 LTS ("bionic") to Ubuntu 18.04 LTS ("bionic") using the `do-release-upgrade` tool just like before.
  * Install the 10 postgresql packages:
+
 ```
 sudo apt install postgresql-10 postgresql-plpython-10 postgresql-contrib-10 postgresql-client-10 postgresql-10-debversion
 ```
+
+
 !!! Note:
     If you get a warning about `/etc/postgresql-common/createcluster.conf` while configuring `postgresql-common`, select to keep the local version.
 
  * Drop the newly created 10 cluster:
+
 ```
 sudo pg_dropcluster 10 main --stop
 ```
+
  * Upgrade the 9.5 cluster:
+
 ```
 sudo pg_upgradecluster 9.5 main
 ```
+
  * If the `UPGRADE_SCHEMA` is set to `no` in `/etc/default/landscape-server` run the setup script manually to perform the database schema upgrade:
+
 ```
 sudo setup-landscape-server
 ```
+
  * Start the Landscape services:
+
 ```
 sudo lsctl start
 ```
+
  * Verify that Landscape is working correctly.
  * If you are happy with the upgrade results, the previous 9.5 cluster can be dropped:
+
 ```
 sudo pg_dropcluster 9.5 main
 ```
 
 ### Release upgrade for juju deployments
+
 Upgrading the Ubuntu release of servers within a juju deployment is not supported at this time.
 
 
@@ -317,6 +376,7 @@ This section describes some relevant known issues that might affect your usage o
     sudo lsctl start
     # update /etc/fstab regarding the new mount point, to avoid surprises after a reboot
 ```
+
 
  * Also due to the `chown` command run during postinst explained above, the upgrade can take a long time if the repository files are mounted somewhere `/var/lib/landscape`, depending on the size of the repository. On an experiment with two machines on the same gigabit switch and a 150Gb repository mounted via NFS, a test upgrade spent about 30min just in that `chown` command. While that happens, the service is down. Until a fix is explicitly mentioned in the release notes, we suggest the same workaround as for the previous case: mount the repository outside of the `/var/lib/landscape/` tree.
 

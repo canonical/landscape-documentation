@@ -2,12 +2,14 @@
 # Landscape installation and set-up
 
 There are multiple different ways to install and configure Landscape.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
 
 Cloud Providers <cloud-providers/index.md>
 Quickstart installation <quickstart-installation>
+SaaS account <create-saas-account>
 Manual installation <manual-installation>
 Juju installation <juju-installation>
 Juju HA installation <juju-ha-installation>

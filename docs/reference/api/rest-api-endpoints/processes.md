@@ -16,26 +16,28 @@ Optional parameters:
 - None
 
 Example request:
+
 ```bash
 curl -X POST \
   -H "Authorization: Bearer $JWT" \
   -d '{
-	"computer_id": 1,
-	"pids": [1]
+  "computer_id": 1,
+  "pids": [1]
   }' \
   https://landscape.canonical.com/api/v2/processes/kill
 
 ```
 
-Example output:
-```bash
+Example response:
+
+```json
 {
   "id": 204,
   "creation_time": "2024-04-10T23:13:38Z",
   "creator": {
-	"name": "John Allen Smith",
-	"email": "john@example.com",
-	"id": 1
+    "name": "John Allen Smith",
+    "email": "john@example.com",
+    "id": 1
   },
   "type": "ActivityGroup",
   "summary": "Signal process init (PID 1) with KILL",
@@ -47,4 +49,3 @@ Example output:
   "activity_status": "undelivered"
 }
 ```
-

@@ -20,7 +20,7 @@ For example, the following command creates a removal profile titled “New Profi
 
 The method returns a JSON representation of the created removal profile:
 
-```text
+```json
 {
     "id": 1,
     "name": "new-profile",
@@ -33,7 +33,7 @@ The method returns a JSON representation of the created removal profile:
 The following errors may be raised:
 
 `UnknownAccessGroup`: The given access group is not known.
-`Unauthorised`: The person is not authorised to create removal profiles in the given access group.
+`Unauthorised`: The person is not authorized to create removal profiles in the given access group.
 `InvalidDaysWithoutExchangeValue`: The days_without_exchange value is less than 1.
 
 ## RemoveRemovalProfile
@@ -66,7 +66,7 @@ For example, the following request lists all removal profiles:
 
 The method returns a JSON serialized representation of the list:
 
-```text
+```json
 [
     {
         "id": 1,
@@ -104,7 +104,7 @@ For example, the following modifies the example profile in documented in CreateR
 
 The method returns a JSON serialized representation of the modified object:
 
-```text
+```json
 {
     "id": 1,
     "name": "newprofile",
@@ -117,7 +117,7 @@ The method returns a JSON serialized representation of the modified object:
 The following errors may be raised:
 
 `UnknownRemovalProfile`: A profile with the specified name could not be found.
-`Unauthorised`: The person is not authorised to edit removal profiles in the associated access group.
+`Unauthorised`: The person is not authorized to edit removal profiles in the associated access group.
 `InvalidDaysWithoutExchangeValue`: The `days_without_exchange` value is less than 1.
 
 ## AssociateRemovalProfile
@@ -130,7 +130,7 @@ Arguments:
 - `tags.#`: A list of tag names to associate to the profile.
 - `all_computers`: true if the profile should be associated to all computers. This parameter is optional and defaults to false. Individual tags associated to the profile will remain, but they will only be effective if the `all_computers` flag is later disabled.
 
-`tags.#` and `all_computers=true` are mutually exclusive.
+The `tags.#` and `all_computers=true` arguments are mutually exclusive.
 
 Example of a valid request:
 
@@ -146,7 +146,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the profile status:
 
-```text
+```json
 {
     "name": "test-1",
     "id": 178,
@@ -171,7 +171,7 @@ Arguments:
 - `tags.#`: A list of tag names to disassociate from the profile.
 - `all_computers`: if true, the profile will only remain enabled for computers with tags associated to the profile. This parameter is optional and defaults to false.
 
-`tags.#` and `all_computers=true` are mutually exclusive.
+The `tags.#` and `all_computers=true` arguments are mutually exclusive.
 
 Example of a valid request:
 
@@ -187,7 +187,7 @@ The following errors may be raised:
 
 The method returns JSON serialized info of the profile status:
 
-```text
+```json
 {
     "name": "test-1",
     "id": 178,
@@ -199,4 +199,3 @@ The method returns JSON serialized info of the profile status:
     "all_computers": false
 }
 ```
-

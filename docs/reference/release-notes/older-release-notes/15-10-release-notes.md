@@ -2,6 +2,7 @@
 # 15.10 release notes
 
 ## Highlights
+
  * Autopilot only supported on MAAS 1.8.X only
  * New charm to deploy Landscape
  * Juju deployed Landscape can be upgraded to future versions
@@ -16,6 +17,7 @@ This section describes the changes and new features in more detail.
 
 ## Machine requirement for Autopilot
 In addition to one machine for MAAS and another one for LDS, an Autopilot cloud deployment requires:
+
  * non-HA cloud: 3 machines
  * HA cloud: 6 machines
 
@@ -43,20 +45,25 @@ LDS 15.10 supports Ubuntu 14.04 LTS ("trusty"). It can only be upgraded from LDS
 If you used the landscape-server-quickstart package to install LDS 15.01.X then you can use this method to upgrade it.
 
 If you are a https://landscape.canonical.com customer, you can select new version of LDS in your hosted account at https://landscape.canonical.com and then run:
+
 ```text
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
 Alternatively, just add the LDS 15.10 PPA and run the same commands as above:
+
 ```text
     sudo add-apt-repository ppa:landscape/15.10
     sudo apt-get update
     sudo apt-get dist-upgrade
 ```
+
 When prompted, reply with N to any dpkg questions about configuration files so the existing files stay untouched. The quickstart package will make any needed modifications to your configuration files automatically. 
 
 ## Non-quickstart upgrade
 Follow these steps to perform a non-quickstart upgrade, that is, you did not use the landscape-server-quickstart package when installing LDS 15.01:
+
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service: `sudo lsctl stop`
  * edit the apache2 vhost file for landscape, usually `/etc/apache2/sites-enabled/landscape.conf` and change the `RewriteRule` lines for combo loader:
   ||from:||`RewriteRule ^/combo http://localhost:9070/ [P,L]`||
@@ -67,10 +74,13 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
  * answer with "N" to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command: 
+
 ```text
     sudo setup-landscape-server
 ```
+
   after it succeeds, the Landscape services can be started: 
+
 ```text
     sudo lsctl start
 ```

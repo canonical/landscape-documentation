@@ -11,7 +11,7 @@ This guide describes how to configure WSL-related services if you've upgraded fr
 
 Open the `service.conf` file located in the `/etc/landscape` directory and add:
 
-```bash
+```ini
 [broker]
 hostagent_virtual_host = landscape-hostagent
 hostagent_task_queue = landscape-server-hostagent-task-queue
@@ -28,7 +28,7 @@ enable-wsl-child-instance-profiles = true
 
 Open your Apache config (commonly located in `/etc/apache2/sites-available/{hostname}.conf`) and add the following at the end:
 
-```bash
+```apache
 Listen 6554
 
 <VirtualHost *:6554>
@@ -62,6 +62,7 @@ Then enable `proxy_http2`:
 ```bash
 sudo a2enmod proxy_http2
 ```
+
 You can see a full Apache config example with details in our {ref}`how to configure the web server <how-to-heading-manual-install-configure-web-server>` guide.
 
 ## Add a virtual host to RabbitMQ

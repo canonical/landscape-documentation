@@ -40,7 +40,7 @@ This code block includes the following values that must be changed:
 
 `{PRO_TOKEN}`: Your Ubuntu Pro token from [`https://ubuntu.com/pro/dashboard`](https://ubuntu.com/pro/dashboard). If you’re running an Ubuntu Pro instance on Azure, AWS, or Google Cloud, leave this as an empty string.
 
-`{HOST_NAME}`: The hostname from your FQDN. For example, `server` from `server.domain.com`. 
+`{HOST_NAME}`: The hostname from your FQDN. For example, `server` from `server.domain.com`.
 
 `{DOMAIN}`: The top-level domain (TLD) for your FQDN. For example, `domain.com` from `server.domain.com`.
 
@@ -110,22 +110,27 @@ lxc network set lxdbr0 bridge.mtu=$(ip link show $INTERFACE | awk '/mtu/ {print 
 It’s recommended to install Landscape on the latest Ubuntu LTS, but you can also use 20.04 if you require that version.
 ```
 
-You can configure ports 6554, 443 and 80 to allow for connections to the Landscape instance inside the LXD container. 
+You can configure ports 6554, 443 and 80 to allow for connections to the Landscape instance inside the LXD container.
 
 **Step 1:** Install Landscape Quickstart inside a LXD container using `cloud-init.yaml`, run:
+
  ```bash
 lxc launch ubuntu:24.04 landscape --config=user.user-data="$(cat cloud-init.yaml)" 
 ```
+
 **Step 2:** Capture the IP address of the "landscape" LXD container:
+
  ```bash
 LANDSCAPE_IP=$(lxc list landscape --format csv -c 4 | awk '{print $1}')
 ```
+
 **Step 3:** Configure port forwarding for Port 6554, 443, and 80:
-```text
+
+```bash
 for PORT in 6554 443 80; do lxc config device add landscape tcp${PORT}proxyv4 proxy listen=tcp:0.0.0.0:${PORT} connect=tcp:${LANDSCAPE_IP}:${PORT}; done
 ```
 
-Allowing TCP traffic on these ports in the host machine’s firewall settings and the network router  configuration or enterprise firewall configuration enables the Landscape Quickstart instance to be  accessible to the public Internet. This allows certbot to obtain a valid SSL certificate if a DNS record  exists with the FQDN pointing to your host machine’s public IP address. 
+Allowing TCP traffic on these ports in the host machine’s firewall settings and the network router  configuration or enterprise firewall configuration enables the Landscape Quickstart instance to be  accessible to the public Internet. This allows certbot to obtain a valid SSL certificate if a DNS record  exists with the FQDN pointing to your host machine’s public IP address.
 
 **Step 4:** To observe the progress, run:
 
@@ -135,7 +140,7 @@ lxc exec landscape -- bash -c "tail -f /var/log/cloud-init-output.log"
 
 When the cloud-init process is complete, you’ll receive two lines similar to this:
 
-```bash
+```text
 cloud-init v. 23.2.2-0ubuntu0~20.04.1 running 'modules:final' at Sun, 20 Aug 2023 17:30:43 +0000. 
 Up 25.14 seconds.
 cloud-init v. 23.2.2-0ubuntu0~20.04.1 finished at Sun, 20 Aug 2023 17:30:56 +0000. Datasource 
@@ -143,4 +148,3 @@ DataSourceGCELocal.  Up 37.35 seconds
 ```
 
 **Step 5:** Press `CTRL + C` to terminate the tail process in your terminal window.
-
