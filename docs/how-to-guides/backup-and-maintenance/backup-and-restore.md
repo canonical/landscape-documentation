@@ -12,7 +12,7 @@ It covers:
 
 It doesn't cover:
 
-- Juju deployments using [Charmed PostgreSQL](https://canonical-charmed-postgresql.readthedocs-hosted.com/14/), which was introduced in the [24.04 LTS release of the Landscape Server charm](https://charmhub.io/landscape-server). See [Charmed PostgreSQL's backup and restore documentation](https://canonical-charmed-postgresql.readthedocs-hosted.com/14/how-to/back-up-and-restore/create-a-backup/index.html) for information on backing up and restoring your charmed database.
+- Juju deployments using [Charmed PostgreSQL](https://canonical-charmed-postgresql.readthedocs-hosted.com/14/), which was introduced in the [24.04 LTS release of the Landscape Server charm](https://charmhub.io/landscape-server). See {ref}`the guide on backing up and restoring a charmed deployment <how-to-back-up-restore-tear-down-charmed-deployment>` and [Charmed PostgreSQL's backup and restore documentation](https://canonical-charmed-postgresql.readthedocs-hosted.com/14/how-to/back-up-and-restore/create-a-backup/index.html) for information on backing up and restoring your charmed database.
 - Backup of Landscape Clients
 - PostgreSQL tuning or general database administration beyond what's required for PITR
 
