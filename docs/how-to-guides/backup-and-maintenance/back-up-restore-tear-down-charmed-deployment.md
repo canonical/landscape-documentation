@@ -1,6 +1,6 @@
 (how-to-back-up-restore-tear-down-charmed-deployment)=
 
-# How to back up and restore a charmed deployment
+# How to backup and restore a charmed deployment
 
 This guide covers the complete process of backing up and restoring a Landscape deployment to a new Juju model using the Landscape Server charm and Charmed PostgreSQL. This guide uses Charmed PostgreSQL 14 because it is {ref}`compatible with the 24.04 LTS version of the Landscape Server charm <how-to-juju-installation>`.
 
@@ -51,7 +51,7 @@ For general backup and restore operations within an existing deployment, see [Ba
 
     If the service resumes during the process, connected clients may lose data.
 
-### Back up the databases
+### Backup the databases
 
 1. Create a backup directory on the PostgreSQL leader unit:
 
@@ -68,7 +68,7 @@ For general backup and restore operations within an existing deployment, see [Ba
 
     Replace `<operator-password>` with the password you recorded and `<postgres-ip>` with the PostgreSQL leader IP.
 
-1. Dump each database. This operation is performed for each database listed:
+1. Dump each database. Repeat this step for each database and each PostgreSQL unit in your deployment:
 
     ```sh
     for DB_NAME in \
@@ -106,11 +106,11 @@ For general backup and restore operations within an existing deployment, see [Ba
 
 1. Create a new Landscape model and deploy Landscape the same way you did originally. Keep the Juju configuration consistent with your backup. Start with a single PostgreSQL unit and scale later if needed.
 
-```{note}
-The `service.conf` file is generated automatically by the Landscape Server charm based on its configuration. The backup you created earlier is for reference only and the new deployment will have different passwords, endpoints, and database connection details. If your original deployment had custom settings in `service.conf`, you can add them to the new deployment using the [`additional_service_config`](https://charmhub.io/landscape-server/configurations#additional_service_config) charm configuration option.
-```
+    ```{note}
+    The `service.conf` file is generated automatically by the Landscape Server charm based on its configuration. The backup you created earlier is for reference only and the new deployment will have different passwords, endpoints, and database connection details. If your original deployment had custom settings in `service.conf`, you can add them to the new deployment using the [`additional_service_config`](https://charmhub.io/landscape-server/configurations#additional_service_config) charm configuration option.
+    ```
 
-1. Wait for the model to settle. All units should reach active status:
+1. Wait for the model to finish deploying. All units should reach active status:
 
     ```sh
     juju wait-for model <new-model-name> --timeout 3600s --query='forEach(units, unit => unit.workload-status == "active")'
@@ -167,7 +167,7 @@ The `service.conf` file is generated automatically by the Landscape Server charm
 
     Replace `<operator-password>` with the new password and `<postgres-ip>` with the new PostgreSQL leader IP.
 
-1. Restore each database. This operation is performed for each database listed:
+1. Restore each database. Repeat this step for each database and each PostgreSQL unit in your deployment:
 
     ```sh
     for DB_NAME in \
