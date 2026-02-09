@@ -26,7 +26,16 @@ Starting with revision xxx, the Landscape Server charm handles load balancing in
 
 Landscape Server is currently only distributed as a machine (VM) charm and cannot be directly integrated with any version of K8s Charmed Operators, such as the HAProxy K8s operator or the Charmed PostgreSQL K8s operator.
 
-<!--TODO: Add section on Ingress Configurator charm -->
+## Ingress Configurator charm
+
+The Ingress Configurator charm is used to integrate Landscape Server with external load balancers that are providers of the `haproxy-route` interface. To ensure correct traffic routing, the `external-grpc-port` option must be configured for the following services:
+
+- **Hostagent Messenger:** Requires `external-grpc-port` set to `6554`.
+- **Ubuntu Installer Attach:** Requires `external-grpc-port` set to `50051`.
+
+Defining these ports allows an external load balancer to correctly expose the relevant service endpoints via the `haproxy-route` relation and handle traffic routing for Landscape Server.
+
+- [Ingress Configurator on Charmhub](https://charmhub.io/ingress-configurator)
 
 ## HAProxy
 
