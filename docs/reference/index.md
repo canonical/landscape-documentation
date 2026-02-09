@@ -1,4 +1,5 @@
 (reference-index)=
+
 # Reference
 
 This section includes technical information you may need to reference when using Landscape.
@@ -17,3 +18,4 @@ terms/index
 database
 known-issues
 lsctl
+charm/index

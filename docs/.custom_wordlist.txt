@@ -47,6 +47,7 @@ ceph
 Certbot
 certbot
 centralized
+cfg
 Charmhub
 Charmhub's
 changelog
@@ -123,6 +124,7 @@ grpcio
 filesystem
 frontend
 HAProxy
+haproxy
 HashiCorp
 hardcoded
 HashiCorp’s
@@ -148,6 +150,7 @@ IoT
 Iot
 ip
 IPv
+Jinja
 jQuery
 Juju's
 Juju
@@ -186,6 +189,7 @@ LXD
 lxd
 MAAS
 maas
+maxconn
 Mailjet
 Makefile
 ManualInstallation
@@ -241,6 +245,7 @@ queueingQuickstartquickstart
 packagesearch
 PAYG
 PCI
+pem
 perf
 perfs
 performant
