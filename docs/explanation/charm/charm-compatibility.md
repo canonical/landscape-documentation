@@ -28,12 +28,13 @@ Landscape Server is currently only distributed as a machine (VM) charm and canno
 
 ## Ingress Configurator charm
 
-The Ingress Configurator charm is used to integrate Landscape Server with external load balancers that are providers of the `haproxy-route` interface. To ensure correct traffic routing, the `external-grpc-port` option must be configured for the following services:
+The Ingress Configurator charm is used to integrate Landscape Server with external load balancers that are providers of the `haproxy-route` interface. These integrations are optional. If you use them, configure the following services to ensure correct traffic routing:
 
 - **Hostagent Messenger:** Requires `external-grpc-port` set to `6554`.
 - **Ubuntu Installer Attach:** Requires `external-grpc-port` set to `50051`.
+- **HTTP ingress:** Uses HTTP traffic on port `80`. Configure the appropriate hostname and paths. Does not require `external-grpc-port`.
 
-Defining these ports allows an external load balancer to correctly expose the relevant service endpoints via the `haproxy-route` relation and handle traffic routing for Landscape Server.
+These settings allow an external load balancer to correctly expose the relevant service endpoints via the `haproxy-route` relation and handle traffic routing for Landscape Server.
 
 - [Ingress Configurator on Charmhub](https://charmhub.io/ingress-configurator)
 
