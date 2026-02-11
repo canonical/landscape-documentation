@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Manage repository mirrors from Landscape 24.04 LTS web portal. Configure Ubuntu repositories, generate GPG keys, and create profiles."
+---
+
 (how-to-manage-repos-web-portal)=
 # How to manage and mirror repositories from the web portal
 

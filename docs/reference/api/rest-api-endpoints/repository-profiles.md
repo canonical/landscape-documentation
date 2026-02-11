@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing repository profiles in Landscape. Create, read, update, and delete APT source profiles."
+---
+
 (reference-rest-api-repository-profiles)=
 # Repository Profiles
 

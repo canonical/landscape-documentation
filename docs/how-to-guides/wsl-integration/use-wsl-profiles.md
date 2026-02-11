@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Create and manage WSL profiles in Landscape. Provision instances with rootfs images, cloud-init, and enforce compliance settings."
+---
+
 (how-to-use-wsl-profiles)=
 
 # How to use WSL profiles

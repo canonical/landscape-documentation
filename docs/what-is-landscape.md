@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn what Landscape is, how it works, and what it does. Landscape is Canonical's systems management solution for Ubuntu."
+---
+
 (what-is-landscape)=
 # What is Landscape?
 

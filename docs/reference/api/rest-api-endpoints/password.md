@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to update user passwords in Landscape. Change password securely with current password verification."
+---
+
 (reference-rest-api-password)=
 # Password
 

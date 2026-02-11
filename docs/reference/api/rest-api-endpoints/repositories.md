@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for repository management in Landscape. Retrieve and configure APT sources for package distribution."
+---
+
 (reference-rest-api-repositories)=
 # Repositories
 

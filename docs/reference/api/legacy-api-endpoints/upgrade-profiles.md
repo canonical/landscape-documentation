@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for upgrade profile management. Legacy API endpoints to create, associate, and schedule automatic package upgrades for computers."
+---
+
 (reference-legacy-api-upgrade-profiles)=
 # Upgrade Profiles
 

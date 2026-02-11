@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Automate compliance audits and fixes with security profiles in Landscape 25.04+ using Ubuntu Security Guide (USG) benchmarks."
+---
+
 (how-to-web-portal-use-security-profiles)=
 # How to use security profiles
 

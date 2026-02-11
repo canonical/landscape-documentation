@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 24.10 (October 2024). Manage kernel versions, view Livepatch status, Okta login support, new REST API endpoints, and enhanced WSL management."
+---
+
 (reference-release-notes-24-10)=
 # 24.10 release notes
 

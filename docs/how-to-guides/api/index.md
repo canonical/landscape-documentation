@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to use Landscape APIs to automate system management. Access REST API and legacy API documentation for remote operations."
+---
+
 (how-to-guides-api-index)=
 # API
 

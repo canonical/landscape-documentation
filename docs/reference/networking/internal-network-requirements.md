@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Technical details on Landscape internal network requirements, port ranges, protocols, and communication between server components and clients."
+---
+
 (reference-internal-network-requirements)=
 # Internal network requirements
 

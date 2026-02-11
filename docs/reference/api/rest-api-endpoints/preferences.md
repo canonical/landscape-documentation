@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to manage account preferences in Landscape. Update audit retention, auto-registration, and organization settings."
+---
+
 (reference-rest-api-preferences)=
 # Preferences
 The endpoint(s) here are for account preferences.

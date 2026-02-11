@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Complete reference for Landscape profiles including package, reboot, removal, script, security, upgrade, and WSL profile types."
+---
+
 (reference-terms-profiles)=
 # Profiles
 

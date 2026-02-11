@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to retrieve and manage Landscape alerts. Monitor computer offline, duplicate, and security alerts for your account."
+---
+
 (reference-rest-api-alerts)=
 # Alerts
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Deploy Landscape Server with Juju for scalable infrastructure management. Learn to use the landscape-scalable bundle and access your self-hosted server."
+---
+
 (how-to-juju-installation)=
 # How to install Landscape Server with Juju
 

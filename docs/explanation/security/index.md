@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about security in Landscape including cryptographic technology, authentication, data handling, and security disclosure policies."
+---
+
 (explanation-security-index)=
 # Security
 

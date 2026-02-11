@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Automatically restart specific Landscape client instances on scheduled basis using reboot profiles in Landscape 25.04+ portal."
+---
+
 (how-to-web-portal-use-reboot-profiles)=
 # How to use reboot profiles
 

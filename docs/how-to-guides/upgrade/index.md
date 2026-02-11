@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Upgrade Landscape Server to latest versions. Follow upgrade procedures for self-hosted deployments from version 23.03 onwards."
+---
+
 (how-to-guides-upgrade-index)=
 # Upgrade
 

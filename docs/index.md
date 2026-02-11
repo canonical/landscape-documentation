@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Landscape documentation home. Comprehensive guides for Canonical's Ubuntu systems management solution for desktops, servers, and IoT."
+---
+
 ```{include} ../README.md
 
 ````

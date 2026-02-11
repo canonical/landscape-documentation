@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing script profiles in Landscape. Create, read, update, delete, and execute automated script profiles."
+---
+
 # Script Profiles
 
 The endpoints available here are related to the management of script profiles and are available only on self-hosted deployments.

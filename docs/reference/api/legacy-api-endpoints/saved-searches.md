@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for saved search management. Legacy API endpoints to create, edit, and retrieve saved search queries for your Landscape account."
+---
+
 (reference-legacy-api-saved-searches)=
 # Saved Searches
 

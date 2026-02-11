@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to retrieve user information in Landscape. Access name, email, timezone, and login history for current user."
+---
+
 (reference-rest-api-person)=
 # Person
 

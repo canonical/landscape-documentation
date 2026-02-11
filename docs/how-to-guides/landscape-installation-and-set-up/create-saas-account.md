@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Create a Landscape SaaS account with Ubuntu Pro. Sign up, attach your Pro subscription, and register your first client machines for cloud management."
+---
+
 (howto-create-saas-account)=
 # How to create a SaaS account and register your first client
 

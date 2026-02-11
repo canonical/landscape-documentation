@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Enable OpenID Connect authentication in Landscape. Integrate with Okta, Keycloak, Google, or Microsoft Entra ID identity providers."
+---
+
 (how-to-external-auth-oidc)=
 # How to enable OIDC authentication
 

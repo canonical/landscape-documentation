@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing computers in Landscape. Query, filter, and retrieve detailed information about registered systems and devices."
+---
+
 (reference-rest-api-computers)=
 
 # Computers

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Backup and restore Landscape charmed deployments using Juju and Charmed PostgreSQL. Migrate deployments to new infrastructure."
+---
+
 (how-to-back-up-restore-tear-down-charmed-deployment)=
 
 # How to backup and restore a charmed deployment

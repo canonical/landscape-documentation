@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure RabbitMQ timeout settings for Landscape Server on Ubuntu 22.04 and later. Increase or disable timeouts to prevent task failures during long operations."
+---
+
 (how-to-configure-rabbitmq)=
 # How to configure RabbitMQ for Jammy 22.04 (or later)
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Create tiered repository mirrors for multi-region and air-gapped deployments. Configure role-isolated or region-based mirror architectures."
+---
+
 (how-to-create-tiered-repo-mirrors)=
 # How to create tiered repository mirrors for multi-region and air-gapped deployments
 

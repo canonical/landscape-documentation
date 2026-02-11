@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how Landscape handles data in transit and at rest for SaaS and self-hosted deployments with TLS encryption and AES encryption."
+---
+
 (explanation-data-handling)=
 # Data handling
 

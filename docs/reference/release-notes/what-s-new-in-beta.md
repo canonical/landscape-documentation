@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Latest beta features and updates for Landscape. Discover upcoming capabilities and experimental features being tested before official release."
+---
+
 (reference-whats-new-in-beta)=
 # What's new in beta
 

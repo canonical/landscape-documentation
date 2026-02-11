@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install, refresh, remove, and hold snaps for managed computers using Landscape's 24.04+ portal Snaps tab."
+---
+
 (how-to-web-portal-manage-snaps)=
 # How to manage snaps
 

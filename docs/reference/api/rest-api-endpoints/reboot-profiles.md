@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing reboot profiles in Landscape. Create, update, delete, and schedule automated system reboots."
+---
+
 (reference-rest-api-reboot-profiles)=
 # Reboot Profiles
 
