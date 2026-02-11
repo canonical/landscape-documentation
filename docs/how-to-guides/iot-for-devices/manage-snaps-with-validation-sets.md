@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Control snap installations across IoT device fleets using validation sets in Landscape. Enforce snap environments and manage revisions."
+---
+
 (howto-manage-snaps-with-validation-sets)=
 # How to manage snaps in Landscape with validation sets
 

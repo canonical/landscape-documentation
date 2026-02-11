@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Complete a hands-on tutorial for Landscape. Install Server, configure it, register a client, and run scripts in about 45 minutes."
+---
+
 (getting-started-with-landscape)=
 # Getting started with Landscape
 

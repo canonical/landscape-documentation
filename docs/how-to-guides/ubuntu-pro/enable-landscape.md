@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Enable Landscape through Ubuntu Pro Client interactively or non-interactively. Register machines using pro enable landscape command."
+---
+
 (how-to-ubuntu-pro-enable-landscape)=
 # How to enable Landscape in the Ubuntu Pro Client
 

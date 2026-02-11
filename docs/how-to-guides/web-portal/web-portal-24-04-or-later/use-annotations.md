@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Use annotations in Landscape's 24.04+ portal to send custom metadata from clients, enabling device monitoring, grouping, and search."
+---
+
 (how-to-web-portal-use-annotations)=
 # How to use annotations
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Backup and restore Landscape Server using PostgreSQL PITR and WAL archiving. Configure continuous archiving for self-hosted deployments."
+---
+
 (how-to-backup-and-restore)=
 
 # How to backup and restore Landscape

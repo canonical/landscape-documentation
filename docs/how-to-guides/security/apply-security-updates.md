@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Apply security patches and kernel updates using Landscape. Schedule security upgrades with Livepatch for high and critical vulnerabilities."
+---
+
 (how-to-apply-security-updates)=
 # How to apply security patches and upgrades
 

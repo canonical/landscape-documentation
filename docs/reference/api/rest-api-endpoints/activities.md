@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to retrieve and monitor activities in Landscape. View activity history, creation time, and status for account operations."
+---
+
 (reference-rest-api-activities)=
 # Activities
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API reference for managing WSL instances in Landscape. Monitor, configure, and control Windows Subsystem for Linux environments."
+---
+
 (reference-rest-api-wsl)=
 
 # WSL

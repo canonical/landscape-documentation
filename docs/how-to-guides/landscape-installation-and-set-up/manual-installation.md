@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server manually with separate database and application servers. Complete guide for production deployments with PostgreSQL and Ubuntu Pro."
+---
+
 (how-to-manual-installation)=
 # How to install Landscape manually
 

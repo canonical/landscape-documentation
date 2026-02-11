@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Landscape licensing with Ubuntu Pro subscriptions and legacy license.txt methods for SaaS and self-hosted deployments."
+---
+
 (explanation-licenses)=
 # Landscape licenses
 

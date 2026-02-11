@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape log files for client and server services, including locations for broker, manager, API, message-server, and more."
+---
+
 (reference-logs)=
 # Logs
 

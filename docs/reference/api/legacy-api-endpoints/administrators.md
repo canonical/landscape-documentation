@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for administrator management. Legacy API endpoints to invite, list, and disable administrators in your Landscape account."
+---
+
 (reference-legacy-api-administrators)=
 # Administrators
 

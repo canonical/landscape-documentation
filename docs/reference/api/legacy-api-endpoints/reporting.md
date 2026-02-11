@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for reporting functionality. Legacy API endpoints to generate compliance reports and identify computers without upgrade profiles."
+---
+
 (reference-legacy-api-reporting)=
 # Reporting
 

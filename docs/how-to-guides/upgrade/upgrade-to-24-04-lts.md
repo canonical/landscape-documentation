@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Upgrade Landscape Server to 24.04 LTS from Ubuntu 22.04 or 24.04. Update service.conf and Apache configuration for new features."
+---
+
 (how-to-upgrade-to-24-04-lts)=
 # How to upgrade to Landscape Server 24.04 LTS
 

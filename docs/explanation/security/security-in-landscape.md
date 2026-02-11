@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about security in Landscape including deployment hardening, Ubuntu Pro integration, external authentication, and security updates management."
+---
+
 (explanation-security-overview)=
 # Security in Landscape
 

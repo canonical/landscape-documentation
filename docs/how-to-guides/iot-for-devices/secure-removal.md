@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Completely remove Landscape Client snap and all associated data from devices. Manage snap lifecycle, upgrades, and snapshots securely."
+---
+
 (how-to-guides-secure-removal-client-snap)=
 # How to completely remove the Landscape Client snap and its data
 

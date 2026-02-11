@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Contribute to Landscape documentation. Learn how to improve docs, give back to the community, and expand your technical skills."
+---
+
 (contribute-to-docs)=
 # Contribute to our documentation
 

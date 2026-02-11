@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Enable PAM authentication in Landscape for LDAP or Active Directory. Configure pluggable authentication modules for user login."
+---
+
 (how-to-external-auth-pam)=
 # How to enable PAM authentication
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for repository management. Legacy API endpoints to create, read, update, and delete distributions, series, and repository pockets."
+---
+
 (reference-legacy-api-repositories)=
 # Repositories
 

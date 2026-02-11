@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape access groups used to assign administrative rights to computers and organize management responsibilities."
+---
+
 (reference-terms-access-groups)=
 # Access groups
 

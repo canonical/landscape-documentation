@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for Landscape REST API and legacy API endpoints for programmatic management of systems and services."
+---
+
 (reference-api-index)=
 # API
 

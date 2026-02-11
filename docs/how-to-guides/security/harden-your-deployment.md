@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Harden Landscape deployment security with TLS certificates, network restrictions, secure client configurations, and mTLS. Configure secure services and access controls."
+---
+
 (how-to-harden-deployment)=
 # How to harden your Landscape deployment
 

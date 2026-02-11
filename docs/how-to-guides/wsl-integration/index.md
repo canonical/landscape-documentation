@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Manage Windows Subsystem for Linux instances with Landscape. Register WSL hosts, use profiles, and perform remote management tasks."
+---
+
 (how-to-guides-wsl-integration-index)=
 # WSL integration
 

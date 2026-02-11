@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Landscape Server charm for Juju deployments including integration compatibility with HAProxy, PostgreSQL, and RabbitMQ charms."
+---
+
 (explanation-charm-index)=
 
 # Landscape Server charm

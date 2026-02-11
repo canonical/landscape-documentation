@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure Landscape Client snap using wizard, parameters, or cloud-init. Set up SSL certificates and auto-register IoT devices."
+---
+
 (how-to-configure-the-client-snap)=
 # How to configure the snap
 

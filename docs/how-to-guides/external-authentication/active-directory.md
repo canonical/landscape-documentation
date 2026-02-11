@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Integrate Landscape with Microsoft Active Directory using PAM and SSSD. Configure domain authentication for self-hosted servers."
+---
+
 (how-to-external-auth-active-directory)=
 # How to authenticate with Active Directory
 

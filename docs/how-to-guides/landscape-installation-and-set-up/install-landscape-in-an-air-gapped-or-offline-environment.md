@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server in air-gapped or offline environments. Download packages from online machines and transfer them to isolated networks."
+---
+
 (how-to-install-airgapped)=
 # How to install Landscape in an air-gapped or offline environment
 

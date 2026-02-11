@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Landscape release notes from versions 14.10 through 19.10 (2014-2019). Historical documentation covering features, bug fixes, and upgrade instructions for older releases."
+---
+
 (reference-release-notes-older-release-notes-index)=
 # Older release notes
 

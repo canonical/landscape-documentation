@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Compare Landscape and Ansible for Ubuntu systems management and learn how to use them together for provisioning and ongoing administration."
+---
+
 # Related tools: Landscape and Ansible
 
 A common question for new users, especially those with a background in RHEL, is how Landscape and Ansible relate to each other. This page describes the relationship between Landscape and Ansible.

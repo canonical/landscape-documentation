@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for package management. Legacy API endpoints to query, search, and retrieve package information across managed computers."
+---
+
 (reference-legacy-api-packages)=
 # Packages
 

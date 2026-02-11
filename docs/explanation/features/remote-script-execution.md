@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand remote script execution in Landscape including how scripts are delivered, executed on clients, and results reported back to server."
+---
+
 (explanation-remote-script-execution)=
 # Remote script execution
 

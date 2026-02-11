@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore explanatory and conceptual guides for Landscape systems management platform including architecture, features, and security."
+---
+
 (explanation-index)=
 
 # Explanation

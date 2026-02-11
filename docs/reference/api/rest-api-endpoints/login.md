@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for authentication and login to Landscape. Obtain JWT tokens using email and password for API access."
+---
+
 (reference-rest-api-login)=
 # Login
 

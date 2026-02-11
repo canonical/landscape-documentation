@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for script management. Legacy API endpoints to create, retrieve, execute, and delete stored scripts on managed computers."
+---
+
 (reference-legacy-api-scripts)=
 # Scripts
 

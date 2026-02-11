@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Invite administrators, create roles, and manage permissions in Landscape's 24.04+ portal for granular access control."
+---
+
 (how-to-web-portal-manage-admins-and-roles)=
 # How to manage administrators and roles
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 17.03 (March 2017). Autopilot enhancements with Nova-LXD support, OpenStack Ocata deployment, MAAS 2.1 and Juju 2.1 compatibility."
+---
+
 (reference-release-notes-17-03)=
 # 17.03 release notes
 

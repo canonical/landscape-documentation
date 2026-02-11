@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 15.10 (October 2015). Introduces new Juju charm for deployment, high availability cloud support, OpenStack Kilo, and hardware expansion capability."
+---
+
 (reference-release-notes-15-10)=
 # 15.10 release notes
 

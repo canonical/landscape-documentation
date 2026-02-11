@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for package profile management. Legacy API endpoints to create, read, update, delete, and apply package constraint profiles."
+---
+
 (reference-legacy-api-package-profiles)=
 # Package Profiles
 

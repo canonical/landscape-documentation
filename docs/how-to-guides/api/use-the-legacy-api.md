@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Access Landscape legacy API through HTTPS, command line, or Python. Learn authentication methods and call endpoints programmatically."
+---
+
 (how-to-use-legacy-api)=
 # How to use the legacy API
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference guide for lsctl command line tool that manages Landscape systemd services including start, stop, enable, disable, and status."
+---
+
 (reference-lsctl)=
 # `lsctl`
 
