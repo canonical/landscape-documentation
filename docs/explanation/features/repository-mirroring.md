@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about repository mirroring in Landscape including mirror hierarchy, pockets, components, profiles, and custom package distribution."
+---
+
 (explanation-repo-mirroring)=
 # Repository mirroring
 

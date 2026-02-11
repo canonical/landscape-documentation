@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Execute scripts on triggers like post-enrollment, dates, or schedules using script profiles in Landscape 25.04+ portal."
+---
+
 (how-to-web-portal-use-script-profiles)=
 # How to use script profiles
 

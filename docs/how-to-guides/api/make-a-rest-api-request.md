@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Make REST API requests to Landscape 24.04 LTS using curl and JWT authentication. Learn login credentials and token management."
+---
+
 (how-to-rest-api-request)=
 # How to make a REST API request
 

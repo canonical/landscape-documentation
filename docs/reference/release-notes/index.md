@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Landscape release notes covering all versions from latest releases to historical versions. Find new features, bug fixes, upgrade instructions, and security updates."
+---
+
 (reference-release-notes-index)=
 # Release notes
 

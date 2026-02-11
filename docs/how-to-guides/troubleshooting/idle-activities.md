@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Troubleshoot idle and stuck activities in Landscape. Debug queued and in-progress tasks, RabbitMQ issues, and client connectivity problems."
+---
+
 (how-to-idle-activities)=
 # How to troubleshoot idle activities
 

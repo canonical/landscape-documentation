@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server on Google Cloud using cloud-init. Set up gcloud CLI, configure authentication, and deploy standard or FIPS-compliant instances."
+---
+
 (how-to-install-on-google-cloud)=
 # How to install Landscape Server on Google Cloud
 

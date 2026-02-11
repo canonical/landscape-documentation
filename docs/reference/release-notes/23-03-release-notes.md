@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 23.03 (March 2023). Features Ubuntu Pro awareness, native RISC-V support, modernized charms, and compatibility with Ubuntu 22.04 LTS."
+---
+
 (reference-release-notes-23-03)=
 # 23.03 release notes
 

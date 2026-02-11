@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Get support for WSL instances in Landscape. Check minimum requirements, troubleshoot WSL 2 setup, and resolve configuration issues."
+---
+
 (how-to-wsl-get-support)=
 # How to get support for WSL instances that connect to Landscape
 

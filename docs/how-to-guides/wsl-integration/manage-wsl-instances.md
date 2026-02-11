@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Create, register, and provision WSL instances in Landscape. Use web portal, REST API, or WSL profiles to manage Ubuntu on Windows."
+---
+
 (how-to-manage-wsl-instances)=
 # How to manage WSL instances
 

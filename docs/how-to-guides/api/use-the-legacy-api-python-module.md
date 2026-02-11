@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Use landscape-api Python module to automate Landscape operations. Import API class and call methods programmatically in Python scripts."
+---
+
 (how-to-use-legacy-api-python)=
 # How to use the legacy API Python module
 

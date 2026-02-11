@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn to use Landscape's modern web portal (24.04+) with enhanced usability for managing instances, access groups, and system configurations."
+---
+
 (how-to-guides-web-portal-web-portal-24-04-or-later-index)=
 # Web portal (24.04 or later)
 

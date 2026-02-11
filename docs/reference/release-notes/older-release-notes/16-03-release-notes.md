@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 16.03 (March 2016). Introduces machine roles for Autopilot, Nagios integration, updated OpenStack charms, and duplicate computer alerts."
+---
+
 (reference-release-notes-16-03)=
 # 16.03 release notes
 

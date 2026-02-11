@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install and configure Landscape Server in a single LXD container for testing. Set up cloud-init, configure environment variables, and provision resources."
+---
+
 (how-to-install-in-lxd-container)=
 # How to install and configure Landscape Server in a single LXD container
 

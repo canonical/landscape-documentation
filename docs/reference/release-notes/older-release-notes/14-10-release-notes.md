@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 14.10 (October 2014). Introduced OpenStack Autopilot Beta, Juju integration, throttled package updates, and new theme with API enhancements."
+---
+
 (reference-release-notes-14-10)=
 # 14.10 release notes
 

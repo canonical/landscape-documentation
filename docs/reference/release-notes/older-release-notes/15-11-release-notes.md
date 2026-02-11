@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 15.11 (November 2015). OpenStack Liberty deployment support, Juju upgrade handling improvements, and database connection fixes."
+---
+
 (reference-release-notes-15-11)=
 # 15.11 release notes
 

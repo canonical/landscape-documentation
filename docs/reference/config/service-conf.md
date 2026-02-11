@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Technical reference for Landscape service.conf file including all configuration sections, key-value pairs, environment variables, and defaults."
+---
+
 (reference-service-conf)=
 # The `service.conf` file
 

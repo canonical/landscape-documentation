@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Backup and maintain Landscape Server deployments. Manage PostgreSQL databases, cron jobs, and remove duplicate instances."
+---
+
 (how-to-guides-backup-and-maintenance-index)=
 
 # Backup and Maintenance

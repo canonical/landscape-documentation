@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for role-based access control. Legacy API endpoints to create, manage, and assign roles with permissions and access groups."
+---
+
 (reference-legacy-api-role-based-access-control)=
 # Role Based Access Control
 

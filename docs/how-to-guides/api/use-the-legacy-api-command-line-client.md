@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install and configure landscape-api command-line client snap. Automate Landscape operations using CLI tools and environment variables."
+---
+
 (how-to-use-legacy-api-cli)=
 # How to use the legacy API command-line client
 

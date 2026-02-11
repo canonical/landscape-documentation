@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore Landscape Server architecture including API, appserver, message system, job handler services with PostgreSQL and RabbitMQ integration."
+---
+
 (explanation-server-architecture)=
 # Landscape Server architecture
 

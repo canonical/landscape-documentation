@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Compare Landscape editions: SaaS, self-hosted, and managed Landscape with features including repository management and SSO integration."
+---
+
 (explanation-about-landscape)=
 # About Landscape
 

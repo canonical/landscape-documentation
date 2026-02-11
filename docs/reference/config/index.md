@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape configuration including service.conf settings and immutable configuration options."
+---
+
 (reference-config-index)=
 # Configuration
 

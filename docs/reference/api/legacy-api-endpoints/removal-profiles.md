@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for removal profile management. Legacy API endpoints to create and remove automatic computer removal profiles based on inactivity."
+---
+
 (reference-legacy-api-removal-profiles)=
 # Removal Profiles
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Mirror Ubuntu and third-party repositories with Landscape. Create custom repositories and manage packages for offline deployments."
+---
+
 (how-to-guides-repository-mirrors-index)=
 # Repository mirrors
 

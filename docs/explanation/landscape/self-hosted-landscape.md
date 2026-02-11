@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about self-hosted Landscape including release cycles, Ubuntu compatibility, LTS and latest stable PPAs, and installation options."
+---
+
 (explanation-about-self-hosted)=
 # About Self-hosted Landscape
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Build custom Ubuntu Core images with Landscape Client snap pre-installed. Auto-register IoT devices at first boot for scaled deployments."
+---
+
 (how-to-create-a-core-image)=
 # How to create an Ubuntu Core image with Landscape Client included
 

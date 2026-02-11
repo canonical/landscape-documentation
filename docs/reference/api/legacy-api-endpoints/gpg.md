@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for GPG key management. Legacy API endpoints to import, retrieve, and delete GPG keys for repository signing."
+---
+
 (reference-legacy-api-gpg)=
 # GPG
 

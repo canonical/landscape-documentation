@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape tags used to organize and group client instances with user-defined labels and metadata."
+---
+
 (reference-terms-tags)=
 # Tags
 

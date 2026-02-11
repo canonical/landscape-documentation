@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Perform essential tasks in Landscape's classic portal: check versions, group machines with tags, and automate package upgrades."
+---
+
 (how-to-classic-web-portal-other-tasks)=
 # Other tasks in the Landscape web portal
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure WSL services after upgrading from Landscape 23.10. Update service.conf and Apache config for WSL child instance profiles."
+---
+
 (how-to-wsl-configure-landscape-after-upgrade)=
 # How to configure WSL-related services after upgrading Landscape
 

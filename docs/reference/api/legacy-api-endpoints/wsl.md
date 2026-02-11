@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for WSL management. Legacy API endpoints to create, configure, and manage Windows Subsystem for Linux instances in Landscape."
+---
+
 (reference-legacy-api-wsl)=
 # WSL
 

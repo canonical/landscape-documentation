@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 19.01 (January 2019). Enhanced security updates detection, CVE display alongside USNs, randomized upgrade delivery, and TLS 1.0 disabled."
+---
+
 (reference-release-notes-19-01)=
 # 19.01 release notes
 

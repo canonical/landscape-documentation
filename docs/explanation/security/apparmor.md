@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand how AppArmor security system integrates with Landscape Client snap and provides application-level access controls for Ubuntu."
+---
+
 (explanation-apparmor)=
 # AppArmor and Landscape
 

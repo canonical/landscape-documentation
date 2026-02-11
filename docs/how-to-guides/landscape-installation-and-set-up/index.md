@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to install and set up Landscape Server with quickstart, manual, Juju, LXD, cloud providers, FIPS, air-gapped, and client configuration methods."
+---
+
 (how-to-guides-landscape-installation-and-set-up-index)=
 # Landscape installation and set-up
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for computer management. Legacy API endpoints to retrieve computers, apply tags, and perform operations on managed machines."
+---
+
 (reference-legacy-api-computers)=
 # Computers
 

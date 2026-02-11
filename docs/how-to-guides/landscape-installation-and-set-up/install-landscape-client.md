@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Client from Ubuntu's main repository, PPA, or snap. Configure client registration for self-hosted and SaaS Landscape deployments."
+---
+
 (how-to-install-landscape-client)=
 # How to install Landscape Client
 

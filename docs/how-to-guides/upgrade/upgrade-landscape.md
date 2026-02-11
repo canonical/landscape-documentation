@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Upgrade self-hosted Landscape Server to newer versions. Backup database, update PPA, run schema migrations, and configure version-specific settings."
+---
+
 (how-to-upgrade)=
 # How to upgrade your Landscape server
 

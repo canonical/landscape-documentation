@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Complete reference for Landscape database users, tables, and schema across account, main, package, and session databases."
+---
+
 (reference-database)=
 # Database
 

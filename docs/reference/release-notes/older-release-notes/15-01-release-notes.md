@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 15.01 (January 2015). Features reduced machine requirements for Autopilot deployments, syslog support, event logs, and package-search service."
+---
+
 (reference-release-notes-15-01)=
 # 15.01 release notes
 

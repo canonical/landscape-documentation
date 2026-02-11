@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server quickly on a single machine with quickstart mode. Learn minimum requirements, installation steps, and SSL certificate setup."
+---
+
 (how-to-quickstart-installation)=
 # How to install Landscape Server with quickstart mode
 

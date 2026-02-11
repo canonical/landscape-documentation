@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape roles that define user permissions and management privileges across access groups."
+---
+
 (reference-terms-roles)=
 # Roles
 
