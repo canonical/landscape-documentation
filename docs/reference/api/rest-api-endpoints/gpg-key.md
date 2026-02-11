@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for GPG key management in Landscape. Import and configure GPG keys for repository signing and verification."
+---
+
 (reference-rest-api-gpg-key)=
 # GPG Key
 

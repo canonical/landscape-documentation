@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Set up Ubuntu Amazon WorkSpaces on Landscape SaaS. Create your Ubuntu Pro account, register machines, and centrally manage WorkSpaces instances."
+---
+
 (how-to-ubuntu-on-ubuntu-amazon-workspaces)=
 # How to set up Ubuntu Amazon WorkSpaces on Landscape
 

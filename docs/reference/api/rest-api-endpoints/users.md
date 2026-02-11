@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing users in Landscape. Create, delete, modify, and retrieve user accounts on managed computers."
+---
+
 (reference-rest-api-users)=
 # Users
 

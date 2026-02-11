@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape alerts that notify administrators of conditions requiring attention and how to manage them."
+---
+
 (reference-terms-alerts)=
 # Alerts
 

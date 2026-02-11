@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing security profiles in Landscape. Create, read, update, delete, and audit CIS benchmark compliance profiles."
+---
+
 (reference-rest-api-security-profiles)=
 # Security Profiles
 

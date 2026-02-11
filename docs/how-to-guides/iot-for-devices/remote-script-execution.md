@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Execute Python scripts remotely on Ubuntu Core devices using Landscape Client snap. Access SnapD REST API and manage confined environments."
+---
+
 (how-to-remote-script-execution)=
 # How to use remote script execution with the Landscape Client snap
 

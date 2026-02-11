@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape in compliance with DISA STIG technical security guidelines. Configure FIPS, DoD certificates, and directory size limits for DoD deployments."
+---
+
 (howto-install-disa-stig-compliant)=
 
 # How to install Landscape in compliance with the DISA STIG

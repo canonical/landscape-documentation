@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Set up Landscape server for Autoinstall workstation provisioning. Configure OIDC authentication and create autoinstall configuration files."
+---
+
 (how-to-ubuntu-installer-set-up-landscape)=
 # How to set up your Landscape server to provision workstations with Autoinstall via the Ubuntu installer
 

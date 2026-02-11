@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Secure your Landscape deployment and apply security updates. Harden server infrastructure and manage CVE patches with USN alerts."
+---
+
 (how-to-guides-security-index)=
 # Security
 

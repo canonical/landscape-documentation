@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Set up Landscape repository mirrors in air-gapped or offline environments. Configure restricted networks and fully disconnected deployments."
+---
+
 (how-to-manage-repos-airgapped)=
 # How to manage repositories in an air-gapped or offline environment
 

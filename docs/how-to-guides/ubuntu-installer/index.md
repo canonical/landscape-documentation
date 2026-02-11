@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Provision workstations with Autoinstall using Ubuntu installer and Landscape. Automate Ubuntu installation with OIDC authentication."
+---
+
 (how-to-guides-ubuntu-installer-provisioning-index)=
 # Ubuntu installer
 

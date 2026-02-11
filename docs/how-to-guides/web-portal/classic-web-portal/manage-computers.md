@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Manage computers in Landscape's classic portal. Register and select machines with tags, configure alerts, run scripts, manage users and roles, and set up upgrade and removal profiles."
+---
+
 (how-to-classic-web-portal-manage-computers)=
 # How to manage computers
 

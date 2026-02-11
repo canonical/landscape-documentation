@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for Landscape administrators including management, permissions, invitations, and API interactions for authorized users."
+---
+
 (reference-terms-administrators)=
 # Administrators
 

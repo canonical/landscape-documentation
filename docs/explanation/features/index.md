@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Landscape features including activities tracking, repository mirroring, package reporting, and remote script execution capabilities."
+---
+
 (explanation-features-index)=
 # Features
 

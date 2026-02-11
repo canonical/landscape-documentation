@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure Landscape Client using landscape-config or the client.conf file. Set up registration, tags, scripts, and connection settings for managed machines."
+---
+
 (how-to-configure-landscape-client)=
 # How to configure Landscape Client
 

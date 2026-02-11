@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Manage repository mirrors using Landscape legacy API. Create distributions, pockets, repository profiles, and automate mirror operations."
+---
+
 (how-to-manage-repos-api)=
 # How to manage and mirror repositories with the API
 

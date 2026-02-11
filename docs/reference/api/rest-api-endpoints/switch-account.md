@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to switch between Landscape accounts. Obtain new JWT tokens for multi-account access and management."
+---
+
 (reference-rest-api-switch-account)=
 # Switch Account
 

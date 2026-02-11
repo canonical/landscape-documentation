@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Known issues and workarounds for Landscape Server and Client. Current limitations, compatibility notes, and configuration fixes."
+---
+
 (reference-known-issues)=
 # Known issues
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape on FIPS-compliant machines with Ubuntu 22.04 LTS. Configure FIPS mode, external authentication, and secure SMTP TLS settings."
+---
+
 (how-to-install-fips-compliant)=
 # How to install on FIPS-compliant machines
 

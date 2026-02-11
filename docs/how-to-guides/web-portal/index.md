@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Discover Landscape's two web portals: the modern 24.04+ interface and the classic portal with comprehensive management features."
+---
+
 (how-to-guides-web-portal-index)=
 # Web portal
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore package reporting in Landscape including package state tracking, database stores, package-reporter process, and server synchronization."
+---
+
 (explanation-package-reporting)=
 # Landscape package reporting
 

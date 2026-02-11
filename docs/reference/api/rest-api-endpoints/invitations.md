@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing user invitations in Landscape. Create, accept, revoke, and retrieve invitations for account access."
+---
+
 (reference-rest-api-invitations)=
 
 # Invitations

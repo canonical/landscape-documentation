@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Client snap on Ubuntu Core and classic Ubuntu. Connect interfaces and register devices with self-hosted Landscape servers."
+---
+
 (how-to-install-the-client-snap)=
 # How to install the snap
 

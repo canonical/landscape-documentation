@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 16.06 (June 2016). Features Ubuntu 16.04 LTS support, OpenStack Mitaka deployment, and automatic cloud image refresh for Trusty and Xenial."
+---
+
 (reference-release-notes-16-06)=
 # 16.06 release notes
 

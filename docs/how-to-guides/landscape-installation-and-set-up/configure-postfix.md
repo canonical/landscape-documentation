@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure Postfix for Landscape Server email notifications. Set up SMTP with SendGrid, Mailjet, Amazon SES, or other providers using postconf."
+---
+
 (how-to-configure-postfix)=
 # How to configure Postfix for emails
 

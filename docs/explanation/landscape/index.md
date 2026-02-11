@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore Landscape documentation covering deployment models, server architecture, client architecture, licensing, and self-hosted options."
+---
+
 (explanation-landscape-index)=
 # Landscape
 

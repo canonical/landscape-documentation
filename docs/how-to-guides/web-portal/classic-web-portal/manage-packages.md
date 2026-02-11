@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Access package information, create package profiles, and manage security updates in Landscape's classic web portal."
+---
+
 (how-to-classic-web-portal-manage-packages)=
 # How to manage packages
 

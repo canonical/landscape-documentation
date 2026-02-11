@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Make Landscape legacy API requests using HTTPS with JWT or HMAC authentication. Learn required parameters and signature methods."
+---
+
 (how-to-use-legacy-api-http)=
 # How to use the legacy API via HTTPS requests
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape 24.04 LTS (April 2024). Features new web portal with Vanilla Framework, web-based repository management, REST API, and snap management capabilities."
+---
+
 (reference-release-notes-24-04-lts)=
 # 24.04 LTS release notes
 

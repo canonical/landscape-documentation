@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 18.03 (March 2018). Ubuntu 18.04 LTS Bionic support, OpenStack Autopilot removal, autoremove feature, and repository profile management."
+---
+
 (reference-release-notes-18-03)=
 # 18.03 release notes
 

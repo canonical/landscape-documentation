@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure high-availability Landscape deployments with Juju and the landscape-scalable bundle. Deploy HAProxy, RabbitMQ, PostgreSQL, and multiple units."
+---
+
 (how-to-juju-ha-installation)=
 # How to install and configure Landscape for high-availability deployments
 

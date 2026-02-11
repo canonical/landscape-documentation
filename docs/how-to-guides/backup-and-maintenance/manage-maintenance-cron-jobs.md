@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Manage Landscape Server maintenance cron jobs for security updates, monitoring, alerts, and profiles. Configure cleanup tasks for activities."
+---
+
 (how-to-manage-maintenance-cron-jobs)=
 # How to manage maintenance cron jobs
 

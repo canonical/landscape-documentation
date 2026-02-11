@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Create and manage Landscape Client snap annotations on IoT devices. Configure custom metadata via files, connect through content interface, and search in the web portal."
+---
+
 (how-to-use-annotations-client-snap)=
 # How to use annotations with the Landscape Client snap
 

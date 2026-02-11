@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand security disclosure policies and how to report security issues in Landscape through Ubuntu Security's established procedures."
+---
+
 (explanation-security-disclosure)=
 # Security disclosure and reporting for Landscape
 

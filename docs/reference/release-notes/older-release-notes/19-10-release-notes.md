@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 19.10 (October 2019). Improved ESM USN detection, OpenID Connect authentication support, automatic activity cleanup, and bug fixes."
+---
+
 (reference-release-notes-19-10)=
 # 19.10 release notes
 

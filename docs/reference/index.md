@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for Landscape systems management, including API, configuration, networking, database, logs, and terminology."
+---
+
 (reference-index)=
 # Reference
 

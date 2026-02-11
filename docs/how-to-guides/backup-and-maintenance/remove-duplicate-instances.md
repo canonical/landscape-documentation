@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Remove duplicate instance registrations in Landscape using web portal, removal profiles, or API. Clean up cloned client registrations."
+---
+
 (how-to-remove-duplicate-instances)=
 # How to remove duplicate instances
 

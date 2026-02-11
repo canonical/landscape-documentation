@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for activity management. Legacy API endpoints to search, cancel, and approve activities associated with your Landscape account."
+---
+
 (reference-legacy-api-activities)=
 # Activities
 

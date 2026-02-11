@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing Landscape administrators. Assign and update administrator roles and permissions by user ID."
+---
+
 (reference-rest-api-administrators)=
 # Administrators
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for event log retrieval. Legacy API endpoints to query and export account event log entries ordered by creation time."
+---
+
 (reference-legacy-api-event-log)=
 # Event Log
 

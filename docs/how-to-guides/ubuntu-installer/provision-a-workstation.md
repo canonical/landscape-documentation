@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Provision workstations using Ubuntu installer 26.04 with Landscape Autoinstall. Authenticate with OIDC and serve autoinstall files."
+---
+
 (how-to-ubuntu-installer-provision-a-workstation)=
 # How to provision a workstation with Autoinstall using Landscape and the Ubuntu installer
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 23.10 (October 2023). Introduces WSL integration, JWT authentication, repository management dashboard, and auto-registration features."
+---
+
 (reference-release-notes-23-10)=
 # 23.10 release notes
 

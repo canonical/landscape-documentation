@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore cryptographic technology in Landscape including TLS/HTTPS, JSON Web Tokens, password authentication, and GPG signing for secure deployments."
+---
+
 (explanation-cryptographic-technology)=
 # Cryptographic technology in Landscape
 

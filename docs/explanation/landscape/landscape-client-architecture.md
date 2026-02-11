@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Landscape Client architecture including Broker, Manager, Monitor, Watchdog processes and their roles in client-server communication."
+---
+
 (explanation-client-architecture)=
 # Landscape Client architecture
 

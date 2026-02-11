@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for JWT token management in Landscape. Invalidate tokens for users and accounts for enhanced security."
+---
+
 (reference-rest-api-tokens)=
 # Tokens
 

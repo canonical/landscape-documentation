@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Browse how-to guides for Landscape covering installation, configuration, web portal usage, API access, security, and system management tasks."
+---
+
 (how-to-guides-index)=
 # How-to guides
 

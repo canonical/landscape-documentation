@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Attach Ubuntu Pro subscription for enterprise lifecycle support. Enable Livepatch, FIPS packages, and security compliance with Pro tokens."
+---
+
 (how-to-attach-ubuntu-pro)=
 # How to attach your Ubuntu Pro subscription
 
