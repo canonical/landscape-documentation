@@ -24,18 +24,18 @@ Landscape Client is available in Ubuntu's `main` repository in all [Ubuntu relea
 1. Set environment variables:
 
    ```bash
-   LANDSCAPE_ACCOUNT_NAME='{ACCOUNT_NAME}'
-   LANDSCAPE_FQDN='{FQDN}'
-   LANDSCAPE_COMPUTER_TITLE='{COMPUTER_NAME}'
+   LANDSCAPE_ACCOUNT_NAME='<ACCOUNT_NAME>'
+   LANDSCAPE_FQDN='<FQDN>'
+   LANDSCAPE_COMPUTER_TITLE='<COMPUTER_NAME>'
    ```
 
    This code block includes the following values which must be changed:
 
-   `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the account name in their Landscape account.
+   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `{FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
+   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
 
-   `{COMPUTER_NAME}`: The name of the computer you’re installing Landscape Client on. You choose this name.
+   `<COMPUTER_NAME>`: The name of the computer you're installing Landscape Client on. You choose this name.
 
 1. Configure:
 
@@ -47,7 +47,7 @@ When you install Landscape Client from Ubuntu's `main` repository, you install t
 
 ## Install Landscape Client from a PPA
 
-This method is suitable when performing the installation through a terminal or shell scripting. To install Landscape Client from a PPA:
+To install Landscape Client from a PPA:
 
 1. Install the prerequisites:
 
@@ -55,13 +55,13 @@ This method is suitable when performing the installation through a terminal or s
    sudo apt update && sudo apt install -y software-properties-common
    ```
 
-1. Add the PPA, replacing `{LANDSCAPE_PPA}` with the appropriate repository:
+1. Add the PPA, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
 
    ```bash
-   sudo add-apt-repository -y {LANDSCAPE_PPA}
+   sudo add-apt-repository -y <LANDSCAPE_PPA>
    ```
 
-    - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you're using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
 1. Install the `landscape-client` package:
 
@@ -72,18 +72,18 @@ This method is suitable when performing the installation through a terminal or s
 1. Set environment variables:
 
    ```bash
-   LANDSCAPE_ACCOUNT_NAME='{ACCOUNT_NAME}'
-   LANDSCAPE_FQDN='{FQDN}'
-   LANDSCAPE_COMPUTER_TITLE='{COMPUTER_NAME}'
+   LANDSCAPE_ACCOUNT_NAME='<ACCOUNT_NAME>'
+   LANDSCAPE_FQDN='<FQDN>'
+   LANDSCAPE_COMPUTER_TITLE='<COMPUTER_NAME>'
    ```
 
    This code block includes the following values which must be changed:
 
-   `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the account name in their Landscape account.
+   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `{FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
+   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
 
-   `{COMPUTER_NAME}`: The name of the computer you’re installing Landscape Client on. You choose this name.
+   `<COMPUTER_NAME>`: The name of the computer you're installing Landscape Client on. You choose this name.
 
 1. Configure:
 
@@ -100,15 +100,15 @@ This method is suitable when using charmed operators. To install Landscape Clien
 1. Set environment variables:
 
    ```bash
-   LANDSCAPE_ACCOUNT_NAME='{ACCOUNT_NAME}'
-   LANDSCAPE_FQDN='{FQDN}'
+   LANDSCAPE_ACCOUNT_NAME='<ACCOUNT_NAME>'
+   LANDSCAPE_FQDN='<FQDN>'
    ```
 
    This code block includes the following values which must be changed:
 
-   `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the account name in their Landscape account.
+   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `{FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
+   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
 
 1. Deploy the charm:
 
@@ -126,7 +126,7 @@ For more information on the Landscape client charm, see the [Charmhub documentat
 
 ## Install Landscape Client with Cloud-init
 
-This method is suitable if it’s available during a machine’s provisioning stage. To install Landscape Client with cloud-init:
+This method is suitable if it's available during a machine's provisioning stage. To install Landscape Client with cloud-init:
 
 1. Install `landscape-client` from a PPA:
 
@@ -142,30 +142,30 @@ This method is suitable if it’s available during a machine’s provisioning st
    ```yaml
    landscape:
      client:
-       account_name: {ACCOUNT_NAME}
-       computer_title: "{COMPUTER_NAME}"
-       url: "https://{FQDN}/message-system"
-       ping_url: "http://{FQDN}/ping"
+       account_name: "<ACCOUNT_NAME>"
+       computer_title: "<COMPUTER_NAME>"
+       url: "https://<FQDN>/message-system"
+       ping_url: "http://<FQDN>/ping"
    ```
 
    This code block includes the following values which must be changed:
 
-   `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the account name in their Landscape account.
+   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `{COMPUTER_NAME}`: The name of the computer you’re installing Landscape Client on. You choose this name.
+   `<COMPUTER_NAME>`: The name of the computer you're installing Landscape Client on. You choose this name.
 
-   `{FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should omit `url` and `ping_url`.
+   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should omit `url` and `ping_url`.
 
    For additional information, see the [cloud-init Landscape module documentation](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#landscape).
 
 ## Install the `landscape-client` snap
 
 ```{note}
-The Landscape Client snap doesn’t support management of Debian packages.
+The Landscape Client snap doesn't support management of Debian packages.
 ```
 
 ```{note}
-You must be running a self-hosted Landscape server version 23.10 or later (or beta) to use the snap.
+You must be running a self-hosted Landscape server version 23.10 or later to use the snap.
 ```
 
 The snap is generally used for Ubuntu Core devices. You can install the Landscape Client snap from the [Snap Store](https://snapcraft.io/landscape-client) or the command line. For more detailed instructions and information on the snap's limitations, see {ref}`how-to-install-the-client-snap`.

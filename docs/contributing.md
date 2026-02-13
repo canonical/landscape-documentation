@@ -10,15 +10,15 @@ myst:
 We warmly welcome your engagement with the Landscape community and appreciate all contributions, suggestions, and feedback. There are many reasons why you should contribute to the Landscape documentation.
 
 - **Improve your skills**
-    
-    Contributing to the Landscape docs is a great way to improve your documentation and technical communication skills. You’ll get experience writing clear, concise documentation that’s helpful to the Landscape community, and you’ll have the opportunity to learn about writing documentation that focuses on user needs.
-    
+
+    Contributing to the Landscape docs is a great way to improve your documentation and technical communication skills. You'll get experience writing clear, concise documentation that's helpful to the Landscape community, and you'll have the opportunity to learn about writing documentation that focuses on user needs.
+
 - **Give back to the community**
-    
+
     By contributing to the Landscape documentation, you foster a supportive community and can help other users learn about Landscape. Your contributions make a difference to other Landscape users!
-    
+
 - **Learn more about Landscape**
-    
+
     Contributing to the Landscape documentation can help you broaden your understanding of Landscape and its related technologies. Writing documentation often involves exploring new features and investigating potential problems or challenges users may face, which can help you learn more about how Landscape works and how users interact with it.
 
 We believe that everyone has something valuable to contribute, no matter your level of experience, and we hope to make it as easy as possible to contribute. If you find any part of our process doesn't work well for you, please let us know!
@@ -50,7 +50,7 @@ Our navigational structure, style, and the content of our documentation follows 
 
 For further details on our Diátaxis strategy, see [Diátaxis, a new foundation for Canonical documentation](https://ubuntu.com/blog/diataxis-a-new-foundation-for-canonical-documentation).
 
-Improving our documentation and applying the principles of Diátaxis are on-going tasks. There’s a lot to do, and we don’t want to deter anyone from contributing to our docs. If you don’t know whether something should be a tutorial, how-to guide, reference doc or explanatory text, either ask on the forum or publish what you’re thinking. Changes are easy to make, and every contribution helps.
+Improving our documentation and applying the principles of Diátaxis are on-going tasks. There's a lot to do, and we don't want to deter anyone from contributing to our docs. If you don't know whether something should be a tutorial, how-to guide, reference doc or explanatory text, either ask on the forum or publish what you're thinking. Changes are easy to make, and every contribution helps.
 
 ## Ways to contribute
 
