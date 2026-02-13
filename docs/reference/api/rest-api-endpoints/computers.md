@@ -107,7 +107,7 @@ Example response:
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers?query=id:1%20OR%20id:2 -H "Authorization: Bearer $JWT" -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.canonical.com/api/v2/computers?query=id:1%20OR%20id:2 -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -1006,7 +1006,8 @@ Example request:
 
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/restart" \
-  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -1116,7 +1117,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/1/usergroups/update_bulk" -H "Authorization: Bearer $JWT"  -d '{"action": "add", "usernames": ["john", "jane"], "groupnames": ["finance", "admin"]}'
+curl -X POST "https://landscape.canonical.com/api/v2/computers/1/usergroups/update_bulk" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"action": "add", "usernames": ["john", "jane"], "groupnames": ["finance", "admin"]}'
 ```
 
 Example response:
@@ -1264,7 +1268,10 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/archive" -H "Authorization: Bearer $JWT" -d '{"computer_title": "test computer"}'
+curl -X POST "https://landscape.canonical.com/api/v2/computers/29/archive" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_title": "test computer"}'
 ```
 
 Example response:
@@ -1301,7 +1308,10 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/delete-children -H "Authorization: Bearer $JWT" -d '{"computer_names": ["Ubuntu-24.04", "Focal WSL"]}'
+curl -X POST https://landscape.canonical.com/api/v2/computers/20/delete-children \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_names": ["Ubuntu-24.04", "Focal WSL"]}'
 ```
 
 Example response:
@@ -1346,7 +1356,10 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" -H "Authorization: Bearer $JWT" -d '{"computer_title": "test computer"}'
+curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_title": "test computer"}'
 ```
 
 Example response:

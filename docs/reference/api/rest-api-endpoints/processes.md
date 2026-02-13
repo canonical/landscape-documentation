@@ -24,14 +24,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST \
+curl -X POST https://landscape.canonical.com/api/v2/processes/kill \
+  -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT" \
-  -d '{
-  "computer_id": 1,
-  "pids": [1]
-  }' \
-  https://landscape.canonical.com/api/v2/processes/kill
-
+  -d '{"computer_id": 1, "pids": [1]}'
 ```
 
 Example response:

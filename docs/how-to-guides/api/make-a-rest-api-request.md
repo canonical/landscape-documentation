@@ -11,6 +11,8 @@ myst:
 
 This guide demonstrates how to login and make a request using the Landscape REST API. You need Landscape 24.04 LTS (or higher) to use the REST API. This guide provides general steps and examples using `curl`.
 
+> **Note**: When using state-changing methods (i.e. `POST`, `PUT`, and `PATCH`), you must explicitly declare `Content-Type` as `application/json`.
+
 ## Make a REST API request with your preferred API tool
 
 The general steps to make a REST API request are:
@@ -29,7 +31,9 @@ This method is for those using password authentication to login.
 1. Provide your login credentials with `POST`. Your request will be similar to the following
 
     ```bash
-    curl -X POST "https://your-landscape.domain.com/api/v2/login" -d '{"email": "jane@example.com", "password": "jane-pwd", "account": "standalone"}'
+    curl -X POST "https://your-landscape.domain.com/api/v2/login" \
+      -H "Content-Type: application/json" \
+      -d '{"email": "jane@example.com", "password": "jane-pwd", "account": "standalone"}'
     ```
 
     And you’ll receive output similar to:
@@ -78,8 +82,8 @@ To make a REST API request with `curl`:
 
     ```bash
     curl -X POST https://your-landscape.domain.com/api/v2/login/access-key \
-    -H "Content-Type: application/json" \
-    -d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
+      -H "Content-Type: application/json" \
+      -d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
     ```
 
     And you’ll receive output similar to

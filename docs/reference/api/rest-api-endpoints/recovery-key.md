@@ -46,7 +46,9 @@ Query parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/23/recovery-key:generate" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/computers/23/recovery-key:generate" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 Example response:

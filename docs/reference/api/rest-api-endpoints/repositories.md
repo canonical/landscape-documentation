@@ -92,7 +92,22 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/repository/series -H "Authorization: Bearer $JWT" -d '{"name": "oracular", "distribution": "ubuntu", "pockets": [{"name": "proposed", "components": ["main"], "architectures": ["amd64"]}], "mirror_uri": "http://archive.ubuntu.com", "gpg_key": "my-key"}'
+curl -X POST https://landscape.canonical.com/api/v2/repository/series \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{
+    "name": "oracular", 
+    "distribution": "ubuntu", 
+    "pockets": [
+      {
+        "name": "proposed", 
+        "components": ["main"], 
+        "architectures": ["amd64"]
+      }
+    ], 
+    "mirror_uri": "http://archive.ubuntu.com", 
+    "gpg_key": "my-key"
+  }'
 ```
 
 Example output:

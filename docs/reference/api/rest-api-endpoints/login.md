@@ -23,7 +23,9 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/login" -d '{"email": "john@example.com", "password": "pwd", "account": "onward"}'
+curl -X POST "https://landscape.canonical.com/api/v2/login" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "john@example.com", "password": "pwd", "account": "onward"}'
 ```
 
 Example response:
@@ -67,8 +69,8 @@ Example request:
 
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/login/access-key" \
--H "Content-Type: application/json" \
--d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
+  -H "Content-Type: application/json" \
+  -d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
 ```
 
 Example response:

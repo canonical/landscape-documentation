@@ -62,9 +62,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST -H "Authorization: Bearer $JWT"   -d '{
-  "name": "John Allen Smith"
-  }'   https://landscape.canonical.com/api/v2/person
+curl -X POST https://landscape.canonical.com/api/v2/person \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"name": "John Allen Smith"}'   
 ```
 
 Example response:
