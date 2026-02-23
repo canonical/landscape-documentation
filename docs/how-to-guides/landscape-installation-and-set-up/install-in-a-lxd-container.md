@@ -36,7 +36,7 @@ declare -A VARIABLES=(
   [SMTP_PORT]='{SMTP_PORT}'
   [SMTP_USERNAME]='{SMTP_USERNAME}'
   [SMTP_PASSWORD]='{SMTP_PASSWORD}'
-  [LANDSCAPE_VERSION]='{LANDSCAPE_VERSION}'
+  [LANDSCAPE_PPA_NAME]='{LANDSCAPE_PPA_NAME}'
 )
 ```
 
@@ -60,7 +60,7 @@ This code block includes the following values that must be changed:
 
 `{SMTP_PASSWORD}`: The password or API key associated with the SMTP username. If you’re using SendGrid, use an API Key from [`https://app.sendgrid.com/settings/api_keys`](https://app.sendgrid.com/settings/api_keys)
 
-`{LANDSCAPE_VERSION}`: The version of Landscape you will install. Enter `beta` or `24.04` (stable LTS).
+`{LANDSCAPE_PPA_NAME}`: The version of Landscape you will install. Enter `self-hosted-24.04`, `self-hosted-25.10`, `self-hosted-beta`, or `latest-stable`.
 
 ### Populate the cloud-init configuration file with your variables
 
@@ -147,10 +147,7 @@ lxc exec landscape -- bash -c "tail -f /var/log/cloud-init-output.log"
 When the cloud-init process is complete, you’ll receive two lines similar to this:
 
 ```text
-cloud-init v. 23.2.2-0ubuntu0~20.04.1 running 'modules:final' at Sun, 20 Aug 2023 17:30:43 +0000. 
-Up 25.14 seconds.
-cloud-init v. 23.2.2-0ubuntu0~20.04.1 finished at Sun, 20 Aug 2023 17:30:56 +0000. Datasource 
-DataSourceGCELocal.  Up 37.35 seconds
+Cloud-init v. 25.2-0ubuntu1~24.04.1 finished at Fri, 20 Feb 2026 18:36:19 +0000. Datasource DataSourceLXD.  Up 408.07 seconds
 ```
 
 **Step 5:** Press `CTRL + C` to terminate the tail process in your terminal window.
