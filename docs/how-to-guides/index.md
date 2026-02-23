@@ -132,4 +132,5 @@ ubuntu-installer/index
 security/index
 api/index
 troubleshooting/index
+charm/index
 ```

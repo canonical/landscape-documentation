@@ -61,6 +61,9 @@ CLI's
 Cognito
 conf
 config
+configurator
+configurators
+Configurator
 configs
 Configurator
 conformant
@@ -150,6 +153,7 @@ init
 IoT
 Iot
 ip
+IPs
 IPv
 Jinja
 jQuery
@@ -171,11 +175,14 @@ kvm
 kwarg
 labelled
 launchpadcontent
+lbaas
+LBaaS
 LDAP
 LDS
 LetsEncrypt
 libvirt
 licence
+lego
 lifecycle
 Livepatch
 Livepatches

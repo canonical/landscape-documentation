@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Configure high-availability Landscape deployments with Juju and the landscape-scalable bundle. Deploy HAProxy, RabbitMQ, PostgreSQL, and multiple units."
+    description: "Configure high-availability Landscape deployments with Juju and the landscape-scalable bundle. Deploy with internal HAProxy, RabbitMQ, PostgreSQL, and multiple units."
 ---
 
 (how-to-juju-ha-installation)=
@@ -9,13 +9,36 @@ myst:
 
 > See also: [Juju documentation](https://juju.is/docs/juju)
 
-You can create a scalable, high availability (HA) deployment of Landscape Server by using Juju and the [Landscape Scalable](https://charmhub.io/landscape-scalable) charm bundle. The result is a Juju-managed deployment of Landscape Server and the other services it depends on: HAProxy, RabbitMQ Server, and PostgreSQL.
+You can create a scalable, high availability (HA) deployment of Landscape Server by using Juju and the [Landscape Scalable](https://charmhub.io/landscape-scalable) charm bundle. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
-Each of these services will have an independently scalable number of Juju units. Depending on your Juju cloud configuration, these units can be deployed to different availability zones to further improve resilience.
+```{important}
+This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 beta version introduces internal HAProxy load balancing and eliminates the need for the external HAProxy charm. For new deployments, use the 26.04 beta+ approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
+```
 
-This is a simplified model of a full Landscape HA deployment:
+## Architecture overview
 
-![Landscape scalable charm deployment](https://assets.ubuntu.com/v1/fbb9e2c3-HA_Deployment_Landscape%20(1).png)
+### 26.04 beta+ architecture (recommended)
+
+Starting with the 26.04 beta version, Landscape Server uses a simplified architecture:
+
+- **Landscape Server units** with internal HAProxy for load balancing
+- **PostgreSQL 14+** for the database (using the modern `database` interface)
+- **RabbitMQ Server** for message queuing
+- **Self-signed certificates** charm for TLS
+- **Optional Ingress Configurator** charms for external load balancer integration
+
+Each Landscape Server unit can handle traffic independently, providing true high availability.
+
+### Before 26.04
+
+The older approach uses:
+
+- **External HAProxy charm** for load balancing
+- **PostgreSQL 14** for the database (using the legacy `pgsql` interface)
+- **RabbitMQ Server** for message queuing
+- **Separate HAProxy units** for traffic management
+
+This architecture is deprecated but remains available for existing deployments.
 
 ## Prerequisites
 
@@ -23,18 +46,325 @@ Before you can deploy the Landscape Scalable charm bundle, you need to:
 
   1. [Install the Juju client](https://juju.is/docs/juju/install-and-manage-the-client)
   1. [Add a machine cloud to Juju](https://juju.is/docs/juju/manage-clouds)
-  
+
 These steps lay the groundwork for using Juju to deploy [machine charms](https://juju.is/charms-architecture).
 
 Machine charms are Juju-managed applications deployed on bare-metal servers, virtual machines, or system containers such as [LXD](https://canonical.com/lxd). Landscape is only one of many charms that can be deployed from [Charmhub](https://charmhub.io/) and managed by Juju. Juju handles installing the applications and configuring them to work together.
 
-## Deploy the charm bundle
+## Deployment approach selection
+
+Choose the appropriate deployment approach based on your needs:
+
+- **For new deployments:** Use the 26.04 beta+ approach (recommended)
+- **For existing deployments:** Continue with the older approach or migrate using {ref}`how-to-migrate-to-26-04-charm`
+
+---
+
+## 26.04 beta+ deployment (recommended)
+
+This section covers deploying Landscape Server using the internal HAProxy architecture introduced in version 26.04 beta.
+
+### Create a Juju model
+
+```bash
+juju add-model landscape-ha
+```
+
+### Deploy with a custom bundle file
+
+For the 26.04 beta+ deployment, you'll create a custom bundle file that includes all the necessary components.
+
+#### Step 1: Create the bundle file
+
+Create a file named `landscape-ha-26.04.yaml` with the following content:
+
+```yaml
+description: Landscape Scalable
+applications:
+  postgresql:
+    channel: 16/stable
+    charm: ch:postgresql
+    num_units: 3
+    options:
+      plugin_plpython3u_enable: true
+      plugin_ltree_enable: true
+      plugin_intarray_enable: true
+      plugin_debversion_enable: true
+      plugin_pg_trgm_enable: true
+      experimental_max_connections: 500
+    base: ubuntu@24.04
+
+  rabbitmq-server:
+    channel: latest/edge
+    charm: ch:rabbitmq-server
+    num_units: 3
+    options:
+      consumer-timeout: 259200000
+
+  landscape-server:
+    charm: ch:landscape-server
+    channel: 26.04/beta
+    num_units: 3
+    options:
+      landscape_ppa: ppa:landscape/self-hosted-26.04
+      min_install: True
+      root_url: https://landscape.local/
+      redirect_https: none
+    base: ubuntu@24.04
+
+  lb-certs:
+    charm: ch:self-signed-certificates
+    channel: stable
+    num_units: 1
+
+relations:
+  - [landscape-server:inbound-amqp, rabbitmq-server]
+  - [landscape-server:outbound-amqp, rabbitmq-server]
+  - [landscape-server:database, postgresql:database]
+  - [landscape-server:load-balancer-certificates, lb-certs:certificates]
+```
+
+```{note}
+This bundle uses PostgreSQL 16 and the new `database` interface. Adjust the `root_url` option to match your domain name.
+```
+
+#### Step 2: Deploy the bundle
+
+```bash
+juju deploy ./landscape-ha-26.04.yaml
+```
+
+#### Step 3: Monitor the deployment
+
+Watch the deployment progress:
+
+```bash
+juju status --watch 3s
+```
+
+Once everything is installed and settled, the `Status` for every application will be `active`:
+
+```text
+Model         Controller  Cloud/Region    Version  SLA          Timestamp
+landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
+
+App               Version  Status  Scale  Charm                      Channel     Rev  Base
+landscape-server  26.04    active      3  landscape-server           26.04/beta   150  ubuntu@24.04
+lb-certs                   active      1  self-signed-certificates   stable        12  ubuntu@24.04
+postgresql        16.4     active      3  postgresql                 16/stable    500  ubuntu@24.04
+rabbitmq-server   3.9.27   active      3  rabbitmq-server            latest/edge  200  ubuntu@22.04
+```
+
+#### Step 4: Configure license file
+
+Set your Landscape license:
+
+```sh
+juju config landscape-server "license_file=$(cat your-license-file)"
+```
+
+#### Step 5: Access Landscape
+
+You can access Landscape via:
+- Any Landscape Server unit IP address
+- The configured `root_url` (requires DNS setup pointing to one or more unit IPs)
+
+### Optional: Replace self-signed certificates with a valid certificate
+
+If you deployed the example bundle above, it includes self-signed certificates (suitable for testing). For production, replace them with a valid certificate, such as one from Let's Encrypt:
+
+```bash
+juju remove-application lb-certs
+
+juju deploy lego --channel 4/stable
+juju config lego server="https://acme-v02.api.letsencrypt.org/directory"
+juju config lego email="admin@example.com"
+juju config lego plugin="http"
+
+juju integrate landscape-server:load-balancer-certificates lego:certificates
+```
+
+**Prerequisites:**
+- Domain in `root_url` must resolve to at least one Landscape Server unit IP
+- Port 80 must be accessible for ACME HTTP-01 challenge validation
+- Valid email for certificate notifications
+
+For more details, see the [lego charm documentation](https://charmhub.io/lego/docs/getting-started-with-lego-http01).
+
+### Optional: External Load Balancer with Cross-Model Integration (LBaaS)
+
+For production deployments requiring an external load balancer in a separate infrastructure layer, you can deploy HAProxy in a **separate Juju model** and connect it to Landscape Server using cross-model relations (also known as LBaaS - Load Balancer as a Service).
+
+This approach is useful when:
+- You want to manage your load balancer infrastructure separately from application deployments
+- You need a dedicated load balancer shared across multiple applications
+- You want to isolate load balancer lifecycle from application lifecycle
+
+#### Step 1: Create a separate model for the load balancer
+
+```bash
+juju add-model lbaas
+juju switch lbaas
+```
+
+#### Step 2: Deploy HAProxy and TLS certificates in the LBaaS model
+
+Deploy HAProxy:
+
+```sh
+juju deploy haproxy --channel 2.8/edge
+juju config haproxy external-hostname="landscape.example.com"
+juju config haproxy enable-hsts="false"
+juju expose haproxy
+```
+
+Deploy the TLS certificates provider:
+
+```sh
+juju deploy lego --channel 4/stable
+juju config lego server="https://acme-v02.api.letsencrypt.org/directory"
+juju config lego email="admin@example.com"
+juju config lego plugin="http"
+```
+
+Wait for both applications to become active:
+
+```sh
+juju wait-for application haproxy --query='status=="active"'
+juju wait-for application lego --query='status=="active"'
+```
+
+Integrate HAProxy with the TLS certificates provider:
+
+```sh
+juju integrate haproxy:certificates lego:certificates
+juju integrate haproxy:receive-ca-certs lego:send-ca-cert
+```
+
+```{note}
+The `receive-ca-certs` and `send-ca-cert` endpoints implement the [`certificate_transfer` interface](https://charmhub.io/integrations/certificate_transfer). This integration is required for the gRPC ingress configurators (hostagent-messenger and ubuntu-installer-attach) to function properly.
+```
+
+#### Step 3: Create a cross-model offer
+
+```sh
+juju offer haproxy:haproxy-route
+```
+
+This creates an offer that can be consumed from other Juju models.
+
+#### Step 4: Deploy Landscape Server with Ingress Configurators
+
+Switch back to your Landscape Server model:
+
+```sh
+juju switch landscape-ha
+```
+
+```{tip}
+Ingress configurator charms have no workload and can be co-located with landscape-server units to save resources using `--to <machine-id>`.
+```
+
+Deploy the hostagent messenger ingress configurator:
+
+```sh
+juju deploy ingress-configurator hostagent-messenger-ingress --channel latest/edge
+juju config hostagent-messenger-ingress \
+  external-grpc-port=6554 \
+  hostname="landscape.example.com" \
+  backend-protocol="https"
+```
+
+Deploy the HTTP ingress configurator:
+
+```sh
+juju deploy ingress-configurator http-ingress --channel latest/edge
+juju config http-ingress \
+  paths="/" \
+  hostname="landscape.example.com" \
+  header-rewrite-expressions="X-Forwarded-Proto:https" \
+  allow-http="true"
+```
+
+Deploy the Ubuntu installer attach ingress configurator:
+
+```sh
+juju deploy ingress-configurator ubuntu-installer-attach-ingress --channel latest/edge
+juju config ubuntu-installer-attach-ingress \
+  external-grpc-port=50051 \
+  hostname="landscape.example.com" \
+  backend-protocol="https"
+```
+
+Integrate the ingress configurators with Landscape Server using the `ingress` interface:
+
+```sh
+juju integrate landscape-server:hostagent-messenger-ingress hostagent-messenger-ingress:ingress
+juju integrate landscape-server:ubuntu-installer-attach-ingress ubuntu-installer-attach-ingress:ingress
+juju integrate landscape-server:http-ingress http-ingress:ingress
+```
+
+Enable the required services on Landscape Server:
+
+```sh
+juju config landscape-server enable_hostagent_messenger=True
+juju config landscape-server enable_ubuntu_installer_attach=True
+```
+
+#### Step 5: Consume the HAProxy offer and integrate
+
+Consume the HAProxy offer from the lbaas model:
+
+```sh
+juju consume admin/lbaas.haproxy lbaas-haproxy
+```
+
+Integrate the ingress configurators with the external HAProxy using the `haproxy-route` interface:
+
+```sh
+juju integrate lbaas-haproxy:haproxy-route http-ingress:haproxy-route
+juju integrate lbaas-haproxy:haproxy-route hostagent-messenger-ingress:haproxy-route
+juju integrate lbaas-haproxy:haproxy-route ubuntu-installer-attach-ingress:haproxy-route
+```
+
+Wait for the deployment to complete:
+
+```sh
+juju wait-for application landscape-server --query='status=="active"'
+```
+
+#### Step 6: Configure DNS and access
+
+Get the HAProxy public IP address:
+
+```sh
+juju switch lbaas
+juju status haproxy --format=json | jq -r '.applications.haproxy.units | to_entries[0].value["public-address"]'
+```
+
+Configure your DNS to point `landscape.example.com` (or your configured hostname) to this IP address.
+
+Access Landscape via: `https://landscape.example.com/`
+
+```{note}
+With the LBaaS approach, traffic flows: Client → HAProxy (lbaas model) → Ingress Configurators → Internal HAProxy (on each Landscape Server unit) → Landscape Services
+```
+
+## Pre-26.04 deployment
+
+```{warning}
+This deployment approach is **deprecated**. For new deployments, use the 26.04 beta+ approach described above. For existing deployments, consider migrating using {ref}`how-to-migrate-to-26-04-charm`.
+```
+
+This section covers the older deployment approach using the external HAProxy charm. This approach is maintained for existing deployments only.
+
+### Deploy the charm bundle
 
 You can deploy the Landscape Scalable charm bundle using one of two main methods. The methods are:
 
   1. Deploy the bundle with the default configuration, then customize the configuration
   1. Download the bundle configuration, customize it, then deploy it
-  
+
 This guide describes both methods.
 
 ### Option 1: Deploy with the default configuration
@@ -367,25 +697,41 @@ Machine  State    Address        Inst id         Base          AZ  Message
 
 You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
-## Create a SSL certificate with LetsEncrypt (Optional)
+(how-to-header-configure-haproxy-with-ssl-cert)=
+## Configure SSL certificates (pre-26.04 deployments only)
 
-If your Landscape instance has a public IP, and your FQDN resolves to that public IP, run the following code to get a valid SSL certificate from LetsEncrypt. Replace `<EMAIL@EXAMPLE.COM>` with an email address where certificate renewal reminders can be sent.
-
-```bash
-sudo certbot certonly --standalone -d $FQDN --non-interactive --agree-tos --email <EMAIL@EXAMPLE.COM>
+```{warning}
+This section applies **only to pre-26.04 deployments** using the external HAProxy charm. For 26.04 beta+ deployments, see the TLS certificates configuration in the 26.04 deployment section above.
 ```
 
-This will produce a `fullchain.pem` and `privkey.pem` file which you need for HAProxy SSL termination.
+### For pre-26.04 deployments with external HAProxy charm
 
-(how-to-header-configure-haproxy-with-ssl-cert)=
-## Configure HAProxy with an SSL certificate
+The older HAProxy charm uses self-signed SSL certificates by default. Landscape Clients and your browser won't trust this certificate.
 
-If you followed the previous instructions in this guide, you'll have a Landscape Server high availability deployment. The HAProxy application in this deployment uses a self-signed SSL certificate for secure HTTPS. Landscape Clients and your browser won't trust this certificate by default.
+**Option 1: Manual certificate configuration**
 
-If you have a valid SSL certificate, you can configure HAProxy to use it by executing the following `juju config` commands. `fullchain.pem` is the public, full-chain SSL certificate and `privkey.pem` is the certificate's private key.
+If you have a valid SSL certificate:
 
 ```bash
 juju config haproxy ssl_cert="$(base64 fullchain.pem)" ssl_key="$(base64 privkey.pem)"
 ```
 
-Once your SSL certificate is in place, your Landscape Clients and browser should trust HTTPS connections to your Landscape Server deployment, so long as your certificate remains valid.
+**Option 2: Let's Encrypt with certbot**
+
+If your Landscape instance has a public IP and your FQDN resolves to it:
+
+```bash
+# On a machine with port 80 accessible
+sudo certbot certonly --standalone -d $FQDN --non-interactive --agree-tos --email admin@example.com
+```
+
+This produces `fullchain.pem` and `privkey.pem` files:
+
+```bash
+juju config haproxy ssl_cert="$(base64 /etc/letsencrypt/live/$FQDN/fullchain.pem)" \
+  ssl_key="$(base64 /etc/letsencrypt/live/$FQDN/privkey.pem)"
+```
+
+```{note}
+Certificate renewal must be handled manually for pre-26.04 deployments. Consider migrating to 26.04 beta+ for automatic certificate management via the `tls-certificates` interface.
+```
