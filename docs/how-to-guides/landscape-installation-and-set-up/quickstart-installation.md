@@ -11,6 +11,8 @@ The quickstart mode of deploying Landscape consists of installing all the necess
 
 If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
+If you have an Ubuntu Pro subscription, attach your Pro token before or after installation and enable the Landscape entitlement. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
+
 ## Check minimum requirements
 
 The following minimum requirements are needed to install Landscape Server:

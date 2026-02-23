@@ -11,6 +11,8 @@ myst:
 
 This guide describes how to configure the Landscape Client Debian package in multiple ways.
 
+For Ubuntu Pro subscriptions, you'll need to attach your Pro token before or after configuration to use Ubuntu Pro services. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
+
 If you're using the snap instead of the Debian package, see {ref}`how-to-configure-the-client-snap`.
 
 If you're using the charm, you'll need to configure the client with `juju config`. For more information, see the [Juju documentation](https://juju.is/docs/juju) and [Charmhub's documentation on the Landscape client charm](https://charmhub.io/landscape-client).

@@ -13,6 +13,8 @@ There are multiple ways to install Landscape Client. This document describes eac
 
 After installation, configure and register the client using {ref}`how-to-configure-landscape-client`.
 
+If you have an Ubuntu Pro subscription, attach the Pro token before or after installing the client. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
+
 ## Install Landscape Client from Ubuntu's `main` repository
 
 Landscape Client is available in Ubuntu's `main` repository in all [Ubuntu releases](https://ubuntu.com/about/release-cycle), and is published independently of the self-hosted Landscape releases. This method is suitable when performing the installation through a terminal or shell scripting. To install Landscape Client from Ubuntu's `main` repository:

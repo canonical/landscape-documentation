@@ -7,10 +7,6 @@ myst:
 (how-to-manual-installation)=
 # How to install Landscape manually
 
-```{note}
-If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
-```
-
 This is the baseline deployment recommendation we have for Landscape Server when Juju is not used. At a minimum, you need two machines: the database server and application server.
 
 For a manual installation of Landscape 24.04 LTS:
@@ -27,9 +23,11 @@ This is a long document. If you want a quick installation that just works, but d
 What you will need:
 
 - Ubuntu server install media for the version of Ubuntu you're using
-- An Ubuntu Pro subscription
+- An Ubuntu Pro subscription for access to Landscape and other Pro services. See {ref}`how-to-attach-ubuntu-pro` for attaching tokens.
 - Server X509 certificate and key, signed by a publicly known Certificate Authority, and issued for the FQDN hostname of the application server.
 - Custom (internal) CAs can be used, but this process isn't documented here in depth because many parts of that process take place outside of Landscape. Administrators deploying custom CAs generally know what needs to be done, but there is some guidance throughout this document.
+
+If you plan to use Ubuntu Pro services on the Landscape Server host, attach the Pro token before or after installation and enable the Landscape entitlement when needed. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 
 ## Install the database server
 
