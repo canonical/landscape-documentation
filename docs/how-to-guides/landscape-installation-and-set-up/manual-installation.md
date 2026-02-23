@@ -575,27 +575,9 @@ The first user that is created in Landscape automatically becomes the administra
 
 ### Configure the first client
 
-On the client machine, install `landscape-client`.
+Install and configure Landscape Client using the dedicated guides: {ref}`how-to-install-landscape-client` and {ref}`how-to-configure-landscape-client`.
 
-```bash
-sudo apt update && sudo apt install -y landscape-client
-```
-
-If you are using the self-signed certificate on your Landscape Server, download your self-signed certificate from Landscape Server to the client machine with this command:
-
-```bash
-echo -n | openssl s_client -connect LANDSCAPE-SERVER-IP:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
-```
-
-To configure the Landscape Client package, run the following command, replacing `<servername>` with the address of the server:
-
-```bash
-sudo landscape-config --computer-title "My First Computer" --account-name standalone --url https://<servername>/message-system --ping-url http://<servername>/ping
-```
-
-If you used a custom CA, you will need to pass the `--ssl-public-key` parameter pointing to the CA file so that the client can recognize the issuer of the server certificate.
-
-You can now accept your client in the Landscape UI, and it will begin to upload data.
+If your self-hosted Landscape server uses a self-signed or custom CA certificate, follow the trust and registration steps in the configuration guide before approving the client in the web portal.
 
 ### (Optional) Add an email alias
 

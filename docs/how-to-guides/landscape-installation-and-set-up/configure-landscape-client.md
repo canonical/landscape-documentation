@@ -35,6 +35,26 @@ To view all possible options for `landscape-config`, visit the man page with:
 man landscape-config
 ```
 
+## Register a self-hosted client
+
+Use this approach when connecting a client to a self-hosted Landscape server. Replace `<SERVER_NAME>` with the FQDN or IP address of your server.
+
+If your Landscape server uses a self-signed certificate, download the server certificate to the client:
+
+```bash
+echo -n | openssl s_client -connect <SERVER_NAME>:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
+```
+
+Then register the client:
+
+```bash
+sudo landscape-config --computer-title "My client" --account-name standalone --url https://<SERVER_NAME>/message-system --ping-url http://<SERVER_NAME>/ping
+```
+
+If you used a custom CA, you'll need to pass the --ssl-public-key parameter pointing to the CA file so that the client can recognize the issuer of the server certificate.
+
+After registration, approve the client in the Landscape web portal to begin reporting data.
+
 ## Update the `client.conf` file
 
 See the Landscape Client GitHub project for an [example `client.conf` file](https://github.com/canonical/landscape-client/blob/main/example.conf). This file contains all the existing configuration options available.
