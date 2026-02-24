@@ -15,12 +15,12 @@ If you have an Ubuntu Pro subscription, attach your Pro token before or after in
 
 ## Check minimum requirements
 
-The following minimum requirements are needed to install Landscape Server:
+The following minimum requirements are needed to install Landscape Server 24.04 LTS:
 
 - **Operating system**: Ubuntu 22.04 LTS (Jammy Jellyfish) or Ubuntu 24.04 LTS (Noble Numbat)
 - **Hardware**: A dual-core 2 GHz processor, 8 GB of RAM, and 20 GB of disk space
 - **Networking**: An IP address and FQDN with TCP communication allowed for SSH (typically port 22), HTTP (port 80), and HTTPS (port 443)
-- If you wish to use LetsEncrypt to obtain an SSL certificate, DNS administration access for the hostname you’ll use to access Landscape
+- If you wish to use Lets Encrypt to obtain an SSL certificate, DNS administration access for the hostname you’ll use to access Landscape
 
 ## Install Landscape Server
 
@@ -39,16 +39,16 @@ The `add-apt-packages` command line utility is necessary to add the PPA which co
 To set the necessary environment variables, run:
 
 ```bash
-HOST_NAME={HOST_NAME}
-DOMAIN={DOMAIN_NAME}
+HOST_NAME=<HOST_NAME>
+DOMAIN=<DOMAIN_NAME>
 FQDN=$HOST_NAME.$DOMAIN
 ```
 
 This code block includes the following values that must be changed:
 
-`{HOST_NAME}`: The host name you’re using for the Landscape installation
+`<HOST_NAME>`: The host name you’re using for the Landscape installation
 
-`{DOMAIN_NAME}`: The domain name you’re using for the Landscape installation
+`<DOMAIN_NAME>`: The domain name you’re using for the Landscape installation
 
 It’s important to set `HOST_NAME`, `DOMAIN` and `FQDN` correctly prior to installing Landscape Server. These variables are used by other commands later.
 
@@ -66,13 +66,13 @@ When Landscape Server is installed, it will read the machine’s host name and u
 
 To install `landscape-server-quickstart`:
 
-1. Add the PPA for Landscape Server, replacing `{LANDSCAPE_PPA}` with the appropriate repository:
+1. Add the PPA for Landscape Server, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
 
     ```bash
-    sudo add-apt-repository -y {LANDSCAPE_PPA}
+    sudo add-apt-repository -y <LANDSCAPE_PPA>
     ```
 
-    - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
 2. Update packages and dependencies in your local system:
 
@@ -96,7 +96,7 @@ If you have the `fullchain.pem` and `privkey.pem` files for your SSL certificate
 
 ### Install Certbot
 
-Certbot is a command line utility which makes acquiring and renewing SSL certificates from LetsEncrypt an easy, free and automated process. You can install Certbot with the `snap` or `apt` package manager.
+Certbot is a command line utility which makes acquiring and renewing SSL certificates from Let's Encrypt an easy, free and automated process. You can install Certbot with the `snap` or `apt` package manager.
 
 To install Certbot with `snap`:
 
@@ -110,19 +110,19 @@ Or `apt`:
 sudo apt-get install certbot python3-certbot-apache -y
 ```
 
-### Get an SSL certificate from LetsEncrypt
+### Get an SSL certificate from Let's Encrypt
 
-If your Landscape instance has a public IP, and your FQDN resolves to that public IP, run the following code to get a valid SSL certificate from LetsEncrypt:
+If your Landscape instance has a public IP, and your FQDN resolves to that public IP, run the following code to get a valid SSL certificate from Let's Encrypt:
 
 ```bash
-sudo certbot --non-interactive --apache --no-redirect --agree-tos --email {EMAIL@ADDRESS.COM} --domains $FQDN
+sudo certbot --non-interactive --apache --no-redirect --agree-tos --email <EMAIL@ADDRESS.COM> --domains $FQDN
 ```
 
-But, replace `{EMAIL@ADDRESS.COM}` with an email address where certificate renewal reminders can be sent.
+But, replace `<EMAIL@ADDRESS.COM>` with an email address where certificate renewal reminders can be sent.
 
 ## Create a global administrator account
 
-At this point, visiting `https://HOST_NAME.DOMAIN` prompts you to create Landscape’s first Global Administrator account. To add administrators:
+At this point, visiting `https://$FQDN` prompts you to create Landscape’s first Global Administrator account. To add administrators:
 
 1. Click **Settings**
 2. Set a valid outgoing email address in the **System email address** field
@@ -139,6 +139,6 @@ You can configure Postfix to handle Landscape Server email notifications and ale
 Your Landscape Server is now ready to manage client instances. To register clients:
 
 1. See {ref}`how-to-install-landscape-client` for instructions on installation and registration.
-2. When registering clients, attach an Ubuntu Pro token to each machine to enable Pro services. If you don't have a token, you can get a free personal Ubuntu Pro subscription at [ubuntu.com/pro](https://ubuntu.com/pro).
+2. When registering clients, attach an Ubuntu Pro token to each client machine to enable Pro services. If you don't have a token, you can get a free personal Ubuntu Pro subscription at [ubuntu.com/pro](https://ubuntu.com/pro).
 
 For more details, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
