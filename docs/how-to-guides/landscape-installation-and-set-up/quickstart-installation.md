@@ -32,7 +32,7 @@ To install prerequisites, run:
 sudo apt update && sudo apt install -y ca-certificates software-properties-common
 ```
 
-The `add-apt-packages` command line utility is necessary to add the PPA which contains the Landscape Server software. The `software-properties-common` package must be added to access `add-apt-packages`.
+The `add-apt-repository` command line utility is necessary to add the PPA which contains the Landscape Server software. The `software-properties-common` package must be added to access `add-apt-repository`.
 
 ### Set environment variables
 
