@@ -20,7 +20,7 @@ The following minimum requirements are needed to install Landscape Server 24.04 
 - **Operating system**: Ubuntu 22.04 LTS (Jammy Jellyfish) or Ubuntu 24.04 LTS (Noble Numbat)
 - **Hardware**: A dual-core 2 GHz processor, 8 GB of RAM, and 20 GB of disk space
 - **Networking**: An IP address and FQDN with TCP communication allowed for SSH (typically port 22), HTTP (port 80), and HTTPS (port 443)
-- If you wish to use Lets Encrypt to obtain an SSL certificate, DNS administration access for the hostname you’ll use to access Landscape
+- If you plan to use Lets Encrypt to obtain an SSL certificate, DNS administration access for the hostname you’ll use to access Landscape
 
 ## Install Landscape Server
 
