@@ -7,7 +7,7 @@ myst:
 (explanation-features-index)=
 # Features
 
-We have the following explanations for certain features in Landscape.
+Understand how Landscape's key features work. These explanations cover common features in Landscape such as repository management, package reporting, and remote script execution.
 
 ```{toctree}
 :titlesonly:

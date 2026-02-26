@@ -7,6 +7,8 @@ myst:
 (explanation-landscape-index)=
 # Landscape
 
+Learn about Landscape's architecture, deployment options, and licensing. These explanations cover fundamental concepts about Landscape.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
