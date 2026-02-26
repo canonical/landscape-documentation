@@ -7,9 +7,9 @@ myst:
 (how-to-install-landscape-client)=
 # How to install Landscape Client
 
-There are multiple ways to install Landscape Client. This document describes each method, including basic registration steps.
+> See also: {ref}`how-to-configure-landscape-client`
 
-After you install Landscape Client and register the client with your Landscape server, see {ref}`how-to-configure-landscape-client` to configure your client machines.
+There are multiple ways to install Landscape Client. This document describes each method, including basic registration steps.
 
 If you have an Ubuntu Pro subscription, attach the Pro token before or after installing the client. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 
