@@ -31,8 +31,6 @@ What you'll need:
 - Server X509 certificate and key, signed by a publicly known Certificate Authority, and issued for the FQDN hostname of the application server.
 - Custom (internal) CAs can be used, but this process isn't documented here in depth because many parts of that process take place outside of Landscape. Administrators deploying custom CAs generally know what needs to be done, but there is some guidance throughout this document.
 
-If you plan to use Ubuntu Pro services on the Landscape Server host, attach the Pro token before or after installation and enable the Landscape entitlement when needed. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
-
 ## Install the database server
 
 After having installed the basic server profile of Ubuntu Server, you need to install the PostgreSQL database and configure it for use by Landscape.
@@ -163,7 +161,7 @@ sudo apt-get install landscape-server rabbitmq-server apache2
 
 ### (If needed) Install the (legacy) license file
 
-Most Landscape Server 24.04 LTS and later deployments use Ubuntu Pro entitlements instead of a legacy license file. If you were given a legacy license file, copy it to `/etc/landscape/license.d`:
+Most Landscape 24.04 LTS and later deployments use Ubuntu Pro entitlements instead of a legacy license file. If you were given a legacy license file, copy it to `/etc/landscape/license.d`:
 
 ```bash
 sudo cp license.txt /etc/landscape/license.d
@@ -171,7 +169,7 @@ sudo cp license.txt /etc/landscape/license.d
 
 Make sure it's readable by the `landscape` user and root.
 
-If you don't have a legacy license file, Landscape will manage machines with Ubuntu Pro subscriptions associated with them.
+If you don't have a legacy license file, Landscape will manage client machines with Ubuntu Pro subscriptions associated with them.
 
 ### Configure rabbitmq
 
@@ -576,7 +574,7 @@ The first user that's created in Landscape automatically becomes the administrat
 
 Install and configure Landscape Client using the dedicated guides: {ref}`how-to-install-landscape-client` and {ref}`how-to-configure-landscape-client`.
 
-If your self-hosted Landscape server uses a self-signed or custom CA certificate, follow the trust and registration steps in the configuration guide before approving the client in the web portal.
+If your self-hosted Landscape server uses a self-signed or custom CA certificate, see {ref}`howto-heading-register-client-self-signed-certificate`.
 
 ### (Optional) Add an email alias
 

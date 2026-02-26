@@ -11,8 +11,6 @@ The quickstart mode of deploying Landscape consists of installing all the necess
 
 If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
-If you have an Ubuntu Pro subscription, attach your Pro token before or after installation and enable the Landscape entitlement. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
-
 ## Check minimum requirements
 
 The following minimum requirements are needed to install Landscape Server 24.04 LTS:
@@ -72,7 +70,7 @@ To install `landscape-server-quickstart`:
     sudo add-apt-repository -y <LANDSCAPE_PPA>
     ```
 
-    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. Use an LTS for production deployments.
 
 2. Update packages and dependencies in your local system:
 
@@ -122,7 +120,7 @@ Replace `<EMAIL@ADDRESS.COM>` with an email address where certificate renewal re
 
 ## Create a global administrator account
 
-At this point, visiting `https://$FQDN` prompts you to create Landscape’s first Global Administrator account. To add administrators:
+At this point, visiting `https://HOST_NAME.DOMAIN` prompts you to create Landscape’s first Global Administrator account. To add administrators:
 
 1. Click **Settings**
 2. Set a valid outgoing email address in the **System email address** field
@@ -136,7 +134,7 @@ You can configure Postfix to handle Landscape Server email notifications and ale
 
 ## Next step: Register your clients
 
-Your Landscape Server is now ready to manage client instances. To register clients:
+Your Landscape server is now ready to manage client instances. To register clients:
 
 1. See {ref}`how-to-install-landscape-client` for instructions on installation and registration.
 1. When registering clients, attach an Ubuntu Pro token to each client machine to enable Pro services. If you don't have a token, you can get a free personal Ubuntu Pro subscription at [ubuntu.com/pro](https://ubuntu.com/pro).

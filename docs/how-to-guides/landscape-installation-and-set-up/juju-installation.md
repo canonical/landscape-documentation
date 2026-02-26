@@ -13,8 +13,6 @@ You can deploy Landscape in a scalable way with Juju. This document provides a v
 
 For detailed instructions on deploying Landscape with Juju in a high-availability environment, see {ref}`how-to-juju-ha-installation`.
 
-If you have an Ubuntu Pro subscription, make sure your Landscape Server units are attached to Ubuntu Pro and the Landscape entitlement is enabled. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
-
 ## Install Juju
 
 [Install Juju](https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-juju/) as a snap with this command:
