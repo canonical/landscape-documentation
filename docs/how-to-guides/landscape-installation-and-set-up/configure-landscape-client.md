@@ -53,7 +53,7 @@ If you're using a self-signed SSL certificate for your Landscape instance, follo
 1. Save your certificate to an accessible location, such as `/etc/landscape/server.pem`.
 1. Reference the certificate path using one of the following methods:
 
-   i. **Command Line**: Provide the full path to the --ssl-public-key parameter when registering the computer.
+   i. **Command Line**: Provide the full path to the `--ssl-public-key` parameter when registering the computer.
       ```
       landscape-config --ssl-public-key /etc/landscape/server.pem
       ```
