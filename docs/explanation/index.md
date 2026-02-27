@@ -11,7 +11,7 @@ These explanatory and conceptual guides provide a deeper understanding of how La
 
 ## Landscape
 
-Learn about Landscape's architecture, deployment models, and fundamental concepts.
+Learn about Landscape's architecture, deployment models, and other concepts.
 
 ```{toctree}
 :titlesonly:
