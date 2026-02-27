@@ -44,6 +44,15 @@ The Landscape Client configuration file is located in `/etc/landscape/client.con
 ```bash
 sudo systemctl restart landscape-client
 ```
+### SSL certificates
+
+If you are using a self-signed SSL certificate for your Landscape instance, follow these steps:
+
+1. Save your certificate to a accessible directory (for example, `/etc/landscape/server.pem`).
+1. Reference the certificate path using one of the following methods:
+   1. **Command Line**: Provide the full path to the --ssl-public-key parameter when registering the computer.
+   1. **Configuration File**: Add the certificate path to your client.conf file.
+      - Key in `client.conf` will be `ssl_public_key` so using this example it would be `ssl_public_key = /etc/landscape/server.pem`
 
 (howto-heading-client-autoregister)=
 ## Auto-register new computers
