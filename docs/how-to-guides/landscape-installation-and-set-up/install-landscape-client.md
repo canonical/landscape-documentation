@@ -7,9 +7,11 @@ myst:
 (how-to-install-landscape-client)=
 # How to install Landscape Client
 
-> See also: {ref}`how-to-attach-ubuntu-pro`, {ref}`how-to-ubuntu-pro-enable-landscape`
+> See also: {ref}`how-to-configure-landscape-client`
 
-There are multiple ways to install Landscape Client. This document describes each method.
+There are multiple ways to install Landscape Client. This document describes each method, including basic registration steps.
+
+If you have an Ubuntu Pro subscription, attach the Pro token before or after installing the client. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 
 ## Install Landscape Client from Ubuntu's `main` repository
 
@@ -158,14 +160,33 @@ This method is suitable if it's available during a machine's provisioning stage.
 
    For additional information, see the [cloud-init Landscape module documentation](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#landscape).
 
-## Install the `landscape-client` snap
+## Install the Landscape Client snap
 
 ```{note}
 The Landscape Client snap doesn't support management of Debian packages.
-```
 
-```{note}
-You must be running a self-hosted Landscape server version 23.10 or later to use the snap.
+You must be running a self-hosted Landscape Server version 23.10 or later to use the snap.
 ```
 
 The snap is generally used for Ubuntu Core devices. You can install the Landscape Client snap from the [Snap Store](https://snapcraft.io/landscape-client) or the command line. For more detailed instructions and information on the snap's limitations, see {ref}`how-to-install-the-client-snap`.
+
+(howto-heading-register-client-self-signed-certificate)=
+## Register a client machine on a self-hosted server with a self-signed certificate
+
+If your self-hosted Landscape server uses a self-signed certificate, you'll need to download the server certificate to the client before registration. Replace `<SERVER_NAME>` with the FQDN or IP address of your server.
+
+Download the server certificate:
+
+```bash
+echo -n | openssl s_client -connect <SERVER_NAME>:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
+```
+
+Then register the client:
+
+```bash
+sudo landscape-config --computer-title "My client" --account-name standalone --url https://<SERVER_NAME>/message-system --ping-url http://<SERVER_NAME>/ping
+```
+
+If you used a custom CA, you'll need to pass the `--ssl-public-key` parameter pointing to the CA file so that the client can recognize the issuer of the server certificate.
+
+After registration, approve the client in the Landscape web portal to begin reporting data.
