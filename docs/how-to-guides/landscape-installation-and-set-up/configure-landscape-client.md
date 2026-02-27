@@ -48,7 +48,7 @@ sudo systemctl restart landscape-client
 ```
 ### SSL certificates
 
-If you are using a self-signed SSL certificate for your Landscape instance, follow these steps:
+If you're using a self-signed SSL certificate for your Landscape instance, follow these steps:
 
 1. Save your certificate to a accessible directory (for example, `/etc/landscape/server.pem`).
 1. Reference the certificate path using one of the following methods:
