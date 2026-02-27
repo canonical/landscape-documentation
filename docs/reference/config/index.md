@@ -7,10 +7,12 @@ myst:
 (reference-config-index)=
 # Configuration
 
+Configuration file references for Landscape Server. These pages document available settings and their usage.
+
 ```{toctree}
 :titlesonly:
-:maxdepth: 2
-:glob:
+:maxdepth: 1
 
 immutable-settings
 service-conf
+```
