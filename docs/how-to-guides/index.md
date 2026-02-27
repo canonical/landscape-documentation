@@ -72,7 +72,7 @@ external-authentication/index
 (how-to-index-heading-repo-mirrors)=
 ## Repository mirrors
 
-Create and manage Ubuntu package repository mirrors for your managed machines, including support for air-gapped environments.
+Create and manage Ubuntu package repository mirrors for your managed machines, including support for airgapped environments.
 
 ```{toctree}
 :titlesonly:
