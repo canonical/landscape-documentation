@@ -8,6 +8,8 @@ myst:
 
 # Rest API endpoints
 
+Complete reference documentation for Landscape's REST API (v2).
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2

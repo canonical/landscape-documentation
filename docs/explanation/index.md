@@ -33,7 +33,7 @@ charm/index
 
 ## Features
 
-Explore key Landscape features including activities, repository mirroring, and remote script execution.
+Explore key Landscape features including activities, repository mirroring, package reporting, and remote script execution.
 
 ```{toctree}
 :titlesonly:
