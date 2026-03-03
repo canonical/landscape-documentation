@@ -7,10 +7,11 @@ myst:
 (reference-release-notes-index)=
 # Release notes
 
+Release notes documenting new features, bug fixes, and changes across all Landscape releases.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 1
-:glob:
 
 what-s-new-in-beta
 24-04-lts-release-notes
@@ -20,3 +21,4 @@ what-s-new-in-beta
 23-10-release-notes
 23-03-release-notes
 older-release-notes/index
+```

@@ -8,6 +8,8 @@ myst:
 
 # Legacy API endpoints
 
+Complete reference documentation for Landscape's Legacy API (v1).
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2

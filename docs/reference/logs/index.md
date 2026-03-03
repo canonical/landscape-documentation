@@ -7,9 +7,11 @@ myst:
 (reference-logs-index)=
 # Logs
 
+Log file locations and formats for Landscape Server and Client.
+
 ```{toctree}
 :titlesonly:
-:maxdepth: 2
-:glob:
+:maxdepth: 1
 
 logs
+```

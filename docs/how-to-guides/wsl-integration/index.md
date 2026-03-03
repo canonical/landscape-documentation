@@ -7,6 +7,8 @@ myst:
 (how-to-guides-wsl-integration-index)=
 # WSL integration
 
+Landscape can manage Windows Subsystem for Linux (WSL) instances, allowing you to centrally control and monitor Ubuntu running on Windows machines.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2

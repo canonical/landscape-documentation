@@ -96,7 +96,7 @@ Your Landscape Server will also need the following external network access:
 - HTTPS access to `ubuntu.com/security` for fetching security information
 - HTTPS access to `api.snapcraft.io`, `dashboard.snapcraft.io`, `login.ubuntu.com`, and `*.snapcraftcontent.com` if using or downloading snaps (e.g., `landscape-api`)
 
-If this external network access is unavailable, Canonical's professional services include assistance with setting up Landscape in a fully air-gapped environment.
+If this external network access is unavailable, Canonical's professional services include assistance with setting up Landscape in a fully airgapped environment.
 
 ## Unsupported Versions
 

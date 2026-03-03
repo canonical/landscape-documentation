@@ -7,6 +7,8 @@ myst:
 (how-to-guides-troubleshooting-index)=
 # Troubleshooting
 
+Diagnose and resolve common Landscape issues.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
