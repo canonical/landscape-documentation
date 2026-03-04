@@ -643,7 +643,7 @@ The method returns a JSON serialized list of the repository profiles:
 
 ## GetAPTSources
 
-Get a list of apt sources in the account used for authentication.
+Get a list of APT sources in the account used for authentication.
 
 - `names.#`: List of names of the APT source to be returned. Multiple names can be supplied. (optional)
 
@@ -697,11 +697,11 @@ The method returns a JSON serialized list of the created APT source:
 
 ## RemoveAPTSource
 
-Remove an apt source.
+Remove an APT source.
 
 This method takes one mandatory argument:
 
-- `name`: Name of the apt source to be removed.
+- `name`: Name of the APT source to be removed.
 
 Example of a valid request:
 

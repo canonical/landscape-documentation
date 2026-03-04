@@ -63,7 +63,7 @@ Follow these steps to perform a non-quickstart upgrade, that is, you did not use
 
  * stop all landscape services on all machines that make up your non-quickstart deployment, except the database service: `sudo lsctl stop`
  * add the OPL 16.03 PPA: `sudo add-apt-repository ppa:landscape/16.03`
- * refresh the apt database and upgrade: `sudo apt-get update && sudo apt-get dist-upgrade`
+ * refresh the APT database and upgrade: `sudo apt-get update && sudo apt-get dist-upgrade`
  * answer with `N` to any dpkg questions about Landscape configuration files
  * if you have `UPGRADE_SCHEMA` enabled in `/etc/default/landscape-server`, then the required schema upgrade will be performed as part of the package upgrade and all services will be running at the end. The upgrade is finished.
  * if `UPGRADE_SCHEMA` is disabled, then you will have failures when the services are restarted at the end of the upgrade. That's expected. You now have to perform the schema upgrade manually with this command: 
@@ -152,7 +152,7 @@ Clouds deployed with a previous version of Landscape will not be correctly handl
  * The add-hardware operation will fail, and possibly allocate a resource in your MAAS controller without releasing it.
 
 ### Repository management "weak digest"
-Starting with Ubuntu 16.04 LTS ("xenial"), apt will complain when a repository was signed using a "weak digest". The error or warning is similar to this:
+Starting with Ubuntu 16.04 LTS ("xenial"), APT will complain when a repository was signed using a "weak digest". The error or warning is similar to this:
 
 ```text
 W: http://<server>/path/foo/Release.gpg: Signature by key <somekey> uses weak digest algorithm (SHA1)

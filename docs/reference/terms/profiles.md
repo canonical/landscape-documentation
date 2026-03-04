@@ -20,7 +20,7 @@ Landscape has multiple types of profiles.
 
 A **package profile**, or meta-package, comprises a set of one or more packages, including their dependencies and conflicts (generally called constraints), that you can manage as a group. Package profiles specify sets of packages that associated systems should always get, or never get. You can associate zero or more instances with each package profile via tags to install packages on those instances. You can also associate a package profile with an access group, which limits its use to only instances within the specified access group. You can manage package profiles from the **Profiles** page.
 
-Package profiles are evaluated periodically, and can be used for ensuring compliance over time. If package profiles are used to install packages, it is important to ensure any prerequisite repository configurations have been applied so the package can be downloaded, otherwise the package profile will fail to install the package, and report the machine as non-compliant.
+Package profiles are evaluated periodically, and can be used for ensuring compliance over time. If package profiles are used to install packages, it is important to ensure any prerequisite repository configurations have been applied so the package can be downloaded, otherwise the package profile will fail to install the package, and report the instance as non-compliant.
 
 (reference-terms-reboot-profile)=
 ## Reboot profile
@@ -30,12 +30,12 @@ A **reboot profile** defines how and when Landscape executes system reboots on m
 (reference-terms-removal-profile)=
 ## Removal profile
 
-A **removal profile** defines a maximum number of days that an instance can go without exchanging data with the Landscape server before it is automatically removed. If more days pass than the profile’s "Days without exchange", that instance will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired instance data for long periods of time. You can associate zero or more instances with each removal profile via tags to ensure those instances are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only instances within the specified access group. You can manage removal profiles from the **Profiles** page.
+A **removal profile** defines a maximum number of days that an instance can go without exchanging data with the Landscape server before it is automatically removed. If more days pass than the profile's *Days without exchange*, that instance will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired instance data for long periods of time. You can associate zero or more instances with each removal profile via tags to ensure those instances are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only instances within the specified access group. You can manage removal profiles from the **Profiles** page.
 
 (reference-terms-repository-profile)=
 ## Repository profile
 
-A **repository profile** defines a set of pockets and apt sources for instances to use to source packages. When an instance is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations. You can associate zero or more instances with each repository profile via tags to ensure those instances are governed by this repository profile. You can also associate a repository profile with an access group, which limits its use to only instances within the specified access group. You can manage repository profiles from the sidebar by navigating to **Profiles -> Repository Profiles**.
+A **repository profile** defines a set of pockets and APT sources for instances to use to source packages. When an instance is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations. You can associate zero or more instances with each repository profile via tags to ensure those instances are governed by this repository profile. You can also associate a repository profile with an access group, which limits its use to only instances within the specified access group. You can manage repository profiles from the sidebar by navigating to **Profiles -> Repository Profiles**.
 
 (reference-terms-script-profile)=
 ## Script profile
@@ -50,7 +50,7 @@ A **security profile** defines how Landscape should monitor and manage security 
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
 
-An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the machines associated with a specific access group. You can associate zero or more instances with each upgrade profile via tags to install packages on those instances. You can also associate an upgrade profile with an access group, which limits its use to only instances within the specified access group. You can manage upgrade profiles from the **Profiles** page.
+An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the instances associated with a specific access group. You can associate zero or more instances with each upgrade profile via tags to install packages on those instances. You can also associate an upgrade profile with an access group, which limits its use to only instances within the specified access group. You can manage upgrade profiles from the **Profiles** page.
 
 (reference-terms-wsl-profile)=
 ## WSL profile
