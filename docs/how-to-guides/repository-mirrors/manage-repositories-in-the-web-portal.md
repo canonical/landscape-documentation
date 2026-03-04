@@ -157,7 +157,7 @@ landscape-api get-activities --query type:SyncPocketRequest --limit 1
 The output of this returns a `progress` field that provides an estimate of the percent complete of your pocket sync. You can also add `watch --`  before the previous command to get an update every two seconds.
 
 (how-to-heading-manage-repos-create-repo-profile)=
-## Create a repository profile and associate instances to the profile
+## Create a repository profile and associate instances with the profile
 
 A repository profile in Landscape is useful for updating repository configurations. When a machine is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
 
