@@ -71,8 +71,8 @@ To create the GPG key:
     gpg --full-gen-key
     ```
 
-1. If you're prompted to provide information about the key, click **Enter** to choose the default options or make selections based on your system configuration. If you're unsure what to select, the default options work for most configurations.
-1. Enter **Y** when prompted with `Is this correct? (y/N)`
+1. If you're prompted to provide information about the key, press **Enter** to choose the default options or make selections based on your system configuration. If you're unsure what to select, the default options work for most configurations.
+1. Enter **Y** when prompted with `Is this correct? (y/N)`.
 1. When you're prompted with "Please confirm that you do not want to have any protection on your key," choose **Yes, protection is not needed**. You'll be prompted and need to confirm this twice.
 
 Your GPG key should now be created. To import the GPG key into Landscape:
@@ -121,7 +121,7 @@ To create a new distribution:
 
 To create a mirror using the distribution you previously made:
 
-1. On the same page where you created your repository (**Repositories** > **Mirrors**), click **Add mirror**
+1. On the same page where you created your repository (**Repositories** > **Mirrors**), click **Add mirror**.
 1. Select the type of mirror from the **Type** dropdown menu. For example, select **Ubuntu Archive** if you're mirroring Jammy 22.04 or another Ubuntu repository.
 1. In the **Mirror URI** field, use the default Mirror URI if you're mirroring Jammy 22.04 or another Ubuntu repository
 1. In the **Mirror series** dropdown menu, select the series you're mirroring. For example, **Ubuntu Jammy 22.04**.
