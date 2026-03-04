@@ -157,21 +157,22 @@ landscape-api get-activities --query type:SyncPocketRequest --limit 1
 The output of this returns a `progress` field that provides an estimate of the percent complete of your pocket sync. You can also add `watch --`  before the previous command to get an update every two seconds.
 
 (how-to-heading-manage-repos-create-repo-profile)=
-## Create a repository profile and associate computers to the profile
+## Create a repository profile and associate instances to the profile
 
 A repository profile in Landscape is useful for updating repository configurations. When a machine is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
 
 To create a profile:
 
-1. From the sidebar, navigate to **Repositories** > **Profiles**
-2. Click **Add Profile**
-3. In the **Title** field, enter a name for this profile. For example, “jammy-test”.
-4. (Optional) Add a description of this profile in the **Description** field
-5. (Optional) Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group or specific computers (tags)
-6. (Optional) Use the **Pockets** and **Apt Sources** tabs to associate this profile with certain pockets or apt sources
-7. Click **Add profile**
+1. From the sidebar, navigate to **Profiles** > **Repository Profiles**
+1. Click **Add repository profile**
+1. In the **Title** field, enter a name for this profile. For example, “jammy-test”.
+1. (Optional) Add a description of this profile in the **Description** field
+1. (Optional) Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group
+1. (Optional) Use the **Association** field to associate the profile with every instance or specific instances with the tags you select.
+1. (Optional) Use the **Pockets** and **APT sources** tabs to associate this profile with certain pockets or apt sources
+1. Click **Add repository profile**
 
-Note that you may want to create multiple repository profiles for different groups of computers.
+Note that you may want to create multiple repository profiles for different groups of instances.
 
 ## Create and manage pull pockets
 
@@ -186,7 +187,7 @@ To create a new pull pocket:
 7. In the **GPG Key** dropdown menu, select the same private key you previously generated.
 8. (Optional) If you want to use filters in your pull pocket, select the type in the **Filter type** dropdown menu.
 9. Change any selections in **Components** and **Architectures** as necessary for your configuration.
-10. Click **Create**
+10. Click **Add pocket**
 
 To update your pull pocket:
 
