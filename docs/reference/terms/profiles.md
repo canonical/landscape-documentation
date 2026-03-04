@@ -35,7 +35,7 @@ A **removal profile** defines a maximum number of days that an instance can go w
 (reference-terms-repository-profile)=
 ## Repository profile
 
-A **repository profile** defines a set of pockets and APT sources for instances to use to source packages. When an instance is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations. You can associate zero or more instances with each repository profile via tags to ensure those instances are governed by this repository profile. You can also associate a repository profile with an access group, which limits its use to only instances within the specified access group. You can manage repository profiles from the sidebar by navigating to **Profiles -> Repository Profiles**.
+A **repository profile** defines a set of pockets and APT sources for instances to use to source packages. When an instance is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations. You can associate zero or more instances with each repository profile via tags to ensure those instances are governed by this repository profile. You can also associate a repository profile with an access group, which limits its use to only instances within the specified access group. You can manage repository profiles from the sidebar by navigating to **Profiles** > **Repository Profiles**.
 
 (reference-terms-script-profile)=
 ## Script profile
