@@ -61,7 +61,7 @@ To create the GPG key:
     sudo apt-get install rng-tools && sudo rngd -r /dev/urandom
     ```
 
-1. Create the GPG key using one of the following commands. The `--gen-key` command creates a GPG key that sets a two year expiration date, and `--full-gen-key` creates a GPG key that does not expire.
+1. Create the GPG key using one of the following commands. The `--gen-key` command creates a GPG key that sets a two-year expiration date, and `--full-gen-key` creates a GPG key that does not expire.
 
     ```bash
     gpg --gen-key
@@ -163,14 +163,14 @@ A repository profile in Landscape is useful for updating repository configuratio
 
 To create a profile:
 
-1. From the sidebar, navigate to **Profiles** > **Repository Profiles**
-1. Click **Add repository profile**
+1. From the sidebar, navigate to **Profiles** > **Repository Profiles**.
+1. Click **Add repository profile**.
 1. In the **Title** field, enter a name for this profile. For example, "jammy-test".
-1. (Optional) Add a description of this profile in the **Description** field
-1. (Optional) Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group
-1. (Optional) Use the **Association** field to associate the profile with every instance or specific instances with the tags you select.
-1. (Optional) Use the **Pockets** and **APT sources** tabs to associate this profile with certain pockets or APT sources
-1. Click **Add repository profile**
+1. (Optional) Add a description of this profile in the **Description** field.
+1. (Optional) Use the **Access group** dropdown menu to associate this profile with an access group.
+1. (Optional) Use the **Association** section to associate the profile with every instance or specific instances with the tags you select.
+1. (Optional) Use the **Pockets** and **APT sources** tabs to associate this profile with certain pockets or APT sources.
+1. Click **Add repository profile**.
 
 Note that you may want to create multiple repository profiles for different groups of instances.
 
