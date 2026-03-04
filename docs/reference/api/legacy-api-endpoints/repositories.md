@@ -645,7 +645,7 @@ The method returns a JSON serialized list of the repository profiles:
 
 Get a list of APT sources in the account used for authentication.
 
-- `names.#`: List of names of the APT source to be returned. Multiple names can be supplied. (optional)
+- `names.#`: List of names of the APT sources to be returned. Multiple names can be supplied. (optional)
 
 Example of a valid request:
 

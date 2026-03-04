@@ -123,7 +123,7 @@ To create a mirror using the distribution you previously made:
 
 1. On the same page where you created your repository (**Repositories** > **Mirrors**), click **Add mirror**
 1. Select the type of mirror from the **Type** dropdown menu. For example, select **Ubuntu Archive** if you're mirroring Jammy 22.04 or another Ubuntu repository.
-1. In the **Mirror URI** field, use the default Mirror URI if you're mirroring Jammy 22.04 or anther Ubuntu repository
+1. In the **Mirror URI** field, use the default Mirror URI if you're mirroring Jammy 22.04 or another Ubuntu repository
 1. In the **Mirror series** dropdown menu, select the series you're mirroring. For example, **Ubuntu Jammy 22.04**.
 1. In the **Series name** field, enter a name for your series. For example, "jammy".
 1. In the **Mirror GPG key** dropdown menu, you can leave this blank if mirroring an Ubuntu repository. The Ubuntu public mirror GPG key is already configured in Landscape.
@@ -192,5 +192,5 @@ To create a new pull pocket:
 To update your pull pocket:
 
 1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate your pull pocket
-1. In the same row, click the <img src="https://assets.ubuntu.com/v1/e8b73774-sync.png" alt="two arrows creating a circle" width="32"/> arrow to update your pocket. This activity may take awhile to complete.
+1. In the same row, click the <img src="https://assets.ubuntu.com/v1/e8b73774-sync.png" alt="two arrows creating a circle" width="32"/> arrow to update your pocket. This activity may take a while to complete.
     - If you hover your cursor over the icon, it says **Sync** for mirrored pockets and **Pull** for pull pockets.
