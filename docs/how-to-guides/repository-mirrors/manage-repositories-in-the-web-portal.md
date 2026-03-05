@@ -157,7 +157,7 @@ landscape-api get-activities --query type:SyncPocketRequest --limit 1
 The output of this returns a `progress` field that provides an estimate of the percent complete of your pocket sync. You can also add `watch --`  before the previous command to get an update every two seconds.
 
 (how-to-heading-manage-repos-create-repo-profile)=
-## Create a repository profile and associate instances with the profile
+## Create a repository profile and associate managed instances with the profile
 
 A repository profile in Landscape is useful for updating repository configurations. When a machine is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
 
@@ -168,11 +168,11 @@ To create a profile:
 1. In the **Title** field, enter a name for this profile. For example, "jammy-test".
 1. (Optional) Add a description of this profile in the **Description** field.
 1. (Optional) Use the **Access group** dropdown menu to associate this profile with an access group.
-1. (Optional) Use the **Association** section to associate the profile with every instance or specific instances with the tags you select.
+1. (Optional) Use the **Association** section to associate the profile with every managed instance or specific managed instances with the tags you select.
 1. (Optional) Use the **Pockets** and **APT sources** tabs to associate this profile with certain pockets or APT sources.
 1. Click **Add repository profile**.
 
-Note that you may want to create multiple repository profiles for different groups of instances.
+Note that you may want to create multiple repository profiles for different groups of managed instances.
 
 ## Create and manage pull pockets
 
