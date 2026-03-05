@@ -34,7 +34,7 @@ stores = main account-1
 ```
 
 ```{note}
-Landscape server 24.04 LTS uses percent signs `%` for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as `%%` so that it is interpreted as `%`.
+Landscape Server 24.04 LTS uses percent signs `%` for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as `%%` so that it is interpreted as `%`.
 ```
 
 ### Update Apache config
