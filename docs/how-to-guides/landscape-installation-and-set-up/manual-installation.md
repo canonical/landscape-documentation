@@ -141,6 +141,10 @@ Additionally, other services needed by Landscape will also be running on this ma
 - `apache`
 - `rabbitmq-server`
 
+### Attach your Ubuntu Pro token
+
+If you have an Ubuntu Pro subscription, attach your Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
+
 ### Add the Landscape package archive
 
 Landscape is distributed in a public PPA. You can add it to the system with these commands, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
