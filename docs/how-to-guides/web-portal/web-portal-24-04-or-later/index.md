@@ -15,6 +15,7 @@ The web portal (24.04 LTS or later) is Landscape's newer interface. We're active
 :titlesonly:
 :maxdepth: 2
 
+Manage instances <manage-instances>
 Manage administrators and roles <manage-administrators-and-roles>
 Manage access groups <manage-access-groups>
 Use annotations <use-annotations>
