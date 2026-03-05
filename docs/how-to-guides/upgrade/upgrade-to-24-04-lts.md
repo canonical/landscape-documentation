@@ -33,6 +33,10 @@ threads = 1
 stores = main account-1
 ```
 
+```{note}
+Landscape Server 24.04 LTS uses percent signs `%` for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as `%%` so that it is interpreted as `%`.
+```
+
 ### Update Apache config
 
 In your Apache config file (commonly in `/etc/apache2/sites-available/landscape.conf`), you need to add the following RewriteRule.
