@@ -22,6 +22,8 @@ how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-int
 
 how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/backup-and-maintenance/manage-maintenance-cron-jobs/
 
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps
+
 # Reference
 
 reference/terms/profiles/package-profile/ reference/terms/profiles/
