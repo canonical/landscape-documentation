@@ -19,7 +19,7 @@ This tab displays a list of installed packages, including the name, status, and 
 
 You can also search for specific packages using the search bar.
 
-### Manage packages
+### Manage packages: Install, hold, upgrade, and more
 
 You can perform different actions with packages from an instance's **Packages** tab, either in bulk or on a single package. From the **Packages** tab, you can:
 
