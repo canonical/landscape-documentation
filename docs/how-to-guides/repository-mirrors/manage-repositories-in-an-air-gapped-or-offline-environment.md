@@ -34,7 +34,7 @@ For fully disconnected airgapped environments, using physical media to manually 
 
 ## Restricted network airgap
 
-**Note:** This process will take awhile to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see {ref}`explanation-repo-mirroring`.
+**Note:** This process will take a while to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see {ref}`explanation-repo-mirroring`.
 
 In a restricted network airgap, you can use different server configurations depending on your requirements:
 
@@ -46,7 +46,7 @@ After you’ve set up your repository mirror structure, see {ref}`how-to-manage-
 
 ## Fully disconnected airgap
 
-**Note:** This process will take awhile to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see {ref}`explanation-repo-mirroring`.
+**Note:** This process will take a while to set up, especially if you’re not familiar with repository management. For general information on repository management in Landscape, see {ref}`explanation-repo-mirroring`.
 
 If you’re in a fully-disconnected airgap, the general process is that you copy the necessary data from your outside (online) server and manually transfer it to your inside (offline) server via physical media.
 
