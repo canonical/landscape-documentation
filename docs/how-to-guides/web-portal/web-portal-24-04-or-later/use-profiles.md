@@ -29,6 +29,35 @@ To create a package profile, go to **Profiles** from the sidebar > **Package pro
 
 Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
+(how-to-web-portal-use-reboot-profiles)=
+## Reboot profiles
+
+```{note}
+This feature is only available in **Landscape 25.04** and later.
+
+Reference: {ref}`reference-terms-reboot-profile`
+```
+
+You can use reboot profiles to automatically restart specific Landscape Client instances on a scheduled basis.
+
+To create a reboot profile, go to **Profiles** from the sidebar > **Reboot profiles**. Then **Add reboot profile** and complete the form. The following fields appear in the form:
+
+   - **Name**: Name of the profile.
+   - **Access group**: The access group the profile will apply to.
+   - **Schedule**:
+
+     - **Days**: The day(s) the reboot will occur
+     - **Time**: The time (in 24-hour format) when the reboot will occur. The scheduled time is interpreted in UTC.
+     - **Expires after**: A time window for retrying the reboot if it fails. The request will be retried until this window closes.
+
+   - **Randomize delivery over a time window**: Select **Yes** if you want to stagger the delivery of reboots to the selected instances. This avoids rebooting them all simultaneously.
+   - **Association**:
+
+     - **All instances**: The profile will affect all instances in the same access group as the profile
+     - **Tag(s)**: Only instances having the specific tag(s) will be affected
+
+After you've created your reboot profile, you'll see the new profile listed along with its next scheduled reboot time. You can manage existing profiles using the dot menu under **Actions**.
+
 ## Removal profiles
 
 > Reference: {ref}`reference-terms-removal-profile`
@@ -39,7 +68,17 @@ To create a removal profile, go to **Profiles** from the sidebar > **Removal pro
 
 ## Repository profiles
 
+> Reference: {ref}`reference-terms-repository-profile`
+
 To create or manage a repository profile, see {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
+
+## Script profiles
+
+<INSERT>
+
+## Security profiles
+
+<INSERT>
 
 ## Upgrade profiles
 
@@ -56,5 +95,3 @@ Once you've created your profile, you can edit or remove it using the dot menu u
 > Reference: {ref}`reference-terms-wsl-profile`
 
 To create or manage a WSL profile, see {ref}`how-to-use-wsl-profiles`.
-
-### <CONTINUE> ###

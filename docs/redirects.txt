@@ -24,6 +24,8 @@ how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/bac
 
 how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps
 
+how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
+
 # Reference
 
 reference/terms/profiles/package-profile/ reference/terms/profiles/
