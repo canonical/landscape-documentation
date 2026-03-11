@@ -29,6 +29,10 @@ To create a package profile, go to **Profiles** from the sidebar > **Package pro
 
 Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
+## Repository profiles
+
+See {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
+
 ## Upgrade profiles
 
 > See also: {ref}`reference-terms-upgrade-profile`
