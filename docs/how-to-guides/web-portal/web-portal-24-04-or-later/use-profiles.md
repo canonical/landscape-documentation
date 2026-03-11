@@ -72,9 +72,36 @@ To create a removal profile, go to **Profiles** from the sidebar > **Removal pro
 
 To create or manage a repository profile, see {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
 
+(how-to-web-portal-use-script-profiles)=
 ## Script profiles
 
-<INSERT>
+```{note}
+This feature is only available in self-hosted **Landscape 25.04** and later.
+
+Reference: {ref}`reference-terms-script-profile`
+```
+
+You can use script profiles to execute scripts based on certain triggers. The possible triggers are: post-enrollment, date, and a recurring schedule.
+
+To create a reboot profile, go to **Profiles** from the sidebar > **Script profiles**. Then **Add script profile** and complete the form. The following fields appear in the form:
+
+   - **Name**: Name of the profile.
+   - **Script**: Name of a corresponding script.
+The same access group of this script will be assigned to the new profile.
+   - **Run as user**: The username to execute the script as on the client.
+   - **Time limit**: The time, in seconds, after which the script is considered defunct.
+   - **Trigger**:
+
+     - **Post Enrollment**: Triggers after a computer is enrolled in an account.
+     - **On a date**: A UTC time at which the script profile should execute.
+     - **Recurring**: A start date after which the profile will execute the specified [Cron](https://en.wikipedia.org/wiki/Cron) schedule.
+
+   - **Association**:
+
+     - **All instances**: The profile will affect all instances in the same access group as the profile.
+     - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
+
+You can manage existing profiles using the dot menu under **Actions**.
 
 ## Security profiles
 

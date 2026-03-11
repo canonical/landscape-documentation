@@ -23,5 +23,4 @@ Use profiles <use-profiles>
 Use annotations <use-annotations>
 Manage Livepatch and kernel updates <manage-livepatch-and-kernel-updates>
 Sanitize instances <sanitize-instances>
-Use script profiles <use-script-profiles>
 Use security profiles <use-security-profiles>
