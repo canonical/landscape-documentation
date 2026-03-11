@@ -105,7 +105,9 @@ You can manage existing profiles using the dot menu under **Actions**.
 
 ## Security profiles
 
-<INSERT>
+> Reference: {ref}`reference-terms-security-profile`
+
+To create or manage security profiles, see {ref}`how-to-web-portal-use-security-profiles`.
 
 ## Upgrade profiles
 
