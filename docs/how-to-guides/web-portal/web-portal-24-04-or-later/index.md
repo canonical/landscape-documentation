@@ -20,6 +20,8 @@ Manage administrators and roles <manage-administrators-and-roles>
 Manage access groups <manage-access-groups>
 Manage packages and snaps <manage-packages-and-snaps>
 Use profiles <use-profiles>
+Use remote script execution <use-remote-script-execution>
 Use annotations <use-annotations>
 Manage Livepatch and kernel updates <manage-livepatch-and-kernel-updates>
 Sanitize instances <sanitize-instances>
+
