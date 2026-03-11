@@ -21,30 +21,40 @@ Once you've created your profile, you can edit, remove, and more using the dot m
 
 ## Package profiles
 
-> See also: {ref}`reference-terms-package-profile`
+> Reference: {ref}`reference-terms-package-profile`
 
 Package profiles let you define rules for how packages should exist on certain client instances. For example, you could use a package profile to prevent certain packages from being installed together on the same client instances.
 
-To create a package profile, go to **Profiles** from the sidebar > **Package profiles**. Then **Add package profile** and complete the form. You'll need to specify what package constraints you want to enforce on the package profile in this form, and which tags and/or access groups to apply the profile to.
+To create a package profile, go to **Profiles** from the sidebar > **Package profiles**. Then **Add package profile** and complete the form. You'll need to specify what package constraints you want to enforce on the package profile in this form, and which access group and (optional) tags to apply the profile to.
 
 Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
+## Removal profiles
+
+> Reference: {ref}`reference-terms-removal-profile`
+
+Removal profiles let you automatically remove client instances from Landscape that haven't communicated with the Landscape server in a specified number of days.
+
+To create a removal profile, go to **Profiles** from the sidebar > **Removal profiles**. Then **Add removal profile** and complete the form. You'll need to specify the removal timeframe (in days), and which access group and (optional) tags to apply the profile to.
+
 ## Repository profiles
 
-See {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
+To create or manage a repository profile, see {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
 
 ## Upgrade profiles
 
-> See also: {ref}`reference-terms-upgrade-profile`
+> Reference: {ref}`reference-terms-upgrade-profile`
 
 Upgrade profiles let you schedule and control when package updates are applied to client instances. This allows you to automate upgrades across groups of machines.
 
-To create an upgrade profile, go to **Profiles** from the sidebar > **Upgrade profiles**. Then **Add upgrade profile** and complete the form. You'll need to specify the type of upgrades (e.g., security-only upgrades), the schedule of upgrades, and which tags and/or access groups to apply the profile to.
+To create an upgrade profile, go to **Profiles** from the sidebar > **Upgrade profiles**. Then **Add upgrade profile** and complete the form. You'll need to specify the type of upgrades (e.g., security-only upgrades), the schedule of upgrades, and which access group and (optional) tags to apply the profile to.
 
 Once you've created your profile, you can edit or remove it using the dot menu under **Actions** for each profile.
 
 ## WSL profiles
 
-See {ref}`how-to-use-wsl-profiles`.
+> Reference: {ref}`reference-terms-wsl-profile`
+
+To create or manage a WSL profile, see {ref}`how-to-use-wsl-profiles`.
 
 ### <CONTINUE> ###
