@@ -66,6 +66,8 @@ Removal profiles let you automatically remove client instances from Landscape th
 
 To create a removal profile, go to **Profiles** from the sidebar > **Removal profiles**. Then **Add removal profile** and complete the form. You'll need to specify the removal timeframe (in days), and which access group and (optional) tags to apply the profile to.
 
+Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
+
 ## Repository profiles
 
 > Reference: {ref}`reference-terms-repository-profile`
@@ -101,7 +103,7 @@ The same access group of this script will be assigned to the new profile.
      - **All instances**: The profile will affect all instances in the same access group as the profile.
      - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
 
-You can manage existing profiles using the dot menu under **Actions**.
+Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
 ## Security profiles
 
