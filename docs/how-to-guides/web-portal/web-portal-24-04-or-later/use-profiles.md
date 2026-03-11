@@ -43,4 +43,8 @@ To create an upgrade profile, go to **Profiles** from the sidebar > **Upgrade pr
 
 Once you've created your profile, you can edit or remove it using the dot menu under **Actions** for each profile.
 
+## WSL profiles
+
+See {ref}`how-to-use-wsl-profiles`.
+
 ### <CONTINUE> ###
