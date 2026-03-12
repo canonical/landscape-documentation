@@ -37,7 +37,7 @@ To run a script on one or more instances:
 
 ## View script execution status and results
 
-After you run a scipt, you can monitor its progress and view results.
+After you run a script, you can monitor its progress and view results.
 
 ### From the Activities page
 
