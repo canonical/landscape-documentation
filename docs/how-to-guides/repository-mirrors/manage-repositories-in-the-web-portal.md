@@ -123,7 +123,7 @@ To create a mirror using the distribution you previously made:
 
 1. On the same page where you created your repository (**Repositories** > **Mirrors**), click **Add mirror**
 1. Select the type of mirror from the **Type** dropdown menu. For example, select **Ubuntu Archive** if you’re mirroring Noble 24.04 or another Ubuntu repository.
-1. In the **Mirror URI** field, use the default Mirror URI if you’re mirroring Noble 24.04 or anther Ubuntu repository
+1. In the **Mirror URI** field, use the default Mirror URI if you’re mirroring Noble 24.04 or another Ubuntu repository
 1. In the **Mirror series** dropdown menu, select the series you’re mirroring. For example, **Ubuntu Noble 22.04**.
 1. In the **Series name** field, enter a name for your series. For example, "noble".
 1. In the **Mirror GPG key** dropdown menu, you can leave this blank if mirroring an Ubuntu repository. The Ubuntu public mirror GPG key is already configured in Landscape.
