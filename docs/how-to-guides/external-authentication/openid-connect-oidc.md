@@ -33,14 +33,14 @@ The `oidc_client_id` and `oidc_client_secret` should be provided by your OIDC pr
 
 ## Enable OIDC support in Landscape (earlier versions)
 
-For versions earlier than 25.10, to enable OIDC support, add `oidc-issuer`, `oidc-client-id` and `oidc-client-secret` to `/etc/landscape/service.conf` in the `[appserver]` section. For example:
+For versions earlier than 25.10, to enable OIDC support, add `oidc-issuer`, `oidc-client-id` and `oidc-client-secret` to `/etc/landscape/service.conf` in the `[landscape]` section. For example:
 
 ```bash
 [landscape]
 […]
 oidc-issuer = <https://accounts.google.com/>
 oidc-client-id = 000000000000-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com
-oidc-client-secret = a4sDFAsdfA4F52as-asDfAsd`
+oidc-client-secret = a4sDFAsdfA4F52as-asDfAsd
 ```
 
 The `oidc-issuer` is the URL of the issuer. That URL should also be a discovery configuration file available by appending `.well-known/openid-configuration`, such as [https://accounts.google.com/.well-known/openid-configuration](https://accounts.google.com/.well-known/openid-configuration).
