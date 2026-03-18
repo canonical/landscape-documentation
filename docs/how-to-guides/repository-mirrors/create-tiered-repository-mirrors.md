@@ -68,8 +68,8 @@ To download all the packages for your mirror, you need to {ref}`sync the mirror 
 
 1. In your Management server, go to **Repositories** > **APT Sources**
 2. Click **Add APT Source**
-3. Add a name for your APT source, such as “landscape-ppa”
-4. In the **APT Line** field, enter “deb”, followed by the URI for the repository mirror, distribution and components. An example entry could be `deb http://landscape-repo-mirror/repository/standalone/ubuntu jammy main universe restricted multiverse`
+3. Add a name for your APT source, such as "landscape-ppa"
+4. In the **APT Line** field, enter "deb", followed by the URI for the repository mirror, distribution and components. An example entry could be `deb http://landscape-repo-mirror/repository/standalone/ubuntu jammy main universe restricted multiverse`
 5. Select the private GPG key you imported earlier
 6. Select the appropriate access group you want for the APT source
 7. Click **Add APT Source**
@@ -78,10 +78,10 @@ To download all the packages for your mirror, you need to {ref}`sync the mirror 
 
 In your Management server, follow the {ref}`guide to create repository profiles <how-to-heading-manage-repos-create-repo-profile>`, with the following changes:
 
-* If you’ve tagged your clients with a specific tag, such as “repo-mirror-client”, associate your profile to the appropriate tag(s)
+* If you’ve tagged your clients with a specific tag, such as "repo-mirror-client", associate your profile to the appropriate tag(s)
 * In the **APT Source** tab, select the APT source you previously added
 
-In the **Activities** menu in the sidebar, a new activity named “Apply repository profiles” should be in progress. Once that activity finishes, your configuration is complete. Your Mirror server is configured as the upstream source of packages to the clients, which are managed under the Management Server.
+In the **Activities** menu in the sidebar, a new activity named "Apply repository profiles" should be in progress. Once that activity finishes, your configuration is complete. Your Mirror server is configured as the upstream source of packages to the clients, which are managed under the Management Server.
 
 ## Option #2: Network-isolated configuration
 

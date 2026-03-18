@@ -85,7 +85,7 @@ To create the signature:
 - Percent encode the space character as `%20` (and not `+`, as common encoding schemes do).
 - Separate the encoded parameter names from their encoded values with the equals sign (`=`) (ASCII character `61`), even if the parameter value is empty.
 - Separate the name-value pairs with an ampersand (`&`) (ASCII code `38`).
-- Create the string to sign according to the following pseudo-grammar (the “`\n`” represents an ASCII newline):
+- Create the string to sign according to the following pseudo-grammar (the "`\n`" represents an ASCII newline):
 
     ```text
     StringToSign = HTTPVerb + "\n" +

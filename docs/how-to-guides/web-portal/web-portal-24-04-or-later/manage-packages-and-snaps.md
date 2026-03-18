@@ -25,7 +25,7 @@ You can perform different actions with packages from an instance's **Packages** 
 
 - Install/uninstall
 - Hold/unhold
-   - “Holding” a package prevents the package from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually upgrade the package.
+   - "Holding" a package prevents the package from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually upgrade the package.
 - Upgrade/Downgrade
    - You can only downgrade an individual package, not multiple packages at once.
 
@@ -48,7 +48,7 @@ You can perform different actions with snaps from an instance's **Snaps** tab, e
 - Install/uninstall (remove)
 - Refresh (upgrade)
 - Hold/unhold
-   - “Holding” a snap prevents the snap from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually refresh (upgrade) the snap.
+   - "Holding" a snap prevents the snap from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually refresh (upgrade) the snap.
 - Switch channels
    - You can only switch channels on individual snap, not multiple snaps at once.
 

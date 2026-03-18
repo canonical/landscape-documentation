@@ -142,8 +142,8 @@ Syncing pockets involves downloading all packages from that pocket locally. For 
 
 To sync a pocket from the web portal:
 
-1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the pocket you intend to sync. For example, the “release” pocket in Noble 24.04.
-2. In the same row, click the <img src="https://assets.ubuntu.com/v1/e8b73774-sync.png" alt="two arrows creating a circle" width="32"/> arrow to sync your pocket
+1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the pocket you intend to sync. For example, the "release" pocket in Noble 24.04.
+1. In the same row, click the <img src="https://assets.ubuntu.com/v1/e8b73774-sync.png" alt="two arrows creating a circle" width="32"/> arrow to sync your pocket
     - If you hover your cursor over the icon, it says **Sync** for mirrored pockets and **Pull** for pull pockets
 
 **NOTE:** Only one pocket can be synchronized, at a time. This will change in the future.
@@ -164,7 +164,7 @@ A repository profile in Landscape is useful for updating repository configuratio
 To create a profile:
 
 1. From the sidebar, go to **Profiles** > **Repository profiles** > **Add repository profile**
-1. In the **Title** field, enter a name for this profile. For example, “noble-test”.
+1. In the **Title** field, enter a name for this profile. For example, "noble-test".
 1. Complete the rest of the form to match your desired repository profile configurations. The remaining fields are **optional**:
    - Add a description of this profile in the **Description** field
    - Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group or specific instances/computers (tags)
@@ -177,16 +177,16 @@ Note that you may want to create multiple repository profiles for different grou
 
 To create a new pull pocket:
 
-1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the series with the pocket you intend to pull from. For example, “noble”.
-2. In that section, click **New pocket**.
-3. In the **Type** dropdown menu, select the type. For example, **Ubuntu**.
-4. In the **Mode** dropdown menu, select **Pull**.
-5. In the **Name** field, enter a name for your pull pocket. For example, “noble-release-pull”.
-6. In the **Pull from** dropdown menu, select the pocket you intend to pull from.
-7. In the **GPG Key** dropdown menu, select the same private key you previously generated.
-8. (Optional) If you want to use filters in your pull pocket, select the type in the **Filter type** dropdown menu.
-9. Change any selections in **Components** and **Architectures** as necessary for your configuration.
-10. Click **Create**
+1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the series with the pocket you intend to pull from. For example, "noble".
+1. In that section, click **New pocket**.
+1. In the **Type** dropdown menu, select the type. For example, **Ubuntu**.
+1. In the **Mode** dropdown menu, select **Pull**.
+1. In the **Name** field, enter a name for your pull pocket. For example, "noble-release-pull".
+1. In the **Pull from** dropdown menu, select the pocket you intend to pull from.
+1. In the **GPG Key** dropdown menu, select the same private key you previously generated.
+1. (Optional) If you want to use filters in your pull pocket, select the type in the **Filter type** dropdown menu.
+1. Change any selections in **Components** and **Architectures** as necessary for your configuration.
+1. Click **Create**
 
 To update your pull pocket:
 

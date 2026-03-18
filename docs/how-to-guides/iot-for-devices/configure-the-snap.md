@@ -87,7 +87,7 @@ sudo landscape-client.config --include-manager-plugins=ScriptExecution
 
 > This configuration is available for Rev 383 or higher.
 
-After you've installed the Landscape Client snap, you can set your device to “managed mode”. This is a configuration that tells SnapD not to automatically refresh or update any snaps and that Landscape Client will now undertake those responsibilities remotely.
+After you've installed the Landscape Client snap, you can set your device to "managed mode". This is a configuration that tells SnapD not to automatically refresh or update any snaps and that Landscape Client will now undertake those responsibilities remotely.
 
 This setting is recommended for IoT devices where it's often important to control if, and exactly when, snaps get updated to later versions.
 

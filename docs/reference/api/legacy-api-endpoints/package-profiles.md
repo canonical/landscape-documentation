@@ -17,7 +17,7 @@ Get the details of all Package Profiles defined in the account.
 
 - `names`: Specific profile names to limit results. (optional)
 
-For example, the following command limits the results to return the single package profile named “mysqlprofile” in this account:
+For example, the following command limits the results to return the single package profile named "mysqlprofile" in this account:
 
 ```text
 ?action=GetPackageProfiles&names.1=mysqlprofile
