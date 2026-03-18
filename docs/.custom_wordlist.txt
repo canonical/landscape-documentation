@@ -331,6 +331,7 @@ STIGed
 Syslog
 TCP
 teardown
+templated
 timeframe
 TLD
 TLS

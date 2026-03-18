@@ -15,4 +15,5 @@ Secure your Landscape deployment and manage security updates for your client mac
 
 Harden your deployment <harden-your-deployment>
 Apply security updates <apply-security-updates>
+Use security profiles <use-security-profiles>
 ```

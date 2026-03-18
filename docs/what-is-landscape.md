@@ -18,7 +18,7 @@ Landscape is a client-server application in which there are two main components:
 - **Landscape Server** is installed on a single, centralized server and manages all of your Ubuntu client machines and devices. Landscape Server is generally what users of Landscape interact with the most, and it’s where you perform system administration tasks. You can manage your system with Landscape Server using the web portal or API.
 - **Landscape Client** is installed on each Ubuntu machine in your system. It communicates with Landscape Server by sending client information to the server, receiving updates from the server, and executing commands on the client from the server.
 
-Although “Landscape” refers to both the Landscape Server and Landscape Client applications, it most often describes Landscape Server in the documentation because the server is where management activities are performed. If you see “Landscape” mentioned without further clarification, it’s probably discussing the Server component.
+Although "Landscape" refers to both the Landscape Server and Landscape Client applications, it most often describes Landscape Server in the documentation because the server is where management activities are performed. If you see "Landscape" mentioned without further clarification, it’s probably discussing the Server component.
 
 In addition, Landscape Server relies on the following third-party infrastructure:
 
