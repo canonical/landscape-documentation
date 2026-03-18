@@ -31,6 +31,10 @@ hostagent_task_queue = landscape-server-hostagent-task-queue
 [hostagent-message-consumer]
 threads = 1
 stores = main account-1
+
+[secrets]
+secrets-url = 
+secrets-service-url = http://localhost:26155
 ```
 
 ```{note}
