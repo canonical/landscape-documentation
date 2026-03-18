@@ -17,7 +17,7 @@ You still need to invite users and assign their roles and permissions within Lan
 
 ## Enable OIDC support in Landscape (25.10 and later)
 
-For Landscape 25.10+, to enable OIDC support, add `nidc_issuer`, `oidc_client_id` and `oidc_client_secret` to `/etc/landscape/service.conf` in the `[appserver]` section. For example:
+For Landscape 25.10+, to enable OIDC support, add `oidc_issuer`, `oidc_client_id` and `oidc_client_secret` to `/etc/landscape/service.conf` in the `[appserver]` section. For example:
 
 ```bash
 [appserver]
@@ -45,7 +45,7 @@ oidc-client-secret = a4sDFAsdfA4F52as-asDfAsd
 
 The `oidc-issuer` is the URL of the issuer. That URL should also be a discovery configuration file available by appending `.well-known/openid-configuration`, such as [https://accounts.google.com/.well-known/openid-configuration](https://accounts.google.com/.well-known/openid-configuration).
 
-The `oidc-client-id` and `oidc-client-secret` should be provided by your OIDC provider when you create the client credentials. The provider may require setting an authorization redirect URI. This should look like `https://your-landscape/login/handle-openid`. If your provider also requires a logout redirect URL, this should be the address of your Landscape server such as `https://your_landscape/`.
+The `oidc-client-id` and `oidc-client-secret` should be provided by your OIDC provider when you create the client credentials. The provider may require setting an authorization redirect URI. This should look like `https://your-landscape/login/handle-openid`. If your provider also requires a logout redirect URL, this should be the address of your Landscape server such as `https://your-landscape/`.
 
 ## Restart all Landscape services
 
