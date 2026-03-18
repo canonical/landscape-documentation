@@ -121,11 +121,11 @@ To create a new distribution:
 
 To create a mirror using the distribution you previously made:
 
-1. On the same page where you created your repository (**Repositories** > **Mirrors**), click **Add mirror**.
-1. Select the type of mirror from the **Type** dropdown menu. For example, select **Ubuntu Archive** if you're mirroring Jammy 22.04 or another Ubuntu repository.
-1. In the **Mirror URI** field, use the default Mirror URI if you're mirroring Jammy 22.04 or another Ubuntu repository
-1. In the **Mirror series** dropdown menu, select the series you're mirroring. For example, **Ubuntu Jammy 22.04**.
-1. In the **Series name** field, enter a name for your series. For example, "jammy".
+1. On the same page where you created your repository (**Repositories** > **Mirrors**), click **Add mirror**
+1. Select the type of mirror from the **Type** dropdown menu. For example, select **Ubuntu Archive** if you’re mirroring Noble 24.04 or another Ubuntu repository.
+1. In the **Mirror URI** field, use the default Mirror URI if you’re mirroring Noble 24.04 or another Ubuntu repository
+1. In the **Mirror series** dropdown menu, select the series you’re mirroring. For example, **Ubuntu Noble 22.04**.
+1. In the **Series name** field, enter a name for your series. For example, "noble".
 1. In the **Mirror GPG key** dropdown menu, you can leave this blank if mirroring an Ubuntu repository. The Ubuntu public mirror GPG key is already configured in Landscape.
 1. In the **GPG key** dropdown menu, select your private key which you previously generated.
 1. Review the selections under **Pockets**, **Components** and **Architectures**. Either use the defaults or change the options as needed to customize your mirror.
@@ -142,7 +142,7 @@ Syncing pockets involves downloading all packages from that pocket locally. For 
 
 To sync a pocket from the web portal:
 
-1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the pocket you intend to sync. For example, the "release" pocket in Jammy 22.04.
+1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the pocket you intend to sync. For example, the "release" pocket in Noble 24.04.
 1. In the same row, click the <img src="https://assets.ubuntu.com/v1/e8b73774-sync.png" alt="two arrows creating a circle" width="32"/> arrow to sync your pocket
     - If you hover your cursor over the icon, it says **Sync** for mirrored pockets and **Pull** for pull pockets
 
@@ -157,20 +157,19 @@ landscape-api get-activities --query type:SyncPocketRequest --limit 1
 The output of this returns a `progress` field that provides an estimate of the percent complete of your pocket sync. You can also add `watch --`  before the previous command to get an update every two seconds.
 
 (how-to-heading-manage-repos-create-repo-profile)=
-## Create a repository profile and associate managed instances with the profile
+## Create a repository profile and associate client machines to the profile
 
-A repository profile in Landscape is useful for updating repository configurations. When a machine is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
+A repository profile in Landscape is useful for updating repository configurations. When a machine (instance) is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
 
 To create a profile:
 
-1. From the sidebar, navigate to **Profiles** > **Repository Profiles**.
-1. Click **Add repository profile**.
-1. In the **Title** field, enter a name for this profile. For example, "jammy-test".
-1. (Optional) Add a description of this profile in the **Description** field.
-1. (Optional) Use the **Access group** dropdown menu to associate this profile with an access group.
-1. (Optional) Use the **Association** section to associate the profile with every managed instance or specific managed instances with the tags you select.
-1. (Optional) Use the **Pockets** and **APT sources** tabs to associate this profile with certain pockets or APT sources.
-1. Click **Add repository profile**.
+1. From the sidebar, go to **Profiles** > **Repository profiles** > **Add repository profile**
+1. In the **Title** field, enter a name for this profile. For example, "noble-test".
+1. Complete the rest of the form to match your desired repository profile configurations. The remaining fields are **optional**:
+   - Add a description of this profile in the **Description** field
+   - Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group or specific instances/computers (tags)
+   - Use the **Pockets** and **APT sources** tabs to associate this profile with certain pockets or apt sources
+1. Click **Add profile**
 
 Note that you may want to create multiple repository profiles for different groups of managed instances.
 
@@ -178,16 +177,16 @@ Note that you may want to create multiple repository profiles for different grou
 
 To create a new pull pocket:
 
-1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the series with the pocket you intend to pull from. For example, "jammy".
+1. On the same page where you created your mirror (**Repositories** > **Mirrors**), locate the series with the pocket you intend to pull from. For example, "noble".
 1. In that section, click **New pocket**.
 1. In the **Type** dropdown menu, select the type. For example, **Ubuntu**.
 1. In the **Mode** dropdown menu, select **Pull**.
-1. In the **Name** field, enter a name for your pull pocket. For example, "jammy-release-pull".
+1. In the **Name** field, enter a name for your pull pocket. For example, "noble-release-pull".
 1. In the **Pull from** dropdown menu, select the pocket you intend to pull from.
 1. In the **GPG Key** dropdown menu, select the same private key you previously generated.
 1. (Optional) If you want to use filters in your pull pocket, select the type in the **Filter type** dropdown menu.
 1. Change any selections in **Components** and **Architectures** as necessary for your configuration.
-1. Click **Add pocket**
+1. Click **Create**
 
 To update your pull pocket:
 

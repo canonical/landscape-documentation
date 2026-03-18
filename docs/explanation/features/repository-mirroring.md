@@ -19,13 +19,13 @@ When you mirror a repository, you create a local copy of the entire repository, 
 
 To understand the repository mirroring hierarchy in Landscape, you should know the following terms:
 
-- **Repository:** The repository is the highest level of the hierarchy. It can also be called the “distribution”. If you’re mirroring an Ubuntu repository, the repository would simply be “Ubuntu”.
+- **Repository:** The repository is the highest level of the hierarchy. It can also be called the "distribution". If you’re mirroring an Ubuntu repository, the repository would simply be "Ubuntu".
 - **Series:** Series are inside the repository; they are specific versions of your repository. For example, "noble" (for Ubuntu 24.04 LTS) could be the series from the Ubuntu repository. When you download a series, you download every package locally that’s available from that particular series.
 - **Pocket:** Pockets are inside the series. They're system-defined sections of packages within a package repository. Pockets are a concept from the [Ubuntu package archive](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#). Landscape uses the following pockets:
   - **Release pocket:** Contains all packages that were available at the moment of releasing that particular series. For example, the Jammy 22.04 release pocket contains all of the packages that were included with Jammy 22.04 at the time of its initial release.
   - **Updates pocket:** Contains all the updates, or newer versions, of the packages in the series that were added to the repository after its initial release. For example, the Jammy 22.04 updates pocket contains all package updates that have been added to Jammy 22.04 *after* its initial release. If the repository doesn’t have any updates, then there won’t be an updates pocket.
   - **Security pocket:** This is a subset of the updates pocket, and it contains all the newer versions of packages that were updated specifically to fix a security issue.
-  - **Pull pocket (optional - user-defined):** Pull pockets are user-defined pockets that you can create to make specific packages and updates available to different groups of machines. Pull pockets are essentially a “staging” area for you to prepare packages from other pockets before they’re distributed to your systems. You can use allowlist and blocklist filters to control which packages are included or excluded from your user-defined pull pocket.
+  - **Pull pocket (optional - user-defined):** Pull pockets are user-defined pockets that you can create to make specific packages and updates available to different groups of machines. Pull pockets are essentially a "staging" area for you to prepare packages from other pockets before they’re distributed to your systems. You can use allowlist and blocklist filters to control which packages are included or excluded from your user-defined pull pocket.
 - **Component:** Components are categories of packages in the system-defined pockets (release, updates, security). There are four possible components:
   - **Main:** Contains all packages that are directly maintained by the repository owner. For an Ubuntu repository, this would be all packages directly maintained by Canonical.
   - **Restricted:** Contains proprietary packages and drivers that aren’t fully open-source.
@@ -44,7 +44,7 @@ The following image demonstrates an example hierarchy of the previous terms, sho
 
 The following diagram provides an example of how packages from the Ubuntu repository can get distributed to specific client machines. To understand the example, you should be familiar with these additional terms:
 
-- **Profile:** A configuration that can be applied to managed machines. {ref}`Profiles <reference-terms-profiles>` are sometimes called “repository profiles” in the context of repository mirroring, and they enable you to enforce certain repository configurations on your machines. For example, you may have a `test` and `production` profile which you later distribute to various machines.
+- **Profile:** A configuration that can be applied to managed machines. {ref}`Profiles <reference-terms-profiles>` are sometimes called "repository profiles" in the context of repository mirroring, and they enable you to enforce certain repository configurations on your machines. For example, you may have a `test` and `production` profile which you later distribute to various machines.
 - **Tags:** Tags are labels you can apply to groups of machines, and they’re used with profiles when mirroring repositories. For example, if you had a repository profile named `test-profile`, you could associate it with a tag named `test-tag`, and the configuration in this profile would then be applied to all machines tagged with `test-tag`.
 
 **Repository mirroring process**

@@ -21,7 +21,7 @@ You can also create an {ref}`reference-terms-upgrade-profile` to schedule securi
 
 There are two options to view the instances that have security upgrades available:
 
-- **Overview**: From the **Overview** tab (home page), find the **Upgrades** section and click the instances link next to “Security”.
+- **Overview**: From the **Overview** tab (home page), find the **Upgrades** section and click the instances link next to "Security".
 - **Instances**: From the **Instances** tab, select **Status** > **Security upgrades**.
 
 You can update the security fixes on a per-instance basis. To do this, select the instance, and upgrade from the **Security issues** tab.
