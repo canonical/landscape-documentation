@@ -57,7 +57,7 @@ juju deploy landscape-scalable
 It will take some time for the bundle to finish deploying. You can watch the deployment progress with `juju status`:
 
 ```bash
-juju status --relations --watch 3s
+juju status --watch 3s
 ```
 
 `--watch` refreshes the status periodically. This example is set to refresh every three seconds.
