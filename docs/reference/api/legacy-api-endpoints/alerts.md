@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for alert management. Legacy API endpoints to associate, disassociate, and configure alerts for computers and tags in your account."
+---
+
 (reference-legacy-api-alerts)=
 # Alerts
 

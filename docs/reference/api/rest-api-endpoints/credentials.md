@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to retrieve legacy API credentials for Landscape accounts. Access API keys and secrets for authentication."
+---
+
 (reference-rest-api-credentials)=
 # Credentials
 

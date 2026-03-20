@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure high-availability Landscape deployments with Juju and the landscape-scalable bundle. Deploy HAProxy, RabbitMQ, PostgreSQL, and multiple units."
+---
+
 (how-to-juju-ha-installation)=
 # How to install and configure Landscape for high-availability deployments
 
@@ -17,6 +23,7 @@ Before you can deploy the Landscape Scalable charm bundle, you need to:
 
   1. [Install the Juju CLI client](https://documentation.ubuntu.com/juju/3.6/howto/manage-juju/)
   1. [Have a Juju controller bootstrapped](https://documentation.ubuntu.com/juju/3.6/howto/manage-controllers/)
+  1. Attach your Ubuntu Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
 
 These steps lay the groundwork for using Juju to deploy [machine charms](https://canonical.com/juju/charms-architecture) and [integrate them via relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
 

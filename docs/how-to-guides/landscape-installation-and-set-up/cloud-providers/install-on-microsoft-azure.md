@@ -1,7 +1,11 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server on Microsoft Azure with cloud-init. Configure Azure CLI, provision resources, and deploy VMs for standard or FIPS environments."
+---
+
 (how-to-install-on-microsoft-azure)=
 # How to install Landscape Server on Microsoft Azure
-
-> *Thanks to the following contributor(s): [@MikeT-gh](https://github.com/MikeT-gh)*
 
 This guide provides an example of how to install and set up your Landscape server on Microsoft Azure with [cloud-init](https://cloudinit.readthedocs.io/en/latest/). The instructions here can be used for standard or FIPS-compliant deployments.
 

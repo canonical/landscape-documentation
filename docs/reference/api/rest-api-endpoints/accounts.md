@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for Landscape account management. Create and configure accounts with self-service organization setup."
+---
+
 (reference-rest-api-accounts)=
 
 # Accounts

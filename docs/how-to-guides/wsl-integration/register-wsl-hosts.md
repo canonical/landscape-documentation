@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Set up Ubuntu Pro for WSL and register Windows hosts to Landscape. Configure WSL 2 integration on Windows 11 with Ubuntu Pro account."
+---
+
 (how-to-register-wsl-hosts)=
 # How to set up Ubuntu Pro for WSL and register WSL hosts to Landscape
 

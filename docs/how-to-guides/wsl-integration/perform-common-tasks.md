@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Perform common WSL tasks in Landscape: start, shutdown, set default instances, and remove WSL instances via web portal or API."
+---
+
 (how-to-wsl-perform-common-tasks)=
 # How to perform common tasks with WSL in Landscape
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for removal profile management. Legacy API endpoints to create and remove automatic computer removal profiles based on inactivity."
+---
+
 (reference-legacy-api-removal-profiles)=
 # Removal Profiles
 
@@ -11,7 +17,7 @@ Create a removal profile.
 - `days_without_exchange`: The length of time after which a computer may be removed.
 - `access_group`: If specified, the name of the access group the profile will apply to.
 
-For example, the following command creates a removal profile titled “New Profile” that will remove computers after 4 days:
+For example, the following command creates a removal profile titled "New Profile" that will remove computers after 4 days:
 
 ```text
 ?action=CreateRemovalProfile&title=New%20Profile
@@ -44,7 +50,7 @@ Arguments:
 
 - `name`: The name of the removal profile to be removed.
 
-For example, the following request deletes a removal profile with the name “test-1”:
+For example, the following request deletes a removal profile with the name "test-1":
 
 ```text
 ?action=RemoveRemovalProfile&name=test-1

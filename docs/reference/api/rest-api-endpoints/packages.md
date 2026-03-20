@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to query and manage packages in Landscape. Search installed, available, and upgradable packages across computers."
+---
+
 (reference-rest-api-packages)=
 # Packages
 

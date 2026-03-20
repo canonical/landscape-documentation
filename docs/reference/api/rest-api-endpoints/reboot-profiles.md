@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing reboot profiles in Landscape. Create, update, delete, and schedule automated system reboots."
+---
+
 (reference-rest-api-reboot-profiles)=
 # Reboot Profiles
 
@@ -8,7 +14,7 @@ Creates a new reboot profile that schedules a system reboot on selected days of 
 Required parameters:
 
 - `title`: The human readable title for this reboot profile.
-- `on_days`: A list of days of the week (abbreviated: mo, tu, we, th, fr, sa, su) on which the reboot will run.
+- `on_days`: A list of days of the week (abbreviated: `mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`) on which the reboot will run.
 - `at_hour`: The hour (0–23) at which the reboot will run.
 
 Optional parameters:
@@ -73,7 +79,7 @@ Optional parameters:
 
 - `title`: The human readable title for this reboot profile.
 - `every`: The frequency at which the reboot should run. Only `"week"` is supported at this time.
-- `on_days`: A list of days (abbreviated: mo, tu, we, th, fr, sa, su) on which the reboot will run.
+- `on_days`: A list of days (abbreviated: `mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`) on which the reboot will run.
 - `at_hour`: The hour (0–23) at which the reboot will run. This time is interpreted in UTC.
 - `at_minute`: The minute (0–59) at which the reboot will run. This time is interpreted in UTC.
 - `all_computers`: Whether to apply this reboot profile to all computers.

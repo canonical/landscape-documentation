@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Complete reference for Landscape immutable configuration settings in service.conf and environment variables including system and service options."
+---
+
 (reference-immutable-settings)=
 # Immutable configuration settings
 

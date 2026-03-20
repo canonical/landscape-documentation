@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to manage account preferences in Landscape. Update audit retention, auto-registration, and organization settings."
+---
+
 (reference-rest-api-preferences)=
 # Preferences
 The endpoint(s) here are for account preferences.
@@ -14,12 +20,13 @@ Optional parameters:
 
 - `audit_retention_period`: The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely.
 - `auto_register_new_computers`: Toggle to automatically register new computers.
-- `registration_password`: Registration key for auto-registering computers. A valid input is a non-empty string (3-50 chars, single line). To clear the value, explicitly set to `null`.`auto_register_new_computers` must be false in order to clear the registration key (null).
+- `registration_password`: Registration key for auto-registering computers. A valid input is a non-empty string (3-50 chars, single line). To clear the registration password, explicitly set this field to `null` in the request.
 - `title`: The title of organization name.
 - `ubuntu_one`: Enable or disable Ubuntu One as an identity provider.
 
 ```{note}
 - If you don't provide a value for any field in the request, the current value is unchanged.
+- Auto-registration must be disabled to clear the registration password.
 ```
 
 Example request:

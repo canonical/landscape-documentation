@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Harden Landscape deployment security with TLS certificates, network restrictions, secure client configurations, and mTLS. Configure secure services and access controls."
+---
+
 (how-to-harden-deployment)=
 # How to harden your Landscape deployment
 
@@ -75,6 +81,7 @@ The transport-layer security (TLS) protocol secures communication by requiring t
 Landscape can be configured to use mTLS for its internal services, and for connections to external services like RabbitMQ and HashiCorp Vault.
 
 <!--TODO: remove when we add standard TLS (verify-none) support-->
+
 ```{note}
 Standard TLS connections that do not enforce mTLS are not supported.
 ```

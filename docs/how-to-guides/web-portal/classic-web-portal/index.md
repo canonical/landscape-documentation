@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Access Landscape's original classic web portal with comprehensive features for managing computers, packages, and administrators."
+---
+
 (how-to-guides-web-portal-classic-web-portal-index)=
 # Classic web portal
 

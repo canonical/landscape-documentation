@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Technical reference for Landscape service.conf file including all configuration sections, key-value pairs, environment variables, and defaults."
+---
+
 (reference-service-conf)=
 # The `service.conf` file
 
@@ -909,7 +915,7 @@ The `[system]` section contains configurations that apply across many or all of 
 
 ### `offline`
 
-- Purpose: Set `True` if Landscape is deployed in an air-gapped environment.
+- Purpose: Set `True` if Landscape is deployed in an airgapped environment.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_SYSTEM__OFFLINE`
 - Default: `None`

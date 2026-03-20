@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Completely remove Landscape Client snap and all associated data from devices. Manage snap lifecycle, upgrades, and snapshots securely."
+---
+
 (how-to-guides-secure-removal-client-snap)=
 # How to completely remove the Landscape Client snap and its data
 
@@ -87,7 +93,7 @@ snap_http.remove(snap, purge=True, terminate=True)
 
 ## Complete device wipe
 
-While the above steps address individual snap data, for a more comprehensive approach to data removal, you may need to perform a complete device wipe. In the event that you wish to completely remove all data from a device, you'll need to use the “install recovery mode”. This should not be confused with a factory reset or remodeling as these processes will not necessarily clear system configuration data.
+While the above steps address individual snap data, for a more comprehensive approach to data removal, you may need to perform a complete device wipe. In the event that you wish to completely remove all data from a device, you'll need to use the "install recovery mode". This should not be confused with a factory reset or remodeling as these processes will not necessarily clear system configuration data.
 
 With install mode, all existing user and system data on the device will be removed and the device will be initialized from the system version image specified. As such, the process should be treated with care if the device is not otherwise backed up.
 

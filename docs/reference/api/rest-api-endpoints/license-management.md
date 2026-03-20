@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for Ubuntu Pro license management in Landscape. Attach tokens, manage licenses, and monitor subscription status."
+---
+
 (reference-rest-api-license-management)=
 # License Management
 

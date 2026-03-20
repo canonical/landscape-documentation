@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand authentication and authorization in Landscape including local users, external identity providers, sessions, and JWT authentication."
+---
+
 (authentication-and-authorization)=
 # Authentication and authorization in Landscape
 

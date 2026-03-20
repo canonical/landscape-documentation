@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Landscape deployment models including single-server and multi-server high-availability setups with HAProxy and Juju integration."
+---
+
 (explanation-deployment-models)=
 # Landscape deployment models
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to manage snap packages in Landscape. Install, remove, update, and configure snaps on managed computers."
+---
+
 (reference-rest-api-snaps)=
 # Snaps
 

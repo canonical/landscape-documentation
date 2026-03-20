@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Build custom Ubuntu Core images with Landscape Client snap pre-installed. Auto-register IoT devices at first boot for scaled deployments."
+---
+
 (how-to-create-a-core-image)=
 # How to create an Ubuntu Core image with Landscape Client included
 
@@ -99,12 +105,12 @@ Instead, you can pre-configure the client with your information when building yo
 
 ### Create and configure a gadget snap with your account details and auto-registration
 
-You need to create a gadget snap to configure the client when building your image. A “gadget snap” is a special type of snap that contains device specific support code and data. For more information on gadget snaps, see [Snapcraft’s documentation on gadget snaps](https://ubuntu.com/core/docs/gadget-snaps).
+You need to create a gadget snap to configure the client when building your image. A "gadget snap" is a special type of snap that contains device specific support code and data. For more information on gadget snaps, see [Snapcraft’s documentation on gadget snaps](https://ubuntu.com/core/docs/gadget-snaps).
 
 To create and configure your gadget snap:
 
 1. Fork the official [Ubuntu Core 22 gadget snap repository](https://github.com/snapcore/pi-gadget/) to your local environment.
-    - Other reference gadget snaps are available for different architectures from the [Snapcore GitHub account](https://github.com/snapcore/). Search for repositories with “gadget” in the name.
+    - Other reference gadget snaps are available for different architectures from the [Snapcore GitHub account](https://github.com/snapcore/). Search for repositories with "gadget" in the name.
 2. Append the following configuration at the bottom of the `gadget.yaml` file that defines the gadget snap:
 
     ```text
@@ -148,7 +154,7 @@ If you have your own brand store, publish your custom gadget snap there and upda
 
 If you don’t have a brand store, you’ll need to use your local **`.json`** file instead. This is because it’s not permitted to upload custom gadget snaps to the global snap store. To reference your custom gadget snap in your model assertion:
 
-1. Open your `.json` file and set the grade of the snap to “dangerous” as it hasn’t been signed by a store.
+1. Open your `.json` file and set the grade of the snap to "dangerous" as it hasn’t been signed by a store.
 2. Remove the **`snap-id`** and **`default-channel`** values.
 3. Update the name to that of your snap filename.
 

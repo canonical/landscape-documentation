@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to manage processes on computers in Landscape. Kill or terminate processes by PID on managed systems."
+---
+
 (reference-rest-api-processes)=
 # Processes
 

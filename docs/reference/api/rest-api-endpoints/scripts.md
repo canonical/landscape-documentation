@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing scripts in Landscape. Retrieve and filter scripts by status, type, and version for automation."
+---
+
 # Scripts
 
 The endpoints available here are related to the management of scripts. Creation, and modification of scripts must still

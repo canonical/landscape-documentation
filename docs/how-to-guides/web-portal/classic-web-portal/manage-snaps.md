@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install, refresh, remove, and hold snaps on managed computers using Landscape's classic web portal Snaps tab."
+---
+
 (how-to-classic-web-portal-manage-snaps)=
 # How to manage snaps
 
@@ -36,6 +42,6 @@ To manage snaps on a specific computer:
 - To refresh (upgrade) a snap, click the up arrow icon in the same row and column as the snap name.
 - To remove a snap, click the minus sign icon in the same row and column as the snap name.
 - To hold a snap, click the package icon directly next to the snap name in the same row and column as the snap name.
-  - Note: “Holding” a snap prevents the snap from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually refresh (upgrade) the snap.
+  - Note: "Holding" a snap prevents the snap from upgrading in the background. It’ll stay locked to that version until you remove the hold, but you can still manually refresh (upgrade) the snap.
 - Specify the delivery information located after the table
 - Click **Apply changes**

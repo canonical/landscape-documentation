@@ -1,9 +1,15 @@
+---
+myst:
+  html_meta:
+    description: "Use landscape-api Python module to automate Landscape operations. Import API class and call methods programmatically in Python scripts."
+---
+
 (how-to-use-legacy-api-python)=
 # How to use the legacy API Python module
 
 The **landscape-api** package also has a Python module to use the Landscape API. Once the package is installed, the `API` class can be imported.
 
-In a similar way as happened with the command-line client, the API methods are slightly mangled here. The method names are converted to lowercase and an underscore (“`_`”) is used as a word separator. For example, instead of using `GetComputers`, the method defined in the `API` class is called `get_computers`.
+In a similar way as happened with the command-line client, the API methods are slightly mangled here. The method names are converted to lowercase and an underscore ("`_`") is used as a word separator. For example, instead of using `GetComputers`, the method defined in the `API` class is called `get_computers`.
 
 Each Python method has documentation explaining its purpose, parameters and types. To see the full list, run:
 

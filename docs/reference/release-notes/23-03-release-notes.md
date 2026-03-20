@@ -1,15 +1,22 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 23.03 (March 2023). Features Ubuntu Pro awareness, native RISC-V support, modernized charms, and compatibility with Ubuntu 22.04 LTS."
+---
+
 (reference-release-notes-23-03)=
 # 23.03 release notes
 
 These are the release notes for Landscape 23.03.
 
 ## Highlights
+
 * Landscape Server can be installed on Ubuntu 20.04 LTS (Focal Fossa) and Ubuntu 22.04 LTS (Jammy Jellyfish)
 * Manages all versions from Ubuntu 16.04 (Xenial Xerus) onwards
 * Native Ubuntu Pro awareness
 * Landscape Client is compatible with Debian Bullseye
 * Landscape manages all machines with an Ubuntu Pro subscription without needing a license.txt file to be installed on the server
-* Compatible with Canonical's air-gapped contract server
+* Compatible with Canonical's airgapped contract server
 * Landscape Client package for the RISC-V (RV64) CPU architecture
 * Landscape Server packages for the s390x, rv64, and arm64 (AArch64) CPU architectures
 * Modernized Charms authored in Juju's Operator Framework
@@ -22,13 +29,13 @@ These are the release notes for Landscape 23.03.
 * Faster out-of-the-box reporting of packages, for Ubuntu 22.10 (Kinetic Kudu) and onwards
 
 ## Bug fixes
-* #1945456 Landscape Login page using an older version of jQuery
-* #1966970 GPG license gets truncated if it's too large
-* #1966199 XSS - Cross-Site Scripting vulnerability via the page_key parameter
-* #1970224 Update logos
-* #2009079 Landscape can't use Duo for OIDC
-* #2043035 Landscape UI lag
-* #2070049 Allow binary script uploads via API and downloads via UI
+* Bug 1945456: Landscape Login page using an older version of jQuery
+* Bug 1966970: GPG license gets truncated if it's too large
+* Bug 1966199: XSS - Cross-Site Scripting vulnerability via the page_key parameter
+* Bug 1970224: Update logos
+* Bug 2009079: Landscape can't use Duo for OIDC
+* Bug 2043035: Landscape UI lag
+* Bug 2070049: Allow binary script uploads via API and downloads via UI
 
 ## Upgrade Notes
 Performing an in-place upgrade from Landscape 19.10 entails a fresh installation using either Juju, Quickstart, or a Manual installation; and restoring the database. Going forward, Juju is the recommended installation method. In the future, upgrading Landscape via Juju will be a two-step process: one command to pause Landscape, and one command to perform the upgrade.

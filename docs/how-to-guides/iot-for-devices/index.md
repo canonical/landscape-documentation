@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Manage IoT devices remotely with Landscape Client snap. Control updates, execute scripts, and monitor Ubuntu Core devices from web portal."
+---
+
 (how-to-guides-iot-for-devices-index)=
 # IoT for devices
 

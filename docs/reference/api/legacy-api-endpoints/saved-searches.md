@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for saved search management. Legacy API endpoints to create, edit, and retrieve saved search queries for your Landscape account."
+---
+
 (reference-legacy-api-saved-searches)=
 # Saved Searches
 
@@ -10,7 +16,7 @@ Create a new saved search associated with the current account.
 
 It requires three arguments:
 
-`name`: The “slug” name for this saved search. It must consist of only lowercase ASCII letters, numbers and hyphens. This is the text which must be used when using the “search:name” syntax. If this parameter is not included a name will be generated automatically based on the title.
+`name`: The "slug" name for this saved search. It must consist of only lowercase ASCII letters, numbers and hyphens. This is the text which must be used when using the "search:name" syntax. If this parameter is not included a name will be generated automatically based on the title.
 `title`: The display name for the saved search.
 `search`: The search string to save.
 

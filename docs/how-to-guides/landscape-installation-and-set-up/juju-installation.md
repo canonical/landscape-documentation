@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Deploy Landscape Server with Juju for scalable infrastructure management. Learn to use the landscape-scalable bundle and access your self-hosted server."
+---
+
 (how-to-juju-installation)=
 # How to install Landscape Server with Juju
 
@@ -18,6 +24,8 @@ sudo snap install juju --classic
 To learn more about Juju and to bootstrap a Juju controller, check out their [getting started](https://canonical-juju.readthedocs-hosted.com/en/latest/user/tutorial/) page.
 
 ## Deploy self-hosted Landscape Server
+
+If you have an Ubuntu Pro subscription, attach your Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
 
 When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires.
 

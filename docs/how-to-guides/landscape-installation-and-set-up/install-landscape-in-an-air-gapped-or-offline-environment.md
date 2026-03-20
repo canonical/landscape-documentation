@@ -1,13 +1,19 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server in airgapped or offline environments. Download packages from online machines and transfer them to isolated networks."
+---
+
 (how-to-install-airgapped)=
-# How to install Landscape in an air-gapped or offline environment
+# How to install Landscape in an airgapped or offline environment
 
-This guide provides a high-level overview of how to install Landscape in an offline environment. These instructions can be used for air-gapped deployments.
+This guide provides a high-level overview of how to install Landscape in an offline environment. These instructions can be used for airgapped deployments.
 
-Note that this guide only covers how to install Landscape in the offline environment and some basic set-up. This guide doesn’t cover setting up repository management. For details on setting up repository management in an air-gapped environment, see {ref}`how-to-manage-repos-airgapped`.
+Note that this guide only covers how to install Landscape in the offline environment and some basic set-up. This guide doesn’t cover setting up repository management. For details on setting up repository management in an airgapped environment, see {ref}`how-to-manage-repos-airgapped`.
 
 ## Overview
 
-The process of installing Landscape in an offline or air-gapped environment is relatively straightforward—you need to download all the relevant packages from an online machine (outside your environment) and transfer those packages into the offline environment.
+The process of installing Landscape in an offline or airgapped environment is relatively straightforward—you need to download all the relevant packages from an online machine (outside your environment) and transfer those packages into the offline environment.
 
 You won’t need the online machine anymore after you’ve downloaded the packages, so the online machine can be ephemeral.
 
@@ -39,7 +45,7 @@ All of the necessary packages for Landscape Server should now be downloaded to t
 
 ### Install Landscape Server in the offline environment
 
-Copy the downloaded `.deb` packages, carry them into the offline or air-gapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
+Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
 
 ```bash
 sudo dpkg -i /PATH/TO/PACKAGES/*.deb
@@ -69,7 +75,7 @@ All of the necessary packages for Landscape Client should now be downloaded to t
 
 ### Install Landscape Client in an offline environment
 
-Copy the downloaded `.deb` packages, carry them into the offline or air-gapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
+Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
 
 ```bash
 sudo dpkg -i /PATH/TO/PACKAGES/*.deb

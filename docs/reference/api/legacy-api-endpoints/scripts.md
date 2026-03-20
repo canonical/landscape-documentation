@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for script management. Legacy API endpoints to create, retrieve, execute, and delete stored scripts on managed computers."
+---
+
 (reference-legacy-api-scripts)=
 # Scripts
 
@@ -150,7 +156,7 @@ The following errors may be raised:
 - `DuplicateScript`: A script with this title already exists in the account.
 - `ScriptEncoding`: The code (script body) is not UTF-8 decodeable.
 - `EmptyScriptCode`: The code (script body) is of zero length or commented.
-- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (eg: `#!/bin/bash`)
+- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (e.g.,: `#!/bin/bash`)
 - `UnknownAccessContext`: The specified access context could not be found for the current script.
 - `Unauthorised`: The user doesn’t have permission to create the specified script.
 
@@ -200,7 +206,7 @@ The following errors may be raised:
 - `DuplicateScript`: A script with this title already exists in the account.
 - `ScriptEncoding`: The code (script body) is not UTF-8 decodeable.
 - `EmptyScriptCode`: The code (script body) is of zero length or commented.
-- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (eg: `#!/bin/bash`)
+- `EmptyScriptInterpreter`: The code (script body) does not start with a script interpreter. (e.g.,: `#!/bin/bash`)
 - `Unauthorised`: The user doesn’t have permission to remove the specified script.
 
 The method returns a JSON serialized description of the new script, like the following result:
@@ -285,7 +291,7 @@ The following errors may be raised:
 - `UnknownScriptAttachment`: An attachment with the specified filename could not be found in this script.
 - `Unauthorised`: The user doesn’t have permission to remove the attachment.
 
-For example, the following request deletes an attachment named “foo.jpg” from a script:
+For example, the following request deletes an attachment named "foo.jpg" from a script:
 
 ```text
 ?action=RemoveScriptAttachment&script_id=1&filename=foo.jpg
@@ -308,7 +314,7 @@ The following errors may be raised:
 - `ScriptAttachmentSize`: The maximum allowed size for attachments is already reached, or would be reached should the creation have occurred.
 - `Unauthorised`: The user doesn’t have permission to create the attachment.
 
-For example, the following request creates an attachment named “foo.txt” containing “hello”:
+For example, the following request creates an attachment named "foo.txt" containing "hello":
 
 ```text
 ?action=CreateScriptAttachment&script_id=1&file=foo.txt$$aGVsbG8=

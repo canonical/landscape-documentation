@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Control snap installations across IoT device fleets using validation sets in Landscape. Enforce snap environments and manage revisions."
+---
+
 (howto-manage-snaps-with-validation-sets)=
 # How to manage snaps in Landscape with validation sets
 
@@ -45,7 +51,7 @@ from landscape.client import snap_http
 snap_http.get_validation_sets()
 ```
 
-Next, you may want to determine if the device is already in a conformant state for a given validation set. The following script will return a result that includes whether the set is “valid” - meaning the device meets the requirements of the set.
+Next, you may want to determine if the device is already in a conformant state for a given validation set. The following script will return a result that includes whether the set is "valid" - meaning the device meets the requirements of the set.
 
 ```python
 #!/usr/bin/env python3
@@ -96,7 +102,7 @@ On saving and exiting the text editor, Snapcraft will sign and upload the update
 
 When snapd performs a refresh, any validation sets which have not been pinned to a specific sequence are updated before any snap updates are attempted. This is actually standard snapd behavior during refresh; assertions are updated before snaps.
 
-This process occurs automatically if the refresh timer is still enabled, although it's advised that this timer is disabled on Ubuntu Core to allow specific control over update scheduling. If the device is in “managed mode”, which disables the automatic refresh, it'll be necessary to tell your devices to refresh.
+This process occurs automatically if the refresh timer is still enabled, although it's advised that this timer is disabled on Ubuntu Core to allow specific control over update scheduling. If the device is in "managed mode", which disables the automatic refresh, it'll be necessary to tell your devices to refresh.
 
 You can do this with the following script:
 
@@ -126,7 +132,7 @@ snap_http.refresh_validation_set("<ACCOUNT_ID>","<VALIDATION_SET_NAME>", <VALIDA
 
 ## Remove a validation set
 
-All validation sets on a device that have not been specifically defined in your model assertion, or have been defined with the “prefer-enforce” setting, may be forgotten if the snap restrictions are no longer required. Forgetting a validation set will remove all restrictions on installing, updating, or removing snaps that were previously enforced by that validation.
+All validation sets on a device that have not been specifically defined in your model assertion, or have been defined with the "prefer-enforce" setting, may be forgotten if the snap restrictions are no longer required. Forgetting a validation set will remove all restrictions on installing, updating, or removing snaps that were previously enforced by that validation.
 
 To remove a validation set from a device, use the following script:
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Execute Python scripts remotely on Ubuntu Core devices using Landscape Client snap. Access SnapD REST API and manage confined environments."
+---
+
 (how-to-remote-script-execution)=
 # How to use remote script execution with the Landscape Client snap
 
@@ -11,7 +17,7 @@ This document describes some differences and gives examples of how remote script
 
 ### Landscape Client snap design
 
-Snaps are designed to be secure. As part of this, they operate in a confined environment. The Landscape Client snap is considered “strictly confined,” which is required for it to work on an Ubuntu Core device. Strict confinement restricts the snap from interacting with the system, except when interacting via specifically configured, audited and authorized interfaces. More information on how this works can be found in [Snapcraft’s documentation on interfaces](https://snapcraft.io/docs/interfaces).
+Snaps are designed to be secure. As part of this, they operate in a confined environment. The Landscape Client snap is considered "strictly confined," which is required for it to work on an Ubuntu Core device. Strict confinement restricts the snap from interacting with the system, except when interacting via specifically configured, audited and authorized interfaces. More information on how this works can be found in [Snapcraft’s documentation on interfaces](https://snapcraft.io/docs/interfaces).
 
 Some standard connected interfaces are:
 
@@ -134,9 +140,9 @@ from landscape.client import snap_http
 snap_http.install("nano-strict")
 ```
 
-### Example #3: Set the logging level to “debug”
+### Example #3: Set the logging level to "debug"
 
-This example sets a configuration value of the Landscape Client snap to set the logging level to “debug”:
+This example sets a configuration value of the Landscape Client snap to set the logging level to "debug":
 
 ```python
 #!/usr/bin/env python3 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints to retrieve Livepatch information from Landscape. Monitor kernel patching status, versions, and patch state for computers."
+---
+
 (reference-rest-api-livepatch)=
 # Livepatch
 

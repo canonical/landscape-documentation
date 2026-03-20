@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference for securing Landscape with network firewall rules including publicly accessible URIs and recommended access restrictions."
+---
+
 (reference-network-firewall)=
 # Network firewall
 

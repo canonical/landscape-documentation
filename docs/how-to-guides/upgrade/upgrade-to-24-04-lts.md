@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Upgrade Landscape Server to 24.04 LTS from Ubuntu 22.04 or 24.04. Update service.conf and Apache configuration for new features."
+---
+
 (how-to-upgrade-to-24-04-lts)=
 # How to upgrade to Landscape Server 24.04 LTS
 
@@ -25,6 +31,14 @@ hostagent_task_queue = landscape-server-hostagent-task-queue
 [hostagent-message-consumer]
 threads = 1
 stores = main account-1
+
+[secrets]
+secrets-url = 
+secrets-service-url = http://localhost:26155
+```
+
+```{note}
+Landscape Server 24.04 LTS uses percent signs `%` for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as `%%` so that it is interpreted as `%`.
 ```
 
 ### Update Apache config

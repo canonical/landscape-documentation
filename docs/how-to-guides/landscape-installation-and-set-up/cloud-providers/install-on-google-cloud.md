@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server on Google Cloud using cloud-init. Set up gcloud CLI, configure authentication, and deploy standard or FIPS-compliant instances."
+---
+
 (how-to-install-on-google-cloud)=
 # How to install Landscape Server on Google Cloud
 
@@ -98,7 +104,7 @@ Your current project is [None].  You can change this setting by running:
     gcloud compute addresses create landscape-external-ip --region=$REGION
     ```
 
-    This step isn’t required, but it's recommended because Landscape benefits from a static IP address assignment. A DNS record called an “A record” is responsible for pointing the fully qualified domain name (FQDN) to the Landscape Server’s IP address. If you use a static IP address, the A record doesn’t have to be updated every time the dynamic IP changes.
+    This step isn’t required, but it's recommended because Landscape benefits from a static IP address assignment. A DNS record called an "A record" is responsible for pointing the fully qualified domain name (FQDN) to the Landscape Server’s IP address. If you use a static IP address, the A record doesn’t have to be updated every time the dynamic IP changes.
 
 7. List the addresses you’ve created:
 

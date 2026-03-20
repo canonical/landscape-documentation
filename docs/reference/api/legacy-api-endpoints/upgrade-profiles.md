@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for upgrade profile management. Legacy API endpoints to create, associate, and schedule automatic package upgrades for computers."
+---
+
 (reference-legacy-api-upgrade-profiles)=
 # Upgrade Profiles
 
@@ -59,7 +65,7 @@ Arguments:
 - `deliver_delay_window`: Randomize delivery within the given timeframe specified in minutes. (optional)
 - `security_upgrade`: Optional, defaults to False. Whether this upgrade is a security upgrade or not. Deprecated, use upgrade_type instead.
 - `upgrade_type`: This profile should apply to all package upgrades or only security upgrades. Must be either `security` or `all`.
-- `autoremove`: Optional, defaults to False. Whether the upgrade profile should also perform an autoremov of old packages.
+- `autoremove`: Optional, defaults to False. Whether the upgrade profile should also perform an autoremove of old packages.
 - `access_group`: An optional name of the access group to create the profile into.
 
 The following errors may be raised:
@@ -200,7 +206,7 @@ The following errors may be raised:
 
 - `UnknownUpgradeProfile`: A profile with the specified name could not be found in the database.
 
-For example, the following request deletes an upgrade profile schedule with the name “test-1”:
+For example, the following request deletes an upgrade profile schedule with the name "test-1":
 
 ```text
 ?action=RemoveUpgradeProfile&name=test-1

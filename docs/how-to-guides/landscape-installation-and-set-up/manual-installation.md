@@ -1,33 +1,39 @@
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server manually with separate database and application servers. Complete guide for production deployments with PostgreSQL and Ubuntu Pro."
+---
+
 (how-to-manual-installation)=
 # How to install Landscape manually
 
-```{note}
-If you have an Ubuntu Pro subscription, we recommend you attach your Pro token for easy access to your Pro services. For more information, see {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
-```
-
-This is the baseline deployment recommendation we have for Landscape Server when Juju is not used. At a minimum, you need two machines: the database server and application server.
+This is the production deployment recommendation for Landscape Server when Juju isn't used. At a minimum, you need two machines: the database server and application server.
 
 For a manual installation of Landscape 24.04 LTS:
 
-- **Database server**: runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16.
-- **Application server**: runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services
+- **Database server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16.
+- **Application server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services
 
- You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
+You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
 
-This is a long document. If you want a quick installation that just works, but doesn't scale to a large number of machines, then install the `landscape-server-quickstart` package. For more information, visit {ref}`how-to-quickstart-installation`.
+Note that manually setting up a Landscape Server Debian package deployment is a long process with many configuration steps. 
+
+If you want a [Juju-managed](https://documentation.ubuntu.com/juju/), charmed deployment, you can install Landscape Server with Juju. See {ref}`how-to-juju-installation` or {ref}`how-to-juju-ha-installation`.
+
+If you're not setting up a real, production deployment and don't require scaling to a large number of client machines, you can instead install the `landscape-server-quickstart` package. For details, visit {ref}`how-to-quickstart-installation`.
 
 ## Prepare for the installation
 
-What you will need:
+What you'll need:
 
 - Ubuntu server install media for the version of Ubuntu you're using
-- An Ubuntu Pro subscription
+- An Ubuntu Pro subscription for access to Landscape and other Pro services. See {ref}`how-to-attach-ubuntu-pro` for attaching tokens.
 - Server X509 certificate and key, signed by a publicly known Certificate Authority, and issued for the FQDN hostname of the application server.
 - Custom (internal) CAs can be used, but this process isn't documented here in depth because many parts of that process take place outside of Landscape. Administrators deploying custom CAs generally know what needs to be done, but there is some guidance throughout this document.
 
 ## Install the database server
 
-After having installed the basic server profile of Ubuntu Server, we need to install the PostgreSQL database and configure it for use by Landscape. Please follow these steps:
+After having installed the basic server profile of Ubuntu Server, you need to install the PostgreSQL database and configure it for use by Landscape.
 
 (how-to-header-install-postgresql)=
 ### Install PostgreSQL and required libraries
@@ -57,14 +63,14 @@ sudo -u postgres createuser --createdb --createrole --superuser --pwprompt lands
 You should use a strong password.
 
 ```{note}
-**Warning!** Do not use an `@` symbol in the password.
+**Warning!** Don't use an `@` symbol in the password.
 ```
 
-If this database is to be shared with other services, it's recommended that another cluster is created instead for those services (or for Landscape). Please refer to the PostgreSQL documentation in that case.
+If this database is going be shared with other services, it's recommended that another cluster is created instead for those services (or for Landscape). Refer to the PostgreSQL documentation for guidance.
 
 ### Configure PostgreSQL
 
-We now need to allow the application server to access this database server. Landscape uses several users for this access, so we need to allow them all. Edit the `/etc/postgresql/<version>/main/pg_hba.conf` file (where `<version>` is the installed version of postgres for example `/etc/postgresql/12/...`) and add the following to the end:
+Now allow the application server to access this database server. Landscape uses several users for this access, so you'll need to allow them all. Edit the `/etc/postgresql/<VERSION>/main/pg_hba.conf` file (where `<VERSION>` is the installed version of PostgreSQL for example `/etc/postgresql/12/...`) and add the following to the end:
 
 ```text
 host all landscape,landscape_maintenance,landscape_superuser <IP-OF-APP> md5
@@ -75,7 +81,7 @@ Replace `<IP-OF-APP>` with the IP address of the application server, followed by
 - `192.168.122.199/32`: the IP address of the APP server
 - `192.168.122.0/24`: a network address
 
-Now come changes to the main PostgreSQL configuration file. Edit `/etc/postgresql/<version>/main/postgresql.conf` and:
+Now come changes to the main PostgreSQL configuration file. Edit `/etc/postgresql/<VERSION>/main/postgresql.conf` and:
 
 - Find the `listen_addresses` parameter, which is probably commented, and change it to:
 
@@ -99,7 +105,7 @@ sudo systemctl restart postgresql
 
 ### Tune PostgreSQL
 
-It is strongly recommended to fine tune this PostgreSQL installation according to the hardware of the server. Keeping the default settings (especially of `max_connections`) is known to be problematic.  For more information, visit [PostgreSQL's guide on tuning your PostgreSQL server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server).
+It's strongly recommended to fine tune this PostgreSQL installation according to the hardware of the server. Keeping the default settings (especially of `max_connections`) is known to be problematic. For more information, visit [PostgreSQL's guide on tuning your PostgreSQL server](https://wiki.postgresql.org/wiki/Tuning_Your_PostgreSQL_Server).
 
 #### Landscape-specific tips for tuning PostgreSQL
 
@@ -110,9 +116,9 @@ The following parameters at a minimum should be touched:
 - [`wal_buffers`](http://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-WAL-BUFFERS)
 - [`max_connections`](https://www.postgresql.org/docs/15/runtime-config-connection.html#GUC-MAX-CONNECTIONS)
 
-A good starting value for `max_connections` is 200, even on modest hardware. As your needs grow, this number should be adjusted and re-evaluated carefully. It may be helpful to use a tuning tool like [pgtune](https://pgtune.leopard.in.ua/).
+A good starting value for `max_connections` is 400, even on modest hardware. As your needs grow, this number should be adjusted and re-evaluated carefully. It may be helpful to use a tuning tool like [pgtune](https://pgtune.leopard.in.ua/).
 
-When you adjust `max_connections`, you are likely to overrun shared memory allowed by the kernel (per process) and may need to increase the [`SHMMAX`](https://www.postgresql.org/docs/current/kernel-resources.html#SYSVIPC) parameter.
+When you adjust `max_connections`, you're likely to overrun shared memory allowed by the kernel (per process) and may need to increase the [`SHMMAX`](https://www.postgresql.org/docs/current/kernel-resources.html#SYSVIPC) parameter.
 
 If the tuning changed the value of `max_connections`, make sure you also change `max_prepared_transactions` to the same value.
 
@@ -132,19 +138,22 @@ The application server will host the following Landscape services:
 
 Additionally, other services needed by Landscape will also be running on this machine, such as:
 
-- apache
-- rabbitmq-server
+- `apache`
+- `rabbitmq-server`
+
+### Attach your Ubuntu Pro token
+
+If you have an Ubuntu Pro subscription, attach your Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
 
 ### Add the Landscape package archive
 
-Landscape is distributed in a public PPA. You can add it to the system with these commands, replacing `{LANDSCAPE_PPA}` with the appropriate repository:
+Landscape is distributed in a public PPA. You can add it to the system with these commands, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
 
 ```bash
-sudo add-apt-repository {LANDSCAPE_PPA}
-sudo apt-get update
+sudo add-apt-repository <LANDSCAPE_PPA>
 ```
 
-- `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+- `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. Use an LTS for production deployments.
 
 ### Install the server package
 
@@ -154,9 +163,9 @@ Install the server package and its dependencies:
 sudo apt-get install landscape-server rabbitmq-server apache2
 ```
 
-### Install the license file
+### (If needed) Install the (legacy) license file
 
-If you were given a license file, copy it to `/etc/landscape/license.d`:
+Most Landscape 24.04 LTS and later deployments use Ubuntu Pro entitlements instead of a legacy license file. If you were given a legacy license file, copy it to `/etc/landscape/license.d`:
 
 ```bash
 sudo cp license.txt /etc/landscape/license.d
@@ -164,31 +173,31 @@ sudo cp license.txt /etc/landscape/license.d
 
 Make sure it's readable by the `landscape` user and root.
 
-If you have no such file, Landscape will manage machines with Ubuntu Pro subscriptions associated with them.
+If you don't have a legacy license file, Landscape will manage client machines with Ubuntu Pro subscriptions associated with them.
 
 ### Configure rabbitmq
 
 ```{note}
-If you're installing Landscape on Jammy 22.04 or later, you may want to change the default timeout of 30 minutes in RabbitMQ. For more information, see {ref}`how-to-configure-rabbitmq`.
+You may want to change the default timeout of 30 minutes in RabbitMQ. See {ref}`how-to-configure-rabbitmq`.
 ```
 
-Just run the following commands, replacing `<password>` with a password of your choice. It will be needed later.
+Run the following commands, replacing `<PASSWORD>` with a password of your choice. You'll need it for later.
 
 ```bash
-sudo rabbitmqctl add_user landscape <password>
+sudo rabbitmqctl add_user landscape <PASSWORD>
 sudo rabbitmqctl add_vhost landscape
 sudo rabbitmqctl set_permissions -p landscape landscape ".*" ".*" ".*"
 sudo rabbitmqctl add_vhost landscape-hostagent
 sudo rabbitmqctl set_permissions -p landscape-hostagent landscape ".*" ".*" ".*"
 ```
 
-To make rabbitmq listen only on the loopback interface (127.0.0.1), edit the file `/etc/rabbitmq/rabbitmq-env.conf` with the following content:
+To make RabbitMQ listen only on the loopback interface (127.0.0.1), edit the file `/etc/rabbitmq/rabbitmq-env.conf` with the following content:
 
 ```ini
 NODE_IP_ADDRESS=127.0.0.1
 ```
 
-Then restart it:
+Then restart RabbitMQ:
 
 ```bash
 sudo systemctl restart rabbitmq-server
@@ -196,13 +205,11 @@ sudo systemctl restart rabbitmq-server
 
 ### Configure database and broker access
 
-We now need to make some configuration changes to the `/etc/landscape/service.conf` file to tell Landscape how to use some other services:
-
-Please make the following changes:
+Make the following configuration changes to the `/etc/landscape/service.conf` file to tell Landscape how to use some other services:
 
 Section `[stores]`:
 
-- `host`: the IP or hostname of the database server.  If not the default PostgreSQL port (5432), add a :NNNN port definition after the hostname (e.g., 10.0.1.5:3232)
+- `host`: the IP or hostname of the database server. If not the default PostgreSQL port (`5432`), add a `:NNNN` port definition after the hostname (e.g., `10.0.1.5:3232`)
 - Ensure a strong password is set for user landscape (this differs from landscape_superuser password from earlier and will be created when setup script is executed)
 
 Section `[broker]`:
@@ -211,86 +218,85 @@ Section `[broker]`:
 
 Section `[schema]`:
 
-- Change the value of `store_user` to the landscape super user we created above during the DB installation
+- Change the value of `store_user` to the landscape super user you created above during the DB installation
 - Add an entry for `store_password` with the password that was chosen in that same step
 
 Section `[landscape]`:
 
-- Add an entry for `secret-token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`.
+- Add an entry for `secret-token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`. Note that Landscape Server 24.04 LTS uses percent signs % for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as %% so that it is interpreted as %.
 
 If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names. For example, to only allow connections on localhost, you may have a configuration like the following:
 
-```bash
-allowed_interfaces  = localhost 127.0.0.1 ::1
+```ini
+allowed_interfaces = localhost 127.0.0.1 ::1
 ```
 
 ### Run the Landscape setup script
 
-This script will bootstrap the databases Landscape needs to work and setup the remaining of the configuration:
+This script will bootstrap the databases Landscape needs to work and setup the rest of the configuration:
 
 ```bash
 sudo setup-landscape-server
 ```
 
 ```{note}
-Depending on the hardware, this may take several minutes to complete
+Depending on the hardware, this may take several minutes to complete.
 ```
 
 ### Configure Landscape services and schema upgrades
 
-We need to enable the Landscape services now. Please edit `/etc/default/landscape-server` and change the `RUN_ALL` line to `yes`:
+Enable the Landscape services now. Edit `/etc/default/landscape-server` and change the `RUN_ALL` line to `yes`:
 
 ```ini
-# To run all Landscape services set this to "yes"
 RUN_ALL="yes"
 ```
 
 ```{note}
-If more performance and availability are needed out of Landscape Server, it's possible to spread out the services amongst several machines. In that case, for example, one could run message servers in one machine, application servers in another one, etc.
+If more performance and availability is needed from Landscape Server, it's possible to spread out the services amongst several machines. In that case, for example, you could run message servers on one machine, application servers on another, etc.
 ```
 
-The message, application and ping services can be configured to run multiple instances. If your hardware has several cores and enough memory (4Gb or more), running two or more of each will improve performance. To run multiple instances of a service, just set the value in the respective `RUN_` line to the number of instances. For example, if you want to run two message servers, just set:
+The message, application, and ping services can be configured to run multiple instances. If your hardware has several cores and enough memory (4GB or more), running two or more of each will improve performance. To run multiple instances of a service, set the value in the respective `RUN_*` line to the number of instances. For example, if you want to run two message servers, set:
 
 ```ini
 RUN_MSGSERVER="2"
 ```
 
 ```{note}
-In order to take advantage of this multiple-instances setting, you need to configure some sort of load balancer or proxy. See the `README.multiple-services` file in the `landscape-server` package documentation directory for an example using Apache's `proxy_loadbalancer` module.
+To take advantage of this multiple-instances setting, you need to configure a load balancer or proxy. See the `README.multiple-services` file in the `landscape-server` package documentation directory for an example using Apache's `proxy_loadbalancer` module.
 ```
 
-In that same file, the `UPGRADE_SCHEMA` option needs to be reviewed. If set to `yes`, whenever the package `landscape-server` is updated it will attempt to update the database schema too. It is a very convenient setting, but please think about the following before enabling it:
+In the same `/etc/default/landscape-server` file, review the `UPGRADE_SCHEMA` option. If set to `yes`, whenever the package `landscape-server` is updated, it will attempt to update the database schema too. It's a convenient setting, but consider the following before enabling it:
 
-- schema updates can take several minutes
-- if the package is updated while the database is offline, or unreachable, the update will fail
-- you should have a backup of the database before updating the package
+- Schema updates can take several minutes
+- If the package is updated while the database is offline, or unreachable, the update will fail
+- You should have a backup of the database before updating the package
 
 Without this setting enabled, a package update might result in services that won't start anymore because of a needed schema change. In that case:
 
-- stop all the Landscape services
-- backup your database
+- Stop all the Landscape services
+- Backup your database
 - Update the schema on the application server:
 
     ```bash
     sudo setup-landscape-server
     ```
 
-- start all Landscape services again
+- Start all Landscape services again
 
 (how-to-heading-manual-install-configure-web-server)=
 ### Configure web server
 
-Landscape uses Apache to, among other things, redirect requests to each service and provide SSL support. The usual way to do this in Ubuntu is to create a Virtual Host for Landscape.
+Landscape uses Apache to redirect requests to each service and provide SSL support. The usual way to do this in Ubuntu is to create a Virtual Host for Landscape.
 
 Below is a suggested configuration file that does just that. Install it as `/etc/apache2/sites-available/landscape.conf` and change the following values:
 
-- `@hostname@`: the FQDN of the hostname the clients (browser and machines) will use to connect to Landscape Server. This is what will be in the URL, and it needs to be resolvable via DNS. For example, `lds.example.com`
-- `@certfile@`: the full filesystem path to where the SSL certificate for this server is installed. For example, `/etc/ssl/certs/landscape_server.pem`
-- `@keyfile@`: the full filesystem path to where the corresponding private key of that certificate is installed. For example, `/etc/ssl/private/landscape_server.key`
+- `@hostname@`: The FQDN of the hostname the clients (browser and machines) will use to connect to Landscape Server. This is what will be in the URL, and it needs to be resolvable via DNS. For example, `landscape.example.com`
+- `@certfile@`: The full filesystem path to where the SSL certificate for this server is installed. For example, `/etc/ssl/certs/landscape_server.pem`
+- `@keyfile@`: The full filesystem path to where the corresponding private key of that certificate is installed. For example, `/etc/ssl/private/landscape_server.key`
 
-If you are using a custom certificate authority for your SSL certificate, then you **MUST** put the CA public certificate in the file `/etc/ssl/certs/landscape_server_ca.crt` and uncomment the `SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt` line.
+If you're using a custom certificate authority for your SSL certificate, then you **must** put the CA public certificate in the `/etc/ssl/certs/landscape_server_ca.crt` file and uncomment the `SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt` line.
 
- Make sure the user apache runs as can read those files! Also, make sure the private key can only be read by root and that same apache user.
+ Make sure the `www-data` user can read those files. Also, make sure the private key can only be read by root and the `ssl-cert` group.
 
 ```apache
 <VirtualHost *:80>
@@ -506,15 +512,15 @@ If you are using a custom certificate authority for your SSL certificate, then y
 Listen 6554
 
 <VirtualHost *:6554>
-  ServerName ${hostname}
-  ServerAdmin webmaster@${hostname}
+  ServerName @hostname@
+  ServerAdmin webmaster@@hostname@
 
   ErrorLog /var/log/apache2/landscape_error.log
   CustomLog /var/log/apache2/landscape_access.log combined
 
   SSLEngine On
-  SSLCertificateFile ${ssl_certificate_crt}
-  SSLCertificateKeyFile ${ssl_certificate_key}
+  SSLCertificateFile @certfile@
+  SSLCertificateKeyFile @keyfile@
   # Disable to avoid POODLE attack
   SSLProtocol all -SSLv3 -SSLv2 -TLSv1
   SSLHonorCipherOrder On
@@ -531,25 +537,25 @@ Listen 6554
 </VirtualHost>
 ```
 
-We now need to enable some modules:
+Enable the following modules:
 
 ```bash
 for module in rewrite proxy_http ssl headers expires proxy_http2; do sudo a2enmod $module; done
 ```
 
-Unless you require it and take necessary steps to secure that endpoint, it is recommended to disable mod-status:
+Unless you require it and take necessary steps to secure that endpoint, it's recommended to disable the `mod_status` module:
 
 ```bash
 sudo a2dismod status
 ```
 
-Disable the default http vhost:
+Disable the default site:
 
 ```bash
 sudo a2dissite 000-default
 ```
 
-Finally we can enable the new site:
+Finally, enable the new site:
 
 ```bash
 sudo a2ensite landscape.conf
@@ -558,7 +564,7 @@ sudo systemctl restart apache2.service
 
 ### Start Landscape services
 
-Just run the helper script `lsctl`:
+Use `lsctl`:
 
 ```bash
 sudo lsctl restart
@@ -566,32 +572,14 @@ sudo lsctl restart
 
 ### Create the first user
 
-The first user that is created in Landscape automatically becomes the administrator of the "standalone" account. To create it, please go to https://\<servername\> and fill in the requested information.
+The first user that's created in Landscape automatically becomes the administrator of the "standalone" account. To create your first user, go to `https://<SERVER_NAME>` and complete the requested information.
 
 ### Configure the first client
 
-On the client machine, install `landscape-client`.
+Install and configure Landscape Client using the dedicated guides: {ref}`how-to-install-landscape-client` and {ref}`how-to-configure-landscape-client`.
 
-```bash
-sudo apt update && sudo apt install -y landscape-client
-```
-
-If you are using the self-signed certificate on your Landscape Server, download your self-signed certificate from Landscape Server to the client machine with this command:
-
-```bash
-echo -n | openssl s_client -connect LANDSCAPE-SERVER-IP:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
-```
-
-To configure the Landscape Client package, run:
-
-```bash
-sudo landscape-config --computer-title "My First Computer" --account-name standalone --url https://<servername>/message-system --ping-url http://<servername>/ping
-```
-
-If you used a custom CA, you will need to pass the `--ssl-public-key` parameter pointing to the CA file so that the client can recognize the issuer of the server certificate.
-
-You can now accept your client in the Landscape UI, and it will begin to upload data.
+If your self-hosted Landscape server uses a self-signed or custom CA certificate, see {ref}`howto-heading-register-client-self-signed-certificate`.
 
 ### (Optional) Add an email alias
 
-You can configure Postfix to handle Landscape Server email notifications and alerts. To ensure that important system emails get attention, we recommend you also add an alias for Landscape on your local environment. For details, see {ref}`how-to-configure-postfix`.
+You can configure Postfix to handle Landscape Server email notifications and alerts. To ensure that important system emails get attention, you can also add an alias for Landscape on your local environment. For details, see {ref}`how-to-configure-postfix`.

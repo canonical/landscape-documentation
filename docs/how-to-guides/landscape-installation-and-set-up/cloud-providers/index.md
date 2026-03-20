@@ -1,7 +1,13 @@
-(how-to-guides-landscape-installation-and-set-up-cloud-index)=
-# Landscape installation and set-up: Cloud Providers
+---
+myst:
+  html_meta:
+    description: "Install Landscape Server on major cloud providers including Google Cloud, Microsoft Azure, and Amazon WorkSpaces with step-by-step guides."
+---
 
-We have the following guides for getting started with Landscape with major cloud providers.
+(how-to-guides-landscape-installation-and-set-up-cloud-index)=
+# Cloud providers
+
+Deploy Landscape Server on major cloud platforms with these installation guides.
 
 ```{toctree}
 :titlesonly:

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Invite and disable administrators, create roles, and manage access permissions in Landscape's classic web portal."
+---
+
 (how-to-classic-web-portal-manage-admins-and-roles)=
 # How to manage administrators and roles
 

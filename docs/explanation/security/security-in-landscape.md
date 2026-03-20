@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about security in Landscape including deployment hardening, Ubuntu Pro integration, external authentication, and security updates management."
+---
+
 (explanation-security-overview)=
 # Security in Landscape
 
@@ -25,9 +31,9 @@ For a more secure system, it’s recommended to use external authentication inst
 - {ref}`how-to-external-auth-oidc`
 - {ref}`how-to-external-auth-pam`
 
-## Air-gapped and restricted network environments
+## Airgapped and restricted network environments
 
-If you’re using Landscape in an air-gapped environment, we have the following guides related to installing Landscape and setting up repository mirrors for offline environments:
+If you’re using Landscape in an airgapped environment, we have the following guides related to installing Landscape and setting up repository mirrors for offline environments:
 
 - {ref}`how-to-install-airgapped`
 - {ref}`how-to-manage-repos-airgapped`

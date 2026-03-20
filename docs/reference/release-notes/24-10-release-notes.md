@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Release notes for Landscape version 24.10 (October 2024). Manage kernel versions, view Livepatch status, Okta login support, new REST API endpoints, and enhanced WSL management."
+---
+
 (reference-release-notes-24-10)=
 # 24.10 release notes
 
@@ -53,8 +59,8 @@ To use the `latest-stable` version of Landscape with the charms, you need charm 
 * [#2069746](https://bugs.launchpad.net/landscape/+bug/2069746): missing distribution information caused mis-identification of distros
 * [#2076014](https://bugs.launchpad.net/landscape/+bug/2076014): improved resiliency against database disconnections
 * [#2072985](https://bugs.launchpad.net/landscape/+bug/2072985): better errors when attempting to manage Snaps on unsupported instances
-* [#2065095](https://bugs.launchpad.net/landscape/+bug/2065095): improved directory structure of mirrored repositories, serving the “ubuntu” directory as-needed
-* Fixed “datetime” usage error in landscape-hostagent-messenger
+* [#2065095](https://bugs.launchpad.net/landscape/+bug/2065095): improved directory structure of mirrored repositories, serving the "ubuntu" directory as-needed
+* Fixed "datetime" usage error in landscape-hostagent-messenger
 * Database user no longer reset during upgrade with UPGRADE_SCHEMA enabled
 * Updated available WSL instance types
 

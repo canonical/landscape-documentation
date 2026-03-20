@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for repository management. Legacy API endpoints to create, read, update, and delete distributions, series, and repository pockets."
+---
+
 (reference-legacy-api-repositories)=
 # Repositories
 
@@ -561,7 +567,7 @@ This method takes 4 mandatory arguments:
 - `name`: The name of the pocket to remove packages from.
 - `packages.#`: The names of the packages to be removed from the pockets.
 
-For example, the following request removes packages named haskel and golang from a pocket named ‘updates’ in the ‘natty-staging’ series of the ‘ubuntu’ distribution:
+For example, the following request removes packages named `haskel` and `golang` from a pocket named ‘updates’ in the ‘natty-staging’ series of the ‘ubuntu’ distribution:
 
 ```text
 ?action=RemovePackagesFromPockets&name=updates&series=natty-staging
@@ -637,9 +643,9 @@ The method returns a JSON serialized list of the repository profiles:
 
 ## GetAPTSources
 
-Get a list of apt sources in the account used for authentication.
+Get a list of APT sources in the account used for authentication.
 
-- `names.#`: List of names of the APT source to be returned. Multiple names can be supplied. (optional)
+- `names.#`: List of names of the APT sources to be returned. Multiple names can be supplied. (optional)
 
 Example of a valid request:
 
@@ -691,11 +697,11 @@ The method returns a JSON serialized list of the created APT source:
 
 ## RemoveAPTSource
 
-Remove an apt source.
+Remove an APT source.
 
 This method takes one mandatory argument:
 
-- `name`: Name of the apt source to be removed.
+- `name`: Name of the APT source to be removed.
 
 Example of a valid request:
 

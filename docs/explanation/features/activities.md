@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand activities in Landscape including client and server activity states, lifecycle tracking, and how tasks are managed and reported."
+---
+
 (explanation-activities)=
 # Activities
 

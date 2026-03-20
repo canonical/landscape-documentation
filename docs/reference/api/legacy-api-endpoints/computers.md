@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "API reference for computer management. Legacy API endpoints to retrieve computers, apply tags, and perform operations on managed machines."
+---
+
 (reference-legacy-api-computers)=
 # Computers
 
@@ -111,6 +117,7 @@ For example, the following request removes the annotation key `location` from al
 ?action=RemoveAnnotationFromComputers&query=tag:server&key=location
 ```
 
+(header-add-tags-to-computers)=
 ## AddTagsToComputers
 
 Add tags to a selection of computers.
@@ -120,13 +127,14 @@ Required arguments:
 - `query`: A query string used to select the computers to add tags to. (See `query` under `GetComputers`, above, for additional details.)
 - `tags`: Tag name to be applied, this can have more than one tag, by numbering the tags with `tags.1`, `tags.2`, `tags.3` etc.
 
-For example, the following request will add the tags “server” and “jammy” to all computers running Ubuntu 22.04 (Jammy):
+For example, the following request will add the tags "server" and "jammy" to all computers running Ubuntu 22.04 (Jammy):
 
 ```text
 ?action=AddTagsToComputers&query=distribution:22.04&tags.1=server
     &tags.2=jammy
 ```
 
+(header-remove-tags-from-computers)=
 ## RemoveTagsFromComputers
 
 Remove tags from a selection of computers.
@@ -136,7 +144,7 @@ Required arguments:
 - `query`: A query string used to select the computers to remove tags from. (See `query` under `GetComputers`, above, for additional details.)
 - `tags`: Tag name to be remove, this can have more than one Tag, by numbering the tags with `tags.1`, `tags.2`, `tags.3` etc.
 
-For example, the following request removes the tags “server” and “jammy” from all computers with tag server:
+For example, the following request removes the tags "server" and "jammy" from all computers with tag server:
 
 ```text
 ?action=RemoveTagsFromComputers&query=tag:server&tags.1=server

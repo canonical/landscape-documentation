@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "REST API endpoints for managing WSL Child Instance Profiles in Landscape. Create, read, update, and delete profiles for WSL instances."
+---
+
 (reference-rest-api-child-instance-profiles)=
 
 # Child Instance Profiles

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Configure Landscape deployment for Autoinstall workstation provisioning. Enable Ubuntu installer attach service on Juju or manual deployments."
+---
+
 (how-to-ubuntu-installer-configure-landscape-deployment)=
 # How to configure your Landscape deployment to provision workstations with Autoinstall via the Ubuntu installer
 
