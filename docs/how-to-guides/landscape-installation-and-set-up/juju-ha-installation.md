@@ -15,12 +15,10 @@ This is a simplified model of a full Landscape HA deployment:
 
 Before you can deploy the Landscape Scalable charm bundle, you need to:
 
-  1. [Install the Juju client](https://juju.is/docs/juju/install-and-manage-the-client)
-  1. [Add a machine cloud to Juju](https://juju.is/docs/juju/manage-clouds)
-  
-These steps lay the groundwork for using Juju to deploy [machine charms](https://juju.is/charms-architecture).
+  1. [Install the Juju CLI client](https://documentation.ubuntu.com/juju/3.6/howto/manage-juju/)
+  1. [Have a Juju controller bootstrapped](https://documentation.ubuntu.com/juju/3.6/howto/manage-controllers/)
 
-Machine charms are Juju-managed applications deployed on bare-metal servers, virtual machines, or system containers such as [LXD](https://canonical.com/lxd). Landscape is only one of many charms that can be deployed from [Charmhub](https://charmhub.io/) and managed by Juju. Juju handles installing the applications and configuring them to work together.
+These steps lay the groundwork for using Juju to deploy [machine charms](https://canonical.com/juju/charms-architecture) and [integrate them via relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
 
 ## Deploy the charm bundle
 
@@ -28,7 +26,7 @@ You can deploy the Landscape Scalable charm bundle using one of two main methods
 
   1. Deploy the bundle with the default configuration, then customize the configuration
   1. Download the bundle configuration, customize it, then deploy it
-  
+
 This guide describes both methods.
 
 ### Option 1: Deploy with the default configuration
@@ -52,7 +50,7 @@ juju deploy landscape-scalable
 It will take some time for the bundle to finish deploying. You can watch the deployment progress with `juju status`:
 
 ```bash
-juju status --watch 3s
+juju status --relations --watch 3s
 ```
 
 `--watch` refreshes the status periodically. This example is set to refresh every three seconds.
@@ -115,13 +113,13 @@ Machine  State    Address        Inst id        Base          AZ  Message
 
 #### Step 3: Add application units
 
-The following commands add two units each of Landscape Server, HAProxy, PostgreSQL, and RabbitMQ. Execute them to create your high availability deployment with three units of each service.
+The following commands adds two additional units of Landscape Server, PostgreSQL, and RabbitMQ, and one for HAProxy. Execute them to create your high availability deployment with three units of each service.
 
 ```bash
 juju add-unit landscape-server -n 2
-juju add-unit haproxy -n 2
 juju add-unit postgresql -n 2
 juju add-unit rabbitmq-server -n 2
+juju add-unit haproxy
 ```
 
 The charms for each application handle relationships between the units. The unit indicated with an asterisk (`*`) in the `juju status` output is the current leader unit.
@@ -167,7 +165,7 @@ Machine  State    Address        Inst id         Base          AZ  Message
 11       started  10.76.244.71   juju-dded29-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://documentation.ubuntu.com/juju/3.6/reference/juju-cli/list-of-juju-cli-commands/config/). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
 ### Option 2: Customize the configuration before deployment
 
