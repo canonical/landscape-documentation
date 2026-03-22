@@ -143,7 +143,7 @@ To assign a role to a new user or edit the role(s) of an existing user:
 
 ## Manage alerts
 
-Landscape uses {ref}`reference-terms-alerts` to notify administrators of conditions that require attention. The following types of alerts are available:
+Landscape uses {ref}`explanation-alerts` to notify administrators of conditions that require attention. The following types of alerts are available:
 
 - when a pending computer needs to be accepted or rejected
 - when you are exceeding your license entitlements for Landscape Dedicated Server (This alert does not apply to the hosted version of Landscape.)

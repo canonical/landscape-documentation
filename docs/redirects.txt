@@ -24,6 +24,8 @@ how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/bac
 
 # Reference
 
+reference/terms/alerts/ explanation/features/alerts/
+
 reference/terms/profiles/package-profile/ reference/terms/profiles/
 
 reference/terms/profiles/removal-profile/ reference/terms/profiles/
