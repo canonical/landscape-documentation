@@ -90,3 +90,38 @@ Example response:
   ]
 }
 ```
+
+(reference-rest-api-alert-dismiss)=
+## POST `/alerts/<int:alert_id>/dismiss`
+
+Dismiss an alert on the account, removing its **Alerted** status if present.
+
+Path parameters:
+
+- `alert_id`: The alert ID.
+
+Query parameters:
+
+- None
+
+Example Request:
+
+```bash
+curl -X POST https://landscape.canonical.com/api/v2/alerts/8/dismiss \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" 
+```
+
+Example response:
+
+```json
+{
+  "alert_type": "EsmDisabledAlert",
+  "description": "Alert when ESM updates are disabled",
+  "scope": "computer",
+  "tags": [],
+  "status": "OK",
+  "all_computers": true,
+  "id": 8
+}
+```
