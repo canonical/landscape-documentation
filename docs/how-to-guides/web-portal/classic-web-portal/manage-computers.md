@@ -141,15 +141,16 @@ To assign a role to a new user or edit the role(s) of an existing user:
 2. Select the relevant cells for each user to grant or revoke their role status
 3. Click **Save**
 
+(how-to-classic-web-portal-alerts)=
 ## Manage alerts
 
 Landscape uses {ref}`explanation-alerts` to notify administrators of conditions that require attention. 
 
 To configure alerts, navigate to your organization's home page and click **Configure alerts** or the **Alerts** tab. Select the checkbox next to each type of alert you want to subscribe to, or click  **All** or **None** at the top of the table, then click **Subscribe** or **Unsubscribe**.
 
-The **Alerts** tab displays the status of each alert. If an alert has not been triggered, the status is **OK**; if it has, the status is **Alerted**. The **Enabled for** column indicates whether the alert applies to all computers, a specified set of tagged computers, or your account. Pending computers, for example, are not yet Landscape clients, but they are part of your account.
+The **Alerts** tab displays the status of each alert. The **Enabled for** column indicates whether the alert applies to all computers, a specified set of tagged computers, or your account. Pending computers, for example, are not yet Landscape clients, but they are part of your account.
 
-If an alert is triggered, an administrator should typically investigate it. You can view active alerts from your organization's home page. If you click on an alert, the resulting screen displays additional information, such as the computer(s) affected, the error code, and error output text.
+You can view active alerts from your organization's home page. If you click on an alert, the resulting screen displays additional information, such as the computer(s) affected, the error code, and error output text.
 
 For some alerts, you can download a list of affected computers as a CSV file. Click **Save this search** to save the criteria that was generated from the alert.
 
