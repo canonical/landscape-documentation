@@ -36,6 +36,7 @@ Query parameters:
   - `profile:<profile-type>:<profile-id>`: Instances associated with the specified profile. The `<profile-type>` must be one of `security`, `script`, `repository`, `package`, `upgrade`, `reboot`, `removal`, or `wsl`. The `<profile-id>` is the database id of the profile.
   - `profile:security:<profile-id>:<status>`: Instances associated with the specified USG security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
   - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
+  - `release-upgrade:available`: (Landscape 26.04+) Search for computers with a supported Ubuntu release upgrade available.
   - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
   - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.
   - `license-type:<license-type>`: Instances associated with the specified `<license-type>`. The `license-type` must be one of `unlicensed`, `pro`, `free_pro`, `legacy`.
@@ -47,6 +48,7 @@ Query parameters:
 - `offset`: The offset inside the list of results.
 - `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.
 - `with_upgrades`: If true, includes how many regular and security upgrades that computer has. Defaults to false.
+- `with_release_upgrades`: (Landscape 26.04+) If true, includes a `has_release_upgrades` boolean in each computer object indicating whether an Ubuntu release upgrade is available. Defaults to false.
 - `with_reboot_packages`: Show packages needing reboot. Defaults to false.
 - `with_network`: If true, include the details of all network devices attached to the computer. Defaults to false.
 - `with_all_network`: If true, include the details of all active and inactive network devices attached to the computer. Defaults to false.
@@ -1384,3 +1386,106 @@ Example response:
  "type": "ActivityGroup"
 }
 ```
+
+```{note}
+This endpoint is available starting in Landscape 26.04 LTS.
+```
+
+## GET `/computers/release-upgrade-targets`
+
+Get the maximum release-upgrade target for each provided computer.
+A release upgrade moves a machine to a newer Ubuntu release. An upgrade is considered available if the computer meets the minimum supported OS version and its local upgrade policy allows the move.
+
+Path parameters:
+
+- None
+
+Query parameters:
+
+- `computer_ids`: A comma-separated list of computer IDs.
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/release-upgrade-targets?computer_ids=1,2" -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "results": [
+    {
+      "computer_id": 1,
+      "computer_title": "Application Server 1",
+      "current_release_name": "Ubuntu 18.04 LTS",
+      "current_release_version": "18.04",
+      "target_release_code_name": "jammy",
+      "target_release_name": "Jammy Jellyfish",
+      "target_release_version": "22.04",
+      "reason_code": null,
+      "reason_detail": null
+    },
+    {
+      "computer_id": 2,
+      "computer_title": "Application Server 2",
+      "current_release_name": "Ubuntu 11.04",
+      "current_release_version": "11.04",
+      "target_release_code_name": null,
+      "target_release_name": null,
+      "target_release_version": null,
+      "reason_code": "no_upgrade_target",
+      "reason_detail": "No release upgrades are available."
+    }
+  ]
+}
+```
+
+```{note}
+This endpoint is available starting in Landscape 26.04 LTS
+```
+
+## POST `/computers/release-upgrades`
+
+Create a release-upgrade activity for the provided computers, which upgrades their operating system to the next available Ubuntu release.
+
+Path parameters:
+
+- None
+
+Required parameters:
+
+- `computer_ids`: A list of computer IDs.
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/computers/release-upgrades" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_ids": [1, 2]}'
+```
+
+Example response:
+
+```json
+{
+  "activity_status": "undelivered",
+  "approval_time": null,
+  "completion_time": null,
+  "creation_time": "2026-03-02T12:00:00Z",
+  "creator": {
+    "email": "john@example.com",
+    "id": 1,
+    "name": "John Smith"
+  },
+  "deliver_delay_window": 0,
+  "id": 98765,
+  "parent_id": null,
+  "result_code": null,
+  "result_text": null,
+  "summary": "Release upgrade computers",
+  "type": "ActivityGroup"
+}
+```
+
