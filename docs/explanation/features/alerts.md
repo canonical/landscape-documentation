@@ -58,7 +58,7 @@ Instance-scoped alerts are relevant to individual managed instances.
 
 - `PackageUpgradesAlert` Package upgrades are available
 - `PackageProfilesAlert` A package profile is not applied
-- `SecurityUpgradesAlert` Ssecurity upgrades are available
+- `SecurityUpgradesAlert` Security upgrades are available
 - `PackageReporterAlert` Package reporting (`apt-get update`) fails
 - `EsmDisabledAlert` ESM (Expanded Security Maintenance) updates are disabled
 - `UnapprovedActivitiesAlert` Activities require explicit administrator acceptance or rejection
