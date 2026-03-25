@@ -20,7 +20,7 @@ Resolving the condition triggering an alert will return the alert to the **OK** 
 
 While alerts are typically actionable, in some cases an administrator may want to dismiss an alert and clear its **Alerted** state. This can be done with the {ref}`REST API <reference-rest-api-alert-dismiss>`.
 
-Instance-scoped alerts can be configured to only be enabled for instances with certain tags, or disabled entirely. **Disabled** alerts will remain inactive until they become enabled for a set of instances.
+Instance-scoped alerts can be configured to only be enabled for instances with certain tags, or disabled entirely. Disabled alerts remain inactive until they're re-enabled for a set of instances.
 
 ## How to be notified
 
