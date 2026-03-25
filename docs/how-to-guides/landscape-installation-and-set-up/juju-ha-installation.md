@@ -21,13 +21,11 @@ This is a simplified model of a full Landscape HA deployment:
 
 Before you can deploy the Landscape Scalable charm bundle, you need to:
 
-  1. [Install the Juju client](https://juju.is/docs/juju/install-and-manage-the-client)
-  1. [Add a machine cloud to Juju](https://juju.is/docs/juju/manage-clouds)
+  1. [Install the Juju CLI client](https://documentation.ubuntu.com/juju/3.6/howto/manage-juju/)
+  1. [Have a Juju controller bootstrapped](https://documentation.ubuntu.com/juju/3.6/howto/manage-controllers/)
   1. Attach your Ubuntu Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
-  
-These steps lay the groundwork for using Juju to deploy [machine charms](https://juju.is/charms-architecture).
 
-Machine charms are Juju-managed applications deployed on bare-metal servers, virtual machines, or system containers such as [LXD](https://canonical.com/lxd). Landscape is only one of many charms that can be deployed from [Charmhub](https://charmhub.io/) and managed by Juju. Juju handles installing the applications and configuring them to work together.
+These steps prepare your environment to deploy [machine charms](https://canonical.com/juju/charms-architecture) with Juju and [integrate them using relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
 
 ## Deploy the charm bundle
 
@@ -35,7 +33,7 @@ You can deploy the Landscape Scalable charm bundle using one of two main methods
 
   1. Deploy the bundle with the default configuration, then customize the configuration
   1. Download the bundle configuration, customize it, then deploy it
-  
+
 This guide describes both methods.
 
 ### Option 1: Deploy with the default configuration
@@ -122,13 +120,13 @@ Machine  State    Address        Inst id        Base          AZ  Message
 
 #### Step 3: Add application units
 
-The following commands add two units each of Landscape Server, HAProxy, PostgreSQL, and RabbitMQ. Execute them to create your high availability deployment with three units of each service.
+The following commands add two additional units of Landscape Server, PostgreSQL, RabbitMQ, and HAProxy. Execute these commands to create your high availability deployment with three units of each service.
 
 ```bash
 juju add-unit landscape-server -n 2
-juju add-unit haproxy -n 2
 juju add-unit postgresql -n 2
 juju add-unit rabbitmq-server -n 2
+juju add-unit haproxy -n 2
 ```
 
 The charms for each application handle relationships between the units. The unit indicated with an asterisk (`*`) in the `juju status` output is the current leader unit.
@@ -157,7 +155,7 @@ postgresql/1         active    idle   8        10.76.244.43    5432/tcp
 postgresql/2         active    idle   9        10.76.244.32    5432/tcp
 rabbitmq-server/0*   active    idle   3        10.76.244.71    5672,15672/tcp  Unit is ready and clustered
 rabbitmq-server/1    active    idle   10       10.76.244.98    5672,15672/tcp  Unit is ready and clustered
-rabbitmq-server/2    active    idle   11       10.76.244.71    5672,15672/tcp  Unit is ready and clustered
+rabbitmq-server/2    active    idle   11       10.76.244.45    5672,15672/tcp  Unit is ready and clustered
 
 Machine  State    Address        Inst id         Base          AZ  Message
 0        started  10.76.244.244  juju-dded29-0   ubuntu@22.04      Running
@@ -171,10 +169,10 @@ Machine  State    Address        Inst id         Base          AZ  Message
 8        started  10.76.244.43   juju-dded29-8   ubuntu@22.04      Running
 9        started  10.76.244.32   juju-dded29-9   ubuntu@22.04      Running
 10       started  10.76.244.98   juju-dded29-10  ubuntu@22.04      Running
-11       started  10.76.244.71   juju-dded29-11  ubuntu@22.04      Running
+11       started  10.76.244.45   juju-dded29-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://documentation.ubuntu.com/juju/3.6/reference/juju-cli/list-of-juju-cli-commands/config/). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
 ### Option 2: Customize the configuration before deployment
 
@@ -331,11 +329,11 @@ Once everything is installed and settled, the `Status` for every application wil
 Model                  Controller           Cloud/Region         Version  SLA          Timestamp
 landscape-self-hosted  localhost-localhost  localhost/localhost  3.5.5    unsupported  16:30:52-08:00
 
-App               Version  Status   Scale  Charm             Channel        Rev  Exposed  Message
-haproxy                    waiting      3  haproxy           latest/stable   75  yes      Unit is ready
-landscape-server           waiting      3  landscape-server  latest/stable  124  no       Unit is ready
-postgresql                 waiting      3  postgresql        14/stable      468  no
-rabbitmq-server            waiting      3  rabbitmq-server   3.9/stable     188  no       Unit is ready
+App               Version  Status  Scale  Charm             Channel        Rev  Exposed  Message
+haproxy                    active      3  haproxy           latest/stable   75  yes      Unit is ready
+landscape-server           active      3  landscape-server  latest/stable  124  no       Unit is ready
+postgresql        14.12    active      3  postgresql        14/stable      468  no
+rabbitmq-server   3.9.27   active      3  rabbitmq-server   3.9/stable     188  no       Unit is ready
 
 Unit                 Workload  Agent  Machine  Public address  Ports           Message
 haproxy/0*           active    idle   0        10.76.244.87    80,443/tcp      Unit is ready
@@ -366,7 +364,7 @@ Machine  State    Address        Inst id         Base          AZ  Message
 11       started  10.76.244.179  juju-be1fab-11  ubuntu@22.04      Running
 ```
 
-You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://juju.is/docs/juju/juju-config). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
+You now have Landscape Server set up for a high-availability deployment. Next, you need to set up your clients by {ref}`installing the Landscape Client charm <how-to-install-landscape-client>` on each client, and configuring them with [the `juju config` command](https://documentation.ubuntu.com/juju/3.6/reference/juju-cli/list-of-juju-cli-commands/config/). You may also need to change your SSL certificate configuration. See the {ref}`how-to-header-configure-haproxy-with-ssl-cert` section in this guide for more information.
 
 ## Create a SSL certificate with LetsEncrypt (Optional)
 
