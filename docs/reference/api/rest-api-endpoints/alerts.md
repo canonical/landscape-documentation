@@ -104,7 +104,7 @@ Query parameters:
 
 - None
 
-Example Request:
+Example request:
 
 ```bash
 curl -X POST https://landscape.canonical.com/api/v2/alerts/8/dismiss \
