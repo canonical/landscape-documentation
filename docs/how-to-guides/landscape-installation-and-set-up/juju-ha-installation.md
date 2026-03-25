@@ -120,7 +120,7 @@ Machine  State    Address        Inst id        Base          AZ  Message
 
 #### Step 3: Add application units
 
-The following commands add two additional units of Landscape Server, PostgreSQL, RabbitMQ, and HAProxy. Execute them to create your high availability deployment with three units of each service.
+The following commands add two additional units of Landscape Server, PostgreSQL, RabbitMQ, and HAProxy. Execute these commands to create your high availability deployment with three units of each service.
 
 ```bash
 juju add-unit landscape-server -n 2
