@@ -11,9 +11,12 @@ Landscape uses alerts to notify administrators when action is required across th
 
 ## Working with alerts
 
-An alert can either be **OK**, **Alerted**, or **Disabled**.
+An alert can have three statuses:
+- **OK**: No action required
+- **Alerted**: Administrator investigation recommended
+- **Disabled**: Inactive alert
 
-If an alert has not been triggered, the status is **OK**. An alert will become **Alerted** once its conditions have been satisfied. If an alert is **Alerted**, an administrator should typically investigate it. Resolving the condition will return the alert to the **OK** state.
+Resolving the condition triggering an alert will return the alert to the **OK** state.
 
 While alerts are typically actionable, in some cases an administrator may want to dismiss an alert and clear its **Alerted** state. This can be done with the {ref}`REST API <reference-rest-api-alert-dismiss>`.
 
