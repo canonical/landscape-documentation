@@ -28,7 +28,7 @@ Instance-scoped alerts can be configured to only be enabled for instances with c
 In self-hosted Landscape, Postfix must be configured for emails to be sent for alerts. See {ref}`how-to-configure-postfix`.
 ```
 
-Landscape notifies administrators of currently active alerts via email. To receive email notifications, administrators must subscribe to the relevant alert. Similarly, administrators can unsubscribe from alerts that they are not interested in being notified about.
+Landscape notifies administrators of active alerts via email. To receive email notifications, administrators must subscribe to the relevant alert. Administrators can also unsubscribe from alerts they don't want to receive.
 
 You can manage your subscription status for alerts using the {ref}`legacy API <reference-legacy-subscribe-to-alert>`, the {ref}`classic web portal <how-to-classic-web-portal-alerts>`, or the new web portal under **Account settings** >**Alerts**.
 
