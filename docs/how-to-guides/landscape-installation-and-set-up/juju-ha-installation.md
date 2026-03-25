@@ -25,7 +25,7 @@ Before you can deploy the Landscape Scalable charm bundle, you need to:
   1. [Have a Juju controller bootstrapped](https://documentation.ubuntu.com/juju/3.6/howto/manage-controllers/)
   1. Attach your Ubuntu Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
 
-These steps lay the groundwork for using Juju to deploy [machine charms](https://canonical.com/juju/charms-architecture) and [integrate them via relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
+These steps prepare your environment to deploy [machine charms](https://canonical.com/juju/charms-architecture) with Juju and [integrate them using relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
 
 ## Deploy the charm bundle
 
