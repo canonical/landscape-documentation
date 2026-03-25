@@ -132,6 +132,7 @@ Example response:
 ]
 ```
 
+(reference-legacy-subscribe-to-alert)=
 ## SubscribeToAlert
 
 Subscribe your user account to a given alert types notifications.

@@ -32,6 +32,8 @@ how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to
 
 # Reference
 
+reference/terms/alerts/ explanation/features/alerts/
+
 reference/terms/profiles/package-profile/ reference/terms/profiles/
 
 reference/terms/profiles/removal-profile/ reference/terms/profiles/

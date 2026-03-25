@@ -14,6 +14,7 @@ Understand how Landscape's key features work. These explanations cover common fe
 :maxdepth: 2
 
 activities
+alerts
 repository-mirroring
 Package reporting <package-reporting>
 Remote script execution <remote-script-execution>
