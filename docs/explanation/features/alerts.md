@@ -38,32 +38,32 @@ You can manage your subscription status for alerts using the {ref}`legacy API <r
 
 Account-scoped alerts are relevant to the Landscape estate as a whole.
 
-- `PendingComputersAlert` alerts when instances are pending acceptance or rejection
-- `LicenseExpiryAlert` alerts when a license is approaching expiration
-- `UbuntuProContractExpirationAlert` alerts when an Ubuntu Pro contract is approaching expiration
+- `PendingComputersAlert` Instances are pending acceptance or rejection
+- `LicenseExpiryAlert` A license is approaching expiration
+- `UbuntuProContractExpirationAlert` An Ubuntu Pro contract is approaching expiration
   - Available from 25.10 onwards
 
 #### Self-hosted alerts
 
 Certain account-scoped alerts are exclusive to self-hosted Landscape.
 
-- `StandaloneOverflowAlert` alerts when license entitlements are exceeded
-- `StandaloneScriptAlert` alerts when a Landscape cron job fails
-- `StandaloneSystemEmailAlert` alerts when system email is misconfigured
+- `StandaloneOverflowAlert` License entitlements are exceeded
+- `StandaloneScriptAlert` A Landscape cron job fails
+- `StandaloneSystemEmailAlert` System email is misconfigured
 
 
 ### Instance-scoped alerts
 
 Instance-scoped alerts are relevant to individual managed instances.
 
-- `PackageUpgradesAlert` alerts when package upgrades are available
-- `PackageProfilesAlert` alerts when a package profile is not applied
-- `SecurityUpgradesAlert` alerts when security upgrades are available
-- `PackageReporterAlert` alerts when package reporting (`apt-get update`) fails
-- `EsmDisabledAlert` alerts when ESM (Expanded Security Maintenance) updates are disabled
-- `UnapprovedActivitiesAlert` alerts when activities require explicit administrator acceptance or rejection
-- `ComputerOfflineAlert` alerts when an instance has not contacted Landscape within the last five minutes
-- `ComputerRebootAlert` alerts when an instance needs to be rebooted in order for a package update (such as a kernel update) to take effect
-- `ComputerDuplicateAlert` alerts when a duplicate instance exists
-- `ChildInstanceProfileAlert` alerts when an instance is not compliant with a child instance profile
+- `PackageUpgradesAlert` Package upgrades are available
+- `PackageProfilesAlert` A package profile is not applied
+- `SecurityUpgradesAlert` Ssecurity upgrades are available
+- `PackageReporterAlert` Package reporting (`apt-get update`) fails
+- `EsmDisabledAlert` ESM (Expanded Security Maintenance) updates are disabled
+- `UnapprovedActivitiesAlert` Activities require explicit administrator acceptance or rejection
+- `ComputerOfflineAlert` An instance has not contacted Landscape within the last five minutes
+- `ComputerRebootAlert` An instance needs to be rebooted in order for a package update (such as a kernel update) to take effect
+- `ComputerDuplicateAlert` A duplicate instance exists
+- `ChildInstanceProfileAlert` An instance is not compliant with a child instance profile
   - Available from 24.10 onwards
