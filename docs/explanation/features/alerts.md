@@ -7,7 +7,7 @@ myst:
 (explanation-alerts)=
 # Alerts
 
-Landscape uses alerts to notify administrators of various circumstances across their estate that require action. There are two types of alerts: account-scoped alerts and instance-scoped alerts. This document explains how alerts work and lists the conditions under which each alert will notify administrators.
+Landscape uses alerts to notify administrators when action is required across their estate. There are two types of alerts: account-scoped and instance-scoped. This document explains how alerts work and the conditions that trigger them.
 
 ## Working with alerts
 
