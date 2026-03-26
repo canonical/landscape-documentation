@@ -24,9 +24,9 @@ There's a few things you'll need before starting this tutorial.
 You'll need a workstation with at least the following requirements:
 
 - 25G of disk space
-- 5GB RAM of memory
+- 8GB RAM of memory
 
-You'll make two Multipass VMs in this tutorial: one for Landscape Server and one for Landscape Client. You'll use 20G of disk space and 4G RAM for Landscape Server, and 5G disk space and 1G RAM for Landscape Client. 
+You'll make two Multipass VMs in this tutorial: one for Landscape Server and one for Landscape Client. You'll use 20G of disk space and 6G RAM for Landscape Server, and 5G disk space and 2G RAM for Landscape Client. 
 
 Your workstation will be called your "host machine" throughout this tutorial.
 
@@ -53,8 +53,8 @@ If you don't have an Ubuntu Pro account, first sign up for a [free personal Ubun
 Now, let's create the Multipass virtual machines (VMs). From the command line, run:
 
 ```bash
-multipass launch noble --cpus 2 --memory 4G --disk 20G --name tutorial-landscape-server-noble
-multipass launch noble --cpus 1 --memory 1G --disk 5G --name tutorial-landscape-client-noble
+multipass launch noble --cpus 2 --memory 6G --disk 20G --name tutorial-landscape-server-noble
+multipass launch noble --cpus 1 --memory 2G --disk 5G --name tutorial-landscape-client-noble
 ```
 
 This step will take a few minutes to complete, but you'll receive progress updates in the command line. These commands create two VMs total: one for your Landscape Server and one for Landscape Client. Both VMs will run on Ubuntu 24.04 Noble Numbat.
