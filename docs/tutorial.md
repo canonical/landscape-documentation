@@ -54,10 +54,10 @@ Now, let's create the Multipass virtual machines (VMs). From the command line, r
 
 ```bash
 multipass launch noble --cpus 2 --memory 4G --disk 20G --name tutorial-landscape-server-noble
-multipass launch jammy --cpus 1 --memory 1G --disk 5G --name tutorial-landscape-client-jammy
+multipass launch noble --cpus 1 --memory 1G --disk 5G --name tutorial-landscape-client-noble
 ```
 
-This step will take a few minutes to complete, but you'll receive progress updates in the command line. These commands create two VMs total: one for your Landscape Server and one for Landscape Client. Your Landscape Server will run on Ubuntu 24.04 Noble Numbat (the VM named `tutorial-landscape-server-noble`) and Landscape Client will run on Ubuntu 22.04 Jammy Jellyfish (the VM named `tutorial-landscape-client-jammy`).
+This step will take a few minutes to complete, but you'll receive progress updates in the command line. These commands create two VMs total: one for your Landscape Server and one for Landscape Client. Both VMs will run on Ubuntu 24.04 Noble Numbat.
 
 You'll need the IP address of the `tutorial-landscape-server-noble` VM later, so let's get it now. Run the following on your host machine:
 
@@ -101,10 +101,10 @@ Now install some required packages by running the command below:
 sudo apt update && sudo apt install -y ca-certificates software-properties-common
 ```
 
-Then add the `landscape/latest-stable` PPA to get access to the Landscape Server packages by running this command:
+Then add the `landscape/self-hosted-24.04` PPA to get access to the Landscape Server packages by running this command:
 
 ```bash
-sudo add-apt-repository -y ppa:landscape/latest-stable
+sudo add-apt-repository -y ppa:landscape/self-hosted-24.04
 ```
 
 Your VM's package information will now be up-to-date and includes information about the Landscape packages. Run the command below to install Landscape Server (quickstart mode) on your VM:
@@ -125,17 +125,19 @@ You command prompt should go back to your standard host machine prompt after you
 
 ## Register the first Landscape administrator
 
-From a browser on your host machine, navigate to `https://10.253.187.38` replacing the IP address in the URL with the one for your Landscape Server VM. Your browser will likely warn about a self-signed certificate. It's OK to accept the risk and continue in this case. Complete the form to create the first admin user for the `standalone` account. Once you complete the form, Landscape will automatically bootstrap your new account. Now you are logged in to Landscape and can start registering and managing client computers.
+From a browser on your host machine, navigate to `https://10.253.187.38` replacing the IP address in the URL with the one for your Landscape Server VM. Your browser will likely warn about a self-signed certificate. It's OK to accept the risk in your browser and continue in this case. Depending on your browser, you may have to click into advanced options to proceed, such as **Advanced** > **Proceed to [site] (unsafe)**.
+
+Complete the form to create the first admin user. Your account name is called `standalone` by default. Once you complete the form, Landscape will automatically bootstrap your new account. Now, you're logged in to Landscape and can start registering and managing client computers.
 
 ## Install and configure Landscape Client
 
-From your host machine, open a shell to the `jammy` client VM.
+From your host machine, open a shell to the `noble` client VM.
 
 ```bash
-multipass shell tutorial-landscape-client-jammy
+multipass shell tutorial-landscape-client-noble
 ```
 
-Your prompt should now be `ubuntu@tutorial-landscape-client-jammy`.
+Your prompt should now be `ubuntu@tutorial-landscape-client-noble`.
 
 Attach your Ubuntu Pro token, replacing `your-pro-token` with your actual Pro token.
 
@@ -152,7 +154,7 @@ This machine is now attached to 'Ubuntu Pro - free personal subscription'
 Subscription: Ubuntu Pro - free personal subscription
 ```
 
-Next, get the server's public SSL certificate and save it where `landscape-client` can use it when it needs to make HTTPS requests to your Landscape Server. Replace the IP address with the one for your Landscape Server VM, but keep the `:443` port.
+Next, run the following command to get the server's public SSL certificate and save it where `landscape-client` can use it when it needs to make HTTPS requests to your Landscape Server. Replace the IP address with the one for your Landscape Server VM, but keep the `:443` port.
 
 ```bash
 echo | openssl s_client -connect 10.253.187.38:443 | openssl x509 | sudo tee /etc/landscape/server.pem
@@ -164,7 +166,7 @@ Now you'll install Landscape Client.
 sudo apt update && sudo apt install -y landscape-client
 ```
 
-Edit the `/etc/landscape/client.conf` file to match the contents below. Be sure to replace the IP address in both `url` and `ping_url` with the one for your Landscape Server VM.
+Edit the `/etc/landscape/client.conf` file to match the contents below. You'll need to use `sudo` to edit the file. Be sure to replace the IP address in both `url` and `ping_url` with the one for your Landscape Server VM.
 
 ```ini
 [client]
@@ -174,7 +176,7 @@ ping_url = http://10.253.187.38/ping
 data_path = /var/lib/landscape/client
 ssl_public_key = /etc/landscape/server.pem
 account_name = standalone
-computer_title = tutorial-landscape-client-jammy
+computer_title = tutorial-landscape-client-noble
 include_manager_plugins = ScriptExecution
 script_users = landscape,ubuntu
 ```
@@ -185,17 +187,17 @@ If you're not sure how to edit the file, you can use `nano` to do so.
 sudo nano /etc/landscape/client.conf
 ```
 
-Change the file as needed and press `CTRL-O` followed by `ENTER` to save the file and `CTRL-X` to exit.
+If you used `nano`, change the file as needed and press `CTRL-O` followed by `ENTER` to save the file and `CTRL-X` to exit.
 
-Next, send a registration request to Landscape Server.
+Once you've edited and saved the file, send a registration request to Landscape Server.
 
 ```bash
 sudo landscape-config --silent
 ```
 
-You should see a message indicating that the registration message was successfully sent to Landscape Server. If you get a message indicating that client was unable to connect to the server, double-check that you downloaded the server's certificate to the `/etc/landscape/` directory and that the IP address in the `/etc/landscape/client.conf` file is correct.
+You should see a message indicating that the registration message was successfully sent to Landscape Server. If you get a message indicating that client was unable to connect to the server, double-check that you downloaded the server's certificate to the `/etc/landscape/` directory and that the IP address in the `/etc/landscape/client.conf` file matches the IP address you used earlier.
 
-You can now exit your Jammy VM and return to your host machine.
+You can now exit your client VM and return to your host machine.
 
 ```bash
 exit
@@ -213,12 +215,12 @@ echo "Hello, World!" > /home/ubuntu/hello
 ```
 Note that this script may take a few minutes to complete. 
 
-From the **Computers** page, select your computer and then click the **Scripts** tab. Select the `Hello World` script and click **Next**. You can leave all the other defaults, then click **Run** to create an activity to run the script on your Jammy VM.
+From the **Computers** page, select your computer and then click the **Scripts** tab. Select the `Hello World` script and click **Next**. You can leave all the other defaults, then click **Run** to create an activity to run the script on your client VM.
 
-Once the activity succeeds, the status of your activity in the web portal will change to "1 activity finished successfully". You can check the file was created by opening a shell on your Jammy VM.
+Once the activity succeeds, the status of your activity in the web portal will change to "1 activity finished successfully". You can check the file was created by opening a shell on your client VM.
 
 ```bash
-multipass shell tutorial-landscape-client-jammy
+multipass shell tutorial-landscape-client-noble
 ```
 
 The directory listing should show the file `hello` in the `ubuntu` user's home directory.
@@ -247,11 +249,11 @@ Continue experimenting with the environment you've created to discover more of L
 
 Congratulations! You now have successfully installed Landscape Server on a Multipass VM, registered another Multipass VM running Landscape Client, and executed a script on that VM. You can continue to explore the web portal and other management features that Landscape has to offer.
 
-When you're done exploring Landscape, don't forget to remove the Multipass VMs from your host machine:
+When you're done exploring Landscape, don't forget to remove the Multipass VMs from your host machine. The `delete` command removes the VMs, and `purge` frees up the disk space on your workstation.
 
 ```bash
 multipass delete tutorial-landscape-server-noble
-multipass delete tutorial-landscape-client-jammy
+multipass delete tutorial-landscape-client-noble
 multipass purge
 ```
 
@@ -264,3 +266,4 @@ From here, you have several options:
 - **Learn more about Landscape**: See {ref}`what-is-landscape` and the {ref}`explanation-index` section to learn more about Landscape and its features.
 - **Set up a production installation**: If you're ready to deploy Landscape for real systems, see {ref}`how-to-guides-landscape-installation-and-set-up-index` for installation guides.
 - **Use Landscape SaaS**: To continue exploring Landscape without the self-hosted infrastructure, see {ref}`howto-create-saas-account`.
+- **Get support**: Connect with community members using [Ubuntu's community support](https://ubuntu.com/support/community-support) or [join the Landscape Discourse forum](https://discourse.ubuntu.com/c/landscape/89)
