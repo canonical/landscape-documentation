@@ -51,6 +51,10 @@ These steps lay the groundwork for using Juju to deploy [machine charms](https:/
 
 Machine charms are Juju-managed applications deployed on bare-metal servers, virtual machines, or system containers such as [LXD](https://canonical.com/lxd). Landscape is only one of many charms that can be deployed from [Charmhub](https://charmhub.io/) and managed by Juju. Juju handles installing the applications and configuring them to work together.
 
+```{note}
+For improved database performance and scalability in high-load deployments, consider using PgBouncer as a connection pooler between Landscape Server and PostgreSQL. PgBouncer integrates via the Landscape Server charm's `database` relation endpoint, which uses the underlying `postgresql_client` interface. This requires recent Landscape Server charm revisions with `postgresql_client` support. See {ref}`explanation-pgbouncer-integration` for more information.
+```
+
 ## Deployment approach selection
 
 Choose the appropriate deployment approach based on your needs:

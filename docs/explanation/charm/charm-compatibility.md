@@ -174,6 +174,7 @@ PostgreSQL charm compatibility varies by Landscape Server version:
 - Compatible with PostgreSQL 14+ using the modern `database` interface
 - Landscape Server integrates using the `database` relation endpoint: `landscape-server:database` → `postgresql:database`
 - It is recommended to use PostgreSQL 16 for new deployments
+- Supports [PgBouncer](https://charmhub.io/pgbouncer) as a connection pooler via the `database` relation endpoint; see {ref}`explanation-pgbouncer-integration`
 
 **Before 26.04:**
 - Compatible with PostgreSQL 14 using the legacy `pgsql` interface

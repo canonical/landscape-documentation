@@ -265,6 +265,8 @@ pgtune
 pingserver
 pluggable
 png
+pooler
+poolers
 Postconf
 postgres
 PostgreSQL
