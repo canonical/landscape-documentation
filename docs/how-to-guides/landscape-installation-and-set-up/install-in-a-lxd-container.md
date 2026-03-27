@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-install-in-lxd-container)=
-# How to install Landscape Server in an LXD container using cloud-init
+# How to install Landscape Server in a LXD container using cloud-init
 
 This guide shows you how to deploy Landscape Server in a single LXD container using cloud-init. This approach is intended for testing and development environments, as it automates the entire setup process with a single cloud-init configuration file. Cloud-init handles the installation of all Landscape components, configuration of networking, certificates, and system settings.
 
