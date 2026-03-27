@@ -13,7 +13,7 @@ This guide shows you how to deploy Landscape Server in a single LXD container us
 
 This guide uses a sample cloud-init file created by the Landscape team. You can see other sample files and scripts in the [Landscape scripts repository on GitHub](https://github.com/canonical/landscape-scripts).
 
-### Download and configure the cloud-init file
+### Download the cloud-init file
 
 To download the cloud-init configuration file and save it as `cloud-init.yaml`, run:
 
@@ -23,7 +23,7 @@ curl -o cloud-init.yaml https://raw.githubusercontent.com/canonical/landscape-sc
 
 ### Set cloud-init variables
 
-Define the variables cloud-init will use by running this command with your own values:
+Set the variables cloud-init will use by running this command with your own values:
 
 ```bash
 declare -A VARIABLES=(
