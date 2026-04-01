@@ -95,13 +95,7 @@ multipass shell tutorial-landscape-server-noble
 
 After running that command, the prompt should change to `ubuntu@tutorial-landscape-server-noble`. This means you're now in your `tutorial-landscape-server-noble` VM, and any commands will be run on that VM instead of your host machine.
 
-Now install some required packages by running the command below:
-
-```bash
-sudo apt update && sudo apt install -y ca-certificates software-properties-common
-```
-
-Then add the `landscape/self-hosted-24.04` PPA to get access to the Landscape Server packages by running this command:
+Now add the `landscape/self-hosted-24.04` PPA to get access to the Landscape Server packages by running this command:
 
 ```bash
 sudo add-apt-repository -y ppa:landscape/self-hosted-24.04
@@ -127,7 +121,7 @@ You command prompt should go back to your standard host machine prompt after you
 
 From a browser on your host machine, navigate to `https://10.253.187.38` replacing the IP address in the URL with the one for your Landscape Server VM. Your browser will likely warn about a self-signed certificate. It's OK to accept the risk in your browser and continue in this case. Depending on your browser, you may have to click into advanced options to proceed, such as **Advanced** > **Proceed to [site] (unsafe)**.
 
-Complete the form to create the first admin user. Your account name is called `standalone` by default. Once you complete the form, Landscape will automatically bootstrap your new account. Now, you're logged in to Landscape and can start registering and managing client computers.
+Complete the form to create the first admin user. Your account name is called `standalone`. Once you complete the form, Landscape will automatically bootstrap your new account. Now, you're logged in to Landscape and can start registering and managing client computers.
 
 ## Install and configure Landscape Client
 
@@ -249,12 +243,10 @@ Continue experimenting with the environment you've created to discover more of L
 
 Congratulations! You now have successfully installed Landscape Server on a Multipass VM, registered another Multipass VM running Landscape Client, and executed a script on that VM. You can continue to explore the web portal and other management features that Landscape has to offer.
 
-When you're done exploring Landscape, don't forget to remove the Multipass VMs from your host machine. The `delete` command removes the VMs, and `purge` frees up the disk space on your workstation.
+When you're done exploring Landscape, don't forget to remove the Multipass VMs from your host machine. The `delete` command removes the VMs, and `--purge` frees up the disk space on your workstation.
 
 ```bash
-multipass delete tutorial-landscape-server-noble
-multipass delete tutorial-landscape-client-noble
-multipass purge
+multipass delete tutorial-landscape-client-noble tutorial-landscape-server-noble --purge
 ```
 
 ## Summary
