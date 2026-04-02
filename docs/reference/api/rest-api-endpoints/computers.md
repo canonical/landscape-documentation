@@ -304,6 +304,7 @@ Query parameters:
 - `with_hardware`: If true, include the details of all hardware information known.
 - `with_network`: If true, include the details of all network devices attached to the computer.
 - `with_profiles`: If true, include details about all profiles the computer is associated with.
+- `with_alerts`: If true, includes alert information if that alert is active.
 
 Example request:
 
