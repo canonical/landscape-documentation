@@ -63,7 +63,7 @@ A **security profile** defines how Landscape should monitor and manage security 
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
 
-An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the managed instances associated with a specific access group. You can associate zero or more managed instances with each upgrade profile via tags.
+An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the managed instances associated with a specific access group. You can also associate zero or more managed instances with each upgrade profile via tags.
 
 Upgrade profiles run according to a configurable weekly schedule. You can set what days of the week you want upgrades to run, and at what times you want upgrades to run on those days. You can also randomize the delivery time of the updates across your estate. Upgrade profiles can be set to only apply security upgrades or to apply all upgrades.
 
