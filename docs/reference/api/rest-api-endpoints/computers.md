@@ -1148,6 +1148,34 @@ Example response:
 }
 ```
 
+
+## POST `/computers:delete`
+
+```{warning}
+This endpoint is available from Landscape Server 26.04 onwards for select accounts.
+```
+
+Delete computers with the given computer IDs.
+
+Required parameters:
+
+- `computer_ids`: A list of computer IDs to delete with minimum length 1 and maximum length 1000
+
+Optional parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/computers:delete" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_ids": [1, 2, 3]}'
+```
+
+This endpoint returns an empty response.
+
 ## GET `/computers/<int:computer_id>/users/<string:username>/groups`
 
 Get all the groups for the provided username on the given computer ID.
