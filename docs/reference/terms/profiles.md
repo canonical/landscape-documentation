@@ -37,7 +37,7 @@ A **reboot profile** defines how and when Landscape executes system reboots on m
 (reference-terms-removal-profile)=
 ## Removal profile
 
-A **removal profile** defines a maximum number of days that a managed instance can go without sending a message to Landscape server before it is automatically removed. If more days pass than the profile's *Days without exchange*, that managed instance will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensures Landscape is not tracking stale or retired instance data for long periods of time. Landscape considers any message sent from the client to be data exchanged. Note that pings do not count as data exchanged, except for Windows hosts.
+A **removal profile** defines a maximum number of days that a managed instance can go without sending a message to Landscape server before it is automatically removed. If more days pass than the profile's *Days without exchange*, that managed instance will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensures Landscape is not tracking stale or retired instance data for long periods of time. Landscape considers any message sent from the client to be data exchanged. Note that pings do not count as data exchanged, except for pings from Windows hosts.
 
 Removal profiles must be associated with an access group which determines the set of instances that the profile can act on. You can also associate zero or more managed instances with each removal profile via tags. You can manage removal profiles from the sidebar by navigating to **Profiles** > **Removal Profiles**.
 
