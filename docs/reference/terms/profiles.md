@@ -20,7 +20,7 @@ Landscape has multiple types of profiles.
 
 A **package profile**, or meta-package, comprises a set of one or more packages, including their dependencies and conflicts (generally called constraints), that you can manage as a group. Package profiles specify sets of packages that associated systems should always get, or never get. 
 
-The constraints for package profiles can be specified in three ways:
+The constraints for package profiles can be specified in the following ways:
 - From an existing instance's packages
 - Imported from a CSV file
 - Manually specified
