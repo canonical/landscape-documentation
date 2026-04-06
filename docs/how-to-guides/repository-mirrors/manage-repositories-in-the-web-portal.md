@@ -20,18 +20,8 @@ The guide specifically demonstrates how to mirror an Ubuntu repository, but most
 (how-to-heading-disk-space-requirements)=
 ## Disk space requirements
 
-As of March 2024, these are the estimates for the amount of disk space needed to download the following Ubuntu distributions:
-
-| Series | amd64 | i386  | Both  |
-| ------ | ----- | ----- | ----- |
-| Noble  | 150GB | 110GB | 180GB |
-| Jammy  | 330GB | 120GB | 360GB |
-| Focal  | 430GB | 105GB | 445GB |
-| Bionic | 290GB | 155GB | 355GB |
-
-Packages will be downloaded to `/var/lib/landscape/landscape-repository/standalone/`. These estimates are a breakdown of the total size of the pockets for the main, restricted, universe and multiverse components of the amd64 and i386 architectures (release, updates and security pockets). The last column provides an estimate for downloading both the amd64 and i386 architectures. It's not a total of the amd64 and i386 disk space requirements because it doesn't duplicate packages that are present in both architectures.
-
-Note that this is only a subset, and it does not include arm and other architectures. Including these will use more disk space.
+```{include} /reuse/repository-disk-space.md
+```
 
 (howto-heading-manage-repos-web-portal-generate-api-credentials)=
 ## (If needed) Generate API credentials
