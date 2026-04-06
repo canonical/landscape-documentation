@@ -25,7 +25,7 @@ The constraints for package profiles can be specified in three ways:
 - Imported from a CSV file
 - Manually specified
 
-Package profiles must be associated with an access group which determines the set of instances that the profile can act on. You can also associate zero or more managed instances with each package profile via tags. You can manage repository profiles from the sidebar by navigating to **Profiles** > **Package Profiles**.
+Package profiles must be associated with an access group which determines the set of instances that the profile can act on. You can associate zero or more managed instances with each package profile via tags. You can manage repository profiles from the sidebar by navigating to **Profiles** > **Package Profiles**.
 
 Package profiles are evaluated periodically, and can be used for ensuring compliance over time. If package profiles are used to install packages, it is important to ensure any prerequisite repository configurations have been applied so the package can be downloaded, otherwise the package profile will fail to install the package, and report the managed instance as non-compliant.
 
@@ -37,7 +37,7 @@ A **reboot profile** defines how and when Landscape executes system reboots on m
 (reference-terms-removal-profile)=
 ## Removal profile
 
-A **removal profile** defines a maximum number of days that a managed instance can go without sending a message to Landscape server before it is automatically removed. If more days pass than the profile's *Days without exchange*, that managed instance will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensures Landscape is not tracking stale or retired instance data for long periods of time. Removal profiles must be associated with an access group which determines the set of instances that the profile can act on. You can also associate zero or more managed instances with each removal profile via tags. You can manage repository profiles from the sidebar by navigating to **Profiles** > **Removal Profiles**.
+A **removal profile** defines a maximum number of days that a managed instance can go without sending a message to Landscape server before it is automatically removed. If more days pass than the profile's *Days without exchange*, that managed instance will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensures Landscape is not tracking stale or retired instance data for long periods of time. Removal profiles must be associated with an access group which determines the set of instances that the profile can act on. You can associate zero or more managed instances with each removal profile via tags. You can manage repository profiles from the sidebar by navigating to **Profiles** > **Removal Profiles**.
 
 ```{note}
 Pings do not count as message exchanges, except for Windows hosts.
@@ -61,7 +61,11 @@ A **security profile** defines how Landscape should monitor and manage security 
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
 
-An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the managed instances associated with a specific access group. You can associate zero or more managed instances with each upgrade profile via tags to install packages on those managed instances. You can also associate an upgrade profile with an access group, which limits its use to only managed instances within the specified access group. You can manage upgrade profiles from the **Profiles** page.
+An **upgrade profile** defines a schedule for the times when upgrades are to be automatically installed on the managed instances associated with a specific access group. You can associate zero or more managed instances with each upgrade profile via tags.
+
+Upgrade profiles run according to a configurable weekly schedule. You can set what days of the week you want upgrades to run, and at what times you want upgrades to run on those days. You can also randomize the delivery time of the updates across your estate. Upgrades profiles can be set to only apply security upgrades or to apply all upgrades.
+
+You can manage repository profiles from the sidebar by navigating to **Profiles** > **Upgrade Profiles**.
 
 (reference-terms-wsl-profile)=
 ## WSL profile
