@@ -25,7 +25,7 @@ The constraints for package profiles can be specified in the following ways:
 - Imported from a CSV file
 - Manually specified
 
-Package profiles must be associated with an access group which determines the set of instances that the profile can act on. You can associate zero or more managed instances with each package profile via tags. You can manage package profiles from the sidebar by navigating to **Profiles** > **Package Profiles**.
+Package profiles must be associated with an access group which determines the set of instances that the profile can act on. You can also associate zero or more managed instances with each package profile via tags. You can manage package profiles from the sidebar by navigating to **Profiles** > **Package Profiles**.
 
 Package profiles are evaluated periodically, and can be used for ensuring compliance over time. If package profiles are used to install packages, it is important to ensure any prerequisite repository configurations have been applied so the package can be downloaded, otherwise the package profile will fail to install the package, and report the managed instance as non-compliant.
 
