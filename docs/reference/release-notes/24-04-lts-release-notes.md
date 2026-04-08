@@ -19,7 +19,7 @@ myst:
 
     ![Landscape 24.04 LTS new web portal](https://assets.ubuntu.com/v1/ef0d70d5-24.04LandscapeWebPortal.png)
 
-    This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal. The first time you use the portal, you may need to generate new API credentials to access the portal. For more information, see {ref}`how to generate API credentials <howto-heading-manage-repos-web-portal-generate-api-credentials>`.
+    This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal. 
 
 - **Web-based repository management**: Manage and mirror your repositories locally with Landscape’s new web-based repository management. For more information, see {ref}`how-to-manage-repos-web-portal` and an {ref}`explanation-repo-mirroring`.
 
