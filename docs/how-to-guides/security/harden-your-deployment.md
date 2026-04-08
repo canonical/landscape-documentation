@@ -26,12 +26,12 @@ The other applications in your deployment only require enough network access to 
 * Landscape server: 6554, and 8080-9100, inclusive
 * PostgreSQL: 5432
 * RabbitMQ server: 5672 for TCP or 5671 for TLS
-  
+
 Make sure these ports are exposed for internal traffic between the applications. **None of these ports should be exposed to external traffic.**
 
 ## Secure external traffic
 
-For more security, you should configure HAProxy or Apache with a TLS certificate. LetsEncrypt provides an easy way to create a certificate, and you can use LetsEncrypt with HAProxy by following the directions in the [Juju HA installation guide for Landscape](/how-to-guides/landscape-installation-and-set-up/juju-ha-installation.md/#configure-haproxy-with-an-ssl-certificate).
+For more security, you should configure HAProxy or Apache with a TLS certificate. LetsEncrypt provides an easy way to create a certificate, and you can use LetsEncrypt with HAProxy by following the directions in the {ref}`Juju HA installation guide for Landscape <how-to-header-configure-haproxy-with-ssl-cert>`.
 
 You can use LetsEncrypt with Apache by following the same directions to acquire the certificate, then install it by following the [configure web server](/how-to-guides/landscape-installation-and-set-up/manual-installation.md#configure-web-server) section of the manual installation guide.
 
@@ -88,7 +88,7 @@ The CA certificate is used by servers and clients in Landscape to identify who t
 To set up TLS or mTLS, you will need the CA certificate used to sign your certificates. Ensure it has the following permissions:
 
 ```sh
-sudo chmod 644 /path/to/ca/ca-cert.pem  
+sudo chmod 644 /path/to/ca/ca-cert.pem
 sudo chown root:root /path/to/ca/ca-cert.pem
 ```
 

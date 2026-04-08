@@ -7,4 +7,4 @@
 :maxdepth: 2
 :glob:
 
-Internal HAProxy Service <internal-haproxy>
+HAProxy route endpoints <haproxy-route-endpoints>

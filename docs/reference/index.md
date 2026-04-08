@@ -20,8 +20,8 @@ release-notes/index
 config/index
 logs/index
 networking/index
+charm/index
 terms/index
 database
 known-issues
 lsctl
-charm/index

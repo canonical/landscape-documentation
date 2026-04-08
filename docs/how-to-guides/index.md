@@ -31,6 +31,7 @@ These how-to guides can be applied to many key operations and common tasks with 
 
 - {ref}`Upgrade Landscape <how-to-upgrade>`
 - {ref}`Upgrade to 24.04 LTS <how-to-upgrade-to-24-04-lts>`
+- {ref}`Upgrade to Landscape 26.04 LTS (charm) <how-to-migrate-to-26-04-charm>`
 
 (how-to-index-heading-backup-maintenance)=
 ## Backup and maintenance
@@ -132,5 +133,4 @@ ubuntu-installer/index
 security/index
 api/index
 troubleshooting/index
-charm/index
 ```

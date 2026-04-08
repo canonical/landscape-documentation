@@ -1,13 +1,17 @@
 ---
 myst:
   html_meta:
-    description: "Migrate to the 26.04 beta version of the Landscape Server charm."
+    description: "Migrate to Landscape 26.04 LTS (charm)."
 ---
 
 (how-to-migrate-to-26-04-charm)=
-# How to migrate to the 26.04 beta version of the charm
+# How to migrate to Landscape 26.04 LTS (charm)
 
-This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS beta+ version with internal HAProxy.
+```{note}
+The Landscape Server charm for 26.04 is currently in beta.
+```
+
+This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS beta+ version with an external HAProxy charm using the `haproxy-route` interface.
 
 ## Architectural changes
 
@@ -15,14 +19,14 @@ The 26.04 beta version introduces significant architectural changes:
 
 | Aspect                   | Landscape 26.04 LTS beta+                                                                               | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | Internal HAProxy on each unit                                                                           | External HAProxy charm                                       |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/edge`, `haproxy-route` interface)                             | External HAProxy charm (`reverseproxy` interface)            |
 | **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                            | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                                     | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+)       | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
-| **HAProxy relation**     | **None** (internal HAProxy, no external charm needed)                                                   | `landscape-server:website` → `haproxy:reverseproxy`          |
-| **TLS certificates**     | `landscape-server:load-balancer-certificates` → TLS provider (e.g., `self-signed-certificates`, `lego`) | HAProxy self-signed or manual config                         |
-| **Access method**        | Any Landscape Server unit IP or `root_url`                                                              | HAProxy unit IP                                              |
-| **HA capabilities**      | Each Landscape Server unit handles traffic                                                              | HAProxy units for load balancing                             |
+| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                       | `landscape-server:website` → `haproxy:reverseproxy`          |
+| **TLS certificates**     | `haproxy:certificates` → TLS provider (e.g., `self-signed-certificates`, `lego`)                        | HAProxy self-signed or manual config                         |
+| **Access method**        | HAProxy unit IP or `root_url`                                                                           | HAProxy unit IP                                              |
+| **HA capabilities**      | HAProxy units for load balancing                                                                        | HAProxy units for load balancing                             |
 
 ## Migration steps
 
@@ -50,14 +54,22 @@ juju remove-relation landscape-server:amqp rabbitmq-server:amqp --force
 If you're migrating from 25.10 or later, you already have the `inbound-amqp` and `outbound-amqp` relations.
 ```
 
-### Step 3: Deploy TLS certificates provider
+### Step 3: Deploy HAProxy and TLS certificates provider
 
-Deploy the TLS certificates provider before refreshing the charm. This gives it time to become active while other operations proceed.
+Deploy the HAProxy charm and a TLS certificates provider before refreshing the charm. This gives them time to become active while other operations proceed.
+
+First, deploy the HAProxy charm:
+
+```bash
+juju deploy haproxy --channel 2.8/edge
+```
 
 **For testing/development with self-signed certificates:**
 
 ```bash
 juju deploy self-signed-certificates
+juju integrate haproxy:certificates self-signed-certificates:certificates
+juju integrate haproxy:receive-ca-certs self-signed-certificates:send-ca-cert
 ```
 
 **For production with Let's Encrypt:**
@@ -67,10 +79,12 @@ juju deploy lego --channel 4/stable
 juju config lego server="https://acme-v02.api.letsencrypt.org/directory"
 juju config lego email="admin@example.com"
 juju config lego plugin="http"
+juju integrate haproxy:certificates lego:certificates
+juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 ```
 
 **Prerequisites for Let's Encrypt HTTP-01 challenge:**
-- Domain in `root_url` must resolve to a Landscape Server unit IP
+- Domain in `root_url` must resolve to the HAProxy unit IP
 - Port 80 must be accessible for ACME HTTP-01 challenge validation
 - Valid email address for certificate notifications
 
@@ -83,9 +97,14 @@ juju deploy manual-tls-certificates --channel stable
 juju config manual-tls-certificates ca-certificate="$(base64 -w0 ca.crt)"
 juju config manual-tls-certificates certificate="$(base64 -w0 server.crt)"
 juju config manual-tls-certificates private-key="$(base64 -w0 server.key)"
+juju integrate haproxy:certificates manual-tls-certificates:certificates
 ```
 
 See the [manual-tls-certificates charm documentation](https://charmhub.io/manual-tls-certificates) for details.
+
+```{note}
+The `manual-tls-certificates` charm provides both the server certificate and any associated CA material over the `certificates` relation, so an additional `haproxy:receive-ca-certs` integration is not required for this provider.
+```
 
 ### Step 4: Refresh the charm
 
@@ -101,28 +120,23 @@ Wait for the refresh to complete and the services to restart:
 juju status --watch 2s
 ```
 
-### Step 5: Integrate with TLS certificates provider
+### Step 5: Integrate Landscape Server with HAProxy
 
-Integrate Landscape Server with the TLS certificates provider you deployed earlier:
-
-```bash
-juju integrate landscape-server:load-balancer-certificates self-signed-certificates:certificates
-```
-
-Or if using lego:
+Add the HAProxy route integrations for all Landscape Server services:
 
 ```bash
-juju integrate landscape-server:load-balancer-certificates lego:certificates
-```
-
-Or if using manual-tls-certificates:
-
-```bash
-juju integrate landscape-server:load-balancer-certificates manual-tls-certificates:certificates
+juju integrate landscape-server:appserver-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:pingserver-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:message-server-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:api-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:package-upload-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:repository-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route
+juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
 
 ```{important}
-The `ssl_cert` and `ssl_key` charm configuration have been removed and are no longer supported in the 26.04 beta charm. Use a provider of the `tls-certificates` interface instead.
+The `ssl_cert` and `ssl_key` charm configuration have been removed and are no longer supported in the 26.04 beta charm. TLS is now managed by the HAProxy charm via the `tls-certificates` interface.
 ```
 
 ### Step 6: Add new RabbitMQ relations (pre-25.10 deployments only)
@@ -148,15 +162,7 @@ PostgreSQL upgrade is optional. The 26.04 beta charm uses the modern `database` 
 The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14. It is recommended to migrate to the modern `database` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
 ```
 
-### Step 8: Remove external HAProxy
-
-The 26.04 beta charm has an internal HAProxy service on each unit, so the external HAProxy charm is no longer needed:
-
-```bash
-juju remove-application haproxy
-```
-
-### Step 9: Verify the deployment
+### Step 8: Verify the deployment
 
 Check that all services are active:
 
@@ -164,10 +170,10 @@ Check that all services are active:
 juju status
 ```
 
-Access Landscape via any Landscape Server unit IP or your configured `root_url`. Use `juju status` to find the landscape-server unit IP addresses.
+Access Landscape via the HAProxy unit IP or your configured `root_url`. Use `juju status` to find the HAProxy unit IP address.
 
 ```{tip}
-For testing access by hostname before DNS is configured, add a Landscape Server unit IP (or your external HAProxy IP if using LBaaS) to `/etc/hosts` on your local machine with the hostname from your `root_url`. For example: `10.1.77.133 landscape.example.com`
+For testing access by hostname before DNS is configured, add the HAProxy unit IP (or your external HAProxy IP if using LBaaS) to `/etc/hosts` on your local machine with the hostname from your `root_url`. For example: `10.1.77.133 landscape.example.com`
 ```
 
 Log in and verify:

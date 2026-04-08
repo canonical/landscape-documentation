@@ -13,4 +13,4 @@ myst:
 
 Upgrade Landscape <upgrade-landscape>
 Upgrade to Landscape 24.04 LTS <upgrade-to-24-04-lts>
-
+Upgrade to Landscape 26.04 LTS (charm) <migrate-to-26-04-charm>

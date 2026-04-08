@@ -28,7 +28,7 @@ To learn more about Juju and to bootstrap a Juju controller, check out their [ge
 When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires.
 
 ```{important}
-Starting with the **26.04 beta version** of the Landscape Server charm, the deployment architecture has changed significantly. The charm now includes internal HAProxy load balancing and no longer requires the external HAProxy charm. If you have an existing deployment using the older approach, see {ref}`how-to-migrate-to-26-04-charm` for migration instructions.
+Starting with the **26.04 beta version** of the Landscape Server charm, the deployment architecture has changed significantly. The charm now integrates directly with the external HAProxy charm (`2.8/edge`) using the `haproxy-route` interface and no longer uses the legacy `reverseproxy` interface. If you have an existing deployment using the older approach, see {ref}`how-to-migrate-to-26-04-charm` for migration instructions.
 ```
 
 ### Deployment approaches
@@ -47,15 +47,13 @@ This approach is deprecated and should only be used for existing deployments tha
 #### 26.04 beta+ deployment (recommended)
 
 The new deployment approach uses:
-- **Internal HAProxy** bundled within each Landscape Server unit
-- PostgreSQL 16 with the modern `postgresql_client` interface
-- TLS certificates provided via the `tls-certificates` interface (e.g., `self-signed-certificates` charm)
-- Optional external load balancer integration via Ingress Configurator charms for advanced routing
+- **External HAProxy charm** (`2.8/edge`) for load balancing via the `haproxy-route` interface
+- PostgreSQL 16 with the modern `database` interface
+- TLS certificates provided via the `tls-certificates` interface integrated with HAProxy (e.g., `self-signed-certificates` charm)
 
 Key benefits of the new approach:
-- Simplified deployment with fewer required charms
-- True high-availability with multiple Landscape Server units
-- Each unit can handle traffic independently
+- HAProxy charm handles all traffic routing and TLS termination
+- True high-availability with multiple Landscape Server units behind HAProxy
 - Better scalability and resilience
 
 For detailed instructions on deploying with the new architecture, see {ref}`how-to-juju-ha-installation`.
@@ -73,10 +71,11 @@ juju deploy landscape-scalable --channel 26.04/beta
 ```
 
 This will deploy:
-- Multiple Landscape Server units with internal HAProxy
+- Multiple Landscape Server units
+- HAProxy (`2.8/edge`) for load balancing
 - PostgreSQL 16 for the database
 - RabbitMQ Server for message queuing
-- Self-signed certificates for TLS
+- Self-signed certificates for TLS (integrated with HAProxy)
 
 **For older deployments:**
 
@@ -101,16 +100,15 @@ Once the deployment has finished, Landscape Server is accessible in different wa
 
 **26.04 beta+ deployment:**
 
-  - Access via the IP address of **any** Landscape Server unit (all units can handle traffic)
-  - If you configured the `root_url` option, access via that hostname (e.g., `https://landscape.local/`)
-  - Internal HAProxy on each unit handles load balancing
+  - Access via the HAProxy unit IP address or your configured `root_url`
+  - HAProxy handles load balancing across all Landscape Server units
 
-**With external load balancer (optional for 26.04 beta+):**
+**With external load balancer (LBaaS):**
 
-  - When using Ingress Configurator charms with an external load balancer
-  - Access via the hostname specified in the `root_url` option and configured in the Ingress Configurator charms
-  - The external load balancer distributes traffic across Landscape Server units
+  - When using a cross-model HAProxy deployment
+  - Access via the hostname specified in your `root_url`
+  - The external HAProxy distributes traffic across Landscape Server units
 
 ```{tip}
-For the 26.04 beta+ deployment, it's recommended to set the `root_url` option and configure DNS to point to one or more of your Landscape Server unit IP addresses, or to an external load balancer if you're using one.
+For the 26.04 beta+ deployment, it's recommended to set the `root_url` option and configure DNS to point to your HAProxy unit IP address, or to an external load balancer if you're using LBaaS.
 ```

@@ -15,10 +15,11 @@ The [Landscape Server charm](https://charmhub.io/landscape-server) requires inte
 - `rabbitmq-server`
 
 **Landscape 26.04 LTS beta+:**
-- A TLS certificates provider (e.g., `self-signed-certificates`, `lego`)
+- `haproxy` (at `2.8/edge`, via `haproxy-route` interface)
+- A TLS certificates provider integrated with HAProxy (e.g., `self-signed-certificates`, `lego`)
 
 **Before Landscape 26.04:**
-- `haproxy`
+- `haproxy` (via `reverseproxy` interface)
 
 For a recommended charm bundle configuration and more information about deploying Landscape Server with Juju, see {ref}`how-to-juju-installation` and {ref}`how-to-juju-ha-installation`.
 
@@ -33,36 +34,34 @@ Learn more about [Juju integrations](https://canonical.com/juju/integrations).
 The Landscape Server charm supports two deployment architectures:
 
 **Landscape 26.04 LTS beta+ (recommended):**
-- Internal HAProxy on each Landscape Server unit
+- External HAProxy charm (`2.8/edge`) for load balancing, using the `haproxy-route` interface
 - PostgreSQL 14+ with modern `database` interface
-- TLS certificates via `tls-certificates` interface provider
-- Optional `ingress-configurator` integration for external load balancer integration
+- TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
+
+```{include} /reuse/charm-ha-architecture-2604.md
+```
 
 **Before 26.04:**
-- External HAProxy charm for load balancing
+- External HAProxy charm for load balancing, using the `reverseproxy` interface
 - PostgreSQL ≥ 14 with legacy `pgsql` interface
+
+```{include} /reuse/charm-ha-architecture-pre-2604.md
+```
 
 For migration from older deployments to 26.04 beta+, see {ref}`how-to-migrate-to-26-04-charm`.
 
 ## Required integrations by version
 
-| Charm                         | Landscape 26.04 LTS beta+                       | Before 26.04                                |
-| ----------------------------- | ----------------------------------------------- | ------------------------------------------- |
-| **PostgreSQL**                | Required (PostgreSQL 14+, `database` interface) | Required (PostgreSQL 14, `pgsql` interface) |
-| **RabbitMQ Server**           | Required                                        | Required                                    |
-| **HAProxy**                   | Not used (internal HAProxy)                     | Required (external charm)                   |
-| **TLS Certificates Provider** | Required (e.g., `self-signed-certificates`)     | Not used                                    |
-| **Ingress Configurator**      | Optional (for external LB integration)          | Not applicable                              |
-
-```{note}
-This feature is available in Landscape 26.04 LTS beta+.
-```
+| Charm                         | Landscape 26.04 LTS beta+                                            | Before 26.04                                    |
+| ----------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
+| **PostgreSQL**                | Required (PostgreSQL 14+, `database` interface)                      | Required (PostgreSQL 14, `pgsql` interface)     |
+| **RabbitMQ Server**           | Required                                                             | Required                                        |
+| **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface)                        | Required (`latest/x`, `reverseproxy` interface) |
+| **TLS Certificates Provider** | Required (integrated with HAProxy, e.g., `self-signed-certificates`) | Not used                                        |
 
 ## TLS certificates charm interface
 
-Starting with the 26.04 beta version, the Landscape Server charm handles load balancing internally using HAProxy bundled within each unit. This architecture requires integration with a provider of the [`tls-certificates` charm interface](https://charmhub.io/integrations/tls-certificates) using the Landscape Server charm's `load-balancer-certificates` relation endpoint.
-
-The TLS certificates are used by the internal HAProxy instances for secure HTTPS connections.
+Starting with the 26.04 beta version, TLS is managed by the HAProxy charm. The HAProxy charm integrates with a provider of the [`tls-certificates` charm interface](https://charmhub.io/integrations/tls-certificates) to obtain certificates for HTTPS connections.
 
 ### Available TLS certificate providers
 
@@ -74,97 +73,41 @@ The TLS certificates are used by the internal HAProxy instances for secure HTTPS
 - [`manual-tls-certificates`](https://charmhub.io/manual-tls-certificates) - Use custom CA certificates
 - Any charm that provides the `tls-certificates` interface
 
+Integrate TLS with HAProxy (not with `landscape-server` directly):
+
+```bash
+juju integrate haproxy:certificates <tls-provider>:certificates
+```
+
 For deployment examples and configuration, see {ref}`how-to-juju-ha-installation` and {ref}`how-to-migrate-to-26-04-charm`.
 
 ## K8s Operators
 
 Landscape Server is currently only distributed as a machine (VM) charm and cannot be directly integrated with any version of K8s Charmed Operators, such as the HAProxy K8s operator or the Charmed PostgreSQL K8s operator.
 
-```{note}
-This feature is available in Landscape 26.04 LTS beta+.
-```
-
-## Ingress Configurator charm
-
-Starting with the 26.04 beta version of the Landscape Server charm, the Ingress Configurator charm can be used to integrate Landscape Server with external load balancers that provide the `haproxy-route` interface, such as the new HAProxy charm. These integrations are **optional** and provide advanced routing capabilities beyond the built-in internal HAProxy.
-
-There are two deployment approaches for external load balancers:
-
-### LBaaS (Load Balancer as a Service) - Cross-Model Relations
-
-For enterprise deployments, you can deploy HAProxy in a separate Juju model and use cross-model relations (offers/consumes) to connect it to Landscape Server. This provides:
-- Separate lifecycle management for load balancer infrastructure
-- Ability to share a load balancer across multiple applications/models
-- Better isolation of infrastructure concerns
-
-**Architecture:**
-```
-Client → HAProxy (lbaas model)
-  → [Cross-model relation]
-  → Ingress Configurators (landscape model)
-  → Internal HAProxy (on each Landscape Server unit)
-  → Landscape Services
-```
-
-See the "External Load Balancer with Cross-Model Integration (LBaaS)" section in {ref}`how-to-juju-ha-installation` for complete setup.
-
-### Configuration
-
-If you use external load balancers via Ingress Configurator, configure the following options:
-
-**Landscape Server charm configuration:**
-
-| Configuration Option             | Value                              |
-| -------------------------------- | ---------------------------------- |
-| `enable_hostagent_messenger`     | `True`                             |
-| `enable_ubuntu_installer_attach` | `True`                             |
-| `root_url`                       | `https://your-domain.example.com/` |
-| `redirect_https`                 | `none`                             |
-
-**Ingress Configurator charm configuration:**
-
-| Relation/Service            | Configuration Option         | Value                     |
-| --------------------------- | ---------------------------- | ------------------------- |
-| **Hostagent Messenger**     | `external-grpc-port`         | `6554`                    |
-|                             | `hostname`                   | `your-domain.example.com` |
-|                             | `backend-protocol`           | `https`                   |
-| **Ubuntu Installer Attach** | `external-grpc-port`         | `50051`                   |
-|                             | `hostname`                   | `your-domain.example.com` |
-|                             | `backend-protocol`           | `https`                   |
-| **HTTP Ingress**            | `paths`                      | `/`                       |
-|                             | `hostname`                   | `your-domain.example.com` |
-|                             | `header-rewrite-expressions` | `X-Forwarded-Proto:https` |
-|                             | `allow-http`                 | `true`                    |
-
-```{important}
-The Ingress Configurator integration for external load balancers (such as a dedicated HAProxy deployment) is optional. The internal HAProxy on each Landscape Server unit already handles load balancing without requiring external load balancers. Use the Ingress Configurator integration only when you need dedicated infrastructure management, advanced routing, or integration with existing load balancer systems.
-```
-
-- [Ingress Configurator on Charmhub](https://charmhub.io/ingress-configurator)
-
 ## HAProxy
 
 The relationship between Landscape Server and HAProxy varies significantly between Landscape versions:
 
 **Landscape 26.04 LTS beta+:**
-- HAProxy is bundled **internally** within each Landscape Server unit
-- Cannot be directly integrated with the HAProxy charm
-- Each Landscape Server unit runs its own HAProxy instance for load balancing
+- Requires the HAProxy charm at `2.8/edge`
+- Integrates via 8 `haproxy-route` relation endpoints directly from landscape-server to haproxy
+- HAProxy handles TLS termination and load balancing
+- Cannot be integrated with the `latest/x` channels of the HAProxy charm (different interface)
 
 **Before 26.04:**
-- Requires the external HAProxy charm for load balancing
-- Uses the `latest/x` channel
-- HAProxy units sit in front of Landscape Server units
+- Requires the external HAProxy charm at `latest/x`
+- Integrates via the `reverseproxy` interface: `landscape-server:website` → `haproxy:reverseproxy`
 - Cannot be integrated with the `2.8/x` channels of the HAProxy charm
 
-**External load balancer integration (optional for Landscape 26.04 LTS beta+):**
-- Must use Ingress Configurator charms as an intermediary to integrate with external HAProxy
-- See the LBaaS section in {ref}`how-to-juju-ha-installation` for complete setup
+**LBaaS (Load Balancer as a Service) - cross-model HAProxy:**
+- Deploy HAProxy in a separate Juju model and use cross-model relations
+- Landscape Server integrates directly with the cross-model HAProxy via `haproxy-route` endpoints
+- See {ref}`heading-lbaas-installation` for complete setup
 
-For migrating from older deployments to the internal HAProxy architecture, see {ref}`how-to-migrate-to-26-04-charm`.
+For migrating from older deployments to the new HAProxy architecture, see {ref}`how-to-migrate-to-26-04-charm`.
 
 - [HAProxy on Charmhub](https://charmhub.io/haproxy)
-- [Ingress Configurator on Charmhub](https://charmhub.io/ingress-configurator)
 
 ## Charmed PostgreSQL
 
