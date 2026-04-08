@@ -29,10 +29,6 @@ You will encounter issues with the following scenarios.
 
     You must use WSL 2 to register and use WSL instances with Landscape. For more information on the difference between WSL 1 and WSL 2, visit [Microsoft’s guide on comparing WSL 1 and WSL 2](https://learn.microsoft.com/en-us/windows/wsl/compare-versions). To learn how to upgrade from WSL 1 to WSL 2, visit [Microsoft’s guide on upgrading from WSL 1 to WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install#upgrade-version-from-wsl-1-to-wsl-2).
 
-- **Attempting to use Landscape SaaS**
-
-    WSL is not supported for Landscape SaaS at this time. You must have Landscape Server Beta self-hosted in a public cloud or on premise to use WSL with Landscape.
-
 - **Attempting to use Landscape Server 23.10 or earlier**
 
     WSL isn't supported for Landscape Server 23.10 or earlier.

@@ -8,10 +8,10 @@ myst:
 # How to configure WSL-related services after upgrading Landscape
 
 ```{note}
-This guide is only for upgrades from **Landscape 23.10** or earlier. Note that the WSL integration is still a beta feature in Landscape and not widely available yet.
+This guide is only for upgrades from **Landscape 23.10** or earlier.
 ```
 
-This guide describes how to configure WSL-related services if you've upgraded from an older version of Landscape (23.10 or earlier). If this is your first time installing Landscape, you don’t need to perform these steps.
+This guide describes how to configure WSL-related services if you've upgraded from an older version of Landscape (23.10 or earlier). If this is your first time installing Landscape, you don't need to perform these steps.
 
 ## Update the `service.conf` file
 
