@@ -180,7 +180,7 @@ For example, you could define the following pull pockets by deriving the series:
 - `test` (derived from `dev`)
 - `prod` (derived from `test`)
 
-When deriving series to make cascading pull pockets, we recommed you include the date in the series name. For example, `noble-2026-03-29`.
+When deriving series to make cascading pull pockets, we recommend you include the date in the series name. For example, `noble-2026-03-29`.
 
 ## Use repository snapshots
 
