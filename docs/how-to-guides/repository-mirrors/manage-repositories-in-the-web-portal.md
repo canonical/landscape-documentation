@@ -180,11 +180,13 @@ For example, you could define the following pull pockets by deriving the series:
 - `test` (derived from `dev`)
 - `prod` (derived from `test`)
 
+In this example, updates flow from `dev` > `test` > `prod`, with each stage using a fixed set of package versions.
+
 When deriving series to make cascading pull pockets, we recommend you include the date in the series name. For example, `noble-2026-03-29`.
 
 ## Use repository snapshots
 
-[Snapshots](https://snapshot.ubuntu.com/) are another source you can use to mirror packages. They allow Landscape to mirror packages from a specific point in time.
+[Snapshots](https://snapshot.ubuntu.com/) are another source you can use to mirror packages. They allow Landscape to mirror packages from the Ubuntu archive at a specific point in time.
 
 To use a snapshot, follow the same process as you would to {ref}`how-to-heading-manage-repos-create-mirror`, but change the type to **Ubuntu Snapshot**, and choose a snapshot date.
 
