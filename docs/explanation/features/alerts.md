@@ -12,6 +12,7 @@ Landscape uses alerts to notify administrators when action is required across th
 ## Working with alerts
 
 An alert can have three statuses:
+
 - **OK**: No action required
 - **Alerted**: Administrator investigation recommended
 - **Disabled**: Inactive alert
