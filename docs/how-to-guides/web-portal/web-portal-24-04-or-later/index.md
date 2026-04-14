@@ -34,7 +34,7 @@ Manage access groups <manage-access-groups>
 
 ## Package and update management
 
-Manage software on your instances, including Debian packages, snaps, Livepatch, and kernel updates.
+Manage software on your instances, including Debian packages, snaps, Livepatch, and the kernel.
 
 ```{toctree}
 :titlesonly:
