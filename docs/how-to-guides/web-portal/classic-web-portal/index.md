@@ -37,7 +37,7 @@ Manage access groups <manage-access-groups>
 
 ## Package and update management
 
-Manage software on your computers, including Debian packages and snaps,
+Manage software on your computers, including Debian packages and snaps.
 
 ```{toctree}
 :titlesonly:
