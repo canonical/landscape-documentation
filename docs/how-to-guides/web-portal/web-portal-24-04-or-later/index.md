@@ -11,7 +11,7 @@ The web portal (24.04 LTS or later) is Landscape's newer interface. We're active
 
 ## Instance management
 
-Manage the instances in your estate and perform common instance-level tasks.
+Manage the instances in your estate and perform common tasks.
 
 ```{toctree}
 :titlesonly:

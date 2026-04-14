@@ -11,7 +11,7 @@ The classic web portal is Landscape's original interface, which includes some fe
 
 ## Computer management
 
-Manage the computers in your estate and perform common computer-level tasks.
+Manage the computers in your estate and perform common tasks.
 
 ```{toctree}
 :titlesonly:
