@@ -109,3 +109,21 @@ We published the 24.04.11 point release on 27 October 2025.
  - fix: Event logs reference wrong computer
  - fix: hide static/asset directory listings
  - fix: Change dependency on chrony to depend on the time-daemon virtual package instead
+
+## Landscape 24.04.12 Point Release
+
+We published the 24.04.12 point release on 17 April 2026.
+
+ - fix: hide inputs when there is a validation error
+ - fix: issue with pro free licenses
+ - fix: user enumeration on password reset page
+ - fix: html escape account title in invitation email
+ - fix: arbitrary file deletion bug in package upload
+ - fix: check for application/json content-type header in POST,PUT,PATCH requests
+ - fix: block cross-site request forgery via GET-based state modifications
+ - fix: Backport pingserver fixes
+ - fix: force download for all script attachments
+ - fix: backport-cross-site scripting in the profile creation page
+ - fix: backport-cross-site-scripting-activity-result-page
+ - fix: remove newlines from proxy config
+ - fix: Zope template security bugs
