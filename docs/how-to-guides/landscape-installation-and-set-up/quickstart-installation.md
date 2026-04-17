@@ -56,6 +56,7 @@ To set the machine’s host name, run:
 
 ```bash
 sudo hostnamectl set-hostname "$FQDN"
+echo "127.0.1.1 $FQDN" | sudo tee -a /etc/hosts
 ```
 
 When Landscape Server is installed, it'll read the machine’s host name and use it in the Apache configuration.
