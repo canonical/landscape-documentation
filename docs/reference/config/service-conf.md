@@ -946,7 +946,7 @@ The `[system]` section contains configurations that apply across many or all of 
 - Purpose: Landscape Server's root URL path.
 - Deprecated key name: `root-url`
 - ENV name: `LANDSCAPE_SYSTEM__ROOT_URL`
-- Default: `http://localhost:8080`
+- Default: `http://localhost:8080/`
 
 ### `syslog_address`
 
