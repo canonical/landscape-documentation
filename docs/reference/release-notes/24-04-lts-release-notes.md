@@ -98,3 +98,14 @@ We published the 24.04.10 point release on 27 February 2025.
  - fix: prevent epoll race conditions when writing API responses
  - fix: reset passphrase oops backport (LP: [#2094844](https://bugs.launchpad.net/landscape/+bug/2094844))
  - fix: 500 error when logging out in standalone
+
+## Landscape 24.04.11 Point Release
+
+We published the 24.04.11 point release on 27 October 2025.
+
+ - fix: remove unused _buffer_type import; safe import of AbstractComputerRequest
+ - fix: raise client error for invalid GPG material in POST /gpg-key
+ - fix: ignore root-url update on conflict
+ - fix: Event logs reference wrong computer
+ - fix: hide static/asset directory listings
+ - fix: Change dependency on chrony to depend on the time-daemon virtual package instead
