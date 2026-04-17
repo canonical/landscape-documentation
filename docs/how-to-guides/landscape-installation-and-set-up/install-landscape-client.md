@@ -26,18 +26,18 @@ Landscape Client is available in Ubuntu's `main` repository in all [Ubuntu relea
 1. Set environment variables:
 
    ```bash
-   LANDSCAPE_ACCOUNT_NAME='<ACCOUNT_NAME>'
-   LANDSCAPE_FQDN='<FQDN>'
-   LANDSCAPE_COMPUTER_TITLE='<COMPUTER_NAME>'
+   LANDSCAPE_ACCOUNT_NAME='{LANDSCAPE_ACCOUNT_NAME}'
+   LANDSCAPE_FQDN='{LANDSCAPE_FQDN}'
+   LANDSCAPE_COMPUTER_TITLE='{LANDSCAPE_COMPUTER_TITLE}'
    ```
 
    This code block includes the following values which must be changed:
 
-   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
+   `{LANDSCAPE_ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
+   `{LANDSCAPE_FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
 
-   `<COMPUTER_NAME>`: The name of the computer you're installing Landscape Client on. You choose this name.
+   `{LANDSCAPE_COMPUTER_TITLE}`: The name of the computer you're installing Landscape Client on. You choose this name.
 
 1. Configure:
 
@@ -57,13 +57,13 @@ To install Landscape Client from a PPA:
    sudo apt update && sudo apt install -y software-properties-common
    ```
 
-1. Add the PPA, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
+1. Add the PPA, replacing `{LANDSCAPE_PPA}` with the appropriate repository:
 
    ```bash
-   sudo add-apt-repository -y <LANDSCAPE_PPA>
+   sudo add-apt-repository -y {LANDSCAPE_PPA}
    ```
 
-    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you're using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+    - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you're using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
 
 1. Install the `landscape-client` package:
 
@@ -74,18 +74,18 @@ To install Landscape Client from a PPA:
 1. Set environment variables:
 
    ```bash
-   LANDSCAPE_ACCOUNT_NAME='<ACCOUNT_NAME>'
-   LANDSCAPE_FQDN='<FQDN>'
-   LANDSCAPE_COMPUTER_TITLE='<COMPUTER_NAME>'
+   LANDSCAPE_ACCOUNT_NAME='{LANDSCAPE_ACCOUNT_NAME}'
+   LANDSCAPE_FQDN='{LANDSCAPE_FQDN}'
+   LANDSCAPE_COMPUTER_TITLE='{LANDSCAPE_COMPUTER_TITLE}'
    ```
 
    This code block includes the following values which must be changed:
 
-   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
+   `{LANDSCAPE_ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
+   `{LANDSCAPE_FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
 
-   `<COMPUTER_NAME>`: The name of the computer you're installing Landscape Client on. You choose this name.
+   `{LANDSCAPE_COMPUTER_TITLE}`: The name of the computer you're installing Landscape Client on. You choose this name.
 
 1. Configure:
 
@@ -102,15 +102,15 @@ This method is suitable when using charmed operators. To install Landscape Clien
 1. Set environment variables:
 
    ```bash
-   LANDSCAPE_ACCOUNT_NAME='<ACCOUNT_NAME>'
-   LANDSCAPE_FQDN='<FQDN>'
+   LANDSCAPE_ACCOUNT_NAME='{LANDSCAPE_ACCOUNT_NAME}'
+   LANDSCAPE_FQDN='{LANDSCAPE_FQDN}'
    ```
 
    This code block includes the following values which must be changed:
 
-   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
+   `{LANDSCAPE_ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
+   `{LANDSCAPE_FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should set this to `landscape.canonical.com`.
 
 1. Deploy the charm:
 
@@ -144,19 +144,19 @@ This method is suitable if it's available during a machine's provisioning stage.
    ```yaml
    landscape:
      client:
-       account_name: "<ACCOUNT_NAME>"
-       computer_title: "<COMPUTER_NAME>"
-       url: "https://<FQDN>/message-system"
-       ping_url: "http://<FQDN>/ping"
+       account_name: "{LANDSCAPE_ACCOUNT_NAME}"
+       computer_title: "{LANDSCAPE_COMPUTER_TITLE}"
+       url: "https://{LANDSCAPE_FQDN}/message-system"
+       ping_url: "http://{LANDSCAPE_FQDN}/ping"
    ```
 
    This code block includes the following values which must be changed:
 
-   `<ACCOUNT_NAME>`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
+   `{LANDSCAPE_ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`. Landscape SaaS users should specify the name of their Landscape SaaS account.
 
-   `<COMPUTER_NAME>`: The name of the computer you're installing Landscape Client on. You choose this name.
+   `{LANDSCAPE_COMPUTER_TITLE}`: The name of the computer you're installing Landscape Client on. You choose this name.
 
-   `<FQDN>`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should omit `url` and `ping_url`.
+   `{LANDSCAPE_FQDN}`: Self-hosted Landscape users should set this to the FQDN used during their Landscape Server installation. Landscape SaaS users should omit `url` and `ping_url`.
 
    For additional information, see the [cloud-init Landscape module documentation](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#landscape).
 
@@ -173,18 +173,18 @@ The snap is generally used for Ubuntu Core devices. You can install the Landscap
 (howto-heading-register-client-self-signed-certificate)=
 ## Register a client machine on a self-hosted server with a self-signed certificate
 
-If your self-hosted Landscape server uses a self-signed certificate, you'll need to download the server certificate to the client before registration. Replace `<SERVER_NAME>` with the FQDN or IP address of your server.
+If your self-hosted Landscape server uses a self-signed certificate, you'll need to download the server certificate to the client before registration. Replace `{LANDSCAPE_FQDN}` with the FQDN or IP address of your server.
 
 Download the server certificate:
 
 ```bash
-echo -n | openssl s_client -connect <SERVER_NAME>:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
+echo -n | openssl s_client -connect {LANDSCAPE_FQDN}:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
 ```
 
 Then register the client:
 
 ```bash
-sudo landscape-config --computer-title "My client" --account-name standalone --url https://<SERVER_NAME>/message-system --ping-url http://<SERVER_NAME>/ping
+sudo landscape-config --computer-title "My client" --account-name standalone --url https://{LANDSCAPE_FQDN}/message-system --ping-url http://{LANDSCAPE_FQDN}/ping
 ```
 
 If you used a custom CA, you'll need to pass the `--ssl-public-key` parameter pointing to the CA file so that the client can recognize the issuer of the server certificate.
