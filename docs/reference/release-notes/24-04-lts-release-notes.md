@@ -119,7 +119,7 @@ We published the 24.04.12 point release on 17 April 2026.
  - fix: user enumeration on password reset page
  - fix: html escape account title in invitation email
  - fix: arbitrary file deletion bug in package upload
- - fix: check for application/json content-type header in POST,PUT,PATCH requests
+ - fix!: check for application/json content-type header in POST,PUT,PATCH requests
  - fix: block cross-site request forgery via GET-based state modifications
  - fix: Backport pingserver fixes
  - fix: force download for all script attachments
