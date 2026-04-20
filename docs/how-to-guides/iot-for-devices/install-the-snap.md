@@ -92,6 +92,10 @@ The options you can set with snap `set` are:
 When you run `snap set`, the value is written to snap options and then applied to `landscape-client.conf` by the `configure` hook. Only the keys listed above are recognized and applied. If you set an unrecognized key, it will not be written to the configuration file but will persist in snap options, which can be misleading. Use `snap unset landscape-client <key>` to remove it.
 ```
 
+```{note}
+The keys `landscape-url` and `landscape-ping-url` are deprecated aliases for `url` and `ping-url`. They still work but will be removed in a future release. Use `url` and `ping-url` for new configurations.
+```
+
 ### Accept the registration
 
 ```{note}
