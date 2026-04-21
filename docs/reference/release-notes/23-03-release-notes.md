@@ -46,7 +46,7 @@ Performing an in-place upgrade from Landscape 19.10 entails a fresh installation
 
 ## Patch Notices
 
-- landscape-server 23.03+19 published on 17 April 2026
+- landscape-server 23.03+19 published on 21 April 2026
 
   * fix: user enumeration on password reset page
   * fix: arbitrary file deletion bug in package upload
