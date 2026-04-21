@@ -48,6 +48,7 @@ Performing an in-place upgrade from Landscape 19.10 entails a fresh installation
 
 - landscape-server 23.03+19 published on 17 April 2026
 
+  * fix: user enumeration on password reset page
   * fix: arbitrary file deletion bug in package upload
   * fix: block cross-site request forgery via GET-based state modifications
   * fix: backport-cross-site-scripting-activity-result-page
