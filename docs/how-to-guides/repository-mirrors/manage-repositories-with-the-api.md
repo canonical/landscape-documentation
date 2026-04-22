@@ -79,8 +79,6 @@ Note: the secret key must NOT have a passphrase. To remove the passphrase from a
 gpg --edit-key A1234B5678C9101112D12141516E17181920FGH0
 ```
 
-See the [gpg](http://manpages.ubuntu.com/cgi-bin/search.py?q=gpg) man page for more details.
-
 List the keys:
 
 ```bash
