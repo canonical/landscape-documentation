@@ -7,9 +7,19 @@ myst:
 (reference-terms-access-groups)=
 # Access groups
 
-In Landscape, **access groups** are logical groupings used by administrators to assign specific administrative rights to computers on a per-group basis. Each computer can only be in one access group. In addition to computers, access groups can contain package profiles, scripts and custom graphs.
+In Landscape, **access groups** are logical groupings used by administrators to assign specific administrative rights to instances on a per-group basis. Each instance can only be in one access group. In addition to computers, access groups can contain package profiles, scripts and more.
 
-A new Landscape installation comes with a single access group, called global, which gives any administrators who are associated with roles that include that access group control over every computer managed by Landscape. Most organizations will want to subdivide administration responsibilities by creating logical groupings of computers.vTypical access groups might be constructed around organizational units or departments, locations or hardware architecture.
+A new Landscape account comes with a single access group, called "global". Any administrators associated with roles that include this access group have control over every instance managed by Landscape. Most organizations will want to subdivide administration responsibilities by creating logical groupings of computers. Typical access groups might be constructed around organizational units or departments, locations or hardware architecture.
+
+When new access groups are created, a parent access group is specified. If an administrator has rights to manage a certain access group, that administrator will also have rights for its children access groups. Every other access group has the global access group as its parent, either directly or indirectly. A nested access group structure might look something like the diagram below.
+
+```bash
+global
+├── desktop
+└── server
+    ├── database
+    └── web
+```
 
 It's good practice to create and document a naming convention for access groups before you deploy Landscape, so that all administrators understand what constitutes an acceptable logical grouping for your organization.
 
