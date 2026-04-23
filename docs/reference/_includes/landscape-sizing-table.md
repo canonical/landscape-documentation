@@ -11,4 +11,4 @@
 - **Disk:** 512 GB
 - **Additional storage:** 2 TB or more if using repository mirroring
 
-Actual requirements depend on the number of managed clients, enabled features, and deployment method. These figures are starting points. You may needd to adjust based on your environment.
+Actual requirements depend on the number of managed clients, enabled features, and deployment method. These figures are starting points. You may need to adjust based on your environment.
