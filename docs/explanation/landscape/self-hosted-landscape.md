@@ -23,9 +23,7 @@ We offer three installation options for self-hosted Landscape Server:
 | {ref}`Juju <how-to-juju-installation>` | Scalable, production-grade deployment with high availability. |
 | {ref}`Manual <how-to-manual-installation>` | Scalable deployment without Juju. Suitable when a Juju environment is not available. |
 
-The Landscape Server charm follows similar release cycles to the other installation methods, although the timing can vary slightly. For more details and the charm-specific Ubuntu compatibility, see the [Landscape Server charm page on Charmhub](https://charmhub.io/landscape-server).
-
-## Supported versions
+## Supported versions and release cycles
 
 Landscape Server has the following active or ESM-supported releases:
 
@@ -33,6 +31,8 @@ Landscape Server has the following active or ESM-supported releases:
 ```
 
 LTS versions are released every two years and are recommended for production deployments. Latest stable versions are released every six months; each is supported only until the next release.
+
+The Landscape Server charm follows similar release cycles to the other installation methods, although the timing can vary slightly. For more details and the charm-specific Ubuntu compatibility, see the [Landscape Server charm page on Charmhub](https://charmhub.io/landscape-server).
 
 For more information, see {ref}`reference-supported-versions-and-ppas`.
 
