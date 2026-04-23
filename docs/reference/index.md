@@ -42,17 +42,6 @@ Configuration file references for Landscape Server and Client.
 config/index
 ```
 
-## Logs
-
-Log file locations and formats for troubleshooting and monitoring.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-logs/index
-```
-
 ## Networking
 
 Network requirements, ports, and firewall configurations.
@@ -94,6 +83,7 @@ Additional technical documentation and command-line tools.
 :titlesonly:
 :maxdepth: 1
 
+logs
 database
 known-issues
 lsctl

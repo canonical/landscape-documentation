@@ -7,7 +7,11 @@ myst:
 (explanation-security-index)=
 # Security
 
-Understand security concepts, practices, and compliance topics in Landscape. These explanations cover cryptographic technology, authentication methods, data handling, security policies, and more.
+Understand security concepts, practices, and policies in Landscape, including cryptographic technology, authentication methods, and data handling.
+
+## Security concepts
+
+Learn about the security principles and technologies underpinning Landscape, including how data is handled and what cryptographic methods are used.
 
 ```{toctree}
 :titlesonly:
@@ -15,8 +19,28 @@ Understand security concepts, practices, and compliance topics in Landscape. The
 
 Security overview <security-in-landscape>
 Cryptographic technology <cryptographic-technology>
-Disclosure and reporting <disclosure-and-reporting>
 Data handling <data-handling>
-AppArmor <apparmor>
+```
+
+## Authentication and access control
+
+Understand how Landscape authenticates users and controls access to managed systems.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
 Authentication and authorization <authentication-and-authorization>
+AppArmor <apparmor>
+```
+
+## Policies
+
+Review Landscape's policies for security disclosures and vulnerability reporting.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
+Disclosure and reporting <disclosure-and-reporting>
 ```

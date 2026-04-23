@@ -207,6 +207,7 @@ From the **{spellexception}`Organisation`** home page in the Landscape web porta
 #!/bin/bash
 echo "Hello, World!" > /home/ubuntu/hello
 ```
+
 Note that this script may take a few minutes to complete. 
 
 From the **Computers** page, select your computer and then click the **Scripts** tab. Select the `Hello World` script and click **Next**. You can leave all the other defaults, then click **Run** to create an activity to run the script on your client VM.
@@ -222,6 +223,7 @@ The directory listing should show the file `hello` in the `ubuntu` user's home d
 ```bash
 ls -l
 ```
+
 
 And the contents should be `Hello, World!`.
 
