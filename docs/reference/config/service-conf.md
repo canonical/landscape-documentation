@@ -266,7 +266,7 @@ Beginning in Landscape Server 25.10, the following keys have moved from the `[ap
 - `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
 - `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
 
-These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape Server 26.04 LTS, when support is expected to be removed and they must be configured in the `[system]` section. Note that upgrades of Landscape Server 25.10 and later includes automated migration of these names.
+These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape Server 26.10, when support is expected to be removed and they must be configured in the `[system]` section. Note that upgrades of Landscape Server 25.10 and later includes automated migration of these names.
 
 ### Authentication providers
 
