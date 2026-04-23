@@ -7,7 +7,7 @@ myst:
 (explanation-about-self-hosted)=
 # About self-hosted Landscape
 
-Self-hosted Landscape is the standalone edition of Landscape that you install and operate yourself, either on-premises or in a public cloud. It gives you full control over the server, its data, and its network boundaries.
+Self-hosted Landscape is the standalone edition of Landscape that you install and operate yourself, either on-premises or in a public cloud.
 
 Feature enhancements are released in scheduled release windows twice per year, typically in April and October. Security patches and bug fixes are provided outside of these windows at the earliest possible opportunity.
 
