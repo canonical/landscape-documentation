@@ -16,9 +16,9 @@ Starting with Landscape 25.10, every entry in the `service.conf` file can be ove
 The sections below contain information about the key-value pairs that can be set in each section, the corresponding environment variable, the default value (if any), and the purpose of the entry.
 
 ```{note}
-The usage of the `-` character in section names and key names was deprecated in Landscape Server 25.10 in favor of the `_` character. Support for the `-` character is expected to be removed in Landscape Server 26.04 LTS.
+The usage of the `-` character in section names and key names was deprecated in Landscape Server 25.10 in favor of the `_` character. Support for the `-` character is expected to be removed in Landscape Server 26.10.
 
-In addition, the names of some sections of the `service.conf` file were deprecated in Landscape Server 25.10. These sections and their new names are detailed below. Support for the deprecated names is expected to be removed in Landscape Server 26.04 LTS.
+In addition, the names of some sections of the `service.conf` file were deprecated in Landscape Server 25.10. These sections and their new names are detailed below. Support for the deprecated names is expected to be removed in Landscape Server 26.10.
 
 Upgrades to Landscape Server 25.10 or later will include migrating these names.
 ```
@@ -266,7 +266,7 @@ Beginning in Landscape Server 25.10, the following keys have moved from the `[ap
 - `enable-saas-metrics` → `enable_saas_metrics` in `[system]`
 - `enable-tag-script-execution` → `enable_tag_script_execution` in `[system]`
 
-These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape Server 26.04 LTS, when support is expected to be removed and they must be configured in the `[system]` section. Note that upgrades of Landscape Server 25.10 and later includes automated migration of these names.
+These keys can still be used in their deprecated forms in `[appserver]`/`[landscape]` until Landscape Server 26.10, when support is expected to be removed and they must be configured in the `[system]` section. Note that upgrades of Landscape Server 25.10 and later includes automated migration of these names.
 
 ### Authentication providers
 
