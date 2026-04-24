@@ -65,7 +65,7 @@ Example request:
 curl -X POST https://landscape.canonical.com/api/v2/person \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT" \
-  -d '{"name": "John Allen Smith"}'   
+  -d '{"name": "John Allen Smith"}'
 ```
 
 Example response:
@@ -86,3 +86,27 @@ Example response:
   "preferred_account": null
 }
 ```
+
+## POST `/person:test-email`
+
+Sends a test email to the currently logged-in user's email address to verify the mail queue configuration.
+
+Path parameters:
+
+- None
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X POST https://landscape.canonical.com/api/v2/person:test-email \
+  -H "Authorization: Bearer $JWT"
+```
+
+Response codes:
+
+- `204`: Email successfully queued.
+- `502`: Failed to queue the test email. Check your mail queue configuration.
