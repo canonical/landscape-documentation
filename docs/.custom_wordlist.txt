@@ -50,6 +50,7 @@ ceph
 Certbot
 certbot
 centralized
+cfg
 Charmhub
 Charmhub's
 changelog
@@ -64,7 +65,11 @@ CLI's
 Cognito
 conf
 config
+configurator
+configurators
+Configurator
 configs
+Configurator
 conformant
 conntrack
 copiedprofilename
@@ -104,8 +109,10 @@ Entra
 EPMD
 epoll
 ESM
+FDE
 eu
 falsy
+FDERecoveryKeyManager
 Fernet
 FIPS
 FQDN
@@ -125,6 +132,7 @@ grpcio
 filesystem
 frontend
 HAProxy
+haproxy
 HashiCorp
 hardcoded
 HashiCorp’s
@@ -149,7 +157,9 @@ init
 IoT
 Iot
 ip
+IPs
 IPv
+Jinja
 jQuery
 Juju's
 Juju
@@ -164,15 +174,19 @@ keyslots
 Kudu
 KVM
 keyrings
+keyslot
 kvm
 kwarg
 labelled
 launchpadcontent
+lbaas
+LBaaS
 LDAP
 LDS
 LetsEncrypt
 libvirt
 licence
+lego
 lifecycle
 Livepatch
 Livepatches
@@ -187,6 +201,7 @@ LXD
 lxd
 MAAS
 maas
+maxconn
 Mailjet
 Makefile
 ManualInstallation
@@ -242,9 +257,11 @@ queueingQuickstartquickstart
 packagesearch
 PAYG
 PCI
+pem
 perf
 perfs
 performant
+PID
 PIDs
 PITR
 pgSQL
@@ -252,6 +269,8 @@ pgtune
 pingserver
 pluggable
 png
+pooler
+poolers
 Postconf
 postgres
 PostgreSQL
@@ -339,6 +358,8 @@ timeframe
 TLD
 TLS
 TLSv
+tmpfiles
+TPM
 traceback
 transactional
 truthy

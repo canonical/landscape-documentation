@@ -126,19 +126,22 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles" -H "Authorization: Bearer $JWT" -d '
-{
-  "benchmark": "disa_stig",
-  "mode": "audit",
-  "schedule": "RRULE:FREQ=WEEKLY",
-  "title": "Macrodata Refinement Terminals",
-  "start_date": "2025-03-29T12:00:00Z",
-  "access_group": "mdr-terminals",
-  "all_computers": false,
-  "restart_deliver_delay": 2,
-  "restart_deliver_delay_window": 10,
-  "tags": ["mdr"]
-}'
+curl -X POST "https://landscape.canonical.com/api/v2/security-profiles" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '
+  {
+    "benchmark": "disa_stig",
+    "mode": "audit",
+    "schedule": "RRULE:FREQ=WEEKLY",
+    "title": "Macrodata Refinement Terminals",
+    "start_date": "2025-03-29T12:00:00Z",
+    "access_group": "mdr-terminals",
+    "all_computers": false,
+    "restart_deliver_delay": 2,
+    "restart_deliver_delay_window": 10,
+    "tags": ["mdr"]
+  }'
 ```
 
 Example response, the profile's state:
@@ -198,12 +201,15 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X PATCH "https://landscape.canonical.com/api/v2/security-profiles/1" -H "Authorization: Bearer $JWT" -d '
-{
-  "schedule": "RRULE:FREQ=WEEKLY;BYDAY=MO",
-  "title": "Macrodata Refinement Terminals Updated",
-  "restart_deliver_delay_window": 300
-}'
+curl -X PATCH "https://landscape.canonical.com/api/v2/security-profiles/1" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '
+  {
+    "schedule": "RRULE:FREQ=WEEKLY;BYDAY=MO",
+    "title": "Macrodata Refinement Terminals Updated",
+    "restart_deliver_delay_window": 300
+  }'
 ```
 
 Example response:
@@ -253,7 +259,9 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:archive" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:archive" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -303,7 +311,9 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:execute" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:execute" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
