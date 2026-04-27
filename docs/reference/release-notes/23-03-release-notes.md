@@ -46,9 +46,22 @@ Performing an in-place upgrade from Landscape 19.10 entails a fresh installation
 
 ## Patch Notices
 
+- landscape-server 23.03+19 published on 22 April 2026
+
+  * fix: user enumeration on password reset page
+  * fix: arbitrary file deletion bug in package upload
+  * fix: block cross-site request forgery via GET-based state modifications
+  * fix: backport-cross-site-scripting-activity-result-page
+  * fix: force download for all script attachments
+  * fix: backport-cross-site scripting in the profile creation page
+  * fix: remove new lines from proxy config
+  * fix: Zope page template security bugs
+  * fix: Event logs reference wrong computer
+  * fix: make logfile create perms CIS-compliant; proper signal to rsyslogd (LP: #2095406)
+
 - landscape-server 23.03+18.3 published on 25 June 2024
 
-   * Fix: allow binary script uploads via API and downloads via UI (LP: [#2070049](https://bugs.launchpad.net/landscape/+bug/2070049))
+  * Fix: allow binary script uploads via API and downloads via UI (LP: [#2070049](https://bugs.launchpad.net/landscape/+bug/2070049))
 
 - landscape-server 23.03+18.2 published 5 June 2024
 

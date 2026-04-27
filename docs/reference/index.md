@@ -42,17 +42,6 @@ Configuration file references for Landscape Server and Client.
 config/index
 ```
 
-## Logs
-
-Log file locations and formats for troubleshooting and monitoring.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-logs/index
-```
-
 ## Networking
 
 Network requirements, ports, and firewall configurations.
@@ -75,6 +64,17 @@ Definitions of key terms and concepts used in Landscape.
 terms/index
 ```
 
+## Supported versions and PPAs
+
+Version lifecycle, PPA locations, and Ubuntu compatibility for self-hosted Landscape.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
+supported-versions-and-ppas
+```
+
 ## Other references
 
 Additional technical documentation and command-line tools.
@@ -83,6 +83,7 @@ Additional technical documentation and command-line tools.
 :titlesonly:
 :maxdepth: 1
 
+logs
 database
 known-issues
 lsctl
