@@ -18,7 +18,7 @@ There are some differences in features between the two portals. You may use both
 
 ```{toctree}
 :titlesonly:
-:maxdepth: 2
+:maxdepth: 1
 
 web-portal-24-04-or-later/index
 classic-web-portal/index
