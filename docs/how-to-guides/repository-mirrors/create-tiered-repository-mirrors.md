@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Create tiered repository mirrors for multi-region and air-gapped deployments. Configure role-isolated or region-based mirror architectures."
+    description: "Create tiered repository mirrors for multi-region and airgapped deployments. Configure role-isolated or region-based mirror architectures."
 ---
 
 (how-to-create-tiered-repo-mirrors)=
-# How to create tiered repository mirrors for multi-region and air-gapped deployments
+# How to create tiered repository mirrors for multi-region and airgapped deployments
 
 > See also: {ref}`explanation-repo-mirroring`
 
@@ -14,7 +14,7 @@ You can create tiered (or layered) repository mirrors for additional control ove
 There are multiple different use cases for this configuration. A couple use cases are noted here:
 
 * **Multi-region deployments**: If your application is deployed in multiple different regions and has several clients in each region, you might not want to serve all of your package updates and installations from a single region because transferring data from one region to another can be costly, inefficient and not ideal. Instead, you could have a central server push repositories to secondary servers in each region, and these secondary servers would then push updates and installations to regionally local clients. Or, you could separate the repository mirroring function into a separate region-based server and leave all central management to a single global server.
-* **Air-gapped or restricted network environments:** In air-gapped or restricted network environments, you might have a proxy server that has limited access outside the network. You could use each network’s proxy server to access a central server that acts as an initial filter from public repositories and manages the network proxy servers. This can help you maintain multiple isolated networks.
+* **Airgapped or restricted network environments:** In airgapped or restricted network environments, you might have a proxy server that has limited access outside the network. You could use each network’s proxy server to access a central server that acts as an initial filter from public repositories and manages the network proxy servers. This can help you maintain multiple isolated networks.
 
 In this document, we’ve outlined a couple different approaches you can take when creating tiered repository mirrors. Both approaches involve using an additional Landscape server as a third party repository.
 
@@ -68,8 +68,8 @@ To download all the packages for your mirror, you need to {ref}`sync the mirror 
 
 1. In your Management server, go to **Repositories** > **APT Sources**
 2. Click **Add APT Source**
-3. Add a name for your APT source, such as “landscape-ppa”
-4. In the **APT Line** field, enter “deb”, followed by the URI for the repository mirror, distribution and components. An example entry could be `deb http://landscape-repo-mirror/repository/standalone/ubuntu jammy main universe restricted multiverse`
+3. Add a name for your APT source, such as "landscape-ppa"
+4. In the **APT Line** field, enter "deb", followed by the URI for the repository mirror, distribution and components. An example entry could be `deb http://landscape-repo-mirror/repository/standalone/ubuntu jammy main universe restricted multiverse`
 5. Select the private GPG key you imported earlier
 6. Select the appropriate access group you want for the APT source
 7. Click **Add APT Source**
@@ -78,10 +78,10 @@ To download all the packages for your mirror, you need to {ref}`sync the mirror 
 
 In your Management server, follow the {ref}`guide to create repository profiles <how-to-heading-manage-repos-create-repo-profile>`, with the following changes:
 
-* If you’ve tagged your clients with a specific tag, such as “repo-mirror-client”, associate your profile to the appropriate tag(s)
+* If you’ve tagged your clients with a specific tag, such as "repo-mirror-client", associate your profile to the appropriate tag(s)
 * In the **APT Source** tab, select the APT source you previously added
 
-In the **Activities** menu in the sidebar, a new activity named “Apply repository profiles” should be in progress. Once that activity finishes, your configuration is complete. Your Mirror server is configured as the upstream source of packages to the clients, which are managed under the Management Server.
+In the **Activities** menu in the sidebar, a new activity named "Apply repository profiles" should be in progress. Once that activity finishes, your configuration is complete. Your Mirror server is configured as the upstream source of packages to the clients, which are managed under the Management Server.
 
 ## Option #2: Network-isolated configuration
 

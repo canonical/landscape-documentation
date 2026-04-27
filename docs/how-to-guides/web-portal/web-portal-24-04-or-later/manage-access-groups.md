@@ -54,4 +54,4 @@ To associate a role with one or more access groups:
 3. Select the checkbox next to the access group(s) you want to associate the role with
 4. Click **Save changes**
 
-Note that you cannot modify the GlobalAdmin role. If you attempt to edit this role, you’ll get the following error: “The role 'GlobalAdmin' is read-only”.
+Note that you cannot modify the GlobalAdmin role. If you attempt to edit this role, you’ll get the following error: "The role 'GlobalAdmin' is read-only".

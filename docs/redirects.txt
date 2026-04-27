@@ -22,7 +22,17 @@ how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-int
 
 how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/backup-and-maintenance/manage-maintenance-cron-jobs/
 
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-script-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/use-security-profiles/
+
 # Reference
+
+reference/terms/alerts/ explanation/features/alerts/
 
 reference/terms/profiles/package-profile/ reference/terms/profiles/
 

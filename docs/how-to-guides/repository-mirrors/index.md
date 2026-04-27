@@ -7,6 +7,8 @@ myst:
 (how-to-guides-repository-mirrors-index)=
 # Repository mirrors
 
+Landscape can mirror Ubuntu package repositories and third-party repositories, enabling you to control which packages are available to your managed machines. This is particularly useful for creating controlled update environments, reducing bandwidth usage, and supporting airgapped or offline deployments.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2

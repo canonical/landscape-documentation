@@ -141,6 +141,10 @@ Additionally, other services needed by Landscape will also be running on this ma
 - `apache`
 - `rabbitmq-server`
 
+### Attach your Ubuntu Pro token
+
+If you have an Ubuntu Pro subscription, attach your Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
+
 ### Add the Landscape package archive
 
 Landscape is distributed in a public PPA. You can add it to the system with these commands, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
@@ -219,7 +223,7 @@ Section `[schema]`:
 
 Section `[landscape]`:
 
-- Add an entry for `secret-token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`.
+- Add an entry for `secret-token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`. Note that Landscape Server 24.04 LTS uses percent signs % for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as %% so that it is interpreted as %.
 
 If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names. For example, to only allow connections on localhost, you may have a configuration like the following:
 

@@ -3,6 +3,7 @@ AES
 ALPN
 Agentless
 agentless
+airgap
 airgapped
 ajax
 allowlist
@@ -349,6 +350,7 @@ STIGed
 Syslog
 TCP
 teardown
+templated
 timeframe
 TLD
 TLS

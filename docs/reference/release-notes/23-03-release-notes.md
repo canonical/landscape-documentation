@@ -16,7 +16,7 @@ These are the release notes for Landscape 23.03.
 * Native Ubuntu Pro awareness
 * Landscape Client is compatible with Debian Bullseye
 * Landscape manages all machines with an Ubuntu Pro subscription without needing a license.txt file to be installed on the server
-* Compatible with Canonical's air-gapped contract server
+* Compatible with Canonical's airgapped contract server
 * Landscape Client package for the RISC-V (RV64) CPU architecture
 * Landscape Server packages for the s390x, rv64, and arm64 (AArch64) CPU architectures
 * Modernized Charms authored in Juju's Operator Framework

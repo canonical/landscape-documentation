@@ -141,25 +141,16 @@ To assign a role to a new user or edit the role(s) of an existing user:
 2. Select the relevant cells for each user to grant or revoke their role status
 3. Click **Save**
 
+(how-to-classic-web-portal-alerts)=
 ## Manage alerts
 
-Landscape uses {ref}`reference-terms-alerts` to notify administrators of conditions that require attention. The following types of alerts are available:
-
-- when a pending computer needs to be accepted or rejected
-- when you are exceeding your license entitlements for Landscape Dedicated Server (This alert does not apply to the hosted version of Landscape.)
-- when new package updates are available for computers
-- when new security updates are available for computers
-- when a package profile is not applied
-- when package reporting fails (Each client runs the command `apt-get update` every 60 minutes. Anything that prevents that command from succeeding is considered a package reporting failure.)
-- when an activity requires explicit administrator acceptance or rejection
-- when a computer has not contacted the Landscape server for more than five minutes
-- when computers need to be rebooted in order for a package update (such as a kernel update) to take effect
+Landscape uses {ref}`explanation-alerts` to notify administrators of conditions that require attention. 
 
 To configure alerts, navigate to your organization's home page and click **Configure alerts** or the **Alerts** tab. Select the checkbox next to each type of alert you want to subscribe to, or click  **All** or **None** at the top of the table, then click **Subscribe** or **Unsubscribe**.
 
-The **Alerts** tab displays the status of each alert. If an alert has not been triggered, the status is **OK**; if it has, the status is **Alerted**. The **Enabled for** column indicates whether the alert applies to all computers, a specified set of tagged computers, or your account. Pending computers, for example, are not yet Landscape clients, but they are part of your account.
+The **Alerts** tab displays the status of each alert. The **Enabled for** column indicates whether the alert applies to all computers, a specified set of tagged computers, or your account. Pending computers, for example, are not yet Landscape clients, but they are part of your account.
 
-If an alert is triggered, an administrator should typically investigate it. You can view active alerts from your organization's home page. If you click on an alert, the resulting screen displays additional information, such as the computer(s) affected, the error code, and error output text.
+You can view active alerts from your organization's home page. If you click on an alert, the resulting screen displays additional information, such as the computer(s) affected, the error code, and error output text.
 
 For some alerts, you can download a list of affected computers as a CSV file. Click **Save this search** to save the criteria that was generated from the alert.
 

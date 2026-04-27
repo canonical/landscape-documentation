@@ -8,20 +8,94 @@ myst:
 
 # Reference
 
-This section includes technical information you may need to reference when using Landscape.
+This section includes technical reference information for Landscape Server and Landscape Client.
+
+## API
+
+Programmatic access to Landscape through REST and legacy APIs.
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
-:glob:
 
 api/index
+```
+
+## Release notes
+
+Version history, new features, and changes in Landscape releases.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 release-notes/index
+```
+
+## Configuration
+
+Configuration file references for Landscape Server and Client.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 config/index
+```
+
+## Logs
+
+Log file locations and formats for troubleshooting and monitoring.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 logs/index
+```
+
+## Networking
+
+Network requirements, ports, and firewall configurations.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 networking/index
+```
+
+## Landscape Server charm
+
+References specifically related to the Landscape Server charm.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 charm/index
+```
+
+## Terminology
+
+Definitions of key terms and concepts used in Landscape.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 terms/index
+```
+
+## Other references
+
+Additional technical documentation and command-line tools.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
 database
 known-issues
 lsctl
+```

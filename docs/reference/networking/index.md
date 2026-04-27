@@ -7,10 +7,12 @@ myst:
 (reference-networking-index)=
 # Networking
 
+Network requirements, ports, and firewall configurations for Landscape Server and Client communication.
+
 ```{toctree}
 :titlesonly:
-:maxdepth: 2
-:glob:
+:maxdepth: 1
 
 internal-network-requirements
 network-firewall
+```
