@@ -22,11 +22,13 @@ async
 auth
 autocommit
 autoinstall
+automations
 AutoPilot
 autoremove
 Autoremovable
 amd
 backend
+backported
 balancer
 backport
 Backport
@@ -53,6 +55,7 @@ Charmhub's
 changelog
 checkboxes
 Chocolatey
+chrony
 CIDR
 CIS
 CISOs
@@ -390,6 +393,7 @@ Xenial
 xenial
 Xerus
 XSS
+Zope
 
 # Partial words (e.g., amd from amd64)
 amd

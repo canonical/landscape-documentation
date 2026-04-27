@@ -10,10 +10,6 @@ myst:
 > See also: [Ubuntu on WSL documentation](https://documentation.ubuntu.com/wsl/latest/)
 
 ```{note}
-Ubuntu Pro for WSL is **not available yet** for everyone in the Microsoft Store. It's currently in beta.
-```
-
-```{note}
 If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
 ```
 
@@ -37,10 +33,6 @@ Also, you must have WSL 2 installed instead of WSL 1. If you've just now install
 ## Install and configure Ubuntu Pro for WSL
 
 > See also: [Ubuntu on WSL's full documentation](https://documentation.ubuntu.com/wsl/latest/)
-
-```{note}
-This feature is in beta. Ubuntu Pro for WSL is **not available yet** for everyone in the Microsoft Store.
-```
 
 There are two ways to configure Ubuntu Pro for WSL for Ubuntu Pro and Landscape: via the Ubuntu Pro for WSL GUI or the Windows Registry.
 

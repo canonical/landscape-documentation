@@ -10,10 +10,6 @@ myst:
 
 > See also: {ref}`reference-rest-api-child-instance-profiles` and {ref}`reference-rest-api-wsl` REST API endpoints.
 
-```{note}
-This feature is currently in beta.
-```
-
 This guide describes how to use {ref}`WSL profiles <reference-terms-wsl-profile>` to provision WSL instances and manage them with Landscape.
 
 To use WSL profiles, your Windows host **must not** have any WSL child instances that aren't registered with Landscape. If you want to use WSL profiles but you have WSL instances that aren't managed by Landscape, you need to remove them from your Windows host, or re-register a new Windows host with only the Landscape-managed WSL instances.

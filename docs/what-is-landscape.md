@@ -7,25 +7,26 @@ myst:
 (what-is-landscape)=
 # What is Landscape?
 
-Landscape is Canonical’s systems management solution. You can use Landscape to manage all of your Ubuntu systems—desktops, servers, cloud instances, IoT devices, and more.
+Landscape is Canonical’s systems management solution. You can use Landscape to manage all of your Ubuntu systems: desktops, servers, cloud instances, IoT devices, and more.
 
-At its core, Landscape allows you to manage all of your systems from a single portal. This includes tasks such as: managing software updates across your Ubuntu estate, configuring Role-Based Access Control (RBAC), monitoring your client machines, executing scripts on your clients remotely, managing packages and repositories, and much more.
+At its core, Landscape allows you to manage all of your systems from a single portal. This includes tasks such as: managing software updates across your Ubuntu estate, executing scripts on your clients remotely, managing packages and repositories, configuring Role-Based Access Control (RBAC), monitoring your client machines, and much more.
 
 ## How Landscape works
 
 Landscape is a client-server application in which there are two main components: Landscape Server and Landscape Client.
 
 - **Landscape Server** is installed on a single, centralized server and manages all of your Ubuntu client machines and devices. Landscape Server is generally what users of Landscape interact with the most, and it’s where you perform system administration tasks. You can manage your system with Landscape Server using the web portal or API.
-- **Landscape Client** is installed on each Ubuntu machine in your system. It communicates with Landscape Server by sending client information to the server, receiving updates from the server, and executing commands on the client from the server.
+- **Landscape Client** is installed on each managed Ubuntu machine in your system. It communicates with Landscape Server by sending client information to the server, receiving updates from the server, and executing commands on the client from the server.
 
 Although "Landscape" refers to both the Landscape Server and Landscape Client applications, it most often describes Landscape Server in the documentation because the server is where management activities are performed. If you see "Landscape" mentioned without further clarification, it’s probably discussing the Server component.
 
 In addition, Landscape Server relies on the following third-party infrastructure:
 
-- **Apache**: The web server that handles the HTTPS traffic sent to the Server from client machines, the API, and users accessing the web portal.
 - **PostgreSQL**: The database.
-- **RabbitMQ**: The message server. This handles message sending between client and server.
-- (Sometimes) **HAProxy**: The reverse proxy used for high-availability deployments.
+- **RabbitMQ**: Queues and processes background tasks, such as repository synchronisation supports internal communication between services (for example, triggering alerts).
+- (Usually) **HAProxy** or **Apache**: Handles HTTPS requests and routes them to Landscape Server. HAProxy is used for high-availability deployments.
+
+The Landscape message system (built into the Server) is responsible for communication between managed clients and the Server.
 
 ## What Landscape does
 
@@ -33,8 +34,9 @@ Landscape performs your system management tasks. You can use Landscape for lots 
 
 - **System monitoring, management, and alerts:** Monitor the health of your system, view system details such as hardware information, and configure alerts to notify you for certain activities, such as when security upgrades are available, when a client machine needs to be rebooted, and more.
 - **Package and upgrade management:** Install, remove, and upgrade packages on your client machines and ensure your system is up-to-date with the latest software and security patches.
-- **User management and Role-Based Access Control (RBAC):** Add, remove, and edit user accounts on your client machines and use RBAC to configure specific permissions.
 - **Remote scripting:** Run custom scripts on your client machines remotely from your Landscape Server web portal or via the API.
+- **Repository management:** Internally distribute software and manage custom repositories across your Ubuntu estate.
+- **User management and Role-Based Access Control (RBAC):** Add, remove, and edit user accounts on your client machines and use RBAC to configure specific permissions.
 
 ## Editions of Landscape
 

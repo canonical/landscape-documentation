@@ -51,3 +51,5 @@ reference/terms/distribution/ explanation/features/repository-mirroring/
 reference/terms/repositories/ explanation/features/repository-mirroring/
 
 reference/terms/scripts/ explanation/features/remote-script-execution/
+
+reference/logs/logs/ reference/logs/

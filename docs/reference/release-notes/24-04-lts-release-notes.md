@@ -19,7 +19,7 @@ myst:
 
     ![Landscape 24.04 LTS new web portal](https://assets.ubuntu.com/v1/ef0d70d5-24.04LandscapeWebPortal.png)
 
-    This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal. The first time you use the portal, you may need to generate new API credentials to access the portal. For more information, see {ref}`how to generate API credentials <howto-heading-manage-repos-web-portal-generate-api-credentials>`.
+    This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal. 
 
 - **Web-based repository management**: Manage and mirror your repositories locally with Landscape’s new web-based repository management. For more information, see {ref}`how-to-manage-repos-web-portal` and an {ref}`explanation-repo-mirroring`.
 
@@ -98,3 +98,32 @@ We published the 24.04.10 point release on 27 February 2025.
  - fix: prevent epoll race conditions when writing API responses
  - fix: reset passphrase oops backport (LP: [#2094844](https://bugs.launchpad.net/landscape/+bug/2094844))
  - fix: 500 error when logging out in standalone
+
+## Landscape 24.04.11 Point Release
+
+We published the 24.04.11 point release on 27 October 2025.
+
+ - fix: remove unused _buffer_type import; safe import of AbstractComputerRequest
+ - fix: raise client error for invalid GPG material in POST /gpg-key
+ - fix: ignore root-url update on conflict
+ - fix: Event logs reference wrong computer
+ - fix: hide static/asset directory listings
+ - fix: Change dependency on chrony to depend on the time-daemon virtual package instead
+
+## Landscape 24.04.12 Point Release
+
+We published the 24.04.12 point release on 17 April 2026.
+
+ - fix: hide inputs when there is a validation error
+ - fix: issue with pro free licenses
+ - fix: user enumeration on password reset page
+ - fix: html escape account title in invitation email
+ - fix: arbitrary file deletion bug in package upload
+ - fix!: check for application/json content-type header in POST,PUT,PATCH requests
+ - fix: block cross-site request forgery via GET-based state modifications
+ - fix: Backport pingserver fixes
+ - fix: force download for all script attachments
+ - fix: backport-cross-site scripting in the profile creation page
+ - fix: backport-cross-site-scripting-activity-result-page
+ - fix: remove newlines from proxy config
+ - fix: Zope template security bugs
