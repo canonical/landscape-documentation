@@ -7,7 +7,11 @@ myst:
 (explanation-features-index)=
 # Features
 
-Understand how Landscape's key features work. These explanations cover common features in Landscape, including: activities, repository management, package reporting, and remote script execution.
+Understand how Landscape's key features work, including repository management, package reporting, remote script execution, and more.
+
+## Activities and monitoring
+
+Understand what is happening across your estate and identify when action is required.
 
 ```{toctree}
 :titlesonly:
@@ -15,8 +19,38 @@ Understand how Landscape's key features work. These explanations cover common fe
 
 activities
 alerts
+```
+
+## Package and repository management
+
+Landscape enables you to control software across your instances, including mirroring repositories and reporting on package state.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 repository-mirroring
 Package reporting <package-reporting>
+```
+
+## Scripting
+
+Run scripts on managed machines remotely, enabling centralized automation across your estate.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 Remote script execution <remote-script-execution>
+```
+
+## Security
+
+Understand security-related Landscape features such as Full Disk Encryption.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
 Full Disk Encryption recovery keys <fde-recovery-key>
 

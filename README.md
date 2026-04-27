@@ -18,20 +18,22 @@ Landscape is used by system administrators, security teams, IT managers, and com
 |--------------------|---------------------------------------------------------------------|
 | **Getting started** | {ref}`Tutorial <getting-started-with-landscape>` • {ref}`What is Landscape? <what-is-landscape>` |
 | **Deployment** | {ref}`Quickstart installation <how-to-quickstart-installation>` • {ref}`Manual installation <how-to-manual-installation>` • {ref}`Juju installation <how-to-juju-installation>` • {ref}`High availability <how-to-juju-ha-installation>` • {ref}`Cloud providers <how-to-guides-landscape-installation-and-set-up-cloud-index>` • {ref}`Offline environments <how-to-install-airgapped>` |
-| **Administration** | {ref}`Web portal guides <how-to-guides-web-portal-index>` • {ref}`API <reference-api-index>` • {ref}`Script execution <explanation-remote-script-execution>` • {ref}`OIDC <how-to-external-auth-oidc>` • {ref}`PAM <how-to-external-auth-pam>` |
+| **Administration** | {ref}`Web portal guides <how-to-guides-web-portal-index>` • {ref}`API <reference-api-index>` • {ref}`Script execution <how-to-web-portal-use-remote-script-execution>` • {ref}`OIDC <how-to-external-auth-oidc>` • {ref}`PAM <how-to-external-auth-pam>` |
 | **Repositories** | {ref}`Manage repositories <how-to-manage-repos-web-portal>` • {ref}`Explanation <explanation-repo-mirroring>` |
 | **Security** | {ref}`Security patches and updates <how-to-apply-security-updates>` • {ref}`Hardening <how-to-harden-deployment>` • {ref}`Security overview <explanation-security-overview>` • {ref}`Cryptographic technology <explanation-cryptographic-technology>` |
 
 ## How the documentation is organized
 
-{ref}`Tutorial <getting-started-with-landscape>`: For new users exploring Landscape for the first time <br>
-{ref}`How-to guides <how-to-guides-index>`: For users needing step-by-step instructions to achieve a practical goal <br>
-{ref}`Reference <reference-index>`: For precise, technical information to be used while working with Landscape <br>
-{ref}`Explanation <explanation-index>`: For deeper understanding of key Landscape concepts <br>
+This documentation uses the [Diátaxis documentation structure](https://diataxis.fr/).
+
+- The {ref}`Tutorial <getting-started-with-landscape>` takes you step-by-step through setting up and exploring Landscape for the first time. <br>
+- {ref}`How-to guides <how-to-guides-index>` assume you have basic familiarity with Landscape. They're for users needing step-by-step instructions to achieve a practical goal. <br>
+- {ref}`Reference <reference-index>` contains technical specifications for APIs, configuration, logs, and more. <br>
+- {ref}`Explanation <explanation-index>` discusses background topics such as system architecture, features, and more. <br>
 
 ## Project and community
 
-Landscape is a member of the Ubuntu family. It welcomes community contributions, suggestions, fixes and constructive feedback.
+Landscape is a member of the Ubuntu family. It welcomes community contributions, suggestions, fixes, and constructive feedback.
 
 ### Get involved
 
@@ -43,5 +45,7 @@ Landscape is a member of the Ubuntu family. It welcomes community contributions,
 
 * {ref}`Release notes <reference-release-notes-index>`
 * [Our Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct)
+
+### Commercial support
 
 Thinking about using Landscape for your next project? [Get in touch!](https://ubuntu.com/landscape#get-in-touch)
