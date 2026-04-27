@@ -53,3 +53,5 @@ reference/terms/repositories/ explanation/features/repository-mirroring/
 reference/terms/scripts/ explanation/features/remote-script-execution/
 
 reference/logs/logs/ reference/logs/
+
+reference/release-notes/what-s-new-in-beta/ reference/release-notes/
