@@ -5,8 +5,9 @@ myst:
 ---
 
 (how-to-guides-backup-and-maintenance-index)=
+# Backup and maintenance
 
-# Backup and Maintenance
+Protect your Landscape Server data and perform routine maintenance tasks. These guides cover database backups, restoration procedures, cron job management, and instance cleanup.
 
 ```{toctree}
 :titlesonly:

@@ -7,9 +7,12 @@ myst:
 (explanation-terms-index)=
 # Terms
 
+Definitions of key terms and concepts used throughout Landscape documentation.
+
 ```{toctree}
 :titlesonly:
-:maxdepth: 2
+:maxdepth: 1
 :glob:
 
 *
+```

@@ -206,7 +206,7 @@ The following errors may be raised:
 
 - `UnknownUpgradeProfile`: A profile with the specified name could not be found in the database.
 
-For example, the following request deletes an upgrade profile schedule with the name “test-1”:
+For example, the following request deletes an upgrade profile schedule with the name "test-1":
 
 ```text
 ?action=RemoveUpgradeProfile&name=test-1

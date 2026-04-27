@@ -5,15 +5,15 @@ myst:
 ---
 
 (how-to-install-in-lxd-container)=
-# How to install and configure Landscape Server in a single LXD container
+# How to install Landscape Server in a LXD container using cloud-init
 
-```{note}
-You can also use this guide to test Landscape inside a single LXD container.
-```
+This guide shows you how to deploy Landscape Server in a single LXD container using cloud-init. This approach is intended for testing and development environments, as it automates the entire setup process with a single cloud-init configuration file. Cloud-init handles the installation of all Landscape components, configuration of networking, certificates, and system settings.
 
-## Install and configure cloud-init
+## Prepare your cloud-init configuration
 
-### Download the cloud-init configuration file
+This guide uses a sample cloud-init file created by the Landscape team. You can see other sample files and scripts in the [Landscape scripts repository on GitHub](https://github.com/canonical/landscape-scripts).
+
+### Download the cloud-init file
 
 To download the cloud-init configuration file and save it as `cloud-init.yaml`, run:
 
@@ -23,7 +23,7 @@ curl -o cloud-init.yaml https://raw.githubusercontent.com/canonical/landscape-sc
 
 ### Set cloud-init variables
 
-To set the variables needed by the cloud-init configuration file, run:
+Set the variables cloud-init will use by running this command with your own values:
 
 ```bash
 declare -A VARIABLES=(
@@ -40,7 +40,7 @@ declare -A VARIABLES=(
 )
 ```
 
-This code block includes the following values that must be changed:
+Replace the following values with your configuration:
 
 `{EMAIL_ADDRESS}`: The email address that you’ll share with LetsEncrypt for your SSL certificate.
 
@@ -62,19 +62,17 @@ This code block includes the following values that must be changed:
 
 `{LANDSCAPE_PPA_NAME}`: The version of Landscape you will install. Enter `self-hosted-24.04`, `self-hosted-25.10`, `self-hosted-beta`, or `latest-stable`.
 
-### Populate the cloud-init configuration file with your variables
+### Apply variables to cloud-init
 
-To populate `cloud-init.yaml` with your variables, run:
+Populate the cloud-init configuration file with your variables:
 
 ```bash
 for VALUE in "${!VARIABLES[@]}"; do sed -i "s|{% set $VALUE = '.*' %}|{% set $VALUE = '${VARIABLES[$VALUE]}' %}|" cloud-init.yaml; done
 ```
 
-## Install and configure LXD
+## Set up LXD
 
-### Install or update LXD
-
-To install or update the LXD snap, run:
+Install or update LXD to the latest stable version:
 
 ```bash
 snap list lxd &> /dev/null && sudo snap refresh lxd --channel latest/stable || sudo snap install lxd --channel latest/stable
@@ -82,43 +80,33 @@ snap list lxd &> /dev/null && sudo snap refresh lxd --channel latest/stable || s
 
 This command checks if the LXD snap is installed. If it’s already installed, this command updates it to the latest version. If it’s not installed, this command installs the latest version.
 
-### Configure LXD
-
-To configure LXD with predefined settings without requiring user input, run:
+Then, initialize LXD with default settings:
 
 ```bash
 lxd init --auto
 ```
 
-## Configure network settings
+## Configure networking
 
-### Identify the default network adapter and check MTU configuration
-
-To identify the default network adapter on the machine and check the MTU configuration on this adapter, run:
+Identify the default network adapter on the machine and check the MTU configuration on this adapter:
 
 ```bash
 read -r INTERFACE < <(ip route | awk '$1=="default"{print $5; exit}')
 ```
 
-### Adjust LXD network MTU settings
+If your network uses non-standard MTU settings (jumbo frames with MTU 9000 or smaller than 1500), configure LXD to match. Google Cloud VMs, for example, use MTU values smaller than 1500.
 
-If your network uses jumbo frames (e.g., MTU 9000) or an MTU smaller than 1500, you’ll need to use a matching MTU on `lxdbr0`. Note that Google Cloud VMs use MTUs smaller than 1500.
-
-To change the LXD bridge MTU to match the network’s configuration, run:
+To set the LXD bridge MTU to match your network:
 
 ```bash
 lxc network set lxdbr0 bridge.mtu=$(ip link show $INTERFACE | awk '/mtu/ {print $5}')
 ```
 
-## Install and configure Landscape Quickstart
+## Deploy Landscape with cloud-init
 
-```{note}
-It’s recommended to install Landscape on the latest Ubuntu LTS, but you can also use 20.04 if you require that version.
-```
+Cloud-init will automatically deploy Landscape and configure port forwarding for ports 80, 443, and 6554 to make the instance accessible.
 
-You can configure ports 6554, 443 and 80 to allow for connections to the Landscape instance inside the LXD container.
-
-**Step 1:** Install Landscape Quickstart inside a LXD container using `cloud-init.yaml`, run:
+**Step 1:** Install Landscape Quickstart inside a LXD container using `cloud-init.yaml`. This command installs Landscape on Ubuntu 24.04 LTS.
 
  ```bash
 lxc launch ubuntu:24.04 landscape --config=user.user-data="$(cat cloud-init.yaml)" 

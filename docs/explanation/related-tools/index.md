@@ -7,6 +7,8 @@ myst:
 (explanation-related-tools-index)=
 # Related tools
 
+Landscape can work alongside other systems management and automation tools. Learn how Landscape relates to similar technologies.
+
 ```{toctree}
 :titlesonly:
 :maxdepth: 2

@@ -7,14 +7,16 @@ myst:
 (explanation-features-index)=
 # Features
 
-We have the following explanations for certain features in Landscape.
+Understand how Landscape's key features work. These explanations cover common features in Landscape, including: activities, repository management, package reporting, and remote script execution.
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
 
 activities
-Full Disk Encryption recovery keys <fde-recovery-key>
+alerts
 repository-mirroring
 Package reporting <package-reporting>
 Remote script execution <remote-script-execution>
+Full Disk Encryption recovery keys <fde-recovery-key>
+

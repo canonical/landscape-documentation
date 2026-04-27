@@ -95,7 +95,7 @@ To create the first administrator account:
 
 1. Navigate to the IP of your Landscape instance
 2. Complete the requested information to register the first administrator account
-    - In the **Identity** field, enter the user’s relative distinguished name. In Active Directory, this is the “User Principal Name” and is most commonly defined with the user’s email address.
+    - In the **Identity** field, enter the user’s relative distinguished name. In Active Directory, this is the "User Principal Name" and is most commonly defined with the user’s email address.
 
 ```{note}
 Other Active Directory users will need to be invited individually in Landscape. This process does not automatically grant access to all Active Directory users. 
@@ -113,6 +113,6 @@ Users that have already been created in Landscape can be migrated to Active Dire
 2. Click your username in the top right corner
 3. Click **Edit settings**
 4. Complete the **Identity** and **Passphrase** fields
-    - In the **Identity** field, enter the user’s relative distinguished name. In Active Directory, this is the “User Principal Name” and is most commonly defined with the user’s email address.
+    - In the **Identity** field, enter the user’s relative distinguished name. In Active Directory, this is the "User Principal Name" and is most commonly defined with the user’s email address.
 
 If the user was correctly verified, they will be migrated to Active Directory for authentication.

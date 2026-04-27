@@ -15,13 +15,14 @@ The web portal (24.04 LTS or later) is Landscape's newer interface. We're active
 :titlesonly:
 :maxdepth: 2
 
+Manage instances <manage-instances>
 Manage administrators and roles <manage-administrators-and-roles>
 Manage access groups <manage-access-groups>
+Manage packages and snaps <manage-packages-and-snaps>
+Use profiles <use-profiles>
+Use remote script execution <use-remote-script-execution>
 Use annotations <use-annotations>
 Manage Livepatch and kernel updates <manage-livepatch-and-kernel-updates>
 Manage saved searches <manage-saved-searches>
 Sanitize instances <sanitize-instances>
-Use reboot profiles <use-reboot-profiles>
-Use script profiles <use-script-profiles>
-Use security profiles <use-security-profiles>
-Manage snaps <manage-snaps>
+

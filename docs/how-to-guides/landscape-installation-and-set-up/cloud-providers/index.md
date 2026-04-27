@@ -5,9 +5,9 @@ myst:
 ---
 
 (how-to-guides-landscape-installation-and-set-up-cloud-index)=
-# Landscape installation and set-up: Cloud Providers
+# Cloud providers
 
-We have the following guides for getting started with Landscape with major cloud providers.
+Deploy Landscape Server on major cloud platforms with these installation guides.
 
 ```{toctree}
 :titlesonly:

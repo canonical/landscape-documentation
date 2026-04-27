@@ -291,7 +291,7 @@ The following errors may be raised:
 - `UnknownScriptAttachment`: An attachment with the specified filename could not be found in this script.
 - `Unauthorised`: The user doesn’t have permission to remove the attachment.
 
-For example, the following request deletes an attachment named “foo.jpg” from a script:
+For example, the following request deletes an attachment named "foo.jpg" from a script:
 
 ```text
 ?action=RemoveScriptAttachment&script_id=1&filename=foo.jpg
@@ -314,7 +314,7 @@ The following errors may be raised:
 - `ScriptAttachmentSize`: The maximum allowed size for attachments is already reached, or would be reached should the creation have occurred.
 - `Unauthorised`: The user doesn’t have permission to create the attachment.
 
-For example, the following request creates an attachment named “foo.txt” containing “hello”:
+For example, the following request creates an attachment named "foo.txt" containing "hello":
 
 ```text
 ?action=CreateScriptAttachment&script_id=1&file=foo.txt$$aGVsbG8=
