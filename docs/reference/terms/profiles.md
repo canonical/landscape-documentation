@@ -30,7 +30,10 @@ A **reboot profile** defines how and when Landscape executes system reboots on m
 ## Removal profile
 
 A **removal profile** defines a maximum number of days that a computer can go without exchanging data with the Landscape server before it is automatically removed. If more days pass than the profile’s “Days without exchange”, that computer will automatically be removed and the license seat it held will be released. This helps Landscape keep license seats open and ensure Landscape is not tracking stale or retired computer data for long periods of time. You can associate zero or more computers with each removal profile via tags to ensure those computers are governed by this removal profile. You can also associate a removal profile with an access group, which limits its use to only computers within the specified access group. You can manage removal profiles from the **Profiles** page.
+(reference-terms-repository-profile)=
+## Repository profile
 
+A **repository profile** defines a set of pockets and APT sources for managed instances to use to source packages. When a managed instance is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations. You can associate zero or more managed instances with each repository profile via tags. You can also associate a repository profile with an access group, which limits its use to only managed instances within the specified access group. You can manage repository profiles from the **Profiles** page.
 (reference-terms-script-profile)=
 ## Script profile
 
