@@ -62,6 +62,8 @@ myst:
 
 - **Secrets management**: The legacy v1 secrets functionality and secrets UI have been removed. The modern secrets service replaces them.
 
+- **REST API strict content-type enforcement**: HTTP `POST`, `PUT`, and `PATCH` requests to the v2 REST API now require the `Content-Type: application/json` request header. Requests that omit or incorrectly set this header will receive a 415 Unsupported Media Type response.
+
 ## Bug fixes
 
 - Fixed package changer not honouring the configured proxy when downloading packages.
