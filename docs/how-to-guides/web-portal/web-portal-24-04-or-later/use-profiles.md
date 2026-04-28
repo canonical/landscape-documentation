@@ -105,7 +105,7 @@ The same access group of this script will be assigned to the new profile.
 
 Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
-## Security profiles
+## USG profiles
 
 > Reference: {ref}`reference-terms-usg-profile`
 
