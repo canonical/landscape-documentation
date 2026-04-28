@@ -4,7 +4,7 @@ myst:
     description: "Automate compliance audits and fixes with USG profiles in Landscape 25.04+ using Ubuntu Security Guide (USG) benchmarks."
 ---
 
-(how-to-web-portal-use-usg-profiles)=
+(how-to-security-use-usg-profiles)=
 # How to use USG profiles
 
 ```{note}
