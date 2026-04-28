@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Release notes for Landscape 26.04 LTS (April 2026). Features FDE recovery key management, Ubuntu release upgrades, saved searches, and a new Juju charm architecture."
+    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new debarchive repository service, and multiple security fixes."
 ---
 
 (reference-release-notes-26-04-lts)=
