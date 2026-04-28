@@ -7,8 +7,9 @@ myst:
 (reference-release-notes-26-04-lts)=
 # 26.04 LTS release notes
 
+<!-- TODO: 
 > See also: {ref}`how-to-upgrade-to-26-04-lts`
-
+-->
 ```{note}
 - Landscape Server 26.04 LTS runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish.
 - Database schema changes are required to upgrade to Landscape Server 26.04 LTS.
