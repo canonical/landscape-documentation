@@ -109,7 +109,7 @@ The Deb Archive gateway must be exposed at the `/debarchive` path on your Landsc
 
 ### Apache
 
-If you followed the {ref}`manual installation guide <how-to-heading-manual-install-configure-web-server>`, your Landscape Server uses Apache. Add the following rules to the `<VirtualHost *:443>` block in `/etc/apache2/sites-available/landscape.conf`.
+If you followed the {ref}`manual installation guide <how-to-heading-manual-install-configure-web-server>`, your Landscape Server uses Apache. Add the following rules to the `<VirtualHost *:443>` block in `/etc/apache2/sites-available/landscape.conf` (or the appropriate configuration file for your setup).
 
 Add these lines **before** the final catch-all `RewriteRule` at the bottom of the block (the line that rewrites to `localhost:8080`):
 
@@ -176,15 +176,15 @@ landscape-debarchive.debarchive      enabled  active   -
 Send a health check request through the reverse proxy. Replace `<LANDSCAPE_FQDN>` with the FQDN of your Landscape Server:
 
 ```bash
-curl -sk -o /dev/null -w "%{http_code}" --head https://<LANDSCAPE_FQDN>/debarchive/
+curl -sk -o /dev/null -w "%{http_code}" https://<LANDSCAPE_FQDN>/debarchive/v1/mirrors
 ```
 
-A response of `200` confirms the Deb Archive service is reachable through the reverse proxy.
+A response of `401` (unauthorized) confirms the Deb Archive service is reachable through the reverse proxy.
 
 You can also test directly against the service (bypassing the proxy) to isolate connectivity issues:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" --head http://localhost:8100/
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
 ```
 
 ### Verify in the Landscape web portal
