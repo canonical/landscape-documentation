@@ -12,6 +12,8 @@ myst:
 :maxdepth: 1
 :glob:
 
+23-10-release-notes
+23-03-release-notes
 19-10-release-notes
 19-01-release-notes
 18-03-release-notes
@@ -22,3 +24,4 @@ myst:
 15-10-release-notes
 15-01-release-notes
 14-10-release-notes
+```
