@@ -22,11 +22,11 @@ Harden your deployment <harden-your-deployment>
 
 ## Apply security updates and automations
 
-Keep your managed instances secure by applying patches, updates, and using automations (security profiles).
+Keep your managed instances secure by applying patches, updates, and using automations (USG profiles).
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 1
 Apply security updates <apply-security-updates>
-Use security profiles <use-security-profiles>
+Use USG profiles <use-security-profiles>
 ```
