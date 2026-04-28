@@ -13,7 +13,7 @@ For a full list and description of each profile type, see {ref}`reference-terms-
 
 ## Basic tasks for all profiles
 
-To access different types profiles, go to **Profiles** from the sidebar > select the type of profile you're working on. 
+To access different types profiles, go to **Profiles** from the sidebar > select the type of profile you're working on.
 
 To create a new profile, click **Add [profile type]**, and complete the form. The information on this form differs depending on the type of profile you're creating.
 
