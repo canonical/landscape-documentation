@@ -28,8 +28,6 @@ how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-g
 
 how-to-guides/web-portal/web-portal-24-04-or-later/use-script-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
 
-how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/use-security-profiles/
-
 # Reference
 
 reference/terms/alerts/ explanation/features/alerts/
@@ -40,7 +38,7 @@ reference/terms/profiles/removal-profile/ reference/terms/profiles/
 
 # USG Profiles (renamed from Security Profiles in 26.04 LTS)
 how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/
-reference/api/rest-api-endpoints/security-profiles/ reference/api/rest-api-endpoints/usg-profiles/
+reference/api/rest-api-endpoints/security-profiles/ reference/api/rest-api-endpoints/usg_profiles/
 
 reference/terms/profiles/upgrade-profile/ reference/terms/profiles/
 

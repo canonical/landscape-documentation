@@ -107,9 +107,9 @@ Once you've created your profile, you can edit, remove, and more using the dot m
 
 ## Security profiles
 
-> Reference: {ref}`reference-terms-security-profile`
+> Reference: {ref}`reference-terms-usg-profile`
 
-To create or manage security profiles, see {ref}`how-to-web-portal-use-security-profiles`.
+To create or manage USG profiles, see {ref}`how-to-web-portal-use-usg-profiles`.
 
 ## Upgrade profiles
 
