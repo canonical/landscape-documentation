@@ -42,7 +42,7 @@ The [Landscape Server charm](https://charmhub.io/landscape-server) follows simil
 
 | Version | Released | Support ended | ESM until | Ubuntu |
 | ------- | -------- | ------------- | --------- | ------ |
-| {ref}`reference-release-notes-25-10` | 2025-Oct | 2025-Apr | — | 22.04 LTS or 24.04 LTS |
+| {ref}`reference-release-notes-25-10` | 2025-Oct | 2026-Apr | — | 22.04 LTS or 24.04 LTS |
 | {ref}`reference-release-notes-25-04` | 2025-May | 2025-Oct | — | 22.04 LTS or 24.04 LTS |
 | {ref}`reference-release-notes-24-10` | 2024-Nov | 2025-Apr | — | 22.04 LTS or 24.04 LTS |
 | {ref}`reference-release-notes-23-10` | 2023-Oct | 2024-Apr | — | 20.04 LTS or 22.04 LTS |

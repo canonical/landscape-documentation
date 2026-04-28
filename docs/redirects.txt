@@ -34,9 +34,9 @@ how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to
 
 reference/logs/logs/ reference/logs/
 
-reference/release-notes/23-03-release-notes reference/release-notes/older-release-notes/23-03-release-notes
+reference/release-notes/23-03-release-notes/ reference/release-notes/older-release-notes/23-03-release-notes/
 
-reference/release-notes/23-10-release-notes reference/release-notes/older-release-notes/23-10-release-notes
+reference/release-notes/23-10-release-notes/ reference/release-notes/older-release-notes/23-10-release-notes/
 
 reference/terms/alerts/ explanation/features/alerts/
 

@@ -86,7 +86,7 @@ Multiple security fixes are included in this release:
 - Fixed a JavaScript execution (XSS) vulnerability.
 - Replaced `xml.etree` with `defusedxml` throughout the codebase.
 - Fixed a Landscape Client issue where data file permissions were too permissive. [LP: #2121558](https://bugs.launchpad.net/landscape-client/+bug/2121558)
-- Fixed content type header validated for REST API endpoints.
+- Fixed content-type header validation for REST API endpoints.
 
 ## Supported third-party services
 
