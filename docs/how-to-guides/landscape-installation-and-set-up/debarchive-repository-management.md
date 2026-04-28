@@ -92,7 +92,7 @@ sudo snap set landscape-debarchive deb.archive.database.host=10.0.1.5
 ```
 
 ```{note}
-When the confshim reads `/etc/landscape/service.conf`, the values from that file take precedence for the fields it maps (database name, host, user, password, and secrets). Values set via `snap set` for those fields are only used if `service.conf` is not available.
+When the configuration shim reads `/etc/landscape/service.conf`, the values from that file take precedence for the fields it maps (database name, host, user, password, and secrets). Values set via `snap set` for those fields are only used if `service.conf` is not available.
 ```
 
 ### Restart the service after configuration changes
@@ -208,7 +208,7 @@ sudo snap logs landscape-debarchive -n 50
 Common issues include:
 
 - **Database connection errors**: Verify the database host, port, user, and password. Ensure the `landscape-debarchive` database exists and the configured user has access.
-- **Missing secrets**: If not using the confshim with `service.conf`, the `deb.archive.pagination.secret` (base64url-encoded) and `deb.archive.jwt.secret` (base64-encoded) must be set.
+- **Missing secrets**: If not using the configuration shim with `service.conf`, the `deb.archive.pagination.secret` (base64url-encoded) and `deb.archive.jwt.secret` (base64-encoded) must be set.
 
 ### Health check returns an error through the proxy
 
