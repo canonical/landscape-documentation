@@ -10,14 +10,19 @@ myst:
 <!-- TODO: 
 > See also: {ref}`how-to-upgrade-to-26-04-lts`
 -->
-```{note}
-- Landscape Server 26.04 LTS runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish.
+- Landscape Server 26.04 LTS runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish. The Landscape Server Quickstart package only runs on 24.04 LTS Noble Numbat and 22.04 LTS Jammy Jellyfish.
 - Database schema changes are required to upgrade to Landscape Server 26.04 LTS.
-- Landscape Server 26.04 LTS requires the `landscape-outbox` snap.
-- The updated Landscape Server Charm will not be released until the Landscape Server 26.04.1 LTS point release in August 2026.
-```
+
+You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self-hosted-26.04`.
 
 ## Highlights
+
+- **Repository management improvements**:
+
+  - Introduces the new `debarchive` service for repository management.
+  - Repository profiles have been updated with improved workflows.
+  - The quickstart installer now includes `debarchive` for local archive support.
+  - The legacy API endpoints for repository management have been removed; the new archive management system replaces them.
 
 - **Security event logging**: Security-relevant actions are now recorded in the {ref}`reference-logs`, including:
 
@@ -28,33 +33,9 @@ myst:
   - Role and permission changes
   - Authorization failures
 
-- **FDE recovery key management**: The server now provides REST API endpoints for Full Disk Encryption (FDE) recovery key management, enabling automated storage and retrieval of recovery keys for enrolled machines. A new client plugin (fde-recovery-key-manager) enables the client to securely report FDE recovery keys to the server.
-
-- **Soft deletion of computers**: Computer deletion now happens asynchronously, allowing for a smoother user workflow.
-
-- **Release upgrade REST API**: New REST API endpoints for managing OS release upgrades have been added, providing improved control and status reporting compared to the legacy endpoints.
-
-- **Repository management improvements**:
-
-  - Introduces the new `debarchive` service for repository management.
-  - Repository profiles have been updated with improved workflows.
-  - A feature flag has been added for repository mirroring, with a safeguard that prevents upgrading from a version with existing repository mirrors until the feature is re-enabled.
-  - The quickstart installer now includes `debarchive` for local archive support.
-  - The legacy API endpoints for repository management have been removed; the new archive management system replaces them.
+- **FDE recovery key management**: The server now provides Full Disk Encryption (FDE) recovery key management, enabling automated storage and retrieval of recovery keys for enrolled machines. A new client plugin (`fde-recovery-key-manager`) enables the client to securely report FDE recovery keys to the server.
 
 - **Ubuntu Installer attach service**: The Ubuntu Installer attach service is now included in the quickstart installation by default, allowing machines to be attached to Landscape during the Ubuntu installation process.
-
-- **TLS support for RabbitMQ**: Standard TLS connections are now supported for RabbitMQ.
-
-- **REST API strict content-type enforcement**: HTTP `POST`, `PUT`, and `PATCH` requests to the v2 REST API now require the `Content-Type: application/json` request header. Requests that omit this header will receive a 415 Unsupported Media Type response.
-
-- **Python version and dependency updates**:
-
-  - Landscape Server now vendors its Python dependencies into a virtual environment and requires Python 3.12.
-  - Dependencies on `netaddr`, `python3-bs4`, `python3-oops-amqp`, `python3-stripe`, `simplejson`, and `wkhtmltopdf` have been removed.
-  - The build system has migrated from `setup.py/requirements.txt` to `pyproject.toml` with `uv`.
-
-- **Landscape Client - Configurable apt update timeout**: A new configuration option allows administrators to set a custom timeout for apt update operations, addressing issues with slow or unreliable package mirrors.
 
 ## Breaking changes
 
@@ -63,6 +44,22 @@ myst:
 - **Secrets management**: The legacy v1 secrets functionality and secrets UI have been removed. The modern secrets service replaces them.
 
 - **REST API strict content-type enforcement**: HTTP `POST`, `PUT`, and `PATCH` requests to the v2 REST API now require the `Content-Type: application/json` request header. Requests that omit or incorrectly set this header will receive a 415 Unsupported Media Type response.
+
+## Additional updates
+
+- **TLS support for RabbitMQ**: Standard TLS connections are now supported for RabbitMQ.
+
+- **Landscape Client - Configurable `apt update` timeout**: A new configuration option allows administrators to set a custom timeout for `apt update` operations, addressing issues with slow or unreliable package mirrors.
+
+- **Manage release upgrades**: You can now trigger release upgrades at scale from the web portal.
+
+- **Soft deletion of computers**: Computer deletion now happens asynchronously, allowing for a smoother user workflow.
+
+- **Python version and dependency updates**:
+
+  - Landscape Server now vendors its Python dependencies into a virtual environment and requires Python 3.12.
+  - Dependencies on `netaddr`, `python3-bs4`, `python3-oops-amqp`, `python3-stripe`, `simplejson`, and `wkhtmltopdf` have been removed.
+  - The build system has migrated from `setup.py/requirements.txt` to `pyproject.toml` with `uv`.
 
 ## Bug fixes
 
@@ -98,3 +95,13 @@ Multiple security fixes are included in this release:
 | PostgreSQL | 14, 16, 18 |
 | HAProxy | 2.4, 2.8, 3.2 |
 | RabbitMQ | 3.9, 3.12 |
+
+## Upgrades
+
+See our 26.04 upgrade guide for detailed steps.
+
+If you use repository management in Landscape, we recommend waiting to upgrade until the 26.04.1 point release (expected August 2026). There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
+
+Landscape Server 26.04 LTS requires the `landscape-outbox` snap.
+
+The updated Landscape Server Charm will not be released until the Landscape Server 26.04.1 LTS point release in August 2026.
