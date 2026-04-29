@@ -64,6 +64,17 @@ Definitions of key terms and concepts used in Landscape.
 terms/index
 ```
 
+## Supported versions and PPAs
+
+Version lifecycle, PPA locations, and Ubuntu compatibility for self-hosted Landscape.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
+supported-versions-and-ppas
+```
+
 ## Other references
 
 Additional technical documentation and command-line tools.
