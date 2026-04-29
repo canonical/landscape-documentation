@@ -1,0 +1,331 @@
+commit e1d6f236da1d31202012841892e37bbaa5fe8215
+Author: jansdhillon <jan.dhillon@canonical.com>
+Date:   Tue Apr 28 11:22:08 2026 -0600
+
+    feat: rename security profiles to USG profiles (LNDENG-3183)
+    
+    - Rename use-security-profiles.md to use-usg-profiles.md
+    - Rename security_profiles.md to usg_profiles.md in API reference
+    - Update all UI text and headings from 'security profiles' to 'USG profiles'
+    - Update API endpoint paths from /security-profiles to /usg-profiles
+      (old endpoints remain as aliases for backwards compatibility)
+    - Update reference anchor from reference-terms-security-profile to
+      reference-terms-usg-profile
+    - Update API reference anchor from reference-rest-api-security-profiles to
+      reference-rest-api-usg-profiles
+    - Add rename note: beginning in 26.04 LTS, security profiles -> USG profiles
+    - Add URL redirects for renamed pages
+    - Update cross-references in activities.md and index.md
+
+diff --git a/docs/explanation/features/activities.md b/docs/explanation/features/activities.md
+index 51c16e6..2ac7f3f 100644
+--- a/docs/explanation/features/activities.md
++++ b/docs/explanation/features/activities.md
+@@ -40,7 +40,7 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
+ 
+ ## Server activities
+ 
+-Server activities run on Landscape Server without interacting with Landscape Client. For example, {ref}`downloading security profile reports <reference-rest-api-security-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
++Server activities run on Landscape Server without interacting with Landscape Client. For example, {ref}`downloading USG profile reports <reference-rest-api-usg-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
+ 
+ ### Server activity states
+ 
+diff --git a/docs/how-to-guides/web-portal/web-portal-24-04-or-later/index.md b/docs/how-to-guides/web-portal/web-portal-24-04-or-later/index.md
+index 9b8b197..b80b948 100644
+--- a/docs/how-to-guides/web-portal/web-portal-24-04-or-later/index.md
++++ b/docs/how-to-guides/web-portal/web-portal-24-04-or-later/index.md
+@@ -23,5 +23,5 @@ Manage saved searches <manage-saved-searches>
+ Sanitize instances <sanitize-instances>
+ Use reboot profiles <use-reboot-profiles>
+ Use script profiles <use-script-profiles>
+-Use security profiles <use-security-profiles>
++Use USG profiles <use-usg-profiles>
+ Manage snaps <manage-snaps>
+diff --git a/docs/how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles.md b/docs/how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles.md
+similarity index 75%
+rename from docs/how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles.md
+rename to docs/how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles.md
+index 8369b90..66b0b10 100644
+--- a/docs/how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles.md
++++ b/docs/how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles.md
+@@ -1,19 +1,23 @@
+ ---
+ myst:
+   html_meta:
+-    description: "Automate compliance audits and fixes with security profiles in Landscape 25.04+ using Ubuntu Security Guide (USG) benchmarks."
++    description: "Automate compliance audits and fixes with USG profiles in Landscape 25.04+ using Ubuntu Security Guide (USG) benchmarks."
+ ---
+ 
+-(how-to-web-portal-use-security-profiles)=
+-# How to use security profiles
++(how-to-web-portal-use-usg-profiles)=
++# How to use USG profiles
+ 
+-You can use security profiles to automatically audit and fix your managed instances on a schedule using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/docs/compliance/usg/).
++```{note}
++Beginning in Landscape 26.04 LTS, "security profiles" were renamed to "USG profiles".
++```
++
++You can use USG profiles to automatically audit and fix your managed instances on a schedule using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/docs/compliance/usg/).
+ 
+ ```{note}
+ This feature is only available in self-hosted **Landscape 25.04** and later.
+ ```
+ 
+-## Create a security profile
++## Create a USG profile
+ 
+ On each instance you want to manage, follow the steps in [Ubuntu Security's installation guide](https://documentation.ubuntu.com/security/docs/compliance/usg/install-usg/), then:
+ 
+@@ -38,10 +42,10 @@ On each instance you want to manage, follow the steps in [Ubuntu Security's inst
+ From the web portal:
+ 
+ 1. Click **Profiles**
+-2. Click **Security profiles**
+-3. Click **Add security profile**
++2. Click **USG profiles**
++3. Click **Add USG profile**
+ 
+-In the security profile creation form, complete the following fields:
++In the USG profile creation form, complete the following fields:
+ 
+ - **Profile name**: Name of the profile
+ - **Access group**: The access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
+@@ -58,16 +62,16 @@ In the security profile creation form, complete the following fields:
+   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile
+   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected
+   
+-After you've created your security profile, you can view, download audit reports, edit, run, duplicate, or archive it using the dot menu under **Actions**.
++After you've created your USG profile, you can view, download audit reports, edit, run, duplicate, or archive it using the dot menu under **Actions**.
+ 
+-## Download audit for a security profile
++## Download audit for a USG profile
+ 
+-You can download the results of USG audits executed by your security profile for a specific date or for a range of dates.
++You can download the results of USG audits executed by your USG profile for a specific date or for a range of dates.
+ 
+ From the web portal:
+ 
+ 1. Click **Profiles**
+-2. Click **Security profiles**
++2. Click **USG profiles**
+ 3. Click the menu dots under **Actions** for a profile
+ 4. Click **Download audit**
+ 
+diff --git a/docs/redirects.txt b/docs/redirects.txt
+index ac05409..5e968ab 100644
+--- a/docs/redirects.txt
++++ b/docs/redirects.txt
+@@ -28,6 +28,10 @@ reference/terms/profiles/package-profile/ reference/terms/profiles/
+ 
+ reference/terms/profiles/removal-profile/ reference/terms/profiles/
+ 
++# USG Profiles (renamed from Security Profiles in 26.04 LTS)
++how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/
++reference/api/rest-api-endpoints/security-profiles/ reference/api/rest-api-endpoints/usg-profiles/
++
+ reference/terms/profiles/upgrade-profile/ reference/terms/profiles/
+ 
+ reference/terms/series/ explanation/features/repository-mirroring/
+diff --git a/docs/reference/api/rest-api-endpoints/security_profiles.md b/docs/reference/api/rest-api-endpoints/usg_profiles.md
+similarity index 83%
+rename from docs/reference/api/rest-api-endpoints/security_profiles.md
+rename to docs/reference/api/rest-api-endpoints/usg_profiles.md
+index d3c3ff0..cdfeaf9 100644
+--- a/docs/reference/api/rest-api-endpoints/security_profiles.md
++++ b/docs/reference/api/rest-api-endpoints/usg_profiles.md
+@@ -1,17 +1,21 @@
+ ---
+ myst:
+   html_meta:
+-    description: "REST API endpoints for managing security profiles in Landscape. Create, read, update, delete, and audit CIS benchmark compliance profiles."
++    description: "REST API endpoints for managing USG profiles in Landscape. Create, read, update, delete, and audit CIS benchmark compliance profiles."
+ ---
+ 
+-(reference-rest-api-security-profiles)=
+-# Security Profiles
++(reference-rest-api-usg-profiles)=
++# USG Profiles
+ 
+-The endpoints available here are related to management of security profiles.
++```{note}
++Beginning in Landscape 26.04 LTS, "security profiles" were renamed to "USG profiles". The `/security-profiles` endpoints are still available as aliases for backwards compatibility.
++```
++
++The endpoints available here are related to management of USG profiles.
+ 
+-## GET `/security-profiles`
++## GET `/usg-profiles`
+ 
+-Get security profiles associated with the current account, paginated and ordered by creation time.
++Get USG profiles associated with the current account, paginated and ordered by creation time.
+ 
+ Optional query parameters:
+ 
+@@ -25,7 +29,7 @@ Optional query parameters:
+ Example request:
+ 
+ ```bash
+-curl -X GET https://landscape.canonical.com/api/v2/security-profiles -H "Authorization: Bearer $JWT"
++curl -X GET https://landscape.canonical.com/api/v2/usg-profiles -H "Authorization: Bearer $JWT"
+ ```
+ 
+ Example response:
+@@ -102,13 +106,13 @@ Example response:
+ }
+ ```
+ 
+-## POST `/security-profiles`
++## POST `/usg-profiles`
+ 
+-Create a security profile. The new security profile will perform its first run according to its schedule.
++Create a USG profile. The new USG profile will perform its first run according to its schedule.
+ 
+ Required parameters:
+ 
+-- `benchmark`: The USG benchmark the security profile will enforce. See the [Ubuntu Security Guide](https://ubuntu.com/security/certifications/docs/usg) for options.
++- `benchmark`: The USG benchmark the USG profile will enforce. See the [Ubuntu Security Guide](https://ubuntu.com/security/certifications/docs/usg) for options.
+ - `mode`: The run mode of the profile. One of `"audit"`, `"fix-audit"`, or `"fix-restart-audit"`.
+ - `schedule`: An [RFC 5545 "Recurrence Rule"](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10), determining how frequently the profile will audit its instances. Cannot be more frequent than weekly.
+ - `title`: The display name of the profile.
+@@ -126,7 +130,7 @@ Optional parameters:
+ Example request:
+ 
+ ```bash
+-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles" \
++curl -X POST "https://landscape.canonical.com/api/v2/usg-profiles" \
+   -H "Content-Type: application/json" \
+   -H "Authorization: Bearer $JWT" \
+   -d '
+@@ -181,9 +185,9 @@ Example response, the profile's state:
+ }
+ ```
+ 
+-## PATCH `/security-profiles/<id>`
++## PATCH `/usg-profiles/<id>`
+ 
+-Update a security profile. Be aware that not every field is editable.
++Update a USG profile. Be aware that not every field is editable.
+ 
+ Path parameters:
+ 
+@@ -201,7 +205,7 @@ Optional parameters:
+ Example request:
+ 
+ ```bash
+-curl -X PATCH "https://landscape.canonical.com/api/v2/security-profiles/1" \
++curl -X PATCH "https://landscape.canonical.com/api/v2/usg-profiles/1" \
+   -H "Content-Type: application/json" \
+   -H "Authorization: Bearer $JWT" \
+   -d '
+@@ -248,9 +252,9 @@ Example response:
+ 
+ ```
+ 
+-## POST `/security-profiles/<id>:archive`
++## POST `/usg-profiles/<id>:archive`
+ 
+-Archive a security profile. This makes it inactive.
++Archive a USG profile. This makes it inactive.
+ 
+ Path parameters:
+ 
+@@ -259,7 +263,7 @@ Path parameters:
+ Example request:
+ 
+ ```bash
+-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:archive" \
++curl -X POST "https://landscape.canonical.com/api/v2/usg-profiles/1:archive" \
+   -H "Content-Type: application/json" \
+   -H "Authorization: Bearer $JWT"
+ ```
+@@ -299,9 +303,9 @@ Example response:
+ }
+ ```
+ 
+-## POST `/security-profiles/<id>:execute`
++## POST `/usg-profiles/<id>:execute`
+ 
+-Creates a run of the security profile immediately, rather than waiting for the next scheduled run.
++Creates a run of the USG profile immediately, rather than waiting for the next scheduled run.
+ Returns the created activity.
+ 
+ Path parameters:
+@@ -311,7 +315,7 @@ Path parameters:
+ Example request:
+ 
+ ```bash
+-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:execute" \
++curl -X POST "https://landscape.canonical.com/api/v2/usg-profiles/1:execute" \
+   -H "Content-Type: application/json" \
+   -H "Authorization: Bearer $JWT"
+ ```
+@@ -339,10 +343,10 @@ Example response:
+ }
+ ```
+ 
+-## GET `/security-profiles/<id>/report`
++## GET `/usg-profiles/<id>/report`
+ 
+ Either returns the URI at which the report can be downloaded, or starts an activity to produce the
+-requested report. The URI can be used with the `/security-profiles/blob` endpoint.
++requested report. The URI can be used with the `/usg-profiles/blob` endpoint.
+ 
+ Path parameters:
+ 
+@@ -360,9 +364,9 @@ Optional query parameters:
+ Example requests:
+ 
+ ```bash
+-curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/1/report?start_date=2025-02-28T12:34Z" -H "Authorization: Bearer $JWT"
++curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/1/report?start_date=2025-02-28T12:34Z" -H "Authorization: Bearer $JWT"
+ 
+-curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/1/report?start_date=2025-02-26&end_date=2025-03-02&detailed=true" -H "Authorization: Bearer $JWT"
++curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/1/report?start_date=2025-02-26&end_date=2025-03-02&detailed=true" -H "Authorization: Bearer $JWT"
+ ```
+ 
+ Example response (when a report already exists):
+@@ -429,18 +433,18 @@ The URI can be found in the `result_text` of the activity:
+ }
+ ```
+ 
+-## GET `/security-profiles/blob`
++## GET `/usg-profiles/blob`
+ 
+ Returns the file for the given `path`. This could be a compliance report or a tailoring file.
+ 
+ Required query parameters:
+ 
+-- `path`: the path of the file, as retrieved from `/security-profiles/<id>/report` or the status of a security profile from `/security-profiles` or `/security-profiles/<id>`.
++- `path`: the path of the file, as retrieved from `/usg-profiles/<id>/report` or the status of a USG profile from `/usg-profiles` or `/usg-profiles/<id>`.
+ 
+ Example request:
+ 
+ ```bash
+-curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/blob?path=Landscape_security_profile_audit_report_ID1-20250218.csv" -H "Authorization: Bearer $JWT"
++curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/blob?path=Landscape_security_profile_audit_report_ID1-20250218.csv" -H "Authorization: Bearer $JWT"
+ ```
+ 
+ Example response:
+diff --git a/docs/reference/terms/profiles.md b/docs/reference/terms/profiles.md
+index 9ad9f25..a2c3a82 100644
+--- a/docs/reference/terms/profiles.md
++++ b/docs/reference/terms/profiles.md
+@@ -36,10 +36,14 @@ A **removal profile** defines a maximum number of days that a computer can go wi
+ 
+ A **script profile** defines how and when a script is automatically executed on managed instances based on specific triggers. It specifies the script, the user account that executes the script, the time limit, and a trigger that determines when the script runs. A script profile also defines which instances the script applies to, either through tags or to all instances within an access group. You can manage script profiles from **Scripts** > **Profiles** page.
+ 
+-(reference-terms-security-profile)=
+-## Security profile
++(reference-terms-usg-profile)=
++## USG profile
+ 
+-A **security profile** defines how Landscape should monitor and manage security compliance on managed instances using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/compliance/usg/). Security profiles evaluate instances against established security benchmarks, such as CIS and DISA-STIG, to collect compliance data on a scheduled basis. With additional configuration, security profiles can attempt to resolve detected compliance issues. Security profiles are associated with instances using tags and an access group. You can manage security profiles from the **Profiles** page.
++```{note}
++Beginning in Landscape 26.04 LTS, "security profiles" were renamed to "USG profiles".
++```
++
++A **USG profile** defines how Landscape should monitor and manage security compliance on managed instances using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/compliance/usg/). USG profiles evaluate instances against established security benchmarks, such as CIS and DISA-STIG, to collect compliance data on a scheduled basis. With additional configuration, USG profiles can attempt to resolve detected compliance issues. USG profiles are associated with instances using tags and an access group. You can manage USG profiles from the **Profiles** page.
+ 
+ 
+ (reference-terms-upgrade-profile)=
