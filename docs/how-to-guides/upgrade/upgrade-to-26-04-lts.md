@@ -15,6 +15,10 @@ To upgrade your self-hosted Landscape server to 26.04 LTS, you should first foll
 
 Note that you must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22.04 Jammy Jellyfish to upgrade to Landscape 26.04 LTS.
 
+## Service.conf migration
+
+If you upgraded from a version prior to 25.10, your `service.conf` file will be migrated away from our deprecated naming system during the upgrade. A backup file from before the migration will be supplied in the same directory as your `service.conf`. Support for the deprecated config options is expected to be removed in the 26.10 release. See {ref}`reference-service-conf` for more details.
+
 ## Additional upgrade steps
 
 After you’ve completed the basic upgrade instructions, you need to make some additional manual changes to finish your upgrade.
