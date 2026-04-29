@@ -11,6 +11,10 @@ myst:
 If you are using repository mirroring in your Landscape deployment, you should not attempt to upgrade to 26.04 LTS at this time. A migration guide for bringing over repository mirrors from 24.04 LTS to 26.04 LTS will be published at a later date.
 ```
 
+```{important}
+Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04.
+```
+
 To upgrade your self-hosted Landscape server to 26.04 LTS, you should first follow the basic upgrade instructions. See {ref}`how-to-upgrade`.
 
 Note that you must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22.04 Jammy Jellyfish to upgrade to Landscape 26.04 LTS.
