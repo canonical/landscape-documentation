@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Upgrade Landscape Server to 26.04 LTS from Ubuntu 22.04, 24.04 or 26.04. Install additional outbox and repository mirroring services as snaps.
+    description: "Upgrade Landscape Server to 26.04 LTS from Ubuntu 22.04, 24.04 or 26.04. Install additional outbox and repository mirroring services as snaps."
 ---
 
 (how-to-upgrade-to-26-04-lts)=
