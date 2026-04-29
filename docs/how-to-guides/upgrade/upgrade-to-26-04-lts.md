@@ -41,9 +41,7 @@ sudo snap logs landscape-outbox
 ### Install the debarchive snap
 
 
-The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Install the `landscape-debarchive` snap on the same machine as your Landscape Server installation.
-
-...
+The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md)
 
 ### Enable hostagent services (optional)
 
