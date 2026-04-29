@@ -1,0 +1,7 @@
+# Global MyST text substitutions used across documentation pages.
+# Add shared values here to avoid repeating literals in multiple files.
+# Keep formatting markers (e.g., backticks) in values when needed
+# so substituted content renders correctly
+
+landscape_recommended_lts: "24.04"
+landscape_recommended_lts_ppa: "`ppa:landscape/self-hosted-24.04`"

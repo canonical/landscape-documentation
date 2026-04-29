@@ -153,7 +153,8 @@ Landscape is distributed in a public PPA. You can add it to the system with thes
 sudo add-apt-repository <LANDSCAPE_PPA>
 ```
 
-- `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. Use an LTS for production deployments.
+```{include} /reuse/landscape-ppa-description.md
+```
 
 ### Install the server package
 
