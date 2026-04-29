@@ -13,7 +13,7 @@ If you're new to Landscape and want to learn how it works first, see the {ref}`g
 
 ## Check minimum requirements
 
-The following minimum requirements are needed to install Landscape Server 24.04 LTS:
+The following minimum requirements are needed to install Landscape Server 24.04 LTS or 26.04 LTS:
 
 - **Operating system**: Ubuntu 22.04 LTS (Jammy Jellyfish) or Ubuntu 24.04 LTS (Noble Numbat)
 - **Hardware**: A dual-core 2 GHz processor, 8 GB of RAM, and 20 GB of disk space
