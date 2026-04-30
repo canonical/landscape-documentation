@@ -6,7 +6,7 @@ myst:
 
 (how-to-upgrade-to-26-04-lts)=
 # How to upgrade to Landscape Server 26.04 LTS
-> <!-- TODO add when the release notes exist: See also: {ref}`reference-release-notes-26-04-lts` -->
+<!-- TODO add when the release notes exist: See also: {ref}`reference-release-notes-26-04-lts` -->
 ```{important}
 If you are using repository mirroring in your Landscape deployment, you should not attempt to upgrade to 26.04 LTS at this time. A migration guide for bringing over repository mirrors from 24.04 LTS to 26.04 LTS will be published at a later date.
 ```
@@ -44,7 +44,7 @@ sudo snap logs landscape-outbox
 
 ### Install the debarchive snap
 
-The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md)
+<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
 
 ### (WSL only) Enable hostagent services
 
