@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Upgrade Landscape Server to 26.04 LTS from Ubuntu 22.04, 24.04 or 26.04. Install additional outbox and repository mirroring services as snaps."
+    description: "Upgrade Landscape Server to 26.04 LTS from Ubuntu 22.04, 24.04, or 26.04. Install additional outbox and repository mirroring services as snaps."
 ---
 
 (how-to-upgrade-to-26-04-lts)=
@@ -19,7 +19,7 @@ To upgrade your self-hosted Landscape server to 26.04 LTS, you should first foll
 
 ## Service.conf migration
 
-If you upgraded from a version prior to 25.10, your `service.conf` file will be migrated away from our deprecated naming system during the upgrade. A backup file from before the migration will be supplied in the same directory as your `service.conf`. Support for the deprecated config options is expected to be removed in the 26.10 release. See {ref}`reference-service-conf` for more details.
+If you upgraded from a version prior to 25.10, your `service.conf` file will be migrated away from the deprecated naming system during the upgrade. A backup file from before the migration will be provided in the same directory as your `service.conf`. Support for the deprecated config options is expected to be removed in the 26.10 release. See {ref}`reference-service-conf` for more details.
 
 ## Additional upgrade steps
 
@@ -27,17 +27,29 @@ After you’ve completed the basic upgrade instructions and have the updated `se
 
 ### Install the outbox snap
 
-The `landscape-outbox` snap is critical to proper functioning of Landscape 26.04 LTS. Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
 
 ```bash
 sudo snap install landscape-outbox
 ```
 
-`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Check that the outbox is active and functioning properly.
+`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
 
 ```bash
 sudo snap services landscape-outbox
-sudo snap logs landscape-outbox
+```
+
+The output should show the `outbox` service as **active**:
+
+```bash
+Service                  Startup  Current  Notes
+landscape-outbox.outbox  enabled  active   -
+```
+
+To view outbox logs, run:
+
+```bash
+sudo snap logs landscape-outbox -n 50
 ```
 
 ### Install the debarchive snap
@@ -46,12 +58,12 @@ sudo snap logs landscape-outbox
 
 ### (WSL only) Enable hostagent services
 
-These steps are only needed for WSL users. The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See the configuration docs for the [hostagent consumer](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [hostagent messenger](/reference/config/service-conf.md/#the-hostagent-messenger-section) to set up these services. 
+These steps are only needed for WSL users. The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See the configuration docs for the [hostagent consumer](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [hostagent messenger](/reference/config/service-conf.md/#the-hostagent-messenger-section) to set up these services.
 
 If you don't configure the hostagent services, you won't be able to use WSL with Landscape. Other activities unrelated to WSL will still function properly.
 
-## Airgapped installations
-If your deployment does not have internet access, you must carry the snaps into your airgapped environment as part of the 26.04 installation process.
+## Airgapped environments
+If your deployment does not have internet access, you must carry the snaps into your airgapped environment as part of the 26.04 upgrade process.
 
 First, in an environment with internet access, download the snaps.
 
@@ -70,5 +82,3 @@ sudo snap install landscape-outbox_*.snap
 sudo snap ack landscape-debarchive_*.assert
 sudo snap install landscape-debarchive_*.snap
 ```
-
-Finally, verify the snaps are working properly according to the instructions above.
