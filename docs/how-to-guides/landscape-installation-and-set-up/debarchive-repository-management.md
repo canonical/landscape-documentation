@@ -111,7 +111,7 @@ The Deb Archive gateway must be exposed at the `/debarchive` path on your Landsc
 
 If you followed the {ref}`manual installation guide <how-to-heading-manual-install-configure-web-server>`, your Landscape Server uses Apache. Add the following rules to the `<VirtualHost *:443>` block in `/etc/apache2/sites-available/landscape.conf` (or the appropriate configuration file for your setup).
 
-Add these lines **before** the final catch-all `RewriteRule` at the bottom of the block (the line that rewrites to `localhost:8080`):
+Add these lines **before** the final catch-all `RewriteRule` at the bottom of the block (the line that starts with `RewriteRule ^/(.*) http://localhost:8080/...`):
 
 ```apache
     # Landscape Deb Archive
@@ -173,13 +173,13 @@ landscape-debarchive.debarchive      enabled  active   -
 
 ### Check the health endpoint
 
-Send a health check request through the reverse proxy. Replace `<LANDSCAPE_FQDN>` with the FQDN of your Landscape Server:
+Send a health check request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
 
 ```bash
-curl -sk -o /dev/null -w "%{http_code}" https://<LANDSCAPE_FQDN>/debarchive/v1/mirrors
+curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1/mirrors"
 ```
 
-A response of `401` (unauthorized) confirms the Deb Archive service is reachable through the reverse proxy.
+A response of `401` (unauthorized) confirms the Deb Archive service is reachable through the reverse proxy. Deb Archive uses the same authentication as the main Landscape Server API. You should receive a `200` response instead if you include a JWT token in the request via bearer authorization, or include a cookie from a logged-in session in the Landscape web portal.
 
 You can also test directly against the service (bypassing the proxy) to isolate connectivity issues:
 
@@ -189,7 +189,7 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
 
 ### Verify in the Landscape web portal
 
-1. Log in to the Landscape web portal at `https://<LANDSCAPE_FQDN>`
+1. Log in to the Landscape web portal at `https://$LANDSCAPE_FQDN`
 2. Navigate to the **repository management** page
 3. Confirm that you can create or add a new repository mirror
 
@@ -207,7 +207,7 @@ sudo snap logs landscape-debarchive -n 50
 
 Common issues include:
 
-- **Database connection errors**: Verify the database host, port, user, and password. Ensure the `landscape-debarchive` database exists and the configured user has access.
+- **Database connection errors**: Verify the database host, port, user, and password. Ensure the `landscape-standalone-debarchive` database exists and the configured user has access.
 - **Missing secrets**: If not using the configuration shim with `service.conf`, the `deb.archive.pagination.secret` (base64url-encoded) and `deb.archive.jwt.secret` (base64-encoded) must be set.
 
 ### Health check returns an error through the proxy
