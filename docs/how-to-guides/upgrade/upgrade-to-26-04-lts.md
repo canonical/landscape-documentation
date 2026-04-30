@@ -23,7 +23,7 @@ If you upgraded from a version prior to 25.10, your `service.conf` file will be 
 
 ## Additional upgrade steps
 
-After you’ve completed the basic upgrade instructions, you need to make some additional manual changes to finish your upgrade.
+After you’ve completed the basic upgrade instructions and have the updated `service.conf` file, you need to make some additional manual changes to finish your upgrade.
 
 ### Install the outbox snap
 
