@@ -132,14 +132,14 @@ If your deployment uses HAProxy as the reverse proxy, add a backend and routing 
 
 Add an ACL and `use_backend` directive in the existing `frontend` section:
 
-```haproxy
+```
     acl is_debarchive path_beg /debarchive
     use_backend debarchive if is_debarchive
 ```
 
 Add a new backend section:
 
-```haproxy
+```
 backend debarchive
     http-request set-path %[path,regsub(^/debarchive,/)]
     server debarchive 127.0.0.1:8100 check
