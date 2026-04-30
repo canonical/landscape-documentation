@@ -21,7 +21,6 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
   - Introduces the new `debarchive` service for repository management.
   - Repository profiles have been updated with improved workflows.
-  - The quickstart installer now includes `debarchive` for local archive support.
   - The legacy API endpoints for repository management have been removed; the new archive management system replaces them.
 
 - **Security event logging**: Security-relevant actions are now recorded in the {ref}`reference-logs`, including:
@@ -34,8 +33,6 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
   - Authorization failures
 
 - **FDE recovery key management**: The server now provides Full Disk Encryption (FDE) recovery key management, enabling automated storage and retrieval of recovery keys for enrolled machines. A new client plugin (`fde-recovery-key-manager`) enables the client to securely report FDE recovery keys to the server.
-
-- **Ubuntu Installer attach service**: The Ubuntu Installer attach service is now included in the quickstart installation by default, allowing machines to be attached to Landscape during the Ubuntu installation process.
 
 ## Breaking changes
 
@@ -53,7 +50,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 - **Manage release upgrades**: You can now trigger release upgrades at scale from the web portal.
 
-- **Soft deletion of computers**: Computer deletion now happens asynchronously, allowing for a smoother user workflow.
+- **Soft deletion of computers**: Computer records are cleaned up asynchronously, allowing for higher deletion throughput and fixing the timeout errors that some users experience when deleting old computers.
 
 - **Python version and dependency updates**:
 
