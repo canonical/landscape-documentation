@@ -19,7 +19,7 @@ To upgrade your self-hosted Landscape server to 26.04 LTS, you should first foll
 
 ## Additional upgrade steps
 
-After you’ve completed the basic upgrade instructions and have the updated `service.conf` file, you need to make some additional manual changes to finish your upgrade.
+After you’ve completed the basic upgrade instructions, you need to make some additional manual changes to finish your upgrade.
 
 ### Install the outbox snap
 
