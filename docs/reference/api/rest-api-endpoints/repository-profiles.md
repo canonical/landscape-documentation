@@ -7,6 +7,10 @@ myst:
 (reference-rest-api-repository-profiles)=
 # Repository Profiles
 
+```{note}
+For Landscape 26.04 LTS and later, these endpoints are deprecated.
+```
+
 ## POST `/v2/repositoryprofiles`
 
 Creates a new repository profile, including its associations, APT sources, and pockets.

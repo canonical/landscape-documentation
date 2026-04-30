@@ -9,6 +9,10 @@ myst:
 
 These methods give access to repository management.
 
+```{note}
+For Landscape 26.04 LTS and later, these endpoints are deprecated.
+```
+
 ## GET `/repository/apt-source`
 
 Gets a list of APT sources. Optionally filter by APT source name or id.
