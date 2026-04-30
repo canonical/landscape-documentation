@@ -461,6 +461,7 @@ The `[broker]` section contains configurations that describe how services connec
 - ENV name: `LANDSCAPE_BROKER__VHOST`
 - Default: `landscape`
 
+(hostagent-consumer-section)=
 ## The `[hostagent_consumer]` section
 
 ```{note}
@@ -471,6 +472,7 @@ The `[hostagent_consumer]` section contains settings for the `landscape-hostagen
 
 This entire section is optional. Omitting the `[hostagent_consumer]` section entirely will cause the `landscape-hostagent-consumer` service to stop immediately after it starts.
 
+(hostagent-messenger-section)=
 ## The `[hostagent_messenger]` section
 
 ```{note}

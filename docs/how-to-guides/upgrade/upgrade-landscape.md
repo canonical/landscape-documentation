@@ -135,8 +135,10 @@ To upgrade a basic Juju deployment:
     juju run landscape-server/n resume
     ```
 
-## Add additional configurations
+## Additional steps needed by version
 
-Landscape commonly has version-specific configurations that must be added to complete your upgrade.
+Landscape commonly has version-specific steps that must be taken to complete your upgrade.
 
 If you're upgrading to Landscape 24.04 LTS, follow {ref}`how-to-upgrade-to-24-04-lts`.
+
+If you're upgrading to Landscape 26.04 LTS, follow {ref}`how-to-upgrade-to-26-04-lts`.
