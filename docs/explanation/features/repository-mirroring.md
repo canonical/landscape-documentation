@@ -7,11 +7,11 @@ myst:
 (explanation-repo-mirroring)=
 # Repository mirroring
 
-Landscape uses repository mirroring to internally distribute software in Debian packages over your local network and manage updates. This feature allows you to mirror upstream repositories, create custom local repositories, and publish them to storage backends — providing control over the software versions available to your client machines. This can also reduce bandwidth usage by distributing updates to clients using your local network.
+Landscape uses repository mirroring to internally distribute software in Debian packages over your local network and manage updates. This feature allows you to mirror upstream repositories, create custom local repositories, and publish them to storage backends, providing control over the software versions available to your client machines. This can also reduce bandwidth usage by distributing updates to clients using your local network.
 
 You can mirror publicly accessible Ubuntu repositories, third-party repositories, or create local repositories for distributing internal software.
 
-Repository mirroring in Landscape is backed by the **landscape-debarchive** service, which must be installed alongside `landscape-server`. This service manages mirrors, local repositories, publications, and storage backends through an API that Landscape Server consumes.
+Repository mirroring in Landscape is backed by the **landscape-debarchive** service, which must be installed alongside `landscape-server`. This service manages mirrors, local repositories, publications, and storage backends through an API that Landscape Server and the Landscape Server UI consume.
 
 Snaps can't be mirrored with Landscape. If you want to mirror snaps, use [Enterprise Store](https://documentation.ubuntu.com/enterprise-store/main/).
 
