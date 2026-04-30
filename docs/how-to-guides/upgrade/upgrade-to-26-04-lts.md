@@ -48,7 +48,9 @@ The `landscape-debarchive` snap is required for repository mirroring from Landsc
 
 ### (WSL only) Enable hostagent services
 
-The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See [the hostagent_consumer section](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [the hostagent_messenger section](/reference/config/service-conf.md/#the-hostagent-messenger-section) if you'd like to configure these services. If not configured, these services will fail to start, but all Landscape activities unrelated to WSL will still function properly.
+These steps are only needed for WSL users. The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. Follow the steps in [the hostagent_consumer section](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [the hostagent_messenger section](/reference/config/service-conf.md/#the-hostagent-messenger-section) to configure these services. 
+
+If you don't configure the hostagent services, you won't be able to use WSL with Landscape. Other activities unrelated to WSL will still function properly.
 
 ## Airgapped installations
 If your deployment does not have internet access, you must carry the snaps into your airgapped environment as part of the 26.04 installation process.
