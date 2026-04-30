@@ -17,10 +17,6 @@ If you use repository management in your Landscape deployment, we recommend wait
 
 To upgrade your self-hosted Landscape server to 26.04 LTS, you should first follow the basic upgrade instructions. See {ref}`how-to-upgrade`.
 
-## Service.conf migration
-
-If you upgraded from a version prior to 25.10, your `service.conf` file will be migrated away from the deprecated naming system during the upgrade. A backup file from before the migration will be provided in the same directory as your `service.conf`. Support for the deprecated config options is expected to be removed in the 26.10 release. See {ref}`reference-service-conf` for more details.
-
 ## Additional upgrade steps
 
 After you’ve completed the basic upgrade instructions and have the updated `service.conf` file, you need to make some additional manual changes to finish your upgrade.
