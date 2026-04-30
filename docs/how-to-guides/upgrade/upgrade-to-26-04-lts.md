@@ -58,7 +58,7 @@ sudo snap logs landscape-outbox -n 50
 
 ### (WSL only) Enable hostagent services
 
-These steps are only needed for WSL users. The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See the configuration docs for the [hostagent consumer](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [hostagent messenger](/reference/config/service-conf.md/#the-hostagent-messenger-section) to set up these services.
+These steps are only needed for WSL users. The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See the configuration docs for the {ref}`hostagent consumer <hostagent-consumer-section>` and {ref}`hostagent messenger<hostagent-messenger-section>` to set up these services.
 
 If you don't configure the hostagent services, you won't be able to use WSL with Landscape. Other activities unrelated to WSL will still function properly.
 
