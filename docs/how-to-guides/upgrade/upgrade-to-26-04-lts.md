@@ -7,17 +7,15 @@ myst:
 (how-to-upgrade-to-26-04-lts)=
 # How to upgrade to Landscape Server 26.04 LTS
 <!-- TODO add when the release notes exist: See also: {ref}`reference-release-notes-26-04-lts` -->
-```{important}
-If you are using repository mirroring in your Landscape deployment, you should not attempt to upgrade to 26.04 LTS at this time. A migration guide for bringing over repository mirrors from 24.04 LTS to 26.04 LTS will be published at a later date.
-```
+You must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22.04 Jammy Jellyfish to upgrade to Landscape 26.04 LTS.
 
-```{important}
-Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04.
-```
+Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
+
+If you use repository management in your Landscape deployment, we recommend waiting to upgrade to 26.04 LTS until the 26.04.1 point release (expected August 2026). A migration guide for bringing over repository mirrors from 24.04 LTS to 26.04 LTS will be published before the point release.
+
+## Begin your upgrade
 
 To upgrade your self-hosted Landscape server to 26.04 LTS, you should first follow the basic upgrade instructions. See {ref}`how-to-upgrade`.
-
-Note that you must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22.04 Jammy Jellyfish to upgrade to Landscape 26.04 LTS.
 
 ## Service.conf migration
 
@@ -44,7 +42,7 @@ sudo snap logs landscape-outbox
 
 ### Install the debarchive snap
 
-<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
+<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
 
 ### (WSL only) Enable hostagent services
 
