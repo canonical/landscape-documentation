@@ -17,14 +17,14 @@ Snaps can't be mirrored with Landscape. If you want to mirror snaps, use [Enterp
 
 ## Core concepts
 
-Repository mirroring in Landscape is built around four core entities: **mirrors**, **local repositories**, **publications**, and **publication targets**. Understanding these concepts and how they relate to each other is essential to using this feature correctly.
+Repository mirroring in Landscape is built around four core entities: **mirrors**, **local repositories**, **publications**, and **publication targets**. Understanding these concepts and how they relate to each other is crucial to using this feature correctly.
 
 ### Mirrors
 
 A mirror is a local copy of an upstream Debian repository (for example, `archive.ubuntu.com`). When you create a mirror, you specify:
 
 - **Archive root:** The upstream URL to mirror from (e.g. `http://archive.ubuntu.com/ubuntu/`)
-- **Distribution:** The repository suite to mirror. This corresponds to what the Ubuntu archive calls a series and pocket combination — for example, `noble` (the release pocket of Ubuntu 24.04 LTS), `noble-updates` (the updates pocket), or `noble-security` (the security pocket)
+- **Distribution:** The repository suite to mirror. This corresponds to what the Ubuntu archive calls a series and pocket combination. For example, `noble` (the release pocket of Ubuntu 24.04 LTS), `noble-updates` (the updates pocket), or `noble-security` (the security pocket)
 - **Components:** The categories of packages to include. Upstream Ubuntu repositories typically use `main`, `restricted`, `universe`, and `multiverse`
 - **Architectures:** The CPU architectures to mirror (e.g. `amd64`, `arm64`)
 - **Filter (optional):** A package query expression to select a subset of packages from the upstream repository, optionally including their dependencies
@@ -33,7 +33,7 @@ After creating a mirror, you **sync** it to download packages from the upstream 
 
 ### Local repositories
 
-Local repositories let you host your own `.deb` packages that aren't sourced from an upstream mirror. You can import packages into a local repository by providing a URL to a `.deb` file. This is useful for distributing internally-built software or third-party packages that aren't available in any upstream repository.
+Local repositories let you host your own `.deb` packages that aren't sourced from an upstream mirror. You can import packages into a local repository by providing a URL to a `.deb` file or archive of `.deb` files. This is useful for distributing internally-built software or third-party packages that aren't available in any upstream repository.
 
 Each local repository has a default distribution and component, which are used when packages are published.
 
@@ -59,13 +59,13 @@ A publication target is a named storage destination where published repositories
 - **S3:** An Amazon S3 bucket or S3-compatible object store (such as MinIO). Configuration includes access credentials, region, bucket name, prefix, and storage class.
 - **Swift:** An OpenStack Swift container. Configuration includes authentication URL, credentials, container name, and prefix.
 
-Publication targets are independent of the repositories themselves — you define them once and can reuse them across multiple publications.
+Publication targets are independent of the repositories themselves. You define them once and can reuse them across multiple publications.
 
 ## Mapping to Ubuntu archive terminology
 
-If you're familiar with the [Ubuntu package archive](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#) structure, the following table maps those concepts to Landscape's repository mirroring terminology:
+If you're familiar with the [Ubuntu package archive](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#) structure and the pre-26.04 Landscape terminology, the following table maps those concepts to 26.04 Landscape's repository mirroring terminology:
 
-| Ubuntu archive concept | Landscape equivalent | Example |
+| Ubuntu archive/Pre-26.04 Landscape concept | 26.04 Landscape equivalent | Example |
 |---|---|---|
 | Repository / Archive | Archive root (upstream URL) | `http://archive.ubuntu.com/ubuntu/` |
 | Series | Part of the distribution string | `noble` (Ubuntu 24.04 LTS) |
@@ -73,7 +73,7 @@ If you're familiar with the [Ubuntu package archive](https://documentation.ubunt
 | Component (main, restricted, universe, multiverse) | Components list on a mirror | `["main", "universe"]` |
 | Pull pocket (user-defined staging area) | Filtered mirror | A mirror with a package filter expression |
 
-In the Ubuntu archive, the **series** and **pocket** are combined into a single **distribution** string. For example:
+In the Ubuntu archive, the **series** and **pocket** are combined into a single **distribution** (dist) string. For example:
 
 - `noble` — the release pocket of Ubuntu 24.04 LTS (all packages included at initial release)
 - `noble-updates` — the updates pocket (newer versions of packages added after the initial release)
@@ -99,27 +99,27 @@ When you set a filter on a mirror, only packages matching the filter expression 
 Filters are applied at sync time. If you need to distribute different subsets of packages to different groups of machines, you can create multiple filtered mirrors from the same upstream repository and publish each one separately.
 
 ```{note}
-Filters cannot be used on signature-preserving mirrors, since filtering would invalidate the upstream repository's original GPG signatures.
+Filters cannot be used on signature-preserving mirrors, since filtering could invalidate the upstream repository's original GPG signatures.
 ```
 
 ## Signature-preserving mirrors
 
 When you create a mirror, you can enable **signature preservation**. A signature-preserving mirror passes through the upstream repository's original GPG signatures without re-signing, which is useful when you want clients to verify packages directly against the upstream key.
 
-This mode has restrictions: you cannot apply filters to a signature-preserving mirror, and syncing is not permitted after the initial creation. The mirror is treated as a direct pass-through of the upstream repository.
+This mode has restrictions: you cannot apply filters to a signature-preserving mirror, and syncing does not occur until publication time. The mirror is treated as a direct pass-through of the upstream repository.
 
 ## An example mirroring workflow
 
 The following example illustrates how a Landscape administrator could use repository mirroring to manage package distribution:
 
 1. **Create a publication target.** The administrator defines a filesystem publication target pointing to a directory on the Landscape server that will be served over HTTP.
-2. **Create mirrors.** They create two mirrors of the Ubuntu archive for Noble 24.04:
+1. **Create mirrors.** They create two mirrors of the Ubuntu archive for Noble 24.04:
    - One for `noble` (the release pocket) with components `main` and `universe`
    - One for `noble-security` (the security pocket) with the same components
-3. **Sync the mirrors.** Both mirrors are synced to download all matching packages from the upstream repository.
-4. **Create a filtered mirror for testing.** They create a third mirror of `noble-updates` with a filter that selects only packages relevant to their application stack.
-5. **Publish.** They create publications for each mirror, all targeting the filesystem publication target, and publish them. Clients can now be configured to use the local server as their APT source.
-6. **Iterate.** When new upstream updates are available, the administrator syncs the mirrors again and re-publishes to make the updated packages available.
+1. **Sync the mirrors.** Both mirrors are synced to download all matching packages from the upstream repository.
+1. **Create a filtered mirror for testing.** They create a third mirror of `noble-updates` with a filter that selects only packages relevant to their application stack.
+1. **Publish.** They create publications for each mirror, all targeting the filesystem publication target, and publish them. Clients can now be configured to use a local server (e.g., Nginx or Apache Server) as their APT source.
+1. **Iterate.** When new upstream updates are available, the administrator syncs the mirrors again and re-publishes to make the updated packages available.
 
 ## GPG keys
 
@@ -129,13 +129,13 @@ GPG keys serve two distinct purposes in Landscape repository mirroring: **verify
 
 When Landscape downloads packages from an upstream repository, it verifies the repository's GPG signatures to ensure the packages are authentic and unmodified. This requires the **public GPG key** of the upstream repository.
 
-For Ubuntu repositories, the public GPG keys (Ubuntu Archive 2012 and 2018 signing keys) are built into the debarchive service and configured automatically — no manual setup is required.
+For Ubuntu repositories, the public GPG keys (Ubuntu Archive 2012 and 2018 signing keys) are built into the debarchive service and configured automatically. No manual setup is required.
 
 If you're mirroring a third-party repository, you need to provide its public GPG key when creating the mirror:
 
 1. Obtain the third party's public GPG key
-2. Ensure it's in ASCII-armored format
-3. Provide it when creating the mirror in Landscape
+1. Ensure it's in ASCII-armored format
+1. Provide it when creating the mirror in Landscape
 
 ### Signing keys (publications)
 
@@ -146,4 +146,4 @@ You provide a private GPG key when creating a publication. This key is used to p
 - **Detached signatures** (`Release.gpg`)
 - **Clearsigned release files** (`InRelease`)
 
-Client machines need the corresponding **public key** to verify these signatures. When Landscape applies a repository configuration to a client, it distributes the appropriate public key so the client can authenticate packages from the published repository.
+Client machines need the corresponding **public key** to verify these signatures. When Landscape applies a repository configuration to a client via a repository profile, it distributes the attached public key so the client can authenticate packages from the published repository.
