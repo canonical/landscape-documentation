@@ -27,7 +27,7 @@ If you upgraded from a version prior to 25.10, your `service.conf` file will be 
 
 After you’ve completed the basic upgrade instructions, you need to make some additional manual changes to finish your upgrade.
 
-### Install the outbox Snap
+### Install the outbox snap
 
 The `landscape-outbox` snap is critical to proper functioning of Landscape 26.04 LTS. Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
 
@@ -44,9 +44,31 @@ sudo snap logs landscape-outbox
 
 ### Install the debarchive snap
 
-
 The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md)
 
 ### Enable hostagent services (optional)
 
 The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See [the hostagent_consumer section](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [the hostagent_messenger section](/reference/config/service-conf.md/#the-hostagent-messenger-section) if you'd like to configure these services. If not configured, these services will fail to start, but all Landscape activities unrelated to WSL will still function properly.
+
+## Airgapped installations
+If your deployment does not have internet access, you must carry the snaps into your airgapped environment as part of the 26.04 installation process.
+
+First, in an environment with internet access, download the snaps.
+
+```bash
+snap download landscape-outbox
+snap download landscape-debacrhive --edge
+```
+
+For each snap, a `.snap` file and a `.assert` file will be produced.
+
+After transferring the files to the airgapped environment, install the snaps.
+
+```bash
+sudo snap ack landscape-outbox_*.assert
+sudo snap install landscape-outbox_*.assert
+sudo snap ack landscape-debarchive_*.assert
+sudo snap install landscape-debarchive_*.assert
+```
+
+Finally, verify the snaps are working properly according to the instructions above.
