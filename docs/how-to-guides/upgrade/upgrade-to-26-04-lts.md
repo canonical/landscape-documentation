@@ -46,7 +46,7 @@ sudo snap logs landscape-outbox
 
 The `landscape-debarchive` snap is required for repository mirroring from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md)
 
-### Enable hostagent services (optional)
+### (WSL only) Enable hostagent services
 
 The hostagent services (`landscape-hostagent-consumer` and `landscape-hostagent-messenger`) are required to manage WSL instances via Ubuntu Pro for WSL. See [the hostagent_consumer section](/reference/config/service-conf.md/#the-hostagent-consumer-section) and [the hostagent_messenger section](/reference/config/service-conf.md/#the-hostagent-messenger-section) if you'd like to configure these services. If not configured, these services will fail to start, but all Landscape activities unrelated to WSL will still function properly.
 
