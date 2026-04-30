@@ -33,10 +33,11 @@ The Deb Archive service requires its own database in the PostgreSQL cluster alre
 sudo -u postgres createdb landscape-standalone-debarchive
 ```
 
-Grant access to the existing Landscape database user so that Deb Archive can connect:
+Grant access to the existing Landscape database users so that Deb Archive can connect:
 
 ```bash
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"landscape-standalone-debarchive\" TO landscape_superuser;"
+sudo -u postgres psql -d landscape-standalone-debarchive -c "GRANT USAGE, CREATE ON SCHEMA public TO landscape_maintenance;"
 ```
 
 ```{note}
