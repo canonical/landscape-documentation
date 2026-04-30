@@ -66,9 +66,9 @@ After transferring the files to the airgapped environment, install the snaps.
 
 ```bash
 sudo snap ack landscape-outbox_*.assert
-sudo snap install landscape-outbox_*.assert
+sudo snap install landscape-outbox_*.snap
 sudo snap ack landscape-debarchive_*.assert
-sudo snap install landscape-debarchive_*.assert
+sudo snap install landscape-debarchive_*.snap
 ```
 
 Finally, verify the snaps are working properly according to the instructions above.
