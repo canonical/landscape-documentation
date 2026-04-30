@@ -6,7 +6,7 @@ myst:
 
 (how-to-upgrade-to-26-04-lts)=
 # How to upgrade to Landscape Server 26.04 LTS
-
+> <!-- TODO add when the release notes exist: See also: {ref}`reference-release-notes-26-04-lts` -->
 ```{important}
 If you are using repository mirroring in your Landscape deployment, you should not attempt to upgrade to 26.04 LTS at this time. A migration guide for bringing over repository mirrors from 24.04 LTS to 26.04 LTS will be published at a later date.
 ```
