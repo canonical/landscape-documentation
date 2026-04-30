@@ -11,7 +11,7 @@ myst:
 
 This guide demonstrates how to login and make a request using the Landscape REST API. You need Landscape 24.04 LTS (or higher) to use the REST API. This guide provides general steps and examples using `curl`.
 
-> **Note**: When using state-changing methods (i.e. `POST`, `PUT`, and `PATCH`), you must explicitly declare `Content-Type` as `application/json`.
+> **Note**: When using state-changing methods (i.e. `POST`, `PUT`, and `PATCH`), you must explicitly declare `Content-Type` as `application/json`. You can do this manually or automatically using a library such as [HTTPie](https://httpie.io/).
 
 ## Make a REST API request with your preferred API tool
 

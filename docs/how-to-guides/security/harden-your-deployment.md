@@ -25,7 +25,7 @@ The other applications in your deployment only require enough network access to 
 
 * Landscape server: 6554, and 8080-9100, inclusive
 * PostgreSQL: 5432
-* RabbitMQ server: 5672 for TCP or 5671 for TLS
+* RabbitMQ server: 5672 for unencrypted TCP or 5671 for TLS-encrypted TCP
 
 Make sure these ports are exposed for internal traffic between the applications. **None of these ports should be exposed to external traffic.**
 
@@ -100,7 +100,7 @@ To enable TLS, obtain TLS credentials for the RabbitMQ server and provide their 
 listeners.ssl.default = 5671
 ssl_options.certfile = /path/to/rabbitmq/server-cert.pem
 ssl_options.keyfile = /path/to/rabbitmq/server-key.pem
-ssl_options.verify     = verify_none
+ssl_options.verify = verify_none
 ssl_options.fail_if_no_peer_cert = false
 ```
 

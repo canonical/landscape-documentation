@@ -23,7 +23,7 @@ The 26.04 beta version introduces significant architectural changes:
 | **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                            | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                                     | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+)       | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
-| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                       | `landscape-server:website` → `haproxy:reverseproxy`          |
+| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                        | `landscape-server:website` → `haproxy:reverseproxy`          |
 | **TLS certificates**     | `haproxy:certificates` → TLS provider (e.g., `self-signed-certificates`, `lego`)                        | HAProxy self-signed or manual config                         |
 | **Access method**        | HAProxy unit IP or `root_url`                                                                           | HAProxy unit IP                                              |
 | **HA capabilities**      | HAProxy units for load balancing                                                                        | HAProxy units for load balancing                             |

@@ -702,7 +702,7 @@ The `[pingserver]` section contains configurations for the `pingserver` service 
 - Purpose: An attempt to write pings to the database will timeout after the configured time (in milliseconds) has elapsed.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_PINGSERVER__STATEMENT_TIMEOUT_MS`
-- Default: `3000000` (5 minutes)
+- Default: `300000` (5 minutes)
 
 ## The `[schema]` section
 

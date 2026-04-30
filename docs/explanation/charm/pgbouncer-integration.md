@@ -37,7 +37,7 @@ PgBouncer is recommended for:
 - **Large-scale environments** managing hundreds or thousands of clients
 - **Resource-constrained setups** where database connection limits are a concern
 
-For small test deployments or proof-of-concept environments with minimal client loads, direct PostgreSQL connections are often be sufficient.
+For small test deployments or proof-of-concept environments with minimal client loads, direct PostgreSQL connections will often be sufficient.
 
 ## Connection architecture
 
