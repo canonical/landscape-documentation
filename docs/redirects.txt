@@ -30,7 +30,26 @@ how-to-guides/web-portal/web-portal-24-04-or-later/use-script-profiles/ how-to-g
 
 # Reference
 
+reference/logs/logs/ reference/logs/
+
+reference/release-notes/23-03-release-notes/ reference/release-notes/older-release-notes/23-03-release-notes/
+
+reference/release-notes/23-10-release-notes/ reference/release-notes/older-release-notes/23-10-release-notes/
+
+# USG Profiles (renamed from Security Profiles in 26.04 LTS)
+how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/use-usg-profiles/
+how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/ how-to-guides/security/use-usg-profiles/
+how-to-guides/security/use-security-profiles/ how-to-guides/security/use-usg-profiles/
+reference/api/rest-api-endpoints/security-profiles/ reference/api/rest-api-endpoints/usg_profiles/
+
+reference/terms/profiles/upgrade-profile/ reference/terms/profiles/
 reference/terms/alerts/ explanation/features/alerts/
+
+reference/terms/components/ explanation/features/repository-mirroring/
+
+reference/terms/distribution/ explanation/features/repository-mirroring/
+
+reference/terms/pocket/ explanation/features/repository-mirroring/
 
 reference/terms/profiles/package-profile/ reference/terms/profiles/
 
@@ -44,16 +63,8 @@ reference/api/rest-api-endpoints/security-profiles/ reference/api/rest-api-endpo
 
 reference/terms/profiles/upgrade-profile/ reference/terms/profiles/
 
-reference/terms/series/ explanation/features/repository-mirroring/
-
-reference/terms/pocket/ explanation/features/repository-mirroring/
-
-reference/terms/components/ explanation/features/repository-mirroring/
-
-reference/terms/distribution/ explanation/features/repository-mirroring/
-
 reference/terms/repositories/ explanation/features/repository-mirroring/
 
 reference/terms/scripts/ explanation/features/remote-script-execution/
 
-reference/logs/logs/ reference/logs/
+reference/terms/series/ explanation/features/repository-mirroring/
