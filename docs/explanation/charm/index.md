@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Learn about Landscape Server charm for Juju deployments including integration compatibility with HAProxy, PostgreSQL, and RabbitMQ charms."
+    description: "Learn about Landscape Server charm for Juju deployments including integration compatibility with HAProxy, PostgreSQL, RabbitMQ, and PgBouncer."
 ---
 
 (explanation-charm-index)=
@@ -15,3 +15,5 @@ These are the explanations for the [Landscape Server charm](https://charmhub.io/
 :maxdepth: 2
 
 Charm integration compatibility <charm-compatibility>
+PgBouncer integration <pgbouncer-integration>
+```

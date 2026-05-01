@@ -13,7 +13,7 @@ If you're new to Landscape and want to learn how it works first, see the {ref}`g
 
 ## Check minimum requirements
 
-The following minimum requirements are needed to install Landscape Server 24.04 LTS:
+The following minimum requirements are needed to install Landscape Server 24.04 LTS or 26.04 LTS:
 
 - **Operating system**: Ubuntu 22.04 LTS (Jammy Jellyfish) or Ubuntu 24.04 LTS (Noble Numbat)
 - **Hardware**: A dual-core 2 GHz processor, 8 GB of RAM, and 20 GB of disk space
@@ -80,7 +80,8 @@ To install `landscape-server-quickstart`:
     sudo add-apt-repository -y <LANDSCAPE_PPA>
     ```
 
-    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. Use an LTS for production deployments.
+    ```{include} /reuse/landscape-ppa-description.md
+    ```
 
 2. Update packages and dependencies in your local system:
 

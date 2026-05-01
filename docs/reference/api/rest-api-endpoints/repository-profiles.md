@@ -28,8 +28,8 @@ Example request:
 
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/repositoryprofiles" \
-  -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
   -d '{
     "title": "Noble Repo Profile",
     "description": "Repository profile for noble instances",
@@ -105,8 +105,8 @@ Example request:
 
 ```bash
 curl -X PUT "https://landscape.canonical.com/api/v2/repositoryprofiles/noble-repo-profile" \
-  -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
   -d '{
     "title": "Noble Repo Profile",
     "description": "Updated description",

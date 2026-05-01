@@ -148,13 +148,13 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST \
+curl -X POST https://landscape.canonical.com/api/v2/users/lock \
+  -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT" \
   -d '{
-  "computer_ids": [1],
-  "usernames": ["john"]
-  }' \
-  https://landscape.canonical.com/api/v2/users/lock
+    "computer_ids": [1],
+    "usernames": ["john"]
+  }'
 ```
 
 Example response:
@@ -195,10 +195,13 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
-  "computer_ids": [1],
-  "usernames": ["john"]
-  }'   https://landscape.canonical.com/api/v2/users/unlock
+curl -X POST https://landscape.canonical.com/api/v2/users/unlock \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{
+    "computer_ids": [1],
+    "usernames": ["john"]
+  }'
 ```
 
 
