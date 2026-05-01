@@ -343,7 +343,9 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/scripts/176892:archive" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/scripts/176892:archive" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 ## POST `/scripts/<id>:redact`
@@ -359,5 +361,7 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/scripts/176892:redact" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/scripts/176892:redact" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```

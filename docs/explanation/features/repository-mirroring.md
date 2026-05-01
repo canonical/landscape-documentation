@@ -7,6 +7,10 @@ myst:
 (explanation-repo-mirroring)=
 # Repository mirroring
 
+```{note}
+This document applies to **Landscape 25.10 and earlier**. <!-- TODO add when the release notes exist: See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04. -->
+```
+
 Landscape uses repository mirroring to internally distribute software in Debian packages over your local network and manage updates. This feature allows you to establish custom repositories from your local mirror, which provides an additional layer of control over the software versions available to your client machines. This can also reduce bandwidth usage by distributing updates to clients using your local network.
 
 You can use the repository mirroring feature in Landscape to mirror several publicly accessible repositories owned by Ubuntu, repositories owned by third parties or your own private repositories for distributing internal software.

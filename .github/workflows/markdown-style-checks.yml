@@ -1,28 +1,20 @@
 name: Markdown style checks
 
 on:
-  workflow_call:
   push:
     branches:
     - main
-    paths:
-    - 'docs/**'   # Only run on changes to the docs directory
   pull_request:
     branches:
     - '*'
-    paths:
-    - 'docs/**'   # Only run on changes to the docs directory
 
 jobs:
   markdown-lint:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Create venv
-      working-directory: "docs"
-      run: make install
-    - name: Lint markdown
-      working-directory: "docs"
-      run: make lint-md
+    - uses: DavidAnson/markdownlint-cli2-action@v16
+      with:
+        config: ".sphinx/.markdownlint.json"

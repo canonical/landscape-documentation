@@ -36,13 +36,8 @@ reference/release-notes/23-03-release-notes/ reference/release-notes/older-relea
 
 reference/release-notes/23-10-release-notes/ reference/release-notes/older-release-notes/23-10-release-notes/
 
-# USG Profiles (renamed from Security Profiles in 26.04 LTS)
-how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/use-usg-profiles/
-how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/ how-to-guides/security/use-usg-profiles/
-how-to-guides/security/use-security-profiles/ how-to-guides/security/use-usg-profiles/
-reference/api/rest-api-endpoints/security-profiles/ reference/api/rest-api-endpoints/usg_profiles/
+reference/release-notes/what-s-new-in-beta/ reference/release-notes/
 
-reference/terms/profiles/upgrade-profile/ reference/terms/profiles/
 reference/terms/alerts/ explanation/features/alerts/
 
 reference/terms/components/ explanation/features/repository-mirroring/

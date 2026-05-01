@@ -152,9 +152,15 @@ Optional parameters:
 Example requests:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Ubuntu-24.04"}'
+curl -X POST https://landscape.canonical.com/api/v2/computers/20/children \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_name": "Ubuntu-24.04"}'
 
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d "{\"computer_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < ~/cloud_init.yaml)\"}"
+curl -X POST https://landscape.canonical.com/api/v2/computers/20/children \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d "{\"computer_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < ~/cloud_init.yaml)\"}"
 ```
 
 Example response:
@@ -182,7 +188,10 @@ Example response:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/children -H "Authorization: Bearer $JWT" -d '{"computer_name": "Custom-WSL-Image", "cloud_init": "<b64 encoded cloud_init file contents>", "rootfs_url": "https://example.com/custom_wsl_image.tar.gz"}'
+curl -X POST https://landscape.canonical.com/api/v2/computers/20/children \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_name": "Custom-WSL-Image", "cloud_init": "<b64 encoded cloud_init file contents>", "rootfs_url": "https://example.com/custom_wsl_image.tar.gz"}'
 ```
 
 Example response:
@@ -228,7 +237,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST -H "Authorization: Bearer $JWT" "https://landscape.canonical.com/api/v2/computers/6/delete-children" -d '{"computer_names": ["child_one", "child_two"]}'
+curl -X POST "https://landscape.canonical.com/api/v2/computers/6/delete-children" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_names": ["child_one", "child_two"]}'
 ```
 
 Example response:

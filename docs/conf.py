@@ -245,7 +245,8 @@ extensions = [
     "sphinx_last_updated_by_git",
     "sphinx.ext.intersphinx",
     "sphinx_sitemap",
-    "sphinxext.rediraffe"
+    "sphinxext.rediraffe",
+    "sphinxcontrib.mermaid",
 ]
 
 
@@ -334,7 +335,7 @@ latex_elements = ast.literal_eval(latex_config.replace("$PROJECT", project))
 rediraffe_branch = "main"
 rediraffe_redirects = "redirects.txt"
 
-## Reredirects extension 
+## Reredirects extension
 ## NOTE: We've moved to use rediraffe as our main redirects extension.
 ## The following are ones we already had in place, but haven't migrated
 redirects = {
