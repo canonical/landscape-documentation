@@ -60,7 +60,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 ## Bug fixes
 
-- Fixed package changer not honouring the configured proxy when downloading packages.
+- Fixed package changer not honoring the configured proxy when downloading packages.
 - Fixed WSL profiles incorrectly adding non-Windows computers.
 - Fixed Landscape Client snap builds and installation issues.
 - Fixed socket leak when connectors encountered errors.
