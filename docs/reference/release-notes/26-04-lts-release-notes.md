@@ -10,10 +10,10 @@ myst:
 <!-- TODO: 
 > See also: {ref}`how-to-upgrade-to-26-04-lts`
 -->
+You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self-hosted-26.04`.
+
 - Landscape Server 26.04 LTS runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish. The Landscape Server Quickstart package only runs on 24.04 LTS Noble Numbat and 22.04 LTS Jammy Jellyfish.
 - Database schema changes are required to upgrade to Landscape Server 26.04 LTS.
-
-You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self-hosted-26.04`.
 
 ## Highlights
 
