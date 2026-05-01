@@ -43,12 +43,34 @@ sudo apt --download-only -y install landscape-server-quickstart
 
 All of the necessary packages for Landscape Server should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
 
+#### (26.04 only) Download the Landscape Server snap services
+
+Landscape 26.04 LTS depends on two snap services, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately.
+
+```bash
+snap download landscape-outbox
+snap download landscape-debarchive --edge
+```
+
+For each snap, a `.snap` file and a `.assert` file will be produced.
+
 ### Install Landscape Server in the offline environment
 
 Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
 
 ```bash
 sudo dpkg -i /PATH/TO/PACKAGES/*.deb
+```
+
+#### (26.04 only) Install the Landscape Server snap services
+
+Copy the downloaded snap artifacts, carry them into the offline or airgapped environment, and install them with `snap`. You can install the packages with a command similar to:
+
+```bash
+sudo snap ack landscape-outbox_*.assert
+sudo snap install landscape-outbox_*.snap
+sudo snap ack landscape-debarchive_*.assert
+sudo snap install landscape-debarchive_*.snap
 ```
 
 Once Landscape Server is installed, you can finish setting up Landscape similar to how you would with an online server. See the {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installation guides for more details. This also includes setting up your first administrator and attaching your {ref}`explanation-licenses`.

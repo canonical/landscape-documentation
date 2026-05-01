@@ -9,6 +9,8 @@ myst:
 
 The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments. 
 
+Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
+
 If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
 ## Check minimum requirements
@@ -89,6 +91,38 @@ To install `landscape-server-quickstart`:
     ```
 
    - This installation takes approximately five minutes.
+
+
+### (26.04 only) Install the outbox snap
+
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
+
+```bash
+sudo snap install landscape-outbox
+```
+
+`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
+
+```bash
+sudo snap services landscape-outbox
+```
+
+The output should show the `outbox` service as **active**:
+
+```bash
+Service                  Startup  Current  Notes
+landscape-outbox.outbox  enabled  active   -
+```
+
+To view outbox logs, run:
+
+```bash
+sudo snap logs landscape-outbox -n 50
+```
+
+### (26.04 only) Install the debarchive snap
+
+<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
 
 ## Install an SSL certificate
 

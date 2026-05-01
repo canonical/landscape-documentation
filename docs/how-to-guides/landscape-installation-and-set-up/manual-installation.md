@@ -283,6 +283,37 @@ Without this setting enabled, a package update might result in services that won
 
 - Start all Landscape services again
 
+### (26.04 only) Install the outbox snap
+
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
+
+```bash
+sudo snap install landscape-outbox
+```
+
+`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
+
+```bash
+sudo snap services landscape-outbox
+```
+
+The output should show the `outbox` service as **active**:
+
+```bash
+Service                  Startup  Current  Notes
+landscape-outbox.outbox  enabled  active   -
+```
+
+To view outbox logs, run:
+
+```bash
+sudo snap logs landscape-outbox -n 50
+```
+
+### (26.04 only) Install the debarchive snap
+
+<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
+
 (how-to-heading-manual-install-configure-web-server)=
 ### Configure web server
 
