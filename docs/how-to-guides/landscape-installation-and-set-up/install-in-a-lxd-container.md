@@ -27,40 +27,41 @@ Set the variables cloud-init will use by running this command with your own valu
 
 ```bash
 declare -A VARIABLES=(
-  [EMAIL]='{EMAIL_ADDRESS}'
-  [TOKEN]='{PRO_TOKEN}'
-  [HOSTNAME]='{HOST_NAME}'
-  [DOMAIN]='{DOMAIN}'
-  [TIMEZONE]='{TIME_ZONE}'
-  [SMTP_HOST]='{SMTP_HOST}'
-  [SMTP_PORT]='{SMTP_PORT}'
-  [SMTP_USERNAME]='{SMTP_USERNAME}'
-  [SMTP_PASSWORD]='{SMTP_PASSWORD}'
-  [LANDSCAPE_PPA_NAME]='{LANDSCAPE_PPA_NAME}'
+  [EMAIL]='<EMAIL_ADDRESS>'
+  [TOKEN]='<PRO_TOKEN>'
+  [HOSTNAME]='<HOST_NAME>'
+  [DOMAIN]='<DOMAIN>'
+  [TIMEZONE]='<TIME_ZONE>'
+  [SMTP_HOST]='<SMTP_HOST>'
+  [SMTP_PORT]='<SMTP_PORT>'
+  [SMTP_USERNAME]='<SMTP_USERNAME>'
+  [SMTP_PASSWORD]='<SMTP_PASSWORD>'
+  [LANDSCAPE_PPA]='<LANDSCAPE_PPA>'
 )
 ```
 
 Replace the following values with your configuration:
 
-`{EMAIL_ADDRESS}`: The email address that you’ll share with LetsEncrypt for your SSL certificate.
+`<EMAIL_ADDRESS>`: The email address that you’ll share with LetsEncrypt for your SSL certificate.
 
-`{PRO_TOKEN}`: Your Ubuntu Pro token from [`https://ubuntu.com/pro/dashboard`](https://ubuntu.com/pro/dashboard). If you’re running an Ubuntu Pro instance on Azure, AWS, or Google Cloud, leave this as an empty string.
+`<PRO_TOKEN>`: Your Ubuntu Pro token from [`https://ubuntu.com/pro/dashboard`](https://ubuntu.com/pro/dashboard). If you’re running an Ubuntu Pro instance on Azure, AWS, or Google Cloud, leave this as an empty string.
 
-`{HOST_NAME}`: The hostname from your FQDN. For example, `server` from `server.domain.com`.
+`<HOST_NAME>`: The hostname from your FQDN. For example, `server` from `server.domain.com`.
 
-`{DOMAIN}`: The top-level domain (TLD) for your FQDN. For example, `domain.com` from `server.domain.com`.
+`<DOMAIN>`: The top-level domain (TLD) for your FQDN. For example, `domain.com` from `server.domain.com`.
 
-`{TIME_ZONE}`: Your timezone as represented in `/usr/share/zoneinfo`. If you leave this as an empty string, UTC time will be used.
+`<TIME_ZONE>`: Your timezone as represented in `/usr/share/zoneinfo`. If you leave this as an empty string, UTC time will be used.
 
-`{SMTP_HOST}`: The hostname or IP address of the SMTP server provided by your email service provider. If you’re using SendGrid, enter `smtp.sendgrid.net`.
+`<SMTP_HOST>`: The hostname or IP address of the SMTP server provided by your email service provider. If you’re using SendGrid, enter `smtp.sendgrid.net`.
 
-`{SMTP_PORT}`: The port number on which the SMTP server is listening for incoming connections. If you’re using SendGrid, enter `587` for port 587.
+`<SMTP_PORT>`: The port number on which the SMTP server is listening for incoming connections. If you’re using SendGrid, enter `587` for port 587.
 
-`{SMTP_USERNAME}`: The username required to authenticate with the SMTP server. This is provided by your email service provider. If you’re using SendGrid, enter `apikey`.
+`<SMTP_USERNAME>`: The username required to authenticate with the SMTP server. This is provided by your email service provider. If you’re using SendGrid, enter `apikey`.
 
-`{SMTP_PASSWORD}`: The password or API key associated with the SMTP username. If you’re using SendGrid, use an API Key from [`https://app.sendgrid.com/settings/api_keys`](https://app.sendgrid.com/settings/api_keys)
+`<SMTP_PASSWORD>`: The password or API key associated with the SMTP username. If you’re using SendGrid, use an API Key from [`https://app.sendgrid.com/settings/api_keys`](https://app.sendgrid.com/settings/api_keys)
 
-`{LANDSCAPE_PPA_NAME}`: The version of Landscape you will install. Enter `self-hosted-24.04`, `self-hosted-25.10`, `self-hosted-beta`, or `latest-stable`.
+```{include} /reuse/landscape-ppa-description.md
+```
 
 ### Apply variables to cloud-init
 

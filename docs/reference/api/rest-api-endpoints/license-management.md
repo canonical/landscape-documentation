@@ -25,7 +25,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.example.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2], "token": "<ubuntu-pro-token>"}'
+curl -X POST https://landscape.example.com/api/v2/attach-token \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_ids": [1, 2], "token": "<ubuntu-pro-token>"}'
 ```
 
 Example response:
@@ -76,7 +79,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.example.com/api/v2/attach-token -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1, 2]}'
+curl -X POST https://landscape.example.com/api/v2/attach-token \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_ids": [1, 2]}'
 ```
 
 Example response:

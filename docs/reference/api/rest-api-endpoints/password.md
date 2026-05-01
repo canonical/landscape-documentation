@@ -27,5 +27,8 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X PUT "https://landscape.canonical.com/api/v2/password" -d '{"password": "pwd", "new_password": "more_secure_pwd"}' -H Authorization:"Bearer $JWT"
+curl -X PUT "https://landscape.canonical.com/api/v2/password" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"password": "pwd", "new_password": "more_secure_pwd"}' 
 ```

@@ -128,11 +128,20 @@ Optional parameters:
 Example requests:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "Stock Ubuntu 24.04", "description": "The image from the store", "image_name": "Ubuntu-24.04", "tags": ["windows_laptops", "windows_desktops"]}'
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"title": "Stock Ubuntu 24.04", "description": "The image from the store", "image_name": "Ubuntu-24.04", "tags": ["windows_laptops", "windows_desktops"]}'
 
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d "{\"title\": \"Customized Ubuntu 24.04\", \"description\": \"The image from the store customized\", \"image_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < cloud_init.yaml)\"}"
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d "{\"title\": \"Customized Ubuntu 24.04\", \"description\": \"The image from the store customized\", \"image_name\": \"Ubuntu-24.04\", \"cloud_init\": \"$(base64 --wrap=0 < cloud_init.yaml)\"}"
 
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles -H "Authorization: Bearer $JWT" -d '{"title": "Custom Rootfs Image", "description": "My custom image", "image_name": "CustomUbuntu", "image_source": "https://example.com/myimage.tar.gz"}'
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"title": "Custom Rootfs Image", "description": "My custom image", "image_name": "CustomUbuntu", "image_source": "https://example.com/myimage.tar.gz"}'
 ```
 
 Example response:
@@ -243,7 +252,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X PATCH https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 -H "Authorization: Bearer $JWT" -d '{"description": "The stock image from the store", "tags": ["windows_laptops"]}'
+curl -X PATCH https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" 
+  -d '{"description": "The stock image from the store", "tags": ["windows_laptops"]}'
 ```
 
 Example response:
@@ -286,7 +298,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404:reapply -H "Authorization: Bearer $JWT" -d '{"computer_ids": [1,2,3]}'
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/stock-ubuntu-2404:reapply \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"computer_ids": [1,2,3]}'
 ```
 
 Example response:
@@ -322,7 +337,10 @@ Required parameters:
 Example requests:
 
 ```sh
-curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/make-hosts-compliant -H "Authorization: Bearer $JWT" -d '{"host_computer_ids": [6, 15]}'
+curl -X POST https://landscape.canonical.com/api/v2/child-instance-profiles/make-hosts-compliant \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"host_computer_ids": [6, 15]}'
 ```
 
 Example response:

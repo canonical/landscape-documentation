@@ -36,6 +36,8 @@ reference/release-notes/23-03-release-notes/ reference/release-notes/older-relea
 
 reference/release-notes/23-10-release-notes/ reference/release-notes/older-release-notes/23-10-release-notes/
 
+reference/release-notes/what-s-new-in-beta/ reference/release-notes/
+
 reference/terms/alerts/ explanation/features/alerts/
 
 reference/terms/components/ explanation/features/repository-mirroring/
