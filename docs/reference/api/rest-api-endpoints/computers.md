@@ -34,7 +34,8 @@ Query parameters:
   - `needs:license` OR `license-id:none`: Search for computers that do not have a Landscape license, and, as a result, are not managed.
   - `annotation`: Search for computers which define the specified annotation key. Optionally specify `annotation:<key>:<string>` which will only return computers whose key matches and value also contains the `<string>` specified.
   - `profile:<profile-type>:<profile-id>`: Instances associated with the specified profile. The `<profile-type>` must be one of `security`, `script`, `repository`, `package`, `upgrade`, `reboot`, `removal`, or `wsl`. The `<profile-id>` is the database id of the profile.
-  - `profile:security:<profile-id>:<status>`: Instances associated with the specified USG security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
+  - `profile:usg:<profile-id>:<status>`: Instances associated with the specified USG profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
+  - `profile:security:<profile-id>:<status>`: Instances associated with the specified security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress` (deprecated: use profile:usg instead).
   - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
   - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
   - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.

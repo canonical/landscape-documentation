@@ -28,5 +28,5 @@ Keep your managed instances secure by applying patches, updates, and using autom
 :titlesonly:
 :maxdepth: 1
 Apply security updates <apply-security-updates>
-Use USG profiles <use-security-profiles>
+Use USG profiles <use-usg-profiles>
 ```

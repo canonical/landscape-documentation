@@ -84,7 +84,7 @@ Example response:
         "not_started": 0,
         "passing": 0,
         "pass_rate": 0,
-        "report_uri": "Landscape_security_profile_audit_report_ID2-20250318.csv",
+        "report_uri": "Landscape_usg_profile_audit_report_ID2-20250318.csv",
         "timestamp": "2025-03-18T17:00:00Z"
       },
       "mode": "fix-audit",
@@ -99,7 +99,7 @@ Example response:
       "tags": [
         "hal"
       ],
-      "tailoring_file_uri": "Landscape_security_profile_tailoring_file_ID2_20250318164544",
+      "tailoring_file_uri": "Landscape_usg_profile_tailoring_file_ID2_20250318164544",
       "title": "HAL 9000"
     }
   ]
@@ -285,7 +285,7 @@ Example response:
     "in_progress": 0,
     "not_started": 0,
     "pass_rate": 100,
-    "report_uri": "Landscape_security_profile_audit_report_ID3-20250328.csv",
+    "report_uri": "Landscape_usg_profile_audit_report_ID3-20250328.csv",
     "timestamp": "2025-03-28T13:00:00Z"
   },
   "modification_time": "2025-03-28T12:30:43Z",
@@ -374,7 +374,7 @@ Example response (when a report already exists):
 ```json
 {
   "id": null,
-  "result_text": "Landscape_security_profile_audit_report_ID1-20250218.csv",
+  "result_text": "Landscape_usg_profile_audit_report_ID1-20250218.csv",
   "activity_status": "succeeded",
   "result_code": 0
 }
@@ -398,7 +398,7 @@ Example response (when a report will be created):
   "parent_id": null,
   "result_text": null,
   "result_code": null,
-  "summary": "Generate security profile compliance report.",
+  "summary": "Generate USG profile compliance report.",
   "type": "GenerateUsgReportActivity"
 }
 ```
@@ -426,9 +426,9 @@ The URI can be found in the `result_text` of the activity:
   "deliver_delay_window": 0,
   "id": 25488,
   "parent_id": null,
-  "result_text": "Landscape_security_profile_audit_report_ID1-20250218.csv",
+  "result_text": "Landscape_usg_profile_audit_report_ID1-20250218.csv",
   "result_code": null,
-  "summary": "Generate security profile compliance report.",
+  "summary": "Generate USG profile compliance report.",
   "type": "GenerateUsgReportActivity"
 }
 ```
@@ -444,7 +444,7 @@ Required query parameters:
 Example request:
 
 ```bash
-curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/blob?path=Landscape_security_profile_audit_report_ID1-20250218.csv" -H "Authorization: Bearer $JWT"
+curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/blob?path=Landscape_usg_profile_audit_report_ID1-20250218.csv" -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
