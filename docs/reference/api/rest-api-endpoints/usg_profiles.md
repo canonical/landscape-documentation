@@ -1,17 +1,21 @@
 ---
 myst:
   html_meta:
-    description: "REST API endpoints for managing security profiles in Landscape. Create, read, update, delete, and audit CIS benchmark compliance profiles."
+    description: "REST API endpoints for managing USG profiles in Landscape. Create, read, update, delete, and audit CIS benchmark compliance profiles."
 ---
 
-(reference-rest-api-security-profiles)=
-# Security Profiles
+(reference-rest-api-usg-profiles)=
+# USG Profiles
 
-The endpoints available here are related to management of security profiles.
+```{note}
+Beginning in Landscape 26.04 LTS, "security profiles" were renamed to "USG profiles". The `/security-profiles` endpoints are still available as aliases for backwards compatibility.
+```
 
-## GET `/security-profiles`
+The endpoints available here are related to management of USG profiles.
 
-Get security profiles associated with the current account, paginated and ordered by creation time.
+## GET `/usg-profiles`
+
+Get USG profiles associated with the current account, paginated and ordered by creation time.
 
 Optional query parameters:
 
@@ -25,7 +29,7 @@ Optional query parameters:
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/security-profiles -H "Authorization: Bearer $JWT"
+curl -X GET https://landscape.canonical.com/api/v2/usg-profiles -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -80,7 +84,7 @@ Example response:
         "not_started": 0,
         "passing": 0,
         "pass_rate": 0,
-        "report_uri": "Landscape_security_profile_audit_report_ID2-20250318.csv",
+        "report_uri": "Landscape_usg_profile_audit_report_ID2-20250318.csv",
         "timestamp": "2025-03-18T17:00:00Z"
       },
       "mode": "fix-audit",
@@ -95,20 +99,20 @@ Example response:
       "tags": [
         "hal"
       ],
-      "tailoring_file_uri": "Landscape_security_profile_tailoring_file_ID2_20250318164544",
+      "tailoring_file_uri": "Landscape_usg_profile_tailoring_file_ID2_20250318164544",
       "title": "HAL 9000"
     }
   ]
 }
 ```
 
-## POST `/security-profiles`
+## POST `/usg-profiles`
 
-Create a security profile. The new security profile will perform its first run according to its schedule.
+Create a USG profile. The new USG profile will perform its first run according to its schedule.
 
 Required parameters:
 
-- `benchmark`: The USG benchmark the security profile will enforce. See the [Ubuntu Security Guide](https://ubuntu.com/security/certifications/docs/usg) for options.
+- `benchmark`: The USG benchmark the USG profile will enforce. See the [Ubuntu Security Guide](https://ubuntu.com/security/certifications/docs/usg) for options.
 - `mode`: The run mode of the profile. One of `"audit"`, `"fix-audit"`, or `"fix-restart-audit"`.
 - `schedule`: An [RFC 5545 "Recurrence Rule"](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10), determining how frequently the profile will audit its instances. Cannot be more frequent than weekly.
 - `title`: The display name of the profile.
@@ -126,7 +130,7 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles" \
+curl -X POST "https://landscape.canonical.com/api/v2/usg-profiles" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT" \
   -d '
@@ -181,9 +185,9 @@ Example response, the profile's state:
 }
 ```
 
-## PATCH `/security-profiles/<id>`
+## PATCH `/usg-profiles/<id>`
 
-Update a security profile. Be aware that not every field is editable.
+Update a USG profile. Be aware that not every field is editable.
 
 Path parameters:
 
@@ -201,7 +205,7 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X PATCH "https://landscape.canonical.com/api/v2/security-profiles/1" \
+curl -X PATCH "https://landscape.canonical.com/api/v2/usg-profiles/1" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT" \
   -d '
@@ -248,9 +252,9 @@ Example response:
 
 ```
 
-## POST `/security-profiles/<id>:archive`
+## POST `/usg-profiles/<id>:archive`
 
-Archive a security profile. This makes it inactive.
+Archive a USG profile. This makes it inactive.
 
 Path parameters:
 
@@ -259,7 +263,7 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:archive" \
+curl -X POST "https://landscape.canonical.com/api/v2/usg-profiles/1:archive" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT"
 ```
@@ -281,7 +285,7 @@ Example response:
     "in_progress": 0,
     "not_started": 0,
     "pass_rate": 100,
-    "report_uri": "Landscape_security_profile_audit_report_ID3-20250328.csv",
+    "report_uri": "Landscape_usg_profile_audit_report_ID3-20250328.csv",
     "timestamp": "2025-03-28T13:00:00Z"
   },
   "modification_time": "2025-03-28T12:30:43Z",
@@ -299,9 +303,9 @@ Example response:
 }
 ```
 
-## POST `/security-profiles/<id>:execute`
+## POST `/usg-profiles/<id>:execute`
 
-Creates a run of the security profile immediately, rather than waiting for the next scheduled run.
+Creates a run of the USG profile immediately, rather than waiting for the next scheduled run.
 Returns the created activity.
 
 Path parameters:
@@ -311,7 +315,7 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/security-profiles/1:execute" \
+curl -X POST "https://landscape.canonical.com/api/v2/usg-profiles/1:execute" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT"
 ```
@@ -339,10 +343,10 @@ Example response:
 }
 ```
 
-## GET `/security-profiles/<id>/report`
+## GET `/usg-profiles/<id>/report`
 
 Either returns the URI at which the report can be downloaded, or starts an activity to produce the
-requested report. The URI can be used with the `/security-profiles/blob` endpoint.
+requested report. The URI can be used with the `/usg-profiles/blob` endpoint.
 
 Path parameters:
 
@@ -360,9 +364,9 @@ Optional query parameters:
 Example requests:
 
 ```bash
-curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/1/report?start_date=2025-02-28T12:34Z" -H "Authorization: Bearer $JWT"
+curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/1/report?start_date=2025-02-28T12:34Z" -H "Authorization: Bearer $JWT"
 
-curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/1/report?start_date=2025-02-26&end_date=2025-03-02&detailed=true" -H "Authorization: Bearer $JWT"
+curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/1/report?start_date=2025-02-26&end_date=2025-03-02&detailed=true" -H "Authorization: Bearer $JWT"
 ```
 
 Example response (when a report already exists):
@@ -370,7 +374,7 @@ Example response (when a report already exists):
 ```json
 {
   "id": null,
-  "result_text": "Landscape_security_profile_audit_report_ID1-20250218.csv",
+  "result_text": "Landscape_usg_profile_audit_report_ID1-20250218.csv",
   "activity_status": "succeeded",
   "result_code": 0
 }
@@ -394,7 +398,7 @@ Example response (when a report will be created):
   "parent_id": null,
   "result_text": null,
   "result_code": null,
-  "summary": "Generate security profile compliance report.",
+  "summary": "Generate USG profile compliance report.",
   "type": "GenerateUsgReportActivity"
 }
 ```
@@ -422,25 +426,25 @@ The URI can be found in the `result_text` of the activity:
   "deliver_delay_window": 0,
   "id": 25488,
   "parent_id": null,
-  "result_text": "Landscape_security_profile_audit_report_ID1-20250218.csv",
+  "result_text": "Landscape_usg_profile_audit_report_ID1-20250218.csv",
   "result_code": null,
-  "summary": "Generate security profile compliance report.",
+  "summary": "Generate USG profile compliance report.",
   "type": "GenerateUsgReportActivity"
 }
 ```
 
-## GET `/security-profiles/blob`
+## GET `/usg-profiles/blob`
 
 Returns the file for the given `path`. This could be a compliance report or a tailoring file.
 
 Required query parameters:
 
-- `path`: the path of the file, as retrieved from `/security-profiles/<id>/report` or the status of a security profile from `/security-profiles` or `/security-profiles/<id>`.
+- `path`: the path of the file, as retrieved from `/usg-profiles/<id>/report` or the status of a USG profile from `/usg-profiles` or `/usg-profiles/<id>`.
 
 Example request:
 
 ```bash
-curl -X GET "https://landscape.canonical.com/api/v2/security-profiles/blob?path=Landscape_security_profile_audit_report_ID1-20250218.csv" -H "Authorization: Bearer $JWT"
+curl -X GET "https://landscape.canonical.com/api/v2/usg-profiles/blob?path=Landscape_usg_profile_audit_report_ID1-20250218.csv" -H "Authorization: Bearer $JWT"
 ```
 
 Example response:

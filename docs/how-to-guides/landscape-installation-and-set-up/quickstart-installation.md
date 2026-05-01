@@ -60,6 +60,12 @@ sudo hostnamectl set-hostname "$FQDN"
 
 When Landscape Server is installed, it'll read the machine’s host name and use it in the Apache configuration.
 
+If your FQDN does not resolve to a public IP, you will need to ensure it resolves on the machine that you are installing Landscape Server. To do so, you can run the following command:
+
+```bash
+echo "127.0.1.1 $FQDN" | sudo tee -a /etc/hosts
+```
+
 ### Attach your Ubuntu Pro token
 
 If you have an Ubuntu Pro subscription, attach your Pro token to the server machine. For guidance, see {ref}`how-to-attach-ubuntu-pro`.

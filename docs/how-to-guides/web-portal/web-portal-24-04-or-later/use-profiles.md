@@ -13,7 +13,7 @@ For a full list and description of each profile type, see {ref}`reference-terms-
 
 ## Basic tasks for all profiles
 
-To access different types profiles, go to **Profiles** from the sidebar > select the type of profile you're working on. 
+To access different types profiles, go to **Profiles** from the sidebar > select the type of profile you're working on.
 
 To create a new profile, click **Add [profile type]**, and complete the form. The information on this form differs depending on the type of profile you're creating.
 
@@ -105,11 +105,11 @@ The same access group of this script will be assigned to the new profile.
 
 Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
-## Security profiles
+## USG profiles
 
-> Reference: {ref}`reference-terms-security-profile`
+> Reference: {ref}`reference-terms-usg-profile`
 
-To create or manage security profiles, see {ref}`how-to-web-portal-use-security-profiles`.
+To create or manage USG profiles, see {ref}`how-to-security-use-usg-profiles`.
 
 ## Upgrade profiles
 

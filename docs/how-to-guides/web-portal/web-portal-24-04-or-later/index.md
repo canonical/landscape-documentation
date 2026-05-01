@@ -53,6 +53,7 @@ Use profiles and scripts to apply configuration and automate tasks across instan
 :maxdepth: 2
 
 Use profiles <use-profiles>
+Use USG profiles </how-to-guides/security/use-usg-profiles>
 Use remote script execution <use-remote-script-execution>
 ```
 
@@ -66,4 +67,3 @@ Perform supporting instance actions such as adding annotations for context and s
 Use annotations <use-annotations>
 Sanitize instances <sanitize-instances>
 ```
-
