@@ -18,7 +18,7 @@ Each service has its own set of environment variables, described in the sections
 
 ## `service.conf` integration
 
-The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read all necessary database and broker configurations from `/etc/landscape/service.conf` and will populate the correspdonding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
+The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read all necessary database and broker configurations from `/etc/landscape/service.conf` and will populate the corresponding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
 
 This means that several environment variables marked as **required** in this reference do not need to be set directly and can instead be read from the `service.conf`. These configurations are marked with **`service.conf-supplied`: Yes**. It is recommended to use this integration instead of setting these environment variables directly.
 
