@@ -11,6 +11,10 @@ This document is for upgrading Landscape Server 23.03 or later to a newer versio
 
 Note that you don’t need to upgrade your client machines when you upgrade your Landscape server.
 
+```{important}
+If you are upgrading to **Landscape 26.04**, you must also follow the steps to migrate to the 26.04 version of the charm. Follow {ref}`this guide to migrate your charmed deployment to 26.04 <how-to-migrate-to-26-04-charm>`.
+```
+
 ## Prepare to upgrade
 
 > See also: {ref}`how-to-backup-and-restore`
