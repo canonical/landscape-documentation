@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Learn about repository mirroring in Landscape, including mirrors, local repositories, publications, publication targets, filters, and GPG key management."
+    description: "Learn about repository mirroring in Landscape including mirror hierarchy, pockets, components, profiles, and custom package distribution."
 ---
 
 (explanation-repo-mirroring)=
