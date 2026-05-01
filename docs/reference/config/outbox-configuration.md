@@ -68,7 +68,7 @@ When running as a snap, each environment variable has a corresponding snap confi
 
 ### Database settings
 
-The outbox service connects to three PostgreSQL databases. Each database is configured with the same set of keys; replace `<DB>` below with `MAIN`, `ACCOUNT`, or `RESOURCE` when setting the environment variable. Reaplce `<db>` with `main`, `account`, or `resource` when setting the snap key.
+The outbox service connects to three PostgreSQL databases. Each database is configured with the same set of keys; replace `<DB>` below with `MAIN`, `ACCOUNT`, or `RESOURCE` when setting the environment variable. Replace `<db>` with `main`, `account`, or `resource` when setting the snap key.
 
 #### `LANDSCAPE_DATABASE_<DB>_NAME`
 
