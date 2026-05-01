@@ -14,11 +14,10 @@ Release notes documenting new features, bug fixes, and changes across all Landsc
 :maxdepth: 1
 
 what-s-new-in-beta
+26-04-lts-release-notes
 24-04-lts-release-notes
 25.10-release-notes
 25.04-release-notes
 24-10-release-notes
-23-10-release-notes
-23-03-release-notes
 older-release-notes/index
 ```
