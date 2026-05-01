@@ -11,4 +11,4 @@ Here's what's new in Landscape beta:
 
 ## Landscape Server
 
-No new updates. Our 25.04 release is now live, see the {ref}`reference-release-notes-25-04`.
+No new updates. Our 26.04 release is now live, see the {ref}`reference-release-notes-26-04-lts`.
