@@ -53,7 +53,6 @@ Use profiles and scripts to apply configuration and automate tasks across instan
 :maxdepth: 2
 
 Use profiles <use-profiles>
-Use USG profiles </how-to-guides/security/use-usg-profiles>
 Use remote script execution <use-remote-script-execution>
 ```
 
