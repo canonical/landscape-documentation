@@ -11,10 +11,6 @@ This document is for upgrading Landscape Server 23.03 or later to a newer versio
 
 Note that you don’t need to upgrade your client machines when you upgrade your Landscape server.
 
-```{important}
-If you are upgrading to **Landscape 26.04**, you must also follow the steps to migrate to the 26.04 version of the charm. Follow {ref}`this guide to migrate your charmed deployment to 26.04 <how-to-migrate-to-26-04-charm>`.
-```
-
 ## Prepare to upgrade
 
 > See also: {ref}`how-to-backup-and-restore`
@@ -83,6 +79,10 @@ For Juju deployments, see {ref}`how-to-heading-upgrade-juju` in this guide. For 
 ## Upgrade Juju deployments
 
 > See also: [Landscape-server charm on Charmhub](https://charmhub.io/landscape-server)
+
+```{important}
+If you are upgrading to **Landscape 26.04**, you must also follow the steps to migrate to the 26.04 version of the charm. Follow {ref}`this guide <how-to-migrate-to-26-04-charm>` to migrate your charmed deployment to 26.04.
+```
 
 To upgrade a basic Juju deployment:
 
