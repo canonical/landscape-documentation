@@ -36,7 +36,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 ## Breaking changes
 
-- **Legacy API repository management endpoints removed**: Users relying on these endpoints should migrate to the new repository management API.
+- **Legacy API repository management endpoints removed**: Users relying on these endpoints will need to migrate to the new repository management API. See [Upgrades](#upgrades) for more details.
 
 - **Secrets management**: The legacy v1 secrets functionality and secrets UI have been removed. The modern secrets service replaces them.
 
