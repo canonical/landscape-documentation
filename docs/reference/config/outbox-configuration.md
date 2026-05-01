@@ -18,7 +18,7 @@ Each service has its own set of environment variables, described in the sections
 
 ## `service.conf` integration
 
-Both the `outbox` and `cleanup` services can read a Landscape `service.conf` file and translate its values into the environment variables that the service expects. The path to the `service.conf` file is supplied via the `LANDSCAPE_CONFIG_FILE` environment variable, which is set automatically when the `landscape.service-conf-file` snap key is configured. By default this is `/etc/landscape/service.conf`.
+Both the `outbox` and `cleanup` services can read a Landscape `service.conf` file and translate its values into the environment variables that the service expects. The path to the `service.conf` file is supplied via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key. By default this is set to `/etc/landscape/service.conf`.
 
 This means that several environment variables marked as **required** in this reference do not need to be set directly when a `service.conf` is in use. The table below lists every environment variable that can be populated. Note that all three databases share the same host, port, user, password, and SSL settings from the `[stores]` section.
 
@@ -60,15 +60,11 @@ This means that several environment variables marked as **required** in this ref
 | `LANDSCAPE_BROKER_SSL_CERT` | `[broker]` | `ssl_client_cert` |
 | `LANDSCAPE_BROKER_SSL_KEY` | `[broker]` | `ssl_client_private_key` |
 
-## Snap configuration keys
-
-When running as a snap, each environment variable has a corresponding snap configuration key. Both services also support the `landscape.service-conf-file` snap key.
-
 ## `landscape-outbox.outbox` service
 
 ### Database settings
 
-The outbox service connects to three PostgreSQL databases. Each database is configured with the same set of keys; replace `<DB>` below with `MAIN`, `ACCOUNT`, or `RESOURCE` when setting the environment variable. Replace `<db>` with `main`, `account`, or `resource` when setting the snap key.
+The outbox service connects to three PostgreSQL databases. Each database is configured with the same set of keys; replace `<DB>` below with `MAIN`, `ACCOUNT`, or `RESOURCE` when setting the environment variable. Replace `<db>` with `main`, `account`, or `resource` when setting the snap key. Note that environment variables and snap keys are case-sensitive.
 
 #### `LANDSCAPE_DATABASE_<DB>_NAME`
 
@@ -262,7 +258,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_LOGGING_HUMAN_READABLE`
 
-- Purpose: When `true`, log output is formatted for human readability. When `false`, logs are emitted as structured JSON, which is more suitable for log aggregation systems.
+- Purpose: When `true`, log output is formatted for human readability. When `false`, logs are emitted as structured JSON.
 - Snap key: `landscape.logging.human-readable`
 - Default: `false`
 - Required: No
@@ -316,7 +312,7 @@ These settings identify the service instance to telemetry and observability syst
 
 ## `landscape-outbox.cleanup` service
 
-The cleanup service purges old outbox entries from the database on a periodic schedule. It shares the database and logging configuration with the main outbox service but does not connect to the broker and uses its own cleanup-specific settings instead of the worker settings.
+The cleanup service purges old outbox entries from the database on a periodic schedule. It shares the database and logging configuration with the main outbox service but does not connect to the broker.
 
 ### Database settings
 
