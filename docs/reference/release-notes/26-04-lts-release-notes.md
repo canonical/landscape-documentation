@@ -95,7 +95,7 @@ Multiple security fixes are included in this release:
 
 ## Upgrades
 
-See our 26.04 upgrade guide for detailed steps.
+See our 26.04 upgrade guide for detailed steps. <!-- TODO: {ref}`how-to-upgrade-to-26-04-lts` -->
 
 If you use repository management in Landscape, we recommend waiting to upgrade until the 26.04.1 point release (expected August 2026). There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
 
