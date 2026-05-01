@@ -9,11 +9,13 @@ myst:
 
 The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments. 
 
+Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
+
 If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
 ## Check minimum requirements
 
-The following minimum requirements are needed to install Landscape Server 24.04 LTS:
+The following minimum requirements are needed to install Landscape Server 24.04 LTS or 26.04 LTS:
 
 - **Operating system**: Ubuntu 22.04 LTS (Jammy Jellyfish) or Ubuntu 24.04 LTS (Noble Numbat)
 - **Hardware**: A dual-core 2 GHz processor, 8 GB of RAM, and 20 GB of disk space
@@ -60,6 +62,12 @@ sudo hostnamectl set-hostname "$FQDN"
 
 When Landscape Server is installed, it'll read the machine’s host name and use it in the Apache configuration.
 
+If your FQDN does not resolve to a public IP, you will need to ensure it resolves on the machine that you are installing Landscape Server. To do so, you can run the following command:
+
+```bash
+echo "127.0.1.1 $FQDN" | sudo tee -a /etc/hosts
+```
+
 ### Attach your Ubuntu Pro token
 
 If you have an Ubuntu Pro subscription, attach your Pro token to the server machine. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
@@ -74,7 +82,8 @@ To install `landscape-server-quickstart`:
     sudo add-apt-repository -y <LANDSCAPE_PPA>
     ```
 
-    - `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`.  The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. Use an LTS for production deployments.
+    ```{include} /reuse/landscape-ppa-description.md
+    ```
 
 2. Update packages and dependencies in your local system:
 
@@ -89,6 +98,38 @@ To install `landscape-server-quickstart`:
     ```
 
    - This installation takes approximately five minutes.
+
+
+### (Landscape 26.04 only) Install the outbox snap
+
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
+
+```bash
+sudo snap install landscape-outbox
+```
+
+`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
+
+```bash
+sudo snap services landscape-outbox
+```
+
+The output should show the `outbox` service as **active**:
+
+```bash
+Service                  Startup  Current  Notes
+landscape-outbox.outbox  enabled  active   -
+```
+
+To view outbox logs, run:
+
+```bash
+sudo snap logs landscape-outbox -n 50
+```
+
+### (Landscape 26.04 only) Install the debarchive snap
+
+<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
 
 ## Install an SSL certificate
 

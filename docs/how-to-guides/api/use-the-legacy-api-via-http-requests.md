@@ -38,7 +38,7 @@ Here's an example request:
 1. Obtain a JWT:
 
     ```bash
-    TOKEN=$(curl -s -X POST "https://<LANDSCAPE-HOSTNAME>/api/login" \
+    JWT=$(curl -s -X POST "https://<LANDSCAPE-HOSTNAME>/api/login" \
       -H "Content-Type: application/json" \
       -d '{"email": "<YOUR-EMAIL>", "password": "<YOUR-PASSWORD>"}' | jq -r '.token')
     ```
@@ -47,7 +47,7 @@ Here's an example request:
 
     ```bash
     curl -X GET "https://<LANDSCAPE-HOSTNAME>/api/?action=GetComputers&version=<VERSION-NUMBER>" \
-      -H "Authorization: Bearer $TOKEN"
+      -H "Authorization: Bearer $JWT"
     ```
 
 > **Note**: The `version` parameter is mandatory in the URL for the legacy API. Without it, the request will fail.

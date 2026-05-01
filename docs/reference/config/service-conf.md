@@ -671,6 +671,13 @@ The `[package_upload]` section contains configurations for the package upload se
 
 The `[pingserver]` section contains configurations for the `pingserver` service that communicates with registered clients, notifying the clients about available messages. In addition to the following, this section can use the {ref}`shared service settings <shared-service-settings>` and the {ref}`shared store settings <shared-store-settings>`.
 
+### `batch_size`
+
+- Purpose: Pings will be written to the database in batches of this configured size.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_PINGSERVER__BATCH_SIZE`
+- Default: `100`
+
 ### `database_check_interval`
 
 - Purpose: Interval in seconds to check the database for computers with outstanding messages.
@@ -691,6 +698,13 @@ The `[pingserver]` section contains configurations for the `pingserver` service 
 - Deprecated key name: `ping-url`
 - ENV name: `LANDSCAPE_PINGSERVER__PING_URL`
 - Default: `None`
+
+### `statement_timeout_ms`
+
+- Purpose: An attempt to write pings to the database will timeout after the configured time (in milliseconds) has elapsed.
+- Deprecated key name: N/A
+- ENV name: `LANDSCAPE_PINGSERVER__STATEMENT_TIMEOUT_MS`
+- Default: `300000` (5 minutes)
 
 ## The `[schema]` section
 
@@ -934,7 +948,7 @@ The `[system]` section contains configurations that apply across many or all of 
 - Purpose: Landscape Server's root URL path.
 - Deprecated key name: `root-url`
 - ENV name: `LANDSCAPE_SYSTEM__ROOT_URL`
-- Default: `http://localhost:8080`
+- Default: `http://localhost:8080/`
 
 ### `syslog_address`
 

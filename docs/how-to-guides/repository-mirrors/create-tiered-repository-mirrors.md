@@ -18,6 +18,10 @@ There are multiple different use cases for this configuration. A couple use case
 
 In this document, we’ve outlined a couple different approaches you can take when creating tiered repository mirrors. Both approaches involve using an additional Landscape server as a third party repository.
 
+```{note}
+The conceptual information here generally applies across all versions of Landscape, but the detailed steps apply to **Landscape 25.10 and earlier**. <!-- TODO: See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04. -->
+```
+
 ## Option #1: Role-isolated configuration
 
 You may want to separate your servers by their role or function. See the following diagram for an example of how this could be configured.

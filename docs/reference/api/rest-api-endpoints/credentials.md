@@ -65,7 +65,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/credentials" -H "Authorization: Bearer $JWT" -d '{"account": "onward"}'
+curl -X POST "https://landscape.canonical.com/api/v2/credentials" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"account": "onward"}'
 ```
 
 Example response:
