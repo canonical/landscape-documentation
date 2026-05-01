@@ -18,9 +18,11 @@ Each service has its own set of environment variables, described in the sections
 
 ## `service.conf` integration
 
-Both the `outbox` and `cleanup` services can read a Landscape `service.conf` file and translate its values into the environment variables that the service expects. The path to the `service.conf` file is supplied via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key. By default this is set to `/etc/landscape/service.conf`.
+The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read all necessary database and broker configurations from `/etc/landscape/service.conf` and will populate the correspdonding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
 
-This means that several environment variables marked as **required** in this reference do not need to be set directly when a `service.conf` is in use. The table below lists every environment variable that can be populated. Note that all three databases share the same host, port, user, password, and SSL settings from the `[stores]` section.
+This means that several environment variables marked as **required** in this reference do not need to be set directly and can instead be read from the `service.conf`. These configurations are marked with **`service.conf-supplied`: Yes**. It is recommended to use this integration instead of setting these environment variables directly.
+
+The table below lists every environment variable that is populated. Note that all three databases share the same host, port, user, password, and SSL settings from the `[stores]` section.
 
 | Environment variable | `service.conf` section | `service.conf` key |
 |---|---|---|
