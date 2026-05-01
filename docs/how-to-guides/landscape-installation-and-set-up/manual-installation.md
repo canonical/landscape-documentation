@@ -571,7 +571,7 @@ Use `lsctl`:
 sudo lsctl restart
 ```
 
-### (26.04 only) Install the outbox snap
+### (Landscape 26.04 only) Install the outbox snap
 
 Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
 
@@ -598,7 +598,7 @@ To view outbox logs, run:
 sudo snap logs landscape-outbox -n 50
 ```
 
-### (26.04 only) Install the debarchive snap
+### (Landscape 26.04 only) Install the debarchive snap
 
 <!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the [dedicated guide](/docs/how-to-guides/landscape-installation-and-setup/debarchive-repository-management.md) -->
 
