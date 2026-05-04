@@ -6,7 +6,9 @@ myst:
 
 (how-to-upgrade-to-26-04-lts)=
 # How to upgrade to Landscape Server 26.04 LTS
-<!-- TODO add when the release notes exist: See also: {ref}`reference-release-notes-26-04-lts` -->
+
+> See also: {ref}`reference-release-notes-26-04-lts`
+
 You must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22.04 Jammy Jellyfish to upgrade to Landscape 26.04 LTS.
 
 Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.

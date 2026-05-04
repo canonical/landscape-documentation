@@ -8,7 +8,7 @@ myst:
 # How to migrate to Landscape 26.04 LTS (charm)
 
 ```{note}
-The Landscape Server charm for 26.04 is currently in beta. <!-- TODO add when the release notes exist: See the {ref}`reference-release-notes-26-04-lts` for details on our changes introduced in 26.04. Note the recommendations for repository management users. -->
+The Landscape Server charm for 26.04 is currently in beta. See the {ref}`reference-release-notes-26-04-lts` for details on our changes introduced in 26.04. Note the recommendations for repository management users.
 ```
 
 This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS beta+ version with an external HAProxy charm using the `haproxy-route` interface.

@@ -7,9 +7,8 @@ myst:
 (reference-release-notes-26-04-lts)=
 # 26.04 LTS release notes
 
-<!-- TODO: 
 > See also: {ref}`how-to-upgrade-to-26-04-lts`
--->
+
 You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self-hosted-26.04`.
 
 - Landscape Server 26.04 LTS runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish. The Landscape Server Quickstart package only runs on 24.04 LTS Noble Numbat and 22.04 LTS Jammy Jellyfish.
@@ -95,7 +94,7 @@ Multiple security fixes are included in this release:
 
 ## Upgrades
 
-See our 26.04 upgrade guide for detailed steps. <!-- TODO: {ref}`how-to-upgrade-to-26-04-lts` -->
+See our 26.04 upgrade guide for detailed steps: {ref}`how-to-upgrade-to-26-04-lts`
 
 If you use repository management in Landscape, we recommend waiting to upgrade until the 26.04.1 point release (expected August 2026). There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
 
