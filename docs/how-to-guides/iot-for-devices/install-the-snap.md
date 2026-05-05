@@ -12,7 +12,7 @@ This document describes how to install the Landscape Client snap and some genera
 ## Install and set up the Landscape Client snap
 
 ```{note}
-You must be running a self-hosted Landscape server version 23.10 or later (or beta) to use the snap.
+You must be running a self-hosted Landscape server version 23.10 or later to use the snap.
 ```
 
 The Landscape Client snap is available in the [Snap Store](https://snapcraft.io/landscape-client). This installation method is suitable for Ubuntu Core devices but can also be used on classic Ubuntu systems.

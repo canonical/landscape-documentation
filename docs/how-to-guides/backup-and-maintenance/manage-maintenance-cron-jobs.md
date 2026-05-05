@@ -32,6 +32,8 @@ The following are automatically scheduled cron jobs. These scripts are all locat
 - `report_anonymous_metrics.sh` (Landscape 25.04 and earlier)
   - Reports anonymous metrics (e.g., the installed Landscape Server version). This job was removed in Landscape 25.08.
 
+These scripts depend on a PID file located in `/run/landscape/` to prevent multiple instances of a script from running concurrently. This directory is created at boot by a systemd tmpfiles configuration located at `/etc/tmpfiles.d/landscape-server-tmpfile.conf`.
+
 ## Optional Cleaning of Activity History
 
 Landscape includes some basic cleanup tasks in the `maintenance.sh` job. You may want to create additional jobs to limit old activities and events to a defined retention period. 

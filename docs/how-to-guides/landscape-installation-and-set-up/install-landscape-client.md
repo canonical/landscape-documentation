@@ -63,7 +63,8 @@ To install Landscape Client from a PPA:
    sudo add-apt-repository -y {LANDSCAPE_PPA}
    ```
 
-    - `{LANDSCAPE_PPA}`: The PPA for the specific Landscape installation you're using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.
+      ```{include} /reuse/landscape-ppa-description.md
+      ```
 
 1. Install the `landscape-client` package:
 

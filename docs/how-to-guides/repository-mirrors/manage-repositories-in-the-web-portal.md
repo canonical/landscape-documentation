@@ -10,6 +10,8 @@ myst:
 > See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
+This document applies to **Landscape 25.10 and earlier**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
+
 Web-based repository mirroring is available starting in Landscape 24.04 LTS for self-hosted users.
 ```
 
