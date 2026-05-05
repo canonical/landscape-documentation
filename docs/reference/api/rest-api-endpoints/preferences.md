@@ -18,7 +18,7 @@ Required parameters:
 
 Optional parameters:
 
-- `audit_retention_period`: The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely.
+- `audit_retention_period`: The time period in days to retain USG profile audit records. A negative value means that records should be retained indefinitely.
 - `auto_register_new_computers`: Toggle to automatically register new computers.
 - `registration_password`: Registration key for auto-registering computers. A valid input is a non-empty string (3-50 chars, single line). To clear the registration password, explicitly set this field to `null` in the request.
 - `title`: The title of organization name.
