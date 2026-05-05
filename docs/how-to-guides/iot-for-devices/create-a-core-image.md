@@ -90,7 +90,7 @@ Now, add an additional record in the `snaps` array for the Landscape Client snap
         {
             "name": "landscape-client",
             "type": "app",
-            "default-channel": "latest/stable",
+            "default-channel": "24/stable",
             "id": "ffnH0sJpX3NFAclH777M8BdXIWpo93af"
         }
 ```
@@ -117,8 +117,9 @@ To create and configure your gadget snap:
     defaults:
       # landscape client
       ffnH0sJpX3NFAclH777M8BdXIWpo93af:
-        landscape-url: {LANDSCAPE_ACCOUNT_URL}
-        account-name: {ACCOUNT_NAME}
+        url: https://{LANDSCAPE_FQDN}/message-system
+        ping-url: http://{LANDSCAPE_FQDN}/ping
+        account-name: {LANDSCAPE_ACCOUNT_NAME}
         registration-key: "{REGISTRATION_KEY}"
         auto-register:
           enabled: true
@@ -128,8 +129,8 @@ To create and configure your gadget snap:
 
     Replacing the following values with the relevant configuration values:
 
-    - `{LANDSCAPE_ACCOUNT_URL}`: The full URL of your Landscape account. Canonical’s Landscape URL is [https://landscape.canonical.com](https://landscape.canonical.com).
-    - `{ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`.
+    - `{LANDSCAPE_FQDN}`: The FQDN of your Landscape server. For Canonical’s Landscape, use `landscape.canonical.com`.
+    - `{LANDSCAPE_ACCOUNT_NAME}`: Self-hosted Landscape users should set this to `standalone`.
     - `{REGISTRATION_KEY}`: Your registration key.
 
     Now, you’ve finished configuring the details of your Landscape server instance. In the `auto-register` section, you’ll likely want to change `computer-title-pattern` to your preferred method of identifying devices. For more information on these parameters, see {ref}`header-explanation-auto-reg-process-gadget-snap` located in this guide.
@@ -143,7 +144,7 @@ These details will be the same for all devices that run this image.
 To build the gadget snap, you just need to run the following in your terminal:
 
 ```bash
-snapcraft
+snapcraft pack
 ```
 
 Now, you have your snap. This is the snap you want to include in your model assertion.
@@ -227,8 +228,9 @@ The `gadget.yaml` file contains a configuration that is similar to the following
 defaults:
   # landscape client
   ffnH0sJpX3NFAclH777M8BdXIWpo93af:
-    landscape-url: {LANDSCAPE_ACCOUNT_URL}
-    account-name: {ACCOUNT_NAME}
+    url: https://{LANDSCAPE_FQDN}/message-system
+    ping-url: http://{LANDSCAPE_FQDN}/ping
+    account-name: {LANDSCAPE_ACCOUNT_NAME}
     registration-key: "{REGISTRATION_KEY}"
     auto-register:
       enabled: true

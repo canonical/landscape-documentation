@@ -234,7 +234,7 @@ At the end of this activity, all computers that have the `example-tag` will get 
 
 ```bash
 deb http://your-server.com/repository/standalone/ubuntu bionic-security main restricted universe multiverse
-deb http://your-server.com/repository/standalone/ubuntu bionic main restricted universe multiverse 
+deb http://your-server.com/repository/standalone/ubuntu bionic main restricted universe multiverse
 deb http://your-server.com/repository/standalone/ubuntu bionic-updates main restricted universe multiverse
 ```
 
@@ -322,7 +322,7 @@ The `%(lds)s` bit will be replaced by whatever follows the `lds:` prefix in the 
 ```text
 my-package (1.0-0ubuntu1) bionic-staging; urgency=low
 
- * Released 1.0 
+ * Released 1.0
 
 -- Package Builder <builder@example.com> Tue, 12 Feb 2023 14:57:05 -0300 (...)
 ```
@@ -451,7 +451,7 @@ landscape-api create-pocket \
  security bionic ubuntu \
  main,restricted,universe,multiverse amd64 mirror mirror-key \
  --mirror-suite bionic-security \
- --mirror-uri http://archive.ubuntu.com/ubuntu/ 
+ --mirror-uri http://archive.ubuntu.com/ubuntu/
 ```
 
 The specific suffix is not significant. You could theoretically choose a different convention for pocket names, but we suggest you stick to this usage. Once you've created the pocket or pockets you want to use, call `sync-mirror-pocket` to start the mirroring process:

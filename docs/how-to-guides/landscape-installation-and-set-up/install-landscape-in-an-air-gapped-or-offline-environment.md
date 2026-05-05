@@ -133,10 +133,10 @@ The `secure_id` can be listed with a given user email invitation in the database
 You can generate the invite URL(s) in the following format:
 
 ```text
-https://<YOUR_LANDSCAPE_URL>/accept-invitation/<SECURE_ID>
+https://{LANDSCAPE_FQDN}/accept-invitation/{SECURE_ID}
 ```
 
-Replace `<YOUR_LANDSCAPE_URL>` with the URL of your Landscape server, and `<SECURE_ID>` with the value from the database query.
+Replace `{LANDSCAPE_FQDN}` with the FQDN of your Landscape server, and `{SECURE_ID}` with the value from the database query.
 
 ### Accept the invitation
 
