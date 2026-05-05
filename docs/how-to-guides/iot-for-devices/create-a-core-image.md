@@ -90,7 +90,7 @@ Now, add an additional record in the `snaps` array for the Landscape Client snap
         {
             "name": "landscape-client",
             "type": "app",
-            "default-channel": "latest/stable",
+            "default-channel": "24/stable",
             "id": "ffnH0sJpX3NFAclH777M8BdXIWpo93af"
         }
 ```
