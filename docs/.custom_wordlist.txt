@@ -328,7 +328,6 @@ signup
 SimpleStreams
 SLA
 SMTP
-Snapcore
 Snapcraft
 Snapcraft's
 SnapD
