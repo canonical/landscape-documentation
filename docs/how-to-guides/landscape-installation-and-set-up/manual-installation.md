@@ -9,10 +9,10 @@ myst:
 
 This is the production deployment recommendation for Landscape Server when Juju isn't used. At a minimum, you need two machines: the database server and application server.
 
-For a manual installation of Landscape 24.04 LTS:
+For a manual installation of Landscape 24.04 LTS or 26.04 LTS:
 
-- **Database server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16.
-- **Application server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services
+- **Database server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16. Landscape 26.04 LTS also runs on Ubuntu 26.04 ("resolute"), which uses PostgreSQL 18.
+- **Application server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services. Landscape 26.04 also runs Ubuntu 26.04 LTS ("resolute").
 
 You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
 
@@ -50,6 +50,12 @@ For an Ubuntu 24.04 ("noble") database server:
 
 ```bash
 sudo apt install postgresql postgresql-16-debversion postgresql-plpython3-16 postgresql-contrib
+```
+
+For an Ubuntu 26.04 ("resolute") database server:
+
+```bash
+sudo apt install postgresql postgresql-18-debversion postgresql-plpython3-18 postgresql-contrib
 ```
 
 ### Create a superuser Landscape can use
@@ -153,7 +159,8 @@ Landscape is distributed in a public PPA. You can add it to the system with thes
 sudo add-apt-repository <LANDSCAPE_PPA>
 ```
 
-- `<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you’re using. The PPA for the most recent Landscape LTS is: `ppa:landscape/self-hosted-24.04`. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. Use an LTS for production deployments.
+```{include} /reuse/landscape-ppa-description.md
+```
 
 ### Install the server package
 
@@ -282,6 +289,7 @@ Without this setting enabled, a package update might result in services that won
     ```
 
 - Start all Landscape services again
+
 
 (how-to-heading-manual-install-configure-web-server)=
 ### Configure web server
@@ -569,6 +577,37 @@ Use `lsctl`:
 ```bash
 sudo lsctl restart
 ```
+
+### (Landscape 26.04 only) Install the outbox snap
+
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
+
+```bash
+sudo snap install landscape-outbox
+```
+
+`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
+
+```bash
+sudo snap services landscape-outbox
+```
+
+The output should show the `outbox` service as **active**:
+
+```bash
+Service                  Startup  Current  Notes
+landscape-outbox.outbox  enabled  active   -
+```
+
+To view outbox logs, run:
+
+```bash
+sudo snap logs landscape-outbox -n 50
+```
+
+### (Landscape 26.04 only) Install the debarchive snap
+
+<!-- TODO add when the release notes exist: The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`. -->
 
 ### Create the first user
 

@@ -43,12 +43,34 @@ sudo apt --download-only -y install landscape-server-quickstart
 
 All of the necessary packages for Landscape Server should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
 
+#### (Landscape 26.04 only) Download the Landscape Server snap services
+
+Landscape 26.04 LTS depends on two snap services, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately.
+
+```bash
+snap download landscape-outbox
+snap download landscape-debarchive --edge
+```
+
+For each snap, a `.snap` file and a `.assert` file will be produced.
+
 ### Install Landscape Server in the offline environment
 
 Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
 
 ```bash
 sudo dpkg -i /PATH/TO/PACKAGES/*.deb
+```
+
+#### (Landscape 26.04 only) Install the Landscape Server snap services
+
+Copy the downloaded snap artifacts, carry them into the offline or airgapped environment, and install them with `snap`. You can install the packages with a command similar to:
+
+```bash
+sudo snap ack landscape-outbox_*.assert
+sudo snap install landscape-outbox_*.snap
+sudo snap ack landscape-debarchive_*.assert
+sudo snap install landscape-debarchive_*.snap
 ```
 
 Once Landscape Server is installed, you can finish setting up Landscape similar to how you would with an online server. See the {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installation guides for more details. This also includes setting up your first administrator and attaching your {ref}`explanation-licenses`.
@@ -111,10 +133,10 @@ The `secure_id` can be listed with a given user email invitation in the database
 You can generate the invite URL(s) in the following format:
 
 ```text
-https://<YOUR_LANDSCAPE_URL>/accept-invitation/<SECURE_ID>
+https://{LANDSCAPE_FQDN}/accept-invitation/{SECURE_ID}
 ```
 
-Replace `<YOUR_LANDSCAPE_URL>` with the URL of your Landscape server, and `<SECURE_ID>` with the value from the database query.
+Replace `{LANDSCAPE_FQDN}` with the FQDN of your Landscape server, and `{SECURE_ID}` with the value from the database query.
 
 ### Accept the invitation
 

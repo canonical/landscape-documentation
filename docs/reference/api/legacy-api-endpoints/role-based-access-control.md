@@ -160,7 +160,7 @@ Create a new access group.
 
 Arguments:
 
-- `title`: The title of the access group.
+- `title`: The title of the access group. The only special characters allowed are `-` and `.`. Disallowed special characters will be stripped from the title.
 - `parent`: Optionally, the name of the access group that this access group should be added as a child of. If this parameter is omitted the child will be added below the root access group of the account.
 
 The following errors may be raised:
