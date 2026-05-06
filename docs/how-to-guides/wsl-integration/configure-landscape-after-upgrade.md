@@ -22,12 +22,16 @@ Open the `service.conf` file located in the `/etc/landscape` directory and add:
 hostagent_virtual_host = landscape-hostagent
 hostagent_task_queue = landscape-server-hostagent-task-queue
 
-[hostagent-message-consumer]
+[hostagent_consumer]
+stores = main account-1 resource-1
 threads = 1
-stores = main account-1
+
+[hostagent_server]
+stores = main
+threads = 1
 
 [features]
-enable-wsl-child-instance-profiles = true
+wsl_management = true
 ```
 
 ## Update your Apache config
