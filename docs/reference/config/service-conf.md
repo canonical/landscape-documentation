@@ -770,7 +770,7 @@ The `[stores]` section contains configurations for database store names and conn
 The knowledge database was deprecated in Landscape Server 25.10 and will be dropped in a future release of Landscape Server.
 ```
 
-- Purpose: The knowledge database name. 
+- Purpose: The knowledge database name.
 - Deprecated key name: N/A
 - ENV name: `LANDSCAPE_STORES__KNOWLEDGE`
 - Default: `landscape-standalone-knowledge`
@@ -855,7 +855,7 @@ The `[system]` section contains configurations that apply across many or all of 
 
 ### `audit_retention_period`
 
-- Purpose: The time period in days to retain security profile audit records. A negative value means that records should be retained indefinitely.
+- Purpose: The time period in days to retain USG profile audit records. A negative value means that records should be retained indefinitely.
 - Deprecated key name: `audit-retention-period`
 - ENV name: `LANDSCAPE_SYSTEM__AUDIT_RETENTION_PERIOD`
 - Default: `-1`

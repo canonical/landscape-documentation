@@ -1,19 +1,23 @@
 ---
 myst:
   html_meta:
-    description: "Automate compliance audits and fixes with security profiles in Landscape 25.04+ using Ubuntu Security Guide (USG) benchmarks."
+    description: "Automate compliance audits and fixes with USG profiles in Landscape 25.04+ using Ubuntu Security Guide (USG) benchmarks."
 ---
 
-(how-to-web-portal-use-security-profiles)=
-# How to use security profiles
+(how-to-security-use-usg-profiles)=
+# How to use USG profiles
 
-You can use security profiles to automatically audit and fix your managed instances on a schedule using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/docs/compliance/usg/).
+```{note}
+Beginning in Landscape 26.04 LTS, "security profiles" were renamed to "USG profiles".
+```
+
+You can use USG profiles to automatically audit and fix your managed instances on a schedule using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/docs/compliance/usg/).
 
 ```{note}
 This feature is only available in self-hosted **Landscape 25.04** and later.
 ```
 
-## Create a security profile
+## Create a USG profile
 
 On each instance you want to manage, follow the steps in [Ubuntu Security's installation guide](https://documentation.ubuntu.com/security/docs/compliance/usg/install-usg/), then:
 
@@ -38,10 +42,10 @@ On each instance you want to manage, follow the steps in [Ubuntu Security's inst
 From the web portal:
 
 1. Click **Profiles**
-2. Click **Security profiles**
-3. Click **Add security profile**
+2. Click **USG profiles**
+3. Click **Add USG profile**
 
-In the security profile creation form, complete the following fields:
+In the USG profile creation form, complete the following fields:
 
 - **Profile name**: Name of the profile
 - **Access group**: The access group the profile will apply to. Restricts which instances the profile can manage and which users can edit and execute the profile.
@@ -57,17 +61,17 @@ In the security profile creation form, complete the following fields:
 
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected
-  
-After you've created your security profile, you can view, download audit reports, edit, run, duplicate, or archive it using the dot menu under **Actions**.
 
-## Download audit for a security profile
+After you've created your USG profile, you can view, download audit reports, edit, run, duplicate, or archive it using the dot menu under **Actions**.
 
-You can download the results of USG audits executed by your security profile for a specific date or for a range of dates.
+## Download audit for a USG profile
+
+You can download the results of USG audits executed by your USG profile for a specific date or for a range of dates.
 
 From the web portal:
 
 1. Click **Profiles**
-2. Click **Security profiles**
+2. Click **USG profiles**
 3. Click the menu dots under **Actions** for a profile
 4. Click **Download audit**
 

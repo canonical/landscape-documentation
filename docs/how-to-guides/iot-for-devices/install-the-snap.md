@@ -59,13 +59,14 @@ Replacing the placeholder variables with their appropriate values.
 
 When the configuration is complete, you’ll receive confirmation that the client was registered successfully or if an error occurred.
 
-**Method #3: Use `set` to set individual configuration values**
+**Method #3: Use `snap set` to set individual configuration values**
 
-You can use the snap `set` command to set individual configuration values. For example:
+You can use the `snap set` command to set individual configuration values. For example:
 
 ```bash
 snap set landscape-client computer-title {LANDSCAPE_COMPUTER_TITLE}
-snap set landscape-client url {LANDSCAPE_URL}
+snap set landscape-client url https://{LANDSCAPE_FQDN}/message-system
+snap set landscape-client ping-url http://{LANDSCAPE_FQDN}/ping
 ```
 
 After setting any configuration variables using `set`, you’ll need to restart the client snap for the new configuration to be applied:
@@ -78,13 +79,22 @@ The options you can set with snap `set` are:
 
 - `account-name`
 - `computer-title`
-- `landscape-url`
+- `url`
+- `ping-url`
 - `log-level`
 - `script-users`
 - `manager-plugins`
 - `monitor-plugins`
 - `access-group`
 - `registration-key`
+
+```{note}
+When you run `snap set`, the value is written to snap options and then applied to `landscape-client.conf` by the `configure` hook. Only the keys listed above are recognized and applied. If you set an unrecognized key, it will not be written to the configuration file but will persist in snap options, which can be misleading. Use `snap unset landscape-client <key>` to remove it.
+```
+
+```{note}
+The keys `landscape-url` and `landscape-ping-url` are deprecated aliases for `url` and `ping-url`. They still work but will be removed in a future release. Use `url` and `ping-url` for new configurations.
+```
 
 ### Accept the registration
 

@@ -33,7 +33,7 @@ This command will install `landscape-client` and start up an interactive wizard 
 
 ## Enable non-interactively
 
-If you know the details of your Landscape setup then you can register a machine without using the wizard. Under the hood, ``pro`` installs and executes `landscape-config`, so you can pass any [parameters supported by](https://manpages.ubuntu.com/manpages/noble/en/man1/landscape-config.1.html) `landscape-config` to `pro enable landscape`.
+If you know the details of your Landscape setup then you can register a machine without using the wizard. Under the hood, ``pro`` installs and executes `landscape-config`, so you can pass any [parameters supported by](https://manpages.ubuntu.com/manpages/resolute/man1/landscape-config.1.html) `landscape-config` to `pro enable landscape`.
 
 You can use the `--assume-yes` flag to automatically accept the defaults for any un-provided parameters.
 

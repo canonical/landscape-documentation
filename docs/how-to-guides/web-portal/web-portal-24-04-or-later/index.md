@@ -66,4 +66,3 @@ Perform supporting instance actions such as adding annotations for context and s
 Use annotations <use-annotations>
 Sanitize instances <sanitize-instances>
 ```
-
