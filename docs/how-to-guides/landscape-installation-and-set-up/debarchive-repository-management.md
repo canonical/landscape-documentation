@@ -103,7 +103,7 @@ The available settings and their defaults are:
 | Server host | `deb.archive.server.host` | `localhost` |
 | Database driver | `deb.archive.database.driver` | `pgx` |
 | Database name | `deb.archive.database.name` | *(empty, read from service.conf)* |
-| Database host | `deb.archive.database.host` | `localhost` |
+| Database host | `deb.archive.database.host` | *(empty, read from service.conf)* |
 | Database port | `deb.archive.database.port` | `5432` |
 | Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
 | Database password | `deb.archive.database.password` | *(empty, read from service.conf)* |
