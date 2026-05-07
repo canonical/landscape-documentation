@@ -204,7 +204,7 @@ landscape-debarchive.debarchive      enabled  active   -
 
 ### Verify Deb Archive is reachable
 
-Send a health check request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
+Send a probe request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
 
 ```bash
 curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1beta1/mirrors"
