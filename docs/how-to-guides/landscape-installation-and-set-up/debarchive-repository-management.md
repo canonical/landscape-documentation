@@ -216,7 +216,7 @@ A response of `401` (unauthorized) confirms the Deb Archive service is reachable
 You can also test directly against the service (bypassing the proxy) to isolate connectivity issues:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1beta1/mirrors
 ```
 
 ### Verify in the Landscape web portal
