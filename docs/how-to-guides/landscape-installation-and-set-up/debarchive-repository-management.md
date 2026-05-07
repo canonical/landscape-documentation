@@ -32,7 +32,7 @@ Install the snap on the same machine as the Landscape application server.
 - For Manual installations, this is the Landscape application server.
 
 ```bash
-sudo snap install landscape-debarchive --channel=latest/edge
+sudo snap install landscape-debarchive --channel=latest/beta
 ```
 
 The snap installs as a daemon that will start automatically. It will fail to connect to the database until the remaining configuration steps are completed.
