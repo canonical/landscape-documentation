@@ -81,7 +81,7 @@ Multiple security fixes are included in this release:
 - Fixed a cross-site request forgery (CSRF) vector via GET-based state-modifying requests.
 - Fixed a JavaScript execution (XSS) vulnerability.
 - Replaced `xml.etree` with `defusedxml` throughout the codebase.
-- Fixed a Landscape Client issue where data file permissions were too permissive. [LP: #2121558](https://bugs.launchpad.net/landscape-client/+bug/2121558)
+- Fixed a Landscape Client issue where data file permissions were too permissive.
 - Fixed content-type header validation for REST API endpoints.
 
 ## Supported third-party services
