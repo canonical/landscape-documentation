@@ -208,7 +208,7 @@ landscape-debarchive.debarchive      enabled  active   -
 Send a health check request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
 
 ```bash
-curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1/mirrors"
+curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1beta1/mirrors"
 ```
 
 A response of `401` (unauthorized) confirms the Deb Archive service is reachable through the reverse proxy. Deb Archive uses the same authentication as the main Landscape Server API. You should receive a `200` response instead if you include a JWT token in the request via bearer authentication, or include a cookie from a logged-in session in the Landscape web portal.
