@@ -102,7 +102,7 @@ The available settings and their defaults are:
 | Gateway (HTTP) port | `deb.archive.server.gateway-port` | `8100` |
 | Server host | `deb.archive.server.host` | `localhost` |
 | Database driver | `deb.archive.database.driver` | `pgx` |
-| Database name | `deb.archive.database.name` | `db` |
+| Database name | `deb.archive.database.name` | *(empty, read from service.conf)* |
 | Database host | `deb.archive.database.host` | `localhost` |
 | Database port | `deb.archive.database.port` | `5432` |
 | Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
