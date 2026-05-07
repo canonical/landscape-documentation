@@ -1,0 +1,249 @@
+---
+myst:
+  html_meta:
+    description: "Set up Landscape Deb Archive alongside a working Landscape Server installation. Step-by-step guide for installing and configuring the landscape-debarchive snap."
+---
+
+(how-to-debarchive-repository-management)=
+# How to set up Deb Archive with Landscape
+
+This guide walks you through installing and configuring the `landscape-debarchive` snap alongside an existing {ref}`manual <how-to-manual-installation>` or {ref}`quickstart <how-to-quickstart-installation>` installation of Landscape Server. By the end, you'll have the Deb Archive service running and accessible through your existing reverse proxy, enabling repository management from the Landscape web portal.
+
+Deb Archive was introduced in **Landscape 26.04 LTS**.
+
+## Prerequisites
+
+You need one of the following Landscape Server installations:
+- A {ref}`quickstart <how-to-quickstart-installation>` installation of `landscape-server-quickstart`
+- A {ref}`manual <how-to-manual-installation>` installation of `landscape-server`
+
+For Quickstart installations, you need administrative access to the Landscape Server machine.
+
+For Manual installations, you need:
+
+- Access to the PostgreSQL database server used by Landscape
+- Administrative (root) access to the application server
+
+## Install the landscape-debarchive snap
+
+Install the snap on the same machine as the Landscape application server. 
+
+- For Quickstart installations, this is the same machine as your Landscape server.
+- For Manual installations, this is the Landscape application server.
+
+```bash
+sudo snap install landscape-debarchive --channel=latest/edge
+```
+
+The snap installs as a daemon that will start automatically. It will fail to connect to the database until the remaining configuration steps are completed.
+
+## Create the Deb Archive database
+
+The Deb Archive service requires its own database in the PostgreSQL cluster already used by Landscape Server. 
+
+- For Quickstart installations, run the following commands on the Landscape Server machine.
+- For Manual installations, run the commands on the PostgreSQL database server.
+
+Create the database:
+
+```bash
+sudo -u postgres createdb landscape-standalone-debarchive
+```
+
+Then, grant access to the existing Landscape database users so that Deb Archive can connect:
+
+```bash
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"landscape-standalone-debarchive\" TO landscape_superuser;"
+sudo -u postgres psql -d landscape-standalone-debarchive -c "GRANT USAGE, CREATE ON SCHEMA public TO landscape_maintenance;"
+```
+
+```{note}
+The existing `pg_hba.conf` entries for the Landscape users should already permit access to this new database. No changes to `pg_hba.conf` are required unless you have restricted access to specific database names.
+```
+
+The Deb Archive service automatically applies its schema on first successful connection. No manual schema import is needed.
+
+## Configure the Deb Archive snap to read Landscape Server configuration
+
+The `landscape-debarchive` snap reads `/etc/landscape/service.conf` to automatically derive database connection details and secrets from the existing Landscape Server configuration. The snap's `etc-landscape` interface auto-connects, so no manual interface connection is required.
+
+For this to work, the `[stores]` section of `/etc/landscape/service.conf` must contain a `debarchive` entry with the database name. This entry is managed by the `landscape-server` package and should already be present. 
+
+Verify that the `[stores]` section includes a `debarchive` entry:
+
+```bash
+grep debarchive /etc/landscape/service.conf
+```
+
+Example output:
+
+```ini
+debarchive = landscape-standalone-debarchive
+```
+
+Which should match the name of the database you created in the previous step.
+
+If the entry is missing, manually add the `debarchive = <DATABASE_NAME>` to the `[stores]` section of `/etc/landscape/service.conf`.
+
+```{note}
+**Manual installations**: The Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
+```
+
+### (Optional) Override default settings with `snap set`
+
+Quickstart installations use the default configurations and generally don't require additional setup. Skip this section unless you've customized your database configuration.
+
+For Manual installations, if your PostgreSQL server is **not** at the default location (`localhost:5432`), or you need to override any other defaults, use `snap set` to configure the snap directly. 
+
+The available settings and their defaults are:
+
+| Setting | Snap key | Default |
+|---|---|---|
+| Gateway (HTTP) port | `deb.archive.server.gateway-port` | `8100` |
+| gRPC port | `deb.archive.server.grpc-port` | `8101` |
+| Server host | `deb.archive.server.host` | `localhost` |
+| Database driver | `deb.archive.database.driver` | `pgx` |
+| Database name | `deb.archive.database.name` | `db` |
+| Database host | `deb.archive.database.host` | `localhost` |
+| Database port | `deb.archive.database.port` | `5432` |
+| Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
+| Database password | `deb.archive.database.password` | *(empty, read from service.conf)* |
+| Database SSL mode | `deb.archive.database.ssl` | `disable` |
+| Logging level | `deb.archive.logging.level` | `debug` |
+| Human-readable logs | `deb.archive.logging.human-readable` | `true` |
+| Filesystem storage path | `deb.archive.filesystem-storage-path` | `./filesystem_storage` |
+| Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
+| JWT secret | `deb.archive.jwt.secret` | *(empty, read from service.conf)* |
+
+For example, to point at a database server on a different host:
+
+```bash
+sudo snap set landscape-debarchive deb.archive.database.host=10.0.1.5
+```
+
+```{note}
+If a value is defined in both `service.conf` and via `snap set`, the value from `service.conf` is used.
+```
+
+If you edited `service.conf` directly, restart the service manually:
+
+```bash
+sudo snap restart landscape-debarchive
+```
+
+The snap automatically restarts when configuration changes are applied via `snap set`.
+
+## Configure the reverse proxy
+
+You need to expose the Deb Archive service at `/debarchive` on your Landscape URL.
+
+This requires updating your reverse proxy to forward requests to the Deb Archive service while stripping the `/debarchive` prefix.
+
+### Apache (Quickstart and most Manual installations)
+
+Add the following rules to the `<VirtualHost *:443>` block in `/etc/apache2/sites-available/landscape.conf` (or the appropriate configuration file for your setup).
+
+Add these lines **before** the final catch-all `RewriteRule` at the bottom of the block (the line that starts with `RewriteRule ^/(.*) http://localhost:8080/...`):
+
+```apache
+    # Landscape Deb Archive
+    RewriteRule ^/debarchive$ /debarchive/ [R=permanent]
+    RewriteRule ^/debarchive/(.*) http://localhost:8100/$1 [P,L]
+```
+
+Then reload Apache:
+
+```bash
+sudo systemctl reload apache2
+```
+
+### HAProxy (some Manual installations)
+
+If your deployment uses HAProxy, add a routing rule and backend for the Deb Archive service. Edit your HAProxy configuration (typically `/etc/haproxy/haproxy.cfg`):
+
+In the existing `frontend` section, add:
+
+```
+    acl is_debarchive path_beg /debarchive
+    use_backend debarchive if is_debarchive
+```
+
+Add a new backend section:
+
+```
+backend debarchive
+    http-request set-path %[path,regsub(^/debarchive,/)]
+    server debarchive 127.0.0.1:8100 check
+```
+
+```{note}
+If the Deb Archive service runs on a different machine from HAProxy, replace `127.0.0.1` with the appropriate IP address or hostname.
+```
+
+Then reload HAProxy:
+
+```bash
+sudo systemctl reload haproxy
+```
+
+## Verify the installation
+
+### Check the service status
+
+Confirm the snap service is running:
+
+```bash
+sudo snap services landscape-debarchive
+```
+
+The output should show the `debarchive` service as **active**:
+
+```text
+Service                              Startup  Current  Notes
+landscape-debarchive.debarchive      enabled  active   -
+```
+
+### Check the health endpoint
+
+Send a health check request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
+
+```bash
+curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1/mirrors"
+```
+
+A response of `401` (unauthorized) confirms the Deb Archive service is reachable through the reverse proxy. Deb Archive uses the same authentication as the main Landscape Server API. You should receive a `200` response instead if you include a JWT token in the request via bearer authentication, or include a cookie from a logged-in session in the Landscape web portal.
+
+You can also test directly against the service (bypassing the proxy) to isolate connectivity issues:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
+```
+
+### Verify in the Landscape web portal
+
+1. Log in to the Landscape web portal at `https://$LANDSCAPE_FQDN`
+2. Navigate to the **Repository management** page
+3. Confirm that you can create or add a new repository mirror
+
+If the repository management page loads and allows you to begin adding mirrors, the Deb Archive service is fully operational.
+
+## Troubleshooting
+
+### Service fails to start
+
+Check the snap logs for error details:
+
+```bash
+sudo snap logs landscape-debarchive -n 50
+```
+
+Common issues include:
+
+- **Database connection errors**: Verify the database host, port, user, and password. Ensure the Deb Archive database exists and the configured user has access.
+- **Missing secrets**: If not using the configuration shim with `service.conf`, the `deb.archive.pagination.secret` (base64url-encoded) and `deb.archive.jwt.secret` (base64-encoded) must be set.
+
+### Health check returns an error through the proxy
+
+- Confirm the Deb Archive gateway port matches what the proxy expects (default: `8100`)
+- Test direct connectivity to `http://localhost:8100/` to determine whether the issue is with the service or the proxy configuration
+- Check Apache or HAProxy error logs for rewrite or proxy errors
