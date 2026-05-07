@@ -108,7 +108,7 @@ The available settings and their defaults are:
 | Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
 | Database password | `deb.archive.database.password` | *(empty, read from service.conf)* |
 | Database SSL mode | `deb.archive.database.ssl` | `disable` |
-| Logging level | `deb.archive.logging.level` | `debug` |
+| Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `true` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `./filesystem_storage` |
 | Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
