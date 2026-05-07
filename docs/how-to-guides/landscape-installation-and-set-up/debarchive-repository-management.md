@@ -110,7 +110,7 @@ The available settings and their defaults are:
 | Database SSL mode | `deb.archive.database.ssl` | `disable` |
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
-| Filesystem storage path | `deb.archive.filesystem-storage-path` | `./filesystem_storage` |
+| Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |
 | Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
 | JWT secret | `deb.archive.jwt.secret` | *(empty, read from service.conf)* |
 
