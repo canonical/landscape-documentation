@@ -100,7 +100,6 @@ The available settings and their defaults are:
 | Setting | Snap key | Default |
 |---|---|---|
 | Gateway (HTTP) port | `deb.archive.server.gateway-port` | `8100` |
-| gRPC port | `deb.archive.server.grpc-port` | `8101` |
 | Server host | `deb.archive.server.host` | `localhost` |
 | Database driver | `deb.archive.database.driver` | `pgx` |
 | Database name | `deb.archive.database.name` | `db` |
