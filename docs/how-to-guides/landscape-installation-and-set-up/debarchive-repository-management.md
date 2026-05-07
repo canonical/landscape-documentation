@@ -202,7 +202,7 @@ Service                              Startup  Current  Notes
 landscape-debarchive.debarchive      enabled  active   -
 ```
 
-### Check the health endpoint
+### Verify Deb Archive is reachable
 
 Send a health check request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
 
