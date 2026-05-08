@@ -137,7 +137,7 @@ The snap automatically restarts when configuration changes are applied via `snap
 
 When you publish a repository to a filesystem target, Deb Archive writes the published repository tree to a location on disk. The `filesystem-published-root` setting defines the base directory that is combined with each publication target's configured path to form the full output location.
 
-By default, the snap uses `$SNAP_COMMON` (typically `/var/snap/landscape-debarchive/common`) as the root. If you need published repositories written to a different location — for example, a dedicated mount point or a directory served directly by a web server — override this setting:
+By default, the snap uses `$SNAP_COMMON/publications` (typically `/var/snap/landscape-debarchive/common/publications`) as the root. If you need published repositories written to a different location — for example, a dedicated mount point or a directory served directly by a web server — override this setting:
 
 ```bash
 sudo snap set landscape-debarchive deb.archive.filesystem-published-root=/srv/published-repos
