@@ -111,7 +111,7 @@ The available settings and their defaults are:
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |
-| Filesystem published root | `deb.archive.filesystem-published-root` | `$SNAP_COMMON` |
+| Filesystem published root | `deb.archive.filesystem-published-root` | `$SNAP_COMMON/publications` |
 | Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
 | JWT secret | `deb.archive.jwt.secret` | *(empty, read from service.conf)* |
 
