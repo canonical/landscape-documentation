@@ -111,6 +111,7 @@ The available settings and their defaults are:
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |
+| Filesystem published root | `deb.archive.filesystem-published-root` | `$SNAP_COMMON` |
 | Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
 | JWT secret | `deb.archive.jwt.secret` | *(empty, read from service.conf)* |
 
@@ -131,6 +132,20 @@ sudo snap restart landscape-debarchive
 ```
 
 The snap automatically restarts when configuration changes are applied via `snap set`.
+
+## Configure the root directory for filesystem publications
+
+When you publish a repository to a filesystem target, Deb Archive writes the published repository tree to a location on disk. The `filesystem-published-root` setting defines the base directory that is combined with each publication target's configured path to form the full output location.
+
+By default, the snap uses `$SNAP_COMMON` (typically `/var/snap/landscape-debarchive/common`) as the root. If you need published repositories written to a different location — for example, a dedicated mount point or a directory served directly by a web server — override this setting:
+
+```bash
+sudo snap set landscape-debarchive deb.archive.filesystem-published-root=/srv/published-repos
+```
+
+The directory must exist and be writable by the snap. After the setting is applied, any new filesystem publication will write its repository tree under the specified root, joined with the target path configured in the publication.
+
+For example, if the published root is `/srv/published-repos` and a publication target has the path `myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`.
 
 ## Configure the reverse proxy
 
