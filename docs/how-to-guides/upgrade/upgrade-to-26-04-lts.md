@@ -67,7 +67,7 @@ First, in an environment with internet access, download the snaps.
 
 ```bash
 snap download landscape-outbox
-snap download landscape-debarchive --edge
+snap download landscape-debarchive --beta
 ```
 
 For each snap, a `.snap` file and a `.assert` file will be produced.
