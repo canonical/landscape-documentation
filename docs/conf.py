@@ -170,8 +170,8 @@ sitemap_excludes = [
 # Template and asset locations
 #######################
 
-html_static_path = ["_static"]
-templates_path = ["_templates"]
+html_static_path = [".sphinx/_static"]
+templates_path = [".sphinx/_templates"]
 
 ###########################
 # Link checker exceptions #
@@ -252,20 +252,19 @@ extensions = [
 
 # Excludes files or directories from processing
 
-exclude_patterns = [
-    "doc-cheat-sheet*",
-]
+# exclude_patterns = [
+# ]
 
 # Adds custom CSS files, located under 'html_static_path'
 
 html_css_files = [
-    "css/pdf.css",
-    "css/cookie-banner.css"
+    "cookie-banner.css",
 ]
 
 # Adds custom JavaScript files, located under 'html_static_path'
+
 html_js_files = [
-    "js/bundle.js"
+    "bundle.js",
  ]
 
 # Specifies a reST snippet to be appended to each .rst file
