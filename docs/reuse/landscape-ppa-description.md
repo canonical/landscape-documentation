@@ -1,0 +1,1 @@
+`<LANDSCAPE_PPA>`: The PPA for the specific Landscape installation you're using. The PPA for the most recent recommended Landscape LTS is: {{ landscape_recommended_lts_ppa }}. The PPA for Landscape's stable rolling release is: `ppa:landscape/latest-stable`. We recommend using an LTS for production deployments.

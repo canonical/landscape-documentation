@@ -5,6 +5,7 @@ myst:
 ---
 
 (explanation-activities)=
+
 # Activities
 
 Landscape tracks the progress of various tasks using activities, such as script execution and installing packages. There are two types of activities: client activities and server activities. This document explains how each type of activity is tracked and their possible states.
@@ -39,7 +40,7 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 
 ## Server activities
 
-Server activities run on Landscape Server without interacting with Landscape Client. For example, {ref}`downloading security profile reports <reference-rest-api-security-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
+Server activities run on Landscape Server without interacting with Landscape Client. For example, {ref}`downloading USG profile reports <reference-rest-api-usg-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
 
 ### Server activity states
 
@@ -102,3 +103,4 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 - `RemoveComputerActivity`
 - `AttachProRequest`
 - `DetachProRequest`
+- `GenerateFDERecoveryKeyRequest`

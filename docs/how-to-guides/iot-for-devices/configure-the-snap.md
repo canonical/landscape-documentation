@@ -61,10 +61,10 @@ To use this feature in the Landscape web portal:
 
 When this feature is enabled, new devices must be enrolled using the key that’s defined in the **Registration key** field. You can’t auto-register new computers if there is no registration key provided.
 
-Once you’ve defined a registration key and enabled the auto-registration feature, you can auto-register new computers by passing the `--registration-key` argument into `landscape-client.config`. For example, the following code registers a new Landscape Client computer with a registration key. The `{ACCOUNT_NAME}`, `{COMPUTER_TITLE}` and `{REGISTRATION_KEY}` placeholders must be changed to the appropriate values for your configuration.
+Once you’ve defined a registration key and enabled the auto-registration feature, you can auto-register new computers by passing the `--registration-key` argument into `landscape-client.config`. For example, the following code registers a new Landscape Client computer with a registration key. The `{LANDSCAPE_ACCOUNT_NAME}`, `{LANDSCAPE_COMPUTER_TITLE}` and `{REGISTRATION_KEY}` placeholders must be changed to the appropriate values for your configuration.
 
 ```bash
-sudo landscape-client.config --account-name={ACCOUNT_NAME} --computer-title={COMPUTER_TITLE} --registration-key={REGISTRATION_KEY}
+sudo landscape-client.config --account-name={LANDSCAPE_ACCOUNT_NAME} --computer-title={LANDSCAPE_COMPUTER_TITLE} --registration-key={REGISTRATION_KEY}
 ```
 
 ## Manage script execution

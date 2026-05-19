@@ -15,17 +15,17 @@ myst:
 
 ## Highlights
 
-- **New web portal:** Use Landscape’s new, early-access web portal built with Canonical’s [Vanilla Framework](https://vanillaframework.io). 
+- **New web portal**: Use Landscape’s new, early-access web portal built with Canonical’s [Vanilla Framework](https://vanillaframework.io).
 
     ![Landscape 24.04 LTS new web portal](https://assets.ubuntu.com/v1/ef0d70d5-24.04LandscapeWebPortal.png)
 
-    This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal. 
+    This portal is available to self-hosted Landscape users. To access it, click **Try the new UI** from the header of the default web portal.
 
 - **Web-based repository management**: Manage and mirror your repositories locally with Landscape’s new web-based repository management. For more information, see {ref}`how-to-manage-repos-web-portal` and an {ref}`explanation-repo-mirroring`.
 
 - **REST API for self-hosted users**: Use the new REST API that supports JSON Web Tokens for authentication. For more information, see {ref}`how-to-rest-api-request` and the available REST API endpoints.
 
-- **Snap management:** Manage snaps directly from the Landscape web portal.
+- **Snap management**: Manage snaps directly from the Landscape web portal.
 
 - **Landscape Client - new features for Ubuntu Core users**: The Landscape Client snap now includes additional features for Ubuntu Core users, such as remote script execution for snaps, user management on Core, and more. For more information, see the {ref}`how-to-guides-iot-for-devices-index`.
 
@@ -58,28 +58,28 @@ myst:
 
 - 24.04.9 published 4 November 2024
 
-  * fix: attempt to recover disconnected db connections on reuse (LP: [#2076014](https://launchpad.net/bugs/2076014))
+  - fix: attempt to recover disconnected db connections on reuse (LP: [#2076014](https://launchpad.net/bugs/2076014))
 
 - 24.04.8 published 3 October 2024
 
-  * build: re-build to unblock Launchpad PPA publication
+  - build: re-build to unblock Launchpad PPA publication
 
 - 24.04.7 published 2 October 2024
 
-  * fix: reprepro list/sync race condition (LP: [#2081056](https://launchpad.net/bugs/2081056))
+  - fix: reprepro list/sync race condition (LP: [#2081056](https://launchpad.net/bugs/2081056))
 
 - 24.04.6 published 9 September 2024
 
-  * feat: PAM-mediated LDAP/AD auth in REST API login (LP: [#2077763](https://launchpad.net/bugs/2077763))
+  - feat: PAM-mediated LDAP/AD auth in REST API login (LP: [#2077763](https://launchpad.net/bugs/2077763))
 
 - 24.04.5 published 14 June 2024
 
-  * fix(hostagent-messenger): remove hostagent_api submodule and use grpcio-tools to generate stubs instead.
-  * fixes broken release 24.04.4
+  - fix(hostagent-messenger): remove hostagent_api submodule and use grpcio-tools to generate stubs instead.
+  - fixes broken release 24.04.4
 
 - 24.04.4 published 13 June 2024
 
-  * fix(package-search): include sslmode parameter in config for connections to Postgres. Previously hardcoded to 'disable' (LP: [#2064756](https://launchpad.net/bugs/2064756))
+  - fix(package-search): include sslmode parameter in config for connections to Postgres. Previously hardcoded to 'disable' (LP: [#2064756](https://launchpad.net/bugs/2064756))
 
 - 24.04.3 published on 6 June 2024
 
@@ -90,40 +90,40 @@ myst:
 
 We published the 24.04.10 point release on 27 February 2025.
 
- - fix: change access group API bug
- - fix: API permissions check
- - fix: make use of MD5 hash FIPS-compliant
- - fix: bug in v2 API eventlog endpoint
- - fix: make logfile create perms CIS-compliant; proper signal to rsyslogd
- - fix: prevent epoll race conditions when writing API responses
- - fix: reset passphrase oops backport (LP: [#2094844](https://bugs.launchpad.net/landscape/+bug/2094844))
- - fix: 500 error when logging out in standalone
+- fix: change access group API bug
+- fix: API permissions check
+- fix: make use of MD5 hash FIPS-compliant
+- fix: bug in v2 API eventlog endpoint
+- fix: make logfile create perms CIS-compliant; proper signal to rsyslogd
+- fix: prevent epoll race conditions when writing API responses
+- fix: reset passphrase oops backport (LP: [#2094844](https://bugs.launchpad.net/landscape/+bug/2094844))
+- fix: 500 error when logging out in standalone
 
 ## Landscape 24.04.11 Point Release
 
 We published the 24.04.11 point release on 27 October 2025.
 
- - fix: remove unused _buffer_type import; safe import of AbstractComputerRequest
- - fix: raise client error for invalid GPG material in POST /gpg-key
- - fix: ignore root-url update on conflict
- - fix: Event logs reference wrong computer
- - fix: hide static/asset directory listings
- - fix: Change dependency on chrony to depend on the time-daemon virtual package instead
+- fix: remove unused _buffer_type import; safe import of AbstractComputerRequest
+- fix: raise client error for invalid GPG material in POST /gpg-key
+- fix: ignore root-url update on conflict
+- fix: Event logs reference wrong computer
+- fix: hide static/asset directory listings
+- fix: Change dependency on chrony to depend on the time-daemon virtual package instead
 
 ## Landscape 24.04.12 Point Release
 
 We published the 24.04.12 point release on 17 April 2026.
 
- - fix: hide inputs when there is a validation error
- - fix: issue with pro free licenses
- - fix: user enumeration on password reset page
- - fix: html escape account title in invitation email
- - fix: arbitrary file deletion bug in package upload
- - fix!: check for application/json content-type header in POST,PUT,PATCH requests
- - fix: block cross-site request forgery via GET-based state modifications
- - fix: Backport pingserver fixes
- - fix: force download for all script attachments
- - fix: backport-cross-site scripting in the profile creation page
- - fix: backport-cross-site-scripting-activity-result-page
- - fix: remove newlines from proxy config
- - fix: Zope template security bugs
+- fix: hide inputs when there is a validation error
+- fix: issue with pro free licenses
+- fix: user enumeration on password reset page
+- fix: html escape account title in invitation email
+- fix: arbitrary file deletion bug in package upload
+- fix!: check for application/json content-type header in POST,PUT,PATCH requests
+- fix: block cross-site request forgery via GET-based state modifications
+- fix: Backport pingserver fixes
+- fix: force download for all script attachments
+- fix: backport-cross-site scripting in the profile creation page
+- fix: backport-cross-site-scripting-activity-result-page
+- fix: remove newlines from proxy config
+- fix: Zope template security bugs

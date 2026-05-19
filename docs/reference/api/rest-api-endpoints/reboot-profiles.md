@@ -33,15 +33,15 @@ The scheduled time (`at_hour` and `at_minute`) is interpreted in **UTC**.
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/rebootprofiles"  \
-  -H "Authorization: Bearer $JWT" \
+curl -X POST "https://landscape.canonical.com/api/v2/rebootprofiles" \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
   -d '{
     "title": "rebootprofile1",
     "on_days": ["mo"],
     "at_hour": 21,
     "tags": ["laptop"]
-}'
+  }'
 ```
 
 Example response:
@@ -91,8 +91,8 @@ Example request:
 
 ```bash
 curl -X PATCH "https://landscape.canonical.com/api/v2/rebootprofiles/11" \
-  -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
   -d '{
     "title": "newtitle"
 }'

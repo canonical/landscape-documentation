@@ -15,4 +15,5 @@ Configuration file references for Landscape Server. These pages document availab
 
 immutable-settings
 service-conf
+outbox-configuration
 ```

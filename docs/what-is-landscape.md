@@ -23,7 +23,7 @@ Although "Landscape" refers to both the Landscape Server and Landscape Client ap
 In addition, Landscape Server relies on the following third-party infrastructure:
 
 - **PostgreSQL**: The database.
-- **RabbitMQ**: Queues and processes background tasks, such as repository synchronisation supports internal communication between services (for example, triggering alerts).
+- **RabbitMQ**: Queues and processes background tasks, such as repository synchronisation. Supports internal communication between services (for example, triggering alerts).
 - (Usually) **HAProxy** or **Apache**: Handles HTTPS requests and routes them to Landscape Server. HAProxy is used for high-availability deployments.
 
 The Landscape message system (built into the Server) is responsible for communication between managed clients and the Server.

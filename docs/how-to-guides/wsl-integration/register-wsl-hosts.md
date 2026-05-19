@@ -136,11 +136,11 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
     url = landscape-server.example.com:6554
     ```
 
-- **Check that the `enable-wsl-child-instance-profiles` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**
+- **Check that the `wsl_management` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**
 
     ```ini
     [features]
-    enable-wsl-child-instance-profiles = true
+    wsl_management = true
     ```
 
     This setting didn't exist in older installations of Landscape. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.

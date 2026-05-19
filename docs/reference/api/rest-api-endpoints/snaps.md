@@ -25,14 +25,17 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST   -H "Authorization: Bearer $JWT"   -d '{
-  "action": "install",
-  "computer_ids": [23],
-  "snaps": [
+curl -X POST https://landscape.canonical.com/api/v2/snaps \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{
+    "action": "install",
+    "computer_ids": [23],
+    "snaps": [
       {"name": "hello"},
       {"name": "spotify"}
-  ]
-  }'   https://landscape.canonical.com/api/v2/snaps
+    ]
+  }'   
 ```
 
 Example response:

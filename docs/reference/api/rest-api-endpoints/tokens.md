@@ -24,7 +24,9 @@ Query parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-account -H "Authorization: Bearer $JWT"
+curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-account \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 This endpoint returns an empty response.
@@ -44,7 +46,9 @@ Query parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-me -H "Authorization: Bearer $JWT"
+curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-me \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 This endpoint returns an empty response.
@@ -64,7 +68,9 @@ Query parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-system -H "Authorization: Bearer $JWT"
+curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-system \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 This endpoint returns an empty response.
@@ -84,7 +90,9 @@ Query parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-account/account/my-account -H "Authorization: Bearer $JWT"
+curl -X POST https://landscape.canonical.com/api/v2/tokens/invalidate-account/account/my-account \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 This endpoint returns an empty response.

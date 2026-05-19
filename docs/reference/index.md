@@ -5,6 +5,7 @@ myst:
 ---
 
 (reference-index)=
+
 # Reference
 
 This section includes technical reference information for Landscape Server and Landscape Client.
@@ -51,6 +52,17 @@ Network requirements, ports, and firewall configurations.
 :maxdepth: 2
 
 networking/index
+```
+
+## Landscape Server charm
+
+References specifically related to the Landscape Server charm.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
+charm/index
 ```
 
 ## Terminology

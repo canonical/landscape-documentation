@@ -11,7 +11,7 @@ Landscape Server is the server-side component of the Landscape ecosystem. It is 
 
 ![Landscape Service Diagram](/assets/images/landscape-services.jpg "Landscape Services")
 
-A Landscape Server deployment has six required services:
+A Landscape Server deployment has seven required services:
 
 * [API](#api) - serves REST API and Legacy API requests
 * [Appserver](#appserver) - serves Legacy UI and static files for the new UI
@@ -19,6 +19,7 @@ A Landscape Server deployment has six required services:
 * [Job handler](#job-handler) - runs background jobs such as repository mirror syncs
 * [Message system](#message-system) - exchanges messages with Landscape Clients
 * [Pingserver](#pingserver) - records Landscape Client heartbeat pings
+* [Outbox](#outbox) - ensures reliable, eventually-consistent delivery of events across databases and the message broker
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
@@ -107,6 +108,11 @@ The Package search service responds to internal HTTP requests with the Debian pa
 ### Package upload
 
 The Package upload service responds to dput or FTP requests to upload Debian packages to Landscape-managed package repositories. It maintains a queue of package uploads and processes them into the appropriate repositories. It primarily interacts with the PostgreSQL database and the filesystem.
+
+(explanation-server-architecture-outbox)=
+### Outbox
+
+The Outbox is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-outbox`. It runs continuously as a background worker and connects to the Landscape databases and the Landscape broker. The outbox pattern guarantees correctness and eventual consistency for operations that span multiple databases or span a database and broker.
 
 ### Secrets
 

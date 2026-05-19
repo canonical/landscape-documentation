@@ -27,7 +27,10 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.canonical.com/api/v2/accounts -H "Authorization: Bearer $JWT" -d '{"title": "Onward, Inc."}'
+curl -X POST https://landscape.canonical.com/api/v2/accounts \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"title": "Onward, Inc."}'
 ```
 
 Example response:
@@ -96,7 +99,10 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST https://landscape.example.com/api/v2/standalone-account -H "Authorization: Bearer $JWT" -d '{"email": "john@example.com", "name": "John Doe", "password": "Passw0rd"}'
+curl -X POST https://landscape.example.com/api/v2/standalone-account \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"email": "john@example.com", "name": "John Doe", "password": "Passw0rd"}'
 ```
 
 Example response:
