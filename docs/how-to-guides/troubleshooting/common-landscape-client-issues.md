@@ -7,12 +7,14 @@ myst:
 (howto-troubleshoot-landscape-client)=
 # How to troubleshoot Landscape Client issues
 
-Use this guide to troubleshoot common Landscape Client issues with registration, communication with the server, client package reporting, and Ubuntu Pro status reporting.
+Issues with Landscape Client can have many different causes. This guide describes common problems and troubleshooting steps you can take.
+
+If you've worked through these steps and still need help, we recommend contacting [Canonical Support](https://support-portal.canonical.com/). Note that you'll need a Support contract to use our Support Portal.
 
 (heading-client-general-checks)=
-## If you don't know where to start
+## Start here: Initial client checks
 
-If Landscape Client isn't working and you don't know the cause yet, use these checks to narrow down the issue. After you find a specific error or symptom, go to the matching section in this guide.
+If Landscape Client isn't working and you don't know the cause yet, use these general checks to narrow down the issue. After you find a specific error or symptom, go to the matching section in this guide.
 
 ### Check whether the service is running
 
@@ -20,7 +22,7 @@ If Landscape Client isn't working and you don't know the cause yet, use these ch
 sudo systemctl status landscape-client
 ```
 
-If the service is inactive, failed, or skipped because of `Start condition unmet`, see {ref}`client-start-condition-unmet`.
+If the service shows `Start condition unmet`, see {ref}`heading-client-start-condition-unmet`.
 
 ### Check the broker log
 
@@ -32,17 +34,22 @@ The broker log is usually the best first log to check for client registration, c
 
 Use the log output to choose the next section:
 
-- If the log contains `Error 60` or `server certificate verification failed`, see {ref}`client-certificate-not-trusted`.
-- If the log contains `Error 77`, see {ref}`client-certificate-not-readable`.
-- If the log contains `Error 6` or `Could not resolve host`, see {ref}`client-dns-resolution`.
-- If the client is registered but doesn't appear online or doesn't pick up activities, see {ref}`client-debug-logging`.
-- If package status is incorrect or stale, see {ref}`client-package-reporting`.
+- If the log contains `Error 60` or `server certificate verification failed`, see {ref}`heading-client-certificate-not-trusted`.
+- If the log contains `Error 77`, see {ref}`heading-client-certificate-not-readable`.
+- If the log contains `Error 6` or `Could not resolve host`, see {ref}`heading-client-dns-resolution`.
+- If the log contains an error referencing `prostatus.json`, see {ref}`heading-client-pro-status`.
+- If the client is registered but doesn't appear online or doesn't pick up activities, see {ref}`heading-client-debug-logging`.
+- If package status is incorrect or stale, see {ref}`heading-client-package-reporting`.
 
 ### Check hostname resolution
+
+Check that the Landscape server hostname resolves correctly:
 
 ```bash
 getent hosts <LANDSCAPE-SERVER-NAME>
 ```
+
+If hostname resolution works, this command returns an IP address followed by the hostname. If it returns no output, the hostname didn't resolve.
 
 You can also test with:
 
@@ -51,9 +58,13 @@ ping <LANDSCAPE-SERVER-NAME>
 dig <LANDSCAPE-SERVER-NAME>
 ```
 
-If the hostname doesn't resolve, fix DNS or add the correct hostname mapping to `/etc/hosts`. Then see {ref}`client-dns-resolution`.
+With `ping`, failed resolution usually shows an error such as `Name or service not known` or `Temporary failure in name resolution`. With `dig`, failed resolution usually appears as `status: NXDOMAIN`.
+
+If the hostname doesn't resolve, see {ref}`heading-client-dns-resolution`.
 
 ### Check the client configuration
+
+Check the key settings in the Landscape Client configuration file:
 
 ```bash
 grep -E '^(url|ping_url|ssl_public_key)' /etc/landscape/client.conf
@@ -67,12 +78,12 @@ Confirm that:
 
 If the hostname, URL, or certificate path is wrong, update `/etc/landscape/client.conf` or re-run `landscape-config` with the correct values.
 
-(client-registration-fails)=
+(heading-client-registration-fails)=
 ## Registration fails
 
-Use this section if `landscape-config` fails, the client doesn't appear as a pending instance (computer) in Landscape, or registration doesn't complete successfully.
+This section covers issues where `landscape-config` fails or the client doesn't appear in Landscape after registration.
 
-(client-certificate-not-trusted)=
+(heading-client-certificate-not-trusted)=
 ### Certificate isn't trusted
 
 **Problem:**
@@ -108,43 +119,44 @@ landscape.lib.fetch.PyCurlError: Error 60: server certificate verification faile
 
 #### Solution
 
-If you use Landscape SaaS, or if your Landscape server uses a certificate trusted by the client system, you normally don't need to configure `ssl_public_key`.
+First, copy the correct certificate to the client:
 
-If your Landscape server uses a self-signed certificate, copy that certificate to the client. If your Landscape server uses a certificate signed by an internal certificate authority, copy the issuing CA certificate to the client. Don't use only the server leaf certificate unless the certificate is self-signed.
+- If your Landscape server uses a self-signed certificate, copy that certificate to the client.
+- If your Landscape server uses a certificate signed by an internal certificate authority, copy the issuing CA certificate to the client (not the server leaf certificate).
 
-You can configure certificate trust in either of these ways:
+Then configure certificate trust using one of these methods:
 
-- Provide the certificate to Landscape Client during registration
-- Import the certificate into the system CA store
+**Method 1: Tell Landscape Client directly about the certificate**
 
-To provide the certificate during registration, copy the certificate to the client and include it in the registration command:
+Pass the certificate path when running `landscape-config`:
 
 ```bash
 sudo landscape-config \
   --computer-title "${HOSTNAME}" \
-  --account-name <account-name> \
+  --account-name <ACCOUNT-NAME> \
   --url https://<LANDSCAPE-SERVER-NAME>/message-system \
   --ping-url http://<LANDSCAPE-SERVER-NAME>/ping \
-  --ssl-public-key=/etc/landscape/landscape-server.pem \
-  --silent
+  --ssl-public-key=/etc/landscape/landscape-server.pem
 ```
 
-You can also set the certificate path in `/etc/landscape/client.conf`:
+This sets `ssl_public_key` in `/etc/landscape/client.conf`. You can also set it directly in the config file:
 
 ```ini
 ssl_public_key = /etc/landscape/landscape-server.pem
 ```
 
-To trust the certificate system-wide, copy the certificate to `/usr/local/share/ca-certificates/` with a `.crt` extension:
+**Method 2: Import the certificate into the system CA store**
+
+Copy the certificate to `/usr/local/share/ca-certificates/` with a `.crt` extension and update the system CA store:
 
 ```bash
-sudo cp /path/to/certificate.crt /usr/local/share/ca-certificates/
+sudo cp /PATH/TO/CERTIFICATE.CRT /usr/local/share/ca-certificates/
 sudo update-ca-certificates
 ```
 
-System-wide trust is useful if other processes on the client also need to trust the Landscape server certificate.
+This approach trusts the certificate system-wide, so all processes on the client trust the Landscape server certificate. It's useful if managing the certificate path in `client.conf` on each client machine individually isn't practical.
 
-(client-certificate-not-readable)=
+(heading-client-certificate-not-readable)=
 ### Certificate file can't be read
 
 **Problem:**
@@ -161,11 +173,11 @@ The broker log should show an error similar to:
 2016-08-16 09:40:24,013 INFO [MainThread] Starting urgent message exchange with https://YOUR.OPL.ADDRESS/message-system.
 2016-08-16 09:40:24,020 ERROR [PoolThread-twisted.internet.reactor-1] Error contacting the server at https://YOUR.OPL.ADDRESS/message-system.
 Traceback (most recent call last):
-File "/usr/lib/python2.7/dist-packages/landscape/broker/transport.py", line 71, in exchange
+File "/usr/lib/python3/dist-packages/landscape/client/broker/transport.py", line 71, in exchange
 message_api)
-File "/usr/lib/python2.7/dist-packages/landscape/broker/transport.py", line 45, in _curl
+File "/usr/lib/python3/dist-packages/landscape/client/broker/transport.py", line 45, in _curl
 headers=headers, cainfo=self._pubkey, curl=curl))
-File "/usr/lib/python2.7/dist-packages/landscape/lib/fetch.py", line 109, in fetch
+File "/usr/lib/python3/dist-packages/landscape/lib/fetch.py", line 109, in fetch
 raise PyCurlError(e.args[0], e.args[1])
 PyCurlError: Error 77:
 2016-08-16 09:40:24,021 INFO [MainThread] Message exchange failed.
@@ -196,12 +208,12 @@ md5sum /PATH/TO/SSL/CERT
 
 If the file path is wrong, update `/etc/landscape/client.conf` or re-run `landscape-config` with the correct `--ssl-public-key` value.
 
-(client-dns-resolution)=
+(heading-client-dns-resolution)=
 ### Server name can't be resolved
 
 **Problem:**
 
-The client can't register or check in because it can't resolve the Landscape server hostname.
+The client can't register or communicate with the server because it can't resolve the Landscape server hostname.
 
 This can happen when the server hostname is missing from DNS, the client is using the wrong hostname, or a local test environment requires an `/etc/hosts` entry.
 
@@ -260,30 +272,74 @@ After fixing DNS or `/etc/hosts`, run registration again:
 sudo landscape-config
 ```
 
-For non-interactive registration, use `--silent` only when the required values are already in `/etc/landscape/client.conf` or provided as command-line options.
+(heading-client-pro-status)=
+### Client can't run `pro status`
 
-(client-registration-pending)=
-### Registration remains pending
+> See also: [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/)
 
 **Problem:**
 
-The registration command succeeds, but the machine doesn't appear as a fully managed computer in Landscape.
+Landscape Client runs `pro status` during registration to determine whether the machine should receive a Pro (or Legacy) license seat. If the client can't collect this information and send it to the server, the client will fail to register.
 
 **Symptoms:**
 
-- `landscape-config` reports that the registration request was sent successfully.
-- The machine appears as a pending computer in the Landscape web portal.
-- The machine doesn't appear as a fully managed computer yet.
+- The broker log contains a pre-registration failure error, such as `Pre-registration failure: Could not parse prostatus.json`.
+- `pro status` fails when run manually on the client.
+
+**Common causes:**
+
+- Ubuntu Pro Client isn't installed on the client machine
+- The client machine has a broken or non-standard Python environment.
+- Security hardening or file permissions prevent the `landscape` user from running `pro status`.
 
 #### Solution
 
-If your deployment requires manual approval, approve the pending computer in the Landscape web portal.
+Confirm the issue by running `pro status` on the client:
 
-If the pending registration belongs to an existing machine, map it to the existing machine entry instead of accepting it as a new computer. In the classic web portal, use the **Computer** field on the pending registration form to select the existing computer before accepting the registration.
+```bash
+pro status
+```
 
-For more information about duplicate-management workflows, see {ref}`how-to-remove-duplicate-instances`.
+If this command fails:
 
-(client-start-condition-unmet)=
+- If Ubuntu Pro Client isn't installed, install it:
+
+    ```bash
+    sudo apt install ubuntu-pro-client
+    ```
+
+- If the error indicates a broken Python runtime or restricted permissions, fix those local issues.
+- If additional security hardening is enabled, verify that the `landscape` user can execute `/usr/bin/pro` and read Ubuntu Pro client configuration files.
+
+Then run `pro status` again and confirm it succeeds.
+
+After resolving the issue, re-run registration:
+
+```bash
+sudo landscape-config
+```
+
+(heading-client-registration-pending)=
+## Pending registration belongs to an existing machine
+
+A pending registration can belong to an existing machine instead of a new one. This often happens when the machine is re-registered after a communication failure or after the machine is reinstalled (for example, the OS image is rebuilt).
+
+### Solution
+
+Note that this must be done in the *classic* web portal.
+
+Map the pending registration to the existing machine entry instead of accepting it as a new machine. In the classic web portal, use the **Computer** field on the pending registration form to select the existing registered computer. Then **Accept** the registration.
+
+(heading-client-duplicate-instances)=
+## Client appears as a duplicate instance/machine
+
+A client machine can appear more than once in Landscape if a new registration request is accepted as a new client instead of being mapped to the existing entry.
+
+### Solution
+
+For steps to resolve duplicate machines, see {ref}`how-to-remove-duplicate-instances`.
+
+(heading-client-start-condition-unmet)=
 ## Client service doesn't start
 
 **Problem:**
@@ -294,7 +350,7 @@ Landscape Client checks whether a registration request has been sent before the 
 
 **Error message:**
 
-`systemctl status landscape-client` may show output similar to this:
+Running `systemctl status landscape-client` should show output similar to:
 
 ```text
 ○ landscape-client.service - Landscape client daemons
@@ -323,17 +379,10 @@ Check for the broker state file and its backup:
 sudo ls -l /var/lib/landscape/client/broker.bpickle*
 ```
 
-The broker state file is:
+The expected filepaths are:
 
-```text
-/var/lib/landscape/client/broker.bpickle
-```
-
-The backup file is:
-
-```text
-/var/lib/landscape/client/broker.bpickle.old
-```
+- Broker state file: `/var/lib/landscape/client/broker.bpickle`
+- Backup file: `/var/lib/landscape/client/broker.bpickle.old`
 
 If the broker state file is missing or corrupted, send a new registration request:
 
@@ -355,79 +404,72 @@ After registration is sent, check the service again:
 sudo systemctl status landscape-client
 ```
 
-If your deployment requires manual approval, approve the pending registration in the Landscape web portal.
+If your deployment requires manual approval of new clients, approve the pending registration in the Landscape web portal.
 
-(client-duplicate-instances)=
-## Client appears as a duplicate machine
-
-A client machine can appear more than once in Landscape if it sends a new registration request and that request is accepted as a new computer.
-
-This can happen after communication problems, repeated use of `landscape-config`, reinstalling a machine, restoring a machine, or deleting local client state. Also, if the server has a registration key configured and auto-registration is enabled, registration requests are accepted automatically.
-
-### Solution
-
-If the machine is still pending (not yet duplicated), map it to the existing machine entry. Note this is only available in the *classic* web portal.
-
-1. Open the pending registration.
-1. In the **Computer** dropdown, select the existing machine you want to map it with
-1. Accept the pending registration.
-
-If duplicate machines already exist, follow {ref}`how-to-remove-duplicate-instances`.
-
-(client-pro-status)=
-## Ubuntu Pro or licensing status is wrong
+(heading-client-debug-logging)=
+## Client is registered but doesn't pick up activities
 
 **Problem:**
 
-Landscape shows the wrong Ubuntu Pro or licensing status for a client.
+The client is already registered and accepted, but it doesn't appear to pick up activities from Landscape or return activity results.
 
-Landscape Client uses Ubuntu Pro Client to gather status information. Ubuntu Pro Client must be installed and functional even if the machine isn't attached to an Ubuntu Pro subscription.
+If this issue affects multiple clients, see {ref}`how-to-idle-activities` as it's likely an issue with the server.
 
 **Symptoms:**
 
-- Landscape shows the wrong seat type or licensing status.
-- The client fails to send Ubuntu Pro status information.
-- The broker log contains an error related to `prostatus.json`.
-- `pro status` fails on the client.
-- The machine has a broken or non-standard Python environment.
-- Security hardening prevents the `landscape` user from running the required command.
+- The client doesn't show a current ping time.
+- Activities remain queued or pending.
+- Script activities don't appear to run.
+- Activity results are not returned to Landscape.
 
 ### Solution
 
-Check whether Ubuntu Pro Client works locally:
+Start with the general checks in this guide: {ref}`heading-client-general-checks`. If those checks don't reveal the cause, enable debug logging to get more detail from the broker log.
 
-```bash
-pro status
+Open `/etc/landscape/client.conf` and set:
+
+```ini
+log_level = debug
 ```
 
-Review recent Landscape Client logs:
+Then restart Landscape Client and review the broker log:
 
 ```bash
-sudo tail -n 100 /var/log/landscape/broker.log
-sudo tail -n 100 /var/log/landscape/manager.log
+sudo systemctl restart landscape-client
+sudo tail -n 200 /var/log/landscape/broker.log
 ```
 
-Check for local conditions that might prevent Landscape Client from collecting Ubuntu Pro status:
+At debug level, `broker.log` shows the full message exchange between the client and server. Look for:
 
-- Ubuntu Pro Client is missing or broken.
-- The machine has a broken or non-standard Python environment.
-- File permissions prevent the `landscape` user from running the required command.
-- Security hardening has changed permissions expected by Landscape Client.
+- Ping exchange entries to confirm the client is reaching the server.
+- Incoming message entries describing received activities.
+- Outgoing message entries after an activity runs, confirming results are sent back.
+- For script activities, the script content received and any output or error returned to the server.
 
-After fixing the local issue, restart Landscape Client:
+If you can see the client pinging but no activities arriving, the issue is likely on the server side. Check that the client is in the expected access group and has the correct tags for the activity.
+
+If activities arrive but don't complete or return results, look for errors in the log immediately after the activity is received.
+
+After troubleshooting, restore the log level in `/etc/landscape/client.conf`:
+
+```ini
+log_level = info
+```
+
+And restart the client:
 
 ```bash
 sudo systemctl restart landscape-client
 ```
 
-(client-package-reporting)=
+(heading-client-package-reporting)=
 ## Package status is incorrect or not reporting
 
 **Problem:**
 
 Landscape shows stale or incorrect package information for a client.
 
-This can affect upgrade profiles because Landscape might not detect that updates are available.
+This can affect {ref}`upgrade profiles <reference-terms-upgrade-profile>` because Landscape might not detect that updates are available.
 
 **Symptoms:**
 
@@ -451,7 +493,7 @@ Then review the package reporter log:
 sudo tail -n 100 /var/log/landscape/package-reporter.log
 ```
 
-Look for entries that show whether the client downloaded the hash-to-ID database and whether it queued package reporting messages.
+Look for entries that show whether the client downloaded the `hash-id` database and whether it queued package reporting messages.
 
 Example package reporter log entries:
 
@@ -462,7 +504,7 @@ Example package reporter log entries:
 2025-06-11 18:06:42,866 INFO     [MainThread] Queuing message with changes in known packages: 598 installed, 90750 available, 0 available upgrades, 0 locked, 0 autoremovable, 14855 security, 0 not installed, 0 not available, 0 not available upgrades, 0 not locked, 0 not autoremovable, 0 not security.
 ```
 
-If the server reports that the client is having trouble reporting package information, check the client's APT sources. A broken APT source can prevent package reporting from completing. Common causes include:
+If the server reports that the client isn't reporting package information, check the client's APT sources. A broken APT source can prevent package reporting from completing. Common causes include:
 
 - an old PPA that no longer exists
 - a third-party repository that is unavailable
@@ -499,11 +541,11 @@ sudo systemctl restart landscape-client
 
 Landscape Client should rebuild the local package database and send updated package information to the server.
 
-If this doesn't resolve the issue, re-register the machine. If the re-registration appears as pending and belongs to an existing computer, map it to the existing computer instead of accepting it as a new one.
+If this doesn't resolve the issue, re-register the machine. If the re-registration appears as pending and belongs to an existing computer, {ref}`map it to the existing machine instead of accepting it as a new one <heading-client-registration-pending>`.
 
 ### Solution #3: Check permissions for the Landscape APT update helper
 
-Landscape uses its own helper script to check for updates. This script must have the expected permissions, including the `setuid` bit. Some security tools may remove this permission.
+Landscape uses its own helper script to check for updates. This script must keep its `setuid` permission, which some security tools remove.
 
 Check the file permissions:
 
@@ -511,83 +553,10 @@ Check the file permissions:
 ls -lah /usr/lib/landscape/apt-update
 ```
 
-Expected output should include the `s` bit:
+Expected output should include the `s` permission marker:
 
 ```text
 -rwsr-xr-- 1 root landscape  /usr/lib/landscape/apt-update
 ```
 
-If the logs show that Landscape can't run this script, check whether a security tool or hardening policy changed the permissions.
-
 For more information about package hashes, package IDs, and package reporting internals, see {ref}`explanation-package-reporting`.
-
-(client-debug-logging)=
-## Client is registered but doesn't pick up activities
-
-**Problem:**
-
-The client is registered, but it doesn't appear to pick up activities from Landscape or return activity results.
-
-**Symptoms:**
-
-- The client doesn't show a current ping time.
-- Activities remain queued or pending.
-- Script activities don't appear to run.
-- Activity results are not returned to Landscape.
-- The default broker log doesn't contain enough detail to diagnose the issue.
-
-### Solution
-
-Check whether the service is running:
-
-```bash
-sudo systemctl status landscape-client
-```
-
-Review the broker log:
-
-```bash
-sudo tail -n 100 /var/log/landscape/broker.log
-```
-
-Check the configured URLs:
-
-```bash
-grep -E '^(url|ping_url)' /etc/landscape/client.conf
-```
-
-The `ping_url` is used for client heartbeat checks. The `url` is used for message exchange between the client and server, including activities and activity results.
-
-If the broker log doesn't show enough detail, enable debug logging.
-
-Open `/etc/landscape/client.conf` and set:
-
-```ini
-log_level = debug
-```
-
-Restart Landscape Client:
-
-```bash
-sudo systemctl restart landscape-client
-```
-
-Review the broker log again:
-
-```bash
-sudo tail -n 100 /var/log/landscape/broker.log
-```
-
-At debug level, `broker.log` can show the full message exchange between the client and server. For script activities, debug logging can show the script received by the client and the output returned to the server.
-
-Debug logs can contain detailed system information, activity payloads, and script output. Disable debug logging after troubleshooting:
-
-```ini
-log_level = info
-```
-
-Then restart the client:
-
-```bash
-sudo systemctl restart landscape-client
-```
