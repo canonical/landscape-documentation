@@ -506,10 +506,10 @@ Example package reporter log entries:
 
 If the server reports that the client isn't reporting package information, check the client's APT sources. A broken APT source can prevent package reporting from completing. Common causes include:
 
-- an old PPA that no longer exists
-- a third-party repository that is unavailable
-- a repository that doesn't publish packages for the client's Ubuntu release
-- an invalid file in `/etc/apt/sources.list.d/`
+- An old PPA that no longer exists
+- A third-party repository that is unavailable
+- A repository that doesn't publish packages for the client's Ubuntu release
+- An invalid file in `/etc/apt/sources.list.d/`
 
 After fixing broken APT sources, run:
 
