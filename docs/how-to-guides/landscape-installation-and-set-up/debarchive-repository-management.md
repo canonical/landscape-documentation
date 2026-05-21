@@ -95,7 +95,7 @@ The available settings and their defaults are:
 | Database port | `deb.archive.database.port` | `5432` |
 | Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
 | Database password | `deb.archive.database.password` | *(empty, read from service.conf)* |
-| Database SSL mode | `deb.archive.database.ssl` | `disable` |
+| Database SSL mode | `deb.archive.database.ssl` | `disable` (can be any of the [PostgreSQL SSL modes](https://www.postgresql.org/docs/current/libpq-ssl.html)) |
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |
