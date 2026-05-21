@@ -47,11 +47,13 @@ To obtain a JWT token, authenticate against the Landscape REST API. See {ref}`re
 
 Before migrating, inventory your existing reprepro-managed repositories. On the Landscape Server, the reprepro repository data is stored under `/var/lib/landscape/landscape-repository/standalone/`.
 
-List all configured distributions and their pockets:
+List all configured distributions and their pockets. Each distribution has its own configuration directory:
 
 ```bash
-cat /var/lib/landscape/landscape-repository/standalone/conf/distributions
+cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/distributions
 ```
+
+where `<DISTRIBUTION>` is the name of the distribution you created (e.g., `ubuntu`, `ubuntu-staging`).
 
 This file contains stanzas like:
 
@@ -82,8 +84,10 @@ The `Update:` field indicates a sync (mirror) pocket. Stanzas with a `Pull:` fie
 To see what packages are currently in a pocket:
 
 ```bash
-reprepro -b /var/lib/landscape/landscape-repository/standalone list noble-release
+reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list noble-release
 ```
+
+Replace `<DISTRIBUTION>` with the appropriate distribution directory name.
 
 ## Migrate sync (mirror) pockets
 
@@ -94,7 +98,7 @@ For sync pockets that mirror an upstream archive, create a new mirror in Deb Arc
 Check the update rules in the reprepro configuration:
 
 ```bash
-cat /var/lib/landscape/landscape-repository/standalone/conf/updates
+cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/updates
 ```
 
 Look for stanzas matching your pocket. For example:
@@ -107,47 +111,42 @@ Components: main restricted universe multiverse
 Architectures: amd64
 ```
 
+The `Components` and `Architectures` fields may not be present. If they're missing, use the values from the corresponding distribution stanza.
+
 ### 2. Create the mirror
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.MirrorService/CreateMirror" \
+curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "mirror": {
-      "display_name": "noble-updates",
-      "archive_root": "http://archive.ubuntu.com/ubuntu",
-      "distribution": "noble-updates",
-      "architectures": ["amd64"],
-      "components": ["main", "restricted", "universe", "multiverse"]
-    }
+    "displayName": "noble-updates",
+    "archiveRoot": "http://archive.ubuntu.com/ubuntu",
+    "distribution": "noble-updates",
+    "architectures": ["amd64"],
+    "components": ["main", "restricted", "universe", "multiverse"]
   }'
 ```
 
-The response includes a `mirror_id` that you'll use in subsequent requests.
+The response includes a `mirrorId` that you'll use in subsequent requests.
 
 ### 3. Sync the mirror
 
 Trigger a sync to download packages from the upstream source:
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.MirrorService/SyncMirror" \
+curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "mirrors/<MIRROR_ID>"
-  }'
+  -d '{}'
 ```
 
 This returns a long-running operation. Poll for its completion:
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.OperationService/GetOperation" \
+curl -X GET "$API_BASE/operations/<OPERATION_ID>" \
   -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "operations/<OPERATION_ID>"
-  }'
+  -H "Content-Type: application/json"
 ```
 
 The operation is complete when `done` is `true`.
@@ -165,7 +164,7 @@ Pull pockets in the legacy system stage packages from another pocket using allow
 Check the reprepro `pulls` configuration:
 
 ```bash
-cat /var/lib/landscape/landscape-repository/standalone/conf/pulls
+cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/pulls
 ```
 
 Example stanza:
@@ -181,7 +180,7 @@ FilterList: install noble-release-staging.list
 The referenced filter list file (e.g., `noble-release-staging.list`) contains package name patterns, one per line. Examine the filter list:
 
 ```bash
-cat /var/lib/landscape/landscape-repository/standalone/conf/noble-release-staging.list
+cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/noble-release-staging.list
 ```
 
 Example allowlist content:
@@ -213,33 +212,28 @@ Deb Archive mirrors support package filtering using an aptly-compatible filter s
 Create a mirror pointing at the same upstream as the original source pocket, with the filter applied:
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.MirrorService/CreateMirror" \
+curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "mirror": {
-      "display_name": "noble-release-staging",
-      "archive_root": "http://archive.ubuntu.com/ubuntu",
-      "distribution": "noble",
-      "architectures": ["amd64"],
-      "components": ["main"],
-      "filter": "Name (= nginx) | Name (= curl) | Name (= libssl3)",
-      "filter_with_deps": true
-    }
+    "displayName": "noble-release-staging",
+    "archiveRoot": "http://archive.ubuntu.com/ubuntu",
+    "distribution": "noble",
+    "architectures": ["amd64"],
+    "components": ["main"],
+    "filter": "Name (= nginx) | Name (= curl) | Name (= libssl3)",
+    "filterWithDeps": true
   }'
 ```
 
-Set `filter_with_deps` to `true` if you want the filter to also include dependencies of matched packages (recommended for allowlists).
+Set `filterWithDeps` to `true` if you want the filter to also include dependencies of matched packages (recommended for allowlists).
 
 ### 4. Sync the filtered mirror
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.MirrorService/SyncMirror" \
+curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "mirrors/<MIRROR_ID>"
-  }'
+  -H "Content-Type: application/json"
 ```
 
 ## Migrate upload pockets
@@ -251,13 +245,13 @@ Upload pockets contain packages that were manually uploaded by users. Since ther
 List the packages in the upload pocket:
 
 ```bash
-reprepro -b /var/lib/landscape/landscape-repository/standalone list noble-staging
+reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list noble-staging
 ```
 
 The pool directory containing the actual `.deb` files is at:
 
 ```
-/var/lib/landscape/landscape-repository/standalone/pool/
+/var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/
 ```
 
 ### 2. Make packages accessible via URL
@@ -268,47 +262,46 @@ If the Deb Archive service runs on the same machine as your existing repository,
 
 ```bash
 # Example: find all .deb files for the staging pocket's component
-find /var/lib/landscape/landscape-repository/standalone/pool/main/ -name "*.deb"
+find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/main/ -name "*.deb"
 ```
 
 Alternatively, if the packages are served by the existing Landscape repository web server, they may already be accessible at:
 
 ```
-https://$LANDSCAPE_FQDN/repository/standalone/ubuntu/pool/
+https://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>/pool/
 ```
 
 ### 3. Create a local repository
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.LocalService/CreateLocal" \
+curl -X POST "$API_BASE/locals" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "local": {
-      "display_name": "noble-staging",
-      "default_distribution": "noble",
-      "default_component": "main"
-    }
+    "displayName": "noble-staging",
+    "defaultDistribution": "noble",
+    "defaultComponent": "main"
   }'
 ```
 
-The response includes a `local_id`.
+The response includes a `localId`.
 
 ### 4. Import packages
 
 Import each package into the local repository:
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.LocalService/ImportLocalPackages" \
+curl -X POST "$API_BASE/locals/<LOCAL_ID>:importLocalPackages" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "locals/<LOCAL_ID>",
     "url": "file:///var/lib/landscape/landscape-repository/standalone/pool/main/m/my-package/my-package_1.0-1_amd64.deb"
   }'
 ```
 
 This is a long-running operation. Poll the returned operation for completion before importing the next package.
+
+#### Option A: Script individual imports
 
 To import multiple packages, script the process:
 
@@ -316,14 +309,13 @@ To import multiple packages, script the process:
 #!/bin/bash
 LOCAL_ID="<LOCAL_ID>"
 
-find /var/lib/landscape/landscape-repository/standalone/pool/ -name "*.deb" | while read -r deb_path; do
+find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ -name "*.deb" | while read -r deb_path; do
   echo "Importing: $deb_path"
   
-  RESPONSE=$(curl -s -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.LocalService/ImportLocalPackages" \
+  RESPONSE=$(curl -s -X POST "$API_BASE/locals/$LOCAL_ID:importLocalPackages" \
     -H "Authorization: Bearer $JWT" \
     -H "Content-Type: application/json" \
     -d "{
-      \"name\": \"locals/$LOCAL_ID\",
       \"url\": \"file://$deb_path\"
     }")
 
@@ -331,10 +323,10 @@ find /var/lib/landscape/landscape-repository/standalone/pool/ -name "*.deb" | wh
   OP_NAME=$(echo "$RESPONSE" | jq -r '.name')
   
   while true; do
-    STATUS=$(curl -s -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.OperationService/GetOperation" \
+    STATUS=$(curl -s -X GET "$API_BASE/operations/$OP_NAME" \
       -H "Authorization: Bearer $JWT" \
       -H "Content-Type: application/json" \
-      -d "{\"name\": \"$OP_NAME\"}")
+    )
     
     DONE=$(echo "$STATUS" | jq -r '.done')
     if [ "$DONE" = "true" ]; then
@@ -345,8 +337,39 @@ find /var/lib/landscape/landscape-repository/standalone/pool/ -name "*.deb" | wh
 done
 ```
 
+#### Option B: Import from a tarball or zip archive
+
+As an alternative to scripting individual imports, you can collect the `.deb` files into a tarball or zip archive and pass it directly to Deb Archive. The service will extract the archive and import all packages:
+
+```bash
+# Create a tarball of all packages
+tar -czf packages.tar.gz -C /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ .
+
+# Import the archive directly
+curl -X POST "$API_BASE/locals/$LOCAL_ID:importLocalPackages" \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "file:///path/to/packages.tar.gz"}'
+```
+
+Alternatively, use a zip archive:
+
+```bash
+# Create a zip archive of all packages
+cd /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/
+zip -r packages.zip .
+
+# Import the zip archive directly
+curl -X POST "$API_BASE/locals/$LOCAL_ID:importLocalPackages" \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "file:///path/to/packages.zip"}'
+```
+
+Deb Archive will automatically extract the archive and import all `.deb` files found within it.
+
 ```{note}
-If you only need to import packages that were in a specific pocket, cross-reference the output of `reprepro list <codename>` with the files in the pool to identify which `.deb` files to import.
+If you only need to import packages that were in a specific pocket, cross-reference the output of `reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list <codename>` with the files in the pool to identify which `.deb` files to import.
 ```
 
 ## Preserve the exact state of a sync mirror
@@ -356,7 +379,7 @@ If you need to preserve the precise package versions currently in a sync mirror 
 ### 1. Export the package list
 
 ```bash
-reprepro -b /var/lib/landscape/landscape-repository/standalone list noble-release > noble-release-packages.txt
+reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list noble-release > noble-release-packages.txt
 ```
 
 ### 2. Create a local repository and import
@@ -370,7 +393,7 @@ while read -r line; do
   # reprepro list output format: "codename|component|arch: package version"
   PACKAGE=$(echo "$line" | awk '{print $2}')
   VERSION=$(echo "$line" | awk '{print $3}')
-  find /var/lib/landscape/landscape-repository/standalone/pool/ \
+  find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ \
     -name "${PACKAGE}_${VERSION}_*.deb" -o -name "${PACKAGE}_${VERSION//:/%3a}_*.deb"
 done < noble-release-packages.txt
 ```
@@ -384,15 +407,13 @@ After migrating your mirrors and local repositories, you need to publish them so
 For a filesystem target (serves repositories from the Landscape Server itself):
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.PublicationTargetService/CreatePublicationTarget" \
+curl -X POST "$API_BASE/publicationTargets" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "publication_target": {
-      "display_name": "filesystem-target",
-      "filesystem": {
-        "path": "ubuntu"
-      }
+    "displayName": "filesystem-target",
+    "filesystem": {
+      "path": "ubuntu"
     }
   }'
 ```
@@ -402,18 +423,16 @@ curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.PublicationTarget
 Link a mirror or local repository to a publication target:
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.PublicationService/CreatePublication" \
+curl -X POST "$API_BASE/publications" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "publication": {
-      "source": "mirrors/<MIRROR_ID>",
-      "publication_target": "publicationTargets/<PUBLICATION_TARGET_ID>",
-      "distribution": "noble-updates",
-      "architectures": ["amd64"],
-      "gpg_key": {
-        "armor": "<ASCII_ARMORED_PRIVATE_GPG_KEY>"
-      }
+    "source": "mirrors/<MIRROR_ID>",
+    "publicationTarget": "publicationTargets/<PUBLICATION_TARGET_ID>",
+    "distribution": "noble-updates",
+    "architectures": ["amd64"],
+    "gpgKey": {
+      "armor": "<ASCII_ARMORED_PRIVATE_GPG_KEY>"
     }
   }'
 ```
@@ -423,12 +442,10 @@ For local repositories, use `"source": "locals/<LOCAL_ID>"` instead.
 ### 3. Publish
 
 ```bash
-curl -X POST "$API_BASE/canonical.landscape.debarchive.v1beta1.PublicationService/PublishPublication" \
+curl -X POST "$API_BASE/publications/<PUBLICATION_ID>:publish" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "publications/<PUBLICATION_ID>"
-  }'
+  -d '{}'
 ```
 
 Poll the returned operation until it completes.
@@ -443,7 +460,7 @@ The legacy repository was served at:
 deb https://$LANDSCAPE_FQDN/repository/standalone/ubuntu <codename>-<pocket> <components>
 ```
 
-The new Deb Archive filesystem publications are served from the configured published root path. Consult your publication target configuration for the exact URL.
+The new Deb Archive filesystem publications can be served from the configured published root path using the web server of your choice. Consult your publication target configuration for the exact URL.
 
 ## See also
 
