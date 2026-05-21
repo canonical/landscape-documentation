@@ -63,30 +63,18 @@ The existing `pg_hba.conf` entries for the Landscape users should already permit
 
 The Deb Archive service automatically applies its schema on first successful connection. No manual schema import is needed.
 
-## Configure the Deb Archive snap to read Landscape Server configuration
+## Configure the Deb Archive snap to connect to the database
 
-The `landscape-debarchive` snap reads `/etc/landscape/service.conf` to automatically derive database connection details and secrets from the existing Landscape Server configuration. The snap's `etc-landscape` interface auto-connects, so no manual interface connection is required.
-
-For this to work, the `[stores]` section of `/etc/landscape/service.conf` must contain a `debarchive` entry with the database name. This entry is managed by the `landscape-server` package and should already be present. 
-
-Verify that the `[stores]` section includes a `debarchive` entry:
+The Deb Archive snap must be configured to connect to the new database you created. You can set the database name directly via `snap set`.
 
 ```bash
-grep debarchive /etc/landscape/service.conf
-```
-
-Example output:
-
-```ini
-debarchive = landscape-standalone-debarchive
+sudo snap set landscape-debarchive deb.archive.database.name=landscape-standalone-debarchive
 ```
 
 Which should match the name of the database you created in the previous step.
 
-If the entry is missing, manually add the `debarchive = <DATABASE_NAME>` to the `[stores]` section of `/etc/landscape/service.conf`.
-
 ```{note}
-**Manual installations**: The Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
+**Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
 ```
 
 ### (Optional) Override default settings with `snap set`
@@ -102,7 +90,7 @@ The available settings and their defaults are:
 | Gateway (HTTP) port | `deb.archive.server.gateway-port` | `8100` |
 | Server host | `deb.archive.server.host` | `localhost` |
 | Database driver | `deb.archive.database.driver` | `pgx` |
-| Database name | `deb.archive.database.name` | *(empty, read from service.conf)* |
+| Database name | `deb.archive.database.name` | *(empty, should be set manually)* |
 | Database host | `deb.archive.database.host` | *(empty, read from service.conf)* |
 | Database port | `deb.archive.database.port` | `5432` |
 | Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
