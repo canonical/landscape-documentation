@@ -17,6 +17,10 @@ You can mirror publicly accessible Ubuntu repositories, third-party repositories
 
 Snaps can't be mirrored with Landscape. If you want to mirror snaps, use [Enterprise Store](https://documentation.ubuntu.com/enterprise-store/main/).
 
+In Landscape 26.04 LTS and later, repository mirroring uses a publication-based model. You create or sync repository content in a mirror or local repository, then create a publication to publish that content to a publication target. Client machines are configured to pull from the publication target, which can serve the published repository content.
+
+The service that provides this functionality is `landscape-debarchive`. You might see this name in installation instructions, configuration, logs, troubleshooting materials, or API references related to repository mirroring.
+
 ## Core concepts
 
 Repository mirroring in Landscape is built around four core entities: **mirrors**, **local repositories**, **publications**, and **publication targets**. Understanding these concepts and how they relate to each other is crucial to using this feature correctly.
