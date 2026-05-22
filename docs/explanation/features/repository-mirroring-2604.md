@@ -110,16 +110,28 @@ Publication targets are separate from mirrors and local repositories. You can de
 
 ## An example mirroring workflow
 
-The following example illustrates how a Landscape administrator could use repository mirroring to manage package distribution:
+The following example illustrates how a Landscape administrator could use repository mirroring to manage package distribution. To understand the example, you should be familiar with these additional terms:
 
-1. **Create a publication target.** The administrator defines a filesystem publication target pointing to a directory on the Landscape server that will be served over HTTP.
-1. **Create mirrors.** They create two mirrors of the Ubuntu archive for Noble 24.04:
-   - One for `noble` (the release pocket) with components `main` and `universe`
-   - One for `noble-security` (the security pocket) with the same components
-1. **Sync the mirrors.** Both mirrors are synced to download all matching packages from the upstream repository.
-1. **Create a filtered mirror for testing.** They create a third mirror of `noble-updates` with a filter that selects only packages relevant to their application stack.
-1. **Publish.** They create publications for each mirror, all targeting the filesystem publication target, and publish them. Clients can now be configured to use a local server (e.g., Nginx or Apache Server) as their APT source.
-1. **Iterate.** When new upstream updates are available, the administrator syncs the mirrors again and re-publishes to make the updated packages available.
+- **Profile:** A configuration that can be applied to managed machines. {ref}`Profiles <reference-terms-profiles>` are sometimes called "repository profiles" in the context of repository mirroring, and they enable you to enforce certain repository configurations on your machines. For example, you may have a `test` and `production` profile which you later distribute to various machines.
+- **Tags:** Tags are labels you can apply to groups of machines, and they're used with profiles when mirroring repositories. For example, if you had a repository profile named `test-profile`, you could associate it with a tag named `test-tag`, and the configuration in this profile would then be applied to all machines tagged with `test-tag`.
+
+**Repository mirroring process**
+
+![Repository mirror process](/assets/images/repository-mirroring-2604.jpg)
+
+Consider the following example scenario which illustrates how a user could use repository mirroring in Landscape:
+
+1. The administrator creates two filesystem publication targets: `test-target` and `prod-target`. Each points to a separate directory on the Landscape server served over HTTP.
+1. They create three mirrors of the Ubuntu archive for Resolute 26.04, using filters to select specific packages for each mirror, as-needed:
+   - One for `resolute` (the release pocket) with components `main` and `universe`
+   - One for `resolute-updates` (the updates pocket) with the same components
+   - One for `resolute-security` (the security pocket) with the same components
+1. They sync all three mirrors to download the matching packages from the upstream Ubuntu repository.
+1. They create two repository profiles (`test-profile` and `prod-profile`) and two tags (`test-tag` and `prod-tag`). These tags are applied to the appropriate machines and associated with their corresponding profiles.
+1. They create publications for each mirror targeting `test-target` and publish them. The `test-profile` is configured to point client machines at `test-target`, so machines tagged with `test-tag` begin pulling packages from the test publication.
+1. The administrator tests the new packages and updates to ensure they work as expected and don't introduce issues into the test environment.
+1. Once testing is complete and the packages are approved, the administrator creates publications for the same mirrors targeting `prod-target` and publishes them. The `prod-profile` is configured to point client machines at `prod-target`, so machines tagged with `prod-tag` now receive the approved packages. The decision of *when* to publish to `prod-target` is what controls the release to production.
+1. The administrator repeats steps #3-7 every time they want to distribute new packages to their client machines. They can re-use the publications they created steps #5 and #7, since the publication configuration is the same each time. They just need to republish to update the content at the publication target.
 
 ## GPG keys
 
