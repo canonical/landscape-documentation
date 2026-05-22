@@ -25,6 +25,23 @@ The service that provides this functionality is `landscape-debarchive`. You migh
 
 Repository mirroring in Landscape is built around four core entities: **mirrors**, **local repositories**, **publications**, and **publication targets**. Understanding these concepts and how they relate to each other is crucial to using this feature correctly.
 
+Repository mirroring in Landscape is based on these main concepts:
+
+- **Mirrors:** Local copies of an upstream Debian repositories.
+- **Local repositories:** Repositories that host your own `.deb` packages you provide.
+- **Publications:** Configurations that connect a mirror or local repository to a publication target, defining how the repository is made available to clients.
+- **Publication targets:** Storage locations where published repositories are written.
+- **Repository profiles:** Configurations that can apply published repositories to client machines.
+
+```{mermaid}
+graph TD
+    A[Mirror] -->|Source for| C[Publication]
+    B[Local Repository] -->|Source for| C[Publication]
+    C[Publication] -->|Publishes to| D[Publication Target]
+    D[Publication Target] -->|Serves repository to| E[Client Machines]
+    F[Repository Profile] -->|Applies APT sources to| E[Client Machines]
+```
+
 ### Mirrors
 
 A mirror is a local copy of an upstream Debian repository (for example, `archive.ubuntu.com`). When you create a mirror, you specify:
