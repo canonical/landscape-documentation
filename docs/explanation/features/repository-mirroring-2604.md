@@ -21,7 +21,7 @@ In Landscape 26.04 LTS and later, repository mirroring uses a publication-based 
 
 The service that provides this functionality is `landscape-debarchive`. You might see this name in installation instructions, configuration, logs, troubleshooting materials, or API references related to repository mirroring.
 
-## Core concepts
+## Repository mirroring concepts
 
 Repository mirroring in Landscape is built around four core entities: **mirrors**, **local repositories**, **publications**, and **publication targets**. Understanding these concepts and how they relate to each other is crucial to using this feature correctly.
 
