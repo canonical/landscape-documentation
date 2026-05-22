@@ -15,8 +15,6 @@ Landscape uses repository mirroring to internally distribute software in Debian 
 
 You can mirror publicly accessible Ubuntu repositories, third-party repositories, or create local repositories for distributing internal software.
 
-Repository mirroring in Landscape is backed by the **landscape-debarchive** service, which must be installed alongside `landscape-server`. This service manages mirrors, local repositories, publications, and storage backends through an API that Landscape Server and the Landscape Server UI consume.
-
 Snaps can't be mirrored with Landscape. If you want to mirror snaps, use [Enterprise Store](https://documentation.ubuntu.com/enterprise-store/main/).
 
 ## Core concepts
@@ -133,7 +131,7 @@ GPG keys serve two distinct purposes in Landscape repository mirroring: **verify
 
 When Landscape downloads packages from an upstream repository, it verifies the repository's GPG signatures to ensure the packages are authentic and unmodified. This requires the **public GPG key** of the upstream repository.
 
-For Ubuntu repositories, the public GPG keys (Ubuntu Archive 2012 and 2018 signing keys) are built into the debarchive service and configured automatically. No manual setup is required.
+For Ubuntu repositories, the public GPG keys (Ubuntu Archive 2012 and 2018 signing keys) are built in and configured automatically. No manual setup is required.
 
 If you're mirroring a third-party repository, you need to provide its public GPG key when creating the mirror:
 
@@ -143,7 +141,7 @@ If you're mirroring a third-party repository, you need to provide its public GPG
 
 ### Signing keys (publications)
 
-When you publish a mirror or local repository, the debarchive service generates its own repository metadata (package indices, release files) for the published repository. A **private GPG key** is used to sign this metadata, so that client machines can verify the published repository is trustworthy.
+When you publish a mirror or local repository, Landscape generates its own repository metadata (package indices, release files) for the published repository. A **private GPG key** is used to sign this metadata, so that client machines can verify the published repository is trustworthy.
 
 You provide a private GPG key when creating a publication. This key is used to produce:
 
