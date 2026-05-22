@@ -5,10 +5,10 @@ myst:
 ---
 
 (explanation-repo-mirroring-2604)=
-# Repository mirroring (26.04+)
+# Repository mirroring (26.04 LTS and later)
 
 ```{note}
-This document applies to **Landscape 26.04 and later**. If you're using Landscape 25.10 or earlier, see {ref}`repository mirroring <explanation-repo-mirroring>` instead.
+This document applies to **Landscape 26.04 and later**. If you're using Landscape 25.10 or earlier, see {ref}`repository mirroring (25.10 and earlier)<explanation-repo-mirroring>` instead.
 ```
 
 Landscape uses repository mirroring to internally distribute software in Debian packages over your local network and manage updates. This feature allows you to establish custom repositories from your local mirror, which provides an additional layer of control over the software versions available to your client machines. This can also reduce bandwidth usage by distributing updates to clients using your local network.
