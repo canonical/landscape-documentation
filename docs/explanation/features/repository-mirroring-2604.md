@@ -46,47 +46,23 @@ graph TD
 
 A mirror is a local copy of an upstream Debian repository (for example, `archive.ubuntu.com`). When you create a mirror, you specify:
 
-- **Archive root:** The upstream URL to mirror from (e.g. `http://archive.ubuntu.com/ubuntu/`)
+- **Archive root:** The upstream repository URL to mirror from (e.g. `http://archive.ubuntu.com/ubuntu/`)
 - **Distribution:** The repository suite to mirror. This corresponds to what the Ubuntu archive calls a series and pocket combination. For example, `noble` (the release pocket of Ubuntu 24.04 LTS), `noble-updates` (the updates pocket), or `noble-security` (the security pocket)
-- **Components:** The categories of packages to include. Upstream Ubuntu repositories typically use `main`, `restricted`, `universe`, and `multiverse`
+- **Components:** The categories of packages to include. Upstream Ubuntu repositories use `main`, `restricted`, `universe`, and `multiverse`
 - **Architectures:** The CPU architectures to mirror (e.g. `amd64`, `arm64`)
 - **Filter (optional):** A package query expression to select a subset of packages from the upstream repository, optionally including their dependencies
 
-After creating a mirror, you **sync** it to download packages from the upstream repository. Syncing is a long-running operation that runs in the background. You can sync a mirror repeatedly to pull in the latest packages from upstream.
+After creating a mirror, you **sync** it to download packages from the upstream repository. You can sync a mirror repeatedly to pull in the latest packages from upstream.
 
-### Local repositories
+### Signature-preserving mirrors
 
-Local repositories let you host your own `.deb` packages that aren't sourced from an upstream mirror. You can import packages into a local repository by providing a URL to a `.deb` file or archive of `.deb` files. This is useful for distributing internally-built software or third-party packages that aren't available in any upstream repository.
+A signature-preserving mirror is a special type of mirror that maintains the original GPG signatures from the upstream repository without re-signing. This allows clients to verify packages directly against the upstream repository's public key, rather than needing a separate key for the mirror. You can enable signature preservation when creating a mirror.
 
-Each local repository has a default distribution and component, which are used when packages are published.
+This mode has restrictions: you cannot apply filters to a signature-preserving mirror, and syncing does not occur until publication time. The mirror is treated as a direct pass-through of the upstream repository.
 
-### Publications
+#### Filtered mirrors
 
-A publication connects a **source** (a mirror or local repository) to a **publication target** (a storage backend). It defines *how* your repository is made available to clients by configuring:
-
-- **Source:** Which mirror or local repository to publish
-- **Publication target:** Where to publish (see below)
-- **Distribution:** The suite name clients will use in their APT configuration
-- **Signing key:** A private GPG key used to sign the published repository metadata
-- **Metadata options:** Labels, origins, architectures, and compression settings
-
-Publishing a publication is a long-running operation. When you publish, the service takes a point-in-time snapshot of the source mirror or local repository and writes the resulting APT repository structure to the publication target.
-
-You can create multiple publications from the same source, each going to a different target or using different settings. This lets you, for example, publish the same mirror to both a local filesystem for internal use and an S3 bucket for remote clients.
-
-### Publication targets
-
-A publication target is a named storage destination where published repositories are written. Landscape supports three types of publication target:
-
-- **Filesystem:** A directory on the local filesystem. You can configure whether files are hardlinked, symlinked, or copied.
-- **S3:** An Amazon S3 bucket or S3-compatible object store (such as MinIO). Configuration includes access credentials, region, bucket name, prefix, and storage class.
-- **Swift:** An OpenStack Swift container. Configuration includes authentication URL, credentials, container name, and prefix.
-
-Publication targets are independent of the repositories themselves. You define them once and can reuse them across multiple publications.
-
-## Filters
-
-Mirrors support package-level filtering using a query expression language. Filters let you select a specific subset of packages from the upstream repository, replacing the role that pull pockets played in earlier versions of Landscape.
+Filtered mirrors include only a subset of packages from the upstream repository. The filter language lets you select which packages are included.
 
 When you set a filter on a mirror, only packages matching the filter expression are downloaded during a sync. You can optionally enable **filter with dependencies**, which also includes any packages that the filtered packages depend on.
 
@@ -96,11 +72,41 @@ Filters are applied at sync time. If you need to distribute different subsets of
 Filters cannot be used on signature-preserving mirrors, since filtering could invalidate the upstream repository's original GPG signatures.
 ```
 
-## Signature-preserving mirrors
+### Local repositories
 
-When you create a mirror, you can enable **signature preservation**. A signature-preserving mirror passes through the upstream repository's original GPG signatures without re-signing, which is useful when you want clients to verify packages directly against the upstream key.
+Local repositories let you host your own `.deb` packages that aren't sourced from an upstream mirror. You can use a local repository for distributing internally-built software or third-party packages that aren't available from an upstream repository you mirror. You add packages to the local repository, then publish the repository so that client machines can use it as an APT source.
 
-This mode has restrictions: you cannot apply filters to a signature-preserving mirror, and syncing does not occur until publication time. The mirror is treated as a direct pass-through of the upstream repository.
+Each local repository has a default distribution and component, which are used when packages are published.
+
+### Publications
+
+Publications make a mirror or local repository available to client instances by publishing it to a publication target. A publication connets a **source** (a mirror or local repository) to a **publication target** (a storage backend). It defines *how* the repository is made avaialable to clients by configuring:
+
+- **Source:** The mirror or local repository to publish
+- **{ref}`Publication target<explanation-repo-mirroring-2604-publication-targets>`:** Where to publish
+- **Distribution:** The suite name clients will use in their APT configuration
+- **Signing key:** A private GPG key used to sign the published repository metadata
+- **Metadata options:**
+  - The values of the Label and Origin fields in the published repository's Release file
+  - Which architectures to include in the published repository
+  - Whether to provide hash index files
+  - Settings for the ButAutomaticUpgrades and NotAutomatic fields in the Release file
+  - Settings for using compression and generating content index files
+
+When you publish, Landscape creates a point-in-time snapshot of the source mirror or local repository and writes the resulting APT repository structure to the publication target. Client machines can then be configured to use that published repository.
+
+You can create multiple publications from the same source, each going to a different target or using different settings. This lets you, for example, publish the same mirror to both a local filesystem for internal use and another target (such as an S3 bucket) for remote clients.
+
+(explanation-repo-mirroring-2604-publication-targets)=
+### Publication targets
+
+A publication target is the storage location where Landscape writes a published repository. Landscape supports the following types of publication target:
+
+- **Filesystem:** A directory on the local filesystem.
+- **S3:** An Amazon S3 bucket or S3-compatible object store (such as MinIO).
+- **Swift:** An OpenStack Swift container.
+
+Publication targets are separate from mirrors and local repositories. You can define a target once and reuse is for multiple publications.
 
 ## An example mirroring workflow
 
@@ -117,13 +123,16 @@ The following example illustrates how a Landscape administrator could use reposi
 
 ## GPG keys
 
-GPG keys serve two distinct purposes in Landscape repository mirroring: **verifying** upstream repositories and **signing** published repositories.
+GPG keys are used with repository mirroring in Landscape to establish trust in the mirror and verify the packages originating from a trusted source. The GPG keys are used for two purposes:
 
-### Verification keys (mirrors)
+- Verifying packages from upstream repositories
+- Signing published repositories so clients can verify them
 
-When Landscape downloads packages from an upstream repository, it verifies the repository's GPG signatures to ensure the packages are authentic and unmodified. This requires the **public GPG key** of the upstream repository.
+### Verification keys
 
-For Ubuntu repositories, the public GPG keys (Ubuntu Archive 2012 and 2018 signing keys) are built in and configured automatically. No manual setup is required.
+When Landscape downloads packages from an upstream repository, it verifies that the repository's metadata is signed by a trusted key to ensure the packages are authentic and unmodified. This requires the **public GPG key** of the upstream repository.
+
+For Ubuntu repositories, the public GPG keys are built into Landscape and configured automatically. No manual setup is required.
 
 If you're mirroring a third-party repository, you need to provide its public GPG key when creating the mirror:
 
@@ -131,13 +140,13 @@ If you're mirroring a third-party repository, you need to provide its public GPG
 1. Ensure it's in ASCII-armored format
 1. Provide it when creating the mirror in Landscape
 
-### Signing keys (publications)
+### Signing keys
 
-When you publish a mirror or local repository, Landscape generates its own repository metadata (package indices, release files) for the published repository. A **private GPG key** is used to sign this metadata, so that client machines can verify the published repository is trustworthy.
+When Landscape publishes a mirror or local repository, the published repository metadata must be signed. Client machines use the corresponding public key to verify that the published repository is trustworthy.
 
-You provide a private GPG key when creating a publication. This key is used to produce:
+The signing key has two parts:
 
-- **Detached signatures** (`Release.gpg`)
-- **Clearsigned release files** (`InRelease`)
+- **Private key:** Used by Landscape to sign the published repository metadata.
+- **Public key:** Distributed to client machines so they can verify the published repository.
 
-Client machines need the corresponding **public key** to verify these signatures. When Landscape applies a repository configuration to a client via a repository profile, it distributes the attached public key so the client can authenticate packages from the published repository.
+When Landscape applies a repository configuration to a client via a repository profile, it distributes the attached public key so the client can authenticate packages from the published repository.
