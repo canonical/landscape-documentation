@@ -80,7 +80,7 @@ Each local repository has a default distribution and component, which are used w
 
 ### Publications
 
-Publications make a mirror or local repository available to client instances by publishing it to a publication target. A publication connets a **source** (a mirror or local repository) to a **publication target** (a storage backend). It defines *how* the repository is made avaialable to clients by configuring:
+Publications make a mirror or local repository available to client instances by publishing it to a publication target. A publication connects a **source** (a mirror or local repository) to a **publication target** (a storage backend). It defines *how* the repository is made available to clients by configuring:
 
 - **Source:** The mirror or local repository to publish
 - **{ref}`Publication target<explanation-repo-mirroring-2604-publication-targets>`:** Where to publish
