@@ -63,35 +63,6 @@ A publication target is a named storage destination where published repositories
 
 Publication targets are independent of the repositories themselves. You define them once and can reuse them across multiple publications.
 
-## Mapping to Ubuntu archive terminology
-
-If you're familiar with the [Ubuntu package archive](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#) structure and the pre-26.04 Landscape terminology, the following table maps those concepts to 26.04 Landscape's repository mirroring terminology:
-
-| Ubuntu archive/Pre-26.04 Landscape concept | 26.04 Landscape equivalent | Example |
-|---|---|---|
-| Repository / Archive | Archive root (upstream URL) | `http://archive.ubuntu.com/ubuntu/` |
-| Series | Part of the distribution string | `noble` (Ubuntu 24.04 LTS) |
-| Pocket (release, updates, security) | Part of the distribution string | `noble`, `noble-updates`, `noble-security` |
-| Component (main, restricted, universe, multiverse) | Components list on a mirror | `["main", "universe"]` |
-| Pull pocket (user-defined staging area) | Filtered mirror | A mirror with a package filter expression |
-
-In the Ubuntu archive, the **series** and **pocket** are combined into a single **distribution** (dist) string. For example:
-
-- `noble` — the release pocket of Ubuntu 24.04 LTS (all packages included at initial release)
-- `noble-updates` — the updates pocket (newer versions of packages added after the initial release)
-- `noble-security` — the security pocket (updates specifically addressing security issues)
-
-If you need to mirror multiple pockets (for example, both `noble` and `noble-updates`), you create a separate mirror for each.
-
-**Components** categorise packages within a distribution:
-
-- **main:** Packages directly maintained by the repository owner (Canonical, for Ubuntu)
-- **restricted:** Proprietary packages and drivers
-- **universe:** Community-maintained packages
-- **multiverse:** Community-maintained packages with additional restrictions
-
-When you create a mirror, you select which components to include. A single mirror can include any combination of components.
-
 ## Filters
 
 Mirrors support package-level filtering using a query expression language. Filters let you select a specific subset of packages from the upstream repository, replacing the role that pull pockets played in earlier versions of Landscape.
