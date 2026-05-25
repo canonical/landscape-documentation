@@ -137,8 +137,7 @@ Trigger a sync to download packages from the upstream source:
 ```bash
 curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{}'
+  -H "Content-Type: application/json"
 ```
 
 This returns a long-running operation. Poll for its completion:
@@ -201,7 +200,7 @@ Deb Archive mirrors support package filtering using an aptly-compatible filter s
   Name (= nginx) | Name (= curl) | Name (= libssl3)
   ```
 
-- **Blocklist** (exclude these packages): Use a negated filter expression. In this case, you typically don't set a filter on the mirror itself — instead, create a standard mirror and exclude packages at publication time, or use the `!` operator:
+- **Blocklist** (exclude these packages): Use a negated filter expression. In this case, you typically don't set a filter on the mirror itself. Instead, create a standard mirror and exclude packages at publication time, or use the `!` operator:
 
   ```
   !Name (= unwanted-package) , !Name (= another-unwanted)
@@ -288,48 +287,81 @@ The response includes a `localId`.
 
 ### 4. Import packages
 
-Import each package into the local repository:
+Import a single package into the local repository:
 
 ```bash
-curl -X POST "$API_BASE/locals/<LOCAL_ID>:importLocalPackages" \
+curl -X POST "$API_BASE/locals/<LOCAL_ID>:importPackages" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
-  -d '{
-    "url": "file:///var/lib/landscape/landscape-repository/standalone/pool/main/m/my-package/my-package_1.0-1_amd64.deb"
-  }'
+  -d '{"url": "file:///path/to/my-package_1.0-1_amd64.deb"}'
 ```
 
 This is a long-running operation. Poll the returned operation for completion before importing the next package.
 
-#### Option A: Script individual imports
+```{note}
+When using `file://` URLs, the path must be accessible to the `landscape-debarchive` snap. Because snap confinement restricts filesystem access, `file://` URLs pointing to arbitrary paths outside the snap's data directory will not work. Packages must instead be served over HTTP — either by the Landscape Server itself, or by a temporary HTTP server.
 
-To import multiple packages, script the process:
+If the Landscape Server is already serving the repository, packages are accessible at:
+
+```
+http://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>/pool/m/my-package/my-package_1.0-1_amd64.deb
+```
+
+Alternatively, start a temporary HTTP server:
+
+```bash
+python3 -m http.server 8080 --directory /path/to/packages
+```
+
+Then reference packages as `http://localhost:8080/my-package_1.0-1_amd64.deb`.
+```
+
+```{important}
+The reprepro pool directory is shared across all distributions in the same reprepro tree. Scanning or archiving the entire pool will include packages from sync mirror and pull pockets, not just your upload pocket. Use one of the approaches below to import only the packages that belong to this specific pocket.
+```
+
+#### Script imports from reprepro list
+
+Use `reprepro list` to enumerate only the packages belonging to this pocket, then locate each `.deb` file and import it via HTTP. Set `REPO_HTTP` to the base URL from which the repository is served:
 
 ```bash
 #!/bin/bash
 LOCAL_ID="<LOCAL_ID>"
+DIST_BASE="/var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>"
+CODENAME="<CODENAME>"  # e.g., noble-staging
+REPO_HTTP="http://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>"
 
-find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ -name "*.deb" | while read -r deb_path; do
-  echo "Importing: $deb_path"
-  
-  RESPONSE=$(curl -s -X POST "$API_BASE/locals/$LOCAL_ID:importLocalPackages" \
+reprepro -b "$DIST_BASE" list "$CODENAME" | while read -r line; do
+  # reprepro list output format: "codename|component|arch: package version"
+  PACKAGE=$(echo "$line" | awk '{print $2}')
+  VERSION=$(echo "$line" | awk '{print $3}')
+
+  DEB_PATH=$(find "$DIST_BASE/pool/" \
+    \( -name "${PACKAGE}_${VERSION}_*.deb" \
+    -o -name "${PACKAGE}_${VERSION//:/%3a}_*.deb" \) | head -1)
+
+  if [ -z "$DEB_PATH" ]; then
+    echo "Warning: could not find .deb for $PACKAGE $VERSION"
+    continue
+  fi
+
+  # Convert local path to HTTP URL
+  RELATIVE_PATH="${DEB_PATH#$DIST_BASE/}"
+  URL="$REPO_HTTP/$RELATIVE_PATH"
+
+  echo "Importing: $URL"
+  RESPONSE=$(curl -s -X POST "$API_BASE/locals/$LOCAL_ID:importPackages" \
     -H "Authorization: Bearer $JWT" \
     -H "Content-Type: application/json" \
-    -d "{
-      \"url\": \"file://$deb_path\"
-    }")
+    -d "{\"url\": \"$URL\"}")
 
-  # Extract operation name and poll for completion
   OP_NAME=$(echo "$RESPONSE" | jq -r '.name')
-  
+
   while true; do
-    STATUS=$(curl -s -X GET "$API_BASE/operations/$OP_NAME" \
+    STATUS=$(curl -s -X GET "$API_BASE/$OP_NAME" \
       -H "Authorization: Bearer $JWT" \
-      -H "Content-Type: application/json" \
-    )
-    
-    DONE=$(echo "$STATUS" | jq -r '.done')
-    if [ "$DONE" = "true" ]; then
+      -H "Content-Type: application/json")
+    if [ "$(echo "$STATUS" | jq -r '.done')" = "true" ]; then
       break
     fi
     sleep 2
@@ -337,66 +369,18 @@ find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ -na
 done
 ```
 
-#### Option B: Import from a tarball or zip archive
+### 5. Verify imported packages
 
-As an alternative to scripting individual imports, you can collect the `.deb` files into a tarball or zip archive and pass it directly to Deb Archive. The service will extract the archive and import all packages:
-
-```bash
-# Create a tarball of all packages
-tar -czf packages.tar.gz -C /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ .
-
-# Import the archive directly
-curl -X POST "$API_BASE/locals/$LOCAL_ID:importLocalPackages" \
-  -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{"url": "file:///path/to/packages.tar.gz"}'
-```
-
-Alternatively, use a zip archive:
+Once all imports have completed, confirm the packages are present in the local repository:
 
 ```bash
-# Create a zip archive of all packages
-cd /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/
-zip -r packages.zip .
-
-# Import the zip archive directly
-curl -X POST "$API_BASE/locals/$LOCAL_ID:importLocalPackages" \
-  -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{"url": "file:///path/to/packages.zip"}'
-```
-
-Deb Archive will automatically extract the archive and import all `.deb` files found within it.
-
-```{note}
-If you only need to import packages that were in a specific pocket, cross-reference the output of `reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list <codename>` with the files in the pool to identify which `.deb` files to import.
+curl -X GET "$API_BASE/locals/<LOCAL_ID>/packages" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 ## Preserve the exact state of a sync mirror
 
-If you need to preserve the precise package versions currently in a sync mirror — rather than re-syncing from upstream (which may have newer versions) — treat it as an upload pocket and import the packages into a local repository.
-
-### 1. Export the package list
-
-```bash
-reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list noble-release > noble-release-packages.txt
-```
-
-### 2. Create a local repository and import
-
-Follow the same steps as [Migrate upload pockets](#migrate-upload-pockets), using the package files from the pool directory that correspond to the packages listed in your export.
-
-To find the `.deb` files for packages listed by reprepro:
-
-```bash
-while read -r line; do
-  # reprepro list output format: "codename|component|arch: package version"
-  PACKAGE=$(echo "$line" | awk '{print $2}')
-  VERSION=$(echo "$line" | awk '{print $3}')
-  find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/ \
-    -name "${PACKAGE}_${VERSION}_*.deb" -o -name "${PACKAGE}_${VERSION//:/%3a}_*.deb"
-done < noble-release-packages.txt
-```
+If you need to preserve the precise package versions currently in a sync mirror, rather than re-syncing from upstream (which may have newer versions), treat it as an upload pocket and import the packages into a local repository. Use the steps above for migrating upload pockets, but use the sync mirror pocket instead.
 
 ## Publish the migrated repositories
 
