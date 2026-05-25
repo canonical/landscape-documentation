@@ -429,7 +429,6 @@ For local repositories, use `"source": "locals/<LOCAL_ID>"` instead.
 curl -X POST "$API_BASE/publications/<PUBLICATION_ID>:publish" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
-  -d '{}'
 ```
 
 Poll the returned operation until it completes.
