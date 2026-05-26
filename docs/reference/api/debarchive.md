@@ -41,7 +41,7 @@ myst:
 <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
 <script>
   Scalar.createApiReference('#scalar-app', {
-    url: '../../../_static/openapi.yaml',
+    url: '../../_static/openapi.yaml',
     theme: 'alternate',
     servers: [
       { url: 'https://landscape.canonical.com/api/debarchive', description: 'Production' },
