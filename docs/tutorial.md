@@ -38,7 +38,7 @@ For this tutorial, Multipass needs to be installed on your host machine. To inst
 sudo snap install multipass
 ```
 
-If you want to learn more about Multipass, see their [installation guide](https://canonical.com/multipass/docs/install-multipass) and [full documentation](https://canonical.com/multipass/docs).
+If you want to learn more about Multipass, see their [installation guide](https://documentation.ubuntu.com/multipass/stable/how-to-guides/install-multipass/) and [full documentation](https://documentation.ubuntu.com/multipass/).
 
 ### Ubuntu Pro token
 

@@ -85,7 +85,7 @@ Reference: {ref}`reference-terms-script-profile`
 
 You can use script profiles to execute scripts based on certain triggers. The possible triggers are: post-enrollment, date, and a recurring schedule.
 
-To create a reboot profile, go to **Profiles** from the sidebar > **Script profiles**. Then **Add script profile** and complete the form. The following fields appear in the form:
+To create a script profile, go to **Profiles** from the sidebar > **Script profiles**. Then **Add script profile** and complete the form. The following fields appear in the form:
 
    - **Name**: Name of the profile.
    - **Script**: Name of a corresponding script.
