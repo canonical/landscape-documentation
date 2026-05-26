@@ -27,11 +27,11 @@ Repository mirroring in Landscape is built around four core entities: **mirrors*
 
 Repository mirroring in Landscape is based on these main concepts:
 
-- **Mirrors:** Local copies of an upstream Debian repositories.
-- **Local repositories:** Repositories that host your own `.deb` packages you provide.
-- **Publications:** Configurations that connect a mirror or local repository to a publication target, defining how the repository is made available to clients.
-- **Publication targets:** Storage locations where published repositories are written.
-- **Repository profiles:** Configurations that can apply published repositories to client machines.
+- **{ref}`Mirrors <explanation-repo-mirroring-2604-mirrors>`:** Local copies of an upstream Debian repositories.
+- **{ref}`Local repositories <explanation-repo-mirroring-2604-local-repositories>`:** Repositories that host your own `.deb` packages you provide.
+- **{ref}`Publications <explanation-repo-mirroring-2604-publications>`:** Configurations that connect a mirror or local repository to a publication target, defining how the repository is made available to clients.
+- **{ref}`Publication targets <explanation-repo-mirroring-2604-publication-targets>`:** Storage locations where published repositories are written.
+- **{ref}`Repository profiles <explanation-repo-mirroring-2604-repository-profiles>`:** Configurations that can apply published repositories to client machines.
 
 ```{mermaid}
 graph TD
@@ -43,6 +43,7 @@ graph TD
     D -.->|Repository URL used in profile| F
 ```
 
+(explanation-repo-mirroring-2604-mirrors)=
 ### Mirrors
 
 A mirror is a local copy of an upstream Debian repository (for example, `archive.ubuntu.com`). When you create a mirror, you specify:
@@ -73,12 +74,14 @@ Filters are applied at sync time. If you need to distribute different subsets of
 Filters cannot be used on signature-preserving mirrors, since filtering could invalidate the upstream repository's original GPG signatures.
 ```
 
+(explanation-repo-mirroring-2604-local-repositories)=
 ### Local repositories
 
 Local repositories let you host your own `.deb` packages that aren't sourced from an upstream mirror. You can use a local repository for distributing internally-built software or third-party packages that aren't available from an upstream repository you mirror. You add packages to the local repository, then publish the repository so that client machines can use it as an APT source.
 
 Each local repository has a default distribution and component, which are used when packages are published.
 
+(explanation-repo-mirroring-2604-publications)=
 ### Publications
 
 Publications make a mirror or local repository available to client instances by publishing it to a publication target. A publication connects a **source** (a mirror or local repository) to a **publication target** (a storage backend). It defines *how* the repository is made available to clients by configuring:
@@ -108,6 +111,15 @@ A publication target is the storage location where Landscape writes a published 
 - **Swift:** An OpenStack Swift container.
 
 Publication targets are separate from mirrors and local repositories. You can define a target once and reuse is for multiple publications.
+
+(explanation-repo-mirroring-2604-repository-profiles)=
+### Repository profiles
+
+A repository profile is a configuration that can be applied to client machines to configure their APT sources. When you create a repository profile, you can specify the public URLs of your published repositories. This allows you to control which published repositories are used by which machines.
+
+For example, if your publication target is a filesystem served over HTTP at `http://landscape-server/ubuntu/`, you would include that URL in the repository profile. When the profile is applied to client machines, they will be configured to pull packages from that URL. If your publication target is an S3 bucket configured for public HTTPS access, you could include the S3 URL (e.g. `https://my-bucket.s3.amazonaws.com/ubuntu/`) in the profile instead.
+
+You can have different repository profiles for different groups of machines, allowing you to control which published repositories each group uses.
 
 ## An example mirroring workflow
 
