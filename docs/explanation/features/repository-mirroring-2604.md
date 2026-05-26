@@ -55,7 +55,7 @@ A mirror is a local copy of an upstream Debian repository (for example, `archive
 
 After creating a mirror, you **sync** it to download packages from the upstream repository. You can sync a mirror repeatedly to pull in the latest packages from upstream.
 
-### Signature-preserving mirrors
+#### Signature-preserving mirrors
 
 A signature-preserving mirror is a special type of mirror that maintains the original GPG signatures from the upstream repository without re-signing. This allows clients to verify packages directly against the upstream repository's public key, rather than needing a separate key for the mirror. You can enable signature preservation when creating a mirror.
 
