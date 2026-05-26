@@ -36,10 +36,11 @@ Repository mirroring in Landscape is based on these main concepts:
 ```{mermaid}
 graph TD
     A[Mirror] -->|Source for| C[Publication]
-    B[Local Repository] -->|Source for| C[Publication]
-    C[Publication] -->|Publishes to| D[Publication Target]
-    D[Publication Target] -->|Serves repository to| E[Client Machines]
-    F[Repository Profile] -->|Applies APT sources to| E[Client Machines]
+    B[Local Repository] -->|Source for| C
+    C -->|Publishes to| D[Publication Target]
+    D -->|Serves repository to| E[Client Machines]
+    F[Repository Profile] -->|Applies APT sources to| E
+    D -.->|Repository URL used in profile| F
 ```
 
 ### Mirrors
