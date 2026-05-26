@@ -300,6 +300,7 @@ This is a long-running operation. Poll the returned operation for completion bef
 
 ```{note}
 When using `file://` URLs, the path must be accessible to the `landscape-debarchive` snap. Because snap confinement restricts filesystem access, `file://` URLs pointing to arbitrary paths outside the snap's data directory will not work. Packages must instead be served over HTTP — either by the Landscape Server itself, or by a temporary HTTP server.
+```
 
 If the Landscape Server is already serving the repository, packages are accessible at:
 
@@ -314,7 +315,6 @@ python3 -m http.server 8080 --directory /path/to/packages
 ```
 
 Then reference packages as `http://localhost:8080/my-package_1.0-1_amd64.deb`.
-```
 
 ```{important}
 The reprepro pool directory is shared across all distributions in the same reprepro tree. Scanning or archiving the entire pool will include packages from sync mirror and pull pockets, not just your upload pocket. Use one of the approaches below to import only the packages that belong to this specific pocket.
