@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Landscape Debarchive REST API reference (Scalar PoC)."
+    description: "Landscape Debarchive REST API reference. 
 ---
 
 (reference-api-debarchive)=
-# Debarchive API (PoC)
+# Debarchive API
 
 ```{raw} html
 <style>
