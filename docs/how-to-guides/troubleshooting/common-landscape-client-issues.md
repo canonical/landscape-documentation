@@ -30,7 +30,7 @@ If the service shows `Start condition unmet`, see {ref}`heading-client-start-con
 sudo tail -n 50 /var/log/landscape/broker.log
 ```
 
-The broker log is usually the best first log to check for client registration, certificate, hostname resolution, and client-server communication issues.
+The broker log is usually the first log you should check for client registration, certificate, hostname resolution, and client-server communication issues.
 
 Use the log output to choose the next section:
 
