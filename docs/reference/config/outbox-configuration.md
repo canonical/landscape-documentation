@@ -18,9 +18,9 @@ Each service has its own set of environment variables, described in the sections
 
 ## `service.conf` integration
 
-The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read all necessary database and broker configurations from `/etc/landscape/service.conf` and will populate the corresponding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
+The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read database and broker configurations from `/etc/landscape/service.conf` and will populate the corresponding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
 
-This means that several environment variables marked as **required** in this reference do not need to be set directly and can instead be read from the `service.conf`. These configurations are marked with **`service.conf-supplied`: Yes**. It is recommended to use this integration instead of setting these environment variables directly.
+This means that several environment variables marked as **required** in this reference do not need to be set directly and can instead be read from the `service.conf`. These configurations are marked with **`service.conf-supplied`: Yes**. It is recommended to use this integration instead of setting these environment variables directly. In cases where the outbox cannot use the same configuration value as the Landscape server, it is necessary to use the snap configuration. A snap configuration takes priority over the equivalent value in the `service.conf`.
 
 The table below lists every environment variable that is populated. Note that all three databases share the same host, port, user, password, and SSL settings from the `[stores]` section.
 
