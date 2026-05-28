@@ -406,56 +406,37 @@ curl -X GET "$API_BASE/locals/<LOCAL_ID>/packages" \
 
 If you need to preserve the precise package versions currently in a sync mirror, rather than re-syncing from upstream (which may have newer versions), treat it as an upload pocket and import the packages into a local repository. Use the steps above for migrating upload pockets, but use the sync mirror pocket instead.
 
+## Upgrade to Landscape 26.04 LTS
+
+Once you have confirmed that all packages are present in the new Deb Archive service, clean up the legacy reprepro Distribution records and then upgrade.
+
+### 1. Delete existing reprepro Distribution records
+
+In the Landscape web UI, navigate to **Repositories**. Each distribution (for example, `ubuntu` or `ubuntu-staging`) has a **Delete** button. Delete each distribution.
+
+```{important}
+Only delete a distribution after confirming that its packages have been successfully migrated to the new Deb Archive service. This action cannot be undone, though you could restore from a database backup if needed.
+```
+
+### 2. Upgrade Landscape Server
+
+Follow {ref}`how-to-upgrade-to-26-04-lts` to upgrade to Landscape 26.04 LTS.
+
 ## Publish the migrated repositories
 
-After migrating your mirrors and local repositories, you need to publish them so they're accessible to client machines. This involves creating a publication target and a publication.
+After upgrading to Landscape 26.04 LTS, publish your migrated mirrors and local repositories so they're accessible to client machines. This involves creating a publication target and a publication in the Landscape web UI.
 
 ### 1. Create a publication target
 
-For a filesystem target (serves repositories from the Landscape Server itself):
-
-```bash
-curl -X POST "$API_BASE/publicationTargets" \
-  -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "displayName": "filesystem-target",
-    "filesystem": {
-      "path": "ubuntu"
-    }
-  }'
-```
+In the Landscape web UI, navigate to **Repositories > Publication Targets** and create a new publication target. For a filesystem target that serves repositories from the Landscape Server itself, set the path to the directory where published repositories should be written.
 
 ### 2. Create a publication
 
-Link a mirror or local repository to a publication target:
-
-```bash
-curl -X POST "$API_BASE/publications" \
-  -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "source": "mirrors/<MIRROR_ID>",
-    "publicationTarget": "publicationTargets/<PUBLICATION_TARGET_ID>",
-    "distribution": "<CODENAME>",
-    "architectures": ["amd64"],
-    "gpgKey": {
-      "armor": "<ASCII_ARMORED_PRIVATE_GPG_KEY>"
-    }
-  }'
-```
-
-For local repositories, use `"source": "locals/<LOCAL_ID>"` instead.
+Navigate to **Repositories > Publications** and create a new publication. Select the migrated mirror or local repository as the source, choose the publication target you created, and configure the distribution, architectures, and GPG signing key.
 
 ### 3. Publish
 
-```bash
-curl -X POST "$API_BASE/publications/<PUBLICATION_ID>:publish" \
-  -H "Authorization: Bearer $JWT" \
-  -H "Content-Type: application/json" \
-```
-
-Poll the returned operation until it completes.
+Trigger the publication. Landscape will generate the repository metadata and make the packages available at the publication target path.
 
 ## Update client machines
 
