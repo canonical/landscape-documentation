@@ -1322,7 +1322,7 @@ Install the `landscape-outbox` snap if not already installed:
 sudo snap install landscape-outbox
 ```
 
-Copy the CA certificate and the RabbitMQ client certificates:
+Copy the CA certificate and the RabbitMQ client certificates that you created on the Landscape server earlier:
 
 ```bash
 sudo cp /etc/ca-certificates.crt /root/snap/landscape-outbox/common/ca.crt
