@@ -91,10 +91,10 @@ Publications make a mirror or local repository available to client instances by 
 - **Distribution:** The suite name clients will use in their APT configuration
 - **Signing key:** A private GPG key used to sign the published repository metadata
 - **Metadata options:**
-  - The values of the Label and Origin fields in the published repository's Release file
+  - The values of the `Label` and `Origin` fields in the published repository's `Release` file
   - Which architectures to include in the published repository
   - Whether to provide hash index files
-  - Settings for the ButAutomaticUpgrades and NotAutomatic fields in the Release file
+  - Settings for the `ButAutomaticUpgrades` and `NotAutomatic` fields in the `Release` file
   - Settings for using compression and generating content index files
 
 When you publish, Landscape creates a point-in-time snapshot of the source mirror or local repository and writes the resulting APT repository structure to the publication target. Client machines can then be configured to use that published repository.
