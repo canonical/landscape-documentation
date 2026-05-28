@@ -208,7 +208,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_AUTH_MODE`
 
-- Purpose: Authentication mode to use with RabbitMQ. Must be one of `{plain,external}`.
+- Purpose: Authentication mode to use with the AMQP broker. Must be one of `{plain,external}`.
 - Snap key: `landscape.broker.auth-mode`
 - Default: plain
 - Required: No
@@ -216,7 +216,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_TLS`
 
-- Purpose: Whether to connect to RabbitMQ with TLS.
+- Purpose: Whether to connect to the AMQP broker with TLS.
 - Snap key: `landscape.broker.tls`
 - Default: false
 - Required: No
