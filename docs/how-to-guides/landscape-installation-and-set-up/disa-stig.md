@@ -1322,13 +1322,17 @@ Install the `landscape-outbox` snap if not already installed:
 sudo snap install landscape-outbox
 ```
 
-Create a directory within the snap's data path to hold the certificates and copy the CA certificate and the RabbitMQ client certificates:
+Copy the CA certificate and the RabbitMQ client certificates:
 
 ```bash
-sudo mkdir -p /root/snap/landscape-outbox/common/
 sudo cp /etc/ca-certificates.crt /root/snap/landscape-outbox/common/ca.crt
-sudo cp /etc/landscape/rabbitmq_client.pem /root/snap/landscape-outbox/common/client.pem
-sudo cp /etc/landscape/rabbitmq_client.key /root/snap/landscape-outbox/common/client.key
+sudo cp /etc/landscape/rabbitmq_client.pem /root/snap/landscape-outbox/common/rabbit.pem
+sudo cp /etc/landscape/rabbitmq_client.key /root/snap/landscape-outbox/common/rabbit.key
+```
+
+Ensure they are owned and readable by `root`:
+
+```bash
 sudo chown -R root:root /root/snap/landscape-outbox/common/
 ```
 
@@ -1342,8 +1346,8 @@ sudo snap set landscape-outbox landscape.broker.tls=true
 Provide the paths to the certificates you copied earlier:
 
 ```bash
-sudo snap set landscape-outbox landscape.broker.ssl-cert=/root/snap/landscape-outbox/common/client.pem
-sudo snap set landscape-outbox landscape.broker.ssl-key=/root/snap/landscape-outbox/common/client.key
+sudo snap set landscape-outbox landscape.broker.ssl-cert=/root/snap/landscape-outbox/common/rabbit.pem
+sudo snap set landscape-outbox landscape.broker.ssl-key=/root/snap/landscape-outbox/common/rabbit.key
 sudo snap set landscape-outbox landscape.broker.ssl-ca-cert=/root/snap/landscape-outbox/common/ca.crt
 ```
 
