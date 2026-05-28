@@ -14,4 +14,5 @@ Diagnose and resolve common Landscape issues.
 :maxdepth: 2
 :glob:
 
+Common Landscape Client issues <common-landscape-client-issues>
 Idle activities <idle-activities>
