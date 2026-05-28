@@ -206,6 +206,22 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Required: No
 - `service.conf`-supplied: Yes
 
+#### `LANDSCAPE_BROKER_AUTH_MODE`
+
+- Purpose: Authentication mode to use with RabbitMQ. Must be one of `{plain,external}`.
+- Snap key: `landscape.broker.auth-mode`
+- Default: plain
+- Required: No
+- `service.conf`-supplied: No
+
+#### `LANDSCAPE_BROKER_TLS`
+
+- Purpose: Whether to connect to RabbitMQ with TLS.
+- Snap key: `landscape.broker.tls`
+- Default: false
+- Required: No
+- `service.conf`-supplied: No
+
 ### Worker settings
 
 #### `LANDSCAPE_WORKER_BATCH_SIZE`
@@ -234,7 +250,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_WORKER_QUEUE_SLEEP`
 
-- Purpose: The duration the worker sleeps between iterations when the broker's publish queue is full. Accepts Go duration strings.
+- Purpose: The duration the worker sleeps between queue depth queries. Accepts Go duration strings.
 - Snap key: `landscape.worker.queue-sleep`
 - Default: `1s`
 - Required: No
