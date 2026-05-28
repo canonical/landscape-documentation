@@ -253,6 +253,10 @@ The pool directory containing the actual `.deb` files is at:
 /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/
 ```
 
+```{important}
+The reprepro pool directory is shared across all distributions in the same reprepro tree. Scanning or archiving the entire pool will include packages from sync mirror and pull pockets, not just your upload pocket. Use one of the approaches in the next section to import only the packages that belong to this specific pocket.
+```
+
 ### 2. Make packages accessible via URL
 
 The `importPackages` API accepts a URL pointing to a `.deb` file. You need to make your existing packages accessible via HTTP or a `file://` URL.
