@@ -1,7 +1,7 @@
 ---
 myst:
-  html_meta:
-		description: "Configure Landscape Outbox for Landscape 26.04+ with a simple 3-step flow: install, assess if overrides are needed, and apply snap set configuration when required."
+    html_meta:
+        description: "Configure Landscape Outbox for Landscape 26.04+ and optionally apply overrides from defaults parsed in the service.conf."
 ---
 
 (how-to-configure-outbox)=
