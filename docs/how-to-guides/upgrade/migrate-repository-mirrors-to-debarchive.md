@@ -84,10 +84,10 @@ The `Update:` field indicates a sync (mirror) pocket. Stanzas with a `Pull:` fie
 To see what packages are currently in a pocket:
 
 ```bash
-reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list noble-release
+reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list <CODENAME>
 ```
 
-Replace `<DISTRIBUTION>` with the appropriate distribution directory name.
+Replace `<DISTRIBUTION>` with the appropriate distribution directory name and `<CODENAME>` with the codename of the pocket (e.g., `noble-updates`).
 
 ## Migrate sync (mirror) pockets
 
@@ -120,9 +120,9 @@ curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "displayName": "noble-updates",
+    "displayName": "<CODENAME>",
     "archiveRoot": "http://archive.ubuntu.com/ubuntu",
-    "distribution": "noble-updates",
+    "distribution": "<CODENAME>",
     "architectures": ["amd64"],
     "components": ["main", "restricted", "universe", "multiverse"]
   }'
@@ -215,9 +215,9 @@ curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "displayName": "noble-release-staging",
+    "displayName": "<CODENAME>",
     "archiveRoot": "http://archive.ubuntu.com/ubuntu",
-    "distribution": "noble",
+    "distribution": "<CODENAME>",
     "architectures": ["amd64"],
     "components": ["main"],
     "filter": "Name (= nginx) | Name (= curl) | Name (= libssl3)",
@@ -277,8 +277,8 @@ curl -X POST "$API_BASE/locals" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "displayName": "noble-staging",
-    "defaultDistribution": "noble",
+    "displayName": "<CODENAME>",
+    "defaultDistribution": "<CODENAME>",
     "defaultComponent": "main"
   }'
 ```
@@ -413,7 +413,7 @@ curl -X POST "$API_BASE/publications" \
   -d '{
     "source": "mirrors/<MIRROR_ID>",
     "publicationTarget": "publicationTargets/<PUBLICATION_TARGET_ID>",
-    "distribution": "noble-updates",
+    "distribution": "<CODENAME>",
     "architectures": ["amd64"],
     "gpgKey": {
       "armor": "<ASCII_ARMORED_PRIVATE_GPG_KEY>"
