@@ -1312,9 +1312,9 @@ Run the script `lsctl` to start the `landscape-server` daemons:
 sudo lsctl restart
 ```
 
-## Install and configure the Landscape Outbox
+## Install and configure the Landscape Outbox (Landscape 26.04+)
 
-The Landscape Outbox is a required component that interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
 
 Install the `landscape-outbox` snap if not already installed:
 
@@ -1330,7 +1330,7 @@ sudo cp /etc/landscape/rabbitmq_client.pem /root/snap/landscape-outbox/common/ra
 sudo cp /etc/landscape/rabbitmq_client.key /root/snap/landscape-outbox/common/rabbit.key
 ```
 
-Ensure they are owned and readable by `root`:
+Ensure the certificates are owned and readable by `root`:
 
 ```bash
 sudo chown -R root:root /root/snap/landscape-outbox/common/
