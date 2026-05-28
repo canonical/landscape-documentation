@@ -255,7 +255,7 @@ The pool directory containing the actual `.deb` files is at:
 
 ### 2. Make packages accessible via URL
 
-The `ImportLocalPackages` API accepts a URL pointing to a `.deb` file. You need to make your existing packages accessible via HTTP or a `file://` URL.
+The `importPackages` API accepts a URL pointing to a `.deb` file. You need to make your existing packages accessible via HTTP or a `file://` URL.
 
 If the Deb Archive service runs on the same machine as your existing repository, you can use `file://` URLs directly:
 
@@ -267,7 +267,7 @@ find /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/main
 Alternatively, if the packages are served by the existing Landscape repository web server, they may already be accessible at:
 
 ```
-https://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>/pool/
+http://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>/pool/
 ```
 
 ### 3. Create a local repository
