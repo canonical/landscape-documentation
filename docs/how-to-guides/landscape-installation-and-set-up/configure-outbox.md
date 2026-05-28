@@ -9,7 +9,7 @@ myst:
 
 The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` is required for Landscape 26.04 LTS and later.
 
-The outbox snap (`landscape-outbox`) runs sandboxed as `root` and connects to the same databases and broker as Landscape Server.
+The outbox snap (`landscape-outbox`) runs sand-boxed as `root` and connects to the same databases and broker as Landscape Server.
 
 ## Install the outbox snap
 
