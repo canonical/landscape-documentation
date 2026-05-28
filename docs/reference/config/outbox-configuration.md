@@ -160,7 +160,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_USER`
 
-- Purpose: The username used to authenticate with the AMQP broker.
+- Purpose: The username used to authenticate with the AMQP broker. Required unless the `external` authentication mode is used
 - Snap key: `landscape.broker.user`
 - Default: None
 - Required: Yes
@@ -168,7 +168,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_PASSWORD`
 
-- Purpose: The password used to authenticate with the AMQP broker. Required unless SSL client certificate authentication is configured (both `SSL_CERT` and `SSL_KEY` are set).
+- Purpose: The password used to authenticate with the AMQP broker. Required unless the `external` authentication mode is used.
 - Snap key: `landscape.broker.password`
 - Default: None
 - Required: No
@@ -184,7 +184,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_SSL_CA_CERT`
 
-- Purpose: Path to the CA certificate file used to verify the broker's TLS certificate. When any SSL variable is set, the connection uses the `amqps` scheme.
+- Purpose: Path to the CA certificate file used to verify the broker's TLS certificate.
 - Snap key: `landscape.broker.ssl-ca-cert`
 - Default: None
 - Required: No
@@ -216,7 +216,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_TLS`
 
-- Purpose: Whether to connect to the AMQP broker with TLS.
+- Purpose: Whether to connect to the AMQP broker over TLS.
 - Snap key: `landscape.broker.tls`
 - Default: false
 - Required: No
