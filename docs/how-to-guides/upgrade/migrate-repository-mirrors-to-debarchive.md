@@ -335,6 +335,8 @@ DIST_BASE="/var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>"
 CODENAME="<CODENAME>"  # e.g., noble-staging
 REPO_HTTP="http://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>"
 
+set -euo pipefail
+
 reprepro -b "$DIST_BASE" list "$CODENAME" | while read -r line; do
   # reprepro list output format: "codename|component|arch: package version"
   PACKAGE=$(echo "$line" | awk '{print $2}')
