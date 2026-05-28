@@ -150,9 +150,18 @@ curl -X GET "$API_BASE/operations/<OPERATION_ID>" \
 
 The operation is complete when `done` is `true`.
 
-### 4. Repeat for each sync pocket
+### 4. Verify the mirror
 
-Repeat steps 2–3 for each sync pocket (`release`, `updates`, `security`, etc.).
+Once the sync is complete, confirm the packages are present in the mirror:
+
+```bash
+curl -X GET "$API_BASE/mirrors/<MIRROR_ID>/packages" \
+  -H "Authorization: Bearer $JWT"
+```
+
+### 5. Repeat for each sync pocket
+
+Repeat steps 2–4 for each sync pocket (`release`, `updates`, `security`, etc.).
 
 ## Migrate pull pockets
 
@@ -233,6 +242,15 @@ Set `filterWithDeps` to `true` if you want the filter to also include dependenci
 curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json"
+```
+
+### 5. Verify the filtered mirror
+
+Once the sync is complete, confirm the filtered packages are present in the mirror:
+
+```bash
+curl -X GET "$API_BASE/mirrors/<MIRROR_ID>/packages" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 ## Migrate upload pockets
