@@ -48,6 +48,8 @@ Every directory listed above must be configured in advance of installing Landsca
 
 If you are using Landscape Server for repository mirroring, packages will be downloaded to the `/var/lib/landscape/landscape-repository/` directory. Consider limiting the size of that directory based on the size of the pockets in each repository mirror.
 
+For Landscape 26.04 and later, repository files managed by the `landscape-debarchive` snap are stored in `/var/snap/landscape-debarchive/common`. If you are using this feature, consider also limiting the size of that directory.
+
 The method used to limit the size of these directories depends on the environment Landscape Server is deployed to.
 
 #### Deployment using LXD containers
@@ -965,6 +967,10 @@ Add the configuration file `/etc/apache2/sites-available/landscape.conf`. See th
 - `<KEYFILE>`: the full filesystem path to the private key corresponding to the SSL certificate. For example, `/etc/apache2/apache_server.key`
 - `<CA_CERTFILE>`: the full filesystem path to the DoD CA chain file for this server. For example, `/etc/ca-certificates.crt`
 - `<CRL_FILE>`: the full filesystem path to the DoD CRL file for revoked certificates. For example, `/etc/crl.crl`
+
+```{note}
+For Landscape 26.04 and later, the sample `landscape.conf` includes an additional `/publications` alias that serves files from `/var/snap/landscape-debarchive/common/publications` over HTTP, for use with the `landscape-debarchive` snap. The existing `/repository` alias is retained for backwards compatibility with older Landscape Server versions.
+```
 
 ### Set permissions for Apache2 files
 
