@@ -11,35 +11,13 @@ The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` is required
 
 The outbox snap (`landscape-outbox`) runs sand-boxed as `root` and connects to the same databases and broker as Landscape Server.
 
-## Install the outbox snap
-
-Install the snap on the same machine as your Landscape Server installation:
-
-```bash
-sudo snap install landscape-outbox
-```
-
-Confirm that the outbox service is running:
-
-```bash
-sudo snap services landscape-outbox
-```
-
-The output should show `landscape-outbox.outbox` as `active`.
-
-To inspect recent logs:
-
-```bash
-sudo snap logs landscape-outbox -n 50
-```
-
 ## Identify whether additional configuration is needed
 
 By default, outbox reads database and broker settings from `/etc/landscape/service.conf`. In many deployments, the configuration read from this file is sufficient and no extra outbox configuration is needed. Additional outbox configuration is usually needed only when one or more of these are true:
 
 - Outbox must read from a non-default `service.conf` path.
 - The outbox needs to connect to the broker or database with different settings than what Landscape server uses.
-- The outbox needs a configuration option that cannot be specified in the `service.conf`
+- The outbox needs a configuration option that cannot be specified in the `service.conf`.
 
 If none of these apply, stop here.
 

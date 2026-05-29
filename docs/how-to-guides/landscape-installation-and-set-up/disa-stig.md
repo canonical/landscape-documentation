@@ -1357,6 +1357,8 @@ Restart the outbox service to apply the new configuration:
 sudo snap restart landscape-outbox
 ```
 
+See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional information.
+
 ### Configure authentication
 
 If you skipped setting up authentication earlier in the guide, now is the time to complete those steps. See {ref}`Configure Authentication <header-configure-authentication>` for more details.
