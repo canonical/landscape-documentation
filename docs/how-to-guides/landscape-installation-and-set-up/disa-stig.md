@@ -48,6 +48,8 @@ Every directory listed above must be configured in advance of installing Landsca
 
 If you are using Landscape Server for repository mirroring, packages will be downloaded to the `/var/lib/landscape/landscape-repository/` directory. Consider limiting the size of that directory based on the size of the pockets in each repository mirror.
 
+For Landscape 26.04 and later, repository files managed by the `landscape-debarchive` snap are stored in `/var/snap/landscape-debarchive/common`. If you are using this feature, consider also limiting the size of that directory.
+
 The method used to limit the size of these directories depends on the environment Landscape Server is deployed to.
 
 #### Deployment using LXD containers
@@ -966,6 +968,10 @@ Add the configuration file `/etc/apache2/sites-available/landscape.conf`. See th
 - `<CA_CERTFILE>`: the full filesystem path to the DoD CA chain file for this server. For example, `/etc/ca-certificates.crt`
 - `<CRL_FILE>`: the full filesystem path to the DoD CRL file for revoked certificates. For example, `/etc/crl.crl`
 
+```{note}
+For Landscape 26.04 and later, the sample `landscape.conf` includes an additional `/publications` alias that serves files from `/var/snap/landscape-debarchive/common/publications` over HTTP, for use with the `landscape-debarchive` snap. The existing `/repository` alias is retained for backwards compatibility with older Landscape Server versions.
+```
+
 ### Set permissions for Apache2 files
 
 Restrict configuration files to `640 root:root` permissions and the SSL private key to `400` permissions:
@@ -1311,6 +1317,53 @@ Run the script `lsctl` to start the `landscape-server` daemons:
 ```bash
 sudo lsctl restart
 ```
+
+## Install and configure the Landscape Outbox (Landscape 26.04+)
+
+The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+
+Install the `landscape-outbox` snap if not already installed:
+
+```bash
+sudo snap install landscape-outbox
+```
+
+Copy the CA certificate and the RabbitMQ client certificates that you created on the Landscape server earlier:
+
+```bash
+sudo cp /etc/ca-certificates.crt /root/snap/landscape-outbox/common/ca.crt
+sudo cp /etc/landscape/rabbitmq_client.pem /root/snap/landscape-outbox/common/rabbit.pem
+sudo cp /etc/landscape/rabbitmq_client.key /root/snap/landscape-outbox/common/rabbit.key
+```
+
+Ensure the certificates are owned and readable by `root`:
+
+```bash
+sudo chown -R root:root /root/snap/landscape-outbox/common/
+```
+
+Configure the outbox to use TLS with external authentication:
+
+```bash
+sudo snap set landscape-outbox landscape.broker.auth-mode=external
+sudo snap set landscape-outbox landscape.broker.tls=true
+```
+
+Provide the paths to the certificates you copied earlier:
+
+```bash
+sudo snap set landscape-outbox landscape.broker.ssl-cert=/root/snap/landscape-outbox/common/rabbit.pem
+sudo snap set landscape-outbox landscape.broker.ssl-key=/root/snap/landscape-outbox/common/rabbit.key
+sudo snap set landscape-outbox landscape.broker.ssl-ca-cert=/root/snap/landscape-outbox/common/ca.crt
+```
+
+Restart the outbox service to apply the new configuration:
+
+```bash
+sudo snap restart landscape-outbox
+```
+
+See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional information.
 
 ### Configure authentication
 
