@@ -49,9 +49,9 @@ graph TD
 A mirror is a local copy of an upstream Debian repository (for example, `archive.ubuntu.com`). When you create a mirror, you specify:
 
 - **Archive root:** The upstream repository URL to mirror from (e.g. `http://archive.ubuntu.com/ubuntu/`)
-- **Distribution:** The repository suite to mirror. This corresponds to what the Ubuntu archive calls a series and pocket combination. For example, `noble` (the release pocket of Ubuntu 24.04 LTS), `noble-updates` (the updates pocket), or `noble-security` (the security pocket)
-- **Components:** The categories of packages to include. Upstream Ubuntu repositories use `main`, `restricted`, `universe`, and `multiverse`
-- **Architectures:** The CPU architectures to mirror (e.g. `amd64`, `arm64`)
+- **Distribution:** The repository suite to mirror. This corresponds to what the Ubuntu archive calls a series and pocket combination. For example, `noble` (the release pocket of Ubuntu 24.04 LTS), `noble-updates` (the updates pocket), or `noble-security` (the security pocket). For more info, see the [Ubuntu project docs](https://documentation.ubuntu.com/project/release-team/ubuntu-releases/).
+- **Components:** The categories of packages to include. Upstream Ubuntu repositories use `main`, `restricted`, `universe`, and `multiverse`. For more info, see [Ubuntu package archive](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/).
+- **Architectures:** The CPU architectures to mirror (e.g. `amd64`, `arm64`). For more info, see [Ubuntu supported architectures](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/supported-architectures/).
 - **Filter (optional):** A package query expression to select a subset of packages from the upstream repository, optionally including their dependencies
 
 After creating a mirror, you **sync** it to download packages from the upstream repository. You can sync a mirror repeatedly to pull in the latest packages from upstream.
