@@ -130,6 +130,7 @@ gRPC
 grpc
 grpcio
 filesystem
+filepaths
 frontend
 HAProxy
 haproxy

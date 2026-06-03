@@ -18,9 +18,9 @@ Each service has its own set of environment variables, described in the sections
 
 ## `service.conf` integration
 
-The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read all necessary database and broker configurations from `/etc/landscape/service.conf` and will populate the corresponding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
+The outbox needs to use the same database and broker systems that Landscape server uses. By default, the outbox will read database and broker configurations from `/etc/landscape/service.conf` and will populate the corresponding environment variables. The path to the `service.conf` file can be overridden via the `LANDSCAPE_CONFIG_FILE` environment variable or equivalently the `landscape.service-conf-file` snap key.
 
-This means that several environment variables marked as **required** in this reference do not need to be set directly and can instead be read from the `service.conf`. These configurations are marked with **`service.conf-supplied`: Yes**. It is recommended to use this integration instead of setting these environment variables directly.
+This means that several environment variables marked as **required** in this reference do not need to be set directly and can instead be read from the `service.conf`. These configurations are marked with **`service.conf-supplied`: Yes**. It is recommended to use this integration instead of setting these environment variables directly. In cases where the outbox cannot use the same configuration value as the Landscape server, it is necessary to use the snap configuration. A snap configuration takes priority over the equivalent value in the `service.conf`.
 
 The table below lists every environment variable that is populated. Note that all three databases share the same host, port, user, password, and SSL settings from the `[stores]` section.
 
@@ -160,7 +160,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_USER`
 
-- Purpose: The username used to authenticate with the AMQP broker.
+- Purpose: The username used to authenticate with the AMQP broker. Required unless the `external` authentication mode is used
 - Snap key: `landscape.broker.user`
 - Default: None
 - Required: Yes
@@ -168,7 +168,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_PASSWORD`
 
-- Purpose: The password used to authenticate with the AMQP broker. Required unless SSL client certificate authentication is configured (both `SSL_CERT` and `SSL_KEY` are set).
+- Purpose: The password used to authenticate with the AMQP broker. Required unless the `external` authentication mode is used.
 - Snap key: `landscape.broker.password`
 - Default: None
 - Required: No
@@ -184,7 +184,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_BROKER_SSL_CA_CERT`
 
-- Purpose: Path to the CA certificate file used to verify the broker's TLS certificate. When any SSL variable is set, the connection uses the `amqps` scheme.
+- Purpose: Path to the CA certificate file used to verify the broker's TLS certificate.
 - Snap key: `landscape.broker.ssl-ca-cert`
 - Default: None
 - Required: No
@@ -205,6 +205,22 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Default: None
 - Required: No
 - `service.conf`-supplied: Yes
+
+#### `LANDSCAPE_BROKER_AUTH_MODE`
+
+- Purpose: Authentication mode to use with the AMQP broker. Must be one of `{plain,external}`.
+- Snap key: `landscape.broker.auth-mode`
+- Default: plain
+- Required: No
+- `service.conf`-supplied: No
+
+#### `LANDSCAPE_BROKER_TLS`
+
+- Purpose: Whether to connect to the AMQP broker over TLS.
+- Snap key: `landscape.broker.tls`
+- Default: false
+- Required: No
+- `service.conf`-supplied: No
 
 ### Worker settings
 
@@ -234,7 +250,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 
 #### `LANDSCAPE_WORKER_QUEUE_SLEEP`
 
-- Purpose: The duration the worker sleeps between iterations when the broker's publish queue is full. Accepts Go duration strings.
+- Purpose: The duration the worker sleeps between queue depth queries. Accepts Go duration strings.
 - Snap key: `landscape.worker.queue-sleep`
 - Default: `1s`
 - Required: No
