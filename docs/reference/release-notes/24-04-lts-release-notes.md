@@ -127,3 +127,11 @@ We published the 24.04.12 point release on 17 April 2026.
 - fix: backport-cross-site-scripting-activity-result-page
 - fix: remove newlines from proxy config
 - fix: Zope template security bugs
+
+## Landscape 24.04.13 Point Release
+
+We published the 24.04.13 point release on 5 June 2026.
+
+- fix: UI bug fixes from landscape-ui commit ea90dbd
+- fix: remove recursive chown (LP: #1725282)
+- fix: validate LDAP identity to prevent injection
