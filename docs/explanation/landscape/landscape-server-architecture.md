@@ -107,11 +107,11 @@ The Package search service responds to internal HTTP requests with the Debian pa
 (explanation-server-architecture-deb-archive)=
 ### Deb Archive
 
+Deb Archive was introduced in Landscape 26.04 LTS, replacing the previous reprepro-based repository mirroring implementation.
+
 The Deb Archive service (`landscape-debarchive`) provides Debian repository mirroring and publishing for Landscape. It is distributed as a separate snap and installed alongside Landscape Server (or deployed as a charm in the same Juju model). It exposes a REST API that Landscape Server consumes to manage mirrors, local repositories, publications, and publication targets.
 
 Deb Archive uses its own PostgreSQL database within the same cluster as Landscape Server. It supports publishing to filesystem, S3, and OpenStack Swift storage backends. Long-running operations such as mirror syncs and publishes run asynchronously in the background.
-
-Deb Archive was introduced in Landscape 26.04 LTS, replacing the previous reprepro-based repository mirroring implementation.
 
 * {ref}`Set up Deb Archive <how-to-debarchive-repository-management>`
 * {ref}`Repository mirroring concepts <explanation-repo-mirroring>`
