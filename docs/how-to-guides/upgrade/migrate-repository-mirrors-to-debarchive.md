@@ -254,7 +254,7 @@ curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
 
 ### 5. Verify the filtered mirror
 
-Once the sync is complete, confirm the filtered packages are present in the mirror. Example call:
+Once the sync is complete, confirm the filtered packages are present in the mirror by listing the packages that have been synced. Example call:
 
 ```bash
 curl -X GET "$API_BASE/mirrors/<MIRROR_ID>/packages" \
