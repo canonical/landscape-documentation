@@ -112,52 +112,9 @@ A publication target is the storage location where Landscape writes a published 
 
 Publication targets are separate from mirrors and local repositories. You can define a target once and reuse it for multiple publications. The publication target must have enough storage available to hold the entire contents of the publication source.
 
-If you are in a restricted environment (e.g. in an air-gapped environment, or with a manual Landscape deployment on a single machine, etc.), you may wish to use a filesystem publication target. Otherwise we recommend using S3 or Swift publication targets.
+If you are in a restricted environment (e.g. in an air-gapped environment, or with a manual Landscape deployment on a single machine, etc.), you may wish to use a filesystem publication target. Otherwise, we recommend using S3 or Swift publication targets.
 
-Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. An example nginx configuration below illustrates how you can achieve that.
-
-```nginx
-server {
-    # 1. Set ports, as they may conflict with Landscape Server
-    listen 8000;
-    listen [::]:8000;
-
-    # 2. Set your server's Fully Qualified Domain Name (FQDN)
-    server_name <YOUR_FQDN>;
-
-    # 3. Set the root to the publication directory
-    root <PUBLICATION_TARGET_FILE_PATH>;
-
-    location / {
-        # 4. Enable directory listing for client consumption/browsing
-        autoindex on;
-        
-        # Optional: Makes the directory listings look a bit cleaner
-        autoindex_exact_size off;
-        autoindex_localtime on;
-
-        try_files $uri $uri/ =404;
-    }
-
-    # Optional: Logging configuration for easier troubleshooting
-    access_log /var/log/nginx/repo_access.log;
-    error_log /var/log/nginx/repo_error.log;
-}
-```
-
-Replace `<YOUR_FQDN>` with the fully qualified domain name for your server. Replace `<PUBLICATION_TARGET_FILE_PATH>` with the path of the local directory you chose when creating the filesystem publication target (e.g. `/var/snap/landscape-debarchive/common/my-repository`).
-
-Save that file as `/etc/nginx/sites-available/filesystem-repo`. Then enable it:
-
-```bash
-sudo ln -s /etc/nginx/sites-available/filesystem-repo /etc/nginx/sites-enabled/
-```
-
-And restart `nginx`:
-
-```bash
-sudo systemctl restart nginx
-```
+Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem.
 
 (explanation-repo-mirroring-2604-repository-profiles)=
 ### Repository profiles

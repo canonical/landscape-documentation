@@ -254,14 +254,14 @@ If your deployment uses HAProxy, add a routing rule and backend for the Deb Arch
 
 In the existing `frontend` section, add:
 
-```cfg
+```text
     acl is_debarchive path_beg /debarchive
     use_backend debarchive if is_debarchive
 ```
 
 Add a new backend section:
 
-```cfg
+```text
 backend debarchive
     http-request set-path %[path,regsub(^/debarchive,/)]
     server debarchive 127.0.0.1:8100 check
