@@ -185,7 +185,7 @@ Architectures: amd64
 FilterList: install noble-release-staging.list
 ```
 
-The referenced filter list file (e.g., `noble-release-staging.list`) contains package name patterns, one per line. Examine the filter list:
+The referenced filter list file (e.g., `noble-release-staging.list`) contains package name patterns, one per line:
 
 ```bash
 cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/noble-release-staging.list
