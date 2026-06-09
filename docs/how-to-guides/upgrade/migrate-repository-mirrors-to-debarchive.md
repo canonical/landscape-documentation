@@ -31,7 +31,7 @@ The migration strategy depends on the type of pocket you're migrating:
 If you need to preserve the **exact state** of a sync mirror (the precise set of package versions currently stored, rather than the latest upstream state), you should treat it as an upload pocket and import its packages into a new local repository instead.
 ```
 
-## Prerequisites
+## Set environment variables
 
 Set the following environment variables for use throughout this guide:
 
