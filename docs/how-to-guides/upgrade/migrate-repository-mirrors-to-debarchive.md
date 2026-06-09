@@ -29,7 +29,6 @@ If you need to preserve the **exact state** of a sync mirror (the precise set of
 
 This guide assumes you have already:
 
-- Upgraded to Landscape 26.04 LTS ({ref}`how-to-upgrade-to-26-04-lts`)
 - Installed and configured the `landscape-debarchive` snap ({ref}`how-to-debarchive-repository-management`)
 
 ## Set environment variables
