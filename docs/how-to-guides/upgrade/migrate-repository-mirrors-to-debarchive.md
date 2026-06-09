@@ -167,7 +167,7 @@ Repeat the previous steps for each sync pocket (`release`, `updates`, `security`
 
 ## Migrate pull pockets
 
-Pull pockets in the pre-26.04 system stage packages from another pocket using allowlist or blocklist filters. In Deb Archive, this is achieved by creating a mirror with a `filter` expression that replicates your allowlist or blocklist.
+Pull pockets in the pre-26.04 system stage packages from another pocket using allowlist or blocklist filters. Starting in Landscape 26.04 LTS, this is achieved by creating a mirror with a `filter` expression that replicates your allowlist or blocklist, also referred to as a "filtered mirror".
 
 ### 1. Identify the filter rules
 
