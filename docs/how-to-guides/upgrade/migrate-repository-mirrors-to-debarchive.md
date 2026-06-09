@@ -55,7 +55,7 @@ cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/distr
 
 where `<DISTRIBUTION>` is the name of the distribution you created (e.g., `ubuntu`, `ubuntu-staging`).
 
-This file contains stanzas like:
+This file contains sections like:
 
 ```text
 Codename: noble-release
@@ -79,7 +79,7 @@ Architectures: amd64
 SignWith: <KEY_FINGERPRINT>
 ```
 
-The `Update:` field indicates a sync (mirror) pocket. Stanzas with a `Pull:` field are pull pockets. Stanzas without either are upload pockets.
+The `Update:` field indicates a sync (mirror) pocket. Sections with a `Pull:` field are pull pockets. Sections without either are upload pockets.
 
 To see what packages are currently in a pocket:
 
@@ -101,7 +101,7 @@ Check the update rules in the reprepro configuration:
 cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/updates
 ```
 
-Look for stanzas matching your pocket. For example:
+Look for sections matching your pocket. For example:
 
 ```text
 Name: noble-updates
@@ -111,7 +111,7 @@ Components: main restricted universe multiverse
 Architectures: amd64
 ```
 
-The `Components` and `Architectures` fields may not be present. If they're missing, use the values from the corresponding distribution stanza.
+The `Components` and `Architectures` fields may not be present. If they're missing, use the values from the corresponding distribution section.
 
 ### 2. Create the mirror
 
@@ -175,7 +175,7 @@ Check the reprepro `pulls` configuration:
 cat /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/conf/pulls
 ```
 
-Example stanza:
+Example section:
 
 ```text
 Name: noble-release-staging
