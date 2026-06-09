@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Migrate repository mirrors from legacy reprepro-managed repositories (Landscape 25.10 and earlier) to the new debarchive service introduced in Landscape 26.04 LTS."
+    description: "Migrate repository mirrors from pre-26.04 reprepro-managed repositories (Landscape 25.10 and earlier) to the new debarchive service introduced in Landscape 26.04 LTS."
 ---
 
 (how-to-migrate-repository-mirrors-to-debarchive)=
@@ -15,7 +15,7 @@ In Landscape 25.10 and earlier, repository management was handled by an internal
 
 The migration strategy depends on the type of pocket you're migrating:
 
-| Legacy pocket type | Migration strategy |
+| Pre-26.04 pocket type | Migration strategy |
 |---|---|
 | **Sync (mirror) pocket** | Create a new mirror in Deb Archive pointing at the original upstream source and sync it |
 | **Pull pocket** | Create a new mirror with a `filter` matching your existing allowlist/blocklist |
@@ -165,7 +165,7 @@ Repeat steps 2–4 for each sync pocket (`release`, `updates`, `security`, etc.)
 
 ## Migrate pull pockets
 
-Pull pockets in the legacy system stage packages from another pocket using allowlist or blocklist filters. In Deb Archive, this is achieved by creating a mirror with a `filter` expression that replicates your allowlist or blocklist.
+Pull pockets in the pre-26.04 system stage packages from another pocket using allowlist or blocklist filters. In Deb Archive, this is achieved by creating a mirror with a `filter` expression that replicates your allowlist or blocklist.
 
 ### 1. Identify the filter rules
 
@@ -408,7 +408,7 @@ If you need to preserve the precise package versions currently in a sync mirror,
 
 ## Upgrade to Landscape 26.04 LTS
 
-Once you have confirmed that all packages are present in the new Deb Archive service, clean up the legacy reprepro Distribution records and then upgrade.
+Once you have confirmed that all packages are present in the new Deb Archive service, clean up the pre-26.04 reprepro Distribution records and then upgrade.
 
 ### 1. Delete existing reprepro Distribution records
 
@@ -440,9 +440,9 @@ Trigger the publication. Landscape will generate the repository metadata and mak
 
 ## Update client machines
 
-After publishing, update the repository profiles on your managed machines to point to the new Deb Archive publication URLs instead of the legacy repository paths.
+After publishing, update the repository profiles on your managed machines to point to the new Deb Archive publication URLs instead of the pre-26.04 repository paths.
 
-The legacy repository was served at:
+The pre-26.04 repository was served at:
 
 ```
 deb https://$LANDSCAPE_FQDN/repository/standalone/ubuntu <codename>-<pocket> <components>
