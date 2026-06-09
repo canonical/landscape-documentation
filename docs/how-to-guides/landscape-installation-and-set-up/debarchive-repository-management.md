@@ -140,9 +140,10 @@ Landscape itself does not serve filesystem publication targets. Instead, you mus
 
 ### Apache
 
+If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
+
 Install the file below as `/etc/apache2/sites-available/filesystem-repo.conf` and change the following values:
 
-If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
 - `@hostname@`: The fully qualified domain name for your server.
 - `@publication_target_file_path@`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
 
@@ -181,7 +182,7 @@ sudo systemctl restart apache2
 
 ### Nginx
 
-Install the file below as `/etc/nginx/sites-available/filesystem-repo.conf` and change the following values:
+Create `/etc/nginx/sites-available/filesystem-repo.conf` with the following contents, then replace:
 
 - `<YOUR_FQDN>`: The fully qualified domain name for your server.
 - `<PUBLICATION_TARGET_FILE_PATH>`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
