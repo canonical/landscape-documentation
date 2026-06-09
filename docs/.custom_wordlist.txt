@@ -56,6 +56,7 @@ Charmhub's
 changelog
 checkboxes
 Chocolatey
+chown
 chrony
 CIDR
 CIS
