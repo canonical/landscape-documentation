@@ -273,7 +273,7 @@ List the packages in the upload pocket:
 reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> list noble-staging
 ```
 
-The pool directory containing the actual `.deb` files is at:
+The pool directory is where the actual `.deb` package binary files are stored. You'll need to import all of the relevant `.deb` files from the pool into the new local repository. For a given distribution, the pool is located at:
 
 ```
 /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION>/pool/
