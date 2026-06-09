@@ -203,7 +203,7 @@ libssl3 install
 
 ### 2. Translate the filter to a Deb Archive filter expression
 
-Deb Archive mirrors support package filtering using an aptly-compatible filter syntax. Translate your allowlist into a filter expression:
+Deb Archive mirrors support package filtering using a straightforward filter syntax. Translate your allowlist into a filter expression:
 
 - **Allowlist** (only include these packages): Use a filter expression that matches the package names:
 
