@@ -25,6 +25,8 @@ The migration strategy depends on the type of pocket you're migrating:
 If you need to preserve the **exact state** of a sync mirror (the precise set of package versions currently stored, rather than the latest upstream state), you should treat it as an upload pocket and import its packages into a new local repository instead.
 ```
 
+For details on how repository mirroring works in 26.04, see {ref}` "Repository mirroring (26.04 LTS and later)"<explanation-repo-mirroring-2604>`.
+
 ## Prerequisites
 
 This guide assumes you have already:
