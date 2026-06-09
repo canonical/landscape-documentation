@@ -201,7 +201,7 @@ curl install
 libssl3 install
 ```
 
-### 2. Translate the filter to a Deb Archive filter expression
+### 2. Migrate allowlists and blocklists to filtered mirrors
 
 Deb Archive mirrors support package filtering using a straightforward filter syntax. Translate your allowlist into a filter expression:
 
