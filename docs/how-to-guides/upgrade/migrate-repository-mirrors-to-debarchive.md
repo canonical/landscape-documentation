@@ -458,7 +458,7 @@ The pre-26.04 repository was served at:
 deb https://$LANDSCAPE_FQDN/repository/standalone/ubuntu <codename>-<pocket> <components>
 ```
 
-The new Deb Archive filesystem publications can be served from the configured published root path using the web server of your choice. Consult your publication target configuration for the exact URL.
+The new Deb Archive filesystem publications can be served from the configured published root path using a web server, such as Nginx or Apache. Consult your publication target configuration for the exact URL.
 
 ## See also
 
