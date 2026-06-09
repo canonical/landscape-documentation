@@ -138,6 +138,7 @@ For example, if the published root is `/srv/published-repos` and a publication t
 
 Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. The example configurations for Apache and Nginx below illustrate how you can achieve this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
 
+If the published repositories should not be publicly accessible, restrict access at the web server and/or network layer (e.g. firewall rules, IP allowlists, or HTTP authentication).
 ### Apache
 
 If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
