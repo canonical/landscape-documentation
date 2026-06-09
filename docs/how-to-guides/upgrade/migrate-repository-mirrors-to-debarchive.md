@@ -412,7 +412,7 @@ Once you have confirmed that all packages are present in the new Deb Archive ser
 
 ### 1. Delete existing reprepro Distribution records
 
-In the Landscape web UI, navigate to **Repositories**. Each distribution (for example, `ubuntu` or `ubuntu-staging`) has a **Delete** button. Delete each distribution.
+In the Landscape web portal, navigate to **Repositories**. Each distribution (for example, `ubuntu` or `ubuntu-staging`) has a **Delete** button. Delete each distribution.
 
 ```{important}
 Only delete a distribution after confirming that its packages have been successfully migrated to the new Deb Archive service. This action cannot be undone, though you could restore from a database backup if needed.
@@ -424,11 +424,11 @@ Follow {ref}`how-to-upgrade-to-26-04-lts` to upgrade to Landscape 26.04 LTS.
 
 ## Publish the migrated repositories
 
-After upgrading to Landscape 26.04 LTS, publish your migrated mirrors and local repositories so they're accessible to client machines. This involves creating a publication target and a publication in the Landscape web UI.
+After upgrading to Landscape 26.04 LTS, publish your migrated mirrors and local repositories so they're accessible to client machines. This involves creating a publication target and a publication in the Landscape web portal.
 
 ### 1. Create a publication target
 
-In the Landscape web UI, navigate to **Repositories > Publication Targets** and create a new publication target. For a filesystem target that serves repositories from the Landscape Server itself, set the path to the directory where published repositories should be written.
+In the Landscape web portal, navigate to **Repositories > Publication Targets** and create a new publication target. For a filesystem target that serves repositories from the Landscape Server itself, set the path to the directory where published repositories should be written.
 
 ### 2. Create a publication
 
