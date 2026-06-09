@@ -145,12 +145,12 @@ server {
 }
 ```
 
-Replace `<YOUR_FQDN>` with the fully qualified domain name for your server. Replace `<PUBLICATION_TARGET_FILE_PATH>` with the path of the local directory you chose when creating the filesystem publication target (e.g. `/var/snap/landscape-debarchive/common/my-repository)`).
+Replace `<YOUR_FQDN>` with the fully qualified domain name for your server. Replace `<PUBLICATION_TARGET_FILE_PATH>` with the path of the local directory you chose when creating the filesystem publication target (e.g. `/var/snap/landscape-debarchive/common/my-repository`).
 
 Save that file as `/etc/nginx/sites-available/filesystem-repo`. Then enable it:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/ubuntu-repo /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/filesystem-repo /etc/nginx/sites-enabled/
 ```
 
 And restart `nginx`:

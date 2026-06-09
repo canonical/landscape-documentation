@@ -136,14 +136,15 @@ The directory must exist and be writable by the snap. After the setting is appli
 
 For example, if the published root is `/srv/published-repos` and a publication target has the path `myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`.
 
-Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. Example configurations for Apache and Nginx below illustrates how you can achieve that. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
+Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. The example configurations for Apache and Nginx below illustrate how you can achieve this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
 
 ### Apache
 
 Install the file below as `/etc/apache2/sites-available/filesystem-repo.conf` and change the following values:
 
+If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
 - `@hostname@`: The fully qualified domain name for your server.
-- `@publication_target_file_path@`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu)`).
+- `@publication_target_file_path@`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
 
 ```apache
 <VirtualHost *:8000>
@@ -183,7 +184,7 @@ sudo systemctl restart apache2
 Install the file below as `/etc/nginx/sites-available/filesystem-repo.conf` and change the following values:
 
 - `<YOUR_FQDN>`: The fully qualified domain name for your server.
-- `<PUBLICATION_TARGET_FILE_PATH>`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu)`).
+- `<PUBLICATION_TARGET_FILE_PATH>`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
 
 ```nginx
 server {
