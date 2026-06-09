@@ -161,7 +161,7 @@ curl -X GET "$API_BASE/mirrors/<MIRROR_ID>/packages" \
 
 ### 5. Repeat for each sync pocket
 
-Repeat steps 2–4 for each sync pocket (`release`, `updates`, `security`, etc.).
+Repeat the previous steps for each sync pocket (`release`, `updates`, `security`, etc.).
 
 ## Migrate pull pockets
 
