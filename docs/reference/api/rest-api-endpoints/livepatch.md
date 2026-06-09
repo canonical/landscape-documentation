@@ -210,8 +210,9 @@ Example request:
 
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/kernel/upgrade" \
-   -H "Authorization: Bearer $JWT" \
-   -d "kernel_package_id=1122"
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d "kernel_package_id=1122"
 ```
 
 Example response:
@@ -259,8 +260,9 @@ Example request:
 
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/computers/29/kernel/downgrade" \
-   -H "Authorization: Bearer $JWT" \
-   -d "kernel_package_id=1122"
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d "kernel_package_id=1122"
 ```
 
 Example response:

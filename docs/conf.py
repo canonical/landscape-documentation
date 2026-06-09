@@ -170,8 +170,8 @@ sitemap_excludes = [
 # Template and asset locations
 #######################
 
-html_static_path = ["_static"]
-templates_path = ["_templates"]
+html_static_path = [".sphinx/_static"]
+templates_path = [".sphinx/_templates"]
 
 ###########################
 # Link checker exceptions #
@@ -245,26 +245,26 @@ extensions = [
     "sphinx_last_updated_by_git",
     "sphinx.ext.intersphinx",
     "sphinx_sitemap",
-    "sphinxext.rediraffe"
+    "sphinxext.rediraffe",
+    "sphinxcontrib.mermaid",
 ]
 
 
 # Excludes files or directories from processing
 
-exclude_patterns = [
-    "doc-cheat-sheet*",
-]
+# exclude_patterns = [
+# ]
 
 # Adds custom CSS files, located under 'html_static_path'
 
 html_css_files = [
-    "css/pdf.css",
-    "css/cookie-banner.css"
+    "cookie-banner.css",
 ]
 
 # Adds custom JavaScript files, located under 'html_static_path'
+
 html_js_files = [
-    "js/bundle.js"
+    "bundle.js",
  ]
 
 # Specifies a reST snippet to be appended to each .rst file
@@ -334,7 +334,7 @@ latex_elements = ast.literal_eval(latex_config.replace("$PROJECT", project))
 rediraffe_branch = "main"
 rediraffe_redirects = "redirects.txt"
 
-## Reredirects extension 
+## Reredirects extension
 ## NOTE: We've moved to use rediraffe as our main redirects extension.
 ## The following are ones we already had in place, but haven't migrated
 redirects = {

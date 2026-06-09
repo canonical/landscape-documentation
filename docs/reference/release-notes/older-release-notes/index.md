@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Landscape release notes from versions 14.10 through 19.10 (2014-2019). Historical documentation covering features, bug fixes, and upgrade instructions for older releases."
+    description: "Landscape release notes from versions 14.10 through 23.10 (2014-2023). Historical documentation covering features, bug fixes, and upgrade instructions for older releases."
 ---
 
 (reference-release-notes-older-release-notes-index)=
@@ -12,6 +12,8 @@ myst:
 :maxdepth: 1
 :glob:
 
+23-10-release-notes
+23-03-release-notes
 19-10-release-notes
 19-01-release-notes
 18-03-release-notes
@@ -22,3 +24,4 @@ myst:
 15-10-release-notes
 15-01-release-notes
 14-10-release-notes
+```

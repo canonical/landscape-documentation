@@ -19,7 +19,10 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/accept-invitation" -H "Authorization: Bearer $JWT" -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
+curl -X POST "https://landscape.canonical.com/api/v2/accept-invitation" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
 ```
 
 Example response:
@@ -93,7 +96,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/invitations" -H "Authorization: Bearer $JWT" -d '{"name": "Bobby", "email": "bobby@ubuntu.com", "roles": ["Auditor", "SupportAnalyst"]}'
+curl -X POST "https://landscape.canonical.com/api/v2/invitations" \ 
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"name": "Bobby", "email": "bobby@ubuntu.com", "roles": ["Auditor", "SupportAnalyst"]}'
 ```
 
 Example response:
@@ -165,5 +171,8 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/reject-invitation" -H "Authorization: Bearer $JWT" -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
+curl -X POST "https://landscape.canonical.com/api/v2/reject-invitation" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
 ```

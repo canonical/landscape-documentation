@@ -25,4 +25,5 @@ REST API endpoints <rest-api-endpoints/index>
 :maxdepth: 2
 
 legacy-api-endpoints/index
+Debarchive API <debarchive>
 ```

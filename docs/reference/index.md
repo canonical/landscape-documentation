@@ -5,6 +5,7 @@ myst:
 ---
 
 (reference-index)=
+
 # Reference
 
 This section includes technical reference information for Landscape Server and Landscape Client.
@@ -53,6 +54,17 @@ Network requirements, ports, and firewall configurations.
 networking/index
 ```
 
+## Landscape Server charm
+
+References specifically related to the Landscape Server charm.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 2
+
+charm/index
+```
+
 ## Terminology
 
 Definitions of key terms and concepts used in Landscape.
@@ -62,6 +74,17 @@ Definitions of key terms and concepts used in Landscape.
 :maxdepth: 2
 
 terms/index
+```
+
+## Supported versions and PPAs
+
+Version lifecycle, PPA locations, and Ubuntu compatibility for self-hosted Landscape.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
+supported-versions-and-ppas
 ```
 
 ## Other references

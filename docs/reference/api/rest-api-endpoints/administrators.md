@@ -28,7 +28,10 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X PUT https://landscape.canonical.com/api/v2/administrators/6 -H "Authorization: Bearer $JWT" -H "Content-Type: application/json" -d '{"roles": ["ServerAdmin", "DesktopAdmin"]}'
+curl -X PUT https://landscape.canonical.com/api/v2/administrators/6 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"roles": ["ServerAdmin", "DesktopAdmin"]}'
 ```
 
 Example response:

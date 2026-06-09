@@ -23,6 +23,8 @@ global
 
 It's good practice to create and document a naming convention for access groups before you deploy Landscape, so that all administrators understand what constitutes an acceptable logical grouping for your organization.
 
+**Note**: The only special characters allowed in the title of an access group are `.` and `-`. All other special characters will be stripped from the title.
+
 ## Managing access groups
 
 ### In the new web portal

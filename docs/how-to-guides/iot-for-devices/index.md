@@ -49,6 +49,8 @@ IoT devices come with their own unique characteristics and challenges. Therefore
   - Use groups and tags to control your updates
     - Deploy to test groups first to ensure functionality after upgrade
     - Choose regional rollout strategies to match local maintenance windows
+- **Use validation sets to control updates to snaps**
+  - We recommend validation sets as a more efficient and controlled way to update snaps across your devices. For implementation details, see {doc}`Manage snaps with validation sets <manage-snaps-with-validation-sets>`.
 - **Use remote scripting to debug**
   - Use Landscape’s remote scripting interface to collect and parse various logs from your devices to help debug issues
 
@@ -105,11 +107,3 @@ The same issues that affect snap services management on Ubuntu Core also apply t
 #### Snap configuration
 
 The same issues that affect snap configuration on Ubuntu Core also apply to Ubuntu Classic. See the previous section on Ubuntu Core and snap configuration.
-
-## Known issues with the snap
-
-### Duplicate machines after reverting snap revisions
-
-Before revision 329, reverting to a previous snap revision could cause clients to re-register with Landscape, resulting in duplicate machines. This was due to the way the client snap stored data. This issue is now fixed in later revisions (after 329).
-
-To remove the duplicate machine(s), go to the Landscape portal and remove any machines that are offline and not pinging. In the newer portal, click on the instance, then **Remove from Landscape**. Or in the classic portal, click the computer, then **Remove computer**. You’ll be prompted to confirm in both web portals.

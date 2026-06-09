@@ -22,9 +22,12 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X POST -H "Authorization: Bearer $JWT" -d '{
-  "account_name": "upside"
-  }'   https://landscape.canonical.com/api/v2/switch-account
+curl -X POST https://landscape.canonical.com/api/v2/switch-account \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{
+    "account_name": "upside"
+  }'   
 ```
 
 Example response:

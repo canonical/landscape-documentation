@@ -15,14 +15,6 @@ If you haven't registered your WSL hosts or WSL instances yet with Landscape, se
 
 Note that you need your computer IDs for many of these calls. If you don’t know the IDs of your child computers, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
-## Start WSL instances registered in your Landscape account
-
-You can remotely start a list of one or more WSL instances via the Landscape API. To start a WSL instance, you need the **legacy** API. See {ref}`Start Child Computers (Legacy API) <reference-legacy-api-wsl-start-child-computer>`.
-
-## Shutdown WSL instances registered in your Landscape account
-
-You can remotely shutdown a list of one or more WSL instances via the Landscape API. To shutdown WSL instances, you need the **legacy** API. See {ref}`Stop Child Computers (Legacy API) <reference-legacy-api-wsl-stop-child-computer>`.
-
 ## Set a default WSL instance
 
 The "default instance" is the instance you log into if you run `wsl` in PowerShell from the Windows host. You can set your default child computer in the Landscape web portal or via the API.

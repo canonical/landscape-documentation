@@ -7,10 +7,10 @@ myst:
 (how-to-ubuntu-pro-enable-landscape)=
 # How to enable Landscape in the Ubuntu Pro Client
 
-> See also: [Ubuntu Pro Client documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/)
+> See also: [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/)
 
 ```{note}
-You must be running Landscape client 23.02 or higher and Ubuntu 24.04 LTS (Noble) to enable Landscape with Ubuntu Pro. For more information, see the [Ubuntu Pro](https://documentation.ubuntu.com/pro/) and [Ubuntu Pro Client](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/) documentation.
+You must be running Landscape client 23.02 or higher and an Ubuntu LTS (24.04 Noble or later) to enable Landscape with Ubuntu Pro. For more information, see the [Ubuntu Pro](https://documentation.ubuntu.com/pro/) and [Ubuntu Pro Client](https://documentation.ubuntu.com/pro-client/) documentation.
 ```
 
 If you have an Ubuntu Pro subscription, you can register a machine with Landscape via the `pro enable landscape` command. You can register interactively for convenience, or non-interactively which is useful for hands-off automation.
@@ -33,7 +33,7 @@ This command will install `landscape-client` and start up an interactive wizard 
 
 ## Enable non-interactively
 
-If you know the details of your Landscape setup then you can register a machine without using the wizard. Under the hood, ``pro`` installs and executes `landscape-config`, so you can pass any [parameters supported by](https://manpages.ubuntu.com/manpages/noble/en/man1/landscape-config.1.html) `landscape-config` to `pro enable landscape`.
+If you know the details of your Landscape setup then you can register a machine without using the wizard. Under the hood, ``pro`` installs and executes `landscape-config`, so you can pass any [parameters supported by](https://manpages.ubuntu.com/manpages/resolute/man1/landscape-config.1.html) `landscape-config` to `pro enable landscape`.
 
 You can use the `--assume-yes` flag to automatically accept the defaults for any un-provided parameters.
 

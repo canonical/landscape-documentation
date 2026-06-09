@@ -80,6 +80,10 @@ For Juju deployments, see {ref}`how-to-heading-upgrade-juju` in this guide. For 
 
 > See also: [Landscape-server charm on Charmhub](https://charmhub.io/landscape-server)
 
+```{important}
+If you are upgrading to **Landscape 26.04**, you must also follow the steps to migrate to the 26.04 version of the charm. Follow {ref}`this guide <how-to-migrate-to-26-04-charm>` to migrate your charmed deployment to 26.04.
+```
+
 To upgrade a basic Juju deployment:
 
 1. Upgrade the `landscape-server` charm
@@ -135,8 +139,10 @@ To upgrade a basic Juju deployment:
     juju run landscape-server/n resume
     ```
 
-## Add additional configurations
+## Additional steps needed by version
 
-Landscape commonly has version-specific configurations that must be added to complete your upgrade.
+Landscape commonly has version-specific steps that must be taken to complete your upgrade.
 
 If you're upgrading to Landscape 24.04 LTS, follow {ref}`how-to-upgrade-to-24-04-lts`.
+
+If you're upgrading to Landscape 26.04 LTS, follow {ref}`how-to-upgrade-to-26-04-lts`.

@@ -29,3 +29,6 @@ sphinxext-rediraffe
 
 # Vale dependencies
 vale
+
+# Mermaid diagrams
+sphinxcontrib-mermaid

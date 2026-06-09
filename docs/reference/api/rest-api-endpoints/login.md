@@ -13,17 +13,32 @@ Login to the REST API with a email address and password.
 
 Required parameters:
 
-- `email`
 - `password`
 
 Optional parameters:
 
 - `account`
+- `email`
+- `expiry_minutes`
+- `identity`
+- `invitation_id`
+
+Exactly one of `email` or `identity` must be passed. Pass `email` for standard email/password authentication. For PAM authentication, pass `identity` instead.
 
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/login" -d '{"email": "john@example.com", "password": "pwd", "account": "onward"}'
+curl -X POST "https://landscape.canonical.com/api/v2/login" \
+  -H "Content-Type: application/json" \
+  -d '{"email": "john@example.com", "password": "pwd", "account": "onward"}'
+```
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/login" \
+  -H "Content-Type: application/json" \
+  -d '{"identity": "john", "password": "pwd", "account": "onward"}'
 ```
 
 Example response:
@@ -67,8 +82,8 @@ Example request:
 
 ```bash
 curl -X POST "https://landscape.canonical.com/api/v2/login/access-key" \
--H "Content-Type: application/json" \
--d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
+  -H "Content-Type: application/json" \
+  -d '{"access_key": "3AS5YX98J8QI9AZ8OS0V", "secret_key": "avlhg23w9HyOWOA1FMzHmrBaB8a97zafzJOApfF2"}'
 ```
 
 Example response:

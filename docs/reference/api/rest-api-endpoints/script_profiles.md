@@ -211,19 +211,22 @@ Required parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/script-profiles" -H "Authorization: Bearer $JWT" -d '
-{
-  "title": "Optics and Design",
-  "username": "root",
-  "time_limit": 360,
-  "script_id": 35,
-  "tags": [],
-  "all_computers": true,
-  "trigger": {
-    "trigger_type": "event",
-    "event_type": "post_enrollment" 
-  }
-}'
+curl -X POST "https://landscape.canonical.com/api/v2/script-profiles" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '
+  {
+    "title": "Optics and Design",
+    "username": "root",
+    "time_limit": 360,
+    "script_id": 35,
+    "tags": [],
+    "all_computers": true,
+    "trigger": {
+      "trigger_type": "event",
+      "event_type": "post_enrollment" 
+    }
+  }'
 ```
 
 Example response:
@@ -299,15 +302,17 @@ Optional parameters:
 Example request:
 
 ```bash
-curl -X PATCH "https://landscape.canonical.com/api/v2/script-profiles/176892" -H "Authorization: Bearer $JWT" -d '
-{
-  "title": "Macrodata Refinement",
-  "username": "landscape",
-  "time_limit": 270,
-  "tags": ["server"],
-  "all_computers": false
-}'
-
+curl -X PATCH "https://landscape.canonical.com/api/v2/script-profiles/176892" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '
+  {
+    "title": "Macrodata Refinement",
+    "username": "landscape",
+    "time_limit": 270,
+    "tags": ["server"],
+    "all_computers": false
+  }'
 ```
 
 Example response:
@@ -355,7 +360,9 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/script-profiles/176892:archive" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/script-profiles/176892:archive" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 ## GET `/script-profiles/<id>/activities`
@@ -371,7 +378,9 @@ Path parameters:
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/script-profiles/176892/activities" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/script-profiles/176892/activities" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -410,7 +419,9 @@ Get account wide limits associated with script profiles.
 Example request:
 
 ```bash
-curl -X POST "https://landscape.canonical.com/api/v2/script-profile-limits" -H "Authorization: Bearer $JWT"
+curl -X POST "https://landscape.canonical.com/api/v2/script-profile-limits" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT"
 ```
 
 Example response:

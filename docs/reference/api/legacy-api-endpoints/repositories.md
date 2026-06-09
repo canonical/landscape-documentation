@@ -9,6 +9,10 @@ myst:
 
 These methods give access to repository management.
 
+```{note}
+For Landscape 26.04 LTS and later, these endpoints are deprecated, except for [RemoveRepositoryProfile](#removerepositoryprofile).
+```
+
 ## CreateDistribution
 
 Create a repository distribution associated with the account.
@@ -264,7 +268,7 @@ This method takes the following arguments:
 - `gpg_key`: The name of the GPG key to use to sign packages lists for this pocket. The GPG key provided must have a private key associated with it.
 - `include_udeb`: Whether the pocket should include selected components also for .udeb packages (debian-installer). It’s ‘false’ by default.
 - `mirror_uri`: In `mirror` mode, the base URI of the repository to mirror.
-- `mirror_suite`: In `mirror` mode, the specific sub-directory under dists/ that should be mirrored. If the suite name ends with a ‘`/`’, the remote repository is flat (no dists/ structure, see http://wiki.debian.org/RepositoryFormat#Flat_Repository_Format); in this case a single value must be passed for the ‘components’ parameter. Packages from the remote repository will be mirrored in the specified component. This parameter is optional and defaults to the same name as local series and pocket.
+- `mirror_suite`: In `mirror` mode, the specific sub-directory under dists/ that should be mirrored. If the suite name ends with a ‘`/`’, the remote repository is flat (no dists/ structure, see https://wiki.debian.org/DebianRepository/Format); in this case a single value must be passed for the ‘components’ parameter. Packages from the remote repository will be mirrored in the specified component. This parameter is optional and defaults to the same name as local series and pocket.
 - `mirror_gpg_key`: The name of the GPG key to use to verify the mirrored archive signature. If none is given, the stock Ubuntu archive one will be used.
 - `pull_pocket`: The name of a pocket in current distribution to sync packages from for pockets in `pull` mode.
 - `pull_series`: The name of the series pull_pocket belongs to. Must be a series in the same distribution series belongs to. If not specified, it defaults to series.
