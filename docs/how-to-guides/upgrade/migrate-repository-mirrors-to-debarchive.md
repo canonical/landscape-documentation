@@ -91,6 +91,8 @@ reprepro -b /var/lib/landscape/landscape-repository/standalone/<DISTRIBUTION> li
 
 Replace `<DISTRIBUTION>` with the appropriate distribution directory name and `<CODENAME>` with the codename of the pocket (e.g., `noble-updates`).
 
+Use this information to decide which migration sections to follow. For example, if your deployment only has sync pockets, complete the sync-pocket migration section for each pocket and skip the pull-pocket and upload-pocket sections.
+
 ## Migrate sync (mirror) pockets
 
 For sync pockets that mirror an upstream archive, create a new mirror in Deb Archive pointing at the same upstream source.
@@ -117,6 +119,8 @@ The `Components` and `Architectures` fields may not be present. If they're missi
 
 ### 2. Create the mirror
 
+Example call:
+
 ```bash
 curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
@@ -134,7 +138,7 @@ The response includes a `mirrorId` that you'll use in subsequent requests.
 
 ### 3. Sync the mirror
 
-Trigger a sync to download packages from the upstream source:
+Trigger a sync to download packages from the upstream source. Example call:
 
 ```bash
 curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
@@ -142,7 +146,7 @@ curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Content-Type: application/json"
 ```
 
-This returns a long-running operation. Poll for its completion:
+This returns a long-running operation. Poll for its completion. Example call:
 
 ```bash
 curl -X GET "$API_BASE/operations/<OPERATION_ID>" \
@@ -154,7 +158,7 @@ The operation is complete when `done` is `true`.
 
 ### 4. Verify the mirror
 
-Once the sync is complete, confirm the packages are present in the mirror:
+Once the sync is complete, confirm the packages are present in the mirror. Example call:
 
 ```bash
 curl -X GET "$API_BASE/mirrors/<MIRROR_ID>/packages" \
@@ -219,7 +223,7 @@ Deb Archive mirrors support package filtering using a straightforward filter syn
 
 ### 3. Create the filtered mirror
 
-Create a mirror pointing at the same upstream as the original source pocket, with the filter applied:
+Create a mirror pointing at the same upstream as the original source pocket, with the filter applied. Example call:
 
 ```bash
 curl -X POST "$API_BASE/mirrors" \
@@ -240,6 +244,8 @@ Set `filterWithDeps` to `true` if you want the filter to also include dependenci
 
 ### 4. Sync the filtered mirror
 
+Example call:
+
 ```bash
 curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Authorization: Bearer $JWT" \
@@ -248,7 +254,7 @@ curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
 
 ### 5. Verify the filtered mirror
 
-Once the sync is complete, confirm the filtered packages are present in the mirror:
+Once the sync is complete, confirm the filtered packages are present in the mirror. Example call:
 
 ```bash
 curl -X GET "$API_BASE/mirrors/<MIRROR_ID>/packages" \
@@ -296,6 +302,8 @@ http://$LANDSCAPE_FQDN/repository/standalone/<DISTRIBUTION>/pool/
 
 ### 3. Create a local repository
 
+Example call:
+
 ```bash
 curl -X POST "$API_BASE/locals" \
   -H "Authorization: Bearer $JWT" \
@@ -311,7 +319,7 @@ The response includes a `localId`.
 
 ### 4. Import packages
 
-Import a single package into the local repository:
+Import a single package into the local repository. Example call:
 
 ```bash
 curl -X POST "$API_BASE/locals/<LOCAL_ID>:importPackages" \
@@ -346,7 +354,7 @@ The reprepro pool directory is shared across all distributions in the same repre
 
 #### Script imports from reprepro list
 
-Use `reprepro list` to enumerate only the packages belonging to this pocket, then locate each `.deb` file and import it via HTTP. Set `REPO_HTTP` to the base URL from which the repository is served:
+Use `reprepro list` to enumerate only the packages belonging to this pocket, then locate each `.deb` file and import it via HTTP. Set `REPO_HTTP` to the base URL from which the repository is served. Example script:
 
 ```bash
 #!/bin/bash
@@ -397,7 +405,7 @@ done
 
 ### 5. Verify imported packages
 
-Once all imports have completed, confirm the packages are present in the local repository:
+Once all imports have completed, confirm the packages are present in the local repository. Example call:
 
 ```bash
 curl -X GET "$API_BASE/locals/<LOCAL_ID>/packages" \
