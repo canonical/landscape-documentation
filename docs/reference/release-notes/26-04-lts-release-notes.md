@@ -84,6 +84,18 @@ Multiple security fixes are included in this release:
 - Fixed a Landscape Client issue where data file permissions were too permissive.
 - Fixed content-type header validation for REST API endpoints.
 
+## Patch Notices
+
+### Landscape Server
+
+- 26.04.0.1 published 11 June 2026
+  - fix: add CA bundle in appserver and api #1454
+  - fix: remove soft-deletion flag from [features] for self-hosted
+  - fix: update python-apt version for Resolute to 3.1.0ubuntu1
+  - fix!: remove self-hosted-default for soft-deletion feature
+  - feat: add /usg-profiles API aliases and usg query filter (LNDENG-3182) #1386
+  - feat: login endpoint supports PAM authn (canonical#1358)
+
 ## Supported third-party services
 
 | Service | Compatible versions |
