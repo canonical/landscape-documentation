@@ -76,6 +76,22 @@ For general backup and restore operations within an existing deployment, see [Ba
 
 1. Dump each database. Repeat this step for each database and each PostgreSQL unit in your deployment:
 
+    `````{tab-set}
+
+    ````{tab-item} Landscape Server 26.04 and later
+    ```sh
+    for DB_NAME in \
+        landscape-standalone-main \
+        landscape-standalone-package \
+        landscape-standalone-account-1 \
+        landscape-standalone-resource-1 \
+        landscape-standalone-session; do
+        juju ssh postgresql/leader -- "sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f /var/snap/charmed-postgresql/current/backup/$DB_NAME.dump -F directory"
+    done
+    ```
+    ````
+
+    ````{tab-item} Landscape Server 25.10 and earlier
     ```sh
     for DB_NAME in \
         landscape-standalone-main \
@@ -87,6 +103,9 @@ For general backup and restore operations within an existing deployment, see [Ba
         juju ssh postgresql/leader -- "sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-dump -d $DB_NAME -U operator -h $PG_HOST -f /var/snap/charmed-postgresql/current/backup/$DB_NAME.dump -F directory"
     done
     ```
+    ````
+
+    `````
 
 1. Confirm that each dump directory contains data:
 
@@ -175,6 +194,22 @@ For general backup and restore operations within an existing deployment, see [Ba
 
 1. Restore each database. Repeat this step for each database and each PostgreSQL unit in your deployment:
 
+    `````{tab-set}
+
+    ````{tab-item} Landscape 26.04 and later
+    ```sh
+    for DB_NAME in \
+        landscape-standalone-main \
+        landscape-standalone-package \
+        landscape-standalone-account-1 \
+        landscape-standalone-resource-1 \
+        landscape-standalone-session; do
+        juju ssh postgresql/leader -- "sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME /var/snap/charmed-postgresql/current/backup/$DB_NAME.dump -c"
+    done
+    ```
+    ````
+
+    ````{tab-item} Landscape 25.10 and earlier
     ```sh
     for DB_NAME in \
         landscape-standalone-main \
@@ -186,6 +221,9 @@ For general backup and restore operations within an existing deployment, see [Ba
         juju ssh postgresql/leader -- "sudo PGPASSWORD=$PG_PASSWORD charmed-postgresql.pg-restore -U operator -h $PG_HOST -d $DB_NAME /var/snap/charmed-postgresql/current/backup/$DB_NAME.dump -c"
     done
     ```
+    ````
+
+    `````
 
 1. Scale PostgreSQL to the desired number of units (if needed):
 

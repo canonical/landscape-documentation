@@ -30,7 +30,7 @@ If the PostgreSQL `set_user` extension is available, Landscape authenticates to 
 
 Each database managed by Landscape contains a defined set of tables, as listed below:
 
-### `account_1`
+### `account-1`
 
 - `account_entity_data`
 - `account_twin`
@@ -143,6 +143,10 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 
 ### `knowledge`
 
+```{note}
+The knowledge database was deprecated in Landscape Server 25.10 and dropped in Landscape Server 26.04.
+```
+
 - `article`
 - `article_category`
 - `article_view`
@@ -233,7 +237,7 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `patch`
 - `usn`
 
-### `resource_1`
+### `resource-1`
 
 - `active_process`
 - `annotation`
