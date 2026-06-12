@@ -44,13 +44,13 @@ The Deb Archive service requires its own database in the PostgreSQL cluster alre
 - For Quickstart installations, run the following commands on the Landscape Server machine.
 - For Manual installations, run the commands on the PostgreSQL database server.
 
-Create a dedicated database user for Deb Archive, replacing `<PASSWORD>` with a strong password of your choice:
+Create a dedicated database user for Deb Archive, replacing `<PASSWORD>` with a strong password of your choice. The `--pwprompt` flag will prompt you to enter the password securely:
 
 ```bash
 sudo -u postgres createuser --pwprompt landscape_debarchive
 ```
 
-Create the database, owned by the new user:
+Create the database, owned by the new user. If the database already exists, you can skip the `createdb` step and just ensure the user has the necessary privileges.
 
 ```bash
 sudo -u postgres createdb --owner=landscape_debarchive landscape-standalone-debarchive
@@ -65,7 +65,7 @@ sudo -u postgres psql -d landscape-standalone-debarchive -c "GRANT USAGE, CREATE
 For **Manual installations** where the PostgreSQL server is on a separate host, also update `/etc/postgresql/<VERSION>/main/pg_hba.conf` on the database server to allow the new user to connect from the application server:
 
 ```text
-host landscape-standalone-debarchive landscape_debarchive <IP-OF-APP>/32 md5
+host landscape-standalone-debarchive landscape_debarchive <IP-OF-APP>/32 scram-sha-256
 ```
 
 Then reload PostgreSQL:
@@ -89,6 +89,10 @@ sudo snap set landscape-debarchive \
 
 ```{note}
 **Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
+```
+
+```{note}
+The snap also supports SSL connections to the database. If your PostgreSQL server requires SSL, set `deb.archive.database.ssl` to the appropriate SSL mode (e.g. `require`) and ensure the snap can access any necessary certificates. Set the SSL cert, key, and root cert as needed with the `deb.archive.database.ssl-cert`, `deb.archive.database.ssl-key`, and `deb.archive.database.ssl-root-cert` settings, respectively.
 ```
 
 ### (Optional) Override default settings with `snap set`
