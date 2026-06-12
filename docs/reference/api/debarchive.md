@@ -42,7 +42,7 @@ myst:
 <script>
   Scalar.createApiReference('#scalar-app', {
     url: '../../../_static/openapi.yaml',
-    theme: 'alternate',
+    theme: 'default',
     servers: [
       { url: 'https://landscape.canonical.com/api/debarchive', description: 'Production' },
     ],

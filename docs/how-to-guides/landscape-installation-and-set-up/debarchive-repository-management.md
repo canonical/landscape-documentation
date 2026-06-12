@@ -14,6 +14,7 @@ Deb Archive was introduced in **Landscape 26.04 LTS**.
 ## Prerequisites
 
 You need one of the following Landscape Server installations:
+
 - A {ref}`quickstart <how-to-quickstart-installation>` installation of `landscape-server-quickstart`
 - A {ref}`manual <how-to-manual-installation>` installation of `landscape-server`
 
@@ -99,12 +100,12 @@ The snap also supports SSL connections to the database. If your PostgreSQL serve
 
 Quickstart installations use the default configurations and generally don't require additional setup. Skip this section unless you've customized your database configuration.
 
-For Manual installations, if your PostgreSQL server is **not** at the default location (`localhost:5432`), or you need to override any other defaults, use `snap set` to configure the snap directly. 
+For Manual installations, if your PostgreSQL server is **not** at the default location (`localhost:5432`), or you need to override any other defaults, use `snap set` to configure the snap directly.
 
 The available settings and their defaults are:
 
 | Setting | Snap key | Default |
-|---|---|---|
+| --- | --- | --- |
 | Gateway (HTTP) port | `deb.archive.server.gateway-port` | `8100` |
 | Server host | `deb.archive.server.host` | `localhost` |
 | Database driver | `deb.archive.database.driver` | `pgx` |
@@ -153,6 +154,95 @@ The directory must exist and be writable by the snap. After the setting is appli
 
 For example, if the published root is `/srv/published-repos` and a publication target has the path `myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`.
 
+Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. The example configurations for Apache and Nginx below illustrate how you can achieve this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
+
+If the published repositories should not be publicly accessible, restrict access at the web server and/or network layer (e.g. firewall rules, IP allowlists, or HTTP authentication).
+### Apache
+
+If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
+
+Install the file below as `/etc/apache2/sites-available/filesystem-repo.conf` and change the following values:
+
+- `@hostname@`: The fully qualified domain name for your server.
+- `@publication_target_file_path@`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
+
+```apache
+<VirtualHost *:8000>
+    ServerName @hostname@
+
+    DocumentRoot @publication_target_file_path@
+
+    <Directory @publication_target_file_path@>
+        Options +Indexes
+
+        # Optional: Makes the directory listings look a bit cleaner
+        IndexOptions FancyIndexing NameWidth=* FoldersFirst
+        
+        Require all granted
+    </Directory>
+
+    # Optional: Logging configuration for easier troubleshooting
+    ErrorLog /var/log/apache2/repo_error.log
+    CustomLog /var/log/apache2/repo_access.log combined
+</VirtualHost>
+```
+
+Then enable it:
+
+```bash
+sudo a2ensite filesystem-repo.conf
+```
+
+And restart Apache:
+
+```bash
+sudo systemctl restart apache2
+```
+
+### Nginx
+
+Create `/etc/nginx/sites-available/filesystem-repo.conf` with the following contents, then replace:
+
+- `<YOUR_FQDN>`: The fully qualified domain name for your server.
+- `<PUBLICATION_TARGET_FILE_PATH>`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
+
+```nginx
+server {
+    listen 8000;
+    listen [::]:8000;
+
+    server_name <YOUR_FQDN>;
+
+    root <PUBLICATION_TARGET_FILE_PATH>;
+
+    location / {
+        autoindex on;
+        
+        # Optional: Makes the directory listings look a bit cleaner
+        autoindex_exact_size off;
+        autoindex_localtime on;
+
+        try_files $uri $uri/ =404;
+    }
+
+    # Optional: Logging configuration for easier troubleshooting
+    access_log /var/log/nginx/repo_access.log;
+    error_log /var/log/nginx/repo_error.log;
+}
+```
+
+Then enable it:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/filesystem-repo.conf /etc/nginx/sites-enabled/
+```
+
+And restart Nginx:
+
+```bash
+sudo systemctl restart nginx
+```
+
 ## Configure the reverse proxy
 
 You need to expose the Deb Archive service at `/debarchive` on your Landscape URL.
@@ -183,14 +273,14 @@ If your deployment uses HAProxy, add a routing rule and backend for the Deb Arch
 
 In the existing `frontend` section, add:
 
-```
+```text
     acl is_debarchive path_beg /debarchive
     use_backend debarchive if is_debarchive
 ```
 
 Add a new backend section:
 
-```
+```text
 backend debarchive
     http-request set-path %[path,regsub(^/debarchive,/)]
     server debarchive 127.0.0.1:8100 check

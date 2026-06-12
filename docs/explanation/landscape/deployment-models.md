@@ -19,7 +19,7 @@ Landscape is also commonly used with other Canonical products.
 ## Single-Server Deployment
 
 This is the simplest deployment model where Landscape Server and its components all run on a single machine, and there’s only one instance of each component. Each Landscape Client registers directly with the single Landscape server.
-
+Optional services such as {ref}`Deb Archive <explanation-server-architecture-deb-archive>` are installed on the same machine as Landscape Server.
 Single-server deployments should be installed using the {ref}`Quickstart <how-to-quickstart-installation>` guide.
 
 ![Landscape single-server deployment](https://assets.ubuntu.com/v1/efcf89cc-Deployment_Landscape%20(1).png)
@@ -27,6 +27,8 @@ Single-server deployments should be installed using the {ref}`Quickstart <how-to
 ## Multi-Server Deployment
 
 This setup provides redundancy and scalability to production and large-scale deployments and can be used in high-availability environments. This deployment uses a load balancer (HAProxy) to distribute requests across multiple Landscape servers, and includes multiple instances of Landscape Server and its components (PostgreSQL and RabbitMQ). Landscape Clients communicate through HAProxy, which then distributes the requests to available Landscape Servers.
+
+In Juju deployments, the {ref}`Deb Archive <explanation-server-architecture-deb-archive>` service is deployed as a charm in the same model as the Landscape Server charm.
 
 Multi-server deployments are usually installed with {ref}`how-to-juju-installation`. For HA deployments, see {ref}`how-to-juju-ha-installation`.
 

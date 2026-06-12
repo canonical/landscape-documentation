@@ -1153,7 +1153,7 @@ Example response:
 ## POST `/computers:delete`
 
 ```{warning}
-This endpoint is available from Landscape Server 26.04 onwards for select accounts.
+This endpoint is available from Landscape Server 26.04 LTS onwards for select accounts.
 ```
 
 Delete computers with the given computer IDs.
