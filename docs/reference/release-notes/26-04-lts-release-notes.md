@@ -49,7 +49,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 - **Manage release upgrades**: You can now trigger release upgrades at scale from the web portal.
 
-- **Soft deletion of computers**: Computer records are cleaned up asynchronously, allowing for higher deletion throughput and fixing the timeout errors that some users experience when deleting old computers.
+- **Soft deletion of computers**: Computer records are cleaned up asynchronously, allowing for higher deletion throughput and fixing the timeout errors that some users experience when deleting old computers. Enable soft deletion by setting `computer_soft_deletion = true` under `[features]` in the `service.conf` file
 
 - **Python version and dependency updates**:
 
@@ -88,13 +88,12 @@ Multiple security fixes are included in this release:
 
 ### Landscape Server
 
-- 26.04.0.1 published 11 June 2026
-  - fix: add CA bundle in appserver and api #1454
-  - fix: remove soft-deletion flag from `[features]` for self-hosted
+- 26.04.0.1 published 12 June 2026
+  - fix: add Certificate Authority bundle in appserver and api (LP: [#2155965])
   - fix: update python-apt version for Resolute to 3.1.0ubuntu1
-  - fix!: remove self-hosted-default for soft-deletion feature
-  - feat: add /usg-profiles API aliases and usg query filter (LNDENG-3182) #1386
-  - feat: login endpoint supports PAM authn (canonical#1358)
+  - fix!: No longer enable computer soft deletion by default. (To enable computer soft deletion, set `computer_soft_deletion = true` under `[features]` in the `service.conf` file)
+  - feat: add /usg-profiles API aliases and usg query filter
+  - feat: login endpoint supports PAM authn
 
 ## Supported third-party services
 
