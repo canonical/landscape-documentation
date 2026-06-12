@@ -537,7 +537,7 @@ Landscape uses multiple databases. To create them:
 
 `````{tab-set}
 
-````{tab-item} Landscape Server 26.04 and later
+````{tab-item} Landscape Server 26.04 LTS and later
 ```bash
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-account-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-main
@@ -570,7 +570,7 @@ If you are on a Noble instance, you will have the PostgreSQL `set_user` extensio
 
     `````{tab-set}
 
-    ````{tab-item} Landscape Server 26.04 and later
+    ````{tab-item} Landscape Server 26.04 LTS and later
     ```bash
     sudo -u postgres psql landscape-standalone-account-1  -c "CREATE EXTENSION IF NOT EXISTS set_user"
     sudo -u postgres psql landscape-standalone-main       -c "CREATE EXTENSION IF NOT EXISTS set_user"
@@ -597,7 +597,7 @@ If you are on a Noble instance, you will have the PostgreSQL `set_user` extensio
 
     `````{tab-set}
 
-    ````{tab-item} Landscape Server 26.04 and later
+    ````{tab-item} Landscape Server 26.04 LTS and later
     ```bash
     sudo -u postgres psql landscape-standalone-account-1  -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
     sudo -u postgres psql landscape-standalone-main       -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
@@ -1164,7 +1164,7 @@ The following changes are required in the sections below. Remove any passwords i
 
 `````{tab-set}
 
-````{tab-item} Landscape Server 26.04 and later
+````{tab-item} Landscape Server 26.04 LTS and later
 ```ini
 [api]
 allowed_interfaces = localhost 127.0.0.1 ::1
@@ -1452,7 +1452,7 @@ Click on the link to download the following sample file. Remember to replace any
 
 `````{tab-set}
 
-````{tab-item} Landscape Server 26.04 and later
+````{tab-item} Landscape Server 26.04 LTS and later
 - [`/etc/landscape/service.conf`](/assets/disa-stig/26.04/service.conf) (26.04 and later)
 ````
 

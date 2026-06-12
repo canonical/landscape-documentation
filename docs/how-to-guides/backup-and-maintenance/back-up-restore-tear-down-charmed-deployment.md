@@ -78,7 +78,7 @@ For general backup and restore operations within an existing deployment, see [Ba
 
     `````{tab-set}
 
-    ````{tab-item} Landscape Server 26.04 and later
+    ````{tab-item} Landscape Server 26.04 LTS and later
     ```sh
     for DB_NAME in \
         landscape-standalone-main \
@@ -196,7 +196,7 @@ For general backup and restore operations within an existing deployment, see [Ba
 
     `````{tab-set}
 
-    ````{tab-item} Landscape 26.04 and later
+    ````{tab-item} Landscape Server 26.04 LTS and later
     ```sh
     for DB_NAME in \
         landscape-standalone-main \
@@ -209,7 +209,7 @@ For general backup and restore operations within an existing deployment, see [Ba
     ```
     ````
 
-    ````{tab-item} Landscape 25.10 and earlier
+    ````{tab-item} Landscape Server 25.10 and earlier
     ```sh
     for DB_NAME in \
         landscape-standalone-main \

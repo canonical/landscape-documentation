@@ -144,7 +144,7 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 ### `knowledge`
 
 ```{note}
-The knowledge database was deprecated in Landscape Server 25.10 and dropped in Landscape Server 26.04.
+The knowledge database was deprecated in Landscape Server 25.10 and dropped in Landscape Server 26.04 LTS.
 ```
 
 - `article`
