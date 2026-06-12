@@ -17,7 +17,8 @@ Use these guides for standard repository mirror setup and management.
 :titlesonly:
 :maxdepth: 1
 
-Manage repositories in the web portal <manage-repositories-in-the-web-portal>
+Manage repositories in the web portal (25.10 and earlier) <manage-repositories-in-the-web-portal>
+Manage repositories in the web portal (26.04 and later) <manage-repositories-in-the-web-portal-2604>
 Manage repositories with the API <manage-repositories-with-the-api>
 ```
 
