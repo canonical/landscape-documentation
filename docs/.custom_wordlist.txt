@@ -123,6 +123,7 @@ Github
 githubusercontent
 GlobalAdmin
 GlobalAdministrator
+gnupg
 GPG
 gpg
 gpgkey
