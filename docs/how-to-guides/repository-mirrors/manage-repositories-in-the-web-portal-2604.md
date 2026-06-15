@@ -28,7 +28,6 @@ To create a new mirror:
     - Note: You can't use the same name for multiple mirrors, so you should make this name unique and descriptive of the repository. If you want to reuse a name later, you'll have to delete the original mirror.
 1. Select the type of mirror from the **Source Type** dropdown menu. For example, select **Ubuntu archive** if you're mirroring an Ubuntu repository.
 1. In the **Source URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
-    - Note: If you're mirroring an **Ubuntu Pro** repository, enter your Ubuntu Pro token in the token field.
 1. To preserve signatures from the upstream source, select the **Preserve upstream signing key** checkbox.
 1. Enter the distribution you want to mirror. If you're mirroring an Ubuntu repository, select the distribution from the dropdown menu. Otherwise, enter the distribution name. For example, `bookworm`.
 1. Select the components you want to mirror. If you're mirroring an Ubuntu repository, select the components from the dropdown menu. Otherwise, enter a comma-separated list of components. For example, `non-free-firmware, main`.
@@ -45,9 +44,7 @@ To create a new local repository:
 1. Click **Add local repository**
 1. Enter the name of the local repository. For example, `my-local-repo`.
     - Note: You can't use the same name for multiple local repositories, so you should make this name unique and descriptive. If you want to reuse a name later, you'll have to delete the original local repository.
-1. Enter a description of your local repository.
-1. Enter the distribution name to display for your local Debian repository.
-1. Enter the component name to display for your local Debian repository.
+1. Complete the remaining fields. Note that if you're mirroring multiple components, they need to be a comma-separated list of components. For example, `non-free-firmware, main`.
 
 (how-to-heading-create-new-publication-target)=
 ## Create a new publication target
@@ -57,8 +54,7 @@ To create a new publication target:
 1. From the sidebar, navigate to **Repositories** > **Publication targets**
 1. Click **Add publication target**
 1. Enter the name of the publication target. For example, `s3-target-1`.
-1. In the **Type** dropdown menu, select the type of publication target you want to create.
-1. Enter the required information for your publication target.
+1. In the **Type** dropdown menu, select the type of publication target you want to create and enter the required information for your publication target.
 
 (how-to-heading-create-new-publication)=
 ## Create a new publication
@@ -93,9 +89,9 @@ To create a profile:
 Note that you may want to create multiple repository profiles for different groups of managed instances.
 
 (how-to-manage-created-repositories-publishing)=
-## Managing existing repositories
+## Publish existing repositories
 
-To publish a mirror:
+To publish (or republish) an existing mirror:
 
 1. If the mirror doesn't preserve upstream signatures, sync the mirror:
     1. From the sidebar, navigate to **Repositories** > **Mirrors**.
@@ -103,7 +99,7 @@ To publish a mirror:
     1. Select the **Update** option on the mirror.
 1. Select the publication with the mirror and publication target you want to publish, then select **Republish**.
 
-To publish a local repository:
+To publish (or republish) an existing local repository:
 
 1. Make sure the local repository contains the packages you want to publish:
     1. From the sidebar, navigate to **Repositories** > **Local repositories**.
