@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Manage repository mirrors from the Landscape 26.04 LTS web portal. Configure Debian repositories and create repository profiles."
+    description: "Manage repository mirrors from the Landscape Server 26.04 LTS web portal. Configure Debian repositories and create repository profiles."
 ---
 
 (how-to-manage-repos-web-portal-2604)=
@@ -27,13 +27,13 @@ To create a new mirror:
 1. Enter the name of the mirror. For example, `noble-backports-mirror`.
     - Note: You can't use the same name for multiple mirrors, so you should make this name unique and descriptive of the repository. If you want to reuse a name later, you'll have to delete the original mirror.
 1. Select the type of mirror from the **Source Type** dropdown menu. For example, select **Ubuntu archive** if you're mirroring an Ubuntu repository.
-1. In the **Mirror URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
+1. In the **Source URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
     - Note: If you're mirroring an **Ubuntu Pro** repository, enter your Ubuntu Pro token in the token field.
 1. To preserve signatures from the upstream source, select the **Preserve upstream signing key** checkbox.
 1. Enter the distribution you want to mirror. If you're mirroring an Ubuntu repository, select the distribution from the dropdown menu. Otherwise, enter the distribution name. For example, `bookworm`.
 1. Select the components you want to mirror. If you're mirroring an Ubuntu repository, select the components from the dropdown menu. Otherwise, enter a comma-separated list of components. For example, `non-free-firmware, main`.
 1. Select the architectures you want to mirror. If you're mirroring an Ubuntu repository, select the architectures from the dropdown menu. Otherwise, enter a comma-separated list of architectures. For example, `amd64, arm64`.
-1. To filter which packages are retrieved instead of mirroring the entire selected component, use the **Filter** text box. The filtering language is documented in the web portal when you hover over the help icon.
+1. To filter which packages are retrieved instead of mirroring the entire selected component, use the **Filter** text box. The filtering language is documented in the web portal when you click on the help icon.
 1. If you're not preserving the upstream signing key, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
 
 (how-to-heading-create-new-local)=
@@ -89,7 +89,6 @@ To create a profile:
     1. If the repository's GPG verification key isn't already in the client machine's keyring, provide the verification key in the **GPG key** field.
 1. Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group or specific instances/computers (tags).
 1. Optionally fill out the **Description** field.
-1. Click **Add profile**
 
 Note that you may want to create multiple repository profiles for different groups of managed instances.
 
