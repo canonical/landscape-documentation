@@ -10,7 +10,7 @@ myst:
 > See also: {ref}`explanation-repo-mirroring-2604`
 
 ```{note}
-This document applies to **Landscape 26.04 and later**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
+This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
 ```
 
 The repository mirroring feature in Landscape lets you mirror Ubuntu and third-party repositories, create local repositories for personal packages, and publish repositories to different targets. This adds an extra layer of control over the software versions available to your client machines. If you're not familiar with repository mirroring in Landscape, read our explanation before continuing through this how-to guide: {ref}`explanation-repo-mirroring-2604`.
@@ -67,7 +67,7 @@ To create a new publication:
 
 1. From the sidebar, navigate to **Repositories** > **Publications**
 1. Click **Add publication**
-1. Enter the name of the publication. For example, `noble-backport-publication`.
+1. Enter the name of the publication. For example, `noble-backports-publication`.
 1. In the **Source type** dropdown menu, select whether you want to publish a local repository or mirror.
     - In the **Source** dropdown menu, select the mirror or local repository you want to publish.
 1. In the **Publication target** dropdown menu, select the publication target you want to publish to.
@@ -80,8 +80,9 @@ A {ref}`repository profile <reference-terms-repository-profile>` in Landscape is
 
 To create a profile:
 
-1. From the sidebar, go to **Profiles** > **Repository profiles** > **Add repository profile**
-1. In the **Title** field, enter a name for this profile. For example, "noble-test".
+1. From the sidebar, go to **Profiles** > **Repository profiles**
+1. Click **Add repository profile**
+1. In the **Title** field, enter a name for this profile. For example, `noble-test`.
 1. Select **Add source** to specify a Debian repository for this repository profile.
     1. In the **Source name** field, enter a name for the source.
     1. Add the `deb` line for the Debian repository. For example, `deb [trusted=yes] https://debarchive-test-bucket.s3.us-west-1.amazonaws.com/ devel main`.
