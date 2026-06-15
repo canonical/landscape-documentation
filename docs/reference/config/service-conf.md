@@ -767,7 +767,7 @@ The `[stores]` section contains configurations for database store names and conn
 ### `knowledge`
 
 ```{note}
-The knowledge database was deprecated in Landscape Server 25.10 and will be dropped in a future release of Landscape Server.
+The knowledge database was deprecated in Landscape Server 25.10 and dropped in Landscape Server 26.04 LTS.
 ```
 
 - Purpose: The knowledge database name.

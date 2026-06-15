@@ -48,6 +48,10 @@ To create a new GPG key:
     gpg --full-gen-key
     ```
 
+    ```{note}
+    **FIPS users:** If your Landscape server is Ubuntu 24.04 or newer with FIPS enabled, you must use the `--full-gen-key` option, select RSA for the key type, and use 4096 bits. The default key type for the `gpg` command has been updated to ed25519, but this isn't currently approved for FIPS. Only RSA keys are approved for FIPS.
+    ```
+
 1. If you're prompted to provide information about the key, press **Enter** to choose the default options or make selections based on your system configuration. If you're unsure what to select, the default options work for most configurations.
 1. Enter **Y** when prompted with `Is this correct? (y/N)`.
 1. When you're prompted with "Please confirm that you do not want to have any protection on your key," choose **Yes, protection is not needed**. You'll be prompted and need to confirm this twice.

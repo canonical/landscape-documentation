@@ -135,3 +135,9 @@ We published the 24.04.13 point release on 5 June 2026.
 - fix: UI bug fixes from landscape-ui commit ea90dbd
 - fix: remove recursive chown command (LP: #1725282)
 - fix: validate LDAP identity to prevent injection
+
+## Landscape 24.04.14 Point Release
+
+We published the 24.04.14 point release on 12 June 2026.
+
+- fix: add recursive chown to gnupg directory(landscape-server)
