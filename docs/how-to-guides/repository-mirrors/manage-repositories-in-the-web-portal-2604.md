@@ -15,7 +15,7 @@ This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}
 
 The repository mirroring feature in Landscape lets you mirror Ubuntu and third-party repositories, create local repositories for personal packages, and publish repositories to different targets. This adds an extra layer of control over the software versions available to your client machines. If you're not familiar with repository mirroring in Landscape, read our explanation before continuing through this how-to guide: {ref}`explanation-repo-mirroring-2604`.
 
-This guide demonstrates how to mirror a Debian repository.
+This guide demonstrates how to mirror Ubuntu and other third-party debian repositories.
 
 (how-to-heading-create-new-mirror)=
 ## Create a new mirror
@@ -28,11 +28,11 @@ To create a new mirror:
     - Note: You can't use the same name for multiple mirrors, so you should make this name unique and descriptive of the repository. If you want to reuse a name later, you'll have to delete the original mirror.
 1. Select the type of mirror from the **Source Type** dropdown menu. For example, select **Ubuntu archive** if you're mirroring an Ubuntu repository.
 1. In the **Source URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
-1. To preserve signatures from the upstream source, select the **Preserve upstream signing key** checkbox.
+1. For signature preserving mirrors, select the **Preserve upstream signing key** checkbox.
 1. Enter the distribution you want to mirror. If you're mirroring an Ubuntu repository, select the distribution from the dropdown menu. Otherwise, enter the distribution name. For example, `bookworm`.
 1. Select the components you want to mirror. If you're mirroring an Ubuntu repository, select the components from the dropdown menu. Otherwise, enter a comma-separated list of components. For example, `non-free-firmware, main`.
 1. Select the architectures you want to mirror. If you're mirroring an Ubuntu repository, select the architectures from the dropdown menu. Otherwise, enter a comma-separated list of architectures. For example, `amd64, arm64`.
-1. To filter which packages are retrieved instead of mirroring the entire selected component, use the **Filter** text box. The filtering language is documented in the web portal when you click on the help icon.
+1. For filtered mirrors, use the **Filter** text box to narrow down which packages are retrieved instead of mirroring the entire selected component(s).
 1. If you're not preserving the upstream signing key, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
 
 (how-to-heading-create-new-local)=
@@ -76,9 +76,9 @@ A {ref}`repository profile <reference-terms-repository-profile>` in Landscape is
 
 To create a profile:
 
-1. From the sidebar, go to **Profiles** > **Repository profiles**
+1. From the sidebar, go to **Repositories** > **Repository profiles**
 1. Click **Add repository profile**
-1. In the **Title** field, enter a name for this profile. For example, `noble-test`.
+1. In the **Profile name** field, enter a name for this profile. For example, `noble-test`.
 1. Select **Add source** to specify a Debian repository for this repository profile.
     1. In the **Source name** field, enter a name for the source.
     1. Add the `deb` line for the Debian repository. For example, `deb [trusted=yes] https://debarchive-test-bucket.s3.us-west-1.amazonaws.com/ devel main`.
@@ -89,20 +89,34 @@ To create a profile:
 Note that you may want to create multiple repository profiles for different groups of managed instances.
 
 (how-to-manage-created-repositories-publishing)=
-## Publish existing repositories
+## Managing existing repositories
+
+(how-to-sync-a-mirror)=
+To sync a mirror:
+
+1. From the sidebar, navigate to **Repositories** > **Mirrors**.
+1. Select the mirror you want to sync.
+1. Click **Update**.
+
+(how-to-import-local-packages)=
+To import packages into a local repository:
+
+1. From the sidebar, navigate to **Repositories** > **Local repositories**.
+1. Select the local repository where you want to import packages.
+1. Click **Import packages**, provide the URI for the packages you want to import, then click **Import packages**.
 
 To publish (or republish) an existing mirror:
 
-1. If the mirror doesn't preserve upstream signatures, sync the mirror:
-    1. From the sidebar, navigate to **Repositories** > **Mirrors**.
-    1. Select the mirror you want to publish.
-    1. Select the **Update** option on the mirror.
-1. Select the publication with the mirror and publication target you want to publish, then select **Republish**.
+If you're publishing or republishing a mirror that doesn't preserve upstream signatures, update the mirror before publishing. For instructions, see {ref}`To sync a mirror <how-to-sync-a-mirror>`.
+
+1. From the sidebar, navigate to **Repositories** > **Mirrors**.
+1. Select the mirror you want to publish.
+1. Click **Publish**, then select an existing publication or fill out the required information for a new publication.
 
 To publish (or republish) an existing local repository:
 
-1. Make sure the local repository contains the packages you want to publish:
-    1. From the sidebar, navigate to **Repositories** > **Local repositories**.
-    1. Select the local repository you want to publish.
-    1. Select **Import packages** and provide the URI for the packages you want to import into the local repository.
-1. Select the publication with the local repository and publication target you want to publish, then select **Republish**.
+If the local repository doesn't contain the packages you want to publish, import the packages before publishing. For instructions, see {ref}`To import packages into a local repository <how-to-import-local-packages>`.
+
+1. From the sidebar, navigate to **Repositories** > **Local repositories**.
+1. Select the local repository you want to publish.
+1. Click **Publish**, then select an existing publication or fill out the required information for a new publication.
