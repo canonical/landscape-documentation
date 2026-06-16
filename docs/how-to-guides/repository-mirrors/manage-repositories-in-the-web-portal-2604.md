@@ -39,7 +39,13 @@ To create a new mirror:
 1. Select the components you want to mirror. If you're mirroring an Ubuntu repository, select the components from the dropdown menu. Otherwise, enter a comma-separated list of components. For example, `non-free-firmware, main`.
 1. Select the architectures you want to mirror. If you're mirroring an Ubuntu repository, select the architectures from the dropdown menu. Otherwise, enter a comma-separated list of architectures. For example, `amd64, arm64`.
 1. For filtered mirrors, use the **Filter** text box to narrow down which packages are retrieved instead of mirroring the entire selected component(s).
-1. If you're not preserving the upstream signing key, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
+1. If you're not preserving the upstream signing key, and using a third-party repository, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
+
+### Use repository snapshots
+
+[Snapshots](https://snapshot.ubuntu.com/) are another source you can use to mirror packages. They allow Landscape to mirror packages from the Ubuntu archive at a specific point in time.
+
+To use a snapshot, follow the same process as you would to {ref}`how-to-heading-create-new-mirror`, but change the type to **Ubuntu Snapshot**, and choose a snapshot date.
 
 (how-to-heading-create-new-local)=
 ## Create a new local repository
@@ -57,14 +63,14 @@ To create a new local repository:
 
 To create a new publication target:
 
-```{note}
-If you use a filesystem publication target for a mirror that doesn't preserve upstream signatures, the target system must have enough storage available for both the synced mirror and the published repository. Plan for roughly double the repository disk space.
-```
-
 1. From the sidebar, navigate to **Repositories** > **Publication targets**
 1. Click **Add publication target**
 1. Enter the name of the publication target. For example, `s3-target-1`.
 1. In the **Type** dropdown menu, select the type of publication target you want to create and enter the required information for your publication target.
+
+```{note}
+If you use a filesystem publication target for a mirror that doesn't preserve upstream signatures, the target system must have enough storage available for both the synced mirror and the published repository. Plan for roughly double the repository disk space.
+```
 
 (how-to-heading-create-new-publication)=
 ## Create a new publication
@@ -102,20 +108,20 @@ Note that you may want to create multiple repository profiles for different grou
 ## Managing existing repositories
 
 (how-to-sync-a-mirror)=
-To sync a mirror:
+### Syncinc a mirror
 
 1. From the sidebar, navigate to **Repositories** > **Mirrors**.
 1. Select the mirror you want to sync.
 1. Click **Update**.
 
 (how-to-import-local-packages)=
-To import packages into a local repository:
+### Importing packages to a local repository
 
 1. From the sidebar, navigate to **Repositories** > **Local repositories**.
 1. Select the local repository where you want to import packages.
 1. Click **Import packages**, provide the URI for the packages you want to import, then click **Import packages**.
 
-To publish (or republish) an existing mirror:
+### Publishing (or republishing) an existing mirror
 
 If you're publishing or republishing a mirror that doesn't preserve upstream signatures, update the mirror before publishing. For instructions, see {ref}`To sync a mirror <how-to-sync-a-mirror>`.
 
@@ -123,7 +129,7 @@ If you're publishing or republishing a mirror that doesn't preserve upstream sig
 1. Select the mirror you want to publish.
 1. Click **Publish**, then select an existing publication or fill out the required information for a new publication.
 
-To publish (or republish) an existing local repository:
+### Publishing (or republishing) an existing local repository
 
 If the local repository doesn't contain the packages you want to publish, import the packages before publishing. For instructions, see {ref}`To import packages into a local repository <how-to-import-local-packages>`.
 
