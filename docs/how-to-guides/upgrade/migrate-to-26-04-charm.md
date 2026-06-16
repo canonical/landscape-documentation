@@ -17,16 +17,16 @@ This guide explains how to migrate from an older Landscape Server charm deployme
 
 The 26.04 beta version introduces significant architectural changes:
 
-| Aspect                   | Landscape 26.04 LTS beta+                                                                               | Pre-26.04                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/edge`, `haproxy-route` interface)                             | External HAProxy charm (`reverseproxy` interface)            |
-| **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                            | Legacy `pgsql` interface (PostgreSQL 14)                     |
-| **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                                     | `landscape-server:db` → `postgresql:db-admin`                |
-| **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+)       | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
-| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                        | `landscape-server:website` → `haproxy:reverseproxy`          |
-| **TLS certificates**     | `haproxy:certificates` → TLS provider (e.g., `self-signed-certificates`, `lego`)                        | HAProxy self-signed or manual config                         |
-| **Access method**        | HAProxy unit IP or `root_url`                                                                           | HAProxy unit IP                                              |
-| **HA capabilities**      | HAProxy units for load balancing                                                                        | HAProxy units for load balancing                             |
+| Aspect                   | Landscape 26.04 LTS beta+                                                                         | Pre-26.04                                                    |
+| ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/edge`, `haproxy-route` interface)                       | External HAProxy charm (`reverseproxy` interface)            |
+| **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
+| **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
+| **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
+| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                  | `landscape-server:website` → `haproxy:reverseproxy`          |
+| **TLS certificates**     | `haproxy:certificates` → TLS provider (e.g., `self-signed-certificates`, `lego`)                  | HAProxy self-signed or manual config                         |
+| **Access method**        | HAProxy unit IP or `root_url`                                                                     | HAProxy unit IP                                              |
+| **HA capabilities**      | HAProxy units for load balancing                                                                  | HAProxy units for load balancing                             |
 
 ## Migration steps
 
@@ -92,18 +92,71 @@ See the [lego charm documentation](https://charmhub.io/lego) for DNS-01 challeng
 
 **For custom CA certificates:**
 
-```bash
-juju deploy manual-tls-certificates --channel stable
-juju config manual-tls-certificates ca-certificate="$(base64 -w0 ca.crt)"
-juju config manual-tls-certificates certificate="$(base64 -w0 server.crt)"
-juju config manual-tls-certificates private-key="$(base64 -w0 server.key)"
-juju integrate haproxy:certificates manual-tls-certificates:certificates
+```{tip}
+See the [manual-tls-certificates charm documentation](https://charmhub.io/manual-tls-certificates/docs/h-getting-started?channel=1/beta) for more details and a tutorial on creating and using a custom CA.
 ```
 
-See the [manual-tls-certificates charm documentation](https://charmhub.io/manual-tls-certificates) for details.
+To use custom CA certificates, deploy the `manual-tls-certificates` charm.
+
+```bash
+juju deploy manual-tls-certificates --channel 1/beta
+```
+
+Then, integrate it with HAProxy twice to provide the TLS certificates and trust the signing CA:
+
+```sh
+juju integrate manual-tls-certificates:certificates haproxy:certificates
+juju integrate manual-tls-certificates:trust_certificate haproxy:receive-ca-certs
+```
+
+Now, generate a CA certificate and private key or ensure they are available locally. For example, generate a CA certificate and private key with OpenSSL:
+
+```sh
+mkdir certs
+
+openssl genrsa -out certs/ca.key 2048
+
+openssl req -new -x509 -days 3650 -key certs/ca.key -out certs/ca.crt -subj "/C=US/CN=landscape.local"
+```
+
+After integrating the charms, HAProxy will make a Certificate Signing Request (CSR) that we can extract via the `get-outstanding-certificate-requests`, and use to create a signed TLS certificate. For example:
+
+```sh
+juju run manual-tls-certificates/0 get-outstanding-certificate-requests --format=json | jq '.manual-tls-certificates/0.results.result' | jq '.[0].csr' > certs/client.csr
+```
+
+```{tip}
+The outstanding certificate requests are grouped by the `relation-id`; if there are multiple requests (i.e., multiple consumers of the manaul TLS certificates), use `juju show-unit manual-tls-certificates/0` to identify correct the ID.
+```
 
 ```{note}
-The `manual-tls-certificates` charm provides both the server certificate and any associated CA material over the `certificates` relation, so an additional `haproxy:receive-ca-certs` integration is not required for this provider.
+If the machine ID of the manual TLS certificates charm is not 0, adjust the above and following commands with the correct ID. Use `juju status` to identify the Juju machine ID of the manual TLS certificates charm.s
+```
+
+Then, it can be used to sign the certificate. For example, with OpenSSL:
+
+```sh
+openssl x509 -req -in certs/client.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/client.crt -days 365 -sha256
+```
+
+Then, use the `provide-certificate` action on the manual TLS certificates charm to provide the signed TLS certificate. For example, using the previous example CA/CSR:
+
+```sh
+juju run manual-tls-certificates/0 provide-certificate \
+  certificate="$(base64 -w0 certs/client.crt)" \
+  ca-certificate="$(base64 -w0 certs/ca.crt)" \
+  certificate-signing-request="$(base64 -w0 certs/client.csr)"
+```
+
+Now, HAProxy is using the custom CA for TLS connections. You can verify HAProxy received the new TLS certificates using the `get-certificates` action on the HAProxy charm by providing the hostname of the configured Landscape Server root URL, for example:
+
+```sh
+juju run haproxy/0 get-certificate hostname=landscape.local --format=json | jq -r '.["haproxy/0"].["results"].certificate' > cert.pem
+openssl x509 -in cert.pem -noout -text
+```
+
+```{note}
+If the machine ID of the HAProxy charm is not 0, adjust the above command with the correct ID. Use `juju status` to identify the Juju machine ID of the HAProxy charm.
 ```
 
 ### Step 4: Refresh the charm
