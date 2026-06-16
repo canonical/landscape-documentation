@@ -111,13 +111,23 @@ juju integrate manual-tls-certificates:trust_certificate haproxy:receive-ca-cert
 
 Now, generate a CA certificate and private key or ensure they are available locally. For example, generate a CA certificate and private key with OpenSSL:
 
-```sh
-mkdir certs
+1. Create a directory to store the certificates:
 
-openssl genrsa -out certs/ca.key 2048
+   ```sh
+   mkdir certs
+   ```
 
-openssl req -new -x509 -days 3650 -key certs/ca.key -out certs/ca.crt -subj "/C=US/CN=landscape.local"
-```
+1. Generate a private key:
+
+   ```sh
+   openssl genrsa -out certs/ca.key 2048
+   ```
+
+1. Generate a self-signed CA certificate:
+
+   ```sh
+   openssl req -new -x509 -days 3650 -key certs/ca.key -out certs/ca.crt -subj "/C=US/CN=landscape.example.com"
+   ```
 
 After integrating the charms, HAProxy will make a Certificate Signing Request (CSR) that we can extract via the `get-outstanding-certificate-requests`, and use to create a signed TLS certificate. For example:
 
@@ -125,12 +135,10 @@ After integrating the charms, HAProxy will make a Certificate Signing Request (C
 juju run manual-tls-certificates/0 get-outstanding-certificate-requests --format=json | jq '.manual-tls-certificates/0.results.result' | jq '.[0].csr' > certs/client.csr
 ```
 
-```{tip}
-The outstanding certificate requests are grouped by the `relation-id`; if there are multiple requests (i.e., multiple consumers of the manaul TLS certificates), use `juju show-unit manual-tls-certificates/0` to identify correct the ID.
-```
-
 ```{note}
-If the machine ID of the manual TLS certificates charm is not 0, adjust the above and following commands with the correct ID. Use `juju status` to identify the Juju machine ID of the manual TLS certificates charm.s
+The outstanding certificate requests are grouped by the `relation-id`; if there are multiple requests (i.e., multiple consumers of the manual TLS certificates), use `juju show-unit manual-tls-certificates/0` to identify the correct ID.
+
+If the machine ID of the manual TLS certificates charm is not 0, adjust the above and following commands with the correct ID. Use `juju status` to identify the Juju machine ID of the manual TLS certificates charms.
 ```
 
 Then, it can be used to sign the certificate. For example, with OpenSSL:
@@ -151,7 +159,7 @@ juju run manual-tls-certificates/0 provide-certificate \
 Now, HAProxy is using the custom CA for TLS connections. You can verify HAProxy received the new TLS certificates using the `get-certificates` action on the HAProxy charm by providing the hostname of the configured Landscape Server root URL, for example:
 
 ```sh
-juju run haproxy/0 get-certificate hostname=landscape.local --format=json | jq -r '.["haproxy/0"].["results"].certificate' > cert.pem
+juju run haproxy/0 get-certificate hostname=landscape.example.com --format=json | jq -r '.["haproxy/0"].["results"].certificate' > cert.pem
 openssl x509 -in cert.pem -noout -text
 ```
 
