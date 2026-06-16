@@ -77,7 +77,7 @@ The Landscape Server charm relates to PgBouncer using the `database` endpoint, a
 
 ## Interaction with Landscape Server schema migration
 
-Historically, Landscape Server has rejected attempts to run schema migrations when there are active connections other than Postgres itself to the database. However, given the fact that PgBouncer connects to Postgres in between Landscape Server (the client) and Postgres (the server), it needs to stay connected to provide Landscape with a database connection so it can run the schema migration. To accomodate this, the Landscape Server charm's `migrate-schema` action has an `allow-connections` flag, which defaults to `false`. Due to the design of charm interfaces, we cannot reliably know if the database connection for Landscape is being provided directly or via PgBouncer without making assumptions (ex. checking if the port is the default for PgBouncer or not).
+Historically, Landscape Server has rejected attempts to run schema migrations when there are active connections other than Postgres itself to the database. However, given the fact that PgBouncer connects to Postgres in between Landscape Server (the client) and Postgres (the server), it needs to stay connected to provide Landscape with a database connection so it can run the schema migration. To accommodate this, the Landscape Server charm's `migrate-schema` action has an `allow-connections` flag, which defaults to `false`. Due to the design of charm interfaces, we cannot reliably know if the database connection for Landscape is being provided directly or via PgBouncer without making assumptions (ex. checking if the port is the default for PgBouncer or not).
 
 ## See also
 
