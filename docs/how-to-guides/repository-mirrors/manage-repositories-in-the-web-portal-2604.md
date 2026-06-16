@@ -105,23 +105,23 @@ To create a profile:
 Note that you may want to create multiple repository profiles for different groups of managed instances.
 
 (how-to-manage-created-repositories-publishing)=
-## Managing existing repositories
+## Manage existing repositories
 
 (how-to-sync-a-mirror)=
-### Syncinc a mirror
+### Sync a mirror
 
 1. From the sidebar, navigate to **Repositories** > **Mirrors**.
 1. Select the mirror you want to sync.
 1. Click **Update**.
 
 (how-to-import-local-packages)=
-### Importing packages to a local repository
+### Import packages to a local repository
 
 1. From the sidebar, navigate to **Repositories** > **Local repositories**.
 1. Select the local repository where you want to import packages.
 1. Click **Import packages**, provide the URI for the packages you want to import, then click **Import packages**.
 
-### Publishing (or republishing) an existing mirror
+### Publish (or republish) an existing mirror
 
 If you're publishing or republishing a mirror that doesn't preserve upstream signatures, update the mirror before publishing. For instructions, see {ref}`To sync a mirror <how-to-sync-a-mirror>`.
 
@@ -129,7 +129,7 @@ If you're publishing or republishing a mirror that doesn't preserve upstream sig
 1. Select the mirror you want to publish.
 1. Click **Publish**, then select an existing publication or fill out the required information for a new publication.
 
-### Publishing (or republishing) an existing local repository
+### Publish (or republish) an existing local repository
 
 If the local repository doesn't contain the packages you want to publish, import the packages before publishing. For instructions, see {ref}`To import packages into a local repository <how-to-import-local-packages>`.
 
