@@ -201,12 +201,15 @@ Example response (201 Created):
 (upgrade_config)=
 ### `upgrade_config`
 
-Upgrades packages on the target computers. At least one selection criterion must be provided. `included_package_ids` cannot be combined with `select_all` or `select_all_security`.
+Upgrades packages on the target computers. Exactly one of `select_by_ids` or `select_by_category` must be set.
 
-- `select_all`: If `true`, upgrade all upgradable packages.
-- `select_all_security`: If `true`, upgrade all security-only upgradable packages.
-- `included_package_ids`: Explicit list of package IDs to upgrade.
-- `excluded_package_ids`: Package IDs to exclude when using `select_all` or `select_all_security`.
+- `select_by_ids`: Upgrade specific packages by ID.
+  - `package_ids` *(required)*: Non-empty list of package IDs to upgrade.
+- `select_by_category`: Upgrade all packages in a given category, optionally excluding selected IDs.
+  - `category` *(required)*: Which packages to upgrade. One of:
+    - `all`: all upgradable packages, including security packages.
+    - `all_security`: only upgradable security packages.
+  - `excluded_package_ids`: Package IDs to exclude from the category (default: `[]`).
 
 Example request--upgrade all security packages:
 
@@ -217,7 +220,26 @@ curl -s -X POST https://landscape.canonical.com/api/v2/package-change-plans \
   -d '{
     "computer_query": "tag:production",
     "upgrade_config": {
-      "select_all_security": true
+      "select_by_category": {
+        "category": "all_security"
+      }
+    }
+  }'
+```
+
+Example request--upgrade all security packages, excluding specific IDs:
+
+```bash
+curl -s -X POST https://landscape.canonical.com/api/v2/package-change-plans \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "computer_query": "tag:production",
+    "upgrade_config": {
+      "select_by_category": {
+        "category": "all_security",
+        "excluded_package_ids": [99]
+      }
     }
   }'
 ```
@@ -231,7 +253,9 @@ curl -s -X POST https://landscape.canonical.com/api/v2/package-change-plans \
   -d '{
     "computer_query": "tag:production",
     "upgrade_config": {
-      "included_package_ids": [101, 102]
+      "select_by_ids": {
+        "package_ids": [101, 102]
+      }
     }
   }'
 ```
