@@ -67,7 +67,7 @@ To create a new publication:
 1. In the **Source type** dropdown menu, select whether you want to publish a local repository or mirror.
     - In the **Source** dropdown menu, select the mirror or local repository you want to publish.
 1. In the **Publication target** dropdown menu, select the publication target you want to publish to.
-1. To resign packages in your publication target, enter the ASCII-armored GPG key you want to use in the **Signing GPG key** text box.
+1. To resign packages in your publication target, enter the ASCII-armored GPG private key you want to use in the **Signing GPG key** text box.
 
 (how-to-create-repo-profile)=
 ## Create a repository profile and associate client machines to the profile
