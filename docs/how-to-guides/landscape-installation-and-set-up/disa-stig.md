@@ -11,7 +11,7 @@ myst:
 This guide provides an overview of how to install Landscape in a DISA STIG compliant environment. DISA STIG is a set of technical security guidelines used by the U.S. Department of Defense.
 
 ```{note}
-This guide only applies to Landscape Server versions 25.10 and later. We recommend using an LTS for production deployments.
+This guide applies to Landscape Server 26.10 and later. Running `setup-landscape-server` with PostgreSQL certificate authentication configured requires 26.10 or later. We recommend using an LTS for production deployments.
 ```
 
 ## Prepare for installation
@@ -1196,9 +1196,11 @@ stores = main account-1 resource-1
 threads = 2
 
 [schema]
-# note that you must have at least two certificates for db connections:
-# one for landscape_superuser (or landscape_maintenance)
-# and one for the regular landscape user
+# [schema] ssl settings apply only to the superuser (landscape_superuser or
+# landscape_maintenance) connection. They are independent of the [stores] ssl
+# settings, which apply to the regular landscape user connection.
+# PostgreSQL certificate authentication requires the certificate CN to match
+# the connecting username, so each role must have its own client certificate.
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
 sslmode = verify-full
