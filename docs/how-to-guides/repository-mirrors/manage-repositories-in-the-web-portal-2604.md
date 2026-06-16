@@ -17,6 +17,12 @@ The repository mirroring feature in Landscape lets you mirror Ubuntu and third-p
 
 This guide demonstrates how to mirror Ubuntu and other third-party debian repositories.
 
+(how-to-heading-disk-space-requirements-2604)=
+## Disk space requirements
+
+```{include} /reuse/repository-disk-space.md
+```
+
 (how-to-heading-create-new-mirror)=
 ## Create a new mirror
 
@@ -50,6 +56,10 @@ To create a new local repository:
 ## Create a new publication target
 
 To create a new publication target:
+
+```{note}
+If you use a filesystem publication target for a mirror that doesn't preserve upstream signatures, the target system must have enough storage available for both the synced mirror and the published repository. Plan for roughly double the repository disk space.
+```
 
 1. From the sidebar, navigate to **Repositories** > **Publication targets**
 1. Click **Add publication target**
