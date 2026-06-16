@@ -5,12 +5,12 @@ myst:
 ---
 
 (how-to-manage-repos-web-portal)=
-# How to manage and mirror repositories from the web portal
+# How to manage and mirror repositories from the web portal (25.10 and earlier)
 
 > See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
-This document applies to **Landscape 25.10 and earlier**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
+This document applies to **Landscape 25.10 and earlier**. If you're using Landscape Server 26.04 LTS or later, see {ref}`managing repositories (26.04 LTS and later)<how-to-manage-repos-web-portal-2604>` instead.
 
 Web-based repository mirroring is available starting in Landscape 24.04 LTS for self-hosted users.
 ```
