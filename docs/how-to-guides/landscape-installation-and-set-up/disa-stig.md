@@ -11,7 +11,7 @@ myst:
 This guide provides an overview of how to install Landscape in a DISA STIG compliant environment. DISA STIG is a set of technical security guidelines used by the U.S. Department of Defense.
 
 ```{note}
-This guide applies to Landscape Server 26.10 and later. Running `setup-landscape-server` with PostgreSQL certificate authentication configured requires 26.10 or later. We recommend using an LTS for production deployments.
+This guide only applies to Landscape Server versions 25.10 and later. We recommend using an LTS for production deployments.
 ```
 
 ## Prepare for installation
