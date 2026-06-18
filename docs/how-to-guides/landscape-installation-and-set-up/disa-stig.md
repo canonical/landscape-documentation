@@ -1196,9 +1196,11 @@ stores = main account-1 resource-1
 threads = 2
 
 [schema]
-# note that you must have at least two certificates for db connections:
-# one for landscape_superuser (or landscape_maintenance)
-# and one for the regular landscape user
+# [schema] ssl settings apply only to the superuser (landscape_superuser or
+# landscape_maintenance) connection. They are independent of the [stores] ssl
+# settings, which apply to the regular landscape user connection.
+# PostgreSQL certificate authentication requires the certificate CN to match
+# the connecting username, so each role must have its own client certificate.
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
 sslmode = verify-full
