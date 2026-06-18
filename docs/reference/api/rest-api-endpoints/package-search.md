@@ -54,14 +54,13 @@ Search for packages across a computer selection.
   - `name`: Package name.
   - `summary`: Short description of the package.
   - `version`: Package version string.
-  - `package_state_counts`: Counts of computers in each state for this package.
-    - `available`: Number of computers where the package is available.
-    - `held`: Number of computers where the package is held.
-    - `upgrade_available`: Number of computers where an upgrade is available.
-    - `installed`: Number of computers where the package is installed.
-- `computer_selection_stats`: Aggregate stats for the computer selection.
-  - `total_count`: Total number of computers matched by `computer_query`.
-  - `no_results_count`: Number of matched computers that returned no packages.
+  - `computers`: Number of computers matching the query that have this package.
+    - `count`: Count of matching computers.
+  - `usn`: Associated Ubuntu Security Notice, if any.
+    - `id`: USN identifier.
+    - `summary`: Optional USN summary.
+  - `cves`: Associated CVEs, if any.
+    - `id`: CVE identifier.
 - `count`: Total number of packages matching the query.
 - `next`: URL for the next page of results, or `null` if there are no more results.
 - `prev`: URL for the previous page of results, or `null` if on the first page.
@@ -92,18 +91,11 @@ Example response (200 OK):
       "name": "openssh-server",
       "summary": "secure shell (SSH) server, for secure access from remote machines",
       "version": "1:9.6p1-3ubuntu13.5",
-      "package_state_counts": {
-        "available": 50,
-        "held": 2,
-        "upgrade_available": 10,
-        "installed": 48
+      "computers": {
+        "count": 50
       }
     }
   ],
-  "computer_selection_stats": {
-    "total_count": 50,
-    "no_results_count": 2
-  },
   "count": 1,
   "next": null,
   "prev": null
@@ -134,13 +126,18 @@ Search for packages with known security vulnerabilities across a computer select
 
 ### Response fields
 
-- `vulnerable_packages`: List of packages with known vulnerabilities.
-  - `package`: Package details (same fields as in `/packages:search`).
-  - `cve_ids`: List of CVE identifiers associated with this package (e.g. `CVE-2024-6387`).
-  - `usn_ids`: List of Ubuntu Security Notice identifiers associated with this package (e.g. `USN-6859-1`).
-- `computer_selection_stats`: Aggregate stats for the computer selection.
-  - `total_count`: Total number of computers matched by `computer_query`.
-  - `no_results_count`: Number of matched computers that returned no packages.
+- `packages`: List of packages with known vulnerabilities.
+  - `id`: Package ID.
+  - `name`: Package name.
+  - `summary`: Short description of the package.
+  - `version`: Package version string.
+  - `computers`: Number of computers matching the query that have this package.
+    - `count`: Count of matching computers.
+  - `usn`: Associated Ubuntu Security Notice, if any.
+    - `id`: USN identifier.
+    - `summary`: Optional USN summary.
+  - `cves`: Associated CVEs, if any.
+    - `id`: CVE identifier.
 - `count`: Total number of vulnerable packages matching the query.
 - `next`: URL for the next page of results, or `null` if there are no more results.
 - `prev`: URL for the previous page of results, or `null` if on the first page.
@@ -163,44 +160,41 @@ Example response (200 OK):
 
 ```json
 {
-  "vulnerable_packages": [
+  "packages": [
     {
-      "package": {
-        "id": 1,
-        "name": "openssh-server",
-        "summary": "secure shell (SSH) server, for secure access from remote machines",
-        "version": "1:9.6p1-3ubuntu13.5",
-        "package_state_counts": {
-          "available": 50,
-          "held": 2,
-          "upgrade_available": 10,
-          "installed": 48
-        }
+      "id": 1,
+      "name": "openssh-server",
+      "summary": "secure shell (SSH) server, for secure access from remote machines",
+      "version": "1:9.6p1-3ubuntu13.5",
+      "computers": {
+        "count": 50
       },
-      "cve_ids": ["CVE-2024-6387", "CVE-2023-51385"],
-      "usn_ids": ["USN-6859-1", "USN-6560-1"]
+      "cves": [
+        {"id": "CVE-2024-6387"},
+        {"id": "CVE-2023-51385"}
+      ],
+      "usn": {
+        "id": "USN-6859-1",
+        "summary": null
+      }
     },
     {
-      "package": {
-        "id": 3,
-        "name": "curl",
-        "summary": "command line tool for transferring data with URL syntax",
-        "version": "8.5.0-2ubuntu10.6",
-        "package_state_counts": {
-          "available": 50,
-          "held": 1,
-          "upgrade_available": 3,
-          "installed": 49
-        }
+      "id": 3,
+      "name": "curl",
+      "summary": "command line tool for transferring data with URL syntax",
+      "version": "8.5.0-2ubuntu10.6",
+      "computers": {
+        "count": 50
       },
-      "cve_ids": ["CVE-2024-2466"],
-      "usn_ids": ["USN-6936-1"]
+      "cves": [
+        {"id": "CVE-2024-2466"}
+      ],
+      "usn": {
+        "id": "USN-6936-1",
+        "summary": null
+      }
     }
   ],
-  "computer_selection_stats": {
-    "total_count": 50,
-    "no_results_count": 2
-  },
   "count": 2,
   "next": null,
   "prev": null
