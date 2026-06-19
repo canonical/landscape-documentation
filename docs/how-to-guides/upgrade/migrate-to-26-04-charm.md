@@ -109,7 +109,11 @@ juju integrate manual-tls-certificates:certificates haproxy:certificates
 juju integrate manual-tls-certificates:trust_certificate haproxy:receive-ca-certs
 ```
 
-Now, generate a CA certificate and private key or ensure they are available locally. For example, generate a CA certificate and private key with OpenSSL:
+Now, ensure you have a CA certificate and private key available locally. You can use any existing CA (such as your organisation's internal CA or corporate PKI) — the `manual-tls-certificates` charm works with any CA.
+
+```{tip}
+If you don't already have a CA, the following example shows how to generate a self-signed one with OpenSSL. **Skip this if you already have a CA certificate and key.**
+```
 
 1. Create a directory to store the certificates:
 
@@ -129,7 +133,7 @@ Now, generate a CA certificate and private key or ensure they are available loca
    openssl req -new -x509 -days 3650 -key certs/ca.key -out certs/ca.crt -subj "/C=US/CN=landscape.example.com"
    ```
 
-After integrating the charms, HAProxy will make a Certificate Signing Request (CSR) that we can extract via the `get-outstanding-certificate-requests`, and use to create a signed TLS certificate. For example:
+After integrating the charm, HAProxy will make a Certificate Signing Request (CSR) that we can extract via `get-outstanding-certificate-requests`, and use to create a signed TLS certificate. For example:
 
 ```sh
 juju run manual-tls-certificates/0 get-outstanding-certificate-requests --format=json | jq '.manual-tls-certificates/0.results.result' | jq '.[0].csr' > certs/client.csr
@@ -138,16 +142,16 @@ juju run manual-tls-certificates/0 get-outstanding-certificate-requests --format
 ```{note}
 The outstanding certificate requests are grouped by the `relation-id`; if there are multiple requests (i.e., multiple consumers of the manual TLS certificates), use `juju show-unit manual-tls-certificates/0` to identify the correct ID.
 
-If the machine ID of the manual TLS certificates charm is not 0, adjust the above and following commands with the correct ID. Use `juju status` to identify the Juju machine ID of the manual TLS certificates charms.
+If the machine ID of the manual TLS certificates charm is not 0, adjust the above and following commands with the correct ID. Use `juju status` to identify the Juju machine ID of the manual TLS certificates charm.
 ```
 
-Then, it can be used to sign the certificate. For example, with OpenSSL:
+Then, sign the CSR with your CA. For example, with OpenSSL:
 
 ```sh
 openssl x509 -req -in certs/client.csr -CA certs/ca.crt -CAkey certs/ca.key -CAcreateserial -out certs/client.crt -days 365 -sha256
 ```
 
-Then, use the `provide-certificate` action on the manual TLS certificates charm to provide the signed TLS certificate. For example, using the previous example CA/CSR:
+Then, use the `provide-certificate` action on the `manual-tls-certificates` charm to provide the signed certificate, your CA certificate, and the original CSR:
 
 ```sh
 juju run manual-tls-certificates/0 provide-certificate \
