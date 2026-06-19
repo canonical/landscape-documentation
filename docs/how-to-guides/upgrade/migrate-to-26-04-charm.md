@@ -109,11 +109,7 @@ juju integrate manual-tls-certificates:certificates haproxy:certificates
 juju integrate manual-tls-certificates:trust_certificate haproxy:receive-ca-certs
 ```
 
-Now, ensure you have a CA certificate and private key available locally. You can use any existing CA (such as your organisation's internal CA or corporate PKI) — the `manual-tls-certificates` charm works with any CA.
-
-```{tip}
-If you don't already have a CA, the following example shows how to generate a self-signed one with OpenSSL. **Skip this if you already have a CA certificate and key.**
-```
+Now, ensure you have a CA certificate and private key available locally. You can use any existing CA (such as your organisation's internal CA or corporate PKI). If you don't already have a CA, the following example shows how to generate one with OpenSSL:
 
 1. Create a directory to store the certificates:
 
