@@ -133,7 +133,7 @@ If you don't already have a CA, the following example shows how to generate a se
    openssl req -new -x509 -days 3650 -key certs/ca.key -out certs/ca.crt -subj "/C=US/CN=landscape.example.com"
    ```
 
-After integrating the charm, HAProxy will make a Certificate Signing Request (CSR) that we can extract via `get-outstanding-certificate-requests`, and use to create a signed TLS certificate. For example:
+After integrating the charm, HAProxy will make a Certificate Signing Request (CSR) that we can extract via the `get-outstanding-certificate-requests` action, and use to create a signed TLS certificate. For example:
 
 ```sh
 juju run manual-tls-certificates/0 get-outstanding-certificate-requests --format=json | jq '.manual-tls-certificates/0.results.result' | jq '.[0].csr' > certs/client.csr
