@@ -1531,7 +1531,7 @@ Required parameters:
 Optional parameters:
 
 - `name`: A name to identify the export job.
-- `archived_only`: If true, only includes archived computers. Defaults to false.
+- `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
 - `wsl_parents`: If true, restrict the result to WSL parent instances. Defaults to false.
 - `wsl_children`: If true, restrict the result to WSL child instances. Defaults to false.
 - `selected_field_ids`: A list of field IDs to include in the exported TSV file.
