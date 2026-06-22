@@ -243,3 +243,56 @@ Required parameters:
 Optional parameters:
 
 - None
+
+(reference-activities-exports)=
+## POST `/activities/exports`
+
+Initiates an asynchronous export of activity log history into Tab-Separated Value (TSV) format. See {ref}`reference-rest-api-exports` to manage and download export jobs.
+
+Required parameters:
+
+- `query`: A query string used to filter the activity history to export.
+
+Optional parameters:
+
+- `name`: A name to identify the export job.
+- `selected_activity_ids`: A list of specific activity IDs to export.
+- `selected_field_ids`: A list of field IDs to include in the exported TSV file.
+- `retain_until`: An ISO 8601-formatted datestamp indicating how long to retain the export.
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/activities/exports" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{
+    "name": "Monthly Activity Export",
+    "query": "activity_status:succeeded",
+    "selected_field_ids": ["id", "creation_time", "summary", "type", "activity_status"],
+    "retain_until": "2026-07-19T11:00:00Z"
+  }'
+```
+
+Example response:
+
+```json
+{
+  "id": 43,
+  "name": "Monthly Activity Export",
+  "status": "pending",
+  "progress": 0,
+  "type": "activity",
+  "query": "activity_status:succeeded",
+  "creation_time": "2026-06-19T11:01:00Z",
+  "retain_until": "2026-07-19T11:00:00Z",
+  "filename": null,
+  "row_count": null,
+  "download_ready": false,
+  "estimated_seconds_remaining": null
+}
+```
+
+```{note}
+This endpoint is available starting in Landscape 26.10.
+```
