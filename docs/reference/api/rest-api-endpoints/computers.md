@@ -1524,13 +1524,10 @@ Example response:
 
 Initiates an asynchronous export of computer data into Tab-Separated Value (TSV) format. See {ref}`reference-rest-api-exports` to manage and download export jobs.
 
-Required parameters:
-
-- `query`: A query string with space-separated tokens used to filter the computers to export.
-
 Optional parameters:
 
 - `name`: A name to identify the export job.
+- `query`: A query string with space-separated tokens used to filter the computers to export. Defaults to an empty string, which exports all computers.
 - `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
 - `wsl_parents`: If true, restrict the result to WSL parent instances. Defaults to false.
 - `wsl_children`: If true, restrict the result to WSL child instances. Defaults to false.
@@ -1560,14 +1557,14 @@ Example response:
 {
   "id": 42,
   "name": "Weekly Computer Export",
-  "status": "pending",
+  "status": "processing",
   "progress": 0,
   "type": "instance",
   "query": "tag:server",
-  "creation_time": "2026-06-19T11:00:00Z",
+  "created_at": "2026-06-19T11:00:00Z",
   "retain_until": "2026-06-26T12:00:00Z",
-  "filename": null,
-  "row_count": null,
+  "filename": "",
+  "row_count": 0,
   "download_ready": false,
   "estimated_seconds_remaining": null
 }

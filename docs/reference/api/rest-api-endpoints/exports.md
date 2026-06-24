@@ -48,7 +48,7 @@ Example response:
       "progress": 100,
       "type": "instance",
       "query": "tag:server",
-      "creation_time": "2026-06-19T11:00:00Z",
+      "created_at": "2026-06-19T11:00:00Z",
       "retain_until": "2026-06-26T12:00:00Z",
       "filename": "export_42.tsv",
       "row_count": 13,
@@ -85,14 +85,14 @@ Example response:
 {
   "id": 42,
   "name": "Weekly Computer Export",
-  "status": "running",
+  "status": "processing",
   "progress": 45,
   "type": "instance",
   "query": "tag:server",
-  "creation_time": "2026-06-19T11:00:00Z",
+  "created_at": "2026-06-19T11:00:00Z",
   "retain_until": "2026-06-26T12:00:00Z",
-  "filename": null,
-  "row_count": null,
+  "filename": "",
+  "row_count": 0,
   "download_ready": false,
   "estimated_seconds_remaining": 30
 }
@@ -117,6 +117,43 @@ curl -X POST "https://landscape.canonical.com/api/v2/exports/42/cancel" -H "Auth
 ```
 
 This endpoint returns an empty response.
+
+## POST `/exports/<int:id>/retry`
+
+Retry a failed export. This creates a new export job and discards the original. The response is the newly created job, which has a new `id`.
+
+Path parameters:
+
+- `id`: The export job ID of the failed export.
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X POST "https://landscape.canonical.com/api/v2/exports/42/retry" -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "id": 51,
+  "name": "Weekly Computer Export",
+  "status": "processing",
+  "progress": 0,
+  "type": "instance",
+  "query": "tag:server",
+  "created_at": "2026-06-19T12:00:00Z",
+  "retain_until": "2026-06-26T12:00:00Z",
+  "filename": "",
+  "row_count": 0,
+  "download_ready": false,
+  "estimated_seconds_remaining": null
+}
+```
 
 ## GET `/exports/<int:id>/download`
 
