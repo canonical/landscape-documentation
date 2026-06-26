@@ -111,7 +111,7 @@ Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu
 (howto-heading-register-wsl-host-troubleshoot)=
 ## (If necessary) Troubleshoot
 
-> See also: [Ubuntu Pro for WSL's logs](https://documentation.ubuntu.com/wsl/en/latest/howto/06-access-the-logs/)
+> See also: [Ubuntu Pro for WSL's logs](https://documentation.ubuntu.com/wsl/latest/howto/06-access-the-logs/)
 
 If your Windows host machine doesn’t appear as a pending instance in your Landscape account:
 
