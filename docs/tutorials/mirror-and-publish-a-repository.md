@@ -13,7 +13,7 @@ In this tutorial, you'll use Landscape's Deb Archive service to mirror part of t
 
 You'll mirror with **signatures preserved**, meaning Landscape keeps the original Ubuntu signing information intact. This keeps the tutorial simple: because your client machine already trusts the Ubuntu archive's signing key, you won't need to manage any GPG keys yourself.
 
-This tutorial creates a *learning* setup so you can see the full workflow end to end. It isn't a production configuration. When you're ready to manage repositories for real, see {ref}`how-to-manage-repos-web-portal-2604`.
+This tutorial creates a *learning* setup so you can see the full workflow end to end. When you're ready to manage repositories, see {ref}`how-to-manage-repos-web-portal-2604`.
 
 Completing this tutorial should take approximately 30 minutes, plus time for the repository to publish.
 
@@ -29,9 +29,10 @@ Completing this tutorial should take approximately 30 minutes, plus time for the
 
 Before you start, make sure you have:
 
-- A working, self-hosted **Landscape Server 26.04 LTS (or later)** deployment that you can sign in to. Repository management with Deb Archive is only available on self-hosted Landscape. If you don't have one yet, follow {ref}`getting-started-with-landscape` first.
-- At least one **registered client machine** running Ubuntu 24.04 LTS (Noble Numbat). The {ref}`getting-started-with-landscape` tutorial walks you through registering one.
+- A **Landscape Server 26.04 LTS (or later)** deployment with Deb Archive. If you don't have one yet, follow: {ref}`Getting started with Landscape <getting-started-with-landscape>` and {ref}`Set up Deb Archive <how-to-debarchive-repository-management>`.
+- At least one **registered client machine** running Ubuntu.
 - An **Amazon S3 bucket** that you can write to, along with its region and a pair of AWS access keys. Any S3-compatible object store (such as MinIO) also works.
+- The bucket must allow your **client machine to read objects**. In this tutorial, the client fetches packages directly from the S3 URL without credentials, so enable public object read on the bucket.
 
 When you sign in to the web portal, confirm that **Repositories** appears in the sidebar. This is where you'll spend the whole tutorial.
 
@@ -66,7 +67,7 @@ Next, you'll create a **mirror**: Landscape's own copy of an upstream Ubuntu rep
     - **Distribution**: `noble`
     - **Components**: `main`
     - **Architectures**: `amd64`
-1. Click the submit button to create the mirror.
+1. Click **Add mirror** to create the mirror.
 
 You've now defined a mirror, but it hasn't pulled any packages yet. For a signature-preserving mirror, Landscape fetches the upstream packages when you publish, which you'll do next.
 
@@ -80,8 +81,10 @@ A **publication** connects your mirror to your publication target and makes the 
 1. In the **Source type** dropdown menu, select **Mirror**.
 1. In the **Source** dropdown menu, select `tutorial-mirror`.
 1. In the **Publication target** dropdown menu, select `tutorial-target`.
+1. In the **Architectures** dropdown menu, select `amd64`.
 1. Notice that there's no **Signing GPG key** field and that the distribution is fixed. Because you preserved the upstream signatures, Landscape doesn't re-sign anything, so there's nothing for you to configure here.
-1. Click the submit button to create and publish.
+1. Click **Add publication** to create and publish.
+1. From the **Publications** list, find `tutorial-publication`, click its actions menu, and select **Republish** to start the publishing process.
 
 Landscape now copies the upstream packages and writes a complete APT repository into your S3 bucket. Mirroring `noble main` for `amd64` involves a fair amount of data, so this step takes some time and disk space. When it finishes, your repository is live in the bucket and ready for clients.
 
@@ -101,14 +104,14 @@ Your repository exists, but your client doesn't know about it yet. You'll fix th
         ```
 
     1. Leave the **GPG key** field empty. Because you preserved the upstream signatures, your client verifies packages against Ubuntu's archive key, which is already in its keyring.
-1. Use the **Association** options to associate this profile with your registered client. For a single test client, the simplest choice is to associate by its tag or select it directly.
+1. Use the **Association** options to associate this profile with your registered client.
 1. Save the profile.
 
 Landscape applies the new APT source to your client. The configuration is applied once when the client is associated with the profile.
 
 ## Step 5: Install a package from your mirror
 
-Now for the payoff. You'll confirm that your client is using your mirror and install a package from it.
+Now you'll confirm that your client is using your mirror and install a package from it.
 
 On your client machine, refresh the package lists and install a package:
 
@@ -123,7 +126,7 @@ If `apt update` completes without any signature warnings, your client successful
 apt-cache policy hello
 ```
 
-You should see your S3 bucket's address listed as the origin for the package. That means `hello` was installed from the repository *you* mirrored and published.
+You should see your S3 bucket's address listed as the origin for the package. That means `hello` was installed from the repository you mirrored and published.
 
 ## Summary
 
@@ -132,5 +135,4 @@ Congratulations! You've mirrored part of the Ubuntu archive with Deb Archive, pu
 From here, you have several options:
 
 - **Learn the concepts in depth**: See {ref}`explanation-repo-mirroring-2604` to understand mirrors, local repositories, publications, targets, and profiles in detail.
-- **Manage repositories for real**: See {ref}`how-to-manage-repos-web-portal-2604` for the full set of repository management tasks, including local repositories, resigned mirrors, and other target types.
-- **Mirror with the API**: See {ref}`how-to-guides-repository-mirrors-index` for automating repository management.
+- **Manage production repositories**: See {ref}`how-to-manage-repos-web-portal-2604` for the full set of repository management tasks, including local repositories, resigned mirrors, and other target types.
