@@ -5,12 +5,12 @@ myst:
 ---
 
 (how-to-manage-repos-web-portal)=
-# How to manage and mirror repositories from the web portal
+# How to manage and mirror repositories from the web portal (25.10 and earlier)
 
 > See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
-This document applies to **Landscape 25.10 and earlier**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
+This document applies to **Landscape 25.10 and earlier**. If you're using Landscape Server 26.04 LTS or later, see {ref}`managing repositories (26.04 LTS and later)<how-to-manage-repos-web-portal-2604>` instead.
 
 Web-based repository mirroring is available starting in Landscape 24.04 LTS for self-hosted users.
 ```
@@ -46,6 +46,10 @@ To create a new GPG key:
 
     ```bash
     gpg --full-gen-key
+    ```
+
+    ```{note}
+    **FIPS users:** If your Landscape server is Ubuntu 24.04 or newer with FIPS enabled, you must use the `--full-gen-key` option, select RSA for the key type, and use 4096 bits. The default key type for the `gpg` command has been updated to ed25519, but this isn't currently approved for FIPS. Only RSA keys are approved for FIPS.
     ```
 
 1. If you're prompted to provide information about the key, press **Enter** to choose the default options or make selections based on your system configuration. If you're unsure what to select, the default options work for most configurations.

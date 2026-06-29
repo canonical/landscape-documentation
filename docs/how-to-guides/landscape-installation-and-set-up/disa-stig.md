@@ -535,6 +535,19 @@ sudo -u postgres createuser --no-createdb --no-createrole --no-superuser landsca
 
 Landscape uses multiple databases. To create them:
 
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+```bash
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-account-1
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-main
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-package
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-session
+```
+````
+
+````{tab-item} Landscape Server 25.10
 ```bash
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-account-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-knowledge
@@ -543,6 +556,9 @@ sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-session
 ```
+````
+
+`````
 
 (header-set-user)=
 
@@ -552,6 +568,19 @@ If you are on a Noble instance, you will have the PostgreSQL `set_user` extensio
 
 1. Enable the extension on each database.
 
+    `````{tab-set}
+
+    ````{tab-item} Landscape Server 26.04 LTS and later
+    ```bash
+    sudo -u postgres psql landscape-standalone-account-1  -c "CREATE EXTENSION IF NOT EXISTS set_user"
+    sudo -u postgres psql landscape-standalone-main       -c "CREATE EXTENSION IF NOT EXISTS set_user"
+    sudo -u postgres psql landscape-standalone-package    -c "CREATE EXTENSION IF NOT EXISTS set_user"
+    sudo -u postgres psql landscape-standalone-resource-1 -c "CREATE EXTENSION IF NOT EXISTS set_user"
+    sudo -u postgres psql landscape-standalone-session    -c "CREATE EXTENSION IF NOT EXISTS set_user"
+    ```
+    ````
+
+    ````{tab-item} Landscape Server 25.10
     ```bash
     sudo -u postgres psql landscape-standalone-account-1  -c "CREATE EXTENSION IF NOT EXISTS set_user"
     sudo -u postgres psql landscape-standalone-knowledge  -c "CREATE EXTENSION IF NOT EXISTS set_user"
@@ -560,9 +589,25 @@ If you are on a Noble instance, you will have the PostgreSQL `set_user` extensio
     sudo -u postgres psql landscape-standalone-resource-1 -c "CREATE EXTENSION IF NOT EXISTS set_user"
     sudo -u postgres psql landscape-standalone-session    -c "CREATE EXTENSION IF NOT EXISTS set_user"
     ```
+    ````
+
+    `````
 
 1. Grant execute permissions.
 
+    `````{tab-set}
+
+    ````{tab-item} Landscape Server 26.04 LTS and later
+    ```bash
+    sudo -u postgres psql landscape-standalone-account-1  -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
+    sudo -u postgres psql landscape-standalone-main       -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
+    sudo -u postgres psql landscape-standalone-package    -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
+    sudo -u postgres psql landscape-standalone-resource-1 -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
+    sudo -u postgres psql landscape-standalone-session    -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
+    ```
+    ````
+
+    ````{tab-item} Landscape Server 25.10
     ```bash
     sudo -u postgres psql landscape-standalone-account-1  -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
     sudo -u postgres psql landscape-standalone-knowledge  -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
@@ -571,6 +616,9 @@ If you are on a Noble instance, you will have the PostgreSQL `set_user` extensio
     sudo -u postgres psql landscape-standalone-resource-1 -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
     sudo -u postgres psql landscape-standalone-session    -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
     ```
+    ````
+
+    `````
 
 1. Disable direct login for the superuser.
 
@@ -1114,6 +1162,138 @@ Modify settings in the `/etc/landscape/service.conf` file to configure Landscape
 
 The following changes are required in the sections below. Remove any passwords if they exist.
 
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+```ini
+[api]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 9080
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package session session-autocommit
+threads = 10
+
+[appserver]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 8080
+blob_storage_root = /var/lib/landscape/blobs
+display_consent_banner_at_each_login = true
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+oops_key = DF
+repository_path = /var/lib/landscape/landscape-repository
+reprepro_binary = /opt/canonical/landscape/scripts/reprepro-wrapper.sh
+sanitize_delay = 3600
+secret_token = <SECRET_TOKEN>
+stores = main account-1 resource-1 package session session-autocommit
+threads = 8
+
+[async_frontend]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 9090
+
+[broker]
+host = localhost
+port = 5671
+ssl_client_cert = /etc/landscape/rabbitmq_client.pem
+ssl_client_private_key = /etc/landscape/rabbitmq_client.key
+ssl_client_ca_cert = /etc/ca-certificates.crt
+user = landscape
+vhost = landscape
+
+[job_handler]
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package
+threads = 10
+
+[load_shaper]
+
+[maintenance]
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package session session-autocommit
+threads = 1
+
+[message_server]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 8090
+oops_key = DM
+stores = main account-1 resource-1 package
+threads = 8
+
+[oops]
+
+[package_search]
+allowed_interfaces = localhost 127.0.0.1 ::1
+account_threshold = 0
+pid_path = /var/run/landscape/landscape-package-search-1.pid
+port = 9099
+stores = main package resource-1
+
+[package_upload]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 9100
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+root_url = http://localhost:9100
+threads = 10
+
+[pingserver]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 8070
+stores = main account-1 resource-1
+threads = 2
+
+[schema]
+# note that you must have at least two certificates for db connections:
+# one for landscape_superuser (or landscape_maintenance)
+# and one for the regular landscape user
+sslcert = /etc/landscape/postgres_client_superuser.pem
+sslkey = /etc/landscape/postgres_client_superuser.key
+sslmode = verify-full
+sslrootcert = /etc/ca-certificates.crt
+stores = main account-1 resource-1 package session
+store_user = landscape_superuser
+# if you have enabled the set_user extension, comment the line above and uncomment the lines below:
+# store_user = landscape_maintenance
+# store_superuser = landscape_superuser
+threads = 1
+
+[scripts]
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package session
+threads = 1
+
+[secrets]
+allowed_interfaces = localhost 127.0.0.1 ::1
+service_url = http://localhost:26155
+
+[stores]
+account_1 = landscape-standalone-account-1
+host = localhost
+main = landscape-standalone-main
+package = landscape-standalone-package
+resource_1 = landscape-standalone-resource-1
+session = landscape-standalone-session
+session_autocommit = landscape-standalone-session
+sslcert = /etc/landscape/postgres_client.pem
+sslkey = /etc/landscape/postgres_client.key
+sslmode = verify-full
+sslrootcert = /etc/ca-certificates.crt
+user = landscape
+
+[system]
+deployment_mode = standalone
+enable_password_authentication = false
+oops_path = /var/lib/landscape/landscape-oops
+syslog_address = /dev/log
+```
+````
+
+````{tab-item} Landscape Server 25.10
 ```ini
 [api]
 allowed_interfaces = localhost 127.0.0.1 ::1
@@ -1243,6 +1423,9 @@ enable_password_authentication = false
 oops_path = /var/lib/landscape/landscape-oops
 syslog_address = /dev/log
 ```
+````
+
+`````
 
 Replace `<SECRET_TOKEN>` with a random 172-character alphanumeric string. You can randomly generate one with:
 
@@ -1269,7 +1452,17 @@ sudo chmod 600 /etc/landscape/service.conf
 
 Click on the link to download the following sample file. Remember to replace any placeholder values with the correct ones for your configuration.
 
-- [`/etc/landscape/service.conf`](/assets/disa-stig/service.conf)
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+- [`/etc/landscape/service.conf`](/assets/disa-stig/26.04/service.conf) (26.04 and later)
+````
+
+````{tab-item} Landscape Server 25.10
+- [`/etc/landscape/service.conf`](/assets/disa-stig/25.10/service.conf) (25.10)
+````
+
+`````
 
 ### Run the Landscape setup script
 

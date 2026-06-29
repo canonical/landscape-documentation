@@ -110,7 +110,11 @@ A publication target is the storage location where Landscape writes a published 
 - **S3:** An Amazon S3 bucket or S3-compatible object store (such as MinIO).
 - **Swift:** An OpenStack Swift container.
 
-Publication targets are separate from mirrors and local repositories. You can define a target once and reuse is for multiple publications.
+Publication targets are separate from mirrors and local repositories. You can define a target once and reuse it for multiple publications. The publication target must have enough storage available to hold the entire contents of the publication source.
+
+If you are in a restricted environment (e.g. in an air-gapped environment, or with a manual Landscape deployment on a single machine, etc.), you may wish to use a filesystem publication target. Otherwise, we recommend using S3 or Swift publication targets.
+
+Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem.
 
 (explanation-repo-mirroring-2604-repository-profiles)=
 ### Repository profiles

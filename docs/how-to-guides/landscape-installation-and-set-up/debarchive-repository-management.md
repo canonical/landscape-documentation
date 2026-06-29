@@ -14,6 +14,7 @@ Deb Archive was introduced in **Landscape 26.04 LTS**.
 ## Prerequisites
 
 You need one of the following Landscape Server installations:
+
 - A {ref}`quickstart <how-to-quickstart-installation>` installation of `landscape-server-quickstart`
 - A {ref}`manual <how-to-manual-installation>` installation of `landscape-server`
 
@@ -39,62 +40,80 @@ The snap installs as a daemon that will start automatically. It will fail to con
 
 ## Create the Deb Archive database
 
-The Deb Archive service requires its own database in the PostgreSQL cluster already used by Landscape Server. 
+The Deb Archive service requires its own database in the PostgreSQL cluster already used by Landscape Server.
 
 - For Quickstart installations, run the following commands on the Landscape Server machine.
 - For Manual installations, run the commands on the PostgreSQL database server.
 
-Create the database:
+Create a dedicated database user for Deb Archive, replacing `<PASSWORD>` with a strong password of your choice. The `--pwprompt` flag will prompt you to enter the password securely:
 
 ```bash
-sudo -u postgres createdb landscape-standalone-debarchive
+sudo -u postgres createuser --pwprompt landscape_debarchive
 ```
 
-Then, grant access to the existing Landscape database users so that Deb Archive can connect:
+Create the database, owned by the new user. If the database already exists, you can skip the `createdb` step and just ensure the user has the necessary privileges.
 
 ```bash
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE \"landscape-standalone-debarchive\" TO landscape_superuser;"
-sudo -u postgres psql -d landscape-standalone-debarchive -c "GRANT USAGE, CREATE ON SCHEMA public TO landscape_maintenance;"
+sudo -u postgres createdb --owner=landscape_debarchive landscape-standalone-debarchive
 ```
 
-```{note}
-The existing `pg_hba.conf` entries for the Landscape users should already permit access to this new database. No changes to `pg_hba.conf` are required unless you have restricted access to specific database names.
+Grant the required privileges:
+
+```bash
+sudo -u postgres psql -d landscape-standalone-debarchive -c "GRANT USAGE, CREATE ON SCHEMA public TO landscape_debarchive;"
+```
+
+For **Manual installations** where the PostgreSQL server is on a separate host, also update `/etc/postgresql/<VERSION>/main/pg_hba.conf` on the database server to allow the new user to connect from the application server:
+
+```text
+host landscape-standalone-debarchive landscape_debarchive <IP-OF-APP>/32 scram-sha-256
+```
+
+Then reload PostgreSQL:
+
+```bash
+sudo systemctl reload postgresql
 ```
 
 The Deb Archive service automatically applies its schema on first successful connection. No manual schema import is needed.
 
 ## Configure the Deb Archive snap to connect to the database
 
-The Deb Archive snap must be configured to connect to the new database you created. You can set the database name directly via `snap set`.
+Configure the snap with the database name, user, and password you created in the previous step. Replace `<PASSWORD>` with the password you set for `landscape_debarchive`:
 
 ```bash
-sudo snap set landscape-debarchive deb.archive.database.name=landscape-standalone-debarchive
+sudo snap set landscape-debarchive \
+    deb.archive.database.name=landscape-standalone-debarchive \
+    deb.archive.database.user=landscape_debarchive \
+    deb.archive.database.password=<PASSWORD>
 ```
-
-Which should match the name of the database you created in the previous step.
 
 ```{note}
 **Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
+```
+
+```{note}
+The snap also supports SSL connections to the database. If your PostgreSQL server requires SSL, set `deb.archive.database.ssl` to the appropriate SSL mode (e.g. `require`) and ensure the snap can access any necessary certificates. Set the SSL cert, key, and root cert as needed with the `deb.archive.database.ssl-cert`, `deb.archive.database.ssl-key`, and `deb.archive.database.ssl-root-cert` settings, respectively.
 ```
 
 ### (Optional) Override default settings with `snap set`
 
 Quickstart installations use the default configurations and generally don't require additional setup. Skip this section unless you've customized your database configuration.
 
-For Manual installations, if your PostgreSQL server is **not** at the default location (`localhost:5432`), or you need to override any other defaults, use `snap set` to configure the snap directly. 
+For Manual installations, if your PostgreSQL server is **not** at the default location (`localhost:5432`), or you need to override any other defaults, use `snap set` to configure the snap directly.
 
 The available settings and their defaults are:
 
 | Setting | Snap key | Default |
-|---|---|---|
+| --- | --- | --- |
 | Gateway (HTTP) port | `deb.archive.server.gateway-port` | `8100` |
 | Server host | `deb.archive.server.host` | `localhost` |
 | Database driver | `deb.archive.database.driver` | `pgx` |
 | Database name | `deb.archive.database.name` | *(empty, should be set manually)* |
 | Database host | `deb.archive.database.host` | *(empty, read from service.conf)* |
 | Database port | `deb.archive.database.port` | `5432` |
-| Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
-| Database password | `deb.archive.database.password` | *(empty, read from service.conf)* |
+| Database user | `deb.archive.database.user` | *(set in previous step)* |
+| Database password | `deb.archive.database.password` | *(set in previous step)* |
 | Database SSL mode | `deb.archive.database.ssl` | `disable` (can be any of the [PostgreSQL SSL modes](https://www.postgresql.org/docs/current/libpq-ssl.html)) |
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
@@ -135,6 +154,95 @@ The directory must exist and be writable by the snap. After the setting is appli
 
 For example, if the published root is `/srv/published-repos` and a publication target has the path `myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`.
 
+Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. The example configurations for Apache and Nginx below illustrate how you can achieve this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
+
+If the published repositories should not be publicly accessible, restrict access at the web server and/or network layer (e.g. firewall rules, IP allowlists, or HTTP authentication).
+### Apache
+
+If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
+
+Install the file below as `/etc/apache2/sites-available/filesystem-repo.conf` and change the following values:
+
+- `@hostname@`: The fully qualified domain name for your server.
+- `@publication_target_file_path@`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
+
+```apache
+<VirtualHost *:8000>
+    ServerName @hostname@
+
+    DocumentRoot @publication_target_file_path@
+
+    <Directory @publication_target_file_path@>
+        Options +Indexes
+
+        # Optional: Makes the directory listings look a bit cleaner
+        IndexOptions FancyIndexing NameWidth=* FoldersFirst
+        
+        Require all granted
+    </Directory>
+
+    # Optional: Logging configuration for easier troubleshooting
+    ErrorLog /var/log/apache2/repo_error.log
+    CustomLog /var/log/apache2/repo_access.log combined
+</VirtualHost>
+```
+
+Then enable it:
+
+```bash
+sudo a2ensite filesystem-repo.conf
+```
+
+And restart Apache:
+
+```bash
+sudo systemctl restart apache2
+```
+
+### Nginx
+
+Create `/etc/nginx/sites-available/filesystem-repo.conf` with the following contents, then replace:
+
+- `<YOUR_FQDN>`: The fully qualified domain name for your server.
+- `<PUBLICATION_TARGET_FILE_PATH>`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
+
+```nginx
+server {
+    listen 8000;
+    listen [::]:8000;
+
+    server_name <YOUR_FQDN>;
+
+    root <PUBLICATION_TARGET_FILE_PATH>;
+
+    location / {
+        autoindex on;
+        
+        # Optional: Makes the directory listings look a bit cleaner
+        autoindex_exact_size off;
+        autoindex_localtime on;
+
+        try_files $uri $uri/ =404;
+    }
+
+    # Optional: Logging configuration for easier troubleshooting
+    access_log /var/log/nginx/repo_access.log;
+    error_log /var/log/nginx/repo_error.log;
+}
+```
+
+Then enable it:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/filesystem-repo.conf /etc/nginx/sites-enabled/
+```
+
+And restart Nginx:
+
+```bash
+sudo systemctl restart nginx
+```
+
 ## Configure the reverse proxy
 
 You need to expose the Deb Archive service at `/debarchive` on your Landscape URL.
@@ -165,14 +273,14 @@ If your deployment uses HAProxy, add a routing rule and backend for the Deb Arch
 
 In the existing `frontend` section, add:
 
-```
+```text
     acl is_debarchive path_beg /debarchive
     use_backend debarchive if is_debarchive
 ```
 
 Add a new backend section:
 
-```
+```text
 backend debarchive
     http-request set-path %[path,regsub(^/debarchive,/)]
     server debarchive 127.0.0.1:8100 check
