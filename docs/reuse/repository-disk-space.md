@@ -12,4 +12,4 @@ Packages will be downloaded to `/var/lib/landscape/landscape-repository/standalo
 
 These estimates are only a subset, and it doesn't include arm and other architectures. Including these will use more disk space.
 
-Note that the [restricted component](https://help.ubuntu.com/community/Repositories#Restricted) is usually large, and it contains proprietary packages and drivers that aren't fully open-source (e.g., Nvidia graphics drivers). If you know you won't need these packages and drivers, you could significantly reduce the size of your mirrors by not mirroring the restricted component.
+Note that the [restricted component](https://ubuntu.com/project/docs/how-ubuntu-is-made/concepts/package-archive/) is usually large, and it contains proprietary packages and drivers that aren't fully open-source (e.g., Nvidia graphics drivers). If you know you won't need these packages and drivers, you could significantly reduce the size of your mirrors by not mirroring the restricted component.
