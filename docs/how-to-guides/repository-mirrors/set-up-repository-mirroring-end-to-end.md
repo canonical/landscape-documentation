@@ -13,7 +13,7 @@ myst:
 This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
 ```
 
-This guide demonstrates how to mirror part of the Ubuntu archive, publish it to object storage, and configure a client machine to install packages from the published repository.
+This guide demonstrates how to mirror part of the Ubuntu archive, publish it to object storage, and configure a client machine to install packages from the published repository. By the end of this guide, you'll have a repository mirror set up and a package on your client machine.
 
 It uses an opinionated setup with Amazon S3 as the publication target, but the steps generally apply to other object stores and configurations. For a broader set of repository management tasks, see {ref}`how-to-manage-repos-web-portal-2604`.
 
@@ -38,14 +38,14 @@ Before you start, make sure you have:
 - At least one **registered client machine** running Ubuntu.
 - An **S3-compatible object store** that you can write to, along with its region and a pair of access keys. This guide uses Amazon S3 as the example.
 - The object store must allow your **client machine to read objects**. In this guide, the client fetches packages directly from the storage URL without credentials, so public object read must be enabled.
-- A **GPG key pair** for signing the published repository.
 
 ## Disk space requirements
 
-```{include} /reuse/repository-disk-space.md
-```
+This guide uses the `main` component and `amd64` architecture in `noble-backports` to keep the example mirror small. Larger distributions with more components and architectures require more storage.
 
-## Create a publication target
+For disk space estimates, see {ref}`how-to-heading-disk-space-requirements-2604`.
+
+## Step 1: Create a publication target
 
 A publication target is the storage location where your mirrored repository is stored. Create it first so it's available when you publish.
 
@@ -62,7 +62,7 @@ A publication target is the storage location where your mirrored repository is s
 
 A publication target is defined independently of any repository, so you can reuse it for other publications.
 
-## Create and sync a mirror
+## Step 2: Create and sync a mirror
 
 A mirror is Landscape's copy of an upstream Ubuntu repository. After you create it, sync it to download the packages from upstream.
 
@@ -85,7 +85,17 @@ To sync the mirror:
 
 The sync downloads the upstream packages into Landscape so they're ready to publish. The time this takes depends on the size of the repository, from a few minutes for a small mirror to several hours for a large one. A single-component, single-architecture mirror such as `noble-backports main` for `amd64` is relatively small.
 
-## Publish the mirror
+## Step 3: Create a GPG key pair
+
+Create a GPG key pair to sign the published repository:
+
+```bash
+gpg --full-generate-key
+```
+
+Use this key pair in the next steps: paste the private key in the publication and the public key in the repository profile.
+
+## Step 4: Publish the mirror
 
 A publication connects your mirror to your publication target and writes the repository into your object store.
 
@@ -111,7 +121,7 @@ To publish the mirror:
 
 Landscape copies the packages and writes a complete APT repository into your object store, signed with your key. When the publish finishes, the repository is available for clients.
 
-## Create a repository profile and associate client machines
+## Step 5: Create a repository profile and associate client machines
 
 A {ref}`repository profile <reference-terms-repository-profile>` applies an APT source to the client machines you associate with it. The configuration is applied one time when a machine is associated with the profile.
 
@@ -133,7 +143,7 @@ A {ref}`repository profile <reference-terms-repository-profile>` applies an APT 
 
 Landscape creates activities to apply the new APT source to the associated client machines.
 
-## Install a package from your mirror
+## Step 6: Install a package from your mirror to the client machine
 
 On a client machine associated with the repository profile, refresh the package lists:
 
@@ -143,16 +153,16 @@ sudo apt update
 
 If `apt update` completes without any signature warnings, the client has verified your published repository against your signing key.
 
-To confirm your mirror is a source for a package it contains, check its policy, replacing `<package>` with a package that exists in your mirror:
+To confirm your mirror is a source for a package it contains, check its policy, replacing `<PACKAGE>` with a package that exists in your mirror:
 
 ```bash
-apt-cache policy <package>
+apt-cache policy <PACKAGE>
 ```
 
 Your object store's address is listed among the sources for the package. Install it to confirm:
 
 ```bash
-sudo apt install <package>
+sudo apt install <PACKAGE>
 ```
 
 ## See also
