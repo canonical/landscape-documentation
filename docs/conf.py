@@ -266,7 +266,7 @@ html_css_files = [
 
 html_js_files = [
     "bundle.js",
-    "overwrite_layout.js",
+    "overwrite_links.js",
  ]
 
 # Specifies a reST snippet to be appended to each .rst file
