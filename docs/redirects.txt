@@ -12,10 +12,7 @@
 # Example:
 # redirect/from/file/ redirect/to/file/
 
-# Tutorial
-
-getting-started-with-landscape tutorials/getting-started-with-landscape/
-tutorial/ tutorials/getting-started-with-landscape/
+getting-started-with-landscape tutorial/
 
 # How-to
 

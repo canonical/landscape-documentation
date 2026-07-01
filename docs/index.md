@@ -16,7 +16,7 @@ myst:
 
 self
 what-is-landscape
-tutorials/index
+Tutorial <tutorial.md>
 how-to-guides/index
 reference/index
 explanation/index
