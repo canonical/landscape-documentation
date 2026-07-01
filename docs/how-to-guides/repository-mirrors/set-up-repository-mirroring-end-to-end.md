@@ -13,11 +13,11 @@ myst:
 This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
 ```
 
-This guide walks through repository mirroring in Landscape from end to end: mirroring part of the Ubuntu archive, publishing it to object storage, and configuring a client machine to install packages from your published copy. It puts the individual repository management tasks in order and in the context of a complete workflow.
+This guide demonstrates how to mirror part of the Ubuntu archive, publish it to object storage, and configure a client machine to install packages from the published repository.
 
-It uses an opinionated setup with Amazon S3 as the publication target, but the steps generally apply to other configurations. For a broader set of repository management tasks, see {ref}`how-to-manage-repos-web-portal-2604`.
+It uses an opinionated setup with Amazon S3 as the publication target, but the steps generally apply to other object stores and configurations. For a broader set of repository management tasks, see {ref}`how-to-manage-repos-web-portal-2604`.
 
-The workflow uses these repository management:
+The workflow uses these repository management components:
 
 - A **mirror**: your copy of an upstream repository.
 - A **publication target**: where the copy is stored.
@@ -38,6 +38,7 @@ Before you start, make sure you have:
 - At least one **registered client machine** running Ubuntu.
 - An **S3-compatible object store** that you can write to, along with its region and a pair of access keys. This guide uses Amazon S3 as the example.
 - The object store must allow your **client machine to read objects**. In this guide, the client fetches packages directly from the storage URL without credentials, so public object read must be enabled.
+- A **GPG key pair** for signing the published repository.
 
 ## Disk space requirements
 
@@ -87,8 +88,6 @@ The sync downloads the upstream packages into Landscape so they're ready to publ
 ## Publish the mirror
 
 A publication connects your mirror to your publication target and writes the repository into your object store.
-
-First, generate a GPG key pair that Landscape uses to sign the published repository.
 
 To create the publication:
 
