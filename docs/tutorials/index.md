@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Hands-on tutorials for learning Landscape, from installing Landscape Server to mirroring and publishing your own repositories."
+    description: "Hands-on tutorials for learning Landscape, starting with installing Landscape Server and exploring the web portal."
 ---
 
 (tutorials-index)=
@@ -14,5 +14,4 @@ These hands-on tutorials guide you through learning Landscape step by step. Each
 :maxdepth: 1
 
 Getting started with Landscape <getting-started-with-landscape>
-Mirror and publish a repository <mirror-and-publish-a-repository>
 ```
