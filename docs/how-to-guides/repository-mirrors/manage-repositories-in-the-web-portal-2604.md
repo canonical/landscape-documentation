@@ -15,7 +15,7 @@ This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}
 
 The repository mirroring feature in Landscape lets you mirror Ubuntu and third-party repositories, create local repositories for personal packages, and publish repositories to different targets. This adds an extra layer of control over the software versions available to your client machines. If you're not familiar with repository mirroring in Landscape, read our explanation before continuing through this how-to guide: {ref}`explanation-repo-mirroring-2604`.
 
-This guide demonstrates how to mirror Ubuntu and other third-party debian repositories. For a complete, ordered walkthrough that publishes a mirror to object storage and installs a package from it on a client, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
+This guide demonstrates how to mirror Ubuntu and other third-party debian repositories. For a complete guide that publishes a mirror to object storage and installs a package from it on a client, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
 
 (how-to-heading-disk-space-requirements-2604)=
 ## Disk space requirements
