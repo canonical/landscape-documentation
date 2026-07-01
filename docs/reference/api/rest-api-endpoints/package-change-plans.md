@@ -410,14 +410,20 @@ Example response (200 OK):
 {
   "items": [
     {
-      "id": 1,
       "package_id": 101,
-      "computer_id": 5
+      "computer": {
+        "id": 5,
+        "name": "web-server-01"
+      },
+      "action": "install"
     },
     {
-      "id": 2,
       "package_id": 102,
-      "computer_id": 7
+      "computer": {
+        "id": 7,
+        "name": "db-server-01"
+      },
+      "action": "install"
     }
   ],
   "count": 2
@@ -427,9 +433,11 @@ Example response (200 OK):
 Response fields:
 
 - `items`: List of plan items.
-  - `id`: Sequential item ID within this response.
   - `package_id`: ID of the package targeted by this item.
-  - `computer_id`: ID of the computer targeted by this item.
+  - `computer`: The computer targeted by this item.
+    - `id`: ID of the computer.
+    - `name`: Name of the computer.
+  - `action`: The package operation for this item.
 - `count`: Total number of items returned.
 
 ## GET `/package-change-plans/<id>/summary`
