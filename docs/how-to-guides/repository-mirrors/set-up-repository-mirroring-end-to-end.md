@@ -93,6 +93,8 @@ Create a GPG key pair to sign the published repository:
 gpg --full-generate-key
 ```
 
+When prompted, do not set a passphrase on the key. Landscape needs direct access to the private key material for signing during publication.
+
 Use this key pair in the next steps: paste the private key in the publication and the public key in the repository profile.
 
 ## Step 4: Publish the mirror
