@@ -7,6 +7,10 @@ myst:
 (how-to-configure-rabbitmq)=
 # How to configure RabbitMQ for Jammy 22.04 (or later)
 
+```{note}
+Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x in its archives, so you must install RabbitMQ 3.x from a separate source when deploying Landscape on Ubuntu 26.04. Ubuntu 22.04 LTS (Jammy) and Ubuntu 24.04 LTS (Noble) both ship RabbitMQ 3.x and are not affected.
+```
+
 RabbitMQ is configured with a default timeout of 30 minutes in Jammy 22.04 or later. This timeout can cause issues when installing Landscape Server or syncing repository mirrors. Any tasks that run longer than 30 minutes without reporting any progress or updates are automatically flagged as failed. RabbitMQ then disconnects from the task due to this perceived failure, and the system assigns a "failed" status to the entire operation. The error message for this issue is `No transition: delivered=>delivered`.
 
 If you encounter this issue, try increasing or disabling the timeout and re-run your task. If you’re syncing a repository mirror, you may also need to delete a lock file for your task to re-run successfully.
