@@ -110,7 +110,7 @@ applications:
 
   landscape-server:
     charm: ch:landscape-server
-    channel: 26.04/beta
+    channel: 26.04/edge
     num_units: 3
     options:
       landscape_ppa: ppa:landscape/self-hosted-26.04
@@ -129,6 +129,13 @@ applications:
     channel: 1/stable
     num_units: 1
     constraints: arch=amd64
+  
+  landscape-debarchive:
+    channel: latest/edge
+    charm: ch:landscape-debarchive
+    num_units: 1
+    base: ubuntu@24.04
+    constraints: arch=amd64
 
 relations:
   - [landscape-server:inbound-amqp, rabbitmq-server]
@@ -144,6 +151,9 @@ relations:
   - [landscape-server:repository-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:hostagent-messenger-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:ubuntu-installer-attach-haproxy-route, haproxy:haproxy-route]
+  - [landscape-debarchive:landscape-server, landscape-server:debarchive]
+  - [landscape-debarchive:database, postgresql:database]
+  - [landscape-debarchive:debarchive-haproxy-route, haproxy:haproxy-route]
 ```
 
 ```{note}
@@ -170,8 +180,9 @@ Once everything is installed and settled, the `Status` for every application wil
 Model         Controller  Cloud/Region    Version  SLA          Timestamp
 landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
 
-App                       Version  Status  Scale  Charm                      Channel     Rev  Base
-haproxy                            active      1  haproxy                    2.8/edge     50  ubuntu@24.04
+App                       Version  Status  Scale  Charm                      Channel      Rev  Base
+haproxy                            active      1  haproxy                    2.8/edge      50  ubuntu@24.04
+landscape-debarchive      242      active      1  landscape-debarchive       latest/edge    2  ubuntu@24.04
 landscape-server          26.04    active      3  landscape-server           26.04/beta   150  ubuntu@24.04
 postgresql                16.4     active      3  postgresql                 16/stable    500  ubuntu@24.04
 rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge  200  ubuntu@22.04
