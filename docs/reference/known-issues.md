@@ -9,11 +9,50 @@ myst:
 
 ## RabbitMQ 4.0 and later not supported
 
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so version 4.0 and later are not supported.
+Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so version 4.0 and later are not compatible.
 
-Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x in its archives. If you are deploying Landscape Server on Ubuntu 26.04, install RabbitMQ 3.x from an external source such as the [official RabbitMQ repositories](https://www.rabbitmq.com/docs/install-debian). The Quickstart installation method is not supported on Ubuntu 26.04 for this reason.
+Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x in its archives, so the default `apt install rabbitmq-server` gives you an incompatible version. The Quickstart installation method is not supported on Ubuntu 26.04 for this reason. Ubuntu 22.04 LTS (Jammy) and Ubuntu 24.04 LTS (Noble) both ship RabbitMQ 3.x and are not affected.
 
-Ubuntu 22.04 LTS (Jammy) and Ubuntu 24.04 LTS (Noble) both ship RabbitMQ 3.x and are not affected.
+If you need to run Landscape on Ubuntu 26.04, you can install RabbitMQ 3.13.x from Team RabbitMQ's apt repositories. Their repositories don't include a resolute-specific entry, but the noble packages work on resolute. You also need to pin Erlang to 26.x, because apt will otherwise select Erlang 27.x which RabbitMQ 3.x doesn't support.
+
+```bash
+# Add Team RabbitMQ's signing key
+sudo apt-get install -y curl gnupg apt-transport-https
+curl -1sLf 'https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA' \
+  | sudo gpg --dearmor \
+  | sudo tee /usr/share/keyrings/com.rabbitmq.team.gpg > /dev/null
+
+# Add the noble-based Erlang and RabbitMQ repos
+sudo tee /etc/apt/sources.list.d/rabbitmq.list << 'EOF'
+deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-erlang/ubuntu/noble noble main
+deb [arch=amd64 signed-by=/usr/share/keyrings/com.rabbitmq.team.gpg] https://deb1.rabbitmq.com/rabbitmq-server/ubuntu/noble noble main
+EOF
+
+sudo apt-get update
+
+# Install Erlang 26.x explicitly (required by RabbitMQ 3.13.x)
+sudo apt-get install -y \
+  erlang-base=1:26.2.5.13-1 \
+  erlang-asn1=1:26.2.5.13-1 \
+  erlang-crypto=1:26.2.5.13-1 \
+  erlang-eldap=1:26.2.5.13-1 \
+  erlang-ftp=1:26.2.5.13-1 \
+  erlang-inets=1:26.2.5.13-1 \
+  erlang-mnesia=1:26.2.5.13-1 \
+  erlang-os-mon=1:26.2.5.13-1 \
+  erlang-parsetools=1:26.2.5.13-1 \
+  erlang-public-key=1:26.2.5.13-1 \
+  erlang-runtime-tools=1:26.2.5.13-1 \
+  erlang-snmp=1:26.2.5.13-1 \
+  erlang-ssl=1:26.2.5.13-1 \
+  erlang-syntax-tools=1:26.2.5.13-1 \
+  erlang-tftp=1:26.2.5.13-1 \
+  erlang-tools=1:26.2.5.13-1 \
+  erlang-xmerl=1:26.2.5.13-1
+
+# Install RabbitMQ 3.13.x
+sudo apt-get install -y rabbitmq-server=3.13.7-1
+```
 
 ## gRPC version
 
