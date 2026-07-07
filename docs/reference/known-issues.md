@@ -52,6 +52,11 @@ sudo apt-get install -y \
 
 # Install RabbitMQ 3.13.x
 sudo apt-get install -y rabbitmq-server=3.13.7-1
+
+# Hold Erlang and RabbitMQ to prevent apt upgrade from pulling in incompatible versions
+sudo apt-mark hold rabbitmq-server erlang-base erlang-asn1 erlang-crypto erlang-eldap \
+  erlang-ftp erlang-inets erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \
+  erlang-runtime-tools erlang-snmp erlang-ssl erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl
 ```
 
 ## gRPC version
