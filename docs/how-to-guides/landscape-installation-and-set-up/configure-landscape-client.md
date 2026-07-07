@@ -5,11 +5,11 @@ myst:
 ---
 
 (how-to-configure-landscape-client)=
-# How to configure Landscape Client
+# How to configure and register Landscape Client
 
 > See also: {ref}`how-to-install-landscape-client`
 
-This guide describes how to configure the Landscape Client Debian package in multiple ways.
+This guide describes how to configure and register the Landscape Client Debian package in multiple ways. Registering the client with your Landscape server is part of the configuration process, whether you use `landscape-config` or the `client.conf` file.
 
 For Ubuntu Pro subscriptions, you'll need to attach your Pro token before or after configuration to use Ubuntu Pro services. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 
@@ -46,6 +46,8 @@ The Landscape Client configuration file is located in `/etc/landscape/client.con
 ```bash
 sudo systemctl restart landscape-client
 ```
+
+Editing `client.conf` sets the configuration values, but it doesn't register the machine on its own. To register the machine, use `landscape-config`.
 
 ### SSL certificates
 

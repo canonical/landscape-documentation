@@ -174,6 +174,8 @@ The snap is generally used for Ubuntu Core devices. You can install the Landscap
 (howto-heading-register-client-self-signed-certificate)=
 ## Register a client machine on a self-hosted server with a self-signed certificate
 
+> See also: {ref}`how-to-configure-landscape-client`
+
 If your self-hosted Landscape server uses a self-signed certificate, you'll need to download the server certificate to the client before registration. Replace `{LANDSCAPE_FQDN}` with the FQDN or IP address of your server.
 
 Download the server certificate:
