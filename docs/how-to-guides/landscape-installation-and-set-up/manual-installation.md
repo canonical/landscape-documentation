@@ -171,7 +171,7 @@ sudo apt-get install landscape-server rabbitmq-server apache2
 ```
 
 ```{note}
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x, so you must install RabbitMQ 3.x separately before running the command above on Ubuntu 26.04. See {ref}`reference-known-issues` for installation steps.
+Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x — see {ref}`reference-known-issues` for details.
 ```
 
 ### (If needed) Install the (legacy) license file

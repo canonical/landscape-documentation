@@ -9,7 +9,7 @@ myst:
 
 The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments. 
 
-Quickstart installations are not supported on Ubuntu 26.04 LTS (Resolute). Ubuntu 26.04 ships RabbitMQ 4.x, which dropped support for the AMQP 0-8 protocol that Landscape depends on. For a Quickstart installation, use Ubuntu 24.04 LTS (Noble) or Ubuntu 22.04 LTS (Jammy), which both ship RabbitMQ 3.x. If you need to run Landscape on Ubuntu 26.04, use a {ref}`manual installation <how-to-manual-installation>` and install RabbitMQ 3.13.x separately. See {ref}`reference-known-issues` for steps.
+Quickstart installations are not supported on Ubuntu 26.04 LTS (Resolute). Ubuntu 26.04 ships RabbitMQ 4.x, which dropped support for the AMQP 0-8 protocol that Landscape depends on. Use Ubuntu 24.04 LTS (Noble) or Ubuntu 22.04 LTS (Jammy) instead.
 
 If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
