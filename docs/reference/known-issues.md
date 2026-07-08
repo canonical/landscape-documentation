@@ -7,12 +7,6 @@ myst:
 (reference-known-issues)=
 # Known issues
 
-## RabbitMQ 4.0 and later not supported
-
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so version 4.0 and later are not compatible.
-
-Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x in its archives. Running RabbitMQ on Ubuntu 26.04 is not supported, which means the Quickstart installation (where all components run on one machine) is not supported on Ubuntu 26.04. For a manual installation on Ubuntu 26.04, RabbitMQ must be hosted on a separate machine running Ubuntu 22.04 LTS (Jammy) or Ubuntu 24.04 LTS (Noble).
-
 ## gRPC version
 
 Landscape installs its own version of `python3-protobuf` and `python3-grpcio` from its PPA, which are incompatible with the versions currently available in different releases of Ubuntu. Applications that require gRPC connectivity cannot currently coexist with Landscape as the gRPC stubs would not be compatible with the gRPC packages installed by Landscape.
