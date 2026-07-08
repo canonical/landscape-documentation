@@ -592,6 +592,31 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /v1beta1/operations:batchGet:
+        post:
+            tags:
+                - OperationService
+            description: BatchGetOperations retrieves a list of operations based on their name.
+            operationId: OperationService_BatchGetOperations
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BatchGetOperationsRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BatchGetOperationsResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /v1beta1/publicationTargets:
         get:
             tags:
@@ -1042,6 +1067,29 @@ components:
                         $ref: '#/components/schemas/Mirror'
                     description: Mirrors requested.
             description: BatchGetMirrorsResponse is the response message for BatchGetMirrors
+        BatchGetOperationsRequest:
+            required:
+                - names
+            type: object
+            properties:
+                names:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        The names of the operations to retrieve.
+                         A maximum of 100 operations can be retrieved in a batch.
+                         Format: operations/{operation}
+            description: BatchGetOperationsRequest is the request message for BatchGetOperations.
+        BatchGetOperationsResponse:
+            type: object
+            properties:
+                operations:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Operation'
+                    description: Operations requested.
+            description: BatchGetOperationsResponse is the response message for BatchGetOperations.
         BatchGetPublicationTargetsRequest:
             required:
                 - names
@@ -1248,6 +1296,11 @@ components:
                     readOnly: true
                     type: string
                     description: The last associated LRO with the local
+                lastImportTime:
+                    readOnly: true
+                    type: string
+                    description: The timestamp of the last successful package import.
+                    format: date-time
             description: Local represents a local repository configuration.
         Mirror:
             required:
@@ -1279,7 +1332,16 @@ components:
                     description: The human-readable name used to reference this mirror.
                 archiveRoot:
                     type: string
-                    description: Root of the debian archive (URL).
+                    description: |-
+                        Root of the debian archive (URL).
+                         When creating mirrors for repositories that require authentication (such as ESM repos), you
+                         can include authentication tokens directly in the URL using the HTTP Basic Authentication
+                         format, e.g.:
+
+                         https://bearer:<my-esm-token>@esm.ubuntu.com/infra/ubuntu/
+
+                         Credentials in the URL are securely handled and scrubbed from API responses for security
+                         purposes.
                 distribution:
                     type: string
                     description: The name of the distribution (subdirectory of `dists`).
@@ -1327,6 +1389,16 @@ components:
                     readOnly: true
                     type: string
                     description: The last associated LRO with the mirror
+                mirrorType:
+                    enum:
+                        - MIRROR_TYPE_UNSPECIFIED
+                        - UBUNTU_ARCHIVE
+                        - UBUNTU_SNAPSHOTS
+                        - UBUNTU_PRO
+                        - THIRD_PARTY
+                    type: string
+                    description: The type of upstream repository being mirrored.
+                    format: enum
             description: Mirror represents a repository mirror configuration and status.
         Operation:
             type: object

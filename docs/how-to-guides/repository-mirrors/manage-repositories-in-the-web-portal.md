@@ -23,7 +23,9 @@ This guide demonstrates how to mirror an Ubuntu repository, but most of the info
 ## Disk space requirements
 
 ```{include} /reuse/repository-disk-space.md
+
 ```
+Packages will be downloaded to `/var/lib/landscape/landscape-repository/standalone/`.
 
 (how-to-heading-create-import-gpg-key)=
 ## Create and import the GPG key
