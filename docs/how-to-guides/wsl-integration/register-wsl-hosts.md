@@ -21,7 +21,7 @@ This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts
 You must be running Windows 11 to use Ubuntu Pro for WSL.
 ```
 
-To use the WSL-Landscape integration, you must an [Ubuntu Pro account](https://ubuntu.com/pro) and the following applications from the Microsoft Store:
+To use the WSL-Landscape integration, you must have an [Ubuntu Pro account](https://ubuntu.com/pro) and the following applications from the Microsoft Store:
 
 - [Windows Subsystem for Linux](https://apps.microsoft.com/detail/9P9TQF7MRM4R)
 - An Ubuntu application, such as [Ubuntu 24.04 LTS](https://apps.microsoft.com/detail/9nz3klhxdjp5?)
