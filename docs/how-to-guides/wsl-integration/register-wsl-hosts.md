@@ -10,7 +10,7 @@ myst:
 > See also: [Ubuntu on WSL documentation](https://documentation.ubuntu.com/wsl/latest/)
 
 ```{note}
-If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
+If this is the first time you've installed Landscape, continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
 ```
 
 This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts (Windows machines) to Landscape.
