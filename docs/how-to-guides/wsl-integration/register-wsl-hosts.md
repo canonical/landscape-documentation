@@ -136,7 +136,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
     url = landscape-server.example.com:6554
     ```
 
-- **Check that the `wsl_management` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**
+- **Check that the `wsl_management` in the `[features]` section of your `LandscapeConfig` key is set to `true`**
 
     ```ini
     [features]
