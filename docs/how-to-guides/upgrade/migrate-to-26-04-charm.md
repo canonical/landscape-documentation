@@ -175,6 +175,12 @@ Refresh the Landscape Server charm to the 26.04 beta version:
 juju refresh landscape-server --channel 26.04/beta
 ```
 
+```{note}
+`juju refresh` updates the charm revision, but it does not upgrade the installed `landscape-server` deb packages on existing units.
+
+The landscape-server charm only adds the PPA source during installation, so you will need to manually update this PPA on each of the landscape-server units.
+```
+
 Wait for the refresh to complete and the services to restart:
 
 ```bash
