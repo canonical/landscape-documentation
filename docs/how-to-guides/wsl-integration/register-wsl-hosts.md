@@ -103,7 +103,7 @@ To finish registering your WSL host to Landscape:
 1. Log into your Landscape web portal and refresh the page.
 1. Either:
 
-    - Accept the instance from the *Pending* tile on the home page
+    - Accept the instance from the *Pending* tile on the home page, or
     - Go to **Instances** > review pending instances > accept the Windows host machine
 
 Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu instances, see {ref}`how-to-manage-wsl-instances`.
