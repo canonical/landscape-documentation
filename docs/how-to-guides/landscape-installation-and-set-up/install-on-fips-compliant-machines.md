@@ -15,7 +15,7 @@ Use the {ref}`Quickstart <how-to-quickstart-installation>` or {ref}`Manual <how-
 
 - **Use Ubuntu 22.04 LTS**
 - **Run `pro enable fips-updates`, then reboot**
-- **Install Landscape (24.04 LTS or 26.04 LTS)**
+- **Install Landscape Server (24.04 LTS or 26.04 LTS)**
 - **Install packages with `apt` instead of `snap`**
   - Packages can only be installed with snap if they are installed on top of a FIPS-compliant core (e.g. `core22` from the `fips-updates/stable` channel)
 - **Use external authentication instead of username/password**
