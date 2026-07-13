@@ -161,7 +161,7 @@ sudo chmod 444 /etc/crl.crl
 
 ### Certificates for PostgreSQL
 
-For an Ubuntu 22.04 database server, you'll need three certificates and their corresponding keys:
+For PostgreSQL, you'll need three certificates and their corresponding keys:
 
 - Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
 
@@ -233,7 +233,7 @@ Use the following steps to harden the PostgreSQL service.
 
 PostgreSQL must be configured to allow the Landscape application server to access the database server. Landscape uses several users for access, so all users must be added.
 
-Edit the file `/etc/postgresql/<VERSION>/main/pg_hba.conf` (replace `<VERSION>` with your PostgreSQL version, i.e., `/etc/postgresql/14/main/pg_hba.conf`) and add:
+Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 
 ```ini
 hostssl all landscape,landscape_maintenance,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
@@ -245,7 +245,7 @@ You should also remove the lines that refer to `scram-sha-256` or other password
 
 ### Configure database settings
 
-Edit `/etc/postgresql/<VERSION>/main/postgresql.conf` (replace `<VERSION>` with your PostgreSQL version, i.e., `/etc/postgresql/14/main/pg_hba.conf`) to apply the following settings:
+Edit `/etc/postgresql/14/main/postgresql.conf` to apply the following settings:
 
 1. Limit the allowed connections.
 
@@ -336,14 +336,13 @@ Edit `/etc/postgresql/<VERSION>/main/postgresql.conf` (replace `<VERSION>` with 
 
 ### Set permissions for PostgreSQL files
 
-Set secure permissions for the certificates and PostgreSQL configuration files. `<VERSION>` should be `14` assuming Ubuntu 22.04 LTS Jammy Jellyfish.
+Set secure permissions for the certificates and PostgreSQL configuration files.
 
 ```bash
-export VERSION=<VERSION>
-sudo chmod 600 /etc/postgresql/$VERSION/main/postgresql.conf
-sudo chmod 600 /etc/postgresql/$VERSION/main/pg_hba.conf
-sudo chown postgres:postgres /etc/postgresql/$VERSION/main/postgresql.conf
-sudo chown postgres:postgres /etc/postgresql/$VERSION/main/pg_hba.conf
+sudo chmod 600 /etc/postgresql/14/main/postgresql.conf
+sudo chmod 600 /etc/postgresql/14/main/pg_hba.conf
+sudo chown postgres:postgres /etc/postgresql/14/main/postgresql.conf
+sudo chown postgres:postgres /etc/postgresql/14/main/pg_hba.conf
 ```
 
 ### Configure `rsyslog` for PostgreSQL
@@ -454,8 +453,8 @@ sudo systemctl restart postgresql
 
 Click on the links to download the following sample files. Remember to replace any placeholder values with the correct ones for your configuration.
 
-- [`/etc/postgresql/<VERSION>/main/postgresql.conf`](/assets/disa-stig/postgresql.conf)
-- [`/etc/postgresql/<VERSION>/main/pg_hba.conf`](/assets/disa-stig/pg_hba.conf)
+- [`/etc/postgresql/14/main/postgresql.conf`](/assets/disa-stig/postgresql.conf)
+- [`/etc/postgresql/14/main/pg_hba.conf`](/assets/disa-stig/pg_hba.conf)
 - [`/etc/rsyslog.d/10-postgresql.conf`](/assets/disa-stig/10-postgresql.conf)
 
 ## Configure PostgreSQL for Landscape
