@@ -1515,6 +1515,18 @@ sudo lsctl restart
 
 The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
 
+Since this is a FIPS-compliant deployment, install or refresh the `core22` base snap from the `fips-updates/stable` channel before installing the `landscape-outbox` snap:
+
+```bash
+snap install core22 --channel=fips-updates/stable
+```
+
+If `core22` is already installed, refresh it to the FIPS channel instead:
+
+```bash
+snap refresh core22 --channel=fips-updates/stable
+```
+
 Install the `landscape-outbox` snap if not already installed:
 
 ```bash
