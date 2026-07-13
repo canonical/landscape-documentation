@@ -236,7 +236,7 @@ PostgreSQL must be configured to allow the Landscape application server to acces
 Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 
 ```ini
-hostssl all landscape,landscape_maintenance,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
+hostssl all landscape,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
 ```
 
 Replace `<LANDSCAPE_IP_ADDRESS>` with the IP address of the server hosting Landscape services. You may also specify a network address using CIDR notation if needed.
@@ -509,12 +509,6 @@ To prevent denial-of-service due to resource exhaustion, limit the number of con
 ```bash
 sudo -u postgres psql -c "ALTER USER landscape CONNECTION LIMIT 100"
 sudo -u postgres psql -c "ALTER USER landscape_superuser CONNECTION LIMIT 8"
-```
-
-If you have the PostgreSQL `set_user` extension enabled, additionally set the limit for the `landscape_maintenance` user.
-
-```bash
-sudo -u postgres psql -c "ALTER USER landscape_maintenance CONNECTION LIMIT 8"
 ```
 
 ### Require reauthentication for privilege escalation
@@ -1023,15 +1017,6 @@ export LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION=false
 sudo sh -c "echo 'LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION=false' >> /etc/environment"
 ```
 
-If you're using the `set_user` extension, also set the following environment variables:
-
-```bash
-export LANDSCAPE_SCHEMA__STORE_USER=landscape_maintenance
-sudo sh -c "echo 'LANDSCAPE_SCHEMA__STORE_USER=landscape_maintenance' >> /etc/environment"
-export LANDSCAPE_SCHEMA__STORE_SUPERUSER=landscape_superuser
-sudo sh -c "echo 'LANDSCAPE_SCHEMA__STORE_SUPERUSER=landscape_superuser' >> /etc/environment"
-```
-
 ### Configure `service.conf`
 
 Modify settings in the `/etc/landscape/service.conf` file to configure Landscape to connect to the database and message queuing services. For more details about the databases that Landscape uses, see {ref}`reference-database`.
@@ -1124,7 +1109,7 @@ threads = 2
 
 [schema]
 # note that you must have at least two certificates for db connections:
-# one for landscape_superuser (or landscape_maintenance)
+# one for landscape_superuser
 # and one for the regular landscape user
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
@@ -1132,9 +1117,6 @@ sslmode = verify-full
 sslrootcert = /etc/ca-certificates.crt
 stores = main account-1 resource-1 package session
 store_user = landscape_superuser
-# if you have enabled the set_user extension, comment the line above and uncomment the lines below:
-# store_user = landscape_maintenance
-# store_superuser = landscape_superuser
 threads = 1
 
 [scripts]
@@ -1253,7 +1235,7 @@ threads = 2
 
 [schema]
 # note that you must have at least two certificates for db connections:
-# one for landscape_superuser (or landscape_maintenance)
+# one for landscape_superuser
 # and one for the regular landscape user
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
@@ -1261,9 +1243,6 @@ sslmode = verify-full
 sslrootcert = /etc/ca-certificates.crt
 stores = main account-1 resource-1 package session knowledge
 store_user = landscape_superuser
-# if you have enabled the set_user extension, comment the line above and uncomment the lines below:
-# store_user = landscape_maintenance
-# store_superuser = landscape_superuser
 threads = 1
 
 [scripts]
