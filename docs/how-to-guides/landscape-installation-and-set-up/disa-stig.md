@@ -18,7 +18,7 @@ This guide only applies to Landscape Server versions 25.10 and later. We recomme
 
 Ensure you meet the following requirements before installing Landscape:
 
-- Ubuntu Server install media for the version of Ubuntu (Jammy 22.04)
+- Ubuntu Server install media for a FIPS certified version of Ubuntu (currently only Ubuntu 22.04 LTS)
 - Ubuntu Pro subscription
 - Server X509 certificates and keys, signed by a DoD Certificate Authority, and issued for the FQDN hostname of the application server, database server, and message queuing server.
 - DISA STIG compliant Ubuntu system with the FIPS OpenSSL package installed and with FIPS enabled for all Landscape nodes.
