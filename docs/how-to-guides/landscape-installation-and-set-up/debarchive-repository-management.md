@@ -12,7 +12,7 @@ This guide walks you through installing and configuring the `landscape-debarchiv
 Deb Archive was introduced in **Landscape 26.04 LTS**.
 
 ```{note}
-This guide covers snap-based Manual and Quickstart installations. If you deployed Landscape with Juju, don't follow the steps below. Instead, see {ref}`how-to-juju-ha-installation`, where the deployment bundle already includes the `landscape-debarchive` charm along with the relations it requires.
+This guide covers snap-based Manual and Quickstart installations. If you deployed Landscape with Juju, see {ref}`how-to-juju-ha-installation` instead.
 ```
 
 ## Prerequisites
