@@ -10,11 +10,7 @@ myst:
 The Ubuntu installer (26.04 and later) can use Landscape to serve an autoinstall file. Your Landscape account must use OIDC authentication.
 
 ```{note}
-This feature is available from Landscape server `25.10` onwards.
-```
-
-```{note}
-This feature is available only on self-hosted deployments.
+This feature is available from Landscape server `25.10` onwards, and only on self-hosted deployments. It is not intended for {ref}`Quickstart <how-to-quickstart-installation>` deployments.
 ```
 
 ## Background information
@@ -94,9 +90,11 @@ This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS 
 - The installer connects using HTTPS.
 - The `landscape-ubuntu-installer-attach` service listens on port 53354 by default.
 
-#### Example configuration (HAProxy)
+#### Example configuration
 
-For example, if you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
+**HAProxy**
+
+If you're using HAProxy, add the following to `/etc/haproxy/haproxy.cfg`:
 
 ```text
 frontend haproxy-0-grpc-ubuntu-installer
@@ -106,6 +104,46 @@ frontend haproxy-0-grpc-ubuntu-installer
 backend landscape-ubuntu-installer-attach-messenger
     mode http
     server landscape-ubuntu-installer-attach-messenger-0-0 localhost:53354 proto h2
+```
+
+**Apache**
+
+If you're using Apache, add the following to your Apache configuration (commonly located in `/etc/apache2/sites-available/{hostname}.conf`):
+
+```apache
+Listen 50051
+
+<VirtualHost *:50051>
+  ServerName ${hostname}
+  ServerAdmin webmaster@${hostname}
+
+  Protocols h2 http/1.1
+
+  ErrorLog /var/log/apache2/landscape_error.log
+  CustomLog /var/log/apache2/landscape_access.log combined
+
+  SSLEngine On
+  SSLCertificateFile ${ssl_certificate_crt}
+  SSLCertificateKeyFile ${ssl_certificate_key}
+  # Disable to avoid POODLE attack
+  SSLProtocol all -SSLv3 -SSLv2 -TLSv1
+  SSLHonorCipherOrder On
+  SSLCompression Off
+  # If you have either an SSLCertificateChainFile or, a self-signed CA signed certificate
+  # uncomment the line below.
+  # Note: Some versions of Apache will not accept the SSLCertificateChainFile
+  # directive. Try using SSLCACertificateFile instead.
+  # SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt
+
+  ProxyPass / h2c://localhost:53354/
+  ProxyPassReverse / http://localhost:53354/
+</VirtualHost>
+```
+
+Then enable `http2` (for HTTP/2 from the client) and `proxy_http2` (for HTTP/2 to the backend):
+
+```bash
+sudo a2enmod http2 proxy_http2
 ```
 
 ### (Optional) Configure the X-FQDN header
