@@ -59,11 +59,34 @@ Keep in mind that management features will be unavailable in Monitor-only mode.
 
 ## Secure your GPG keys
 
+`````{tab-set}
+
+````{tab-item} Landscape Server 25.10 and earlier
+
 If you use Landscape's repository management features, you'll need to [upload a GPG key to Landscape Server](/how-to-guides/repository-mirrors/manage-repositories-in-the-web-portal.md#create-and-import-the-gpg-key). Do not reuse an existing key—you should generate a new key for this purpose.
 
 This GPG private key is used to sign repository package indices. The public key is used by registered clients to validate these signatures. Because the use of the private key is automated, it's required that the key is **not** secured with a passphrase.
 
 If for any reason you suspect that the key has been compromised, create a new key, upload it to Landscape, and edit your repository mirrors to use the new key. Landscape will re-sign your repository using the new key. You should then delete the previously-used key.
+
+````
+
+````{tab-item} Landscape Server 26.04 LTS and later
+
+In Landscape Server 26.04 LTS and later, you don't upload a single GPG key to Landscape Server. Instead, you provide GPG keys directly on the mirrors and publications that use them:
+
+- **Verification keys** are attached to a {ref}`mirror <how-to-heading-create-new-mirror>`. For a third-party repository that doesn't preserve the upstream signing key, provide the ASCII-armored public key in the mirror's **Verification GPG key** field. Landscape uses this key to validate the upstream repository's signature when it syncs the mirror.
+- **Signing keys** are attached to a {ref}`publication <how-to-heading-create-new-publication>`. To sign (or resign) the release files of a published repository, provide the ASCII-armored GPG private key in the publication's **Signing GPG key** field. Registered clients use the corresponding public key to validate these signatures.
+
+Keep the following in mind when managing these keys:
+
+- Do not reuse an existing key for signing—generate a new key for this purpose.
+- Because signing is automated, the signing private key must **not** be secured with a passphrase.
+- If you suspect a signing key has been compromised, generate a new key, update the affected publications to use it, and republish. Distribute the new verification (public) key to any registered clients that don't already have it in their keyring, then delete the compromised key.
+
+````
+
+`````
 
 ## Harden Ubuntu
 

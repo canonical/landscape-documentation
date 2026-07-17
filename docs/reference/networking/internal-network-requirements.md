@@ -34,7 +34,8 @@ These are the current port ranges for each internal component that accepts traff
 
 - 8070-8079: {ref}`explanation-server-architecture-appserver`
 - 8080-8089: {ref}`explanation-server-architecture-pingserver`
-- 8090-9079: {ref}`explanation-server-architecture-message-system`
+- 8090-8099: {ref}`explanation-server-architecture-message-system`
+- 8100: {ref}`explanation-server-architecture-deb-archive`
 - 9080-9098: {ref}`explanation-server-architecture-api`
 - 9099: {ref}`explanation-server-architecture-package-search`
 - 9100: {ref}`explanation-server-architecture-package-upload`
