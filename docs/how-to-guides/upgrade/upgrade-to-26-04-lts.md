@@ -13,7 +13,11 @@ You must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22
 
 Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
 
-If you use repository management in your Landscape deployment, we recommend waiting to upgrade to 26.04 LTS until the 26.04.1 point release (expected August 2026). A migration guide for bringing over repository mirrors from 24.04 LTS to 26.04 LTS will be published before the point release.
+## If you use repository management
+
+If you use repository management in your Landscape deployment, we recommend waiting to upgrade to 26.04 LTS until the 26.04.1 point release (expected August 2026).
+
+If you still want to upgrade, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS. See the {ref}`dedicated guide <how-to-migrate-repository-mirrors-to-debarchive>` for instructions on how to do this.
 
 ## Begin your upgrade
 

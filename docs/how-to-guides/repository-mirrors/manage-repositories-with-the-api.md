@@ -62,6 +62,10 @@ gpg --gen-key
 gpg --full-gen-key
 ```
 
+```{note}
+**FIPS users:** If your Landscape server is Ubuntu 24.04 or newer with FIPS enabled, you must use the `--full-gen-key` option, select RSA for the key type, and use 4096 bits. The default key type for the `gpg` command has been updated to ed25519, but this isn't currently approved for FIPS. Only RSA keys are approved for FIPS.
+```
+
 You will be prompted twice for:
 
 ```text
