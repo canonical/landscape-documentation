@@ -7,7 +7,7 @@ myst:
 (how-to-quickstart-installation)=
 # How to install Landscape Server with quickstart mode
 
-The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments. 
+The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments.
 
 Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
 
@@ -99,6 +99,60 @@ To install `landscape-server-quickstart`:
 
    - This installation takes approximately five minutes.
 
+### (Landscape 26.04 only) Install the task handler snap
+
+Install the `landscape-task-handler` snap and grant it access to the `/etc/landscape` directory.
+
+```bash
+sudo snap install landscape-task-handler
+sudo snap connect landscape-task-handler:etc-landscape
+```
+
+Create the task handler's own database and grant the `landscape` user access to it.
+
+```bash
+sudo -u postgres createdb landscape-standalone-task-handler
+sudo -u postgres psql landscape-standalone-task-handler -c \
+  "GRANT CONNECT ON DATABASE \"landscape-standalone-task-handler\" TO landscape;"
+sudo -u postgres psql landscape-standalone-task-handler -c \
+  "GRANT CREATE ON SCHEMA public TO landscape;"
+```
+
+Configure the snap to connect to the task handler database. Replace `<DB-PASSWORD>` with the `landscape` database user's password, which you can find (base64-encoded) in the `password` key of the `[stores]` section of `/etc/landscape/service.conf`.
+
+```bash
+sudo snap set landscape-task-handler \
+  landscape.database.task-handler.host=localhost \
+  landscape.database.task-handler.port=5432 \
+  landscape.database.task-handler.name=landscape-standalone-task-handler \
+  landscape.database.task-handler.user=landscape \
+  landscape.database.task-handler.password=<DB-PASSWORD> \
+  landscape.database.task-handler.ssl=disable \
+  landscape.task-handler.server.grpc-port=50051 \
+  landscape.task-handler.server.host=localhost
+```
+
+`landscape-task-handler` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
+
+```bash
+sudo snap services landscape-task-handler
+```
+
+The output should show the `task-handler.server` and `task-handler.worker` services as **active**:
+
+```text
+Service                              Startup  Current   Notes
+landscape-task-handler.cert-renewer  enabled  inactive  timer-activated
+landscape-task-handler.cleanup       enabled  inactive  timer-activated
+landscape-task-handler.server        enabled  active    -
+landscape-task-handler.worker        enabled  active    -
+```
+
+To view task handler logs, run:
+
+```bash
+sudo snap logs landscape-task-handler -n 50
+```
 
 ### (Landscape 26.04 only) Install the outbox snap
 
@@ -106,6 +160,8 @@ Install the `landscape-outbox` snap on the same machine as your Landscape Server
 
 ```bash
 sudo snap install landscape-outbox
+sudo snap connect landscape-outbox:etc-landscape
+sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
 ```
 
 `landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.

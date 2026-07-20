@@ -62,6 +62,7 @@ CIS
 CISOs
 CLA
 CLI's
+CNs
 Cognito
 conf
 config
@@ -93,6 +94,7 @@ decodeable
 decrypt
 deduplication
 deprivileged
+dequeue
 deterministically
 DirectoryAPI
 Diátaxis
@@ -314,6 +316,7 @@ RSS
 rsyslog
 rsyslogd
 SaaS
+sandboxed
 Sanitization
 sanitization
 scalable

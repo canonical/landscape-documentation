@@ -137,6 +137,13 @@ applications:
     base: ubuntu@24.04
     constraints: arch=amd64
 
+  landscape-task-handler-operator:
+    channel: latest/edge
+    charm: ch:landscape-task-handler-operator
+    num_units: 1
+    base: ubuntu@24.04
+    constraints: arch=amd64
+
 relations:
   - [landscape-server:inbound-amqp, rabbitmq-server]
   - [landscape-server:outbound-amqp, rabbitmq-server]
@@ -154,6 +161,18 @@ relations:
   - [landscape-debarchive:landscape-server, landscape-server:debarchive]
   - [landscape-debarchive:database, postgresql:database]
   - [landscape-debarchive:debarchive-haproxy-route, haproxy:haproxy-route]
+  - [landscape-task-handler-operator:<TASK-HANDLER-SERVER-ENDPOINT>, landscape-server:<TASK-HANDLER-CLIENT-ENDPOINT>]
+  - [landscape-task-handler-operator:task-db, postgresql:database]
+  - [landscape-task-handler-operator:certificates, self-signed-certificates:certificates]
+  - [landscape-task-handler-operator:grpc-haproxy-route, haproxy:haproxy-route]
+```
+
+```{note}
+`<TASK-HANDLER-SERVER-ENDPOINT>` and `<TASK-HANDLER-CLIENT-ENDPOINT>` are placeholders. Replace them with the actual relation endpoint names once the `landscape-server` charm publishes its task-handler integration endpoint. Until this relation is in place, the task-handler unit will report `Waiting for relation(s): landscape-server`.
+```
+
+```{note}
+`landscape-task-handler-operator` scales independently of `landscape-server`. Set its `num_units` based on your expected task handler load rather than tying it to the number of `landscape-server` units.
 ```
 
 ```{note}
@@ -180,13 +199,14 @@ Once everything is installed and settled, the `Status` for every application wil
 Model         Controller  Cloud/Region    Version  SLA          Timestamp
 landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
 
-App                       Version  Status  Scale  Charm                      Channel      Rev  Base
-haproxy                            active      1  haproxy                    2.8/edge      50  ubuntu@24.04
-landscape-debarchive      242      active      1  landscape-debarchive       latest/edge    2  ubuntu@24.04
-landscape-server          26.04    active      3  landscape-server           26.04/beta   150  ubuntu@24.04
-postgresql                16.4     active      3  postgresql                 16/stable    500  ubuntu@24.04
-rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge  200  ubuntu@22.04
-self-signed-certificates           active      1  self-signed-certificates   1/stable      12  ubuntu@24.04
+App                               Version  Status  Scale  Charm                             Channel                 Rev  Base
+haproxy                                    active      1  haproxy                           2.8/edge                 50  ubuntu@24.04
+landscape-debarchive              242      active      1  landscape-debarchive              latest/edge               2  ubuntu@24.04
+landscape-server                  26.04    active      3  landscape-server                  26.04/beta              150  ubuntu@24.04
+landscape-task-handler-operator            active      1  landscape-task-handler-operator   <TASK-HANDLER-CHANNEL>    1  ubuntu@24.04
+postgresql                        16.4     active      3  postgresql                        16/stable               500  ubuntu@24.04
+rabbitmq-server                   3.9.27   active      3  rabbitmq-server                   latest/edge             200  ubuntu@22.04
+self-signed-certificates                   active      1  self-signed-certificates          1/stable                 12  ubuntu@24.04
 ```
 
 #### Step 4: Configure license file
@@ -200,6 +220,24 @@ juju config landscape-server "license_file=$(cat your-license-file)"
 #### Step 5: Access Landscape
 
 Access Landscape via the HAProxy unit IP or your configured `root_url`. Use `juju status` to find the HAProxy unit IP address.
+
+#### Step 6: Configure and verify the task handler
+
+The task handler charm manages gRPC certificates automatically via the `certificates` relation; no manual certificate configuration is needed. If you need to tune worker or cleanup behavior beyond the defaults (for example, `worker-concurrency`), set charm config options:
+
+```bash
+juju config landscape-task-handler-operator worker-concurrency=8
+```
+
+For all available config options and their meanings, see {ref}`how-to-configure-task-handler`.
+
+Confirm the task handler unit is running correctly:
+
+```bash
+juju ssh landscape-task-handler-operator/0 -- sudo snap services landscape-task-handler
+```
+
+The `task-handler.server` and `task-handler.worker` services should show as **active**.
 
 ### Optional: Replace self-signed certificates with a valid certificate
 
@@ -218,6 +256,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 ```
 
 **Prerequisites:**
+
 - Domain in `root_url` must resolve to the HAProxy unit IP
 - Port 80 must be accessible for ACME HTTP-01 challenge validation
 - Valid email for certificate notifications
@@ -230,6 +269,7 @@ For more details, see the [lego charm documentation](https://charmhub.io/lego/do
 For production deployments requiring an external load balancer in a separate infrastructure layer, you can deploy HAProxy in a **separate Juju model** and connect it to Landscape Server using cross-model relations (also known as LBaaS - Load Balancer as a Service).
 
 This approach is useful when:
+
 - You want to manage your load balancer infrastructure separately from application deployments
 - You need a dedicated load balancer shared across multiple applications
 - You want to isolate load balancer lifecycle from application lifecycle

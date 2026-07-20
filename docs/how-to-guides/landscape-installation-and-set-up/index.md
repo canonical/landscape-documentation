@@ -83,6 +83,8 @@ Configure supporting services for your Landscape deployment.
 
 Configure RabbitMQ <configure-rabbitmq>
 Configure Outbox <configure-outbox>
+Configure Task Handler snap <configure-task-handler-snap>
+Configure Task Handler charm <configure-task-handler>
 Configure Postfix <configure-postfix>
 Set up Deb Archive <debarchive-repository-management>
 ```
