@@ -1,5 +1,17 @@
 # Environment
 *env*/
+.venv/
+
+# Sphinx
+_dev/warnings.txt
+_dev/.wordlist.dic
+_dev/.doctrees/
+_dev/update/
+_dev/node_modules/
+
+# Vale
+_dev/styles/*
+_dev/vale.ini
 
 # Build outputs
 _build

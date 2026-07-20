@@ -1,6 +1,7 @@
 import datetime
-import ast
 import os
+import textwrap
+
 import yaml
 
 # Configuration for the Sphinx documentation builder.
@@ -9,177 +10,156 @@ import yaml
 # A complete list of built-in Sphinx configuration values:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 #
-# Our starter pack uses the custom Canonical Sphinx extension
-# to keep all documentation based on it consistent and on brand:
+# The Sphinx Stack uses the Canonical Sphinx theme to keep all documentation consistent
+# and on brand:
 # https://github.com/canonical/canonical-sphinx
-
 
 #######################
 # Project information #
 #######################
 
 # Project name
-
 project = "Landscape"
+
+# Author name; used in the default copyright statement in the page footer
 author = "Canonical Ltd."
 
+# The year in the copyright statement. The canonical-sphinx footer renders this as
+# "© {copyright} {author}" (e.g. "© 2026 Canonical Ltd."), matching other Canonical
+# documentation. The documentation content remains licensed under CC-BY-SA.
+copyright = f"{datetime.date.today().year}"
 
-# Sidebar documentation title; best kept reasonably short
-# To include a version number, add it here (hardcoded or automated).
-# To disable the title, set to an empty string.
-
+# Sidebar documentation title
+# To disable the title, set it to an empty string.
 html_title = project + " documentation"
 
-
-# Copyright string; shown at the bottom of the page
-#
-# Now, the starter pack uses CC-BY-SA as the license
-# and the current year as the copyright year.
-#
-# If your docs need another license, specify it instead of 'CC-BY-SA'.
-#
-# If your documentation is a part of the code repository of your project,
-# it inherits the code license instead; specify it instead of 'CC-BY-SA'.
-#
-# NOTE: For static works, it is common to provide the first publication year.
-#       Another option is to provide both the first year of publication
-#       and the current year, especially for docs that frequently change,
-#       e.g. 2022–2023 (note the en-dash).
-#
-#       A way to check a repo's creation date is to get a classic GitHub token
-#       with 'repo' permissions; see https://github.com/settings/tokens
-#       Next, use 'curl' and 'jq' to extract the date from the API's output:
-#
-#       curl -H 'Authorization: token <TOKEN>' \
-#         -H 'Accept: application/vnd.github.v3.raw' \
-#         https://api.github.com/repos/canonical/<REPO> | jq '.created_at'
-
-copyright = "%s CC-BY-SA, %s" % (datetime.date.today().year, author)
-
-
 # Documentation website URL
-# NOTE: The Open Graph Protocol (OGP) enhances page display in a social graph
-#       and is used by social media platforms; see https://ogp.me/
-
-ogp_site_url = f"https://ubuntu.com/landscape/docs/"
-
+# NOTE: The Landscape documentation is published at ubuntu.com/landscape/docs, so the
+# canonical and Open Graph URLs are set explicitly rather than derived from
+# READTHEDOCS_CANONICAL_URL.
+ogp_site_url = "https://ubuntu.com/landscape/docs/"
 
 # Preview name of the documentation website
 ogp_site_name = project
 
-
 # Preview image URL
 ogp_image = "https://assets.ubuntu.com/v1/cc828679-docs_illustration.svg"
 
-# Product favicon; shown in bookmarks, browser tabs, etc. - can set custom one here
-# html_favicon = '.sphinx/_static/favicon.png'
+# Product favicon; shown in bookmarks, browser tabs, etc.
+# html_favicon = "_static/favicon.png"
 
 # Dictionary of values to pass into the Sphinx context for all pages:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_context
-
 html_context = {
     # Product page URL; can be different from product docs URL
     "product_page": "ubuntu.com/landscape",
-
     # Product tag image; the orange part of your logo, shown in the page header
-
-    # To add a tag image, uncomment and update as needed.
     # 'product_tag': '_static/tag.png',
-
     # Your Discourse instance URL
     "discourse": "https://discourse.ubuntu.com/c/project/landscape/89",
-
     # Your Mattermost channel URL
-    "mattermost":
-    "",
-
+    "mattermost": "",
     # Your Matrix channel URL
     "matrix": "",
-
-    # Your documentation GitHub repository URL
+    # Your documentation GitHub repository URL If set, links for viewing the
+    # documentation source files and creating GitHub issues are added at the bottom of
+    # each page.
     "github_url": "https://github.com/canonical/landscape-documentation",
-
     # Docs branch in the repo; used in links for viewing the source files
     "repo_default_branch": "main",
-
     # Docs location in the repo; used in links for viewing the source files
     "repo_folder": "/docs/",
-
     # To enable or disable the Previous / Next buttons at the bottom of pages
     # Valid options: none, prev, next, both
-    # "sequential_nav": "both",
-
+    # "sequential_nav": "",
+    # To enable listing contributors on individual pages, set to True
+    "display_contributors": False,
     # Required for feedback button
-    'github_issues': 'enabled',
-
+    "github_issues": "enabled",
+    # Passes the top-level 'author' value to the theme
+    "author": author,
 }
 
-html_extra_path = []
-
-# Allow opt-in build of the OpenAPI "Hello" example so docs stay clean by default.
-# if os.getenv("OPENAPI", ""):
-#     tags.add("openapi")
-#     html_extra_path.append("how-to/assets/openapi.yaml")
-
-# To enable the edit button on pages, uncomment and change the link to a
-# public repository on GitHub or Launchpad. Any of the following link domains
-# are accepted:
-# - https://github.com/example-org/example"
-# - https://launchpad.net/example
-# - https://git.launchpad.net/example
-#
+# Enables the edit button on pages, linking to the documentation source on GitHub.
 html_theme_options = {
-'source_edit_link': 'https://github.com/canonical/landscape-documentation',
+    "source_edit_link": "https://github.com/canonical/landscape-documentation",
 }
 
-# Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
-#
-# If your documentation is hosted on https://docs.ubuntu.com/,
-#       uncomment and update as needed.
-
-slug = 'landscape/docs'
+# Project slug; used by canonical-sphinx for the documentation feedback path.
+slug = "landscape/docs"
 
 #######################
 # Sitemap configuration: https://sphinx-sitemap.readthedocs.io/
 #######################
 
-# Base URL changed during the RTD domain migration
-
-html_baseurl = f"https://ubuntu.com/landscape/docs/"
+# The base URL is set explicitly because the Landscape documentation is served from
+# ubuntu.com/landscape/docs (it was changed during the Read the Docs domain migration).
+html_baseurl = "https://ubuntu.com/landscape/docs/"
 
 # sphinx-sitemap uses html_baseurl to generate the full URL for each page:
-
 sitemap_url_scheme = "{link}"
+
+# Custom sitemap filename for the ubuntu.com/landscape/docs publishing path:
 sitemap_filename = "doc-sitemap.xml"
 
 # Include `lastmod` dates in the sitemap:
-
 sitemap_show_lastmod = True
 
-# Exclude generated pages from the sitemap:
-
+# Pages excluded from the sitemap:
 sitemap_excludes = [
-    '404/',
-    'genindex/',
-    'search/',
+    "404/",
+    "genindex/",
+    "search/",
 ]
 
-# Add more pages to sitemap_excludes if needed. Wildcards are supported.
-#       For example, to exclude module pages generated by autodoc, add '_modules/*'.
+################################
+# Template and asset locations #
+################################
 
-#######################
-# Template and asset locations
-#######################
+html_static_path = ["_static"]
+# _templates overrides only the footer, to restore the "Manage your tracker
+# settings" link (the canonical-sphinx built-in footer leaves that slot empty).
+# The header uses the canonical-sphinx built-in template.
+templates_path = ["_templates"]
 
-html_static_path = [".sphinx/_static"]
-templates_path = [".sphinx/_templates"]
+#############
+# Redirects #
+#############
+
+# Add redirects to the 'redirects.txt' file
+# https://sphinxext-rediraffe.readthedocs.io/en/latest/
+
+# To set up redirects in the Read the Docs project dashboard:
+# https://docs.readthedocs.io/en/stable/guides/redirects.html
+
+rediraffe_redirects = "redirects.txt"
+
+# Strips '/index.html' from destination URLs when building with 'dirhtml'
+rediraffe_dir_only = True
+
+############################
+# sphinx-llm configuration #
+############################
+
+# This description is included in llms.txt to provide some initial context for the
+# product docs.
+llms_txt_description = textwrap.dedent(
+    """\
+    This is the documentation for Landscape, Canonical's systems management tool for
+    managing and monitoring Ubuntu deployments across desktops, servers, cloud
+    instances, and IoT devices.
+    """
+)
+
+# The base URL for references built by sphinx-markdown-builder.
+if os.environ.get("READTHEDOCS"):
+    markdown_http_base = html_baseurl
 
 ###########################
 # Link checker exceptions #
 ###########################
 
 # A regex list of URLs that are ignored by 'make linkcheck'
-
 linkcheck_ignore = [
     "http://127.0.0.1:8000",
     "https://github.com/canonical/landscape-documentation/*",
@@ -192,17 +172,16 @@ linkcheck_ignore = [
     "https://ubuntu.com/aws#get-in-touch",
     "http://nfs.sourceforge.net/#faq_d2",
     "https://www.hashicorp.com/en/products/vault",
-    "https://developer.hashicorp.com/vault/docs/concepts/production-hardening"
+    "https://developer.hashicorp.com/vault/docs/concepts/production-hardening",
 ]
 
-
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
+linkcheck_anchors_ignore_for_url = [
+    r"https://github\.com/.*",
+    r"https://ubuntu.com/landscape",
+]
 
-linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*",
-                                    r"https://ubuntu.com/landscape"]
-
-# give linkcheck multiple tries on failure
-# linkcheck_timeout = 30
+# Give linkcheck multiple tries on failure
 linkcheck_retries = 3
 
 ########################
@@ -211,85 +190,59 @@ linkcheck_retries = 3
 
 # Custom MyST syntax extensions; see
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
-#
 # NOTE: By default, the following MyST extensions are enabled:
-#       substitution, deflist, linkify
-
+#   - substitution
+#   - deflist
+#   - linkify
 # myst_enable_extensions = set()
 
-# MyST configurations
+# MyST configuration
 myst_heading_anchors = 4
-
 
 # Custom Sphinx extensions; see
 # https://www.sphinx-doc.org/en/master/usage/extensions/index.html
-
-# NOTE: The canonical_sphinx extension is required for the starter pack.
-
 extensions = [
     "canonical_sphinx",
     "notfound.extension",
     "sphinx_design",
-    "sphinx_reredirects",
-    "sphinx_tabs.tabs",
+    "sphinx_rerediraffe",
     "sphinxcontrib.jquery",
     "sphinxext.opengraph",
-    "sphinx_config_options",
-    "sphinx_contributor_listing",
-    "sphinx_filtered_toctree",
-    "sphinx_related_links",
+    "sphinx_llm.txt",
     "sphinx_roles",
-    "sphinx_terminal",
-    "sphinx_ubuntu_images",
-    "sphinx_youtube_links",
     "sphinxcontrib.cairosvgconverter",
     "sphinx_last_updated_by_git",
     "sphinx.ext.intersphinx",
     "sphinx_sitemap",
-    "sphinxext.rediraffe",
     "sphinxcontrib.mermaid",
 ]
 
-
-# Excludes files or directories from processing
-
-# exclude_patterns = [
-# ]
-
-# Adds custom CSS files, located under 'html_static_path'
-
-html_css_files = [
-    "cookie-banner.css",
+# Excludes files or directories from processing. The 'reuse' and '_includes'
+# directories hold snippet files that are pulled in with MyST '{include}' rather than
+# built as standalone pages, so they are excluded from source discovery.
+exclude_patterns = [
+    "doc-cheat-sheet*",
+    ".venv*",
+    "reuse/**",
+    "**/_includes/**",
 ]
 
-# Adds custom JavaScript files, located under 'html_static_path'
+# Adds custom CSS files, located remotely or in 'html_static_path'.
+html_css_files = [
+    "https://assets.ubuntu.com/v1/d86746ef-cookie_banner.css",
+]
 
+# Adds custom JavaScript files, located remotely or in 'html_static_path'.
+# overwrite_links.js rewrites the Read the Docs-hosted domain to the published
+# ubuntu.com/landscape/docs domain in the header and Read the Docs flyout.
 html_js_files = [
-    "bundle.js",
+    "https://assets.ubuntu.com/v1/287a5e8f-bundle.js",
     "overwrite_links.js",
- ]
-
-# Specifies a reST snippet to be appended to each .rst file
-rst_epilog = """
-.. include:: /reuse/links.txt
-.. include:: /reuse/substitutions.txt
-"""
-
-# Feedback button at the top; enabled by default
-# disable_feedback_button = True
-
-
-# Your manpage URL
-# NOTE: If set, adding ':manpage:' to an .rst file
-#       adds a link to the corresponding man section at the bottom of the page.
-# manpages_url = f'https://manpages.ubuntu.com/manpages/{codename}/en/' + \
-#     f'man{section}/{page}.{section}.html'
-
+]
 
 # Specifies a reST snippet to be prepended to each .rst file
 # This defines a :center: role that centers table cell content.
 # This defines a :h2: role that styles content for use with PDF generation.
-
 rst_prolog = """
 .. role:: center
    :class: align-center
@@ -301,49 +254,18 @@ rst_prolog = """
     :class: vale-ignore
 """
 
-# Workaround for https://github.com/canonical/canonical-sphinx/issues/34
-
-if "discourse_prefix" not in html_context and "discourse" in html_context:
-    html_context["discourse_prefix"] = html_context["discourse"] + "/t/"
-
-# Workaround for substitutions.yaml
-
-if os.path.exists('./reuse/substitutions.yaml'):
-    with open('./reuse/substitutions.yaml', 'r') as fd:
-        myst_substitutions = yaml.safe_load(fd.read())
-
-# Add configuration for intersphinx mapping
-
+# Configuration for Intersphinx projects
+#
 # intersphinx_mapping = {
-#     'starter-pack': ('https://canonical-example-product-documentation.readthedocs-hosted.com/en/latest', None),
-#     'sphinxcontrib-mermaid': ('https://sphinxcontrib-mermaid-demo.readthedocs.io/en/latest', None)
+#     "snap": ("https://snapcraft.io/docs/", None),
 # }
 
 #####################
-# PDF configuration #
+# MyST substitutions #
 #####################
 
-with open(".sphinx/latex_elements_template.txt", "rt") as file:
-    latex_config = file.read()
-
-latex_elements = ast.literal_eval(latex_config.replace("$PROJECT", project))
-
-#############
-# Redirects #
-#############
-
-## Rediraffe extension
-rediraffe_branch = "main"
-rediraffe_redirects = "redirects.txt"
-
-## Reredirects extension
-## NOTE: We've moved to use rediraffe as our main redirects extension.
-## The following are ones we already had in place, but haven't migrated
-redirects = {
-    'how-to-guides/landscape-installation-and-set-up/install-on-google-cloud': '../cloud-providers/install-on-google-cloud',
-    'how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure': '../cloud-providers/install-on-microsoft-azure',
-    'how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environment': '../../repository-mirrors/manage-repositories-in-an-air-gapped-or-offline-environment',
-    'how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment': '../../landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment',
-    'explanation/repository-mirroring/repository-mirroring': '../../features/repository-mirroring',
-    'reference/known-issues/known-issues': '../../known-issues'
-}
+# Landscape-specific: load global MyST text substitutions from reuse/substitutions.yaml
+# so shared values can be reused across documentation pages.
+if os.path.exists("./reuse/substitutions.yaml"):
+    with open("./reuse/substitutions.yaml", "r") as fd:
+        myst_substitutions = yaml.safe_load(fd.read())

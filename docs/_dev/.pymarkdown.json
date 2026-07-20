@@ -15,13 +15,6 @@
             "enabled": true,
             "punctuation": ".,;。，；"
         },
-        "blanks-around-fences": {
-            "enabled": true,
-            "list_items": false
-        },
-        "blanks-around-lists": {
-            "enabled": true
-        },
         "hr-style": {
             "enabled": true
         },
