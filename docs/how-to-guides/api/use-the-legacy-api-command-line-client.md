@@ -7,9 +7,7 @@ myst:
 (how-to-use-legacy-api-cli)=
 # How to use the legacy API command-line client
 
-The **landscape-api** package is available as a snap.
-
-Install the package as a self updating snap by running:
+The **landscape-api** package is available as a snap. Install it with:
 
 ```bash
 sudo snap install landscape-api
