@@ -118,7 +118,7 @@ sudo -u postgres psql landscape-standalone-task-handler -c \
   "GRANT CREATE ON SCHEMA public TO landscape;"
 ```
 
-Configure the snap to connect to the task handler database. Replace `<DB-PASSWORD>` with the `landscape` database user's password, which you can find (base64-encoded) in the `password` key of the `[stores]` section of `/etc/landscape/service.conf`.
+Configure the snap to connect to the task handler database. Replace `<DB-PASSWORD>` with the `landscape` database user's password. This value is stored base64-encoded in the `password` key of the `[stores]` section of `/etc/landscape/service.conf`; decode it (for example, `echo '<value>' | base64 -d`) to get the plaintext password. For the main, account, and resource databases this decoding happens automatically, but it must be done manually here because the task handler's own database is not read from `service.conf`.
 
 ```bash
 sudo snap set landscape-task-handler \
@@ -141,12 +141,12 @@ sudo snap services landscape-task-handler
 The output should show the `task-handler.server` and `task-handler.worker` services as **active**:
 
 ```text
-Service                              Startup  Current   Notes
-landscape-task-handler.cert-renewer  enabled  inactive  timer-activated
-landscape-task-handler.cleanup       enabled  inactive  timer-activated
-landscape-task-handler.server        enabled  active    -
-landscape-task-handler.worker        enabled  active    -
+Service                        Startup  Current  Notes
+landscape-task-handler.server  enabled  active   -
+landscape-task-handler.worker  enabled  active   -
 ```
+
+Other services (`cert-renewer`, `cleanup`) run on their own timers and normally show as `inactive`/`timer-activated` between runs; this is expected.
 
 To view task handler logs, run:
 

@@ -209,9 +209,9 @@ These settings apply to the `landscape-task-handler.worker` service only.
 
 #### `LANDSCAPE_TASK_HANDLER_WORKER_MAX_RETRIES`
 
-- Purpose: The maximum number of times the worker will retry a failed task before marking it as permanently failed. When unset, retries are unlimited.
+- Purpose: The maximum number of times the worker will retry a failed task before marking it as permanently failed.
 - Snap key: `landscape.task-handler.worker.max-retries`
-- Default: None (unlimited)
+- Default: `3` (applied by the worker when this setting is unset; the underlying config field itself has no default)
 - Required: No
 - `service.conf`-supplied: No
 

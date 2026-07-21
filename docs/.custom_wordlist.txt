@@ -270,6 +270,7 @@ PITR
 pgSQL
 pgtune
 pingserver
+plaintext
 pluggable
 png
 pooler

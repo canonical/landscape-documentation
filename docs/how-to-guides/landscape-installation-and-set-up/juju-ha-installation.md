@@ -137,9 +137,9 @@ applications:
     base: ubuntu@24.04
     constraints: arch=amd64
 
-  landscape-task-handler-operator:
+  landscape-task-handler:
     channel: latest/edge
-    charm: ch:landscape-task-handler-operator
+    charm: ch:landscape-task-handler
     num_units: 1
     base: ubuntu@24.04
     constraints: arch=amd64
@@ -161,18 +161,14 @@ relations:
   - [landscape-debarchive:landscape-server, landscape-server:debarchive]
   - [landscape-debarchive:database, postgresql:database]
   - [landscape-debarchive:debarchive-haproxy-route, haproxy:haproxy-route]
-  - [landscape-task-handler-operator:<TASK-HANDLER-SERVER-ENDPOINT>, landscape-server:<TASK-HANDLER-CLIENT-ENDPOINT>]
-  - [landscape-task-handler-operator:task-db, postgresql:database]
-  - [landscape-task-handler-operator:certificates, self-signed-certificates:certificates]
-  - [landscape-task-handler-operator:grpc-haproxy-route, haproxy:haproxy-route]
+  - [landscape-task-handler:landscape-server, landscape-server:task-handler]
+  - [landscape-task-handler:task-db, postgresql:database]
+  - [landscape-task-handler:certificates, self-signed-certificates:certificates]
+  - [landscape-task-handler:grpc-haproxy-route, haproxy:haproxy-route-tcp]
 ```
 
 ```{note}
-`<TASK-HANDLER-SERVER-ENDPOINT>` and `<TASK-HANDLER-CLIENT-ENDPOINT>` are placeholders. Replace them with the actual relation endpoint names once the `landscape-server` charm publishes its task-handler integration endpoint. Until this relation is in place, the task-handler unit will report `Waiting for relation(s): landscape-server`.
-```
-
-```{note}
-`landscape-task-handler-operator` scales independently of `landscape-server`. Set its `num_units` based on your expected task handler load rather than tying it to the number of `landscape-server` units.
+`landscape-task-handler` scales independently of `landscape-server`. Set its `num_units` based on your expected task handler load rather than tying it to the number of `landscape-server` units.
 ```
 
 ```{note}
@@ -203,7 +199,7 @@ App                               Version  Status  Scale  Charm                 
 haproxy                                    active      1  haproxy                           2.8/edge                 50  ubuntu@24.04
 landscape-debarchive              242      active      1  landscape-debarchive              latest/edge               2  ubuntu@24.04
 landscape-server                  26.04    active      3  landscape-server                  26.04/beta              150  ubuntu@24.04
-landscape-task-handler-operator            active      1  landscape-task-handler-operator   <TASK-HANDLER-CHANNEL>    1  ubuntu@24.04
+landscape-task-handler                     active      1  landscape-task-handler            latest/edge                1  ubuntu@24.04
 postgresql                        16.4     active      3  postgresql                        16/stable               500  ubuntu@24.04
 rabbitmq-server                   3.9.27   active      3  rabbitmq-server                   latest/edge             200  ubuntu@22.04
 self-signed-certificates                   active      1  self-signed-certificates          1/stable                 12  ubuntu@24.04
@@ -226,7 +222,7 @@ Access Landscape via the HAProxy unit IP or your configured `root_url`. Use `juj
 The task handler charm manages gRPC certificates automatically via the `certificates` relation; no manual certificate configuration is needed. If you need to tune worker or cleanup behavior beyond the defaults (for example, `worker-concurrency`), set charm config options:
 
 ```bash
-juju config landscape-task-handler-operator worker-concurrency=8
+juju config landscape-task-handler worker-concurrency=8
 ```
 
 For all available config options and their meanings, see {ref}`how-to-configure-task-handler`.
@@ -234,7 +230,7 @@ For all available config options and their meanings, see {ref}`how-to-configure-
 Confirm the task handler unit is running correctly:
 
 ```bash
-juju ssh landscape-task-handler-operator/0 -- sudo snap services landscape-task-handler
+juju ssh landscape-task-handler/0 -- sudo snap services landscape-task-handler
 ```
 
 The `task-handler.server` and `task-handler.worker` services should show as **active**.
