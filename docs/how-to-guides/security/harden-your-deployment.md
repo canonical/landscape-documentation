@@ -92,13 +92,15 @@ TLS 1.0 and TLS 1.1 should no longer appear.
 
 If your deployment {ref}`relays Landscape's outgoing email notifications through Postfix <how-to-configure-postfix>`, you can require a minimum TLS version for those outgoing connections.
 
-Landscape's Postfix configuration acts as an SMTP client that relays mail to an external SMTP provider. The Postfix guide already sets `smtp_tls_security_level=encrypt`, which requires TLS for outgoing mail. To also require a minimum protocol version, set the mandatory client protocols:
+Landscape's Postfix configuration acts as an SMTP client that relays mail to an external SMTP provider. The Postfix guide already sets `smtp_tls_security_level=encrypt`, which requires TLS for outgoing mail. To also require a minimum protocol version and restrict the cipher suites, set the mandatory client parameters:
 
 ```bash
 sudo postconf -e 'smtp_tls_mandatory_protocols=>=TLSv1.2'
+sudo postconf -e 'smtp_tls_mandatory_ciphers=high'
+sudo postconf -e 'smtp_tls_mandatory_exclude_ciphers=aNULL, MD5, SHA, CBC, CAMELLIA'
 ```
 
-`smtp_tls_mandatory_protocols` applies when TLS is mandatory, that is, when `smtp_tls_security_level` is `encrypt` or higher. The `>=TLSv1.2` syntax requires Postfix 3.6 or later, which is the version shipped with Ubuntu 22.04 LTS and later releases. This setting restricts the protocol versions Postfix uses when it connects to your SMTP provider; it does not configure Postfix to accept incoming SMTP connections.
+These `smtp_tls_mandatory_*` settings apply when TLS is mandatory, that is, when `smtp_tls_security_level` is `encrypt` or higher. The `>=TLSv1.2` syntax requires Postfix 3.6 or later, which is the version shipped with Ubuntu 22.04 LTS and later releases. These settings restrict the protocols and cipher suites Postfix uses when it connects to your SMTP provider; they do not configure Postfix to accept incoming SMTP connections.
 
 Reload Postfix to apply the change:
 
