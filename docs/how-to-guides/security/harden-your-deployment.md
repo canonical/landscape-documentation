@@ -12,22 +12,30 @@ You have many options when hardening your Landscape deployment.
 
 ## Harden the network
 
-The only application in your Landscape server deployment that should be exposed to incoming external traffic is the reverse proxy, which is either HAProxy or Apache. The reverse proxies listen on ports 80 and 443 for HTTP and HTTPS traffic, respectively. The reverse proxy also exposes port 6554 for gRPC over HTTP/2 traffic. For more details on networking, see {ref}`reference-internal-network-requirements`.
+The only application in your Landscape server deployment that should be exposed to incoming external traffic is the reverse proxy, which is either HAProxy or Apache. The reverse proxy listens on these frontend ports:
+
+* **80** and **443**: HTTP and HTTPS traffic, respectively.
+* **6554** (optional): gRPC over HTTP/2 traffic for the Hostagent Messenger service. Expose it only when that service is enabled.
+* **50051** (optional): gRPC over HTTP/2 traffic for Ubuntu Installer Attach. Expose it only when that service is enabled.
+
+For more details on networking, see {ref}`reference-internal-network-requirements`.
+
+Landscape's gRPC services currently support only unencrypted HTTP/2 (h2c). External clients reach the gRPC frontends using HTTP/2 over TLS; TLS terminates at the reverse proxy, which then forwards the traffic to the backend services over h2c. Because these backend connections aren't TLS, the backend services don't negotiate ALPN, so their ports must remain internal.
 
 If you're using Landscape's repository mirroring features, Landscape Server may need outgoing network access depending on the location of the repositories you're pulling from.
 
 Port 80 is only needed for Landscape's repository mirroring features. If you don't use these features, then you don't need to expose Port 80. In this case, you would configure your Landscape clients to use HTTPS for all traffic:
 
 1. Edit `/etc/landscape/client.conf` to ensure that the entries for `url`, `package_hash_id_url`, and `ping_url` all start with `https` instead of `http`
-1. Restart Landscape client: `sudo systemctl restart landscape-client`
+1. Restart Landscape Client: `sudo systemctl restart landscape-client`
 
-The other applications in your deployment only require enough network access to communicate with each other. Using the default configuration, applications listen on these ports for incoming traffic:
+The other applications in your deployment only require enough network access to communicate with each other. Using the default configuration, these applications use the following ports for incoming traffic:
 
-* Landscape server: 8080-9100 (inclusive) and 50052
+* Landscape server: 8070-9100 (inclusive) and 50052
 * PostgreSQL: 5432
 * RabbitMQ server: 5672 for unencrypted TCP or 5671 for TLS-encrypted TCP
 
-Make sure these ports are exposed for internal traffic between the applications. **None of these ports should be exposed to external traffic.**
+Landscape doesn't listen on every port in the 8070-9100 range; each service uses a base port plus one more port per configured worker, so the exact ports depend on your deployment. Make sure the ports in use are exposed for internal traffic between the applications. **None of these ports should be exposed to external traffic.**
 
 ## Secure external traffic
 
@@ -71,12 +79,12 @@ juju exec --application haproxy "sudo systemctl restart haproxy.service"
 ```
 
 ```{note}
-Landscape 26.04 LTS and later use a different HAProxy charm (the `2.8` channel) that doesn't expose these options, so these steps apply only to pre-26.04 deployments.
+Landscape 26.04 LTS and later use a different HAProxy charm, from the `2.8/stable` channel, that doesn't expose these options, so these steps apply only to pre-26.04 deployments. For that charm, see its [security documentation](https://canonical.com/juju/docs/haproxy-charm/latest/explanation/security/) for maintained guidance.
 ```
 
 **Verify the result**
 
-From a machine that can reach the reverse proxy, scan it with `nmap` (`sudo apt install nmap`) to confirm the offered protocols and ciphers. If your deployment exposes port 6554, include it in the scan as well by using `-p 443,6554`. 
+From a machine that can reach the reverse proxy, scan it with `nmap` (`sudo apt install nmap`) to confirm the offered protocols and ciphers. If your deployment exposes port 6554, include it in the scan as well by using `-p 443,6554`.
 
 ```bash
 nmap --script ssl-enum-ciphers -p 443 <LANDSCAPE_HOST>
