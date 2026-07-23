@@ -42,10 +42,10 @@ Supporting files:
 - `docs/index.md` and the `index.md` file at the root of each section – landing
   pages and `toctree` navigation.
 - `docs/reuse/` – reusable snippets and `substitutions.yaml` (MyST
-  substitutions). `reuse/links.txt` holds shared link targets.
+  substitutions).
 - `docs/redirects.txt` – redirects for moved, renamed, or deleted pages.
 - `docs/.custom_wordlist.txt` – spelling exceptions for the Vale spell check.
-- `docs/.sphinx/` – Canonical Sphinx Stack tooling and check configuration.
+- `docs/_dev/` – Canonical Sphinx Stack tooling and check configuration.
 
 ## Build and validation
 

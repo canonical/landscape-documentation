@@ -41,15 +41,26 @@
     <div class="copyright">
       {%- if hasdoc('copyright') %}
         {% trans path=pathto('copyright'), copyright=copyright|e -%}
-          <a href="{{ path }}">Copyright</a> &#169; {{ copyright }}
+          <a href="{{ path }}">&copy; {{ copyright }} {{ author }}</a>
         {%- endtrans %}
       {%- else %}
         {% trans copyright=copyright|e -%}
-          Copyright &#169; {{ copyright }}
+          &copy; {{ copyright }} {{ author }}
         {%- endtrans %}
       {%- endif %}
     </div>
     {%- endif %}
+    {%- if license and license.name -%}
+      {%- if license.url -%}
+      <div class="license">
+        This page is licensed under <a href="{{ license.url }}">{{ license.name }}</a>
+      </div>
+      {%- else -%}
+      <div class="license">
+        This page is licensed under {{ license.name }}
+      </div>
+      {%- endif -%}
+    {%- endif -%}
 
     {# mod: removed "Made with" #}
 
@@ -88,12 +99,5 @@
        {% endif %}
    {% endif %}
   </div>
-  <div class="right-details"><a href="" class="js-revoke-cookie-manager muted-link">Manage your tracker settings</a>
-    <div class="ask-discourse">
-      <a class="muted-link" href="https://discourse.ubuntu.com/c/project/landscape/89">Ask a question on Discourse</a>
-    </div>
-    <div class="edit-github">
-      <a class="muted-link" href="{{ github_url }}/edit/{{ repo_default_branch }}{{ repo_folder }}{{ pagename }}{{ page_source_suffix }}">Edit this page on GitHub</a>
-    </div>
-    </div>
+  <div class="right-details"><a href="" class="js-revoke-cookie-manager muted-link">Manage your tracker settings</a></div>
 </div>
