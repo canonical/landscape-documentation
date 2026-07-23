@@ -1268,6 +1268,7 @@ components:
         Local:
             required:
                 - displayName
+                - defaultDistribution
                 - defaultComponent
             type: object
             properties:
@@ -1306,6 +1307,8 @@ components:
             required:
                 - displayName
                 - archiveRoot
+                - distribution
+                - architectures
                 - components
             type: object
             properties:
@@ -1447,6 +1450,7 @@ components:
                 - displayName
                 - publicationTarget
                 - source
+                - architectures
             type: object
             properties:
                 name:
@@ -1488,9 +1492,7 @@ components:
                     type: array
                     items:
                         type: string
-                    description: |-
-                        List of architectures to publish.
-                         Defaults to all source architectures if omitted.
+                    description: List of architectures to publish.
                 acquireByHash:
                     type: boolean
                     description: Provides index file by hash if unique.
