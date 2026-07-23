@@ -67,10 +67,7 @@ juju config haproxy global_default_bind_ciphers='HIGH:!aNULL:!NULL:!3DES:!DSS:!E
 This disables SSL 3.0 and TLS 1.0/1.1 and restricts the TLS 1.2 cipher suites, but doesn't affect TLS 1.3. Then restart HAProxy on each unit to apply the change:
 
 ```bash
-juju ssh haproxy/0 "sudo systemctl restart haproxy.service"
-juju ssh haproxy/1 "sudo systemctl restart haproxy.service"
-...
-juju ssh haproxy/n "sudo systemctl restart haproxy.service"
+juju exec --application haproxy "sudo systemctl restart haproxy.service"
 ```
 
 ```{note}
