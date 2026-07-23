@@ -27,19 +27,13 @@ After you’ve completed the basic upgrade instructions, you need to make some a
 
 On the **database server**, create the task handler's own database and grant the `landscape` user access to it.
 
-```bash
-sudo -u postgres createdb landscape-standalone-task-handler
-sudo -u postgres psql landscape-standalone-task-handler -c \
-  "GRANT CONNECT ON DATABASE \"landscape-standalone-task-handler\" TO landscape;"
-sudo -u postgres psql landscape-standalone-task-handler -c \
-  "GRANT CREATE ON SCHEMA public TO landscape;"
+```{include} /reuse/task-handler-create-database.md
 ```
 
 On the **application server**, install the snap and grant it access to the `/etc/landscape` directory.
 
 ```bash
 sudo snap install landscape-task-handler
-sudo snap connect landscape-task-handler:etc-landscape
 ```
 
 Configure the snap with the connection details for the task handler database.
@@ -52,10 +46,18 @@ sudo snap set landscape-task-handler \
   landscape.database.task-handler.password=<DB-PASSWORD> \
   landscape.database.task-handler.name=landscape-standalone-task-handler \
   landscape.database.task-handler.ssl=disable \
+  landscape.task-handler.server.grpc-port=50051 \
   landscape.task-handler.server.host=localhost
 ```
 
 Replace `<DB-HOST>`, `<DB-PORT>`, and `<DB-PASSWORD>` with the hostname, port, and password for the `landscape` database user. The Landscape server databases are read automatically from `/etc/landscape/service.conf`.
+
+```{seealso}
+This example uses `ssl=disable` for simplicity. If your PostgreSQL connection requires SSL, see {ref}`task-handler-ssl-tls`.
+```
+
+```{include} /reuse/task-handler-outbox-grpc-address-note.md
+```
 
 Confirm that the snap services are running.
 
@@ -63,15 +65,8 @@ Confirm that the snap services are running.
 sudo snap services landscape-task-handler
 ```
 
-The output should show the `task-handler.server` and `task-handler.worker` services as **active**:
-
-```text
-Service                        Startup  Current  Notes
-landscape-task-handler.server  enabled  active   -
-landscape-task-handler.worker  enabled  active   -
+```{include} /reuse/task-handler-services-active.md
 ```
-
-Other services (`cert-renewer`, `cleanup`) run on their own timers and normally show as `inactive`/`timer-activated` between runs; this is expected.
 
 To view task handler logs, run:
 
@@ -85,7 +80,6 @@ Install the `landscape-outbox` snap on the same machine as your Landscape Server
 
 ```bash
 sudo snap install landscape-outbox
-sudo snap connect landscape-outbox:etc-landscape
 sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
 ```
 

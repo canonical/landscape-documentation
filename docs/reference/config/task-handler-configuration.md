@@ -13,7 +13,7 @@ The task handler snap (`landscape-task-handler`) provides four services:
 
 - **`landscape-task-handler.server`**: the gRPC server other Landscape services can connect with to create a task.
 - **`landscape-task-handler.worker`**: the service that performs queued tasks.
-- **`landscape-task-handler.cert-renewer`**: a periodic job that automatically renews client and server mTLS certificates when they near their expiration dates.
+- **`landscape-task-handler.cert-renewer`**: a periodic job that automatically renews client and server mTLS certificates when they near their expiration dates. It has no configurable settings of its own; its behavior is controlled entirely through the certificate directories described in [mTLS certificate management](#mtls-certificate-management) below.
 - **`landscape-task-handler.cleanup`**: a periodic cleanup job that purges old task handler entries from the database.
 
 ## `service.conf` integration
@@ -354,10 +354,10 @@ To use your own certificates instead of the auto-generated ones, place all five 
 | `client.crt` | Client certificate (PEM), must chain to `ca.crt` |
 | `client.key` | Client private key (PEM) |
 
-All five files must be present; a partial set is ignored. On the next cert-manager run (which happens on every service start, snap refresh, and daily rotation), the certificates are validated, copied into the active directory, and a `.custom-managed` sentinel file is written.
+All five files must be present; a partial set found before any custom certificates have been adopted is ignored (a warning is logged, and the cert-manager falls back to generating self-signed certificates as usual). On the next cert-manager run (which happens on every service start, snap refresh, and daily rotation), the certificates are validated, copied into the active directory, and a `.custom-managed` sentinel file is written.
 
 ```{important}
-Once the `.custom-managed` sentinel is present, removing the files from `custom-certs/` will cause the cert-manager to error rather than fall back to auto-generated certificates. To revert to auto-generated certificates, remove both the `custom-certs/` files and the `.custom-managed` sentinel from `$SNAP_COMMON/certs/active/`.
+Once the `.custom-managed` sentinel is present (that is, after custom certificates have been adopted at least once), the cert-manager will no longer silently fall back to auto-generated certificates. If the files in `custom-certs/` are later removed or made incomplete, the cert-manager errors instead. To revert to auto-generated certificates, remove both the `custom-certs/` files and the `.custom-managed` sentinel from `$SNAP_COMMON/certs/active/`.
 ```
 
 There are no snap keys for providing certificate content directly; operator certificates must be placed on the filesystem as described above.
