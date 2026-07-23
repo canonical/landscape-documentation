@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Upgrade Landscape Server to 26.04 LTS from Ubuntu 22.04, 24.04, or 26.04. Install additional outbox and repository mirroring services as snaps."
+    description: "Upgrade Landscape Server to 26.04 LTS from Ubuntu 22.04, 24.04, or 26.04. Install additional task handler, outbox, and repository mirroring services as snaps."
 ---
 
 (how-to-upgrade-to-26-04-lts)=
@@ -23,12 +23,64 @@ To upgrade your self-hosted Landscape server to 26.04 LTS, you should first foll
 
 After you’ve completed the basic upgrade instructions, you need to make some additional manual changes to finish your upgrade.
 
+### Install the task handler snap
+
+On the **database server**, create the task handler's own database and grant the `landscape` user access to it.
+
+```{include} /reuse/task-handler-create-database.md
+```
+
+On the **application server**, install the snap and grant it access to the `/etc/landscape` directory.
+
+```bash
+sudo snap install landscape-task-handler
+```
+
+Configure the snap with the connection details for the task handler database.
+
+```bash
+sudo snap set landscape-task-handler \
+  landscape.database.task-handler.host=<DB-HOST> \
+  landscape.database.task-handler.port=<DB-PORT> \
+  landscape.database.task-handler.user=landscape \
+  landscape.database.task-handler.password=<DB-PASSWORD> \
+  landscape.database.task-handler.name=landscape-standalone-task-handler \
+  landscape.database.task-handler.ssl=disable \
+  landscape.task-handler.server.grpc-port=50051 \
+  landscape.task-handler.server.host=localhost
+```
+
+Replace `<DB-HOST>`, `<DB-PORT>`, and `<DB-PASSWORD>` with the hostname, port, and password for the `landscape` database user. The Landscape server databases are read automatically from `/etc/landscape/service.conf`.
+
+```{seealso}
+This example uses `ssl=disable` for simplicity. If your PostgreSQL connection requires SSL, see {ref}`task-handler-ssl-tls`.
+```
+
+```{include} /reuse/task-handler-outbox-grpc-address-note.md
+```
+
+Confirm that the snap services are running.
+
+```bash
+sudo snap services landscape-task-handler
+```
+
+```{include} /reuse/task-handler-services-active.md
+```
+
+To view task handler logs, run:
+
+```bash
+sudo snap logs landscape-task-handler -n 50
+```
+
 ### Install the outbox snap
 
 Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
 
 ```bash
 sudo snap install landscape-outbox
+sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
 ```
 
 `landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
@@ -61,11 +113,13 @@ These steps are only needed for WSL users. The hostagent services (`landscape-ho
 If you don't configure the hostagent services, you won't be able to use WSL with Landscape. Other activities unrelated to WSL will still function properly.
 
 ## Airgapped environments
+
 If your deployment does not have internet access, you must carry the snaps into your airgapped environment as part of the 26.04 upgrade process.
 
 First, in an environment with internet access, download the snaps.
 
 ```bash
+snap download landscape-task-handler
 snap download landscape-outbox
 snap download landscape-debarchive --beta
 ```
@@ -75,6 +129,8 @@ For each snap, a `.snap` file and a `.assert` file will be produced.
 After transferring the files to the airgapped environment, install the snaps.
 
 ```bash
+sudo snap ack landscape-task-handler_*.assert
+sudo snap install landscape-task-handler_*.snap
 sudo snap ack landscape-outbox_*.assert
 sudo snap install landscape-outbox_*.snap
 sudo snap ack landscape-debarchive_*.assert

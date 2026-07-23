@@ -16,7 +16,7 @@ For a manual installation of Landscape 24.04 LTS or 26.04 LTS:
 
 You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
 
-Note that manually setting up a Landscape Server Debian package deployment is a long process with many configuration steps. 
+Note that manually setting up a Landscape Server Debian package deployment is a long process with many configuration steps.
 
 If you want a [Juju-managed](https://documentation.ubuntu.com/juju/), charmed deployment, you can install Landscape Server with Juju. See {ref}`how-to-juju-installation` or {ref}`how-to-juju-ha-installation`.
 
@@ -289,7 +289,6 @@ Without this setting enabled, a package update might result in services that won
     ```
 
 - Start all Landscape services again
-
 
 (how-to-heading-manual-install-configure-web-server)=
 ### Configure web server
@@ -578,12 +577,66 @@ Use `lsctl`:
 sudo lsctl restart
 ```
 
+### (Landscape 26.04 only) Install the task handler snap
+
+Install the `landscape-task-handler` snap on the same machine as your Landscape Server installation and grant it access to the `/etc/landscape` directory.
+
+```bash
+sudo snap install landscape-task-handler
+```
+
+On the **database server**, create the task handler's own database and grant the `landscape` user access to it.
+
+```{include} /reuse/task-handler-create-database.md
+```
+
+On the **application server**, configure the snap with the connection details for the task handler database.
+
+```bash
+sudo snap set landscape-task-handler \
+  landscape.database.task-handler.host=<DB-HOST> \
+  landscape.database.task-handler.port=<DB-PORT> \
+  landscape.database.task-handler.user=landscape \
+  landscape.database.task-handler.password=<DB-PASSWORD> \
+  landscape.database.task-handler.name=landscape-standalone-task-handler \
+  landscape.database.task-handler.ssl=disable \
+  landscape.task-handler.server.grpc-port=50051 \
+  landscape.task-handler.server.host=localhost
+```
+
+Replace `<DB-HOST>` with the IP address or hostname of the PostgreSQL server, `<DB-PORT>` with the port, and `<DB-PASSWORD>` with the database password you selected for the `landscape` database user.
+
+```{seealso}
+This example uses `ssl=disable` for simplicity. If your PostgreSQL connection requires SSL, see {ref}`task-handler-ssl-tls`.
+```
+
+```{include} /reuse/task-handler-outbox-grpc-address-note.md
+```
+
+The Landscape server databases (`main`, `account`, and `resource`) are read automatically from `/etc/landscape/service.conf` via the `etc-landscape` snap connection. No additional database configuration is needed for those.
+
+`landscape-task-handler` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
+
+```bash
+sudo snap services landscape-task-handler
+```
+
+```{include} /reuse/task-handler-services-active.md
+```
+
+To view task handler logs, run:
+
+```bash
+sudo snap logs landscape-task-handler -n 50
+```
+
 ### (Landscape 26.04 only) Install the outbox snap
 
-Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation and grant it access to the `/etc/landscape` directory.
 
 ```bash
 sudo snap install landscape-outbox
+sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
 ```
 
 `landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
