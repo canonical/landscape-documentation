@@ -16,7 +16,7 @@ The only application in your Landscape server deployment that should be exposed 
 
 * **80** and **443**: HTTP and HTTPS traffic, respectively.
 * **6554** (optional): gRPC over HTTP/2 traffic for the Hostagent Messenger service. Expose it only when that service is enabled.
-* **50051** (optional): gRPC over HTTP/2 traffic for Ubuntu Installer Attach. Expose it only when that service is enabled.
+* **50051** (optional): gRPC over HTTP/2 traffic for the Ubuntu Installer Attach Messenger service. Expose it only when that service is enabled.
 
 For more details on networking, see {ref}`reference-internal-network-requirements`.
 
