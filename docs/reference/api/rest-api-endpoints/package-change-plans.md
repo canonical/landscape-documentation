@@ -10,9 +10,7 @@ myst:
 The following endpoints are for creating, viewing, and deleting package change plans. Package change plans let you stage and review a bulk package operation across a fleet of computers before executing it.
 
 ```{note}
-TODO(srunde3): clarify point release version when finalized.
-
-You must be running the latest point release of Landscape Server 26.04 or above to use the REST API for package management.
+You must be running  Landscape Server 26.10 or later to use the REST API for package management.
 
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
@@ -39,10 +37,11 @@ Create a new package change plan.
 ### Response fields
 
 - `id`: UUID of the newly created plan.
-- `state`: Lifecycle state of the plan. One of `created`, `started`, `completed`, `failed`.
 - `action`: The package operation. One of `install`, `remove`, `hold`, `unhold`, `upgrade`, `change_version`.
 - `created_at`: ISO 8601 timestamp of when the plan was created.
 - `item_count`: Number of computer/package pairs targeted by the plan.
+- `executed_at`: ISO 8601 timestamp of when the plan was executed, or `null` if it has not been executed yet.
+- `activity_id`: ID of the activity created by executing the plan, or `null` if it has not been executed yet.
 
 (install_config)=
 ### `install_config`
@@ -89,10 +88,11 @@ Example response (201 Created):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "install",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 50
+  "item_count": 50,
+  "executed_at": null,
+  "activity_id": null
 }
 ```
 
@@ -125,10 +125,11 @@ Example response (201 Created):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "remove",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 12
+  "item_count": 12,
+  "executed_at": null,
+  "activity_id": null
 }
 ```
 
@@ -158,10 +159,11 @@ Example response (201 Created):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "hold",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 20
+  "item_count": 20,
+  "executed_at": null,
+  "activity_id": null
 }
 ```
 
@@ -191,10 +193,11 @@ Example response (201 Created):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "unhold",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 20
+  "item_count": 20,
+  "executed_at": null,
+  "activity_id": null
 }
 ```
 
@@ -265,10 +268,11 @@ Example response (201 Created):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "upgrade",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 85
+  "item_count": 85,
+  "executed_at": null,
+  "activity_id": null
 }
 ```
 
@@ -298,10 +302,11 @@ Example response (201 Created):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "change_version",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 10
+  "item_count": 10,
+  "executed_at": null,
+  "activity_id": null
 }
 ```
 
@@ -330,10 +335,24 @@ Example response (200 OK):
 ```json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
-  "state": "created",
   "action": "install",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 50
+  "item_count": 50,
+  "executed_at": null,
+  "activity_id": null
+}
+```
+
+Once the plan has been executed (see below), `executed_at` and `activity_id` will be populated:
+
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "action": "install",
+  "created_at": "2026-01-15T10:00:00+00:00",
+  "item_count": 50,
+  "executed_at": "2026-01-15T10:05:00+00:00",
+  "activity_id": 42
 }
 ```
 
@@ -391,58 +410,119 @@ Path parameters:
 Query parameters:
 
 - `computer_ids`: Comma-separated list of computer IDs to filter by (optional).
-- `package_ids`: Comma-separated list of package IDs to filter by (optional).
 - `computer_instance_name`: Filter by a computer's instance name (optional).
 - `limit`: Maximum number of results to return (optional).
 - `offset`: Offset into the result list (default: `0`).
 
-Example request:
+**Action filters:** at most one of the following may be set. Each filter must match the plan's own `action`; using a filter for a different action returns a `400` error.
+
+- `install`: A package ID. Restricts results to the item installing this package.
+- `remove`: A package ID. Restricts results to the item removing this package.
+- `hold`: A package ID. Restricts results to the item holding this package.
+- `unhold`: A package ID. Restricts results to the item unholding this package.
+- `upgrade`: A package ID (the target/new package). Restricts results to the item upgrading to this package.
+- `change_version`: A JSON-encoded object with `from_package_id` and `to_package_id`, e.g. `{"from_package_id": 10, "to_package_id": 11}`. Restricts results to the item performing this version change.
+
+Example request--filter by computer and action:
 
 ```bash
-curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/items?limit=2" \
+curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/items?computer_ids=5,7&install=101" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json"
 ```
 
-Example response (200 OK):
+Example request--filter a `change_version` plan by the version change:
+
+```bash
+curl -s -G "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/items" \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  --data-urlencode 'change_version={"from_package_id": 10, "to_package_id": 11}'
+```
+
+Example response (200 OK)--`install` plan:
 
 ```json
 {
+  "action": "install",
   "items": [
     {
-      "package_id": 101,
+      "action": {
+        "install": {
+          "id": 101,
+          "name": "openssh-server",
+          "version": "1:9.6p1-3ubuntu13.5"
+        }
+      },
       "computer": {
         "id": 5,
         "name": "web-server-01"
-      },
-      "action": "install"
+      }
     },
     {
-      "package_id": 102,
+      "action": {
+        "install": {
+          "id": 102,
+          "name": "curl",
+          "version": "8.5.0-2ubuntu10.6"
+        }
+      },
       "computer": {
         "id": 7,
         "name": "db-server-01"
-      },
-      "action": "install"
+      }
     }
   ],
   "count": 2
 }
 ```
 
+Example response (200 OK)--`change_version` plan:
+
+```json
+{
+  "action": "change_version",
+  "items": [
+    {
+      "action": {
+        "change_version": {
+          "from_package": {
+            "id": 10,
+            "name": "vim",
+            "version": "2:8.2"
+          },
+          "to_package": {
+            "id": 11,
+            "name": "vim",
+            "version": "2:9.0"
+          }
+        }
+      },
+      "computer": {
+        "id": 5,
+        "name": "web-server-01"
+      }
+    }
+  ],
+  "count": 1
+}
+```
+
 Response fields:
 
+- `action`: The plan's package operation. One of `install`, `remove`, `hold`, `unhold`, `upgrade`, `change_version`.
 - `items`: List of plan items.
-  - `package_id`: ID of the package targeted by this item.
+  - `action`: An object with exactly one key--matching the plan's `action`--describing the package(s) involved in this item.
+    - For `install`, `remove`, `hold`, `unhold`, and `upgrade`, the value is the package: `id`, `name`, and `version`.
+    - For `change_version`, the value has `from_package` and `to_package`, each with `id`, `name`, and `version`.
   - `computer`: The computer targeted by this item.
     - `id`: ID of the computer.
     - `name`: Name of the computer.
-  - `action`: The package operation for this item.
 - `count`: Total number of items returned.
 
 ## GET `/package-change-plans/<id>/summary`
 
-Get a per-package summary of applicable and non-applicable target states across the computer selection.
+Get an action-focused summary of a plan: the distinct package actions it will perform and how many computers each applies to, plus counts for computers that could not apply the action on a given package.
 
 Path parameters:
 
@@ -460,41 +540,68 @@ curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e
   -H "Content-Type: application/json"
 ```
 
-Example response (200 OK):
+Example response (200 OK)--`install` plan:
 
 ```json
 {
-  "summary_items": [
+  "actions": [
     {
-      "package_id": 1,
-      "package_name": "openssh-server",
-      "package_version": "1:9.6p1-3ubuntu13.5",
-      "package_state_counts": [
-        {
-          "state": "applicable",
-          "count": 48
-        },
-        {
-          "state": "not_applicable",
-          "count": 2
+      "action": {
+        "install": {
+          "id": 101,
+          "name": "openssh-server",
+          "version": "1:9.6p1-3ubuntu13.5"
         }
-      ]
+      },
+      "computer_count": 48
+    }
+  ],
+  "exclusions": [
+    {
+      "package_name": "curl",
+      "computer_count": 2
     }
   ]
 }
 ```
 
+Example response (200 OK)--`change_version` plan:
+
+```json
+{
+  "actions": [
+    {
+      "action": {
+        "change_version": {
+          "from_package": {
+            "id": 10,
+            "name": "vim",
+            "version": "2:8.2"
+          },
+          "to_package": {
+            "id": 11,
+            "name": "vim",
+            "version": "2:9.0"
+          }
+        }
+      },
+      "computer_count": 12
+    }
+  ],
+  "exclusions": []
+}
+```
+
 Response fields:
 
-- `summary_items`: One entry per package included in the plan.
-  - `package_id`: ID of the package.
-  - `package_name`: Name of the package.
-  - `package_version`: Version string of the package.
-  - `package_state_counts`: List of state/count pairs describing the distribution of target states across the selected computers.
-    - `state`: Either `applicable` or `not_applicable`.
-    - `count`: Number of computers in this state.
-
-`applicable` means the operation will be performed on that computer. `not_applicable` means the operation will not.
+- `actions`: One entry per distinct package action in the plan.
+  - `action`: An object with exactly one key--matching the plan's `action`--describing the package(s) involved.
+    - For `install`, `remove`, `hold`, `unhold`, and `upgrade`, the value is the package: `id`, `name`, and `version`.
+    - For `change_version`, the value has `from_package` and `to_package`, each with `id`, `name`, and `version`.
+  - `computer_count`: Number of selected computers this action applies to.
+- `exclusions`: Packages that could not be resolved for some computers, grouped by package name.
+  - `package_name`: Name of the excluded package. Exclusions are grouped by name (not ID), so multiple versions of the same package may be aggregated together.
+  - `computer_count`: Number of selected computers excluded for this package.
 
 ## DELETE `/package-change-plans/<id>`
 

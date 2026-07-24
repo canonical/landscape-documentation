@@ -8,9 +8,15 @@ myst:
 
 # Package change plans
 
-A package change plan is a staged set of package operations to be applied across a computer selection. When you create a plan, Landscape calculates which computers and packages are affected before any changes are made. You can inspect the plan, then execute it to trigger the underlying activities.
+A package change plan is a staged set of package actions to be applied across a computer selection. When you create a plan, Landscape calculates which computers and packages are targeted before any changes are made. You can inspect the plan, then execute it to trigger the underlying activities.
 
 Each plan has exactly one action, which determines how the set of affected (computer, package) pairs is resolved.
+
+```{note}
+You must be running  Landscape Server 26.10 or later to use the REST API for package management.
+
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
+```
 
 ## Actions
 
@@ -49,14 +55,13 @@ When upgrading by category, you can also exclude specific packages from the upgr
 
 ### Change version
 
-Switch specific packages to a different version -- either an upgrade or a downgrade. Each operation maps a currently installed version to a desired target version. A computer is included if the current version is installed on it, the current version is not held, and the target version is available. A computer is excluded if the current version is not installed, the current version is held, or the target version is unavailable.
+Switch specific packages to a different version -- either an upgrade or a downgrade. Each change maps a currently installed version to a desired target version. A computer is included if the current version is installed on it, the current version is not held, and the target version is available. A computer is excluded if the current version is not installed, the current version is held, or the target version is unavailable.
 
 ## Plan items and the summary
 
-After creation, the plan contains a flat list of (computer, package) items, each representing one intended operation on one computer. Not every item will necessarily be executable. The plan summary groups items by package and breaks down counts by target state:
+After creation, the plan contains a flat list of (computer, package) items, each representing one intended action on one computer. Not every computer targeted by the `computer_query` will necessarily receive an item--computers for which the operation doesn't apply are excluded from the plan.
 
-- **Applicable** -- the operation can be performed on this computer.
-- **Not applicable** -- the operation cannot be performed on this computer.
+The plan summary groups the plan's items by the distinct package action being performed and reports how many computers each action applies to. It also reports exclusions--packages that could not be resolved for one or more computers--grouped by package name and the number of computers affected.
 
 Reviewing the summary before executing gives you visibility into the scope and impact of the plan.
 
