@@ -264,6 +264,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Required: No
 - `service.conf`-supplied: No
 
+(reference-outbox-task-handler-client-settings)=
 ### Task handler client settings
 
 The outbox connects to the Task Handler over gRPC with mutual TLS to submit hard deletion tasks. If no certificates directory is configured, the outbox logs an error and continues running its other jobs (soft deletion, RabbitMQ publishing) without the task handler client.

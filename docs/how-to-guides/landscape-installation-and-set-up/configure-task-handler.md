@@ -7,7 +7,7 @@ myst:
 (how-to-configure-task-handler)=
 # How to configure Task Handler
 
-Task handler is required for Landscape 26.04.1 LTS and later. It performs hard deletion tasks (for example, permanently deleting a computer) as a saga that spans the main, account, and resource databases, tracking each task through its stages so that a transient failure can be retried instead of leaving the deletion partially applied.
+Task handler is required for Landscape 26.04.1 LTS and later. It performs hard deletion tasks (for example, permanently deleting a computer) across the main, account, and resource databases. It records each operation's progress so that temporary failures can be retried without leaving the deletion incomplete.
 
 The Landscape Task Handler snap (`landscape-task-handler`) runs sandboxed as `root` and connects to both its own task database and the shared Landscape Server databases. By default, the task handler reads the shared database configuration from `/etc/landscape/service.conf`. The task handler's own database must always be configured directly, as it is not provided by `service.conf`.
 
@@ -50,7 +50,7 @@ sudo snap set landscape-task-handler landscape.database.main.ssl=verify-full
 Or to tune worker concurrency:
 
 ```bash
-sudo snap set landscape-task-handler landscape.task-handler.worker.max-retries=5
+sudo snap set landscape-task-handler landscape.task-handler.worker.concurrency=8
 ```
 
 ## Verify configuration changes

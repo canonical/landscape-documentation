@@ -30,7 +30,7 @@ On the **database server**, create the task handler's own database and grant the
 ```{include} /reuse/task-handler-create-database.md
 ```
 
-On the **application server**, install the snap and grant it access to the `/etc/landscape` directory.
+On the **application server**, install the snap.
 
 ```bash
 sudo snap install landscape-task-handler

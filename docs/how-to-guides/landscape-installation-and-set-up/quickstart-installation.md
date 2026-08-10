@@ -101,7 +101,7 @@ To install `landscape-server-quickstart`:
 
 ### (Landscape 26.04 only) Install the task handler snap
 
-Install the `landscape-task-handler` snap and grant it access to the `/etc/landscape` directory.
+Install the `landscape-task-handler` snap.
 
 ```bash
 sudo snap install landscape-task-handler
@@ -112,7 +112,7 @@ Create the task handler's own database and grant the `landscape` user access to 
 ```{include} /reuse/task-handler-create-database.md
 ```
 
-Configure the snap to connect to the task handler database. Replace `<DB-PASSWORD>` with the `landscape` database user's password. This value is stored base64-encoded in the `password` key of the `[stores]` section of `/etc/landscape/service.conf`; decode it (for example, `echo '<value>' | base64 -d`) to get the plaintext password. For the main, account, and resource databases this decoding happens automatically, but it must be done manually here because the task handler's own database is not read from `service.conf`.
+Configure the snap to connect to the task handler database. Replace `<DB-PASSWORD>` with the `landscape` database user's password, found in the `password` key of the `[stores]` section of `/etc/landscape/service.conf`. This value may be stored as plain text or, if prefixed with `b64:`, as base64-encoded text; in the latter case, decode it (for example, `echo '<value-without-b64-prefix>' | base64 -d`) to get the plaintext password. For the main, account, and resource databases this decoding happens automatically, but it must be done manually here because the task handler's own database is not read from `service.conf`.
 
 ```bash
 sudo snap set landscape-task-handler \

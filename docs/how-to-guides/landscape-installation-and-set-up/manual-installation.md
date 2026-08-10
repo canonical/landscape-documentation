@@ -579,7 +579,7 @@ sudo lsctl restart
 
 ### (Landscape 26.04 only) Install the task handler snap
 
-Install the `landscape-task-handler` snap on the same machine as your Landscape Server installation and grant it access to the `/etc/landscape` directory.
+Install the `landscape-task-handler` snap on the same machine as your Landscape Server installation.
 
 ```bash
 sudo snap install landscape-task-handler
@@ -632,7 +632,7 @@ sudo snap logs landscape-task-handler -n 50
 
 ### (Landscape 26.04 only) Install the outbox snap
 
-Install the `landscape-outbox` snap on the same machine as your Landscape Server installation and grant it access to the `/etc/landscape` directory.
+Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
 
 ```bash
 sudo snap install landscape-outbox
