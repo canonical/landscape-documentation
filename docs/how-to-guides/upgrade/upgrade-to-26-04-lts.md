@@ -46,7 +46,7 @@ sudo snap set landscape-task-handler \
   landscape.database.task-handler.password=<DB-PASSWORD> \
   landscape.database.task-handler.name=landscape-standalone-task-handler \
   landscape.database.task-handler.ssl=disable \
-  landscape.task-handler.server.grpc-port=50051 \
+  landscape.task-handler.server.grpc-port=50053 \
   landscape.task-handler.server.host=localhost
 ```
 

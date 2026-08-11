@@ -1,4 +1,4 @@
-The output should show the `task-handler.server` and `task-handler.worker` services as **active**:
+The output should show the `landscape-task-handler.server` and `landscape-task-handler.worker` services as **active**:
 
 ```text
 Service                        Startup  Current  Notes

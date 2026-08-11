@@ -281,7 +281,7 @@ Always update both sides together.
 
 - Purpose: The host and port of the Task Handler's gRPC server that the outbox connects to.
 - Snap key: `landscape.task-handler.grpc-address`
-- Default: `localhost:50051`
+- Default: `localhost:50053`
 - Required: No
 - `service.conf`-supplied: No
 

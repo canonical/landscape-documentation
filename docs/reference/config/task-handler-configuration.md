@@ -150,7 +150,7 @@ These settings apply to the `landscape-task-handler.server` service only.
 
 - Purpose: The port on which the gRPC server listens.
 - Snap key: `landscape.task-handler.server.grpc-port`
-- Default: `50051`
+- Default: `50053`
 - Required: Yes
 - `service.conf`-supplied: No
 
@@ -211,7 +211,7 @@ These settings apply to the `landscape-task-handler.worker` service only.
 
 - Purpose: The maximum number of times the worker will retry a failed task before marking it as permanently failed.
 - Snap key: `landscape.task-handler.worker.max-retries`
-- Default: `3` (applied by the worker when this setting is unset; the underlying config field itself has no default)
+- Default: `3`
 - Required: No
 - `service.conf`-supplied: No
 
