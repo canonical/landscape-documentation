@@ -78,6 +78,7 @@ This will deploy:
 - PostgreSQL 16 for the database
 - RabbitMQ Server for message queuing
 - Self-signed certificates for TLS (integrated with HAProxy)
+- `landscape-debarchive` charm for Deb Archive repository management
 
 **For older deployments:**
 
