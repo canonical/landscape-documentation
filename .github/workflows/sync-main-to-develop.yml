@@ -26,7 +26,8 @@ jobs:
     if: github.repository == 'canonical/landscape-documentation'
 
     env:
-      GH_TOKEN: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
+      GH_TOKEN: ${{ secrets.LANDSCAPE_SYNC_TOKEN != '' && secrets.LANDSCAPE_SYNC_TOKEN || github.token }}
+      DRY_RUN: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') }}
 
     steps:
       - name: Check whether develop is already up to date
@@ -46,8 +47,6 @@ jobs:
         if: steps.compare.outputs.ahead_by != '0'
         id: ensure-pr
         run: |
-          dry_run="${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}"
-
           pr_number=$(gh pr list \
             --repo "${{ github.repository }}" \
             --base develop \
@@ -59,7 +58,7 @@ jobs:
           if [ -n "${pr_number}" ]; then
             echo "Reusing existing open PR #${pr_number}."
           else
-            if [ "${dry_run}" = "true" ]; then
+            if [ "${DRY_RUN}" = "true" ]; then
               echo "Dry-run mode: no existing PR found, and PR creation is skipped."
             else
               echo "No existing open PR found – creating one."
@@ -77,7 +76,7 @@ jobs:
           echo "pr_number=${pr_number}" >> "$GITHUB_OUTPUT"
 
       - name: Enable auto-merge on the sync PR
-        if: steps.compare.outputs.ahead_by != '0' && !(github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true') && steps.ensure-pr.outputs.pr_number != ''
+        if: steps.compare.outputs.ahead_by != '0' && env.DRY_RUN != 'true' && steps.ensure-pr.outputs.pr_number != ''
         run: |
           pr_number="${{ steps.ensure-pr.outputs.pr_number }}"
           already_set=$(gh pr view "${pr_number}" \
