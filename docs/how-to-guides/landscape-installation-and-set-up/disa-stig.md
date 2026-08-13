@@ -221,8 +221,8 @@ For Apache, you'll need one certificate and its corresponding key:
     ```bash
     sudo chown root:root /etc/apache2/apache_server.pem
     sudo chown root:root /etc/apache2/apache_server.key
-    sudo chmod 444 /etc/apache2/apache2_server.pem
-    sudo chmod 400 /etc/apache2/apache2_server.key
+    sudo chmod 444 /etc/apache2/apache_server.pem
+    sudo chmod 400 /etc/apache2/apache_server.key
     ```
 
 ## Harden PostgreSQL
