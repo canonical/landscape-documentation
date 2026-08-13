@@ -33,7 +33,7 @@ jobs:
             echo "main is ${ahead_by} commit(s) ahead of develop – sync required."
           fi
 
-      - name: Ensure a sync PR exists
+      - name: Create or reuse sync PR
         if: steps.compare.outputs.ahead_by != '0'
         id: ensure-pr
         run: |
