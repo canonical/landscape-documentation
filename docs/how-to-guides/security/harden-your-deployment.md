@@ -222,9 +222,9 @@ The Task Handler can connect to the Landscape databases and its own database usi
 
 The Outbox can connect to the Landscape databases and the RabbitMQ broker using TLS. To set this up, see the SSL mode configuration settings for the {ref}`database <reference-outbox-database-ssl>` and {ref}`broker <reference-outbox-broker-ssl>`.
 
-#### Debarchive
+#### Deb Archive
 
-Debarchive can connect to its own database using TLS. To set this up, see the {ref}`configuration settings <reference-debarchive-snap-config>`.
+Deb Archive can connect to its own database using TLS. To set this up, see the {ref}`configuration settings <reference-debarchive-snap-config>`.
 
 
 #### Secrets Service (with HashiCorp Vault)

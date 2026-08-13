@@ -306,6 +306,7 @@ ReleaseNotes
 repo
 reprepro
 restorable
+retryable
 revalidated
 RewriteRule
 RHEL
