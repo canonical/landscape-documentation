@@ -118,7 +118,7 @@ The Outbox is a required component for Landscape 26.04 LTS and later. It is dist
 (explanation-server-architecture-task-handler)=
 ### Task-Handler
 
-The Task Handler is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-task-handler`. It runs continuously as a background worker and connects to the Landscape databases. It also stores its own state in its own separate database. The Task Handler processes background tasks in retriable chunks to get work done as reliably as possible.
+The Task Handler is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-task-handler`. It runs continuously as a background worker and connects to the Landscape databases. It also stores its own state in its own separate database. The Task Handler processes background tasks in retryable chunks to get work done as reliably as possible.
 
 ### Secrets
 
