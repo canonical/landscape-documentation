@@ -7,7 +7,7 @@ myst:
 (how-to-web-portal-manage-snaps)=
 # How to manage packages and snaps
 
-You can manage packages (Debian) and snaps from the web portal for each managed instance in your Landscape account.
+You can manage packages (Debian) and snaps from the web portal for each managed instance in your Landscape account. You can also use package profiles and remote script execution to apply package management policies across multiple instances.
 
 ## Packages
 
@@ -30,6 +30,27 @@ You can perform different actions with packages from an instance's **Packages** 
    - You can only downgrade an individual package, not multiple packages at once.
 
 All actions will ask you to complete a form or confirm before Landscape sends an activity to perform the action. You can check the status of activities in the **Activities** page from the sidebar.
+
+### Prevent a package from being installed
+
+You can prevent a Debian package from being installed on groups of managed instances by combining remote script execution with a package profile.
+
+This workflow is for APT-managed Debian packages on instances using the Landscape Client deb package. If you're using the Landscape Client snap (with Ubuntu Core), remote script execution is still available, but APT-based package blocking isn't.
+
+1. Add and run a script on the target instances (see {ref}`how-to-web-portal-use-remote-script-execution`) that creates `/etc/apt/preferences.d/<PACKAGE>.pref` with `Pin-Priority` set below `0`.
+   For example, to block `audacity`, the preferences file content should be:
+
+   ```text
+   Package: audacity
+   Pin: release *
+   Pin-Priority: -1
+   ```
+
+1. Create a package profile with a manual `Conflicts with` constraint for that package, then associate it with the target access group or tags (see {ref}`how-to-web-portal-use-profiles`).
+
+APT preferences prevent future installation, but they don't remove a package that's already installed. The package profile is what enforces removal if the package appears on associated instances.
+
+To allow the package again later, remove the APT preferences file from target instances, then remove or update the related package profile constraint.
 
 ## Snaps
 

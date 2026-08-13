@@ -68,6 +68,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y postfix
     sudo postconf -e smtp_sasl_tls_security_options=noanonymous
     ```
 
+```{tip}
+To enforce a minimum TLS version for outgoing mail in addition to requiring TLS, see {ref}`how-to-harden-deployment-secure-email-traffic` in the deployment hardening guide.
+```
+
 ## Finish configuration
 
 1. Write `/etc/postfix/sasl_passwd` with the authentication credentials:
