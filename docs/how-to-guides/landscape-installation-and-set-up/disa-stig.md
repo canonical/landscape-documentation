@@ -18,7 +18,7 @@ This guide only applies to Landscape Server versions 25.10 and later. We recomme
 
 Ensure you meet the following requirements before installing Landscape:
 
-- Ubuntu Server install media for the version of Ubuntu (Jammy 22.04 or Noble 24.04)
+- Ubuntu Server install media for a FIPS certified version of Ubuntu (currently only Ubuntu 22.04 LTS)
 - Ubuntu Pro subscription
 - Server X509 certificates and keys, signed by a DoD Certificate Authority, and issued for the FQDN hostname of the application server, database server, and message queuing server.
 - DISA STIG compliant Ubuntu system with the FIPS OpenSSL package installed and with FIPS enabled for all Landscape nodes.
@@ -114,20 +114,11 @@ You need to install PostgreSQL, RabbitMQ, and Apache.
 
 ### Install PostgreSQL and required libraries
 
-Run one of the following commands to install the database software.
-
-For an Ubuntu 22.04 (`jammy`) database server:
+Run the following commands to install the database software.
 
 ```bash
 sudo apt update
 sudo apt install postgresql postgresql-14 postgresql-14-debversion postgresql-plpython3-14 postgresql-contrib postgresql-client-14 postgresql-client-common postgresql-common postgresql-14-pgaudit postgresql-14-pgauditlogtofile pgbackrest
-```
-
-For an Ubuntu 24.04 (`noble`) database server:
-
-```bash
-sudo apt update
-sudo apt install postgresql postgresql-16 postgresql-16-debversion postgresql-plpython3-16 postgresql-contrib postgresql-client-16 postgresql-client-common postgresql-common postgresql-16-pgaudit postgresql-16-pgauditlogtofile pgbackrest postgresql-16-set-user
 ```
 
 ### Install RabbitMQ
@@ -170,9 +161,7 @@ sudo chmod 444 /etc/crl.crl
 
 ### Certificates for PostgreSQL
 
-#### Ubuntu 22.04 (Jammy) database server
-
-For an Ubuntu 22.04 database server, you'll need three certificates and their corresponding keys:
+For PostgreSQL, you'll need three certificates and their corresponding keys:
 
 - Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
 
@@ -190,46 +179,6 @@ For an Ubuntu 22.04 database server, you'll need three certificates and their co
     sudo chown landscape:landscape /etc/landscape/postgres_client_superuser.key
     sudo chmod 444 /etc/landscape/postgres_client_superuser.pem
     sudo chmod 400 /etc/landscape/postgres_client_superuser.key
-    ```
-
-- Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
-
-    ```bash
-    sudo chown postgres:postgres /etc/postgresql/postgres_server.pem
-    sudo chown postgres:postgres /etc/postgresql/postgres_server.key
-    sudo chmod 444 /etc/postgresql/postgres_server.pem
-    sudo chmod 400 /etc/postgresql/postgres_server.key
-    ```
-
-#### Ubuntu 24.04 (Noble) database server
-
-For an Ubuntu 24.04 database server, you'll need four certificates and their corresponding keys:
-
-- Client authentication certificate for the `landscape` PostgreSQL user. The common name must be `landscape`. The SAN must contain the DNS or IP address of the Landscape server.
-
-    ```bash
-    sudo chown landscape:landscape /etc/landscape/postgres_client.pem
-    sudo chown landscape:landscape /etc/landscape/postgres_client.key
-    sudo chmod 444 /etc/landscape/postgres_client.pem
-    sudo chmod 400 /etc/landscape/postgres_client.key
-    ```
-
-- Client authentication certificate for the `landscape_superuser` PostgreSQL user. The common name must be `landscape_superuser`. The SAN must contain the DNS or IP address of the Landscape server.
-
-    ```bash
-    sudo chown landscape:landscape /etc/landscape/postgres_client_superuser.pem
-    sudo chown landscape:landscape /etc/landscape/postgres_client_superuser.key
-    sudo chmod 444 /etc/landscape/postgres_client_superuser.pem
-    sudo chmod 400 /etc/landscape/postgres_client_superuser.key
-    ```
-
-- Client authentication certificate for the `landscape_maintenance` PostgreSQL user. The common name must be `landscape_maintenance`. The SAN must contain the DNS or IP address of the Landscape server.
-
-    ```bash
-    sudo chown landscape:landscape /etc/landscape/postgres_client_maintenance.pem
-    sudo chown landscape:landscape /etc/landscape/postgres_client_maintenance.key
-    sudo chmod 444 /etc/landscape/postgres_client_maintenance.pem
-    sudo chmod 400 /etc/landscape/postgres_client_maintenance.key
     ```
 
 - Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
@@ -284,10 +233,10 @@ Use the following steps to harden the PostgreSQL service.
 
 PostgreSQL must be configured to allow the Landscape application server to access the database server. Landscape uses several users for access, so all users must be added.
 
-Edit the file `/etc/postgresql/<VERSION>/main/pg_hba.conf` (replace `<VERSION>` with your PostgreSQL version, i.e., `/etc/postgresql/14/main/pg_hba.conf` for Jammy and `/etc/postgresql/16/main/pg_hba.conf` for Noble) and add:
+Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 
 ```ini
-hostssl all landscape,landscape_maintenance,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
+hostssl all landscape,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
 ```
 
 Replace `<LANDSCAPE_IP_ADDRESS>` with the IP address of the server hosting Landscape services. You may also specify a network address using CIDR notation if needed.
@@ -296,7 +245,7 @@ You should also remove the lines that refer to `scram-sha-256` or other password
 
 ### Configure database settings
 
-Edit `/etc/postgresql/<VERSION>/main/postgresql.conf` (replace `<VERSION>` with your PostgreSQL version, i.e., `/etc/postgresql/14/main/pg_hba.conf` for Jammy and `/etc/postgresql/16/main/pg_hba.conf` for Noble) to apply the following settings:
+Edit `/etc/postgresql/14/main/postgresql.conf` to apply the following settings:
 
 1. Limit the allowed connections.
 
@@ -387,14 +336,13 @@ Edit `/etc/postgresql/<VERSION>/main/postgresql.conf` (replace `<VERSION>` with 
 
 ### Set permissions for PostgreSQL files
 
-Set secure permissions for the certificates and PostgreSQL configuration files. `<VERSION>` should be either `14` or `16` depending on whether you are on Jammy or Noble.
+Set secure permissions for the certificates and PostgreSQL configuration files.
 
 ```bash
-export VERSION=<VERSION>
-sudo chmod 600 /etc/postgresql/$VERSION/main/postgresql.conf
-sudo chmod 600 /etc/postgresql/$VERSION/main/pg_hba.conf
-sudo chown postgres:postgres /etc/postgresql/$VERSION/main/postgresql.conf
-sudo chown postgres:postgres /etc/postgresql/$VERSION/main/pg_hba.conf
+sudo chmod 600 /etc/postgresql/14/main/postgresql.conf
+sudo chmod 600 /etc/postgresql/14/main/pg_hba.conf
+sudo chown postgres:postgres /etc/postgresql/14/main/postgresql.conf
+sudo chown postgres:postgres /etc/postgresql/14/main/pg_hba.conf
 ```
 
 ### Configure `rsyslog` for PostgreSQL
@@ -505,8 +453,8 @@ sudo systemctl restart postgresql
 
 Click on the links to download the following sample files. Remember to replace any placeholder values with the correct ones for your configuration.
 
-- [`/etc/postgresql/<VERSION>/main/postgresql.conf`](/assets/disa-stig/postgresql.conf)
-- [`/etc/postgresql/<VERSION>/main/pg_hba.conf`](/assets/disa-stig/pg_hba.conf)
+- [`/etc/postgresql/14/main/postgresql.conf`](/assets/disa-stig/postgresql.conf)
+- [`/etc/postgresql/14/main/pg_hba.conf`](/assets/disa-stig/pg_hba.conf)
 - [`/etc/rsyslog.d/10-postgresql.conf`](/assets/disa-stig/10-postgresql.conf)
 
 ## Configure PostgreSQL for Landscape
@@ -525,16 +473,23 @@ Landscape also needs a regular user to store and retrieve information from the d
 sudo -u postgres createuser --no-createdb --no-createrole --no-superuser landscape
 ```
 
-For Ubuntu 24.04+, Landscape also needs a maintenance user which will be used to escalate permissions for schema migrations. If you are on Ubuntu 22.04 (Jammy), skip this step.
-
-```bash
-sudo -u postgres createuser --no-createdb --no-createrole --no-superuser landscape_maintenance
-```
-
 ### Create databases
 
 Landscape uses multiple databases. To create them:
 
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+```bash
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-account-1
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-main
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-package
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-session
+```
+````
+
+````{tab-item} Landscape Server 25.10
 ```bash
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-account-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-knowledge
@@ -543,40 +498,9 @@ sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-session
 ```
+````
 
-(header-set-user)=
-
-### Enable the `set_user` extension
-
-If you are on a Noble instance, you will have the PostgreSQL `set_user` extension. This allows Landscape to escalate from a normal user to a superuser for schema migrations. To enable it:
-
-1. Enable the extension on each database.
-
-    ```bash
-    sudo -u postgres psql landscape-standalone-account-1  -c "CREATE EXTENSION IF NOT EXISTS set_user"
-    sudo -u postgres psql landscape-standalone-knowledge  -c "CREATE EXTENSION IF NOT EXISTS set_user"
-    sudo -u postgres psql landscape-standalone-main       -c "CREATE EXTENSION IF NOT EXISTS set_user"
-    sudo -u postgres psql landscape-standalone-package    -c "CREATE EXTENSION IF NOT EXISTS set_user"
-    sudo -u postgres psql landscape-standalone-resource-1 -c "CREATE EXTENSION IF NOT EXISTS set_user"
-    sudo -u postgres psql landscape-standalone-session    -c "CREATE EXTENSION IF NOT EXISTS set_user"
-    ```
-
-1. Grant execute permissions.
-
-    ```bash
-    sudo -u postgres psql landscape-standalone-account-1  -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
-    sudo -u postgres psql landscape-standalone-knowledge  -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
-    sudo -u postgres psql landscape-standalone-main       -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
-    sudo -u postgres psql landscape-standalone-package    -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
-    sudo -u postgres psql landscape-standalone-resource-1 -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
-    sudo -u postgres psql landscape-standalone-session    -c "GRANT EXECUTE ON FUNCTION set_user_u(text) TO landscape_maintenance"
-    ```
-
-1. Disable direct login for the superuser.
-
-    ```bash
-    sudo -u postgres psql -c "ALTER USER landscape_superuser NOLOGIN"
-    ```
+`````
 
 ### Limit concurrent connections
 
@@ -585,12 +509,6 @@ To prevent denial-of-service due to resource exhaustion, limit the number of con
 ```bash
 sudo -u postgres psql -c "ALTER USER landscape CONNECTION LIMIT 100"
 sudo -u postgres psql -c "ALTER USER landscape_superuser CONNECTION LIMIT 8"
-```
-
-If you have the PostgreSQL `set_user` extension enabled, additionally set the limit for the `landscape_maintenance` user.
-
-```bash
-sudo -u postgres psql -c "ALTER USER landscape_maintenance CONNECTION LIMIT 8"
 ```
 
 ### Require reauthentication for privilege escalation
@@ -1099,21 +1017,141 @@ export LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION=false
 sudo sh -c "echo 'LANDSCAPE_SYSTEM__ENABLE_PASSWORD_AUTHENTICATION=false' >> /etc/environment"
 ```
 
-If you're using the `set_user` extension, also set the following environment variables:
-
-```bash
-export LANDSCAPE_SCHEMA__STORE_USER=landscape_maintenance
-sudo sh -c "echo 'LANDSCAPE_SCHEMA__STORE_USER=landscape_maintenance' >> /etc/environment"
-export LANDSCAPE_SCHEMA__STORE_SUPERUSER=landscape_superuser
-sudo sh -c "echo 'LANDSCAPE_SCHEMA__STORE_SUPERUSER=landscape_superuser' >> /etc/environment"
-```
-
 ### Configure `service.conf`
 
 Modify settings in the `/etc/landscape/service.conf` file to configure Landscape to connect to the database and message queuing services. For more details about the databases that Landscape uses, see {ref}`reference-database`.
 
 The following changes are required in the sections below. Remove any passwords if they exist.
 
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+```ini
+[api]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 9080
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package session session-autocommit
+threads = 10
+
+[appserver]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 8080
+blob_storage_root = /var/lib/landscape/blobs
+display_consent_banner_at_each_login = true
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+oops_key = DF
+repository_path = /var/lib/landscape/landscape-repository
+reprepro_binary = /opt/canonical/landscape/scripts/reprepro-wrapper.sh
+sanitize_delay = 3600
+secret_token = <SECRET_TOKEN>
+stores = main account-1 resource-1 package session session-autocommit
+threads = 8
+
+[async_frontend]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 9090
+
+[broker]
+host = localhost
+port = 5671
+ssl_client_cert = /etc/landscape/rabbitmq_client.pem
+ssl_client_private_key = /etc/landscape/rabbitmq_client.key
+ssl_client_ca_cert = /etc/ca-certificates.crt
+user = landscape
+vhost = landscape
+
+[job_handler]
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package
+threads = 10
+
+[load_shaper]
+
+[maintenance]
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package session session-autocommit
+threads = 1
+
+[message_server]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 8090
+oops_key = DM
+stores = main account-1 resource-1 package
+threads = 8
+
+[oops]
+
+[package_search]
+allowed_interfaces = localhost 127.0.0.1 ::1
+account_threshold = 0
+pid_path = /var/run/landscape/landscape-package-search-1.pid
+port = 9099
+stores = main package resource-1
+
+[package_upload]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 9100
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+root_url = http://localhost:9100
+threads = 10
+
+[pingserver]
+allowed_interfaces = localhost 127.0.0.1 ::1
+base_port = 8070
+stores = main account-1 resource-1
+threads = 2
+
+[schema]
+# note that you must have at least two certificates for db connections:
+# one for landscape_superuser
+# and one for the regular landscape user
+sslcert = /etc/landscape/postgres_client_superuser.pem
+sslkey = /etc/landscape/postgres_client_superuser.key
+sslmode = verify-full
+sslrootcert = /etc/ca-certificates.crt
+stores = main account-1 resource-1 package session
+store_user = landscape_superuser
+threads = 1
+
+[scripts]
+mailer = queue
+mailer_path = /var/lib/landscape/landscape-mail-queue
+stores = main account-1 resource-1 package session
+threads = 1
+
+[secrets]
+allowed_interfaces = localhost 127.0.0.1 ::1
+service_url = http://localhost:26155
+
+[stores]
+account_1 = landscape-standalone-account-1
+host = localhost
+main = landscape-standalone-main
+package = landscape-standalone-package
+resource_1 = landscape-standalone-resource-1
+session = landscape-standalone-session
+session_autocommit = landscape-standalone-session
+sslcert = /etc/landscape/postgres_client.pem
+sslkey = /etc/landscape/postgres_client.key
+sslmode = verify-full
+sslrootcert = /etc/ca-certificates.crt
+user = landscape
+
+[system]
+deployment_mode = standalone
+enable_password_authentication = false
+oops_path = /var/lib/landscape/landscape-oops
+syslog_address = /dev/log
+```
+````
+
+````{tab-item} Landscape Server 25.10
 ```ini
 [api]
 allowed_interfaces = localhost 127.0.0.1 ::1
@@ -1207,9 +1245,6 @@ sslmode = verify-full
 sslrootcert = /etc/ca-certificates.crt
 stores = main account-1 resource-1 package session knowledge
 store_user = landscape_superuser
-# if you have enabled the set_user extension, comment the line above and uncomment the lines below:
-# store_user = landscape_maintenance
-# store_superuser = landscape_superuser
 threads = 1
 
 [scripts]
@@ -1243,6 +1278,9 @@ enable_password_authentication = false
 oops_path = /var/lib/landscape/landscape-oops
 syslog_address = /dev/log
 ```
+````
+
+`````
 
 Replace `<SECRET_TOKEN>` with a random 172-character alphanumeric string. You can randomly generate one with:
 
@@ -1269,7 +1307,17 @@ sudo chmod 600 /etc/landscape/service.conf
 
 Click on the link to download the following sample file. Remember to replace any placeholder values with the correct ones for your configuration.
 
-- [`/etc/landscape/service.conf`](/assets/disa-stig/service.conf)
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+- [`/etc/landscape/service.conf`](/assets/disa-stig/26.04/service.conf) (26.04 and later)
+````
+
+````{tab-item} Landscape Server 25.10
+- [`/etc/landscape/service.conf`](/assets/disa-stig/25.10/service.conf) (25.10)
+````
+
+`````
 
 ### Run the Landscape setup script
 
@@ -1323,6 +1371,18 @@ sudo lsctl restart
 ## Install and configure the Landscape Outbox (Landscape 26.04+)
 
 The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+
+Since this is a FIPS-compliant deployment, install or refresh the `core22` base snap from the `fips-updates/stable` channel before installing the `landscape-outbox` snap:
+
+```bash
+snap install core22 --channel=fips-updates/stable
+```
+
+If `core22` is already installed, refresh it to the FIPS channel instead:
+
+```bash
+snap refresh core22 --channel=fips-updates/stable
+```
 
 Install the `landscape-outbox` snap if not already installed:
 

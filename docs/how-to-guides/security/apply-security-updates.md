@@ -28,6 +28,25 @@ You can update the security fixes on a per-instance basis. To do this, select th
 
 Or, you can update multiple instances at a time, but this would update all packages in those instances, not just the security updates. To do this, select the checkbox for the instances you want to fully update, then click **Upgrade**.
 
+#### Apply an individual CVE or USN fix
+
+You can use remote script execution and Ubuntu Pro Client to apply an individual CVE or USN fix to selected managed instances in Landscape. This is useful if you want to test a specific security fix on a group of instances before applying it more broadly.
+
+This process involves using Ubuntu Pro Client and the `pro fix` command. For more information, see their documentation: [Ubuntu Pro Client | How to resolve a specific CVE or USN](https://documentation.ubuntu.com/pro-client/en/latest/howtoguides/fix_how_to_resolve_given_cve/). Note that Ubuntu Pro Client must be installed on the target instances for this process to work.
+
+From the web portal, add and run a script on the target instances (see {ref}`how-to-web-portal-use-remote-script-execution`) that uses `pro fix` and the CVE or USN ID(s) you want to fix.
+
+For example, this script applies the fix for `CVE-YYYY-NNNN`:
+
+```bash
+#!/bin/bash
+set -e
+
+pro fix CVE-YYYY-NNNN
+```
+
+Landscape will create script execution activities for each selected instance. Use the **Activities** page or the instance’s **Activities** tab to review the status and output.
+
 ### Classic web portal
 
 You can view security updates available and upgrade on a per-computer basis. To do this, select each computer in the classic web portal, and click **Packages**. In this tab, you can view and apply any reported security updates.

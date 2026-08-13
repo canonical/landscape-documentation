@@ -7,10 +7,10 @@ myst:
 (how-to-register-wsl-hosts)=
 # How to set up Ubuntu Pro for WSL and register WSL hosts to Landscape
 
-> See also: [Ubuntu on WSL documentation](https://documentation.ubuntu.com/wsl/latest/)
+> See also: [Ubuntu on WSL documentation](https://ubuntu.com/wsl/docs/latest/)
 
 ```{note}
-If this is the first time you've installed Landscape, you can continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
+If this is the first time you've installed Landscape, continue with this guide. If you've upgraded from Landscape 23.10 or earlier, you first need to configure it to enable WSL-related services. See {ref}`how-to-wsl-configure-landscape-after-upgrade`.
 ```
 
 This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts (Windows machines) to Landscape.
@@ -21,7 +21,7 @@ This guide describes how to set up Ubuntu Pro for WSL and register new WSL hosts
 You must be running Windows 11 to use Ubuntu Pro for WSL.
 ```
 
-To use the WSL-Landscape integration, you must an [Ubuntu Pro account](https://ubuntu.com/pro) and the following applications from the Microsoft Store:
+To use the WSL-Landscape integration, you must have an [Ubuntu Pro account](https://ubuntu.com/pro) and the following applications from the Microsoft Store:
 
 - [Windows Subsystem for Linux](https://apps.microsoft.com/detail/9P9TQF7MRM4R)
 - An Ubuntu application, such as [Ubuntu 24.04 LTS](https://apps.microsoft.com/detail/9nz3klhxdjp5?)
@@ -32,7 +32,7 @@ Also, you must have WSL 2 installed instead of WSL 1. If you've just now install
 
 ## Install and configure Ubuntu Pro for WSL
 
-> See also: [Ubuntu on WSL's full documentation](https://documentation.ubuntu.com/wsl/latest/)
+> See also: [Ubuntu on WSL's full documentation](https://ubuntu.com/wsl/docs/latest/)
 
 There are two ways to configure Ubuntu Pro for WSL for Ubuntu Pro and Landscape: via the Ubuntu Pro for WSL GUI or the Windows Registry.
 
@@ -103,7 +103,7 @@ To finish registering your WSL host to Landscape:
 1. Log into your Landscape web portal and refresh the page.
 1. Either:
 
-    - Accept the instance from the *Pending* tile on the home page
+    - Accept the instance from the *Pending* tile on the home page, or
     - Go to **Instances** > review pending instances > accept the Windows host machine
 
 Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu instances, see {ref}`how-to-manage-wsl-instances`.
@@ -111,7 +111,7 @@ Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu
 (howto-heading-register-wsl-host-troubleshoot)=
 ## (If necessary) Troubleshoot
 
-> See also: [Ubuntu Pro for WSL's logs](https://documentation.ubuntu.com/wsl/en/latest/howto/06-access-the-logs/)
+> See also: [Ubuntu Pro for WSL's logs](https://ubuntu.com/wsl/docs/latest/howto/06-access-the-logs/)
 
 If your Windows host machine doesn’t appear as a pending instance in your Landscape account:
 
@@ -136,7 +136,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
     url = landscape-server.example.com:6554
     ```
 
-- **Check that the `wsl_management` in the `[features]` section of your `LandscapeConfig` key is set to `true`.**
+- **Check that the `wsl_management` in the `[features]` section of your `LandscapeConfig` key is set to `true`**
 
     ```ini
     [features]
@@ -147,7 +147,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
 
 - **Ensure your firewall settings are configured appropriately**
 
-   > See also: [Ubuntu Pro for WSL documentation on firewall requirements](https://documentation.ubuntu.com/wsl/latest/reference/firewall_requirements/)
+   > See also: [Ubuntu Pro for WSL documentation on firewall requirements](https://ubuntu.com/wsl/docs/latest/reference/firewall_requirements/)
 
     You may need to adjust your firewall settings to allow inbound and outbound traffic on Port 6554, or whichever port you’re routing traffic on if you’ve changed the port. Port 6554 is the default for `landscape-server-quickstart` installations.
 
@@ -165,6 +165,6 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
 
 - **Access the Ubuntu Pro for WSL logs**
 
-   If you’ve completed the previous troubleshooting steps and your Windows machine still doesn’t appear as a pending computer in Landscape, you should review the Ubuntu Pro for WSL logs. To access those logs, see [Ubuntu Pro for WSL's guide on how to access the logs for debugging](https://documentation.ubuntu.com/wsl/latest/howto/06-access-the-logs/).
+   If you’ve completed the previous troubleshooting steps and your Windows machine still doesn’t appear as a pending computer in Landscape, you should review the Ubuntu Pro for WSL logs. To access those logs, see [Ubuntu Pro for WSL's guide on how to access the logs for debugging](https://ubuntu.com/wsl/docs/latest/howto/06-access-the-logs/).
 
   Landscape won’t have awareness of the Windows host machine until it's a pending instance or auto-registered in your Landscape account. The Landscape logs won’t be helpful when troubleshooting this registration issue.
