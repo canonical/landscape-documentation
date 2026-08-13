@@ -20,6 +20,7 @@ A Landscape Server deployment has seven required services:
 * [Message system](#message-system) - exchanges messages with Landscape Clients
 * [Pingserver](#pingserver) - records Landscape Client heartbeat pings
 * [Outbox](#outbox) - ensures reliable, eventually-consistent delivery of events across databases and the message broker
+* [Task Handler](#task-handler) - runs background jobs such as resource cleanup
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
@@ -113,6 +114,11 @@ The Package upload service responds to dput or FTP requests to upload Debian pac
 ### Outbox
 
 The Outbox is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-outbox`. It runs continuously as a background worker and connects to the Landscape databases and the Landscape broker. The outbox pattern guarantees correctness and eventual consistency for operations that span multiple databases or span a database and broker.
+
+(explanation-server-architecture-task-handler)=
+### Task-Handler
+
+The Task Handler is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-task-handler`. It runs continuously as a background worker and connects to the Landscape databases. It also stores its own state in its own separate database. The Task Handler processes background tasks in retriable chunks to get work done as reliably as possible.
 
 ### Secrets
 
