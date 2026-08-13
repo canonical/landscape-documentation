@@ -31,7 +31,7 @@ You can edit, archive, run and more on the script using the dot menu under **Act
 
 To run a script on one or more instances:
 
-1. Go to **Instances** from the sidebar > Select the target instance(s) > **Run script**
+1. Go to **Instances** from the sidebar > Select the target instance(s) > **Operations** > **Run script**
 1. In the side panel that opens, complete the form > **Run**
    - Note: **Time limit** is the maximum time the script can run before Landscape forcibly terminates it
 

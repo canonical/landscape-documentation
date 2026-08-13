@@ -23,6 +23,7 @@ A Landscape Server deployment has seven required services:
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
+* [Deb Archive](#deb-archive) - for repository mirroring and publishing
 * [Hostagent consumer](#hostagent-consumer) - for WSL instance management
 * [Hostagent messenger](#hostagent-messenger) - for WSL instance management
 * [Package search](#package-search) - for improved package management performance
@@ -35,7 +36,6 @@ A deployment requires a number of third-party components as well:
 * reverse proxy and load-balancer - usually [HAProxy](https://www.haproxy.org/) or [Apache Server](https://httpd.apache.org/), listens for external connections and forwards them to the responsible core service
 * [PostgreSQL](https://www.postgresql.org/) - database, the main store of Landscape data regarding accounts, users, packages, and managed instances
 * [RabbitMQ Server](https://www.rabbitmq.com/) - message-broker, used between services for background tasks and asynchronous communication
-* reprepro - repository-mirroring utility, used to create, manage, and sync Landscape-managed Debian repository mirrors
 * [systemd](https://systemd.io/) - service manager, used to start, stop, restart, enable, and disable the Landscape services
 
 There is also one optional third-party component:
@@ -103,6 +103,18 @@ The Hostagent messenger service communicates with Ubuntu Pro for WSL on managed 
 ### Package search
 
 The Package search service responds to internal HTTP requests with the Debian package state information of instances. It acts as an in-memory cache of this information, improving the performance of package queries. Without it, package queries go directly to the database. It primarily interacts with the PostgreSQL database.
+
+(explanation-server-architecture-deb-archive)=
+### Deb Archive
+
+Deb Archive was introduced in Landscape 26.04 LTS, replacing the previous reprepro-based repository mirroring implementation.
+
+The Deb Archive service (`landscape-debarchive`) provides Debian repository mirroring and publishing for Landscape. It is distributed as a separate snap and installed alongside Landscape Server (or deployed as a charm in the same Juju model). It exposes a REST API that Landscape Server consumes to manage mirrors, local repositories, publications, and publication targets.
+
+Deb Archive uses its own PostgreSQL database within the same cluster as Landscape Server. It supports publishing to filesystem, S3, and OpenStack Swift storage backends. Long-running operations such as mirror syncs and publishes run asynchronously in the background.
+
+* {ref}`Set up Deb Archive <how-to-debarchive-repository-management>`
+* {ref}`Repository mirroring explanation <explanation-repo-mirroring-2604>`
 
 (explanation-server-architecture-package-upload)=
 ### Package upload
