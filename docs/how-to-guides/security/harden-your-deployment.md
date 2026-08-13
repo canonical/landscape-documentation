@@ -175,6 +175,9 @@ sudo lsctl restart
 The following Landscape services can be configured to use TLS or mTLS:
 
 - `landscape-async-frontend`
+- `landscape-task-handler`
+- `landscape-outbox`
+- `landscape-debarchive`
 - `landscape-secrets-service`
 
 Each service can have its own server certificate and can be configured to require clients to authenticate via their own TLS credentials.
@@ -210,6 +213,19 @@ Restart Landscape:
 ```sh
 sudo lsctl restart
 ```
+
+#### Task Handler
+
+The Task Handler can connect to the Landscape databases and its own database using TLS. To set this up, see the {ref}`SSL mode configuration settings <reference-task-handler-database-ssl>`.
+
+#### Outbox
+
+The Outbox can connect to the Landscape databases and the RabbitMQ broker using TLS. To set this up, see the SSL mode configuration settings for the {ref}`database <reference-outbox-database-ssl>` and {ref}`broker <reference-outbox-broker-ssl>`.
+
+#### Debarchive
+
+Debarchive can connect to its own database using TLS. To set this up, see the {ref}`configuration settings <reference-debarchive-snap-config>`.
+
 
 #### Secrets Service (with HashiCorp Vault)
 

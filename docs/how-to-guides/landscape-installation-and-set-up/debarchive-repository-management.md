@@ -81,6 +81,7 @@ Which should match the name of the database you created in the previous step.
 **Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
 ```
 
+(reference-debarchive-snap-config)=
 ### (Optional) Override default settings with `snap set`
 
 Quickstart installations use the default configurations and generally don't require additional setup. Skip this section unless you've customized your database configuration.
@@ -100,6 +101,9 @@ The available settings and their defaults are:
 | Database user | `deb.archive.database.user` | *(empty, read from service.conf)* |
 | Database password | `deb.archive.database.password` | *(empty, read from service.conf)* |
 | Database SSL mode | `deb.archive.database.ssl` | `disable` (can be any of the [PostgreSQL SSL modes](https://www.postgresql.org/docs/current/libpq-ssl.html)) |
+| Database SSL root certificate | `deb.archive.database.ssl-root-cert` | *(empty)* — path to the root CA certificate used to verify the server's certificate; required when the SSL mode is `verify-ca` or `verify-full` |
+| Database SSL client certificate | `deb.archive.database.ssl-cert` | *(empty)* — path to the client certificate for SSL client certificate authentication; must be set together with the SSL key |
+| Database SSL client key | `deb.archive.database.ssl-key` | *(empty)* — path to the private key for the client certificate; must be set together with the SSL certificate |
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |
