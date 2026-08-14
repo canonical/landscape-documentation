@@ -1,0 +1,20 @@
+# Hand-written request/response examples for the generated Debarchive API spec
+# (docs/_static/openapi.yaml). Applied at build time by docs/scripts/apply_overlay.py
+# to produce docs/_static/openapi-with-examples.yaml, which is what
+# docs/reference/api/debarchive.md renders.
+#
+# See openapi-examples-overlay.md for the full design, including why targets
+# MUST be full literal JSONPaths (no wildcards or filter expressions such as
+# `$.paths.*.*[?(@.operationId=='...')]`).
+overlay: 1.0.0
+info:
+  title: Debarchive API examples
+  version: 1.0.0
+actions:
+  - target: $.paths['/v1beta1/locals'].get.responses['200'].content['application/json']
+    update:
+      example:
+        locals:
+          - name: locals/my-local
+            displayName: My local repository
+        nextPageToken: ""
