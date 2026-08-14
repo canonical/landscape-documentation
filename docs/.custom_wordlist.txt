@@ -63,6 +63,7 @@ CIS
 CISOs
 CLA
 CLI's
+CNs
 Cognito
 conf
 config
@@ -94,6 +95,7 @@ decodeable
 decrypt
 deduplication
 deprivileged
+dequeue
 deterministically
 DirectoryAPI
 Diátaxis
@@ -228,6 +230,7 @@ nagios
 netinstall
 netmask
 newprofile
+nmap
 NFS
 NIC
 NID
@@ -270,6 +273,7 @@ PITR
 pgSQL
 pgtune
 pingserver
+plaintext
 pluggable
 png
 pooler
@@ -316,6 +320,7 @@ RSS
 rsyslog
 rsyslogd
 SaaS
+sandboxed
 Sanitization
 sanitization
 scalable

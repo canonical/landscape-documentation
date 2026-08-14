@@ -58,6 +58,83 @@ Example response:
 }
 ```
 
+## DELETE `/message-backlog-settings`
+
+Clear the message backlog limit for the current account, restoring default behaviour.
+
+Path parameters:
+
+- None
+
+Required parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X DELETE https://landscape.canonical.com/api/v2/message-backlog-settings \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response: `204 No Content`
+
+## GET `/message-backlog-settings`
+
+Get the message backlog limit for the current account. Returns `404` if no limit has been set.
+
+Path parameters:
+
+- None
+
+Required parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET https://landscape.canonical.com/api/v2/message-backlog-settings \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+    "max_message_backlog": 100000
+}
+```
+
+## PUT `/message-backlog-settings`
+
+Set the message backlog limit for the current account.
+
+Path parameters:
+
+- None
+
+Required parameters:
+
+- `max_message_backlog`: Maximum number of messages to queue per computer (non-negative integer).
+
+Example request:
+
+```bash
+curl -X PUT https://landscape.canonical.com/api/v2/message-backlog-settings \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{"max_message_backlog": 100000}'
+```
+
+Example response:
+
+```json
+{
+    "max_message_backlog": 100000
+}
+```
+
 ## GET `/standalone-account`
 
 An endpoint to indicate whether or not the standalone account has been created in a standalone deployment. This endpoint will always return a 404 in any deployment other than a standalone deployment (e.g. SaaS).

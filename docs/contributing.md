@@ -52,6 +52,16 @@ For further details on our Diátaxis strategy, see [Diátaxis, a new foundation 
 
 Improving our documentation and applying the principles of Diátaxis are on-going tasks. There's a lot to do, and we don't want to deter anyone from contributing to our docs. If you don't know whether something should be a tutorial, how-to guide, reference doc or explanatory text, either ask on the forum or publish what you're thinking. Changes are easy to make, and every contribution helps.
 
+## Using AI-assisted tools
+
+You're welcome to use AI-assisted tools to help write or edit documentation. If you do, keep the following in mind:
+
+- You remain responsible for everything you submit. Review any generated or modified content before proposing it.
+- Verify technical claims, commands, configuration, links, UI instructions, and version- or edition-specific behavior.
+- AI-assisted contributions are reviewed to the same standards as any other contribution. AI does not replace technical validation or human review.
+- Don't submit confidential information, credentials, personal data, or private design material to an external service, and don't share anything you're not permitted to share.
+- Respect licensing and attribution requirements for any content you include.
+
 ## Ways to contribute
 
 Most Landscape documentation contributions are made on GitHub. There are several ways you can contribute:

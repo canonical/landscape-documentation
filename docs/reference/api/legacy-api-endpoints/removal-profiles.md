@@ -14,7 +14,7 @@ Landscape can be configured to automatically remove computers that have not cont
 Create a removal profile.
 
 - `title`: The human-readable title of the profile.
-- `days_without_exchange`: The length of time after which a computer may be removed.
+- `days_without_exchange`: The length of time after which a computer may be removed. Must be an integer between 1 and 3650.
 - `access_group`: If specified, the name of the access group the profile will apply to.
 
 For example, the following command creates a removal profile titled "New Profile" that will remove computers after 4 days:
@@ -40,7 +40,6 @@ The following errors may be raised:
 
 `UnknownAccessGroup`: The given access group is not known.
 `Unauthorised`: The person is not authorized to create removal profiles in the given access group.
-`InvalidDaysWithoutExchangeValue`: The days_without_exchange value is less than 1.
 
 ## RemoveRemovalProfile
 
@@ -100,7 +99,7 @@ Arguments:
 
 - `name`: The name of the profile to edit.
 - `title`: The new human-readable title of the profile.
-- `days_without_exchange`: The length of time after which a computer may be removed.
+- `days_without_exchange`: The length of time after which a computer may be removed. Must be an integer between 1 and 3650.
 
 For example, the following modifies the example profile in documented in CreateRemovalProfile to have a no communication period of 31 days:
 
@@ -124,7 +123,6 @@ The following errors may be raised:
 
 `UnknownRemovalProfile`: A profile with the specified name could not be found.
 `Unauthorised`: The person is not authorized to edit removal profiles in the associated access group.
-`InvalidDaysWithoutExchangeValue`: The `days_without_exchange` value is less than 1.
 
 ## AssociateRemovalProfile
 
