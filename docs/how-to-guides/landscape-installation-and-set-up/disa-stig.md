@@ -486,6 +486,7 @@ sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-package
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-session
+sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-task-handler
 ```
 ````
 
@@ -1368,9 +1369,7 @@ Run the script `lsctl` to start the `landscape-server` daemons:
 sudo lsctl restart
 ```
 
-## Install and configure the Landscape Outbox (Landscape 26.04+)
-
-The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+## Install and configure snapped services
 
 Since this is a FIPS-compliant deployment, install or refresh the `core22` base snap from the `fips-updates/stable` channel before installing the `landscape-outbox` snap:
 
@@ -1384,18 +1383,82 @@ If `core22` is already installed, refresh it to the FIPS channel instead:
 snap refresh core22 --channel=fips-updates/stable
 ```
 
+### Install and configure the Landscape Task Handler (Landscape 26.04+)
+
+The {ref}`Landscape Task Handler <explanation-server-architecture-task-handler>` interacts with the Landscape databases and its own database. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+
+Install the `landscape-task-handler` snap if not already installed:
+
+```bash
+sudo snap install landscape-task-handler
+```
+
+Copy the CA certificate and the PostgreSQL client certificates that you created on the Landscape server earlier:
+
+```bash
+DB_CERTS=/var/snap/landscape-task-handler/common/db-certs
+sudo mkdir -p $DB_CERTS
+sudo cp /etc/ca-certificates.crt           $DB_CERTS/postgres_ca.crt
+sudo cp /etc/landscape/postgres_client.pem $DB_CERTS/postgres_client.pem
+sudo cp /etc/landscape/postgres_client.key $DB_CERTS/postgres_client.key
+```
+
+Ensure the certificates are owned and readable by `root`:
+
+```bash
+sudo chown -R root:root $DB_CERTS
+sudo chmod 600 $DB_CERTS/*
+```
+
+For each database, configure the task handler to use TLS with external authentication. Be sure to change the `DATABASE_HOST` placeholder.
+
+```bash
+for db in main account resource task-handler; do
+  sudo snap set landscape-task-handler \
+    landscape.database.$db.host=<DATABASE_HOST> \
+    landscape.database.$db.port=5432 \
+    landscape.database.$db.user=landscape \
+    landscape.database.$db.ssl=verify-full \
+    landscape.database.$db.ssl-root-cert=$DB_CERTS/postgres_ca.crt \
+    landscape.database.$db.ssl-cert=$DB_CERTS/postgres_client.pem \
+    landscape.database.$db.ssl-key=$DB_CERTS/postgres_client.key
+done
+```
+
+Set the database names, which should match the names used earlier in the guide.
+
+```bash
+sudo snap set landscape-task-handler \
+  landscape.database.main.name=landscape-standalone-main \
+  landscape.database.account.name=landscape-standalone-account-1 \
+  landscape.database.resource.name=landscape-standalone-resource-1 \
+  landscape.database.task-handler.name=landscape-standalone-task-handler
+```
+
+### Install and configure the Landscape Outbox (Landscape 26.04+)
+
+The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+
 Install the `landscape-outbox` snap if not already installed:
 
 ```bash
 sudo snap install landscape-outbox
 ```
 
-Copy the CA certificate and the RabbitMQ client certificates that you created on the Landscape server earlier:
+Connect the outbox and task handler for communication over GRPC. 
+
+```bash
+sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
+```
+
+Copy the CA certificate, PostgreSQL client certificates, and the RabbitMQ client certificates that you created on the Landscape server earlier:
 
 ```bash
 sudo cp /etc/ca-certificates.crt /root/snap/landscape-outbox/common/ca.crt
 sudo cp /etc/landscape/rabbitmq_client.pem /root/snap/landscape-outbox/common/rabbit.pem
 sudo cp /etc/landscape/rabbitmq_client.key /root/snap/landscape-outbox/common/rabbit.key
+sudo cp /etc/landscape/postgres_client.pem /root/snap/landscape-outbox/common/postgres_client.pem
+sudo cp /etc/landscape/postgres_client.key /root/snap/landscape-outbox/common/postgres_client.key
 ```
 
 Ensure the certificates are owned and readable by `root`:
@@ -1417,6 +1480,40 @@ Provide the paths to the certificates you copied earlier:
 sudo snap set landscape-outbox landscape.broker.ssl-cert=/root/snap/landscape-outbox/common/rabbit.pem
 sudo snap set landscape-outbox landscape.broker.ssl-key=/root/snap/landscape-outbox/common/rabbit.key
 sudo snap set landscape-outbox landscape.broker.ssl-ca-cert=/root/snap/landscape-outbox/common/ca.crt
+```
+
+Then, configure the rest of the broker settings, using the same options you specified under the `[broker]` section of the `service.conf`.
+
+```bash
+sudo snap set landscape-outbox landscape.broker.host=localhost
+sudo snap set landscape-outbox landscape.broker.port=5671
+sudo snap set landscape-outbox landscape.broker.user=landscape
+sudo snap set landscape-outbox landscape.broker.vhost=landscape
+```
+
+For each database, configure the outbox to use TLS with external authentication. Be sure to change the `DATABASE_HOST` placeholder.
+
+```bash
+CERTS=/root/snap/landscape-outbox/common
+for db in main account resource; do
+  sudo snap set landscape-outbox \
+    landscape.database.$db.host=<DATABASE_HOST> \
+    landscape.database.$db.port=5432 \
+    landscape.database.$db.user=landscape \
+    landscape.database.$db.ssl=verify-full \
+    landscape.database.$db.ssl-root-cert=$CERTS/ca.crt \
+    landscape.database.$db.ssl-cert=$CERTS/postgres_client.pem \
+    landscape.database.$db.ssl-key=$CERTS/postgres_client.key
+done
+```
+
+Set the database names, which should match the names used earlier in the guide.
+
+```bash
+sudo snap set landscape-outbox \
+  landscape.database.main.name=landscape-standalone-main \
+  landscape.database.account.name=landscape-standalone-account-1 \
+  landscape.database.resource.name=landscape-standalone-resource-1
 ```
 
 Restart the outbox service to apply the new configuration:
