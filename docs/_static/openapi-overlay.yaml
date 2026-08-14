@@ -3,9 +3,8 @@
 # to produce docs/_static/openapi-with-examples.yaml, which is what
 # docs/reference/api/debarchive.md renders.
 #
-# See openapi-examples-overlay.md for the full design, including why targets
-# MUST be full literal JSONPaths (no wildcards or filter expressions such as
-# `$.paths.*.*[?(@.operationId=='...')]`).
+# Targets MUST be full literal JSONPaths (no wildcards or filter expressions
+# such as `$.paths.*.*[?(@.operationId=='...')]`).
 overlay: 1.0.0
 info:
   title: Debarchive API examples

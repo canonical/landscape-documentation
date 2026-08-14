@@ -13,10 +13,10 @@ help:
 # `html` and `run` must also apply docs/_static/openapi-overlay.yaml to the
 # generated Debarchive API spec, so local builds render the same
 # examples-enriched spec Read the Docs publishes (see .readthedocs.yaml's
-# `pre_build` job and openapi-examples-overlay.md). This can't be forwarded
-# to docs/Makefile like other targets: oas-patch (pinned in
-# docs/requirements.txt) is only installed into $(DOCS_VENVDIR) after `install`
-# runs, so `install` runs first here to guarantee it's available.
+# `pre_build` job). This can't be forwarded to docs/Makefile like other
+# targets: oas-patch (pinned in docs/requirements.txt) is only installed into
+# $(DOCS_VENVDIR) after `install` runs, so `install` runs first here to
+# guarantee it's available.
 html run:
 	@$(MAKE) -C docs install
 	$(DOCS_VENVDIR)/bin/python docs/scripts/apply_overlay.py

@@ -9,10 +9,8 @@ Run automatically by:
   * the Read the Docs `pre_build` job (see .readthedocs.yaml)
   * `make html` / `make run` from the repository root (see the root Makefile)
 
-See https://documentation.ubuntu.com/landscape-internal/en/latest/design-docs/openapi-examples-overlay/
-for the full design behind this script, including why overlay targets MUST be
-literal JSONPaths and why a target that matches nothing MUST fail the build
-rather than silently doing nothing.
+Overlay targets MUST be literal JSONPaths and targets that match nothing MUST
+fail the build rather than silently doing nothing.
 """
 
 import sys
@@ -30,8 +28,7 @@ OVERLAY = STATIC_DIR / "openapi-overlay.yaml"
 OUTPUT = STATIC_DIR / "openapi-with-examples.yaml"
 
 # oas-patch corrupted unrelated parts of the document when tested against a
-# wildcard-and-filter target (see "Targets MUST be literal" in
-# openapi-examples-overlay.md), so targets using either are rejected outright.
+# wildcard-and-filter target, so targets using either are rejected outright.
 DISALLOWED_TARGET_SUBSTRINGS = ("*", "[?")
 
 
@@ -47,8 +44,7 @@ def reject_non_literal_targets(actions: list) -> None:
             fail(
                 f"overlay target {target!r} in {OVERLAY.name} uses a wildcard or "
                 "filter expression ('*' or '[?'). Targets MUST be full literal "
-                "JSONPaths. See 'Targets MUST be literal' in "
-                "openapi-examples-overlay.md."
+                "JSONPaths."
             )
 
 
@@ -64,8 +60,7 @@ def check_targets_match(actions: list, base_spec: dict) -> None:
     """Fail if any overlay target matches nothing in the base spec.
 
     oas-patch silently no-ops when a target matches nothing, which would let a
-    proto rename or removal delete examples without the build noticing. See
-    '"Overlay target matched nothing"' in openapi-examples-overlay.md.
+    proto rename or removal delete examples without the build noticing.
     """
     for action in actions:
         target = action["target"]

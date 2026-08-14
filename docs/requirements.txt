@@ -14,7 +14,7 @@ sphinx-rerediraffe>=0.0.3, <1.0.0
 sphinx-roles~=0.1
 
 # Applies docs/_static/openapi-overlay.yaml to docs/_static/openapi.yaml
-# (docs/scripts/apply_overlay.py); see openapi-examples-overlay.md
+# (docs/scripts/apply_overlay.py)
 oas-patch==0.6.0
 
 # Other dependencies
