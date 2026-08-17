@@ -593,9 +593,17 @@ Create the `/etc/rabbitmq/rabbitmq.conf` file and adjust the following parameter
 
 1. Enforce strong password complexity:
 
-    ```ini
-    credential_validator.validation_backend = rabbit_credential_validator_password_regexp
-    credential_validator.regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{15,}$"
+    You must set these configurations in an `/etc/rabbitmq/advanced.config` file. Create the file if needed and set the `validation_backend` and `regexp` settings according to the example below.
+
+    ```erlang
+    [
+        {rabbit, [
+            {credential_validator, [
+                {validation_backend, rabbit_credential_validator_password_regexp},
+                {regexp, "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{15,}$"}
+            ]}
+        ]}
+    ].
     ```
 
 1. Limit connections:
@@ -636,7 +644,7 @@ Create the `/etc/rabbitmq/rabbitmq.conf` file and adjust the following parameter
 
 ### Configure certificate revocation lists
 
-Create the `/etc/rabbitmq/advanced.config` file to enable CRL checking. If your certificates do not have a CRL Distribution Point (CDP) configured to point to your CRL, skip this step.
+If necessary, create the `/etc/rabbitmq/advanced.config` file to enable CRL checking. Set the `ssl_listeners` and `ssl_options` settings according to the example below. If your certificates do not have a CRL Distribution Point (CDP) configured to point to your CRL, skip this step.
 
 ```erlang
 [
@@ -826,10 +834,10 @@ Click on the links to download the following sample files. Remember to replace a
 
 ### Configure Landscape user in RabbitMQ
 
-Execute the following commands to create the Landscape user and vhosts. Passing the empty string to the password set
+Execute the following commands to create the Landscape user and vhosts. Pass a strong password that passes the validation set above, and then clear it so that the Landscape user cannot use password authentication.
 
 ```bash
-sudo rabbitmqctl add_user landscape ""
+sudo rabbitmqctl add_user landscape "<TEMPORARY_STRONG_PASSWORD>"
 sudo rabbitmqctl clear_password landscape
 sudo rabbitmqctl add_vhost landscape
 sudo rabbitmqctl set_permissions -p landscape landscape ".*" ".*" ".*"
