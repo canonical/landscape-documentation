@@ -486,7 +486,6 @@ sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-package
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-session
-sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-task-handler
 ```
 ````
 
@@ -834,7 +833,7 @@ Click on the links to download the following sample files. Remember to replace a
 
 ### Configure Landscape user in RabbitMQ
 
-Execute the following commands to create the Landscape user and vhosts. Pass a strong password that passes the validation set above, and then clear it so that the Landscape user cannot use password authentication.
+Execute the following commands to create the Landscape user and vhosts. Pass a strong password that passes the validation set above to create the Landscape user. Then clear the password so that the Landscape user cannot use password authentication.
 
 ```bash
 sudo rabbitmqctl add_user landscape "<TEMPORARY_STRONG_PASSWORD>"
@@ -1381,7 +1380,7 @@ sudo lsctl restart
 
 ## Install and configure snapped services
 
-Since this is a FIPS-compliant deployment, install or refresh the `core22` base snap from the `fips-updates/stable` channel before installing the `landscape-outbox` snap:
+Since this is a FIPS-compliant deployment, install or refresh the `core22` base snap from the `fips-updates/stable` channel before installing any snaps:
 
 ```bash
 snap install core22 --channel=fips-updates/stable
@@ -1403,6 +1402,11 @@ Install the `landscape-task-handler` snap if not already installed:
 sudo snap install landscape-task-handler
 ```
 
+Create a database for the task handler:
+
+```{include} /reuse/task-handler-create-database.md
+```
+
 Copy the CA certificate and the PostgreSQL client certificates that you created on the Landscape server earlier:
 
 ```bash
@@ -1416,34 +1420,55 @@ sudo cp /etc/landscape/postgres_client.key $DB_CERTS/postgres_client.key
 Ensure the certificates are owned and readable by `root`:
 
 ```bash
-sudo chown -R root:root $DB_CERTS
-sudo chmod 600 $DB_CERTS/*
+sudo chown -R root:root /var/snap/landscape-task-handler/common/db-certs
+sudo chmod 600 /var/snap/landscape-task-handler/common/db-certs/*
 ```
 
-For each database, configure the task handler to use TLS with external authentication. Be sure to change the `DATABASE_HOST` placeholder.
+Provide the paths to the certificates you copied earlier:
 
 ```bash
-for db in main account resource task-handler; do
-  sudo snap set landscape-task-handler \
-    landscape.database.$db.host=<DATABASE_HOST> \
-    landscape.database.$db.port=5432 \
-    landscape.database.$db.user=landscape \
-    landscape.database.$db.ssl=verify-full \
-    landscape.database.$db.ssl-root-cert=$DB_CERTS/postgres_ca.crt \
-    landscape.database.$db.ssl-cert=$DB_CERTS/postgres_client.pem \
-    landscape.database.$db.ssl-key=$DB_CERTS/postgres_client.key
-done
+DB_CERTS=/var/snap/landscape-task-handler/common/db-certs
+sudo snap set landscape-task-handler \
+  landscape.database.main.ssl-root-cert=$DB_CERTS/postgres_ca.crt \
+  landscape.database.main.ssl-cert=$DB_CERTS/postgres_client.pem \
+  landscape.database.main.ssl-key=$DB_CERTS/postgres_client.key \
+  landscape.database.account.ssl-root-cert=$DB_CERTS/postgres_ca.crt \
+  landscape.database.account.ssl-cert=$DB_CERTS/postgres_client.pem \
+  landscape.database.account.ssl-key=$DB_CERTS/postgres_client.key \
+  landscape.database.resource.ssl-root-cert=$DB_CERTS/postgres_ca.crt \
+  landscape.database.resource.ssl-cert=$DB_CERTS/postgres_client.pem \
+  landscape.database.resource.ssl-key=$DB_CERTS/postgres_client.key \
+  landscape.database.task-handler.ssl-root-cert=$DB_CERTS/postgres_ca.crt \
+  landscape.database.task-handler.ssl-cert=$DB_CERTS/postgres_client.pem \
+  landscape.database.task-handler.ssl-key=$DB_CERTS/postgres_client.key
 ```
 
-Set the database names, which should match the names used earlier in the guide.
+Configure the task handler's own database connection. Unlike the shared databases, this connection is not provided by `service.conf` and must be set directly. Be sure to update the `DATABASE_HOST` as needed.
 
 ```bash
 sudo snap set landscape-task-handler \
-  landscape.database.main.name=landscape-standalone-main \
-  landscape.database.account.name=landscape-standalone-account-1 \
-  landscape.database.resource.name=landscape-standalone-resource-1 \
-  landscape.database.task-handler.name=landscape-standalone-task-handler
+  landscape.database.task-handler.host=<DATABASE_HOST> \
+  landscape.database.task-handler.port=5432 \
+  landscape.database.task-handler.user=landscape \
+  landscape.database.task-handler.name=landscape-standalone-task-handler \
+  landscape.database.task-handler.ssl=verify-full
 ```
+
+Configure the `task-handler` server to listen on localhost.
+
+```
+sudo snap set landscape-task-handler landscape.task-handler.server.host=localhost
+```
+
+The task handler reads other configuration options from `/etc/landscape/service.conf` which may have restricted file permissions that do not allow the snap to read the file. In this case, you can copy the `service.conf` file and configure the `landscape-task-handler` to read configuration from the copied file instead.
+
+```bash
+sudo cp /etc/landscape/service.conf /root/snap/landscape-task-handler/common/service.conf
+sudo chown -R root:root /root/snap/landscape-task-handler/common/
+sudo snap set landscape-task-handler landscape.service-conf-file=/root/snap/landscape-task-handler/common/service.conf
+```
+
+See {ref}`how to configure the task-handler <how-to-configure-task-handler>` for additional information.
 
 ### Install and configure the Landscape Outbox (Landscape 26.04+)
 
@@ -1487,43 +1512,28 @@ sudo snap set landscape-outbox landscape.broker.tls=true
 Provide the paths to the certificates you copied earlier:
 
 ```bash
-sudo snap set landscape-outbox landscape.broker.ssl-cert=/root/snap/landscape-outbox/common/rabbit.pem
-sudo snap set landscape-outbox landscape.broker.ssl-key=/root/snap/landscape-outbox/common/rabbit.key
-sudo snap set landscape-outbox landscape.broker.ssl-ca-cert=/root/snap/landscape-outbox/common/ca.crt
-```
-
-Then, configure the rest of the broker settings, using the same options you specified under the `[broker]` section of the `service.conf`.
-
-```bash
-sudo snap set landscape-outbox landscape.broker.host=localhost
-sudo snap set landscape-outbox landscape.broker.port=5671
-sudo snap set landscape-outbox landscape.broker.user=landscape
-sudo snap set landscape-outbox landscape.broker.vhost=landscape
-```
-
-For each database, configure the outbox to use TLS with external authentication. Be sure to change the `DATABASE_HOST` placeholder.
-
-```bash
 CERTS=/root/snap/landscape-outbox/common
-for db in main account resource; do
-  sudo snap set landscape-outbox \
-    landscape.database.$db.host=<DATABASE_HOST> \
-    landscape.database.$db.port=5432 \
-    landscape.database.$db.user=landscape \
-    landscape.database.$db.ssl=verify-full \
-    landscape.database.$db.ssl-root-cert=$CERTS/ca.crt \
-    landscape.database.$db.ssl-cert=$CERTS/postgres_client.pem \
-    landscape.database.$db.ssl-key=$CERTS/postgres_client.key
-done
+sudo snap set landscape-outbox \
+  landscape.database.main.ssl-cert=$CERTS/postgres_client.pem \
+  landscape.database.main.ssl-key=$CERTS/postgres_client.key \
+  landscape.database.main.ssl-root-cert=$CERTS/ca.crt \
+  landscape.database.account.ssl-cert=$CERTS/postgres_client.pem \
+  landscape.database.account.ssl-key=$CERTS/postgres_client.key \
+  landscape.database.account.ssl-root-cert=$CERTS/ca.crt \
+  landscape.database.resource.ssl-cert=$CERTS/postgres_client.pem \
+  landscape.database.resource.ssl-key=$CERTS/postgres_client.key \
+  landscape.database.resource.ssl-root-cert=$CERTS/ca.crt \
+  landscape.broker.ssl-cert=$CERTS/rabbit.pem \
+  landscape.broker.ssl-key=$CERTS/rabbit.key \
+  landscape.broker.ssl-root-cert=$CERTS/ca.crt
 ```
 
-Set the database names, which should match the names used earlier in the guide.
+The outbox reads other configuration options from `/etc/landscape/service.conf` which may have restricted file permissions that do not allow the snap to read the file. In this case, you can copy the `service.conf` file and configure the `landscape-outbox` to read configuration from the copied file instead.
 
 ```bash
-sudo snap set landscape-outbox \
-  landscape.database.main.name=landscape-standalone-main \
-  landscape.database.account.name=landscape-standalone-account-1 \
-  landscape.database.resource.name=landscape-standalone-resource-1
+sudo cp /etc/landscape/service.conf /root/snap/landscape-outbox/common/service.conf
+sudo chown -R root:root /root/snap/landscape-outbox/common/
+sudo snap set landscape-outbox landscape.service-conf-file=/root/snap/landscape-outbox/common/service.conf
 ```
 
 Restart the outbox service to apply the new configuration:
@@ -1534,11 +1544,16 @@ sudo snap restart landscape-outbox
 
 See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional information.
 
-### Configure authentication
+
+### Install and configure the Landscape Deb Archive
+
+The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`. When configuring connections to the database, be sure to follow the instructions to connect using SSL.
+
+## Configure authentication
 
 If you skipped setting up authentication earlier in the guide, now is the time to complete those steps. See {ref}`Configure Authentication <header-configure-authentication>` for more details.
 
-### Create the first user
+## Create the first user
 
 The first user that's created in Landscape automatically becomes the administrator of the account. To create this first user, go to `https://<SERVER_NAME>` and complete the requested information.
 
