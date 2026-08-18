@@ -18,6 +18,7 @@ The [Landscape Server charm](https://charmhub.io/landscape-server) requires inte
 - `haproxy` (at `2.8/edge`, via `haproxy-route` interface)
 - A TLS certificates provider integrated with HAProxy (e.g., `self-signed-certificates`, `lego`)
 - `landscape-debarchive` (for Deb Archive repository management)
+- `landscape-task-handler` (for task processing)
 
 **Before Landscape 26.04:**
 - `haproxy` (via `reverseproxy` interface)
@@ -39,6 +40,7 @@ The Landscape Server charm supports two deployment architectures:
 - PostgreSQL 14+ with modern `database` interface
 - TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
 - `landscape-debarchive` charm for Deb Archive repository management
+- `landscape-task-handler` charm for task processing
 
 ```{include} /reuse/charm-ha-architecture-2604.md
 ```
@@ -61,6 +63,7 @@ For migration from older deployments to 26.04 beta+, see {ref}`how-to-migrate-to
 | **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface)                        | Required (`latest/x`, `reverseproxy` interface) |
 | **TLS Certificates Provider** | Required (integrated with HAProxy, e.g., `self-signed-certificates`) | Not used                                        |
 | **landscape-debarchive**      | Required (Deb Archive repository management)                         | Not available                                   |
+| **landscape-task-handler**    | Required (task processing)                                           | Not available                                   |
 
 ## TLS certificates charm interface
 
