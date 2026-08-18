@@ -11,7 +11,7 @@ Use these guides to bring an existing NVIDIA DGX Spark under Landscape managemen
 
 ## Set up and register
 
-Enroll the DGX Spark in Landscape and enable the client capability required by the scripts.
+Register the DGX Spark with Landscape and enable the client capability required by the scripts.
 
 ```{toctree}
 :titlesonly:

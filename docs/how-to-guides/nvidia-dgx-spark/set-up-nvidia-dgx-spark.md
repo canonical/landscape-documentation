@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Enroll an NVIDIA DGX Spark running DGX OS in Landscape and enable remote script execution for management."
+    description: "Register an NVIDIA DGX Spark running DGX OS with Landscape and enable remote script execution for management."
 ---
 
 (how-to-set-up-nvidia-dgx-spark)=
@@ -28,7 +28,7 @@ Choose the registration path that matches your Landscape deployment:
 - For **Landscape SaaS**, follow {ref}`How to create a SaaS account and register your first client <howto-create-saas-account>`. The `pro enable landscape` method installs Landscape Client and starts the registration wizard after Ubuntu Pro is attached.
 - For **self-hosted Landscape**, follow {ref}`How to install Landscape Client <how-to-install-landscape-client>` and {ref}`How to configure and register Landscape Client <how-to-configure-landscape-client>`. Provide the account name and Landscape Server URL for your deployment.
 
-NVIDIA's current enrollment example uses Ubuntu Pro and `pro enable landscape` with the self-hosted option set to **No**. That example is for Landscape SaaS. Use Canonical's self-hosted instructions when registering with your own Landscape Server.
+NVIDIA's current registration example uses Ubuntu Pro and `pro enable landscape` with the self-hosted option set to **No**. That example is for Landscape SaaS. Use Canonical's self-hosted instructions when registering with your own Landscape Server.
 
 When registering the DGX Spark, choose a descriptive computer title. After registration, an administrator may need to accept the pending computer in the Landscape web portal. Confirm that the DGX Spark appears as a managed instance before continuing.
 
@@ -36,7 +36,7 @@ When registering the DGX Spark, choose a descriptive computer title. After regis
 
 Enable the Landscape Client script execution plugin on the DGX Spark. Follow {ref}`Enable script execution <howto-heading-client-enable-script-execution>` in the Landscape Client configuration guide. That page documents the supported `landscape-config` options, including the system users allowed to run scripts, and the required client restart.
 
-Remote script execution is a Landscape capability. It does not require a DGX-specific client plugin or a separate NVIDIA enrollment mechanism.
+Remote script execution is a Landscape capability. It does not require a DGX-specific client plugin or a separate NVIDIA registration mechanism.
 
 ## Organize the DGX Spark systems
 

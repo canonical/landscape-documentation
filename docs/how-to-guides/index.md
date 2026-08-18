@@ -156,7 +156,7 @@ api/index
 (how-to-index-heading-nvidia-dgx-spark)=
 ## NVIDIA DGX Spark
 
-Use NVIDIA's Landscape reference scripts with Landscape remote script execution on enrolled DGX Spark systems.
+Use NVIDIA's Landscape reference scripts with Landscape remote script execution on registered DGX Spark systems.
 
 ```{toctree}
 :titlesonly:

@@ -1,45 +1,43 @@
 ---
 myst:
   html_meta:
-    description: "Understand how Landscape and NVIDIA DGX Spark work together for operating-system management and NVIDIA reference-script execution."
+    description: "Understand how Landscape manages NVIDIA DGX Spark systems running DGX OS, and how NVIDIA's Landscape reference scripts fit into that workflow."
 ---
 
 (explanation-related-tools-nvidia-dgx-spark)=
 # Landscape and NVIDIA DGX Spark
 
-NVIDIA DGX Spark runs DGX OS, a customized Linux distribution based on Ubuntu. Landscape can manage the operating-system environment on a DGX Spark after the system is enrolled as a Landscape client. NVIDIA also provides Landscape-specific reference scripts for selected DGX Spark operations.
+[NVIDIA DGX Spark](https://docs.nvidia.com/dgx/dgx-spark/) is a compact AI computer that runs DGX OS, NVIDIA's customized Linux distribution based on Ubuntu. Organizations can manage multiple DGX Spark systems centrally with Landscape, alongside their other Ubuntu systems.
 
-For the setup procedure, see {ref}`Set up NVIDIA DGX Spark for Landscape management <how-to-set-up-nvidia-dgx-spark>`. For using NVIDIA's scripts after enrollment, see {ref}`Use NVIDIA DGX Spark management scripts with Landscape <how-to-manage-nvidia-dgx-spark>`.
+NVIDIA describes Landscape as its [primary recommended management platform for DGX Spark](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html). Landscape is available with [Ubuntu Pro](https://ubuntu.com/pro) subscriptions. This page describes how Landscape and DGX Spark fit together.
 
-Landscape and NVIDIA documentation have different areas of responsibility. Landscape documents the client, web portal, activities, and management workflows. NVIDIA remains the source of truth for DGX Spark, DGX OS, and the behavior of its tools and reference scripts.
+## How Landscape manages a DGX Spark
 
-## Landscape's role
+Landscape manages a DGX Spark like any other Ubuntu-based system. Landscape Client is the software that runs on the DGX Spark and communicates with your Landscape server. After you register your DGX Spark with Landscape, the DGX Spark appears in your Landscape account as a managed instance alongside your other machines.
 
-Landscape provides the management functions that apply to an enrolled client, including:
+From there, you use the same Landscape features you use everywhere else, such as:
 
-- system status and inventory information reported by Landscape Client;
-- package and security-update management;
-- tags and access groups for organizing and targeting instances; and
-- remote script execution and the activities that track those operations.
+- Inventory and status reported by Landscape Client,
+- Package and security-update management,
+- {ref}`Tags <reference-terms-tags>` and {ref}`access groups <reference-terms-access-groups>`, which let you group DGX Spark systems and target actions at them, and
+- {ref}`Remote script execution <explanation-remote-script-execution>`, where each run is tracked as an {ref}`activity <explanation-activities>`.
 
-These are existing Landscape capabilities, not DGX Spark-specific features. See the documentation for {ref}`remote script execution <explanation-remote-script-execution>`, {ref}`activities <explanation-activities>`, and the {ref}`Landscape web portal <how-to-guides-web-portal-index>`.
+## NVIDIA's Landscape reference scripts
 
-## NVIDIA's role
+Some DGX Spark operations are specific to the platform rather than to Ubuntu. For these, [NVIDIA publishes](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html) two kinds of automation:
 
-NVIDIA remains authoritative for DGX Spark and DGX OS, including platform compatibility, drivers, firmware, recovery, provisioning, hardware-level management, diagnostics, and the detailed behavior of NVIDIA tools.
+- **[Production tools](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html#production-tools-11)**, which NVIDIA intends for general fleet automation.
+- **[Landscape reference scripts](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html#canonical-landscape-reference-scripts-8)**, which are example implementations written for Landscape's remote script execution. They return short output and write detailed evidence to the DGX Spark itself.
 
-NVIDIA's [Enterprise Lifecycle Integration](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html) documentation distinguishes between production tools and Landscape reference scripts. The production tools are intended for fleet automation. The Landscape scripts are reference implementations designed for use with Landscape remote script execution and may require adaptation for an organization's processes. They are not a replacement for NVIDIA's production tools.
+NVIDIA provides the reference scripts as examples for customer adaptation rather than supported production software, so treat them as a starting point and review them before relying on them. A DGX Spark must be registered with Landscape before you can use the scripts.
 
-## How the reference scripts fit
+Running these scripts through Landscape means DGX-specific tasks use the same targeting and activity history as your other scripted operations. For what each script does and how to interpret its results, see [NVIDIA's Enterprise Lifecycle Integration documentation](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html).
 
-The [NVIDIA Enterprise Lifecycle Integration Scripts package](https://docscontent.nvidia.com/dc/04/5167e1c14532bac843d48d29bf36/enterprise-lifecycle-integration-scripts-20260520-1602.zip) contains the Landscape reference scripts and their setup documentation. Use NVIDIA's documentation to determine which script is appropriate, what the script requires, what it changes, and how to interpret its output.
+## Other DGX Spark operations
 
-Use Landscape to make a reference script available to enrolled clients, select the target systems, run the script, and inspect the resulting activity. Landscape does not interpret NVIDIA's output format or take ownership of the evidence that a script writes on the DGX Spark.
+Landscape manages the Ubuntu-based DGX OS. Use NVIDIA's tooling and [DGX Spark documentation](https://docs.nvidia.com/dgx/dgx-spark/) for hardware, firmware, drivers, recovery, provisioning, and out-of-band management.
 
-Landscape limits the output returned by remote script execution according to the client's `script_output_limit` setting. NVIDIA's reference scripts are designed to keep standard output short and may store detailed evidence on the client. Do not assume that all script output or NVIDIA evidence is retained in Landscape; follow NVIDIA's instructions for detailed evidence and troubleshooting.
+## Next steps
 
-For the Landscape workflow, see {ref}`how-to-manage-nvidia-dgx-spark`.
-
-## Hardware-level management
-
-Landscape manages DGX Spark through Landscape Client at the operating-system level. Hardware-level and out-of-band operations remain part of NVIDIA's DGX Spark management model. Consult [NVIDIA's DGX Spark documentation](https://docs.nvidia.com/dgx/dgx-spark/) for those operations.
+- {ref}`Set up NVIDIA DGX Spark for Landscape management <how-to-set-up-nvidia-dgx-spark>`
+- {ref}`Use NVIDIA DGX Spark management scripts with Landscape <how-to-manage-nvidia-dgx-spark>`
