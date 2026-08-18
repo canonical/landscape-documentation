@@ -315,7 +315,7 @@ sudo lsctl restart
 
 #### Task Handler
 
-The Task Handler can connect to the Landscape databases and its own database using TLS. To set this up, see the {ref}`SSL mode configuration settings <reference-task-handler-database-ssl>`.
+The Task Handler can connect to the Landscape databases and its own database using TLS. To set this up, see {ref}`how to configure SSL for the task-handler <task-handler-ssl-tls>`.
 
 #### Outbox
 

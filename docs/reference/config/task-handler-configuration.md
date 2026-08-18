@@ -102,7 +102,6 @@ Each database is configured with the same set of keys; replace `<DB>` below with
 - Required: No
 - `service.conf`-supplied: Yes (except `TASK_HANDLER`)
 
-(reference-task-handler-database-ssl)=
 #### `LANDSCAPE_DATABASE_<DB>_SSL`
 
 - Purpose: The SSL mode to use when connecting to PostgreSQL. Valid values are `disable`, `allow`, `prefer`, `require`, `verify-ca`, and `verify-full`.
