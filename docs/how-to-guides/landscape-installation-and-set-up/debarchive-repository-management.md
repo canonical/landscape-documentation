@@ -100,6 +100,7 @@ sudo snap set landscape-debarchive \
 The snap also supports SSL connections to the database. If your PostgreSQL server requires SSL, set `deb.archive.database.ssl` to the appropriate SSL mode (e.g. `require`) and ensure the snap can access any necessary certificates. Set the SSL cert, key, and root cert as needed with the `deb.archive.database.ssl-cert`, `deb.archive.database.ssl-key`, and `deb.archive.database.ssl-root-cert` settings, respectively.
 ```
 
+(reference-debarchive-snap-config)=
 ### (Optional) Override default settings with `snap set`
 
 Quickstart installations use the default configurations and generally don't require additional setup. Skip this section unless you've customized your database configuration.
@@ -119,6 +120,9 @@ The available settings and their defaults are:
 | Database user | `deb.archive.database.user` | *(set in previous step)* |
 | Database password | `deb.archive.database.password` | *(set in previous step)* |
 | Database SSL mode | `deb.archive.database.ssl` | `disable` (can be any of the [PostgreSQL SSL modes](https://www.postgresql.org/docs/current/libpq-ssl.html)) |
+| Database SSL root certificate | `deb.archive.database.ssl-root-cert` | *(empty)* — path to the root CA certificate used to verify the server's certificate; required when the SSL mode is `verify-ca` or `verify-full` |
+| Database SSL client certificate | `deb.archive.database.ssl-cert` | *(empty)* — path to the client certificate for SSL client certificate authentication; must be set together with the SSL key |
+| Database SSL client key | `deb.archive.database.ssl-key` | *(empty)* — path to the private key for the client certificate; must be set together with the SSL certificate |
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |

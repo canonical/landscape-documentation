@@ -90,6 +90,7 @@ CVE
 CVEs
 datetime
 datestamp
+debarchive
 debian
 decodeable
 decrypt
@@ -153,6 +154,7 @@ hostname
 hostnames
 html
 http
+HTTPie
 HTTPS
 https
 integrations
@@ -309,6 +311,7 @@ ReleaseNotes
 repo
 reprepro
 restorable
+retryable
 revalidated
 RewriteRule
 RHEL

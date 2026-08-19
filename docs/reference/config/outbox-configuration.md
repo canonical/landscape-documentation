@@ -108,6 +108,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Required: No
 - `service.conf`-supplied: Yes
 
+(reference-outbox-database-ssl)=
 #### `LANDSCAPE_DATABASE_<DB>_SSL`
 
 - Purpose: The SSL mode to use when connecting to PostgreSQL. Valid values are `disable`, `allow`, `prefer`, `require`, `verify-ca`, and `verify-full`.
@@ -182,6 +183,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Required: Yes
 - `service.conf`-supplied: Yes
 
+(reference-outbox-broker-ssl)=
 #### `LANDSCAPE_BROKER_SSL_CA_CERT`
 
 - Purpose: Path to the CA certificate file used to verify the broker's TLS certificate.
