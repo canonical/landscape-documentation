@@ -127,7 +127,7 @@ This method is suitable when using charmed operators. To install Landscape Clien
 
 For more information on the Landscape client charm, see the [Charmhub documentation](https://charmhub.io/landscape-client).
 
-## Install Landscape Client with Cloud-init
+## Install Landscape Client with cloud-init
 
 This method is suitable if it's available during a machine's provisioning stage. To install Landscape Client with cloud-init:
 
