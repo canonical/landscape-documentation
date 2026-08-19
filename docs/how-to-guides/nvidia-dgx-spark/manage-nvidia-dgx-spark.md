@@ -24,7 +24,7 @@ The package contains both production tools and Landscape reference scripts. This
 For each script you plan to use:
 
 1. In the Landscape web portal, go to **Scripts** from the sidebar > **Add script**.
-1. Copy the NVIDIA reference script into the script editor and complete the form, including its title and access group.
+1. Copy the NVIDIA reference script into the script editor and complete the form, including its title and access group. Keep the script's first line, such as `#!/bin/bash`, because Landscape determines the interpreter from it.
 1. Add attachments only when the NVIDIA script documentation requires them, such as a configuration file that the script reads. Use the attachment names expected by that script.
 1. **Add script**
 

@@ -36,7 +36,7 @@ Register the DGX Spark with Landscape so that it appears in your Landscape accou
 
 1. In the Landscape web portal, accept the pending instance if your account requires manual acceptance, then confirm that the DGX Spark appears as a managed instance before continuing.
 
-For non-interactive registration, see {ref}`How to enable Landscape in the Ubuntu Pro Client <how-to-ubuntu-pro-enable-landscape>`.
+For non-interactive registration, see {ref}`How to enable Landscape in the Ubuntu Pro Client <how-to-ubuntu-pro-enable-landscape>`. To register several DGX Spark systems as part of provisioning them, you can also install and register Landscape Client with cloud-init. See {ref}`How to install Landscape Client <how-to-install-landscape-client>` for the Landscape Client settings, and [NVIDIA's custom installation documentation](https://docs.nvidia.com/dgx/dgx-spark/enterprise-custom-install.html) for the DGX Spark provisioning workflow.
 
 ## Enable remote script execution
 
