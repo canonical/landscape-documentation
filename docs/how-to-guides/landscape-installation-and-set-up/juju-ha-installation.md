@@ -147,7 +147,7 @@ relations:
 ```
 
 ```{note}
-This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name — see {ref}`Step 5: Access Landscape<how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional — only add them if you enable the matching `landscape-server` config options.
+This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options.
 ```
 
 #### Step 2: Deploy the bundle

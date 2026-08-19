@@ -239,8 +239,6 @@ Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 hostssl all landscape,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
 ```
 
-If you configure the optional `landscape_maintenance` user, add it to the line above as well.
-
 ### Configure database settings
 
 Edit `/etc/postgresql/14/main/postgresql.conf` to apply the following settings:
@@ -1104,9 +1102,9 @@ stores = main account-1 resource-1
 threads = 2
 
 [schema]
-# [schema] ssl settings apply only to the superuser (landscape_superuser or
-# landscape_maintenance) connection. They are independent of the [stores] ssl
-# settings, which apply to the regular landscape user connection.
+# [schema] ssl settings apply only to the superuser (landscape_superuser)
+# connection. They are independent of the [stores] ssl settings, which
+# apply to the regular landscape user connection.
 # PostgreSQL certificate authentication requires the certificate CN to match
 # the connecting username, so each role must have its own client certificate.
 sslcert = /etc/landscape/postgres_client_superuser.pem
