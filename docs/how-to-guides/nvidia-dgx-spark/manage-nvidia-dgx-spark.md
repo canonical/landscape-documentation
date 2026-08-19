@@ -7,9 +7,9 @@ myst:
 (how-to-manage-nvidia-dgx-spark)=
 # Use NVIDIA DGX Spark management scripts with Landscape
 
-Use Landscape remote script execution to run NVIDIA's Landscape reference scripts on registered DGX Spark systems. This guide covers the integration boundary; use NVIDIA's documentation for the script's purpose, prerequisites, behavior, and output.
+This guide describes how to run NVIDIA's Landscape reference scripts on registered DGX Spark systems using Landscape remote script execution. For each script's purpose, prerequisites, behavior, and output, see NVIDIA's documentation.
 
-Before starting, complete {ref}`Set up NVIDIA DGX Spark for Landscape management <how-to-set-up-nvidia-dgx-spark>`.
+Before you start, complete {ref}`Set up NVIDIA DGX Spark for Landscape management <how-to-set-up-nvidia-dgx-spark>`.
 
 ## Before you begin
 
@@ -27,7 +27,7 @@ For access groups and permissions, see the {ref}`Landscape web portal documentat
 1. Extract the package and read its `README.md` and `LANDSCAPE_REFERENCE_SCRIPTS_SETUP.md` documentation before selecting a script.
 1. Follow NVIDIA's instructions for the selected script's dependencies, permissions, and any files that must already be present on the DGX Spark.
 
-The package contains both production tools and Landscape reference scripts. This guide concerns the Landscape reference scripts only. Do not assume that a production tool can be run through Landscape without following NVIDIA's deployment instructions.
+The package contains both production tools and Landscape reference scripts. This guide covers the Landscape reference scripts. To run a production tool through Landscape, follow NVIDIA's deployment instructions for that tool.
 
 ## Enable remote script execution
 

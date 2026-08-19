@@ -35,7 +35,7 @@ Running these scripts through Landscape means DGX-specific tasks use the same ta
 
 ## Other DGX Spark operations
 
-Landscape manages the Ubuntu-based DGX OS. Use NVIDIA's tooling and [DGX Spark documentation](https://docs.nvidia.com/dgx/dgx-spark/) for hardware, firmware, drivers, recovery, provisioning, and out-of-band management.
+Landscape manages the Ubuntu-based DGX OS installation. Use NVIDIA's tooling and [DGX Spark documentation](https://docs.nvidia.com/dgx/dgx-spark/) for hardware, firmware, drivers, recovery, provisioning, and out-of-band management.
 
 ## Next steps
 
