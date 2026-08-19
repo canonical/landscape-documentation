@@ -26,6 +26,7 @@ Starting with the 26.04 beta version, Landscape Server uses the following archit
 - **PostgreSQL 14+** for the database (using the modern `database` interface)
 - **RabbitMQ Server** for message queuing
 - **Self-signed certificates** charm (or other TLS provider) integrated with HAProxy
+- **landscape-task-handler** charm for task processing
 
 HAProxy sits in front of all Landscape Server units and routes traffic to the appropriate service endpoints.
 
@@ -137,6 +138,13 @@ applications:
     base: ubuntu@24.04
     constraints: arch=amd64
 
+  landscape-task-handler:
+    channel: latest/edge
+    charm: ch:landscape-task-handler
+    num_units: 1
+    base: ubuntu@24.04
+    constraints: arch=amd64
+
 relations:
   - [landscape-server:inbound-amqp, rabbitmq-server]
   - [landscape-server:outbound-amqp, rabbitmq-server]
@@ -154,6 +162,10 @@ relations:
   - [landscape-debarchive:landscape-server, landscape-server:debarchive]
   - [landscape-debarchive:database, postgresql:database]
   - [landscape-debarchive:debarchive-haproxy-route, haproxy:haproxy-route]
+  - [landscape-task-handler:task-db, postgresql:database]
+  - [landscape-task-handler:landscape-server, landscape-server:task-handler]
+  - [landscape-task-handler:certificates, self-signed-certificates:certificates]
+  - [landscape-task-handler:grpc-haproxy-route, haproxy:haproxy-route-tcp]
 ```
 
 ```{note}
@@ -184,6 +196,7 @@ App                               Version  Status  Scale  Charm                 
 haproxy                                    active      1  haproxy                           2.8/edge                 50  ubuntu@24.04
 landscape-debarchive              242      active      1  landscape-debarchive              latest/edge               2  ubuntu@24.04
 landscape-server                  26.04    active      3  landscape-server                  26.04/beta              150  ubuntu@24.04
+landscape-task-handler                     active      1  landscape-task-handler            latest/edge               1  ubuntu@24.04
 postgresql                        16.4     active      3  postgresql                        16/stable               500  ubuntu@24.04
 rabbitmq-server                   3.9.27   active      3  rabbitmq-server                   latest/edge             200  ubuntu@22.04
 self-signed-certificates                   active      1  self-signed-certificates          1/stable                 12  ubuntu@24.04

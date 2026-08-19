@@ -79,6 +79,7 @@ This will deploy:
 - RabbitMQ Server for message queuing
 - Self-signed certificates for TLS (integrated with HAProxy)
 - `landscape-debarchive` charm for Deb Archive repository management
+- `landscape-task-handler` charm for task processing
 
 **For older deployments:**
 
