@@ -10,7 +10,7 @@ myst:
 ## Identify your Landscape version
 
 ```{note}
-Landscape beta versions run ahead of the Landscape SaaS version, and the Landscape SaaS version runs ahead of of self-hosted Landscape versions.
+Landscape beta versions run ahead of the Landscape SaaS version, and the Landscape SaaS version runs ahead of self-hosted Landscape versions.
 ```
 
 You may need to know what version of Landscape you're running. To identify your Landscape Server and Landscape Client versions:

@@ -9,7 +9,7 @@ myst:
 
 All Landscape service configurations are defined in the `service.conf` file. This file follows the `INI` file format. The default location for this file is `/etc/landscape/service.conf`. You can override that by setting the `LANDSCAPE_SERVICE_CONF` environment variable with the file path location of the `service.conf` file.
 
-Changes to the `service.conf` file only take affect once you restart the relevant service(s). Any file paths referenced throughout this document must be readable by the `landscape` system user.
+Changes to the `service.conf` file only take effect once you restart the relevant service(s). Any file paths referenced throughout this document must be readable by the `landscape` system user.
 
 Starting with Landscape 25.10, every entry in the `service.conf` file can be overridden by a corresponding environment variable. These variables have the following general structure: `LANDSCAPE_SECTION_NAME__KEY_NAME`.
 
