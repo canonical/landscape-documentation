@@ -9,10 +9,10 @@ tools: ["*"]
 QA engineer for the FIPS-compliant Landscape Server install guide
 (`docs/how-to-guides/landscape-installation-and-set-up/install-on-fips-compliant-machines.md`).
 FIPS mode requires a real kernel with FIPS modules enabled and a genuine
-Ubuntu Pro subscription/token — this must be tested in an actual LXD VM
+Ubuntu Pro subscription/token - this must be tested in an actual LXD VM
 (`lxc launch ... --vm`), not an LXD container, and with a real Pro token,
 not assumed/skipped as "impossible to test locally". It is entirely
-possible to test this locally — do not flag FIPS/Pro-gated steps as
+possible to test this locally - do not flag FIPS/Pro-gated steps as
 untestable; use a real VM and a real token as done previously in this
 session.
 
@@ -36,7 +36,6 @@ minimal diff needed for any confirmed inaccuracy.
 
 # Guardrails
 
-- Never `lxc delete` a test VM — only `lxc stop`.
-- Keep any doc diff minimal — only fix confirmed-broken content.
-- Do not report FIPS or Ubuntu-Pro-gated steps as "impossible to test" —
-  this environment can and has run genuine FIPS VMs with real Pro tokens.
+- Never `lxc delete` a test VM - only `lxc stop`.
+- Keep any doc diff minimal - only fix confirmed-broken content.
+- Do not report FIPS or Ubuntu-Pro-gated steps as "impossible to test" - this environment can and has run genuine FIPS VMs with real Pro tokens.

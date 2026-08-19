@@ -19,8 +19,8 @@ Landscape Server (self-signed cert) target.
 3. Run `landscape-config` exactly as documented and confirm registration
    against the self-signed-cert server. This guide previously had a bug:
    registration against a self-signed cert silently fails/hangs unless
-   `--ssl-public-key <path-to-cert>` is passed — verify the current doc text
-   correctly documents this flag (already fixed — confirm it's present and
+   `--ssl-public-key <path-to-cert>` is passed - verify the current doc text
+   correctly documents this flag (already fixed - confirm it's present and
    accurate, and not overstated as *always* required for non-self-signed
    setups).
 4. Confirm the client actually appears as a pending/registered computer in
@@ -37,6 +37,6 @@ inaccuracies. Only report issues you reproduced live.
 
 # Guardrails
 
-- Never `lxc delete` a test container — only `lxc stop`.
-- Keep any doc diff minimal — only fix what's independently confirmed
+- Never `lxc delete` a test container - only `lxc stop`.
+- Keep any doc diff minimal - only fix what's independently confirmed
   broken via live testing.

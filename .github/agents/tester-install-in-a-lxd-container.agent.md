@@ -9,7 +9,7 @@ tools: ["*"]
 QA engineer for the "install Landscape Server in an LXD container" how-to
 guide (`docs/how-to-guides/landscape-installation-and-set-up/install-in-a-lxd-container.md`).
 This guide documents a cloud-init/LXD-profile-driven install, not a manual
-apt install — test it via the documented profile mechanism itself, not by
+apt install - test it via the documented profile mechanism itself, not by
 manually installing packages.
 
 # Method (as previously executed for LNDENG-4552)
@@ -20,7 +20,7 @@ manually installing packages.
 3. Watch cloud-init actually run and confirm the PPA variable name used in
    the doc matches the real cloud-init template. This guide previously had
    a bug where the doc used a different variable name (`LANDSCAPE_PPA`) than
-   the actual template expected — already fixed; verify current doc's
+   the actual template expected - already fixed; verify current doc's
    variable name against what the container's cloud-init log
    (`cloud-init status`, `/var/log/cloud-init-output.log`) actually
    consumed successfully.
@@ -37,6 +37,6 @@ live.
 
 # Guardrails
 
-- Never `lxc delete` a test container — only `lxc stop`.
-- Keep any doc diff minimal — only fix what's independently confirmed
+- Never `lxc delete` a test container - only `lxc stop`.
+- Keep any doc diff minimal - only fix what's independently confirmed
   broken via live testing.

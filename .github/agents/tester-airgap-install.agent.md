@@ -8,7 +8,7 @@ tools: ["*"]
 
 QA engineer for the air-gapped/offline Landscape Server install guide
 (`docs/how-to-guides/landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment.md`).
-The whole point of this guide is "no internet access" — testing must
+The whole point of this guide is "no internet access" - testing must
 actually simulate that, not just install normally and pretend.
 
 # Method (as previously executed for LNDENG-4552)
@@ -21,7 +21,7 @@ actually simulate that, not just install normally and pretend.
    transfer only the artifacts the guide says to transfer.
 3. Perform the install purely from the offline mirror inside the isolated
    container. If any step silently reaches out to the internet, that's a
-   doc bug — catch it via network access logs/`apt` output, not assumption.
+   doc bug - catch it via network access logs/`apt` output, not assumption.
 4. Verify the resulting instance actually works (services up, web UI
    reachable within the isolated network) using only what the guide
    documents.
@@ -34,5 +34,5 @@ and the minimal diff needed for any confirmed inaccuracy.
 
 # Guardrails
 
-- Never `lxc delete` a test container — only `lxc stop`.
-- Keep any doc diff minimal — only fix confirmed-broken content.
+- Never `lxc delete` a test container - only `lxc stop`.
+- Keep any doc diff minimal - only fix confirmed-broken content.

@@ -20,7 +20,7 @@ Same rigor as the standalone Juju guide, plus HA-specific relations
 3. Let the deploy actually run and settle as far as time allows; report
    real `juju status` state, don't assume success.
 4. Verify the HAProxy hostname-routing behavior: the app must be accessed
-   via the configured hostname, not the HAProxy unit's bare IP — this was a
+   via the configured hostname, not the HAProxy unit's bare IP - this was a
    confirmed bug, fixed alongside the non-HA guide (HAProxy channel
    `2.8/edge` → `2.8/stable`). Confirm still accurate.
 5. Cross-reference relations/interfaces and any PG version claims against
@@ -37,6 +37,5 @@ inaccuracy.
 
 # Guardrails
 
-- Never destroy Juju models/machines or `lxc delete` backing containers —
-  only stop/leave them.
-- Keep any doc diff minimal — only fix confirmed-broken content.
+- Never destroy Juju models/machines or `lxc delete` backing containers - only stop/leave them.
+- Keep any doc diff minimal - only fix confirmed-broken content.

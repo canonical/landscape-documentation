@@ -21,7 +21,7 @@ current packages.
 2. This guide previously had a bug: the config-management registration flow
    was broken/misleading on current releases (the `RUN=1` note implied
    registration happens automatically in a way that didn't match observed
-   behavior) — already fixed and simplified. Verify the current wording
+   behavior) - already fixed and simplified. Verify the current wording
    accurately reflects what you observe (check
    `/var/log/landscape/landscape-client.log`, confirm the computer actually
    registers, and confirm the actual trigger mechanism e.g. systemd
@@ -36,7 +36,7 @@ inaccuracy. Only report issues reproduced live.
 
 # Guardrails
 
-- Never `lxc delete` a test container — only `lxc stop`.
-- Keep any doc diff minimal — only fix what's independently confirmed
+- Never `lxc delete` a test container - only `lxc stop`.
+- Keep any doc diff minimal - only fix what's independently confirmed
   broken via live testing. Don't reintroduce verbose/removed prose without
   new evidence.
