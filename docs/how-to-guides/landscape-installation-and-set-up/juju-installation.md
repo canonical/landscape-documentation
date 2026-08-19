@@ -32,30 +32,16 @@ When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulati
 ```{important}
 Starting with the **26.04 beta version** of the `landscape-server` charm, the deployment architecture changes to PostgreSQL 14+ over the `database` relation (backed by the `postgresql_client` charm interface), HAProxy 2.8 over `haproxy-route`, and TLS via `tls-certificates`.
 
-The Charmhub `landscape-scalable` bundle does **not** currently publish a `26.04/*` track. The published `latest/*` bundle channels still deploy the older reverse-proxy topology. For 26.04+ deployments, follow {ref}`how-to-juju-ha-installation`.
+The Charmhub `landscape-scalable` bundle is deprecated and does not have a `26.04/*` track. For 26.04+ deployments, follow {ref}`how-to-juju-ha-installation`.
 ```
 
-### Deployment approaches
+### Deployment approach
 
-There are two deployment approaches depending on which version of Landscape you want to deploy:
+> See also: [Landscape-scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
 
-#### Charmhub `landscape-scalable` bundle
+The `landscape-scalable` bundle published on Charmhub is deprecated and should not be used for new deployments. It uses the older topology (external HAProxy charm, PostgreSQL 14 over the legacy `pgsql` interface).
 
-The published `landscape-scalable` bundle on Charmhub still uses the older topology:
-- External HAProxy charm for load balancing
-- PostgreSQL 14 with the legacy `pgsql` interface
-- Separate HAProxy unit(s) for traffic management
-
-Use:
-
-- `latest/stable` for the current 24.04-style package set
-- `latest/beta` for the beta package set
-
-Both bundle channels still use the legacy `reverseproxy` and `db-admin`/`pgsql` relations.
-
-#### 26.04 beta+ deployment (recommended)
-
-The new deployment approach uses:
+For the 26.04 beta+ architecture (recommended), the new deployment approach uses:
 - **External HAProxy charm** (`2.8/stable`) for load balancing via the `haproxy-route` interface
 - PostgreSQL 14+ over the `database` relation (`postgresql_client` interface)
 - TLS certificates provided via the `tls-certificates` interface integrated with HAProxy (e.g., `self-signed-certificates` charm)
@@ -65,34 +51,7 @@ Key benefits of the new approach:
 - True high-availability with multiple Landscape Server units behind HAProxy
 - Better scalability and resilience
 
-For detailed instructions on deploying with the new architecture, see {ref}`how-to-juju-ha-installation`.
-
-### landscape-scalable bundle
-
-> See also: [Landscape-scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
-
-The **landscape-scalable** bundle published on Charmhub is currently the legacy bundle. It does not yet have a `26.04/*` track.
-
-**For the stable legacy bundle:**
-
-```bash
-juju deploy landscape-scalable --channel latest/stable
-```
-
-This deploys the legacy bundle with:
-- HAProxy over `reverseproxy`
-- PostgreSQL 14 over `db-admin`/`pgsql`
-- the 24.04 package set
-
-**For the beta legacy bundle:**
-
-```bash
-juju deploy landscape-scalable --channel latest/beta
-```
-
-This also deploys the legacy bundle topology, but with the beta package set (`ppa:landscape/self-hosted-beta`).
-
-For the 26.04+ architecture, create and deploy a custom bundle as documented in {ref}`how-to-juju-ha-installation`.
+For detailed instructions on deploying with the new architecture, create and deploy a custom bundle as documented in {ref}`how-to-juju-ha-installation`.
 
 ### Other bundles
 
