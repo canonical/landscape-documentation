@@ -1394,7 +1394,7 @@ snap refresh core22 --channel=fips-updates/stable
 
 ### Install and configure the Landscape Task Handler (Landscape 26.04+)
 
-The {ref}`Landscape Task Handler <explanation-server-architecture-task-handler>` interacts with the Landscape databases and its own database. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
+The {ref}`Landscape Task Handler <explanation-server-architecture-task-handler>` interacts with the Landscape databases and its own database. Since the task handler runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
 
 Install the `landscape-task-handler` snap if not already installed:
 
