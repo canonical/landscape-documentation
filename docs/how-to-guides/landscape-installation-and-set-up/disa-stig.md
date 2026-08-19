@@ -233,10 +233,11 @@ Use the following steps to harden the PostgreSQL service.
 
 PostgreSQL must be configured to allow the Landscape application server to access the database server. Landscape uses several users for access, so all users must be added.
 
-Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
+For the all-in-one deployment in this guide, Landscape connects to PostgreSQL using `host = localhost`, so use loopback entries instead of the server's external IP address. Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 
 ```ini
-hostssl all landscape,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
+hostssl all landscape,landscape_superuser 127.0.0.1/32 cert
+hostssl all landscape,landscape_superuser ::1/128      cert
 ```
 
 ### Configure database settings
