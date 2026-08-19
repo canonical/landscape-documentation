@@ -11,7 +11,7 @@ Landscape Server is the server-side component of the Landscape ecosystem. It is 
 
 ![Landscape Service Diagram](/assets/images/landscape-services.jpg "Landscape Services")
 
-A Landscape Server deployment has seven required services:
+A Landscape Server deployment has eight required services:
 
 * [API](#api) - serves REST API and Legacy API requests
 * [Appserver](#appserver) - serves Legacy UI and static files for the new UI
