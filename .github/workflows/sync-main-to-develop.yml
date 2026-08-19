@@ -1,0 +1,83 @@
+name: Sync main into develop
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: sync-main-to-develop
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Merge main into develop
+    runs-on: ubuntu-latest
+    if: github.repository == 'canonical/landscape-documentation'
+
+    env:
+      GH_TOKEN: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
+
+    steps:
+      - name: Check whether develop is already up to date
+        id: compare
+        run: |
+          ahead_by=$(gh api \
+            "repos/${{ github.repository }}/compare/develop...main" \
+            --jq '.ahead_by')
+          echo "ahead_by=${ahead_by}" >> "$GITHUB_OUTPUT"
+          if [ "${ahead_by}" = "0" ]; then
+            echo "develop is already up to date with main – no sync needed."
+          else
+            echo "main is ${ahead_by} commit(s) ahead of develop – sync required."
+          fi
+
+      - name: Create or reuse sync PR
+        if: steps.compare.outputs.ahead_by != '0'
+        id: ensure-pr
+        run: |
+          pr_number=$(gh pr list \
+            --repo "${{ github.repository }}" \
+            --base develop \
+            --head main \
+            --state open \
+            --json number \
+            --jq '.[0].number // ""')
+
+          if [ -n "${pr_number}" ]; then
+            echo "Reusing existing open PR #${pr_number}."
+          else
+            pr_url=$(gh pr create \
+              --repo "${{ github.repository }}" \
+              --base develop \
+              --head main \
+              --title "merge: sync main into develop" \
+              --body "Automated sync of main into develop. Triggered by commit ${{ github.sha }}.")
+            pr_number=$(echo "${pr_url}" | grep -oE '[0-9]+$')
+            echo "Created PR #${pr_number}: ${pr_url}"
+          fi
+
+          echo "pr_number=${pr_number}" >> "$GITHUB_OUTPUT"
+
+      - name: Enable auto-merge on the sync PR
+        if: steps.compare.outputs.ahead_by != '0' && steps.ensure-pr.outputs.pr_number != ''
+        run: |
+          pr_number="${{ steps.ensure-pr.outputs.pr_number }}"
+          already_set=$(gh pr view "${pr_number}" \
+            --repo "${{ github.repository }}" \
+            --json autoMergeRequest \
+            --jq '.autoMergeRequest != null')
+
+          if [ "${already_set}" = "true" ]; then
+            echo "Auto-merge already enabled on PR #${pr_number}."
+          else
+            output=$(gh pr merge --auto --merge "${pr_number}" \
+              --subject "auto: sync main into develop" \
+              --repo "${{ github.repository }}" 2>&1) && rc=0 || rc=$?
+            if [ "${rc}" -eq 0 ]; then
+              echo "Auto-merge (merge commit) enabled on PR #${pr_number}."
+            else
+              echo "::warning::Could not enable auto-merge on PR #${pr_number}: ${output}"
+            fi
+          fi
