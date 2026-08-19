@@ -89,6 +89,8 @@ CVE
 CVEs
 datetime
 datestamp
+debarchive
+Debarchive
 debian
 decodeable
 decrypt
@@ -151,6 +153,7 @@ hostname
 hostnames
 html
 http
+HTTPie
 HTTPS
 https
 integrations
