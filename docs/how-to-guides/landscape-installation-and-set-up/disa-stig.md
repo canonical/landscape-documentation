@@ -1553,12 +1553,12 @@ Here's an example of how to configure the certificates once they are placed in t
 
 ```bash
 sudo snap set landscape-debarchive \
-  deb.archive.ssl=verify-full \
-  deb.archive.ssl-cert=/var/snap/landscape-debarchive/common/certs/postgres_client.pem \
-  deb.archive.ssl-key=/var/snap/landscape-debarchive/common/certs/postgres_client.key \
-  deb.archive.ssl-root-cert=/var/snap/landscape-debarchive/common/certs/ca.crt
+  deb.archive.database.ssl=verify-full \
+  deb.archive.database.ssl-cert=/var/snap/landscape-debarchive/common/certs/postgres_client.pem \
+  deb.archive.database.ssl-key=/var/snap/landscape-debarchive/common/certs/postgres_client.key \
+  deb.archive.database.ssl-root-cert=/var/snap/landscape-debarchive/common/certs/ca.crt \
   deb.archive.database.name=landscape-standalone-debarchive \
-  deb.archive.database.user=landscape_debarchive
+  deb.archive.database.user=landscape_debarchive \
   deb.archive.database.host=<DATABASE_HOST>
 ```
 
