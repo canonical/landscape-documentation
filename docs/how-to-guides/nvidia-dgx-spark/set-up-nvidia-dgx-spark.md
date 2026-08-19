@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-set-up-nvidia-dgx-spark)=
-# Set up NVIDIA DGX Spark for Landscape management
+# How to set up NVIDIA DGX Spark for Landscape management
 
 > See also: {ref}`Landscape and NVIDIA DGX Spark <explanation-related-tools-nvidia-dgx-spark>`.
 
