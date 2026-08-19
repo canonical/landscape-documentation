@@ -45,7 +45,7 @@ All of the necessary packages for Landscape Server should now be downloaded to t
 
 #### (Landscape 26.04 only) Download the Landscape Server snap services
 
-Landscape 26.04 LTS depends on three snap services, `landscape-task-handler`, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately.
+Landscape 26.04 LTS depends on the following snap services, `landscape-task-handler`, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately.
 
 ```bash
 snap download landscape-task-handler

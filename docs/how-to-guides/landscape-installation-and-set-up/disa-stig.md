@@ -1480,7 +1480,7 @@ Install the `landscape-outbox` snap if not already installed:
 sudo snap install landscape-outbox
 ```
 
-Connect the outbox and task handler for communication over GRPC. 
+Connect the outbox and task handler for communication over gRPC. 
 
 ```bash
 sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
@@ -1525,7 +1525,7 @@ sudo snap set landscape-outbox \
   landscape.database.resource.ssl-root-cert=$CERTS/ca.crt \
   landscape.broker.ssl-cert=$CERTS/rabbit.pem \
   landscape.broker.ssl-key=$CERTS/rabbit.key \
-  landscape.broker.ssl-root-cert=$CERTS/ca.crt
+  landscape.broker.ssl-ca-cert=$CERTS/ca.crt
 ```
 
 The outbox reads other configuration options from `/etc/landscape/service.conf` which may have restricted file permissions that do not allow the snap to read the file. In this case, you can copy the `service.conf` file and configure the `landscape-outbox` to read configuration from the copied file instead.
@@ -1545,9 +1545,30 @@ sudo snap restart landscape-outbox
 See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional information.
 
 
-### Install and configure the Landscape Deb Archive
+### Install and configure the Landscape Deb Archive (Landscape 26.04+)
 
-The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`. When configuring connections to the database, be sure to follow the instructions to connect using SSL.
+The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`. When configuring connections to the database, be sure to follow the instructions to connect using SSL. It is recommended to create a separate `landscape_debarchive` user for the database, which will require its own client certificates.
+
+Here's an example of how to configure the certificates once they are placed in the appropriate directory:
+
+```bash
+sudo snap set landscape-debarchive \
+  deb.archive.ssl=verify-full \
+  deb.archive.ssl-cert=/var/snap/landscape-debarchive/common/certs/postgres_client.pem \
+  deb.archive.ssl-key=/var/snap/landscape-debarchive/common/certs/postgres_client.key \
+  deb.archive.ssl-root-cert=/var/snap/landscape-debarchive/common/certs/ca.crt
+  deb.archive.database.name=landscape-standalone-debarchive \
+  deb.archive.database.user=landscape_debarchive
+  deb.archive.database.host=<DATABASE_HOST>
+```
+
+The `landscape-debarchive` snap reads other configuration options from `/etc/landscape/service.conf` which may have restricted file permissions that do not allow the snap to read the file. In this case, you can copy the `service.conf` file and configure the `landscape-debarchive` snap to read configuration from the copied file instead.
+
+```bash
+sudo cp /etc/landscape/service.conf /root/snap/landscape-debarchive/common/service.conf
+sudo chown -R root:root /root/snap/landscape-debarchive/common/
+sudo snap set landscape-debarchive deb.archive.service-conf-file=/root/snap/landscape-debarchive/common/service.conf
+```
 
 ## Configure authentication
 
