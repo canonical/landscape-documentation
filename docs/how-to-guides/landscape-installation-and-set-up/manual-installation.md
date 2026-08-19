@@ -262,6 +262,17 @@ Landscape's services are managed as systemd units, all grouped under the `landsc
 If more performance and availability is needed from Landscape Server, it's possible to spread out the services amongst several machines. In that case, for example, you could run message servers on one machine, application servers on another, etc.
 ```
 
+The message, application, and ping services can each be configured to run multiple worker processes. If your hardware has several cores and enough memory (4GB or more), running two or more workers of each will improve performance. To do this, set `workers` in the corresponding section of `/etc/landscape/service.conf` to the number of workers you want. For example, to run two message server workers:
+
+```ini
+[message_server]
+workers = 2
+```
+
+```{note}
+To take advantage of multiple workers, you need to configure a load balancer or proxy in front of the service.
+```
+
 Review the `UPGRADE_SCHEMA` option in `/etc/default/landscape-server`. If set to `yes`, whenever the package `landscape-server` is updated, it will attempt to update the database schema too. It's a convenient setting, but consider the following before enabling it:
 
 - Schema updates can take several minutes
