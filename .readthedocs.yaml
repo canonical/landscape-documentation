@@ -22,6 +22,14 @@ build:
       then
         exit 183;
       fi
+    pre_build:
+    # Merges docs/_static/openapi-overlay.yaml (hand-written examples) into
+    # docs/_static/openapi.yaml (the generated spec), producing the gitignored
+    # docs/_static/openapi-with-examples.yaml that Scalar renders. Runs here,
+    # rather than in post_checkout, because oas-patch (pinned in
+    # docs/requirements.txt) isn't installed until the install step. See
+    # openapi-examples-overlay.md.
+    - python docs/scripts/apply_overlay.py
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
@@ -31,9 +39,9 @@ sphinx:
 
 # If using Sphinx, optionally build your docs in additional formats such as PDF
 formats:
-  - pdf
+- pdf
 
 # Optionally declare the Python requirements required to build your docs
 python:
   install:
-    - requirements: docs/requirements.txt
+  - requirements: docs/requirements.txt

@@ -228,6 +228,7 @@ nagios
 netinstall
 netmask
 newprofile
+nmap
 NFS
 NIC
 NID

@@ -15,13 +15,13 @@ For detailed instructions on deploying Landscape with Juju in a high-availabilit
 
 ## Install Juju
 
-[Install Juju](https://canonical-juju.readthedocs-hosted.com/en/latest/user/howto/manage-juju/) as a snap with this command:
+[Install Juju](https://canonical.com/juju/docs/juju-cli/latest/howto/manage-juju/) as a snap with this command:
 
 ```bash
 sudo snap install juju --classic
 ```
 
-To learn more about Juju and to bootstrap a Juju controller, check out their [getting started](https://canonical-juju.readthedocs-hosted.com/en/latest/user/tutorial/) page.
+To learn more about Juju and to bootstrap a Juju controller, check out their [getting started](https://canonical.com/juju/docs/juju-cli/latest/tutorial/) page.
 
 ## Deploy self-hosted Landscape Server
 
