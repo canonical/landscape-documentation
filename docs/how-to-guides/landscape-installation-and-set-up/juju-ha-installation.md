@@ -9,10 +9,12 @@ myst:
 
 > See also: [Juju documentation](https://juju.is/docs/juju)
 
-You can create a scalable, high availability (HA) deployment of Landscape Server by using Juju and the [Landscape Scalable](https://charmhub.io/landscape-scalable) charm bundle. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
+You can create a scalable, high availability (HA) deployment of Landscape Server with Juju. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
 ```{important}
-This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 beta version integrates directly with the external HAProxy charm (`2.8/edge`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 beta+ approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
+This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 beta version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 beta+ approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
+
+The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` track, so 26.04+ deployments use a custom bundle such as the one shown below.
 ```
 
 ## Architecture overview
@@ -22,8 +24,8 @@ This guide covers both the **26.04 beta+ deployment approach** and the older **p
 Starting with the 26.04 beta version, Landscape Server uses the following architecture:
 
 - **Landscape Server units** for the application
-- **HAProxy** charm (`2.8/edge`) for load balancing via the `haproxy-route` interface
-- **PostgreSQL 14+** for the database (using the modern `database` interface)
+- **HAProxy** charm (`2.8/stable`) for load balancing via the `haproxy-route` interface
+- **PostgreSQL 14+** for the database (using the modern `database` relation, backed by the `postgresql_client` interface)
 - **RabbitMQ Server** for message queuing
 - **Self-signed certificates** charm (or other TLS provider) integrated with HAProxy
 
@@ -46,7 +48,7 @@ The older approach uses:
 
 ## Prerequisites
 
-Before you can deploy the Landscape Scalable charm bundle, you need to:
+Before you can deploy Landscape with Juju, you need to:
 
   1. [Install the Juju CLI client](https://documentation.ubuntu.com/juju/3.6/howto/manage-juju/)
   1. [Have a Juju controller bootstrapped](https://documentation.ubuntu.com/juju/3.6/howto/manage-controllers/)
@@ -115,12 +117,12 @@ applications:
     options:
       landscape_ppa: ppa:landscape/self-hosted-26.04
       min_install: True
-      root_url: https://landscape.local/
+      root_url: https://landscape.example.com/
     base: ubuntu@24.04
 
   haproxy:
     charm: ch:haproxy
-    channel: 2.8/edge
+    channel: 2.8/stable
     num_units: 1
     constraints: arch=amd64
 
@@ -142,12 +144,10 @@ relations:
   - [landscape-server:api-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:package-upload-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:repository-haproxy-route, haproxy:haproxy-route]
-  - [landscape-server:hostagent-messenger-haproxy-route, haproxy:haproxy-route]
-  - [landscape-server:ubuntu-installer-attach-haproxy-route, haproxy:haproxy-route]
 ```
 
 ```{note}
-This bundle uses PostgreSQL 16 and the new `database` interface. Adjust the `root_url` option to match your domain name.
+This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name — see {ref}`Step 5: Access Landscape<how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional — only add them if you enable the matching `landscape-server` config options.
 ```
 
 #### Step 2: Deploy the bundle
@@ -171,7 +171,7 @@ Model         Controller  Cloud/Region    Version  SLA          Timestamp
 landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
 
 App                       Version  Status  Scale  Charm                      Channel     Rev  Base
-haproxy                            active      1  haproxy                    2.8/edge     50  ubuntu@24.04
+haproxy                            active      1  haproxy                    2.8/stable     50  ubuntu@24.04
 landscape-server          26.04    active      3  landscape-server           26.04/beta   150  ubuntu@24.04
 postgresql                16.4     active      3  postgresql                 16/stable    500  ubuntu@24.04
 rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge  200  ubuntu@22.04
@@ -186,9 +186,10 @@ Set your Landscape license:
 juju config landscape-server "license_file=$(cat your-license-file)"
 ```
 
+(how-to-header-access-landscape)=
 #### Step 5: Access Landscape
 
-Access Landscape via the HAProxy unit IP or your configured `root_url`. Use `juju status` to find the HAProxy unit IP address.
+HAProxy routes traffic based on the `hostname` configured in the `haproxy-route` relation, not by IP address alone, so you must connect using the hostname set in `root_url` (via DNS, or `curl --resolve`/a `/etc/hosts` entry for testing) — connecting directly to the HAProxy unit's IP with no matching `Host` header returns HAProxy's default page, not Landscape. If you omit `root_url`, the `landscape-server` charm falls back to using its leader unit's IP address as the routing hostname instead, which is impractical to connect with directly; setting `root_url` to a real hostname is strongly recommended even for testing. Use `juju status` to find the HAProxy unit IP address to point that hostname at.
 
 ### Optional: Replace self-signed certificates with a valid certificate
 
@@ -235,7 +236,7 @@ juju switch lbaas
 Deploy HAProxy:
 
 ```sh
-juju deploy haproxy --channel 2.8/edge
+juju deploy haproxy --channel 2.8/stable
 juju expose haproxy
 ```
 
@@ -293,9 +294,9 @@ juju integrate landscape-server:message-server-haproxy-route lbaas-haproxy:hapro
 juju integrate landscape-server:api-haproxy-route lbaas-haproxy:haproxy-route
 juju integrate landscape-server:package-upload-haproxy-route lbaas-haproxy:haproxy-route
 juju integrate landscape-server:repository-haproxy-route lbaas-haproxy:haproxy-route
-juju integrate landscape-server:hostagent-messenger-haproxy-route lbaas-haproxy:haproxy-route
-juju integrate landscape-server:ubuntu-installer-attach-haproxy-route lbaas-haproxy:haproxy-route
 ```
+
+If you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`, integrate their HAProxy endpoints separately after enabling the matching charm config.
 
 Wait for the deployment to complete:
 
@@ -320,7 +321,7 @@ Access Landscape via: `https://landscape.example.com/`
 flowchart TD
     Client([Client])
     subgraph lbaas[Juju model: lbaas]
-        HAProxy["HAProxy<br/>2.8/edge"]
+        HAProxy["HAProxy<br/>2.8/stable"]
         TLS[lego / TLS provider]
     end
     subgraph landscape-ha[Juju model: landscape-ha]
@@ -348,6 +349,8 @@ This deployment approach is **deprecated**. For new deployments, use the 26.04 b
 This section covers the older deployment approach using the external HAProxy charm. This approach is maintained for existing deployments only.
 
 ### Deploy the charm bundle
+
+> See also: [Landscape Scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
 
 You can deploy the Landscape Scalable charm bundle using one of two main methods. The methods are:
 

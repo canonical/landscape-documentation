@@ -182,12 +182,16 @@ Download the server certificate:
 echo -n | openssl s_client -connect {LANDSCAPE_FQDN}:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee /etc/landscape/server.pem
 ```
 
-Then register the client:
+Then register the client, passing the certificate you just downloaded with `--ssl-public-key` so the client can verify the server:
 
 ```bash
-sudo landscape-config --computer-title "My client" --account-name standalone --url https://{LANDSCAPE_FQDN}/message-system --ping-url http://{LANDSCAPE_FQDN}/ping
+sudo landscape-config --computer-title "My client" --account-name standalone --url https://{LANDSCAPE_FQDN}/message-system --ping-url http://{LANDSCAPE_FQDN}/ping --ssl-public-key /etc/landscape/server.pem
 ```
 
-If you used a custom CA, you'll need to pass the `--ssl-public-key` parameter pointing to the CA file so that the client can recognize the issuer of the server certificate.
+```{note}
+`--ssl-public-key` is only needed when the client doesn't already trust the server's certificate — for example, this self-signed certificate, or one signed by a custom/private CA. A certificate from a publicly trusted CA (for example, via Let's Encrypt/`lego`) is already trusted by the client's system CA store, so the flag isn't needed in that case.
+```
+
+If you used a custom CA instead of a self-signed certificate, pass `--ssl-public-key` pointing to the CA file, so that the client can recognize the issuer of the server certificate.
 
 After registration, approve the client in the Landscape web portal to begin reporting data.

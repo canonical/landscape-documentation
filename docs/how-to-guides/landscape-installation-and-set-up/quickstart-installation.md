@@ -165,7 +165,7 @@ Replace `<EMAIL@ADDRESS.COM>` with an email address where certificate renewal re
 
 ## Create a global administrator account
 
-At this point, visiting `https://HOST_NAME.DOMAIN` prompts you to create Landscape’s first Global Administrator account. To add administrators:
+At this point, visiting `https://$FQDN` shows the **Welcome to Landscape** sign-up form for Landscape’s first Global Administrator account. After you create that account and sign in:
 
 1. Click **Settings**
 2. Set a valid outgoing email address in the **System email address** field

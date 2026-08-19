@@ -19,6 +19,13 @@ Use the {ref}`Quickstart <how-to-quickstart-installation>` or {ref}`Manual <how-
 - **Install packages with `apt` instead of `snap`**
 - **Use external authentication instead of username/password**
 
+If you're installing Landscape 24.04 LTS on Ubuntu 22.04 LTS with Ubuntu Pro enabled, pin `python3-pydantic` to the Landscape PPA version before installing Landscape. Otherwise, Ubuntu Pro's ESM Apps repository may prefer an older `python3-pydantic` package that doesn't satisfy Landscape 24.04's dependency requirements.
+
+```bash
+printf "Package: python3-pydantic\nPin: version 2.4.2-landscape*\nPin-Priority: 1001\n" | sudo tee /etc/apt/preferences.d/landscape-fips-pydantic
+sudo apt-get update
+```
+
 If you're {ref}`configuring Postfix for emails <how-to-configure-postfix>`, add the following change:
 
 - **After you've used Postconf to configure the `/etc/postfix/main.cf` file, add an additional step to manually set the SMTP TLS fingerprint digest**:
