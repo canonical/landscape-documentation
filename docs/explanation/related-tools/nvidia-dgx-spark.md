@@ -29,6 +29,8 @@ Some DGX Spark operations are specific to the platform rather than to Ubuntu. Fo
 - **[Production tools](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html#production-tools-11)**, which NVIDIA intends for general fleet automation.
 - **[Landscape reference scripts](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html#canonical-landscape-reference-scripts-8)**, which are example implementations written for Landscape's remote script execution. They return short output and write detailed evidence to the DGX Spark itself.
 
+You can run both production tools and Landscape reference scripts on one or more DGX Spark systems, using either the Landscape web portal or the API.
+
 NVIDIA provides the reference scripts as examples for customer adaptation rather than supported production software, so treat them as a starting point and review them before relying on them. A DGX Spark must be registered with Landscape before you can use the scripts.
 
 Running these scripts through Landscape means DGX-specific tasks use the same targeting and activity history as your other scripted operations. For what each script does and how to interpret its results, see [NVIDIA's Enterprise Lifecycle Integration documentation](https://docs.nvidia.com/dgx/dgx-spark/enterprise-fleet-lifecycle.html).
