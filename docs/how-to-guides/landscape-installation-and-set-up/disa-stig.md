@@ -181,7 +181,7 @@ For PostgreSQL, you'll need three certificates and their corresponding keys:
     sudo chmod 400 /etc/landscape/postgres_client_superuser.key
     ```
 
-- Server authentication certificate. The SAN must contain the DNS or IP address of the database server. For the all-in-one deployment in this guide, include `DNS:localhost` in the SAN because Landscape connects to PostgreSQL using `host = localhost`.
+- Server authentication certificate. The SAN must contain the DNS or IP address of the database server. This guide installs Landscape, PostgreSQL, and RabbitMQ on the same host, so include `DNS:localhost` in the SAN because Landscape connects to PostgreSQL using `host = localhost`.
 
     ```bash
     sudo chown postgres:postgres /etc/postgresql/postgres_server.pem
@@ -233,7 +233,7 @@ Use the following steps to harden the PostgreSQL service.
 
 PostgreSQL must be configured to allow the Landscape application server to access the database server. Landscape uses several users for access, so all users must be added.
 
-For the all-in-one deployment in this guide, Landscape connects to PostgreSQL using `host = localhost`, so use loopback entries instead of the server's external IP address. Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
+This guide installs Landscape, PostgreSQL, and RabbitMQ on the same host, so Landscape connects to PostgreSQL using `host = localhost`. Use loopback entries instead of the server's external IP address. Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 
 ```ini
 hostssl all landscape,landscape_superuser 127.0.0.1/32 cert
@@ -1018,6 +1018,8 @@ Modify settings in the `/etc/landscape/service.conf` file to configure Landscape
 
 The following changes are required in the sections below. Remove any passwords if they exist.
 
+The `[schema]` section's SSL settings apply only to the superuser (`landscape_superuser`) connection. They're independent of the `[stores]` SSL settings, which apply to the regular `landscape` user connection. PostgreSQL certificate authentication requires the certificate CN to match the connecting username, so each role must have its own client certificate.
+
 `````{tab-set}
 
 ````{tab-item} Landscape Server 26.04 LTS and later
@@ -1103,11 +1105,6 @@ stores = main account-1 resource-1
 threads = 2
 
 [schema]
-# [schema] ssl settings apply only to the superuser (landscape_superuser)
-# connection. They are independent of the [stores] ssl settings, which
-# apply to the regular landscape user connection.
-# PostgreSQL certificate authentication requires the certificate CN to match
-# the connecting username, so each role must have its own client certificate.
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
 sslmode = verify-full

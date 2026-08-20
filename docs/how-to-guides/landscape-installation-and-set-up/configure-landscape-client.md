@@ -31,6 +31,8 @@ sudo landscape-config
 sudo landscape-config --silent --account-name="standalone"
 ```
 
+The advantage of `--silent` over calling `landscape-config` interactively is that it reads all settings from the existing `client.conf` and requests a registration only if the client is not already registered against `landscape-server`. Be aware that some configuration options (namely `computer_title`, `tags`, `access_group`) are only sent to `landscape-server` on registration.
+
 To view all possible options for `landscape-config`, visit the man page with:
 
 ```bash
@@ -177,10 +179,6 @@ sudo chmod 777 <CUSTOM_TEMPDIR>
 
 If you want to manage `landscape-client` through a configuration management tool such as Puppet or Ansible, you can avoid getting duplicate computers by writing the `/etc/landscape/client.conf` file yourself and then running `landscape-config --silent` to apply it.
 
-```{note}
-The `landscape-client` systemd service only starts once a registration request has been sent. Just writing `client.conf` and restarting the service isn't enough — running `landscape-config --silent` is what actually triggers registration and lets the service start.
-```
-
 In `/etc/landscape/client.conf`:
 
 ```ini
@@ -201,8 +199,6 @@ Then, apply the configuration and trigger registration with:
 ```bash
 sudo landscape-config --silent
 ```
-
-The advantage over calling `landscape-config` interactively is that `--silent` reads all settings from the existing `client.conf` and requests a registration only if the client is not already registered against `landscape-server`. Be aware that some configuration options (namely `computer_title`, `tags`, `access_group`) are only sent to `landscape-server` on registration.
 
 ## Log rotation
 

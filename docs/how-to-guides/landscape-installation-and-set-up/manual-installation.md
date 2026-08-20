@@ -59,7 +59,7 @@ sudo apt install postgresql postgresql-18-debversion postgresql-plpython3-18
 ```
 
 ```{note}
-Starting with Resolute, PostgreSQL no longer has a separate `postgresql-contrib` package. Its extensions are now bundled directly into the `postgresql-<version>` package, so no extra package is required.
+Starting with PostgreSQL 18 (the version packaged for Ubuntu 26.04 LTS "Resolute"), there's no separate `postgresql-contrib` package. Its extensions are now bundled directly into the `postgresql-<version>` package, so no extra package is required. This doesn't apply to earlier PostgreSQL versions, even if installed on Resolute.
 ```
 
 ### Create a superuser Landscape can use

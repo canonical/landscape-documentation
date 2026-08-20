@@ -32,14 +32,14 @@ When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulati
 ```{important}
 Starting with the **26.04 beta version** of the `landscape-server` charm, the deployment architecture changes to PostgreSQL 14+ over the `database` relation (backed by the `postgresql_client` charm interface), HAProxy 2.8 over `haproxy-route`, and TLS via `tls-certificates`.
 
-The Charmhub `landscape-scalable` bundle is deprecated and does not have a `26.04/*` track. For 26.04+ deployments, follow {ref}`how-to-juju-ha-installation`.
+The Charmhub `landscape-scalable` bundle was deprecated in 26.04 and does not have a `26.04/*` track. For 26.04+ deployments, follow {ref}`how-to-juju-ha-installation`.
 ```
 
 ### Deployment approach
 
 > See also: [Landscape-scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
 
-The `landscape-scalable` bundle published on Charmhub is deprecated and should not be used for new deployments. It uses the older topology (external HAProxy charm, PostgreSQL 14 over the legacy `pgsql` interface).
+The `landscape-scalable` bundle published on Charmhub was deprecated in 26.04 and should not be used for new deployments. It uses the older topology (external HAProxy charm, PostgreSQL 14 over the legacy `pgsql` interface).
 
 For the 26.04 beta+ architecture (recommended), the new deployment approach uses:
 - **External HAProxy charm** (`2.8/stable`) for load balancing via the `haproxy-route` interface
@@ -68,9 +68,9 @@ Once the deployment has finished, Landscape Server is accessible in different wa
 
 **26.04 beta+ deployment:**
 
-  - HAProxy routes traffic based on the `hostname` set in the `haproxy-route` relation, **not** by port alone, so you must connect using that hostname (for example, with `--resolve` or a DNS entry pointing it at the HAProxy unit's IP) — connecting directly to the HAProxy unit's own IP address (with no matching `Host` header) hits HAProxy's default page instead of Landscape.
+  - HAProxy routes traffic based on the `hostname` set in the `haproxy-route` relation, **not** by port alone, so you must connect using that hostname (for example, with `--resolve` or a DNS entry pointing it at the HAProxy unit's IP). Connecting directly to the HAProxy unit's own IP address (with no matching `Host` header) hits HAProxy's default page instead of Landscape.
   - If you set `root_url`, that hostname is what you must connect with.
-  - If you leave `root_url` unset, the `landscape-server` charm falls back to using the leader unit's IP address as the routing hostname, so you'd need to connect using *that* IP as the `Host` header/SNI value (not the HAProxy unit's IP) — in practice, setting `root_url` to a real hostname is much simpler for testing.
+  - If you leave `root_url` unset, the `landscape-server` charm falls back to using the leader unit's IP address as the routing hostname, so you'd need to connect using *that* IP as the `Host` header/SNI value (not the HAProxy unit's IP). In practice, setting `root_url` to a real hostname is much simpler for testing.
   - HAProxy handles load balancing across all Landscape Server units once you're routed correctly.
 
 **With external load balancer (LBaaS):**

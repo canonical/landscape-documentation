@@ -191,7 +191,7 @@ sudo landscape-config --computer-title "My client" --account-name standalone --u
 ```
 
 ```{note}
-`--ssl-public-key` is only needed when the client doesn't already trust the server's certificate — for example, this self-signed certificate, or one signed by a custom/private CA. A certificate from a publicly trusted CA (for example, via Let's Encrypt/`lego`) is already trusted by the client's system CA store, so the flag isn't needed in that case.
+`--ssl-public-key` is only needed when the client doesn't already trust the server's certificate. For example, this self-signed certificate, or one signed by a custom/private CA. A certificate from a publicly trusted CA (for example, via Let's Encrypt/`lego`) is already trusted by the client's system CA store, so the flag isn't needed in that case.
 ```
 
 If you used a custom CA instead of a self-signed certificate, pass `--ssl-public-key` pointing to the CA file, so that the client can recognize the issuer of the server certificate.
