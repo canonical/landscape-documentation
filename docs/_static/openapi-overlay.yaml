@@ -535,39 +535,3 @@ actions:
         done: false
         metadata:
           '@type': type.googleapis.com/debarchive.v1beta1.PublishPublicationMetadata
-  - target: $.paths['/v1beta1/publications:batchGet'].post.requestBody.content['application/json']
-    update:
-      example:
-        names:
-          - publications/8f14e045-7d3b-4a0d-8f7c-1e0c9a2b3d4e
-          - publications/7c21ab3d-9f28-4b81-c4a5-7e9d3a8c1b5f
-  - target: $.paths['/v1beta1/publications:batchGet'].post.responses['200'].content['application/json']
-    update:
-      example:
-        publications:
-          - name: publications/8f14e045-7d3b-4a0d-8f7c-1e0c9a2b3d4e
-            displayName: noble-updates-publication
-            publicationId: 8f14e045-7d3b-4a0d-8f7c-1e0c9a2b3d4e
-            publicationTarget: publicationTargets/c7d4e8f9-1a2b-4c5d-6e7f-8a9b0c1d2e3f
-            source: mirrors/f27f353d-d580-4717-933b-53318e0bc9b2
-            distribution: noble-updates
-            label: Noble Updates Archive
-            origin: Ubuntu
-            architectures:
-              - amd64
-            acquireByHash: true
-            publishTime: "2025-06-02T04:15:00Z"
-            lastOperation: operations/c3d4e5f6-a7b8-4c5d-8e9f-0a1b2c3d4e5f
-          - name: publications/7c21ab3d-9f28-4b81-c4a5-7e9d3a8c1b5f
-            displayName: noble-security-publication
-            publicationId: 7c21ab3d-9f28-4b81-c4a5-7e9d3a8c1b5f
-            publicationTarget: publicationTargets/d8e5f9a0-2b3c-4d5e-7f8a-9b0c1d2e3f4a
-            source: mirrors/9d673b4c-d806-491e-ac9a-e797f03e2be5
-            distribution: noble-security
-            label: Noble Security Archive
-            origin: Ubuntu
-            architectures:
-              - amd64
-            acquireByHash: true
-            publishTime: "2025-06-02T03:45:00Z"
-            lastOperation: operations/d4e5f6a7-b8c9-4d5e-9f0a-1b2c3d4e5f6a
