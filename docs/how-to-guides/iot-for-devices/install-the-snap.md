@@ -39,7 +39,7 @@ You can use the configuration wizard to guide you through the configuration proc
 sudo landscape-client.config
 ```
 
-Then follow the prompts and provide an requested information.
+Then follow the prompts and provide the requested information.
 
 #### Method #2: Provide the information as parameters
 
