@@ -91,6 +91,7 @@ CVEs
 datetime
 datestamp
 debarchive
+Debarchive
 debian
 decodeable
 decrypt
