@@ -448,7 +448,8 @@ Example response (200 OK)--`install` plan:
   "items": [
     {
       "action": {
-        "install": {
+        "type": "install",
+        "package": {
           "id": 101,
           "name": "openssh-server",
           "version": "1:9.6p1-3ubuntu13.5"
@@ -461,7 +462,8 @@ Example response (200 OK)--`install` plan:
     },
     {
       "action": {
-        "install": {
+        "type": "install",
+        "package": {
           "id": 102,
           "name": "curl",
           "version": "8.5.0-2ubuntu10.6"
@@ -485,17 +487,16 @@ Example response (200 OK)--`change_version` plan:
   "items": [
     {
       "action": {
-        "change_version": {
-          "from_package": {
-            "id": 10,
-            "name": "vim",
-            "version": "2:8.2"
-          },
-          "to_package": {
-            "id": 11,
-            "name": "vim",
-            "version": "2:9.0"
-          }
+        "type": "change_version",
+        "from_package": {
+          "id": 10,
+          "name": "vim",
+          "version": "2:8.2"
+        },
+        "to_package": {
+          "id": 11,
+          "name": "vim",
+          "version": "2:9.0"
         }
       },
       "computer": {
@@ -510,11 +511,11 @@ Example response (200 OK)--`change_version` plan:
 
 Response fields:
 
-- `action`: The plan's package operation. One of `install`, `remove`, `hold`, `unhold`, `upgrade`, `change_version`.
+- `action`: The plan's package operation as a string. One of `install`, `remove`, `hold`, `unhold`, `upgrade`, `change_version`. This outer `action` response field is the same plan action as each nested action object's `type`.
 - `items`: List of plan items.
-  - `action`: An object with exactly one key--matching the plan's `action`--describing the package(s) involved in this item.
-    - For `install`, `remove`, `hold`, `unhold`, and `upgrade`, the value is the package: `id`, `name`, and `version`.
-    - For `change_version`, the value has `from_package` and `to_package`, each with `id`, `name`, and `version`.
+  - `action`: A discriminated union. The `type` field is one of `install`, `remove`, `hold`, `unhold`, `upgrade`, or `change_version` and determines the shape of the action object:
+    - For `install`, `remove`, `hold`, `unhold`, and `upgrade`, the action object includes `package`, containing `id`, `name`, and `version`.
+    - For `change_version`, the action object includes `from_package` and `to_package`, each containing `id`, `name`, and `version`.
   - `computer`: The computer targeted by this item.
     - `id`: ID of the computer.
     - `name`: Name of the computer.
@@ -547,7 +548,8 @@ Example response (200 OK)--`install` plan:
   "actions": [
     {
       "action": {
-        "install": {
+        "type": "install",
+        "package": {
           "id": 101,
           "name": "openssh-server",
           "version": "1:9.6p1-3ubuntu13.5"
@@ -572,17 +574,16 @@ Example response (200 OK)--`change_version` plan:
   "actions": [
     {
       "action": {
-        "change_version": {
-          "from_package": {
-            "id": 10,
-            "name": "vim",
-            "version": "2:8.2"
-          },
-          "to_package": {
-            "id": 11,
-            "name": "vim",
-            "version": "2:9.0"
-          }
+        "type": "change_version",
+        "from_package": {
+          "id": 10,
+          "name": "vim",
+          "version": "2:8.2"
+        },
+        "to_package": {
+          "id": 11,
+          "name": "vim",
+          "version": "2:9.0"
         }
       },
       "computer_count": 12
@@ -595,9 +596,7 @@ Example response (200 OK)--`change_version` plan:
 Response fields:
 
 - `actions`: One entry per distinct package action in the plan.
-  - `action`: An object with exactly one key--matching the plan's `action`--describing the package(s) involved.
-    - For `install`, `remove`, `hold`, `unhold`, and `upgrade`, the value is the package: `id`, `name`, and `version`.
-    - For `change_version`, the value has `from_package` and `to_package`, each with `id`, `name`, and `version`.
+  - `action`: A discriminated union with a `type` field. The `type` identifies the same package action as the plan-level action string. For `install`, `remove`, `hold`, `unhold`, and `upgrade`, the action object includes `package`. For `change_version`, it includes `from_package` and `to_package`.
   - `computer_count`: Number of selected computers this action applies to.
 - `exclusions`: Packages that could not be resolved for some computers, grouped by package name.
   - `package_name`: Name of the excluded package. Exclusions are grouped by name (not ID), so multiple versions of the same package may be aggregated together.
