@@ -181,7 +181,7 @@ For PostgreSQL, you'll need three certificates and their corresponding keys:
     sudo chmod 400 /etc/landscape/postgres_client_superuser.key
     ```
 
-- Server authentication certificate. The SAN must contain the DNS or IP address of the database server.
+- Server authentication certificate. The SAN must contain the DNS or IP address of the database server. This guide installs Landscape, PostgreSQL, and RabbitMQ on the same host, so include `DNS:localhost` in the SAN because Landscape connects to PostgreSQL using `host = localhost`.
 
     ```bash
     sudo chown postgres:postgres /etc/postgresql/postgres_server.pem
@@ -233,15 +233,12 @@ Use the following steps to harden the PostgreSQL service.
 
 PostgreSQL must be configured to allow the Landscape application server to access the database server. Landscape uses several users for access, so all users must be added.
 
-Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
+This guide installs Landscape, PostgreSQL, and RabbitMQ on the same host, so Landscape connects to PostgreSQL using `host = localhost`. Use loopback entries instead of the server's external IP address. Edit the file `/etc/postgresql/14/main/pg_hba.conf` and add:
 
 ```ini
-hostssl all landscape,landscape_superuser <LANDSCAPE_IP_ADDRESS>/32 cert
+hostssl all landscape,landscape_superuser 127.0.0.1/32 cert
+hostssl all landscape,landscape_superuser ::1/128      cert
 ```
-
-Replace `<LANDSCAPE_IP_ADDRESS>` with the IP address of the server hosting Landscape services. You may also specify a network address using CIDR notation if needed.
-
-You should also remove the lines that refer to `scram-sha-256` or other password configurations.
 
 ### Configure database settings
 
@@ -492,7 +489,6 @@ sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 
 ````{tab-item} Landscape Server 25.10
 ```bash
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-account-1
-sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-knowledge
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-main
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-package
 sudo -u postgres createdb --owner=postgres --template=template0 --encoding=UTF8 --lc-ctype=C.UTF-8 --lc-collate=C.UTF-8 landscape-standalone-resource-1
@@ -531,7 +527,7 @@ Create the `/etc/rabbitmq/rabbitmq.conf` file and adjust the following parameter
 
     ```ini
     listeners.tcp = none
-    listeners.ssl.default = <RABBIT_IP_ADDRESS>:5671
+    listeners.ssl.default = 127.0.0.1:5671
     num_acceptors.ssl = 30
     ssl_options.cacertfile = /etc/ca-certificates.crt
     ssl_options.certfile = /etc/rabbitmq/rabbitmq_server.pem
@@ -555,7 +551,7 @@ Create the `/etc/rabbitmq/rabbitmq.conf` file and adjust the following parameter
     ssl_handshake_timeout = 5000
     ```
 
-    Replace `<RABBIT_IP_ADDRESS>` with the RabbitMQ node's interface address.
+    Because this guide installs RabbitMQ on the same host as Landscape and `service.conf` uses `host = localhost`, keep the TLS listener on `127.0.0.1`.
 
 1. Configure logging and auditing (adjust `local2` to an available syslog facility):
 
@@ -607,12 +603,10 @@ Create the `/etc/rabbitmq/rabbitmq.conf` file and adjust the following parameter
 1. Secure inter-node communication
 
     ```ini
-    distribution.listener.interface = <LISTENER_IP_ADDRESS>
+    distribution.listener.interface = 127.0.0.1
     distribution.listener.port_range.min = 25672
     distribution.listener.port_range.max = 25672
     ```
-
-    Replace `<LISTENER_IP_ADDRESS>` with the specific IP address on which the RabbitMQ listener should bind.
 
 1. Invalidate session identifiers for user logout and session termination to prevent replay attacks, MITM attacks, and session hijacking:
 
@@ -669,6 +663,7 @@ Create the `/etc/rabbitmq/enabled_plugins` file and enable SSL authentication an
 Edit the `/etc/rabbitmq/rabbitmq-env.conf` file and set these environment variables:
 
 ```ini
+NODENAME=rabbit@localhost
 NODE_IP_ADDRESS=127.0.0.1
 NODE_PORT=5672
 CONFIG_FILE=/etc/rabbitmq/rabbitmq.conf
@@ -1023,6 +1018,8 @@ Modify settings in the `/etc/landscape/service.conf` file to configure Landscape
 
 The following changes are required in the sections below. Remove any passwords if they exist.
 
+The `[schema]` section's SSL settings apply only to the superuser (`landscape_superuser`) connection. They're independent of the `[stores]` SSL settings, which apply to the regular `landscape` user connection. PostgreSQL certificate authentication requires the certificate CN to match the connecting username, so each role must have its own client certificate.
+
 `````{tab-set}
 
 ````{tab-item} Landscape Server 26.04 LTS and later
@@ -1108,9 +1105,6 @@ stores = main account-1 resource-1
 threads = 2
 
 [schema]
-# note that you must have at least two certificates for db connections:
-# one for landscape_superuser
-# and one for the regular landscape user
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
 sslmode = verify-full
@@ -1200,7 +1194,7 @@ threads = 10
 [maintenance]
 mailer = queue
 mailer_path = /var/lib/landscape/landscape-mail-queue
-stores = main account-1 resource-1 package session session-autocommit knowledge
+stores = main account-1 resource-1 package session session-autocommit
 threads = 1
 
 [message_server]
@@ -1248,7 +1242,7 @@ threads = 1
 [scripts]
 mailer = queue
 mailer_path = /var/lib/landscape/landscape-mail-queue
-stores = main account-1 resource-1 package session knowledge
+stores = main account-1 resource-1 package session
 threads = 1
 
 [secrets]
@@ -1258,7 +1252,6 @@ service_url = http://localhost:26155
 [stores]
 account_1 = landscape-standalone-account-1
 host = localhost
-knowledge = landscape-standalone-knowledge
 main = landscape-standalone-main
 package = landscape-standalone-package
 resource_1 = landscape-standalone-resource-1
