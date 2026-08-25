@@ -272,7 +272,7 @@ to:
 
 `https://mirror.math.princeton.edu/pub/ubuntu/`
 
-Using an `https` source could be useful in situation where a content filtering interferes with the pocket sync when using an `http` source. Some of the [Official Archive Mirrors for Ubuntu](https://launchpad.net/ubuntu/+archivemirrors) are available over `https` although they are not advertised in the mirror list. For more options have a loot at `landscape-api edit-pocket --help`.
+Using an `https` source could be useful in situation where a content filtering interferes with the pocket sync when using an `http` source. Some of the [Official Archive Mirrors for Ubuntu](https://launchpad.net/ubuntu/+archivemirrors) are available over `https` although they are not advertised in the mirror list. For more options have a look at `landscape-api edit-pocket --help`.
 
 ## Upload pockets
 

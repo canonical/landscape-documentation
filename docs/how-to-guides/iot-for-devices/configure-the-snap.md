@@ -5,13 +5,13 @@ myst:
 ---
 
 (how-to-configure-the-client-snap)=
-# How to configure the snap
+# How to configure and register the snap
 
 ```{note}
 You must have the Landscape Client snap installed on at least one client device before configuring it with `landscape-client.config`. For instructions, see {ref}`how-to-install-the-client-snap`.
 ```
 
-This document describes how to configure the Landscape Client snap in multiple ways. If you’re using the Debian package instead of the snap, see {ref}`how-to-configure-landscape-client`.
+This document describes how to configure and register the Landscape Client snap in multiple ways. Registering the device with your Landscape server is part of the configuration process when using `landscape-client.config`. If you’re using the Debian package instead of the snap, see {ref}`how-to-configure-landscape-client`.
 
 ## Use `landscape-client.config`
 

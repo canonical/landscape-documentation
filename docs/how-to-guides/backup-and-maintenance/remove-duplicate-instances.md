@@ -7,7 +7,7 @@ myst:
 (how-to-remove-duplicate-instances)=
 # How to remove duplicate instances
 
-Duplicate registrations of instances can sometimes happen in Landscape when clients have issues communicating with the Landscape server, or if the `lanscape-config` command is used multiple times. In some cases, these issues result in those client instances sending a new registration request, which can result in a clone or duplicate instance if those requests are accepted.
+Duplicate registrations of instances can sometimes happen in Landscape when clients have issues communicating with the Landscape server, or if the `landscape-config` command is used multiple times. In some cases, these issues result in those client instances sending a new registration request, which can result in a clone or duplicate instance if those requests are accepted.
 
 This guide describes how to remove duplicate instances.
 

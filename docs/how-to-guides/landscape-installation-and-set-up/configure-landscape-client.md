@@ -5,11 +5,11 @@ myst:
 ---
 
 (how-to-configure-landscape-client)=
-# How to configure Landscape Client
+# How to configure and register Landscape Client
 
 > See also: {ref}`how-to-install-landscape-client`
 
-This guide describes how to configure the Landscape Client Debian package in multiple ways.
+This guide describes how to configure and register the Landscape Client Debian package in multiple ways. Registering the client with your Landscape server is part of the configuration process, whether you use `landscape-config` or the `client.conf` file.
 
 For Ubuntu Pro subscriptions, you'll need to attach your Pro token before or after configuration to use Ubuntu Pro services. See {ref}`how-to-attach-ubuntu-pro` and {ref}`how-to-ubuntu-pro-enable-landscape`.
 
@@ -31,6 +31,8 @@ sudo landscape-config
 sudo landscape-config --silent --account-name="standalone"
 ```
 
+The advantage of `--silent` over calling `landscape-config` interactively is that it reads all settings from the existing `client.conf` and requests a registration only if the client is not already registered against `landscape-server`. Be aware that some configuration options (namely `computer_title`, `tags`, `access_group`) are only sent to `landscape-server` on registration.
+
 To view all possible options for `landscape-config`, visit the man page with:
 
 ```bash
@@ -46,6 +48,8 @@ The Landscape Client configuration file is located in `/etc/landscape/client.con
 ```bash
 sudo systemctl restart landscape-client
 ```
+
+Editing `client.conf` sets the configuration values, but it doesn't register the machine on its own. To register the machine, use `landscape-config`.
 
 ### SSL certificates
 
@@ -173,7 +177,7 @@ sudo chmod 777 <CUSTOM_TEMPDIR>
 
 ## Landscape clients with configuration management tools
 
-If you want to manage `landscape-client` through a configuration management tool such as Puppet or Ansible, you can avoid getting duplicate computers by writing the `/etc/landscape/client.conf` and `/etc/default/landscape-client` files, and then restarting the `landscape-client` service.
+If you want to manage `landscape-client` through a configuration management tool such as Puppet or Ansible, you can avoid getting duplicate computers by writing the `/etc/landscape/client.conf` file yourself and then running `landscape-config --silent` to apply it.
 
 In `/etc/landscape/client.conf`:
 
@@ -190,13 +194,11 @@ include_manager_plugins = ScriptExecution
 script_users = root,landscape,nobody
 ```
 
-In `/etc/default/landscape-client`:
+Then, apply the configuration and trigger registration with:
 
 ```bash
-RUN=1
+sudo landscape-config --silent
 ```
-
-The advantage over calling `landscape-config` is that this will request a registration only if the client is not already registered against `landscape-server`. Be aware that some configuration options (namely `computer_title`, `tags`, `access_group`) are only sent to `landscape-server` on registration.
 
 ## Log rotation
 
