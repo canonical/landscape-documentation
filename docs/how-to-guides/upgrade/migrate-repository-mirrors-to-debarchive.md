@@ -39,7 +39,7 @@ Set the following environment variables for use throughout this guide, using the
 
 ```bash
 export LANDSCAPE_FQDN="landscape.example.com"
-export API_BASE="https://$LANDSCAPE_FQDN/debarchive/v1beta1"
+export API_BASE="https://$LANDSCAPE_FQDN/debarchive/v1"
 export JWT="<your-jwt-token>"
 ```
 
