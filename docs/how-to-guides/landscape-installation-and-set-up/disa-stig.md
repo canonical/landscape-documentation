@@ -1113,6 +1113,11 @@ stores = main account-1 resource-1
 threads = 2
 
 [schema]
+# [schema] ssl settings apply only to the superuser (landscape_superuser or
+# landscape_maintenance) connection. They are independent of the [stores] ssl
+# settings, which apply to the regular landscape user connection.
+# PostgreSQL certificate authentication requires the certificate CN to match
+# the connecting username, so each role must have its own client certificate.
 sslcert = /etc/landscape/postgres_client_superuser.pem
 sslkey = /etc/landscape/postgres_client_superuser.key
 sslmode = verify-full
