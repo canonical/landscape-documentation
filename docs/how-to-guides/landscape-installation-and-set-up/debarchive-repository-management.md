@@ -93,7 +93,7 @@ sudo snap set landscape-debarchive \
 ```
 
 ```{note}
-**Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
+**Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
 ```
 
 ```{note}

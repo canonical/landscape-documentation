@@ -45,9 +45,11 @@ All of the necessary packages for Landscape Server should now be downloaded to t
 
 #### (Landscape 26.04 only) Download the Landscape Server snap services
 
-Landscape 26.04 LTS depends on the following snap services, `landscape-task-handler`, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately.
+Landscape 26.04 LTS depends on the following snap services: `landscape-task-handler`, `landscape-outbox`, and `landscape-debarchive`. `landscape-outbox` and `landscape-debarchive` currently use the `core22` base and require the `snapd` system snap to be available on the offline machine, so download the following snaps separately:
 
 ```bash
+snap download core22
+snap download snapd
 snap download landscape-task-handler
 snap download landscape-outbox
 snap download landscape-debarchive --beta
@@ -57,10 +59,15 @@ For each snap, a `.snap` file and a `.assert` file will be produced.
 
 ### Install Landscape Server in the offline environment
 
-Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
+Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and transfer them into a directory readable by APT (for example, `/srv/landscape-packages`). The `apt --download-only` command above downloads the full dependency closure into the APT cache, so APT can resolve package dependencies locally without reaching the network. Install the packages with commands similar to:
 
 ```bash
-sudo dpkg -i /PATH/TO/PACKAGES/*.deb
+sudo mkdir -p /srv/landscape-packages
+sudo cp /PATH/TO/PACKAGES/*.deb /srv/landscape-packages/
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  -o Acquire::http::No=true \
+  -o Acquire::https::No=true \
+  /srv/landscape-packages/*.deb
 ```
 
 #### (Landscape 26.04 only) Install the Landscape Server snap services
@@ -68,6 +75,10 @@ sudo dpkg -i /PATH/TO/PACKAGES/*.deb
 Copy the downloaded snap artifacts, carry them into the offline or airgapped environment, and install them with `snap`. You can install the packages with a command similar to:
 
 ```bash
+sudo snap ack core22_*.assert
+sudo snap install core22_*.snap
+sudo snap ack snapd_*.assert
+sudo snap install snapd_*.snap
 sudo snap ack landscape-task-handler_*.assert
 sudo snap install landscape-task-handler_*.snap
 sudo snap ack landscape-outbox_*.assert
@@ -100,10 +111,15 @@ All of the necessary packages for Landscape Client should now be downloaded to t
 
 ### Install Landscape Client in an offline environment
 
-Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
+Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and transfer them into a directory readable by APT (for example, `/srv/landscape-packages`). Install them with APT so package dependencies are resolved locally. You can install the packages with commands similar to:
 
 ```bash
-sudo dpkg -i /PATH/TO/PACKAGES/*.deb
+sudo mkdir -p /srv/landscape-packages
+sudo cp /PATH/TO/PACKAGES/*.deb /srv/landscape-packages/
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  -o Acquire::http::No=true \
+  -o Acquire::https::No=true \
+  /srv/landscape-packages/*.deb
 ```
 
 Once Landscape Client is installed, you can configure the client and register it with your Landscape server similar to how you would in an online environment. See {ref}`how-to-configure-landscape-client` for more details.
