@@ -9,7 +9,7 @@ myst:
 
 ## POST `/login`
 
-Login to the REST API with a email address and password.
+Login to the REST API with an email address and password.
 
 Required parameters:
 

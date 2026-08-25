@@ -1,0 +1,1 @@
+`<LANDSCAPE_PPA_NAME>`: The suffix of the Landscape PPA to use (without the `ppa:landscape/` prefix), for example `self-hosted-26.04`, `self-hosted-24.04`, `self-hosted-beta`, or `latest-stable`. We recommend using the most recent LTS suffix for production deployments. See {ref}`how-to-install-landscape-client` for more about the available PPAs.
