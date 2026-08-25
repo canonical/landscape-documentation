@@ -48,6 +48,8 @@ All of the necessary packages for Landscape Server should now be downloaded to t
 Landscape 26.04 LTS depends on the following snap services, `landscape-task-handler`, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately. The `landscape-outbox` and `landscape-debarchive` snaps currently use the `core22` base and require the `snapd` system snap to be available on the offline machine, so download all five snaps:
 
 ```bash
+snap download core22
+snap download snapd
 snap download landscape-task-handler
 snap download core22
 snap download snapd
@@ -75,6 +77,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
 Copy the downloaded snap artifacts, carry them into the offline or airgapped environment, and install them with `snap`. You can install the packages with a command similar to:
 
 ```bash
+sudo snap ack core22_*.assert
+sudo snap install core22_*.snap
+sudo snap ack snapd_*.assert
+sudo snap install snapd_*.snap
 sudo snap ack landscape-task-handler_*.assert
 sudo snap install landscape-task-handler_*.snap
 sudo snap ack core22_*.assert

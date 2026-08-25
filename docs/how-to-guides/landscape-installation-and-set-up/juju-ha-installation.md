@@ -159,8 +159,6 @@ relations:
   - [landscape-server:api-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:package-upload-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:repository-haproxy-route, haproxy:haproxy-route]
-  - [landscape-server:hostagent-messenger-haproxy-route, haproxy:haproxy-route]
-  - [landscape-server:ubuntu-installer-attach-haproxy-route, haproxy:haproxy-route]
   - [landscape-debarchive:landscape-server, landscape-server:debarchive]
   - [landscape-debarchive:database, postgresql:database]
   - [landscape-debarchive:debarchive-haproxy-route, haproxy:haproxy-route]
