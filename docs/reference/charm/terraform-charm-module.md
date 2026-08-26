@@ -2,12 +2,6 @@
 
 # Landscape Server charm Terraform module
 
-This is the base [Terraform](https://developer.hashicorp.com/terraform) module for the [Landscape Server charm](https://charmhub.io/landscape-server), using the [Terraform Juju provider](https://registry.terraform.io/providers/juju/juju/latest) to model the charm deployment onto any non-Kubernetes cloud managed by [Juju](https://juju.is).
-
-It can be deployed in isolation, but is intended as a building block for higher-level Terraform modules such as the {ref}`Landscape Scalable product module <reference-landscape-product-modules-landscape-scalable>`.
-
-Source: [`terraform/charm`](https://github.com/canonical/landscape-server-operator/tree/main/terraform/charm) in the `landscape-server-operator` repository.
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

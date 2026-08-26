@@ -2,12 +2,6 @@
 
 # Landscape Scalable product module
 
-The Landscape Scalable product module is a Terraform module that deploys the Landscape Server charm and the applications it depends on (HAProxy, PostgreSQL, RabbitMQ, a TLS certificates provider, Debarchive, and Landscape Task Handler) using Juju, and can optionally deploy and integrate PgBouncer. It is based on the (deprecated) `landscape-scalable` charm bundle, and builds on the {ref}`Landscape Server charm Terraform module <reference-charm-terraform-charm-module>`.
-
-See {ref}`how-to-terraform-juju-deployment` for usage.
-
-Source: [`terraform/product/modules/landscape-scalable`](https://github.com/canonical/landscape-server-operator/tree/main/terraform/product/modules/landscape-scalable) in the `landscape-server-operator` repository.
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
