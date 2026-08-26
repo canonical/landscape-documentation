@@ -15,7 +15,7 @@ The [Landscape Server charm](https://charmhub.io/landscape-server) requires inte
 - `rabbitmq-server`
 
 **Landscape 26.04 LTS beta+:**
-- `haproxy` (at `2.8/edge`, via `haproxy-route` interface)
+- `haproxy` (at `2.8/stable`, via `haproxy-route` interface)
 - A TLS certificates provider integrated with HAProxy (e.g., `self-signed-certificates`, `lego`)
 - `landscape-debarchive` (for Deb Archive repository management)
 - `landscape-task-handler` (for task processing)
@@ -36,7 +36,7 @@ Learn more about [Juju integrations](https://canonical.com/juju/integrations).
 The Landscape Server charm supports two deployment architectures:
 
 **Landscape 26.04 LTS beta+ (recommended):**
-- External HAProxy charm (`2.8/edge`) for load balancing, using the `haproxy-route` interface
+- External HAProxy charm (`2.8/stable`) for load balancing, using the `haproxy-route` interface
 - PostgreSQL 14+ with modern `database` interface
 - TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
 - `landscape-debarchive` charm for Deb Archive repository management
@@ -96,7 +96,7 @@ Landscape Server is currently only distributed as a machine (VM) charm and canno
 The relationship between Landscape Server and HAProxy varies significantly between Landscape versions:
 
 **Landscape 26.04 LTS beta+:**
-- Requires the HAProxy charm at `2.8/edge`
+- Requires the HAProxy charm at `2.8/stable`
 - Integrates via 8 `haproxy-route` relation endpoints directly from landscape-server to haproxy
 - HAProxy handles TLS termination and load balancing
 - Cannot be integrated with the `latest/x` channels of the HAProxy charm (different interface)

@@ -46,6 +46,7 @@ Manual installation <manual-installation>
 Juju installation <juju-installation>
 Juju HA installation <juju-ha-installation>
 Install in a LXD container <install-in-a-lxd-container>
+Deploy with Terraform <terraform-juju-deployment>
 ```
 
 ### Specialized environments
