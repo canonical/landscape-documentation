@@ -171,7 +171,7 @@ tls_certificates = {
 
 ## Using a shared, cross-model HAProxy (LBaaS)
 
-Instead of deploying a dedicated HAProxy into the same model, you can integrate Landscape Server with an HAProxy already deployed in another model and shared out as a [Juju cross-model offer](https://documentation.ubuntu.com/juju/latest/howto/manage-offers/) of its `haproxy-route` endpoint. This is useful when a single HAProxy fronts multiple applications or models.
+Instead of deploying a dedicated HAProxy into the same model, you can integrate Landscape Server with an HAProxy already deployed in another model and shared out as a [Juju cross-model offer](https://canonical.com/juju/docs/juju-cli/latest/howto/manage-offers/) of its `haproxy-route` endpoint. This is useful when a single HAProxy fronts multiple applications or models.
 
 To use this, set `haproxy` to `null` (so the module doesn't deploy its own) and provide the offer URL instead:
 
