@@ -12,7 +12,7 @@ myst:
 You can create a scalable, high availability (HA) deployment of Landscape Server with Juju. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
 ```{important}
-This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 beta version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
+This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
 
 The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` track, so 26.04 (and later) deployments use a custom bundle such as the one shown below, or use the {ref}`Landscape Scalable product module <how-to-terraform-juju-deployment>` instead.
 ```
@@ -21,7 +21,7 @@ The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` 
 
 ### 26.04 beta+ architecture (recommended)
 
-Starting with the 26.04 beta version, Landscape Server uses the following architecture:
+Starting with the 26.04 version, Landscape Server uses the following architecture:
 
 - **Landscape Server units** for the application
 - **HAProxy** charm (`2.8/stable`) for load balancing via the `haproxy-route` interface
@@ -69,7 +69,7 @@ Choose the appropriate deployment approach based on your needs:
 
 ---
 
-## 26.04 beta+ deployment (recommended)
+## 26.04 deployment (recommended)
 
 This section covers deploying Landscape Server with the external HAProxy charm introduced in version 26.04 beta.
 
@@ -116,7 +116,6 @@ applications:
     num_units: 3
     options:
       landscape_ppa: ppa:landscape/self-hosted-26.04
-      min_install: True
       root_url: https://landscape.example.com/
     base: ubuntu@24.04
 

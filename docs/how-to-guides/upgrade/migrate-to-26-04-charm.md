@@ -15,11 +15,11 @@ This guide explains how to migrate from an older Landscape Server charm deployme
 
 ## Architectural changes
 
-The 26.04 beta version introduces significant architectural changes:
+The 26.04 version introduces significant architectural changes:
 
 | Aspect                   | Landscape 26.04 LTS beta+                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                       | External HAProxy charm (`reverseproxy` interface)            |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                     | External HAProxy charm (`reverseproxy` interface)            |
 | **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
@@ -39,15 +39,18 @@ Before making any changes, back up your Landscape database following the backup 
 Remove the older HAProxy relation:
 
 ```bash
-juju remove-relation landscape-server:website haproxy:reverseproxy --force
+juju remove-relation landscape-server:website haproxy:reverseproxy
 ```
+
+```{note}
+
 
 **For deployments older than 25.10 only:**
 
 Remove the older RabbitMQ relation:
 
 ```bash
-juju remove-relation landscape-server:amqp rabbitmq-server:amqp --force
+juju remove-relation landscape-server:amqp rabbitmq-server:amqp
 ```
 
 ```{note}
@@ -62,6 +65,12 @@ First, deploy the HAProxy charm:
 
 ```bash
 juju deploy haproxy --channel 2.8/stable
+```
+
+Alternatively, if you still have HAProxy deployed from the `latest/x` track, you can simply refresh it to the `2.8/stable` channel:
+
+```sh
+juju refresh haproxy --channel 2.8/stable
 ```
 
 **For testing/development with self-signed certificates:**
@@ -169,10 +178,10 @@ If the machine ID of the HAProxy charm is not 0, adjust the above command with t
 
 ### Step 4: Refresh the charm
 
-Refresh the Landscape Server charm to the 26.04 beta version:
+Refresh the Landscape Server charm to the 26.04 version:
 
 ```bash
-juju refresh landscape-server --channel 26.04/beta
+juju refresh landscape-server --channel 26.04/stable
 ```
 
 ```{note}
@@ -203,7 +212,7 @@ juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:ha
 ```
 
 ```{important}
-The `ssl_cert` and `ssl_key` charm configuration have been removed and are no longer supported in the 26.04 beta charm. TLS is now managed by the HAProxy charm via the `tls-certificates` interface.
+When using HAProxy charm from the `2.8/x` track, the `ssl_cert` and `ssl_key` charm configuration options for Landscape Server are unused since TLS is now managed by the HAProxy charm via the `tls-certificates` interface.
 ```
 
 ### Step 6: Add new RabbitMQ relations (pre-25.10 deployments only)
@@ -224,7 +233,7 @@ juju integrate landscape-server:outbound-amqp rabbitmq-server
 If you want to upgrade to a newer PostgreSQL version (e.g., from 14 to 16) as part of this migration, follow the backup and restore procedures in {ref}`how-to-back-up-restore-tear-down-charmed-deployment` to migrate your data to a new PostgreSQL deployment.
 
 ```{note}
-PostgreSQL upgrade is optional. The 26.04 beta charm uses the modern `database` interface which works with PostgreSQL 14 and above.
+PostgreSQL upgrade is optional. The 26.04 charm uses the modern `database` interface which works with PostgreSQL 14 and above.
 
 The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14. It is recommended to migrate to the modern `database` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
 ```
@@ -254,5 +263,6 @@ For more information about `juju refresh`, see the [Juju documentation on charm 
 
 - {ref}`how-to-juju-ha-installation` - Full HA deployment guide
 - {ref}`explanation-charm-compatibility` - Charm compatibility details
+- {ref}`how-to-terraform-juju-deployment` - How to deploy Landscape with Terraform and Juju
 - [Landscape Server charm documentation](https://charmhub.io/landscape-server)
 - [PostgreSQL charm documentation](https://charmhub.io/postgresql)

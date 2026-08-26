@@ -61,7 +61,7 @@ For migration from older deployments to 26.04 beta+, see {ref}`how-to-migrate-to
 
 ## TLS certificates charm interface
 
-Starting with the 26.04 beta version, TLS is managed by the HAProxy charm. The HAProxy charm integrates with a provider of the [`tls-certificates` charm interface](https://charmhub.io/integrations/tls-certificates) to obtain certificates for HTTPS connections.
+Starting with the 26.04 version, TLS is managed by the HAProxy charm. The HAProxy charm integrates with a provider of the [`tls-certificates` charm interface](https://charmhub.io/integrations/tls-certificates) to obtain certificates for HTTPS connections.
 
 ### Available TLS certificate providers
 
