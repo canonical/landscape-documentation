@@ -116,7 +116,7 @@ applications:
 
   landscape-server:
     charm: ch:landscape-server
-    channel: 26.04/edge
+    channel: 26.04/stable
     num_units: 3
     options:
       landscape_ppa: ppa:landscape/self-hosted-26.04
