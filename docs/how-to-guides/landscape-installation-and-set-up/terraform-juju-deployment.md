@@ -166,15 +166,15 @@ This module can be configured for high availability by configuring the `units` v
 
 ```hcl
 landscape_server = {
-  units = 2
+  units = 3
 }
 
 postgresql = {
-  units = 2
+  units = 3
 }
 
 rabbitmq_server = {
-  units = 2
+  units = 3
 }
 ```
 
