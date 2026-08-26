@@ -6,7 +6,7 @@ Landscape can be deployed in a scalable, configurable, and reproducible way by u
 
 In this deployment, Terraform manages the Landscape applications and their Juju integrations. You must first have a Juju controller and model available, and Terraform then deploys the Landscape module into that model.
 
-## Install Juju
+## Install prerequisites
 
 Make sure you have `juju` installed. You can install it as a snap with the following command:
 
@@ -14,13 +14,7 @@ Make sure you have `juju` installed. You can install it as a snap with the follo
 sudo snap install juju --classic
 ```
 
-## Create a Juju controller
-
-With Juju installed, use it to bootstrap a cloud by creating a controller. See [the Juju docs on managing and creating controllers](https://documentation.ubuntu.com/juju/latest/howto/manage-controllers/) for more information. The controller must be configured and accessible before proceeding.
-
-## Install Terraform or OpenTofu
-
-Make sure you have [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) or [OpenTofu](https://opentofu.org/docs/intro/install/) installed.
+Make sure you also have [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) or [OpenTofu](https://opentofu.org/docs/intro/install/) installed.
 
 ```{note}
 This guide uses `terraform` for commands, but everything can also be done using `tofu` instead.
@@ -29,6 +23,10 @@ If using OpenTofu, consider creating an alias in your shell's configuration file
     alias terraform=tofu
 
 ```
+
+## Bootstrap or select a Juju controller
+
+With Juju installed, use it to bootstrap a cloud by creating a controller. See [the Juju docs on managing and creating controllers](https://canonical.com/juju/docs/juju-cli/latest/howto/manage-controllers/) for more information. The controller must be configured and accessible before proceeding.
 
 ## Create a Juju model
 
@@ -52,11 +50,11 @@ If you have [`jq`](https://github.com/jqlang/jq) installed:
     juju show-model landscape --format=json | jq -r '.landscape["model-uuid"]'
 ```
 
-### Deploying the Landscape Scalable product module
+## Create the Terraform configuration
 
-The Landscape Scalable product module is a Terraform module that can be used to deploy the Landscape Server charm and other applications it depends on using Juju. It can be deployed by itself or used in higher-level plans. It is based on the (deprecated) Landscape Scalable charm bundle. See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for its specific inputs and outputs.
+The Landscape Scalable product module is a Terraform module that deploys the Landscape Server charm and the applications it depends on, using Juju. It can be deployed by itself or used in higher-level plans. See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for its specific inputs and outputs.
 
-In a Terraform plan, you need to provide the module with the UUID of a Juju model and any desired configurations for the Landscape Server, HAProxy, PostgreSQL, and RabbitMQ server charms, for example:
+In a Terraform plan, provide the module with the UUID of your Juju model and the desired configuration for the Landscape Server, HAProxy, PostgreSQL, and RabbitMQ server charms, for example:
 
 ```hcl
 variable "model_uuid" {
@@ -105,23 +103,9 @@ module "landscape_landscape-scalable" {
 
 `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`. When set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
 
-Then, apply the plan and supply the Juju model UUID as a variable:
+### Deploying against legacy (pre-26.04) topologies
 
-```sh
-terraform apply -var model_uuid=<model-uuid>
-```
-
-The module's outputs include `applications` (the deployed charms and their integration endpoints), `admin_email`, `admin_password` (sensitive), `registration_key`, `has_modern_amqp_relations`, and `has_modern_postgres_interface`. See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for the full list.
-
-After applying the plan, you can monitor the status of the Juju model using `juju status`, for example:
-
-```sh
-juju status -m landscape --watch 1s --relations
-```
-
-## Deploying against legacy (pre-26.04) or modern (26.04+) topologies
-
-This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified whether `landscape_server.channel` points at a pre-26.04 revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation) or a 26.04+ revision (modern `database` interface, `haproxy-route`, split `inbound-amqp`/`outbound-amqp`).
+This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module used above also works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation) — you don't need a different plan to support an older revision.
 
 The `terraform/product/modules/landscape-scalable` directory in `landscape-server-operator` ships two example variable files for each topology; copy the one matching your target revision to `terraform.tfvars`:
 
@@ -130,17 +114,51 @@ The `terraform/product/modules/landscape-scalable` directory in `landscape-serve
 
 ```sh
 cp terraform.tfvars.modern terraform.tfvars   # or terraform.tfvars.example for legacy
+```
+
+## Initialize and apply the Terraform plan
+
+Initialize the working directory so Terraform can download the required providers:
+
+```sh
 terraform init
+```
+
+Then, review and apply the plan, supplying the Juju model UUID as a variable:
+
+```sh
 terraform apply -var model_uuid=<model-uuid>
 ```
 
-## Accessing the Landscape UI
+## Monitor the deployment
 
-Once the deployment has finished, get the IPv4 address of the leader `haproxy` unit and access it with your browser:
+After applying the plan, you can monitor the status of the Juju model using `juju status`, for example:
+
+```sh
+juju status -m landscape --watch 1s --relations
+```
+
+## Configure DNS and access the web portal
+
+Once the deployment has finished, get the IPv4 address of the leader `haproxy` unit:
 
 ```bash
 juju status -m landscape haproxy/leader
 ```
+
+HAProxy routes traffic based on the `hostname` configured in `landscape_server.config.root_url`, not by IP address alone, so point that hostname at the HAProxy unit's address (via DNS, or `curl --resolve`/a `/etc/hosts` entry for testing) and access Landscape using that hostname in your browser.
+
+## Get the initial credentials and finish setup
+
+The module's outputs include `admin_email` and `admin_password` (sensitive) for the initial Landscape administrator account, and `registration_key` for registering clients. Retrieve them with:
+
+```sh
+terraform output admin_email
+terraform output admin_password
+terraform output registration_key
+```
+
+The outputs also include `applications` (the deployed charms and their integration endpoints), `has_modern_amqp_relations`, and `has_modern_postgres_interface`. See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for the full list.
 
 ## Deploying with high availability
 

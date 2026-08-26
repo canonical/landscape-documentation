@@ -25,11 +25,9 @@ To learn more about Juju and to bootstrap a Juju controller, check out their [ge
 
 ## Deploy self-hosted Landscape Server
 
+Choose the appropriate option for your Landscape charm deployment.
+
 If you have an Ubuntu Pro subscription, attach your Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
-
-When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires.
-
-The recommended way to deploy Landscape is with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`reference documentation <reference-landscape-product-modules-landscape-scalable>` for inputs and outputs), rather than the Charmhub bundle described below.
 
 ```{important}
 Starting with the **26.04 version** of the `landscape-server` charm, the deployment architecture changes to PostgreSQL 14+ over the `database` relation (backed by the `postgresql_client` charm interface), HAProxy 2.8 over `haproxy-route`, and TLS via `tls-certificates`.
@@ -37,7 +35,13 @@ Starting with the **26.04 version** of the `landscape-server` charm, the deploym
 The Charmhub `landscape-scalable` bundle was deprecated in 26.04 and does not have a `26.04/*` track. For 26.04+ deployments, follow {ref}`how-to-juju-ha-installation`.
 ```
 
-### Deployment approach
+### Deploy with Terraform
+
+The recommended way to deploy Landscape is with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`reference documentation <reference-landscape-product-modules-landscape-scalable>` for inputs and outputs), rather than the Charmhub bundle described below.
+
+## Other deployment methods
+
+When deploying with Juju, you will use a Juju bundle. A bundle is an encapsulation of all of the parts needed to deploy the required services as well as associated relations and configurations that the deployment requires.
 
 > See also: [Landscape-scalable bundle on Charmhub](https://charmhub.io/landscape-scalable)
 
@@ -55,8 +59,6 @@ Key benefits of the new approach:
 - Better scalability and resilience
 
 For detailed instructions on deploying with the new architecture, create and deploy a custom bundle as documented in {ref}`how-to-juju-ha-installation`.
-
-### Other bundles
 
 Previously, there were additional bundles: `landscape-dense` and `landscape-dense-maas`. These bundles are now deprecated and should not be used for new deployments.
 

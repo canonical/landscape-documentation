@@ -13,7 +13,7 @@ The Landscape Server charm for 26.04 is currently in beta. See the {ref}`referen
 
 This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS version with an external HAProxy charm using the `haproxy-route` interface.
 
-The recommended way to manage a 26.04+ deployment is the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`), rather than the manual `juju integrate` steps below.
+You can follow the manual `juju integrate` steps below, or use the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`) to manage the migration as code instead.
 
 ## Architectural changes
 
