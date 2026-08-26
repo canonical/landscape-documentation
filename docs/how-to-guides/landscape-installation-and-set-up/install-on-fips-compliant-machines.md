@@ -15,9 +15,17 @@ Use the {ref}`Quickstart <how-to-quickstart-installation>` or {ref}`Manual <how-
 
 - **Use Ubuntu 22.04 LTS**
 - **Run `pro enable fips-updates`, then reboot**
-- **Install Landscape 24.04 LTS**
-- **Install packages with `apt` instead of `snap`**
+- **Install Landscape Server (24.04 LTS or 26.04 LTS)**
+- **Use `apt` packages instead of `snap` packages**
+  - Snap packages can only be used if they are installed on top of a FIPS-compliant core (e.g. `core22` from the `fips-updates/stable` channel)
 - **Use external authentication instead of username/password**
+
+If you're installing Landscape 24.04 LTS on Ubuntu 22.04 LTS with Ubuntu Pro enabled, pin `python3-pydantic` to the Landscape PPA version before installing Landscape. Otherwise, Ubuntu Pro's ESM Apps repository may prefer an older `python3-pydantic` package that doesn't satisfy Landscape 24.04's dependency requirements.
+
+```bash
+printf "Package: python3-pydantic\nPin: version 2.4.2-landscape*\nPin-Priority: 1001\n" | sudo tee /etc/apt/preferences.d/landscape-fips-pydantic
+sudo apt-get update
+```
 
 If you're {ref}`configuring Postfix for emails <how-to-configure-postfix>`, add the following change:
 
