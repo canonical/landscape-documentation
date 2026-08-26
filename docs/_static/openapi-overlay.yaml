@@ -613,6 +613,6 @@ actions:
         name: operations/c3d4e5f6-a7b8-4c5d-8e9f-0a1b2c3d4e5f
         done: false
         metadata:
-          '@type': type.googleapis.com/canonical.landscape.debarchive.v1beta1.PublishPublicationMetadata
+          '@type': type.googleapis.com/canonical.landscape.debarchive.v1beta1.TaskMetadata
         response:
           '@type': type.googleapis.com/canonical.landscape.debarchive.v1beta1.TaskCreatedResponse
