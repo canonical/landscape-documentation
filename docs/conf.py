@@ -173,6 +173,10 @@ linkcheck_ignore = [
     "http://nfs.sourceforge.net/#faq_d2",
     "https://www.hashicorp.com/en/products/vault",
     "https://developer.hashicorp.com/vault/docs/concepts/production-hardening",
+    # terraform-docs renders Terraform module `source` strings (git::.../repo//path)
+    # as markdown links; these use Terraform's git:: subdirectory syntax, not
+    # real URLs, so they 404 when linkcheck fetches them directly.
+    r"https://github\.com/canonical/.*-operator\.git//.*",
 ]
 
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
