@@ -9,12 +9,21 @@ flowchart TD
         LS2[landscape-server/2]
         PG[(PostgreSQL)]
         RMQ[RabbitMQ Server]
+        DA[landscape-debarchive]
+        TH[landscape-task-handler]
     end
     TLS -- certificates --> HAProxy
+    TLS -- certificates --> TH
     Client -- HTTPS --> HAProxy
     HAProxy -- haproxy-route --> LS0
     HAProxy -- haproxy-route --> LS1
     HAProxy -- haproxy-route --> LS2
     LS0 & LS1 & LS2 --- PG
     LS0 & LS1 & LS2 --- RMQ
+    LS0 -- debarchive --> DA
+    DA --- PG
+    HAProxy -- debarchive-haproxy-route --> DA
+    LS0 -- task-handler --> TH
+    TH --- PG
+    HAProxy -- grpc-haproxy-route --> TH
 ```

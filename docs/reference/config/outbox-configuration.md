@@ -108,6 +108,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Required: No
 - `service.conf`-supplied: Yes
 
+(reference-outbox-database-ssl)=
 #### `LANDSCAPE_DATABASE_<DB>_SSL`
 
 - Purpose: The SSL mode to use when connecting to PostgreSQL. Valid values are `disable`, `allow`, `prefer`, `require`, `verify-ca`, and `verify-full`.
@@ -182,6 +183,7 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Required: Yes
 - `service.conf`-supplied: Yes
 
+(reference-outbox-broker-ssl)=
 #### `LANDSCAPE_BROKER_SSL_CA_CERT`
 
 - Purpose: Path to the CA certificate file used to verify the broker's TLS certificate.
@@ -261,6 +263,43 @@ The outbox service connects to three PostgreSQL databases. Each database is conf
 - Purpose: The maximum number of times the worker will retry publishing a single outbox entry before marking it as failed.
 - Snap key: `landscape.worker.max-retries`
 - Default: `3`
+- Required: No
+- `service.conf`-supplied: No
+
+(reference-outbox-task-handler-client-settings)=
+### Task handler client settings
+
+The outbox connects to the Task Handler over gRPC with mutual TLS to submit hard deletion tasks. If no certificates directory is configured, the outbox logs an error and continues running its other jobs (soft deletion, RabbitMQ publishing) without the task handler client.
+
+```{important}
+The `LANDSCAPE_TASK_HANDLER_GRPC_ADDRESS` value must match the host and port that the Task Handler snap's gRPC server is actually listening on (`landscape.task-handler.server.host` and `landscape.task-handler.server.grpc-port`). If the task handler's host or port is changed without updating this setting on the outbox side, the outbox will keep reporting its services as **active**, but any hard deletion request will fail at runtime with an error similar to:
+
+    {"level":"error","error":"rpc error: code = Unavailable desc = connection error: desc = \"transport: authentication handshake failed: tls: first record does not look like a TLS handshake\""...}
+
+Always update both sides together.
+```
+
+#### `LANDSCAPE_TASK_HANDLER_GRPC_ADDRESS`
+
+- Purpose: The host and port of the Task Handler's gRPC server that the outbox connects to.
+- Snap key: `landscape.task-handler.grpc-address`
+- Default: `localhost:50053`
+- Required: No
+- `service.conf`-supplied: No
+
+#### `LANDSCAPE_TASK_HANDLER_TIMEOUT`
+
+- Purpose: The timeout applied to each gRPC call made to the task handler. Accepts Go duration strings.
+- Snap key: `landscape.task-handler.timeout`
+- Default: `10s`
+- Required: No
+- `service.conf`-supplied: No
+
+#### `LANDSCAPE_TASK_HANDLER_GRPC_CERTS_DIR`
+
+- Purpose: The directory containing the mTLS client certificates (CA, client certificate, client key) used to authenticate to the task handler's gRPC server. This directory is normally populated automatically by the `grpc-client-certs` snap content interface shared by the `landscape-task-handler` snap; it should only be set manually if certificates are managed outside of that interface.
+- Snap key: `landscape.task-handler.grpc-certs-dir`
+- Default: `$SNAP_DATA/grpc-certs`
 - Required: No
 - `service.conf`-supplied: No
 

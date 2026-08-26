@@ -116,7 +116,7 @@ applications:
 
   landscape-server:
     charm: ch:landscape-server
-    channel: 26.04/beta
+    channel: 26.04/edge
     num_units: 3
     options:
       landscape_ppa: ppa:landscape/self-hosted-26.04
@@ -196,7 +196,7 @@ landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
 App                       Version  Status  Scale  Charm                      Channel       Rev  Base
 haproxy                            active      1  haproxy                    2.8/stable     50  ubuntu@24.04
 landscape-debarchive               active      1  landscape-debarchive       latest/stable  10  ubuntu@24.04
-landscape-server          26.04    active      3  landscape-server           26.04/beta    150  ubuntu@24.04
+landscape-server          26.04    active      3  landscape-server           26.04/stable  150  ubuntu@24.04
 landscape-task-handler             active      1  landscape-task-handler     latest/stable  10  ubuntu@24.04
 postgresql                16.4     active      3  postgresql                 16/stable     500  ubuntu@24.04
 rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge   200  ubuntu@22.04
@@ -233,6 +233,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 ```
 
 **Prerequisites:**
+
 - Domain in `root_url` must resolve to the HAProxy unit IP
 - Port 80 must be accessible for ACME HTTP-01 challenge validation
 - Valid email for certificate notifications
@@ -245,6 +246,7 @@ For more details, see the [lego charm documentation](https://charmhub.io/lego/do
 For production deployments requiring an external load balancer in a separate infrastructure layer, you can deploy HAProxy in a **separate Juju model** and connect it to Landscape Server using cross-model relations (also known as LBaaS - Load Balancer as a Service).
 
 This approach is useful when:
+
 - You want to manage your load balancer infrastructure separately from application deployments
 - You need a dedicated load balancer shared across multiple applications
 - You want to isolate load balancer lifecycle from application lifecycle
