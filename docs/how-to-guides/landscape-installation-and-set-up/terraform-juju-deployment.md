@@ -4,6 +4,8 @@
 
 Landscape can be deployed in a scalable, configurable, and reproducible way by using the {ref}`Landscape Scalable product module <reference-landscape-product-modules-landscape-scalable>`, which is powered by Juju and managed by Terraform.
 
+In this deployment, Terraform manages the Landscape applications and their Juju integrations. You must first have a Juju controller and model available, and Terraform then deploys the Landscape module into that model.
+
 ## Install Juju
 
 Make sure you have `juju` installed. You can install it as a snap with the following command:
