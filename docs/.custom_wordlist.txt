@@ -283,6 +283,7 @@ postgres
 PostgreSQL
 postgresql
 Postfix
+passthrough
 PowerShell
 PowerShell's
 pocketname

@@ -199,6 +199,12 @@ linkcheck_retries = 3
 # MyST configuration
 myst_heading_anchors = 4
 
+# terraform-docs generates tables with `<a name="...">` HTML anchors and
+# `[text](#anchor)` links between them; MyST treats these as cross-references
+# and warns that the anchor isn't a Sphinx target, so silence that class of
+# warning rather than hand-editing generated content.
+suppress_warnings = ["myst.xref_missing"]
+
 # Custom Sphinx extensions; see
 # https://www.sphinx-doc.org/en/master/usage/extensions/index.html
 extensions = [

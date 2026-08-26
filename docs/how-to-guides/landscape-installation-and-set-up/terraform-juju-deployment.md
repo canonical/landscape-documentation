@@ -20,7 +20,7 @@ With Juju installed, use it to bootstrap a cloud by creating a controller. See [
 
 Make sure you have [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) or [OpenTofu](https://opentofu.org/docs/intro/install/) installed.
 
-```{import}
+```{note}
 This guide uses `terraform` for commands, but everything can also be done using `tofu` instead.
 If using OpenTofu, consider creating an alias in your shell's configuration file:
 
