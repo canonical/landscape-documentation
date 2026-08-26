@@ -3,7 +3,7 @@ flowchart TD
     Client([Client])
     TLS[TLS Provider]
     subgraph model[Juju model]
-        HAProxy["HAProxy<br/>2.8/edge"]
+        HAProxy["HAProxy<br/>2.8/stable"]
         LS0[landscape-server/0]
         LS1[landscape-server/1]
         LS2[landscape-server/2]

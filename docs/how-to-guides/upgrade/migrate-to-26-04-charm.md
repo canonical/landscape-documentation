@@ -19,7 +19,7 @@ The 26.04 beta version introduces significant architectural changes:
 
 | Aspect                   | Landscape 26.04 LTS beta+                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/edge`, `haproxy-route` interface)                       | External HAProxy charm (`reverseproxy` interface)            |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                       | External HAProxy charm (`reverseproxy` interface)            |
 | **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
@@ -61,7 +61,7 @@ Deploy the HAProxy charm and a TLS certificates provider before refreshing the c
 First, deploy the HAProxy charm:
 
 ```bash
-juju deploy haproxy --channel 2.8/edge
+juju deploy haproxy --channel 2.8/stable
 ```
 
 **For testing/development with self-signed certificates:**
