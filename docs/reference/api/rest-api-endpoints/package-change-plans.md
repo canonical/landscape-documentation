@@ -521,6 +521,140 @@ Response fields:
     - `name`: Name of the computer.
 - `count`: Total number of items returned.
 
+## GET `/package-change-plans/<id>/exclusions`
+
+List the packages that could not be applied to computers while resolving a plan,
+with a count of affected computers per package. The endpoint returns the same
+package-name aggregations as the `exclusions` field in the
+{ref}`summary <reference-rest-api-package-change-plans>` response.
+
+A plan has at most 50 distinct package exclusions, so this endpoint is not
+paginated.
+
+Path parameters:
+
+- `id`: The UUID of the package change plan.
+
+Query parameters:
+
+- None
+
+The package change plan's top-level `action` is included once in the response.
+It is not repeated in each exclusion entry because exclusions are aggregated by
+package name.
+
+Example request:
+
+```bash
+curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/exclusions" \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json"
+```
+
+Example response (200 OK):
+
+```json
+{
+  "action": "upgrade",
+  "exclusions": [
+    {
+      "package_name": "libthai0",
+      "computer_count": 11
+    },
+    {
+      "package_name": "nano",
+      "computer_count": 11
+    },
+    {
+      "package_name": "python-twisted-lore",
+      "computer_count": 11
+    }
+  ],
+  "count": 3
+}
+```
+
+Response fields:
+
+- `action`: The plan's package operation as a string.
+- `exclusions`: List of package exclusion summaries, aggregated by package name.
+  - `package_name`: Name of the excluded package.
+  - `computer_count`: Number of computers for which the package could not be
+    applied.
+- `count`: Total number of package exclusion entries returned.
+
+An empty result retains the plan action and is returned as `"exclusions": []`
+with `"count": 0`.
+
+Use the {ref}`exclusion detail endpoint <package-change-plan-exclusion-detail>`
+to retrieve the individual computers behind one of these entries.
+
+(package-change-plan-exclusion-detail)=
+## GET `/package-change-plans/<id>/exclusions/<package_name>`
+
+Get the computers for which a specific package could not be applied while
+resolving a plan.
+
+Path parameters:
+
+- `id`: The UUID of the package change plan.
+- `package_name`: The excluded package name, exactly as returned by
+  `/exclusions`.
+
+Query parameters:
+
+- `computer_ids`: Comma-separated list of computer IDs to filter by (optional).
+- `computer_instance_name`: Filter by a computer's instance name (optional).
+
+Example request--filter by instance name:
+
+```bash
+curl -s -G "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/exclusions/nano" \
+  -H "Authorization: Bearer $JWT" \
+  -H "Content-Type: application/json" \
+  --data-urlencode 'computer_instance_name=John'
+```
+
+Example response (200 OK):
+
+```json
+{
+  "action": "upgrade",
+  "package_name": "nano",
+  "computers": [
+    {
+      "id": 4,
+      "name": "John's Laptop"
+    },
+    {
+      "id": 7,
+      "name": "John's Windows Server"
+    }
+  ]
+}
+```
+
+Response fields:
+
+- `action`: The plan's package operation as a string. One of `install`, `remove`,
+  `hold`, `unhold`, `upgrade`, or `change_version`.
+- `package_name`: The excluded package name, echoing the path parameter.
+- `computers`: Computers for which the package could not be applied, matching
+  the `computer_ids` and `computer_instance_name` filters if given.
+  - `id`: ID of the computer.
+  - `name`: Name of the computer.
+
+If `package_name` is not excluded by this plan, the endpoint returns a
+`404 Not Found`:
+
+```json
+{
+  "error": "NotFound",
+  "message": "Not found.",
+  "detail": null
+}
+```
+
 ## GET `/package-change-plans/<id>/summary`
 
 Get an action-focused summary of a plan: the distinct package actions it will perform and how many computers each applies to, plus counts for computers that could not apply the action on a given package.
