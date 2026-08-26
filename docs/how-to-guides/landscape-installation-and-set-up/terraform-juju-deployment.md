@@ -101,7 +101,7 @@ module "landscape_landscape-scalable" {
 }
 ```
 
-`landscape_debarchive` and `landscape_task_handler` are optional (set to `null` to skip deploying them); when set, the module automatically integrates them with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
+`landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`. When set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
 
 Then, apply the plan and supply the Juju model UUID as a variable:
 

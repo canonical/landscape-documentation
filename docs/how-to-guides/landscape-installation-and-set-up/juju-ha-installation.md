@@ -14,14 +14,14 @@ You can create a scalable, high availability (HA) deployment of Landscape Server
 The recommended way to deploy Landscape is with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` instead of the manual bundle approach below: it manages the same HA architecture reproducibly, and its inputs/outputs are documented in the {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`. The rest of this guide is for manual or custom-bundle deployments.
 
 ```{important}
-This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
+This guide covers both the **26.04 deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
 
 The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` track, so 26.04 (and later) bundle deployments require a custom bundle such as the one shown in this guide.
 ```
 
 ## Architecture overview
 
-### 26.04 beta+ architecture (recommended)
+### 26.04 architecture (recommended)
 
 Starting with the 26.04 version, Landscape Server uses the following architecture:
 
@@ -68,14 +68,14 @@ For improved database performance and scalability in high-load deployments, cons
 
 Choose the appropriate deployment approach based on your needs:
 
-- **For new deployments:** Use the 26.04 beta+ approach (recommended)
+- **For new deployments:** Use the 26.04 approach (recommended)
 - **For existing deployments:** Continue with the older approach or migrate using {ref}`how-to-migrate-to-26-04-charm`
 
 ---
 
 ## 26.04 deployment (recommended)
 
-This section covers deploying Landscape Server with the external HAProxy charm introduced in version 26.04 beta.
+This section covers deploying Landscape Server with the external HAProxy charm introduced in version 26.04.
 
 ### Create a Juju model
 
@@ -85,7 +85,7 @@ juju add-model landscape-ha
 
 ### Deploy with a custom bundle file
 
-For the 26.04 beta+ deployment, you'll create a custom bundle file that includes all the necessary components.
+For the 26.04 deployment, you'll create a custom bundle file that includes all the necessary components.
 
 #### Step 1: Create the bundle file
 
@@ -162,6 +162,7 @@ relations:
   - [landscape-server:package-upload-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:repository-haproxy-route, haproxy:haproxy-route]
   - [landscape-debarchive:database, postgresql:database]
+  - [landscape-debarchive:debarchive-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:debarchive, landscape-debarchive:landscape-server]
   - [landscape-task-handler:task-db, postgresql:database]
   - [landscape-task-handler:landscape-server, landscape-server:task-handler]
@@ -170,7 +171,7 @@ relations:
 ```
 
 ```{note}
-This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options. `landscape-debarchive` (Debarchive) provides repository mirroring, and `landscape-task-handler` offloads background task processing to a dedicated unit; both are optional but recommended.
+This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options. `landscape-debarchive` (Debarchive) provides repository mirroring and `landscape-task-handler` offloads background task processing to a dedicated unit; both are required.
 ```
 
 #### Step 2: Deploy the bundle
@@ -296,7 +297,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 juju offer haproxy:haproxy-route,haproxy-route-tcp
 ```
 
-This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is only needed if you're also deploying `landscape-task-handler`, or enabling the hostagent messenger or Ubuntu installer attach services on `landscape-server`.
+This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler` (required), and also if you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`.
 
 #### Step 4: Consume the HAProxy offer and integrate Landscape Server
 
@@ -323,7 +324,7 @@ juju integrate landscape-server:package-upload-haproxy-route lbaas-haproxy:hapro
 juju integrate landscape-server:repository-haproxy-route lbaas-haproxy:haproxy-route
 ```
 
-If you're deploying `landscape-task-handler`, integrate its gRPC route with the `haproxy-route-tcp` endpoint of the same offer:
+Integrate `landscape-task-handler`'s gRPC route with the `haproxy-route-tcp` endpoint of the same offer:
 
 ```sh
 juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-route-tcp
@@ -376,7 +377,7 @@ flowchart TD
 ## Pre-26.04 deployment
 
 ```{warning}
-This deployment approach is **deprecated**. For new deployments, use the 26.04 beta+ approach described above. For existing deployments, consider migrating using {ref}`how-to-migrate-to-26-04-charm`.
+This deployment approach is **deprecated**. For new deployments, use the 26.04 approach described above. For existing deployments, consider migrating using {ref}`how-to-migrate-to-26-04-charm`.
 ```
 
 This section covers the older deployment approach using the external HAProxy charm. This approach is maintained for existing deployments only.
@@ -726,7 +727,7 @@ You now have Landscape Server set up for a high-availability deployment. Next, y
 ## Configure SSL certificates (pre-26.04 deployments only)
 
 ```{warning}
-This section applies **only to pre-26.04 deployments** using the external HAProxy charm. For 26.04 beta+ deployments, see the TLS certificates configuration in the 26.04 deployment section above.
+This section applies **only to pre-26.04 deployments** using the external HAProxy charm. For 26.04 deployments, see the TLS certificates configuration in the 26.04 deployment section above.
 ```
 
 ### For pre-26.04 deployments with external HAProxy charm
@@ -758,5 +759,5 @@ juju config haproxy ssl_cert="$(base64 /etc/letsencrypt/live/$FQDN/fullchain.pem
 ```
 
 ```{note}
-Certificate renewal must be handled manually for pre-26.04 deployments. Consider migrating to 26.04 beta+ for automatic certificate management via the `tls-certificates` interface.
+Certificate renewal must be handled manually for pre-26.04 deployments. Consider migrating to 26.04 for automatic certificate management via the `tls-certificates` interface.
 ```

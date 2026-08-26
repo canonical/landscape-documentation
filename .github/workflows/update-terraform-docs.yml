@@ -41,7 +41,7 @@ jobs:
           terraform-docs markdown table \
             --hide-empty \
             vendor/landscape-server-operator/terraform/charm \
-            --output-file "$(pwd)/docs/reference/charm/terraform-module.md" \
+            --output-file "$(pwd)/docs/reference/charm/terraform-charm-module.md" \
             --output-mode inject
 
       - name: Render landscape-scalable product module docs
@@ -67,7 +67,7 @@ jobs:
 
           branch="terraform-module-docs"
           git checkout -B "${branch}"
-          git add docs/reference/charm/terraform-module.md docs/reference/charm/terraform-product-modules.md
+          git add docs/reference/charm/terraform-charm-module.md docs/reference/charm/terraform-product-modules.md
           git commit -m "chore(docs): update Terraform module reference docs"
           git push -f origin "${branch}"
 

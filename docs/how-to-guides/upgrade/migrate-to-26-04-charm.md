@@ -11,7 +11,7 @@ myst:
 The Landscape Server charm for 26.04 is currently in beta. See the {ref}`reference-release-notes-26-04-lts` for details on our changes introduced in 26.04. Note the recommendations for repository management users.
 ```
 
-This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS beta+ version with an external HAProxy charm using the `haproxy-route` interface.
+This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS version with an external HAProxy charm using the `haproxy-route` interface.
 
 The recommended way to manage a 26.04+ deployment is the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`), rather than the manual `juju integrate` steps below.
 
@@ -19,7 +19,7 @@ The recommended way to manage a 26.04+ deployment is the {ref}`Landscape Scalabl
 
 The 26.04 version introduces significant architectural changes:
 
-| Aspect                   | Landscape 26.04 LTS beta+                                                                         | Pre-26.04                                                    |
+| Aspect                   | Landscape 26.04 LTS                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                     | External HAProxy charm (`reverseproxy` interface)            |
 | **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
@@ -258,20 +258,21 @@ Log in and verify:
 
 For more information about `juju refresh`, see the [Juju documentation on charm upgrades](https://documentation.ubuntu.com/juju/3.6/howto/manage-charms/#update-a-charm).
 
-### Step 9: Deploy Debarchive and Task Handler (optional)
+### Step 9: Deploy Debarchive and Task Handler
 
-The 26.04 architecture also introduces two optional companion charms: **Debarchive** for repository mirroring, and **Landscape Task Handler** for offloaded background task processing. Deploy them:
+The 26.04 architecture also introduces two required companion charms: **Debarchive** for repository mirroring, and **Landscape Task Handler** for offloaded background task processing. Deploy them:
 
 ```bash
 juju deploy landscape-debarchive --channel latest/stable --base ubuntu@24.04
 juju deploy landscape-task-handler --channel latest/stable --base ubuntu@24.04 --config task-handler-snap-channel=latest/stable
 ```
 
-Integrate Debarchive with Landscape Server and PostgreSQL:
+Integrate Debarchive with Landscape Server, PostgreSQL, and HAProxy:
 
 ```bash
 juju integrate landscape-server:debarchive landscape-debarchive:landscape-server
 juju integrate landscape-debarchive:database postgresql:database
+juju integrate landscape-debarchive:debarchive-haproxy-route haproxy:haproxy-route
 ```
 
 Integrate Landscape Task Handler with Landscape Server, PostgreSQL, your TLS certificates provider, and HAProxy's gRPC route:

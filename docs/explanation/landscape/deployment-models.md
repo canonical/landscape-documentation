@@ -19,7 +19,7 @@ Landscape is also commonly used with other Canonical products.
 ## Single-Server Deployment
 
 This is the simplest deployment model where Landscape Server and its components all run on a single machine, and there’s only one instance of each component. Each Landscape Client registers directly with the single Landscape server.
-Optional services such as {ref}`Debarchive <explanation-server-architecture-deb-archive>` are installed on the same machine as Landscape Server.
+{ref}`Debarchive <explanation-server-architecture-deb-archive>` is typically installed on the same machine as Landscape Server, though it can be installed on a separate machine if needed.
 Single-server deployments should be installed using the {ref}`Quickstart <how-to-quickstart-installation>` guide.
 
 ![Landscape single-server deployment](https://assets.ubuntu.com/v1/efcf89cc-Deployment_Landscape%20(1).png)
