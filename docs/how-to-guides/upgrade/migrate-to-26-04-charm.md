@@ -42,9 +42,6 @@ Remove the older HAProxy relation:
 juju remove-relation landscape-server:website haproxy:reverseproxy
 ```
 
-```{note}
-
-
 **For deployments older than 25.10 only:**
 
 Remove the older RabbitMQ relation:

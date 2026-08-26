@@ -20,13 +20,7 @@ With Juju installed, use it to bootstrap a cloud by creating a controller. See [
 
 Make sure you have [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) or [OpenTofu](https://opentofu.org/docs/intro/install/) installed.
 
-You can install Terraform as a snap with the following command:
-
-```sh
-sudo snap install terraform --classic
-```
-
-```{note}
+```{import}
 This guide uses `terraform` for commands, but everything can also be done using `tofu` instead.
 If using OpenTofu, consider creating an alias in your shell's configuration file:
 
