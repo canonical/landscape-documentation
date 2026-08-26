@@ -11,7 +11,7 @@ myst:
 
 You can create a scalable, high availability (HA) deployment of Landscape Server with Juju. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
-The recommended way to deploy Landscape is with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` instead of the manual bundle approach below: it manages the same HA architecture reproducibly, and its inputs/outputs are documented in the {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`. The rest of this guide is for manual or custom-bundle deployments.
+You can follow the manual bundle approach below, or use the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` instead: it manages the same HA architecture reproducibly, and its inputs/outputs are documented in the {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`.
 
 ```{important}
 This guide covers both the **26.04 deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.

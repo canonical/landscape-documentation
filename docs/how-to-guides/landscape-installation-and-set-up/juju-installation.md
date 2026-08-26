@@ -37,7 +37,7 @@ The Charmhub `landscape-scalable` bundle was deprecated in 26.04 and does not ha
 
 ### Deploy with Terraform
 
-The recommended way to deploy Landscape is with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`reference documentation <reference-landscape-product-modules-landscape-scalable>` for inputs and outputs), rather than the Charmhub bundle described below.
+You can deploy Landscape with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`reference documentation <reference-landscape-product-modules-landscape-scalable>` for inputs and outputs), or with the Charmhub bundle described below.
 
 ## Other deployment methods
 
