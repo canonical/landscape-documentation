@@ -610,7 +610,7 @@ To view outbox logs, run:
 sudo snap logs landscape-outbox -n 50
 ```
 
-### (Landscape 26.04 only) Install the debarchive snap
+### (Landscape 26.04 only) Install the Deb Archive snap
 
 The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`.
 

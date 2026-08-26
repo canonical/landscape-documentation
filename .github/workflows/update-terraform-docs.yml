@@ -1,0 +1,91 @@
+name: Update Terraform module reference docs
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
+
+concurrency:
+  group: update-terraform-docs
+  cancel-in-progress: false
+
+jobs:
+  update-terraform-docs:
+    name: Regenerate Terraform module reference pages
+    runs-on: ubuntu-latest
+
+    env:
+      GH_TOKEN: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
+
+    steps:
+      - name: Checkout landscape-documentation
+        uses: actions/checkout@v5
+
+      - name: Checkout landscape-server-operator
+        uses: actions/checkout@v5
+        with:
+          repository: canonical/landscape-server-operator
+          path: vendor/landscape-server-operator
+
+      - name: Install terraform-docs
+        run: |
+          version="v0.19.0"
+          curl -sSLo terraform-docs.tar.gz \
+            "https://github.com/terraform-docs/terraform-docs/releases/download/${version}/terraform-docs-${version}-linux-amd64.tar.gz"
+          tar -xzf terraform-docs.tar.gz terraform-docs
+          chmod +x terraform-docs
+          sudo mv terraform-docs /usr/local/bin/terraform-docs
+
+      - name: Render charm module docs
+        run: |
+          terraform-docs markdown table \
+            --hide-empty \
+            vendor/landscape-server-operator/terraform/charm \
+            --output-file "$(pwd)/docs/reference/charm/terraform-module.md" \
+            --output-mode inject
+
+      - name: Render landscape-scalable product module docs
+        run: |
+          terraform-docs markdown table \
+            --hide-empty \
+            vendor/landscape-server-operator/terraform/product/modules/landscape-scalable \
+            --output-file "$(pwd)/docs/reference/charm/terraform-product-modules.md" \
+            --output-mode inject
+
+      - name: Remove vendored checkout
+        run: rm -rf vendor
+
+      - name: Create or reuse docs PR
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Terraform module reference docs are already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          branch="terraform-module-docs"
+          git checkout -B "${branch}"
+          git add docs/reference/charm/terraform-module.md docs/reference/charm/terraform-product-modules.md
+          git commit -m "chore(docs): update Terraform module reference docs"
+          git push -f origin "${branch}"
+
+          pr_number=$(gh pr list \
+            --repo "${{ github.repository }}" \
+            --base main \
+            --head "${branch}" \
+            --state open \
+            --json number \
+            --jq '.[0].number // ""')
+
+          if [ -n "${pr_number}" ]; then
+            echo "Reusing existing open PR #${pr_number}."
+          else
+            gh pr create \
+              --repo "${{ github.repository }}" \
+              --base main \
+              --head "${branch}" \
+              --title "chore(docs): update Terraform module reference docs" \
+              --body "Automated regeneration of the Terraform module reference pages from canonical/landscape-server-operator."
+          fi

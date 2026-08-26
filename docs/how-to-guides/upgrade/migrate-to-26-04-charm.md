@@ -13,6 +13,8 @@ The Landscape Server charm for 26.04 is currently in beta. See the {ref}`referen
 
 This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS beta+ version with an external HAProxy charm using the `haproxy-route` interface.
 
+The recommended way to manage a 26.04+ deployment is the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`), rather than the manual `juju integrate` steps below.
+
 ## Architectural changes
 
 The 26.04 version introduces significant architectural changes:
@@ -256,10 +258,40 @@ Log in and verify:
 
 For more information about `juju refresh`, see the [Juju documentation on charm upgrades](https://documentation.ubuntu.com/juju/3.6/howto/manage-charms/#update-a-charm).
 
+### Step 9: Deploy Deb Archive and Task Handler (optional)
+
+The 26.04 architecture also introduces two optional companion charms: **Deb Archive** for repository mirroring, and **Landscape Task Handler** for offloaded background task processing. Deploy them:
+
+```bash
+juju deploy landscape-debarchive --channel latest/stable --base ubuntu@24.04
+juju deploy landscape-task-handler --channel latest/stable --base ubuntu@24.04 --config task-handler-snap-channel=latest/stable
+```
+
+Integrate Deb Archive with Landscape Server and PostgreSQL:
+
+```bash
+juju integrate landscape-server:debarchive landscape-debarchive:landscape-server
+juju integrate landscape-debarchive:database postgresql:database
+```
+
+Integrate Landscape Task Handler with Landscape Server, PostgreSQL, your TLS certificates provider, and HAProxy's gRPC route:
+
+```bash
+juju integrate landscape-task-handler:landscape-server landscape-server:task-handler
+juju integrate landscape-task-handler:task-db postgresql:database
+juju integrate landscape-task-handler:certificates self-signed-certificates:certificates
+juju integrate landscape-task-handler:grpc-haproxy-route haproxy:haproxy-route-tcp
+```
+
+```{note}
+Substitute `self-signed-certificates` above with whichever TLS provider you deployed in Step 3.
+```
+
 ## Additional resources
 
 - {ref}`how-to-juju-ha-installation` - Full HA deployment guide
 - {ref}`explanation-charm-compatibility` - Charm compatibility details
 - {ref}`how-to-terraform-juju-deployment` - How to deploy Landscape with Terraform and Juju
+- {ref}`reference-landscape-product-modules-landscape-scalable` - Terraform module reference
 - [Landscape Server charm documentation](https://charmhub.io/landscape-server)
 - [PostgreSQL charm documentation](https://charmhub.io/postgresql)

@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Migrate repository mirrors from pre-26.04 reprepro-managed repositories (Landscape 25.10 and earlier) to the new debarchive service introduced in Landscape 26.04 LTS."
+    description: "Migrate repository mirrors from pre-26.04 reprepro-managed repositories (Landscape 25.10 and earlier) to the new Deb Archive service introduced in Landscape 26.04 LTS."
 ---
 
 (how-to-migrate-repository-mirrors-to-debarchive)=
@@ -11,7 +11,7 @@ This guide describes how to migrate your existing reprepro-managed repository mi
 
 ## Overview
 
-In Landscape 25.10 and earlier, repository management was handled by an internal reprepro-based system that managed mirrors through distributions, series, and pockets. In Landscape 26.04 LTS, this system is replaced by the `debarchive` service, which provides a REST API for managing mirrors, local repositories, and publications.
+In Landscape 25.10 and earlier, repository management was handled by an internal reprepro-based system that managed mirrors through distributions, series, and pockets. In Landscape 26.04 LTS, this system is replaced by the Deb Archive (`debarchive`) service, which provides a REST API for managing mirrors, local repositories, and publications.
 
 The migration strategy depends on the type of pocket you're migrating:
 

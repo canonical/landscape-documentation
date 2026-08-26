@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Landscape Debarchive REST API reference."
+    description: "Landscape Deb Archive REST API reference."
 ---
 
 (reference-api-debarchive)=
-# Debarchive API
+# Deb Archive API
 
 ```{raw} html
 <style>

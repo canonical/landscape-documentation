@@ -11,10 +11,12 @@ myst:
 
 You can create a scalable, high availability (HA) deployment of Landscape Server with Juju. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
+The recommended way to deploy Landscape is with the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` instead of the manual bundle approach below: it manages the same HA architecture reproducibly, and its inputs/outputs are documented in the {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`. The rest of this guide is for manual or custom-bundle deployments.
+
 ```{important}
 This guide covers both the **26.04 beta+ deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
 
-The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` track, so 26.04 (and later) deployments use a custom bundle such as the one shown below, or use the {ref}`Landscape Scalable product module <how-to-terraform-juju-deployment>` instead.
+The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` track, so 26.04 (and later) bundle deployments require a custom bundle such as the one shown in this guide.
 ```
 
 ## Architecture overview
@@ -28,6 +30,8 @@ Starting with the 26.04 version, Landscape Server uses the following architectur
 - **PostgreSQL 14+** for the database (using the modern `database` relation, backed by the `postgresql_client` interface)
 - **RabbitMQ Server** for message queuing
 - **Self-signed certificates** charm (or other TLS provider) integrated with HAProxy
+- **Deb Archive** charm for repository mirroring, integrated with Landscape Server (`debarchive` relation) and PostgreSQL
+- **Landscape Task Handler** charm for offloaded task processing, integrated with Landscape Server (`task-handler` relation), PostgreSQL (`task-db`), the TLS certificates provider, and HAProxy over the `grpc-haproxy-route`/`haproxy-route-tcp` interface
 
 HAProxy sits in front of all Landscape Server units and routes traffic to the appropriate service endpoints.
 
@@ -131,6 +135,20 @@ applications:
     num_units: 1
     constraints: arch=amd64
 
+  landscape-debarchive:
+    charm: ch:landscape-debarchive
+    channel: latest/stable
+    num_units: 1
+    base: ubuntu@24.04
+
+  landscape-task-handler:
+    charm: ch:landscape-task-handler
+    channel: latest/stable
+    num_units: 1
+    options:
+      task-handler-snap-channel: latest/stable
+    base: ubuntu@24.04
+
 relations:
   - [landscape-server:inbound-amqp, rabbitmq-server]
   - [landscape-server:outbound-amqp, rabbitmq-server]
@@ -143,10 +161,16 @@ relations:
   - [landscape-server:api-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:package-upload-haproxy-route, haproxy:haproxy-route]
   - [landscape-server:repository-haproxy-route, haproxy:haproxy-route]
+  - [landscape-debarchive:database, postgresql:database]
+  - [landscape-server:debarchive, landscape-debarchive:landscape-server]
+  - [landscape-task-handler:task-db, postgresql:database]
+  - [landscape-task-handler:landscape-server, landscape-server:task-handler]
+  - [landscape-task-handler:certificates, self-signed-certificates:certificates]
+  - [landscape-task-handler:grpc-haproxy-route, haproxy:haproxy-route-tcp]
 ```
 
 ```{note}
-This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options.
+This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options. `landscape-debarchive` (Deb Archive) provides repository mirroring, and `landscape-task-handler` offloads background task processing to a dedicated unit; both are optional but recommended.
 ```
 
 #### Step 2: Deploy the bundle
@@ -169,12 +193,14 @@ Once everything is installed and settled, the `Status` for every application wil
 Model         Controller  Cloud/Region    Version  SLA          Timestamp
 landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
 
-App                       Version  Status  Scale  Charm                      Channel     Rev  Base
+App                       Version  Status  Scale  Charm                      Channel       Rev  Base
 haproxy                            active      1  haproxy                    2.8/stable     50  ubuntu@24.04
-landscape-server          26.04    active      3  landscape-server           26.04/beta   150  ubuntu@24.04
-postgresql                16.4     active      3  postgresql                 16/stable    500  ubuntu@24.04
-rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge  200  ubuntu@22.04
-self-signed-certificates           active      1  self-signed-certificates   1/stable      12  ubuntu@24.04
+landscape-debarchive               active      1  landscape-debarchive       latest/stable  10  ubuntu@24.04
+landscape-server          26.04    active      3  landscape-server           26.04/beta    150  ubuntu@24.04
+landscape-task-handler             active      1  landscape-task-handler     latest/stable  10  ubuntu@24.04
+postgresql                16.4     active      3  postgresql                 16/stable     500  ubuntu@24.04
+rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge   200  ubuntu@22.04
+self-signed-certificates           active      1  self-signed-certificates   1/stable       12  ubuntu@24.04
 ```
 
 #### Step 4: Configure license file
@@ -265,10 +291,10 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 #### Step 3: Create a cross-model offer
 
 ```sh
-juju offer haproxy:haproxy-route
+juju offer haproxy:haproxy-route,haproxy-route-tcp
 ```
 
-This creates an offer that can be consumed from other Juju models.
+This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is only needed if you're also deploying `landscape-task-handler`, or enabling the hostagent messenger or Ubuntu installer attach services on `landscape-server`.
 
 #### Step 4: Consume the HAProxy offer and integrate Landscape Server
 
@@ -295,7 +321,13 @@ juju integrate landscape-server:package-upload-haproxy-route lbaas-haproxy:hapro
 juju integrate landscape-server:repository-haproxy-route lbaas-haproxy:haproxy-route
 ```
 
-If you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`, integrate their HAProxy endpoints separately after enabling the matching charm config.
+If you're deploying `landscape-task-handler`, integrate its gRPC route with the `haproxy-route-tcp` endpoint of the same offer:
+
+```sh
+juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-route-tcp
+```
+
+If you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`, integrate their HAProxy endpoints with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
 
 Wait for the deployment to complete:
 
