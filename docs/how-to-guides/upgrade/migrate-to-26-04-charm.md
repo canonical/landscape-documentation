@@ -258,16 +258,16 @@ Log in and verify:
 
 For more information about `juju refresh`, see the [Juju documentation on charm upgrades](https://documentation.ubuntu.com/juju/3.6/howto/manage-charms/#update-a-charm).
 
-### Step 9: Deploy Deb Archive and Task Handler (optional)
+### Step 9: Deploy Debarchive and Task Handler (optional)
 
-The 26.04 architecture also introduces two optional companion charms: **Deb Archive** for repository mirroring, and **Landscape Task Handler** for offloaded background task processing. Deploy them:
+The 26.04 architecture also introduces two optional companion charms: **Debarchive** for repository mirroring, and **Landscape Task Handler** for offloaded background task processing. Deploy them:
 
 ```bash
 juju deploy landscape-debarchive --channel latest/stable --base ubuntu@24.04
 juju deploy landscape-task-handler --channel latest/stable --base ubuntu@24.04 --config task-handler-snap-channel=latest/stable
 ```
 
-Integrate Deb Archive with Landscape Server and PostgreSQL:
+Integrate Debarchive with Landscape Server and PostgreSQL:
 
 ```bash
 juju integrate landscape-server:debarchive landscape-debarchive:landscape-server

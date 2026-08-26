@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new Deb Archive repository service, and multiple security fixes."
+    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new Debarchive repository service, and multiple security fixes."
 ---
 
 (reference-release-notes-26-04-lts)=
@@ -18,7 +18,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 - **Repository management improvements**:
 
-  - Introduces the new Deb Archive (`debarchive`) service for repository management.
+  - Introduces the new Debarchive (`debarchive`) service for repository management.
   - Repository profiles have been updated with improved workflows.
   - The legacy API endpoints for repository management have been removed; the new archive management system replaces them.
 

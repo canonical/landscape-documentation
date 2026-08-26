@@ -30,7 +30,7 @@ Starting with the 26.04 version, Landscape Server uses the following architectur
 - **PostgreSQL 14+** for the database (using the modern `database` relation, backed by the `postgresql_client` interface)
 - **RabbitMQ Server** for message queuing
 - **Self-signed certificates** charm (or other TLS provider) integrated with HAProxy
-- **Deb Archive** charm for repository mirroring, integrated with Landscape Server (`debarchive` relation) and PostgreSQL
+- **Debarchive** charm for repository mirroring, integrated with Landscape Server (`debarchive` relation) and PostgreSQL
 - **Landscape Task Handler** charm for offloaded task processing, integrated with Landscape Server (`task-handler` relation), PostgreSQL (`task-db`), the TLS certificates provider, and HAProxy over the `grpc-haproxy-route`/`haproxy-route-tcp` interface
 
 HAProxy sits in front of all Landscape Server units and routes traffic to the appropriate service endpoints.
@@ -170,7 +170,7 @@ relations:
 ```
 
 ```{note}
-This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options. `landscape-debarchive` (Deb Archive) provides repository mirroring, and `landscape-task-handler` offloads background task processing to a dedicated unit; both are optional but recommended.
+This example bundle uses PostgreSQL 16 (PostgreSQL 14+ also works) over the `database` relation, backed by the `postgresql_client` interface. Adjust the `root_url` option to match your domain name, see {ref}`Step 5: Access Landscape <how-to-header-access-landscape>` below for why setting a real hostname matters. The hostagent messenger and Ubuntu installer attach HAProxy relations are omitted here since they're optional, only add them if you enable the matching `landscape-server` config options. `landscape-debarchive` (Debarchive) provides repository mirroring, and `landscape-task-handler` offloads background task processing to a dedicated unit; both are optional but recommended.
 ```
 
 #### Step 2: Deploy the bundle

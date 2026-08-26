@@ -47,7 +47,7 @@ For the 26.04 architecture (recommended), the new deployment approach uses:
 - **External HAProxy charm** (`2.8/stable`) for load balancing via the `haproxy-route` interface
 - PostgreSQL 14+ over the `database` relation (`postgresql_client` interface)
 - TLS certificates provided via the `tls-certificates` interface integrated with HAProxy (e.g., `self-signed-certificates` charm)
-- The **Deb Archive** and **Landscape Task Handler** charms, integrated with Landscape Server for repository mirroring and offloaded task processing, respectively
+- The **Debarchive** and **Landscape Task Handler** charms, integrated with Landscape Server for repository mirroring and offloaded task processing, respectively
 
 Key benefits of the new approach:
 - HAProxy charm handles all traffic routing and TLS termination
