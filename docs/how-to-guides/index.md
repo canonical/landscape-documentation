@@ -153,6 +153,18 @@ Access Landscape programmatically using the REST API or legacy API for automatio
 api/index
 ```
 
+(how-to-index-heading-nvidia-dgx-spark)=
+## NVIDIA DGX Spark
+
+Register NVIDIA DGX Spark systems with Landscape and use NVIDIA's Landscape reference scripts with Landscape remote script execution.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
+nvidia-dgx-spark/index
+```
+
 (how-to-index-heading-troubleshooting)=
 ## Troubleshooting
 
