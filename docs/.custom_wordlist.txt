@@ -407,6 +407,7 @@ USNs
 UTF
 vCPU
 vCPUs
+vendoring
 vhost
 vhosts
 VMM

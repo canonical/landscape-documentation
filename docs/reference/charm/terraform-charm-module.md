@@ -2,6 +2,10 @@
 
 # Landscape Server charm Terraform module
 
+The Landscape Server charm Terraform module is a reusable Terraform module for deploying the Landscape Server charm with Juju. Use it when you want to include Landscape Server as a component in a larger Terraform deployment.
+
+The module is maintained in the `landscape-server-operator` repository. See the [module source](https://github.com/canonical/landscape-server-operator/tree/main/terraform/charm) for its implementation, and {ref}`how-to-terraform-juju-deployment` for an example of deploying Landscape with Terraform.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

@@ -2,6 +2,10 @@
 
 # Landscape Scalable product module
 
+The Landscape Scalable product module deploys a complete self-hosted Landscape environment, including the Landscape Server charm and its supporting applications and integrations.
+
+The module is maintained in the `landscape-server-operator` repository. See the [module source](https://github.com/canonical/landscape-server-operator/tree/main/terraform/product/modules/landscape-scalable) for its implementation, and {ref}`how-to-terraform-juju-deployment` for deployment instructions.
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 

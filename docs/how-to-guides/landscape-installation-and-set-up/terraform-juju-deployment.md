@@ -52,20 +52,58 @@ If you have [`jq`](https://github.com/jqlang/jq) installed:
 
 ## Create the Terraform configuration
 
-The Landscape Scalable product module is a Terraform module that deploys the Landscape Server charm and the applications it depends on, using Juju. It can be deployed by itself or used in higher-level plans. See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for its specific inputs and outputs.
+The Landscape Scalable product module is a Terraform module that deploys the Landscape Server charm and the applications it depends on, using Juju. It lives at `terraform/product/modules/landscape-scalable` in the `landscape-server-operator` repository, and builds on the lower-level {ref}`Landscape Server charm Terraform module <reference-charm-terraform-charm-module>` (at `terraform/charm` in the same repository). See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for its specific inputs and outputs.
 
-In a Terraform plan, provide the module with the UUID of your Juju model and the desired configuration for the Landscape Server, HAProxy, PostgreSQL, and RabbitMQ server charms, for example:
+Clone the `landscape-server-operator` repository, which contains the module itself along with a ready-to-use Terraform root configuration for it:
+
+```sh
+git clone https://github.com/canonical/landscape-server-operator.git
+cd landscape-server-operator/terraform/product/modules/landscape-scalable
+```
+
+```{tip}
+Check out a tagged revision (e.g. `git checkout rev474`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
+```
+
+This directory ships two example variable files, one per topology; copy the one matching your target `landscape-server` revision to `terraform.tfvars`:
+
+- **`terraform.tfvars.example`** (legacy, pre-26.04): `24.04/stable` channel, `ppa:landscape/self-hosted-24.04`.
+- **`terraform.tfvars.modern`** (modern, 26.04+): `26.04/stable` channel, `ppa:landscape/self-hosted-26.04`, `2.8/stable` HAProxy, `16/stable` PostgreSQL, and `enable_hostagent_messenger`/`enable_ubuntu_installer_attach` set.
+
+```sh
+cp terraform.tfvars.modern terraform.tfvars   # or terraform.tfvars.example for legacy
+```
+
+Open `terraform.tfvars` and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`; when set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
+
+### Deploying against legacy (pre-26.04) topologies
+
+This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation) — you don't need a different plan to support an older revision, just the matching `terraform.tfvars.example` file above.
+
+### Alternative: vendoring the module into your own Terraform plan
+
+If you're integrating Landscape into a larger, existing Terraform plan instead of deploying it standalone, reference the module by its Git source from your own configuration (for example, in a `main.tf` you create):
 
 ```hcl
+terraform {
+  required_providers {
+    juju = {
+      source  = "juju/juju"
+      version = "~> 1.0"
+    }
+  }
+}
+
+# Uses your local Juju client's active controller by default. See
+# https://registry.terraform.io/providers/juju/juju/latest/docs for
+# other ways to configure the provider.
+provider "juju" {}
+
 variable "model_uuid" {
   type = string
 }
 
 module "landscape_landscape-scalable" {
-  # Pin to a charm revision tag (e.g. `rev474`) rather than the default
-  # branch, so the module version, and the landscape-server revision it
-  # deploys, doesn't shift under you. See the repository's tags for
-  # available revisions: https://github.com/canonical/landscape-server-operator/tags
   source = "git::https://github.com/canonical/landscape-server-operator//terraform/product/modules/landscape-scalable?ref=rev474"
 
   model_uuid = var.model_uuid
@@ -74,8 +112,8 @@ module "landscape_landscape-scalable" {
     channel = "26.04/stable"
     base    = "ubuntu@24.04"
     config = {
-      landscape_ppa     = "ppa:landscape/self-hosted-26.04"
-      root_url          = "https://landscape.example.com/"
+      landscape_ppa = "ppa:landscape/self-hosted-26.04"
+      root_url      = "https://landscape.example.com/"
     }
   }
 
@@ -99,21 +137,6 @@ module "landscape_landscape-scalable" {
     base    = "ubuntu@24.04"
   }
 }
-```
-
-`landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`. When set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
-
-### Deploying against legacy (pre-26.04) topologies
-
-This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module used above also works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation) — you don't need a different plan to support an older revision.
-
-The `terraform/product/modules/landscape-scalable` directory in `landscape-server-operator` ships two example variable files for each topology; copy the one matching your target revision to `terraform.tfvars`:
-
-- **`terraform.tfvars.example`** (legacy, pre-26.04): `24.04/stable` channel, `ppa:landscape/self-hosted-24.04`.
-- **`terraform.tfvars.modern`** (modern, 26.04+): `26.04/stable` channel, `ppa:landscape/self-hosted-26.04`, `2.8/stable` HAProxy, `16/stable` PostgreSQL, and `enable_hostagent_messenger`/`enable_ubuntu_installer_attach` set.
-
-```sh
-cp terraform.tfvars.modern terraform.tfvars   # or terraform.tfvars.example for legacy
 ```
 
 ## Initialize and apply the Terraform plan

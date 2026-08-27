@@ -324,6 +324,12 @@ juju integrate landscape-server:package-upload-haproxy-route lbaas-haproxy:hapro
 juju integrate landscape-server:repository-haproxy-route lbaas-haproxy:haproxy-route
 ```
 
+Integrate Debarchive's `debarchive-haproxy-route` endpoint the same way, so it's reachable through the external HAProxy:
+
+```sh
+juju integrate landscape-debarchive:debarchive-haproxy-route lbaas-haproxy:haproxy-route
+```
+
 Integrate `landscape-task-handler`'s gRPC route with the `haproxy-route-tcp` endpoint of the same offer:
 
 ```sh
