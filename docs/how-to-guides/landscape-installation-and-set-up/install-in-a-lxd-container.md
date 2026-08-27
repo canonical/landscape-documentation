@@ -36,7 +36,7 @@ declare -A VARIABLES=(
   [SMTP_PORT]='<SMTP_PORT>'
   [SMTP_USERNAME]='<SMTP_USERNAME>'
   [SMTP_PASSWORD]='<SMTP_PASSWORD>'
-  [LANDSCAPE_PPA]='<LANDSCAPE_PPA>'
+  [LANDSCAPE_PPA_NAME]='<LANDSCAPE_PPA_NAME>'
 )
 ```
 
@@ -60,7 +60,7 @@ Replace the following values with your configuration:
 
 `<SMTP_PASSWORD>`: The password or API key associated with the SMTP username. If you’re using SendGrid, use an API Key from [`https://app.sendgrid.com/settings/api_keys`](https://app.sendgrid.com/settings/api_keys)
 
-```{include} /reuse/landscape-ppa-description.md
+```{include} /reuse/landscape-ppa-name-description.md
 ```
 
 ### Apply variables to cloud-init

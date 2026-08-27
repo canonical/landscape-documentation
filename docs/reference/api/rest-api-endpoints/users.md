@@ -101,7 +101,7 @@ Create an activity to create a user on the specified computers.
 
 Required parameters:
 
-- `computer_ids`: he numerical IDs of the computers.
+- `computer_ids`: The numerical IDs of the computers.
 - `username`: The username of the new user.
 - `name`: The title name of the new user.
 - `password`: The password of the new user.

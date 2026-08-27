@@ -939,7 +939,7 @@ The following errors may be raised:
 
 Add APT sources to a repository profile.
 
-An activity will be created to add the given source to the the computers associated with the given profile.
+An activity will be created to add the given source to the computers associated with the given profile.
 
 `name`: Name of the repository profile.
 `apt_sources.#`: The names of the APT sources to add.
