@@ -5,7 +5,7 @@ myst:
 ---
 
 (explanation-package-change-plan-snapshot)=
-# Package change plans and package data snapshots
+# Package change plans
 
 Available in Landscape 26.10 and later.
 
