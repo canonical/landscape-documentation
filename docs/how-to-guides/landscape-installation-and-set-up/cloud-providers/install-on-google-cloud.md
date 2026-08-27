@@ -239,7 +239,7 @@ To delete the cloud-init `user-data` key, run:
 gcloud compute instances remove-metadata landscape --zone $ZONE --keys=user-data
 ```
 
-Cloud-init scripts are provided in a custom metadata key named `user-data`. The `user-data` key is consumed during instance creation and is executed when the instance starts. Sensitive information such as API keys shouldn’t be left visible within the custom metadata of the VM or in the cloud dashboard. Once the cloud-init process is complete, it’s safe to delete the cloud-init `user-data` key.
+cloud-init scripts are provided in a custom metadata key named `user-data`. The `user-data` key is consumed during instance creation and is executed when the instance starts. Sensitive information such as API keys shouldn’t be left visible within the custom metadata of the VM or in the cloud dashboard. Once the cloud-init process is complete, it’s safe to delete the cloud-init `user-data` key.
 
 ## (Optional) Perform a complete teardown
 
