@@ -7,7 +7,17 @@ myst:
 (explanation-package-change-plan-snapshot)=
 # Package change plans
 
-Available in Landscape 26.10 and later.
+A package change plan is a staged set of package actions to be applied across a computer selection.
+When you create a plan, Landscape calculates which computers and packages are targeted before any changes
+are made. You can inspect the plan, then execute it to trigger the underlying activities.
+
+Each plan has exactly one action, which determines how the set of affected (computer, package) pairs is resolved.
+
+```{note}
+You must be running  Landscape Server 26.10 or later to use the REST API for package management.
+
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
+```
 
 A package change plan is built from the package data that Landscape Server
 already holds for the selected instances. That data comes from what each
@@ -22,7 +32,8 @@ old, or older for instances that have been offline.
 ## What this means when you create a plan
 
 - The package versions, installed and held states, and available upgrades shown
-  in a plan come from the snapshot, not from the instance itself.
+  in a plan come Landscape Server's stored package state, not a live query
+  to the instance.
 - Instances that cannot perform an action according to the snapshot
   are listed as exclusions. Those exclusions are also based on the
   snapshot.
@@ -45,7 +56,7 @@ Check the resulting activities for the actual per-instance outcome.
 
 ## Recommendations
 
-- Keep instances checking in regularly so the snapshot stays current.
+- Keep instances checking in regularly so the snapshot stays reasonbly up to date.
 - Execute a plan soon after creating it, and create a new plan rather than
   executing a stale one.
 - For instances that have been offline, review their reported package state
