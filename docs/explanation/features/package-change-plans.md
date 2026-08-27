@@ -23,9 +23,8 @@ old, or older for instances that have been offline.
 
 - The package versions, installed and held states, and available upgrades shown
   in a plan come from the snapshot, not from the instance itself.
-- Instances that cannot perform an action according to the snapshot -- for
-  example, the package is already installed, is not installed, or is already
-  held -- are listed as exclusions. Those exclusions are also based on the
+- Instances that cannot perform an action according to the snapshot
+  are listed as exclusions. Those exclusions are also based on the
   snapshot.
 - The snapshot is taken when the plan is created and is not refreshed when the
   plan is executed. Changes made on an instance in the meantime, locally or
