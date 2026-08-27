@@ -57,7 +57,7 @@ Check the resulting activities for the actual per-instance outcome.
 
 ## Recommendations
 
-- Keep instances checking in regularly so the snapshot stays reasonbly up to date.
+- Keep instances checking in regularly so the snapshot stays reasonably up to date.
 - Execute a plan soon after creating it, and create a new plan rather than
   executing a stale one.
 - For instances that have been offline, review their reported package state
