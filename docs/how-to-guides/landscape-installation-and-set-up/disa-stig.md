@@ -90,7 +90,7 @@ In non-containerized deployments, loop devices can be used to limit directory si
 1. Format the device as an `ext4` filesystem.
 
     ```bash
-    sudo mkft.ext4 /root/landscape-server-log.img
+    sudo mkfs.ext4 /root/landscape-server-log.img
     ```
 
 1. Mount it at `/var/log/landscape-server`.
