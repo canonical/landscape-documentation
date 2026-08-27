@@ -14,7 +14,7 @@ are made. You can inspect the plan, then execute it to trigger the underlying ac
 Each plan has exactly one action, which determines how the set of affected (computer, package) pairs is resolved.
 
 ```{note}
-You must be running  Landscape Server 26.10 or later to use the REST API for package management.
+You must be running Landscape Server 26.10 or later to use the REST API for package management.
 
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
