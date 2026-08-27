@@ -11,7 +11,8 @@ A package change plan is a staged set of package actions to be applied across a 
 When you create a plan, Landscape calculates which computers and packages are targeted before any changes
 are made. You can inspect the plan, then execute it to trigger the underlying activities.
 
-Each plan has exactly one action, which determines how the set of affected (computer, package) pairs is resolved.
+Each plan has exactly one action (e.g. install, remove, ...), which determines how
+the affected computers, and packages are resolved.
 
 ```{note}
 You must be running Landscape Server 26.10 or later to use the REST API for package management.
