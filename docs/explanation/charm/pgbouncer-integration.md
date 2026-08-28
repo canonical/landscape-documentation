@@ -106,9 +106,7 @@ relations:
 ```
 
 ```{important}
-Unlike Debarchive, `landscape-task-handler`'s `task-db` relation cannot be pooled through its own dedicated PgBouncer. `task-db` isn't only used for the task-handler's own queue database: whenever Landscape Server's own published stores address is a loopback address (i.e. Landscape Server itself is fronted by its own PgBouncer), the Task Handler charm substitutes `task-db`'s resolved host/port for the shared `main`/`account`/`resource` stores too, since those otherwise-unreachable loopback details are meaningless outside Landscape Server's own machine. That substitution assumes `task-db` points at a real, directly-reachable PostgreSQL. If `task-db` is instead routed through a dedicated `pgbouncer-task-handler` application, `task-db`'s resolved address becomes a loopback address too (task-handler's own local PgBouncer), one whose `[databases]` section only ever contains the single `task-handler` database, not the shared stores. The charm then substitutes that pgbouncer's address in for the shared stores, which fails outright: PgBouncer has no route configured for `main`/`account`/`resource` at all, and returns a generic `SASL authentication failed` for any database it doesn't recognize. This is not a `pg_hba.conf` or credentials problem: `postgresql-operator#1927`'s workaround above does not apply and will not fix it.
-
-Fixing this properly would require Landscape Server to publish a real, directly-reachable address for the shared stores independently of whatever pooler it uses for itself, which the Task Handler charm cannot control from its own side. Until that exists, keep `task-db` on a direct connection to PostgreSQL.
+This is a known limitation, not a configuration choice: the Task Handler charm also uses `task-db` to reach the shared `main`/`account`/`resource` stores when Landscape Server's own published address isn't directly reachable, so `task-db` needs a direct connection to PostgreSQL to work correctly.
 ```
 
 ## Interaction with Landscape Server schema migration
