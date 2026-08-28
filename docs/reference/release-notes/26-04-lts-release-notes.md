@@ -95,6 +95,16 @@ Multiple security fixes are included in this release:
   - feat: add /usg-profiles API aliases and usg query filter
   - feat: login endpoint supports PAM authn
 
+- 26.04.1 published August 28 2026
+  - fix: add missing cleanup for soft deleted computers
+  - feat: add --allow-connections flag to schema script for PGBouncer support
+  - feat: add outbox message type for hard deletion
+  - fix: persist description field when edited
+  - fix: fallback to ipv4 when ipv6 fails
+  - fix: make wsl instances soft-deleted aware
+  - fix: allow scoped (non-global) admins to manage repository and reboot profiles (LP: #2151742)
+  - fix: keep [schema] ssl settings separate from [stores] in read_service_configuration
+
 ## Supported third-party services
 
 | Service | Compatible versions |
