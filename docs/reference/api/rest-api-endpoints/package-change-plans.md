@@ -5,14 +5,14 @@ myst:
 ---
 
 (reference-rest-api-package-change-plans)=
-# Package change plans
+# Package Change Plans
 
-A package change plan stages a bulk package operation over a computer selection. Creating a plan resolves the selection into concrete computer/package pairs so you can review them, then execute the plan when you're satisfied.
+A package change plan stages a bulk package operation over a computer selection. Creating a plan resolves the selection into concrete computer/package pairs.
 
 ```{note}
 You must be running Landscape Server 26.10 or later to use the REST API for package management.
 
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts. If it isn't enabled for your account, these endpoints return `404`.
+This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
 
 ## POST `/package-change-plans`
@@ -349,7 +349,7 @@ Request body:
 
 - None
 
-Executing a plan twice doesn't queue the work twice: the second call returns the activity created by the first.
+This endpoint is idempotent: the second call returns the activity created by the first.
 
 Example request:
 
@@ -389,28 +389,14 @@ Query parameters:
 
 - `computer_ids`: Comma-separated computer IDs to filter by.
 - `computer_instance_name`: Case-insensitive prefix match on a computer's instance name.
-- `limit`: Maximum number of items to return. All matching items are returned if omitted.
+- `limit`: Maximum number of items to return.
 - `offset`: Offset into the result list (default: `0`).
 
-**Action filters:** at most one may be set, and it must match the plan's own action. A filter for a different action returns `400`.
-
-- `install`, `remove`, `hold`, `unhold`: A package ID.
-- `upgrade`: The package ID of the new version being installed.
-- `change_version`: A JSON-encoded object with `from_package_id` and `to_package_id`, for example `{"from_package_id": 10, "to_package_id": 11}`.
-
-Example request--filter by computer and package:
+Example request:
 
 ```bash
-curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/items?computer_ids=5,7&install=101" \
+curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/items" \
   -H "Authorization: Bearer $JWT"
-```
-
-Example request--filter a `change_version` plan by the version change:
-
-```bash
-curl -s -G "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/items" \
-  -H "Authorization: Bearer $JWT" \
-  --data-urlencode 'change_version={"from_package_id": 10, "to_package_id": 11}'
 ```
 
 Example response (200 OK)--`install` plan:
@@ -470,15 +456,118 @@ Example response (200 OK)--`change_version` plan:
 
 Response fields:
 
-- `action`: The plan's operation, which matches the `type` of every nested action.
-- `items`: The plan items on this page.
+- `action`: The plan's operation.
+- `items`: The plan items.
   - `action`: A discriminated union keyed on `type`:
     - `install`, `remove`, `hold`, `unhold`: includes `package`, with `id`, `name`, and `version`.
     - `upgrade`, `change_version`: includes `from_package` and `to_package`, each with `id`, `name`, and `version`.
   - `computer`: The targeted computer.
     - `id`: ID of the computer.
     - `name`: Instance name of the computer.
-- `count`: Total number of items matching the filters, ignoring `limit` and `offset`.
+- `count`: Total number of items.
+
+(package-change-plan-exclusions)=
+## GET `/package-change-plans/<id>/exclusions`
+
+List the packages that couldn't be applied to some computers while resolving the plan, with the number of affected computers per package. These are the same aggregations returned in the `exclusions` field of `/summary`.
+
+A plan references at most 50 packages, so this endpoint isn't paginated and takes no filters.
+
+Path parameters:
+
+- `id`: The UUID of the plan.
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/exclusions" \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response (200 OK):
+
+```json
+{
+  "action": "upgrade",
+  "exclusions": [
+    {
+      "package_name": "libthai0",
+      "computer_count": 11
+    },
+    {
+      "package_name": "nano",
+      "computer_count": 11
+    },
+    {
+      "package_name": "python-twisted-lore",
+      "computer_count": 11
+    }
+  ]
+}
+```
+
+Response fields:
+
+- `action`: The plan's operation.
+- `exclusions`: Excluded packages, sorted by name.
+  - `package_name`: Name of the excluded package.
+  - `computer_count`: Number of computers the package couldn't be applied to.
+
+(package-change-plan-exclusion-detail)=
+## GET `/package-change-plans/<id>/exclusions/<package_name>`
+
+Get the computers a specific package couldn't be applied to.
+
+Path parameters:
+
+- `id`: The UUID of the plan.
+- `package_name`: The excluded package name, exactly as returned by `/exclusions`.
+
+Query parameters:
+
+- `computer_ids`: Comma-separated computer IDs to filter by.
+- `computer_instance_name`: Case-insensitive prefix match on a computer's instance name.
+
+Example request--filter by instance name:
+
+```bash
+curl -s -G "https://landscape.canonical.com/api/v2/package-change-plans/550e8400-e29b-41d4-a716-446655440000/exclusions/nano" \
+  -H "Authorization: Bearer $JWT" \
+  --data-urlencode 'computer_instance_name=John'
+```
+
+Example response (200 OK):
+
+```json
+{
+  "action": "upgrade",
+  "package_name": "nano",
+  "computers": [
+    {
+      "id": 4,
+      "name": "John's Laptop"
+    },
+    {
+      "id": 7,
+      "name": "John's Windows Server"
+    }
+  ]
+}
+```
+
+Response fields:
+
+- `action`: The plan's operation.
+- `package_name`: The excluded package name.
+- `computers`: The computers the package couldn't be applied to, narrowed by the filters.
+  - `id`: ID of the computer.
+  - `name`: Instance name of the computer.
+
+If the plan doesn't exist, or `package_name` isn't excluded by it, the endpoint returns `404`.
 
 ## GET `/package-change-plans/<id>/summary`
 
@@ -530,7 +619,7 @@ Response fields:
 - `actions`: One entry per distinct package action in the plan.
   - `action`: The same discriminated union used by `/items`.
   - `computer_count`: Number of selected computers the action applies to.
-- `exclusions`: Packages that couldn't be applied to some of the selected computers, aggregated by package name. Since they're grouped by name, several versions of the same package are counted together.
+- `exclusions`: Packages that couldn't be applied to some of the selected computers, aggregated by package name. Same data as [`/exclusions`](package-change-plan-exclusions).
   - `package_name`: Name of the excluded package.
   - `computer_count`: Number of selected computers excluded for that package.
 
