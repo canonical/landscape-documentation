@@ -75,12 +75,16 @@ relations:
 
 The Landscape Server charm relates to PgBouncer using the `database` endpoint, and PgBouncer relates to PostgreSQL using its `backend-database` endpoint. This creates the connection pooling layer between the application and the database.
 
-In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server. Since a PgBouncer application's `database` endpoint can only serve one principal application, they do not share Landscape Server's PgBouncer. Instead, connect each directly to PostgreSQL, bypassing pooling:
+In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server. Since a PgBouncer application's `database` endpoint can only serve one principal application, they cannot share Landscape Server's PgBouncer; each would need its own dedicated PgBouncer application. The recommended approach is to connect each directly to PostgreSQL instead, bypassing pooling:
 
 ```yaml
 relations:
   - [landscape-debarchive:database, postgresql:database]
   - [landscape-task-handler:task-db, postgresql:database]
+```
+
+```{important}
+A dedicated PgBouncer application per component is possible, but currently unreliable: PgBouncer's `backend-database` relation can intermittently fail to initialise due to a known upstream race condition ([postgresql-operator#1927](https://github.com/canonical/postgresql-operator/issues/1927)) that can leave it permanently unable to connect until a manual workaround is applied. Until that's fixed upstream, connecting directly to PostgreSQL (as shown above) is the reliable option.
 ```
 
 ```{important}
