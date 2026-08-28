@@ -259,7 +259,7 @@ resource "juju_integration" "pgbouncer_postgresql" {
 }
 ```
 
-The `pgbouncer` input only pools connections for `landscape_server`. Since a PgBouncer application's `database` endpoint can only serve one principal application, `landscape_debarchive` and `landscape_task_handler` do **not** share `landscape_server`'s PgBouncer. Instead, connect them directly to PostgreSQL's `database` endpoint, bypassing pooling entirely:
+The `pgbouncer` input only pools connections for `landscape_server`. Since a PgBouncer application's `database` endpoint can only serve one principal application, `landscape_debarchive` and `landscape_task_handler` cannot share `landscape_server`'s PgBouncer; each would need its own dedicated PgBouncer application. The example below connects them directly to PostgreSQL's `database` endpoint instead. See {ref}`explanation-pgbouncer-integration` for the dedicated-PgBouncer alternative and a known upstream issue to be aware of if you use it.
 
 ```hcl
 resource "juju_integration" "debarchive_postgresql" {
