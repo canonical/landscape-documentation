@@ -75,16 +75,14 @@ relations:
 
 The Landscape Server charm relates to PgBouncer using the `database` endpoint, and PgBouncer relates to PostgreSQL using its `backend-database` endpoint. This creates the connection pooling layer between the application and the database.
 
-In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server. Debarchive has its own independent database and can use its own PgBouncer application the same way, since a PgBouncer application's `database` endpoint can only serve one principal application:
+In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server, and each needs its own PgBouncer application, since a PgBouncer application's `database` endpoint can only serve one principal application:
 
 ```yaml
 relations:
   - [landscape-debarchive:database, pgbouncer-debarchive:database]
   - [pgbouncer-debarchive:backend-database, postgresql:database]
-```
-
-```{important}
-Landscape Task Handler is different: alongside its own `task-db` database (related directly to PostgreSQL, since PgBouncer's `database` endpoint is already in use by Landscape Server and cannot serve a second application), it also consumes Landscape Server's shared `main`/`account`/`resource` stores over the `landscape-server:task-handler` relation. Landscape Server publishes the address of *its own* PgBouncer subordinate for these stores, which only listens on `localhost` on the machine it's colocated with. Because of this, **each Landscape Task Handler unit must be deployed on the same machine as a Landscape Server unit** (for example with `juju deploy landscape-task-handler --to <landscape-server-machine>`), or it cannot reach the shared stores; any Landscape Server unit works, since PgBouncer's auth is shared at the application level, not scoped to the leader. This is a known limitation, not a configuration choice; see {ref}`how-to-juju-ha-installation` for details.
+  - [landscape-task-handler:task-db, pgbouncer-task-handler:database]
+  - [pgbouncer-task-handler:backend-database, postgresql:database]
 ```
 
 ## Interaction with Landscape Server schema migration
