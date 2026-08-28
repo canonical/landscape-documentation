@@ -75,12 +75,16 @@ relations:
 
 The Landscape Server charm relates to PgBouncer using the `database` endpoint, and PgBouncer relates to PostgreSQL using its `backend-database` endpoint. This creates the connection pooling layer between the application and the database.
 
-In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server. Since a PgBouncer application's `database` endpoint can only serve one principal application, they do not share Landscape Server's PgBouncer — instead, connect each directly to PostgreSQL, bypassing pooling:
+In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server. Since a PgBouncer application's `database` endpoint can only serve one principal application, they do not share Landscape Server's PgBouncer. Instead, connect each directly to PostgreSQL, bypassing pooling:
 
 ```yaml
 relations:
   - [landscape-debarchive:database, postgresql:database]
   - [landscape-task-handler:task-db, postgresql:database]
+```
+
+```{important}
+`landscape-task-handler`'s `task-db` relation must point at the same PostgreSQL deployment as the one backing Landscape Server's own stores (whether accessed directly or through Landscape Server's PgBouncer). The Task Handler charm does not verify this: if `task-db` is ever related to a genuinely different PostgreSQL server, the charm can substitute the wrong connection details for its shared `main`/`account`/`resource` stores when Landscape Server itself is fronted by a loopback pooler.
 ```
 
 ## Interaction with Landscape Server schema migration
