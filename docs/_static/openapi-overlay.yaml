@@ -10,7 +10,7 @@ info:
   title: Debarchive API examples
   version: 1.0.0
 actions:
-  - target: $.paths['/v1beta1/locals'].get.responses['200'].content['application/json']
+  - target: $.paths['/v1/locals'].get.responses['200'].content['application/json']
     update:
       example:
         locals:
