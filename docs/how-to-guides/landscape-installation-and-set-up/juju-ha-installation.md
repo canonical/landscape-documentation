@@ -145,6 +145,8 @@ applications:
     charm: ch:landscape-task-handler
     channel: latest/stable
     num_units: 1
+    to:
+      - landscape-server/0
     options:
       task-handler-snap-channel: latest/stable
     base: ubuntu@24.04
