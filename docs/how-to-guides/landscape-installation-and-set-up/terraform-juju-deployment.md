@@ -258,3 +258,93 @@ resource "juju_integration" "pgbouncer_postgresql" {
   }
 }
 ```
+
+The `pgbouncer` input only pools connections for `landscape_server`. Since a PgBouncer application's `database` endpoint can only serve one principal application, `landscape_debarchive` and `landscape_task_handler` each need their own PgBouncer application and their own `backend-database` integration with PostgreSQL:
+
+```hcl
+resource "juju_application" "pgbouncer_debarchive" {
+  name       = "pgbouncer-debarchive"
+  model_uuid = var.model_uuid
+
+  charm {
+    name    = "pgbouncer"
+    channel = "1/stable"
+    base    = "ubuntu@24.04"
+  }
+
+  lifecycle {
+    ignore_changes = [units]
+  }
+}
+
+resource "juju_integration" "debarchive_pgbouncer" {
+  model_uuid = var.model_uuid
+
+  application {
+    name     = module.landscape_landscape-scalable.applications.landscape_debarchive.name
+    endpoint = "database"
+  }
+
+  application {
+    name     = juju_application.pgbouncer_debarchive.name
+    endpoint = "database"
+  }
+}
+
+resource "juju_integration" "pgbouncer_debarchive_postgresql" {
+  model_uuid = var.model_uuid
+
+  application {
+    name     = juju_application.pgbouncer_debarchive.name
+    endpoint = "backend-database"
+  }
+
+  application {
+    name     = "postgresql"
+    endpoint = "database"
+  }
+}
+
+resource "juju_application" "pgbouncer_task_handler" {
+  name       = "pgbouncer-task-handler"
+  model_uuid = var.model_uuid
+
+  charm {
+    name    = "pgbouncer"
+    channel = "1/stable"
+    base    = "ubuntu@24.04"
+  }
+
+  lifecycle {
+    ignore_changes = [units]
+  }
+}
+
+resource "juju_integration" "task_handler_pgbouncer" {
+  model_uuid = var.model_uuid
+
+  application {
+    name     = module.landscape_landscape-scalable.applications.landscape_task_handler.name
+    endpoint = "task-db"
+  }
+
+  application {
+    name     = juju_application.pgbouncer_task_handler.name
+    endpoint = "database"
+  }
+}
+
+resource "juju_integration" "pgbouncer_task_handler_postgresql" {
+  model_uuid = var.model_uuid
+
+  application {
+    name     = juju_application.pgbouncer_task_handler.name
+    endpoint = "backend-database"
+  }
+
+  application {
+    name     = "postgresql"
+    endpoint = "database"
+  }
+}
+```
