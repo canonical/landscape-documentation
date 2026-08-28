@@ -84,7 +84,16 @@ relations:
 ```
 
 ```{important}
-A dedicated PgBouncer application per component is possible, but currently unreliable: PgBouncer's `backend-database` relation can intermittently fail to initialise due to a known upstream race condition ([postgresql-operator#1927](https://github.com/canonical/postgresql-operator/issues/1927)) that can leave it permanently unable to connect until a manual workaround is applied. Until that's fixed upstream, connecting directly to PostgreSQL (as shown above) is the reliable option.
+A dedicated PgBouncer application per component is also possible, if pooling is preferred over a direct connection. However, PgBouncer's `backend-database` relation to PostgreSQL can intermittently fail to initialise on first setup, due to a known upstream race condition ([postgresql-operator#1927](https://github.com/canonical/postgresql-operator/issues/1927)): PostgreSQL can grant the new PgBouncer relation user a `pg_hba.conf` rule scoped to only its own database instead of `all`, which blocks PgBouncer's own auth-function bootstrap. If the PgBouncer unit's status shows `blocked`/`waiting for backend-database relation to connect` shortly after relating it, this is likely the cause. It is a one-time issue at initial setup, not an ongoing operational risk: once resolved, the relation works normally going forward, including through leader/primary changes and restarts. To resolve it, trigger PostgreSQL to recompute `pg_hba.conf` and PgBouncer to retry its deferred setup, by toggling a value on each application's config back and forth (any value works; this is done purely to trigger the `config-changed` hook on every unit):
+
+```bash
+juju config postgresql connection_authentication_timeout=61
+juju config postgresql connection_authentication_timeout=60
+juju config <pgbouncer-app> max_db_connections=101
+juju config <pgbouncer-app> max_db_connections=100
+```
+
+Wait for the PgBouncer unit to reach `active` before proceeding. If it doesn't recover, repeat the toggle: the underlying condition is a replication-timing race, so it may need more than one attempt.
 ```
 
 ```{important}
