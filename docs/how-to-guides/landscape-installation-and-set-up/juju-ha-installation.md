@@ -217,6 +217,10 @@ juju config landscape-server "license_file=$(cat your-license-file)"
 
 HAProxy routes traffic based on the `hostname` configured in the `haproxy-route` relation, not by IP address alone, so you must connect using the hostname set in `root_url` (via DNS, or `curl --resolve`/a `/etc/hosts` entry for testing) — connecting directly to the HAProxy unit's IP with no matching `Host` header returns HAProxy's default page, not Landscape. If you omit `root_url`, the `landscape-server` charm falls back to using its leader unit's IP address as the routing hostname instead, which is impractical to connect with directly; setting `root_url` to a real hostname is strongly recommended even for testing. Use `juju status` to find the HAProxy unit IP address to point that hostname at.
 
+```{important}
+This same hostname resolution requirement also applies internally: the outbox component running on the `landscape-server` units connects to the Task Handler's gRPC server through HAProxy's `grpc-haproxy-route`/`haproxy-route-tcp` passthrough, using the same hostname. If that hostname doesn't resolve on the `landscape-server` units (for example, when deploying locally without a real domain), add an `/etc/hosts` entry on those units pointing the hostname at the HAProxy unit's IP address. This dependency is one-directional: outbox (on `landscape-server`) connects to Task Handler, but Task Handler never needs to resolve or connect back to `landscape-server`.
+```
+
 ### Optional: Replace self-signed certificates with a valid certificate
 
 If you deployed the example bundle above, it includes self-signed certificates (suitable for testing). For production, replace them with a valid certificate, such as one from Let's Encrypt:
@@ -337,6 +341,10 @@ juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-r
 ```
 
 If you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`, integrate their HAProxy endpoints with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
+
+```{important}
+The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the external HAProxy's IP address.
+```
 
 Wait for the deployment to complete:
 

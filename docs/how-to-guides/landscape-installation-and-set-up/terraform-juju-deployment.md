@@ -171,6 +171,10 @@ juju status -m landscape haproxy/leader
 
 HAProxy routes traffic based on the `hostname` configured in `landscape_server.config.root_url`, not by IP address alone, so point that hostname at the HAProxy unit's address (via DNS, or `curl --resolve`/a `/etc/hosts` entry for testing) and access Landscape using that hostname in your browser.
 
+```{important}
+The same hostname resolution requirement applies internally: the outbox component on the `landscape_server` units connects to the Task Handler's gRPC server through HAProxy's `haproxy-route-tcp` passthrough, using the same hostname. If it doesn't resolve on the `landscape_server` units (for example, deploying locally without a real domain), add an `/etc/hosts` entry on those units pointing the hostname at the HAProxy unit's IP address. This dependency is one-directional: outbox (on `landscape_server`) connects to Task Handler, not the other way around.
+```
+
 ## Get the initial credentials and finish setup
 
 The module's outputs include `admin_email` and `admin_password` (sensitive) for the initial Landscape administrator account, and `registration_key` for registering clients. Retrieve them with:

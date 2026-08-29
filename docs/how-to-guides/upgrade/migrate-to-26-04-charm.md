@@ -288,6 +288,10 @@ juju integrate landscape-task-handler:grpc-haproxy-route haproxy:haproxy-route-t
 Substitute `self-signed-certificates` above with whichever TLS provider you deployed in Step 3.
 ```
 
+```{important}
+The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy gRPC route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the HAProxy unit's IP address. This dependency is one-directional: outbox connects to Task Handler, not the other way around.
+```
+
 ## Additional resources
 
 - {ref}`how-to-juju-ha-installation` - Full HA deployment guide
