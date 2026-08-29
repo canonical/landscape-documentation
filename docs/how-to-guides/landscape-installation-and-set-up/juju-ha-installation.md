@@ -191,17 +191,14 @@ juju status --watch 3s
 Once everything is installed and settled, the `Status` for every application will be `active`:
 
 ```text
-Model         Controller  Cloud/Region    Version  SLA          Timestamp
-landscape-ha  lxd         localhost/lxd   3.5.5    unsupported  10:30:00+00:00
-
-App                       Version  Status  Scale  Charm                      Channel       Rev  Base
-haproxy                            active      1  haproxy                    2.8/stable     50  ubuntu@24.04
-landscape-debarchive               active      1  landscape-debarchive       latest/stable   2  ubuntu@24.04
-landscape-server          26.04    active      3  landscape-server           26.04/stable  150  ubuntu@24.04
-landscape-task-handler             active      1  landscape-task-handler     latest/stable   3  ubuntu@24.04
-postgresql                16.4     active      3  postgresql                 16/stable     500  ubuntu@24.04
-rabbitmq-server           3.9.27   active      3  rabbitmq-server            latest/edge   200  ubuntu@22.04
-self-signed-certificates           active      1  self-signed-certificates   1/stable       12  ubuntu@24.04
+App                       Version  Status  Scale  Charm                      Channel       Rev  
+haproxy                            active      1  haproxy                    2.8/stable     485
+landscape-debarchive               active      1  landscape-debarchive       latest/stable  2
+landscape-server                   active      3  landscape-server           26.04/stable   485
+landscape-task-handler             active      1  landscape-task-handler     latest/stable  3 
+postgresql                16.11    active      3  postgresql                 16/stable      1047 
+rabbitmq-server           3.12.1   active      3  rabbitmq-server            latest/edge    252
+self-signed-certificates           active      1  self-signed-certificates   1/stable       22
 ```
 
 #### Step 4: Configure license file

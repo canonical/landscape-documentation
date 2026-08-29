@@ -62,7 +62,7 @@ cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
 ```{tip}
-Check out a tagged revision (e.g. `git checkout rev474`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
+Check out a tagged revision (e.g. `git checkout rev485`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
 ```
 
 This directory ships two example variable files, one per topology; copy the one matching your target `landscape-server` revision to `terraform.tfvars`:
@@ -104,7 +104,7 @@ variable "model_uuid" {
 }
 
 module "landscape_landscape-scalable" {
-  source = "git::https://github.com/canonical/landscape-server-operator//terraform/product/modules/landscape-scalable?ref=rev474"
+  source = "git::https://github.com/canonical/landscape-server-operator//terraform/product/modules/landscape-scalable?ref=rev485"
 
   model_uuid = var.model_uuid
 
