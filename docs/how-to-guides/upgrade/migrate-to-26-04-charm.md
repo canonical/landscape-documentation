@@ -44,6 +44,10 @@ Remove the older HAProxy relation:
 juju remove-relation landscape-server:website haproxy:reverseproxy
 ```
 
+```{note}
+The legacy `website` relation (`reverseproxy` interface) is still supported for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10, so it is recommended to complete this migration to the `haproxy-route` interface rather than continuing to rely on the legacy relation.
+```
+
 **For deployments older than 25.10 only:**
 
 Remove the older RabbitMQ relation:
@@ -234,7 +238,7 @@ If you want to upgrade to a newer PostgreSQL version (e.g., from 14 to 16) as pa
 ```{note}
 PostgreSQL upgrade is optional. The 26.04 charm uses the modern `postgresql_client` interface which works with PostgreSQL 14 and above.
 
-The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14. It is recommended to migrate to the modern `postgresql_client` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
+The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14, and is deprecated: support will be removed in Landscape 26.10. It is recommended to migrate to the modern `postgresql_client` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
 ```
 
 ### Step 8: Verify the deployment
