@@ -15,7 +15,14 @@ Landscape doesn't currently integrate with external roles, groups, or existing u
 You still need to invite users and assign their roles and permissions within Landscape.
 ```
 
-## Enable OIDC support in Landscape (25.10 and later)
+## Enable OIDC support in Landscape
+
+**Select your Landscape version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape 25.10 and later
+
 
 For Landscape 25.10+, to enable OIDC support, add `oidc_issuer`, `oidc_client_id` and `oidc_client_secret` to `/etc/landscape/service.conf` in the `[appserver]` section. For example:
 
@@ -31,7 +38,10 @@ The `oidc_issuer` is the URL of the issuer. That URL should also be a discovery 
 
 The `oidc_client_id` and `oidc_client_secret` should be provided by your OIDC provider when you create the client credentials. The provider may require setting an authorization redirect URI. This should look like `https://your_landscape/new_dashboard/handle-auth/oidc`. If your provider also requires a logout redirect URL, this should be the address of your Landscape server such as `https://your_landscape/`.
 
-## Enable OIDC support in Landscape (earlier versions)
+````
+
+````{tab-item} Landscape versions earlier than 25.10
+
 
 For versions earlier than 25.10, to enable OIDC support, add `oidc-issuer`, `oidc-client-id` and `oidc-client-secret` to `/etc/landscape/service.conf` in the `[landscape]` section. For example:
 
@@ -47,6 +57,10 @@ The `oidc-issuer` is the URL of the issuer. That URL should also be a discovery 
 
 The `oidc-client-id` and `oidc-client-secret` should be provided by your OIDC provider when you create the client credentials. The provider may require setting an authorization redirect URI. This should look like `https://your-landscape/login/handle-openid`. If your provider also requires a logout redirect URL, this should be the address of your Landscape server such as `https://your-landscape/`.
 
+````
+
+`````
+
 ## Restart all Landscape services
 
 To restart all Landscape services, run:
@@ -55,7 +69,14 @@ To restart all Landscape services, run:
 sudo lsctl restart
 ```
 
-## (Optional) Configure a logout URL (25.10 and later)
+## (Optional) Configure a logout URL
+
+**Select your Landscape version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape 25.10 and later
+
 
 A logout URL can be configured with `oidc_logout_url` if the provider doesn’t expose one. For example:
 
@@ -65,7 +86,10 @@ A logout URL can be configured with `oidc_logout_url` if the provider doesn’t 
 oidc_logout_url = <https://accounts.google.com/logout>
 ```
 
-## (Optional) Configure a logout URL (earlier versions)
+````
+
+````{tab-item} Landscape versions earlier than 25.10
+
 
 A logout URL can be configured with `oidc-logout-url` if the provider doesn’t expose one. For example:
 
@@ -74,6 +98,10 @@ A logout URL can be configured with `oidc-logout-url` if the provider doesn’t 
 […]
 oidc-logout-url = <https://accounts.google.com/logout>
 ```
+
+````
+
+`````
 
 ```{note}
 There is no provision yet to upgrade current users to OIDC authentication. Most providers return pairwise subject identifiers (sub) which are not easily available. For this reason, we do not provide a user migration method and recommend recreating users.

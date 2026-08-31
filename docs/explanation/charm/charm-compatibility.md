@@ -35,7 +35,12 @@ Learn more about [Juju integrations](https://canonical.com/juju/integrations).
 
 The Landscape Server charm supports two deployment architectures:
 
-**Landscape 26.04 LTS (recommended):**
+**Select your Landscape Server version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+
 - External HAProxy charm (`2.8/stable`) for load balancing, using the `haproxy-route` interface
 - PostgreSQL 14+ with modern `postgresql_client` interface
 - TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
@@ -45,12 +50,19 @@ The Landscape Server charm supports two deployment architectures:
 ```{include} /reuse/charm-ha-architecture-2604.md
 ```
 
-**Before 26.04:**
+````
+
+````{tab-item} Landscape Server 25.10 and earlier
+
 - External HAProxy charm for load balancing, using the `reverseproxy` interface
 - PostgreSQL ≥ 14 with legacy `pgsql` interface
 
 ```{include} /reuse/charm-ha-architecture-pre-2604.md
 ```
+
+````
+
+`````
 
 For migration from older deployments to 26.04, see {ref}`how-to-migrate-to-26-04-charm`.
 

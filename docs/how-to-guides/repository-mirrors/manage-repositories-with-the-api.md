@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-manage-repos-api)=
-# How to manage and mirror repositories with the API
+# How to manage and mirror repositories with the Legacy API
 
 > See also: {ref}`explanation-repo-mirroring`
 
