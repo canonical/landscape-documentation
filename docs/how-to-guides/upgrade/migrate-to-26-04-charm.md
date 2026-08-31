@@ -45,7 +45,7 @@ juju remove-relation landscape-server:website haproxy:reverseproxy
 ```
 
 ```{note}
-The legacy `website` relation (`reverseproxy` interface) is still supported for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10, so it is recommended to complete this migration to the `haproxy-route` interface rather than continuing to rely on the legacy relation.
+The legacy `website` relation (`reverseproxy` interface) is still available for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10, so it is recommended to complete this migration to the `haproxy-route` interface rather than continuing to rely on the legacy relation.
 ```
 
 **For deployments older than 25.10 only:**

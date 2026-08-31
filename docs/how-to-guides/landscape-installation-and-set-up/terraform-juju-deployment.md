@@ -77,7 +77,7 @@ cp terraform.tfvars.modern terraform.tfvars   # or terraform.tfvars.example for 
 Open `terraform.tfvars` and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`; when set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
 
 ```{warning}
-Setting `min_install = "true"` cofigures the deployment to not install the `landscape-hashids` package, which means the hash-id database will not be set up. This should not be used for production deployments.
+Setting `min_install = "true"` configures the deployment to not install the `landscape-hashids` package, which means the hash-id database will not be set up, resulting in slower package reporting. This should not be used for production deployments.
 ```
 
 ### Deploying against legacy (pre-26.04) topologies
@@ -85,7 +85,7 @@ Setting `min_install = "true"` cofigures the deployment to not install the `land
 This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation); you don't need a different plan to support an older revision, just the matching `terraform.tfvars.example` file above.
 
 ```{note}
-Both the legacy `pgsql` database interface and the legacy `reverseproxy`/`website` HAProxy interface are still supported for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the modern interfaces.
+Both the legacy `pgsql` database interface and the legacy `reverseproxy`/`website` HAProxy interface are still available for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the modern interfaces.
 ```
 
 ### Alternative: vendoring the module into your own Terraform plan
@@ -206,7 +206,9 @@ This module can be configured for high availability by configuring the `units` v
 ```hcl
 landscape_server = {
   units = 3
-  min_install = "false"
+  config = {
+    min_install = "false"
+  }
 }
 
 postgresql = {

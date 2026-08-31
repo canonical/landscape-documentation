@@ -58,15 +58,15 @@ For migration from older deployments to 26.04, see {ref}`how-to-migrate-to-26-04
 
 | Charm                         | Landscape 26.04 LTS                                                  | Before 26.04                                    |
 | ----------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
-| **PostgreSQL**                | Required (PostgreSQL 14+, `postgresql_client` interface)             | Required (PostgreSQL 14, `pgsql` interface)     |
+| **PostgreSQL**                | Required (PostgreSQL 14+, `postgresql_client` interface)             | Required (PostgreSQL 14, `pgsql` interface, deprecated)     |
 | **RabbitMQ Server**           | Required                                                             | Required                                        |
-| **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface recommended; `latest/x`, `reverseproxy` interface still supported but deprecated) | Required (`latest/x`, `reverseproxy` interface) |
+| **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface recommended; `latest/x`, `reverseproxy` interface (available for backwards compatibility but deprecated)) | Required (`latest/x`, `reverseproxy` interface) |
 | **TLS Certificates Provider** | Required (integrated with HAProxy, e.g., `self-signed-certificates`) | Not used                                        |
 | **landscape-debarchive**      | Required (Debarchive repository management)                          | Not available                                   |
 | **landscape-task-handler**    | Required (task processing)                                           | Not available                                   |
 
 ```{note}
-The legacy `pgsql` PostgreSQL interface and the legacy `reverseproxy` HAProxy interface are both still supported for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. Migrate to the modern `postgresql_client` and `haproxy-route` interfaces; see {ref}`how-to-migrate-to-26-04-charm`.
+The legacy `pgsql` PostgreSQL interface and the legacy `reverseproxy` HAProxy interface are both still available for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. Migrate to the modern `postgresql_client` and `haproxy-route` interfaces; see {ref}`how-to-migrate-to-26-04-charm`.
 ```
 
 ## TLS certificates charm interface
@@ -115,7 +115,7 @@ The relationship between Landscape Server and HAProxy varies significantly betwe
 - Cannot be integrated with the `2.8/x` channels of the HAProxy charm
 
 ```{note}
-The legacy `reverseproxy` interface (`website` relation) is still supported for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the `haproxy-route` interface.
+The legacy `reverseproxy` interface (`website` relation) is still available for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the `haproxy-route` interface.
 ```
 
 **LBaaS (Load Balancer as a Service) - cross-model HAProxy:**
@@ -143,7 +143,7 @@ PostgreSQL charm compatibility varies by Landscape Server version:
 - Cannot use PostgreSQL 16 due to interface incompatibility
 
 ```{note}
-The legacy `pgsql` interface (`db` relation endpoint) is still supported for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the `postgresql_client` interface.
+The legacy `pgsql` interface (`db` relation endpoint) is still available for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the `postgresql_client` interface.
 ```
 
 - [Charmed PostgreSQL VM on Charmhub](https://charmhub.io/postgresql)
