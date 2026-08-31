@@ -6,11 +6,11 @@ info:
     title: debarchive
     version: 0.1.0
 paths:
-    /v1beta1/locals:
+    /v1/locals:
         get:
             tags:
                 - LocalService
-            description: ListLocals returns a list of Locals.
+            description: Returns a list of local repositories.
             operationId: LocalService_ListLocals
             parameters:
                 - name: pageSize
@@ -19,17 +19,17 @@ paths:
                     The maximum number of local repositories to return.
                      The service may return fewer than this value.
                      If unspecified, at most 100 local repositories will be returned.
-                     The maximum value is 1000; values above 1000 will be coerced to 1000.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
                   schema:
                     type: integer
                     format: int32
                 - name: pageToken
                   in: query
                   description: |-
-                    A page token, received from a previous `ListLocals` call.
+                    A page token, received from a previous call.
                      Provide this to retrieve the subsequent page.
 
-                     When paginating, all other parameters provided to `ListLocals` must match
+                     When paginating, all other request parameters provided must match
                      the call that provided the page token.
                   schema:
                     type: string
@@ -63,7 +63,7 @@ paths:
         post:
             tags:
                 - LocalService
-            description: CreateLocal creates a new Local repository.
+            description: Creates a new local repository.
             operationId: LocalService_CreateLocal
             parameters:
                 - name: localId
@@ -92,11 +92,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/locals/{local}:
+    /v1/locals/{local}:
         get:
             tags:
                 - LocalService
-            description: GetLocal retrieves a Local by its resource name.
+            description: Retrieves a local repository by its resource name.
             operationId: LocalService_GetLocal
             parameters:
                 - name: local
@@ -121,7 +121,7 @@ paths:
         delete:
             tags:
                 - LocalService
-            description: DeleteLocal deletes a Local.
+            description: Deletes a local repository.
             operationId: LocalService_DeleteLocal
             parameters:
                 - name: local
@@ -143,7 +143,7 @@ paths:
         patch:
             tags:
                 - LocalService
-            description: UpdateLocal updates the details of a Local.
+            description: Updates a local repository.
             operationId: LocalService_UpdateLocal
             parameters:
                 - name: local
@@ -177,11 +177,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/locals/{local}/packages:
+    /v1/locals/{local}/packages:
         get:
             tags:
                 - LocalService
-            description: ListLocalPackages retrieves a list of packages available in the Local.
+            description: Retrieves a list of packages available in a local repository.
             operationId: LocalService_ListLocalPackages
             parameters:
                 - name: local
@@ -196,17 +196,17 @@ paths:
                     The maximum number of packages to return.
                      The service may return fewer than this value.
                      If unspecified, at most 100 packages will be returned.
-                     The maximum value is 1000; values above 1000 will be coerced to 1000.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
                   schema:
                     type: integer
                     format: int32
                 - name: pageToken
                   in: query
                   description: |-
-                    A page token, received from a previous `ListLocalPackages` call.
+                    A page token, received from a previous call.
                      Provide this to retrieve the subsequent page.
 
-                     When paginating, all other parameters provided to `ListLocalPackages` must match
+                     When paginating, all other parameters provided must match
                      the call that provided the page token.
                   schema:
                     type: string
@@ -223,13 +223,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/locals/{local}:importPackages:
+    /v1/locals/{local}:importPackages:
         post:
             tags:
                 - LocalService
             description: |-
-                ImportLocalPackages imports packages from a URL pointing to a package list or index
-                 into the Local. This is an async operation; poll the returned Operation for status.
+                Imports packages from a URL pointing to a package list or index
+                 into the local repository. This is an async operation; poll the returned operation for status.
             operationId: LocalService_ImportLocalPackages
             parameters:
                 - name: local
@@ -257,11 +257,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/locals:batchGet:
+    /v1/locals:batchGet:
         post:
             tags:
                 - LocalService
-            description: BatchGetLocals retrieves a list of locals based on their name.
+            description: Retrieves a list of local repositories based on their names.
             operationId: LocalService_BatchGetLocals
             requestBody:
                 content:
@@ -282,11 +282,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/mirrors:
+    /v1/mirrors:
         get:
             tags:
                 - MirrorService
-            description: ListMirrors returns a list of Mirrors.
+            description: Returns a list of mirrors.
             operationId: MirrorService_ListMirrors
             parameters:
                 - name: pageSize
@@ -295,17 +295,17 @@ paths:
                     The maximum number of mirrors to return.
                      The service may return fewer than this value.
                      If unspecified, at most 100 mirrors will be returned.
-                     The maximum value is 1000; values above 1000 will be coerced to 1000.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
                   schema:
                     type: integer
                     format: int32
                 - name: pageToken
                   in: query
                   description: |-
-                    A page token, received from a previous `ListMirrors` call.
+                    A page token, received from a previous call.
                      Provide this to retrieve the subsequent page.
 
-                     When paginating, all other parameters provided to `ListMirrors` must match
+                     When paginating, all other request parameters provided must match
                      the call that provided the page token.
                   schema:
                     type: string
@@ -340,7 +340,7 @@ paths:
             tags:
                 - MirrorService
             description: |-
-                CreateMirror creates a new Mirror.
+                Creates a new mirror.
                  It validates the upstream but does not initiate synchronization.
             operationId: MirrorService_CreateMirror
             parameters:
@@ -370,11 +370,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/mirrors/{mirror}:
+    /v1/mirrors/{mirror}:
         get:
             tags:
                 - MirrorService
-            description: GetMirror retrieves a Mirror by its resource name.
+            description: Retrieves a mirror by its resource name.
             operationId: MirrorService_GetMirror
             parameters:
                 - name: mirror
@@ -399,7 +399,7 @@ paths:
         delete:
             tags:
                 - MirrorService
-            description: DeleteMirror deletes a Mirror.
+            description: Deletes a mirror.
             operationId: MirrorService_DeleteMirror
             parameters:
                 - name: mirror
@@ -410,7 +410,7 @@ paths:
                     type: string
                 - name: force
                   in: query
-                  description: Flag for if you want to force delete the mirror
+                  description: If `true`, the mirror will be deleted even if it has other resources attached to it.
                   schema:
                     type: boolean
             responses:
@@ -426,7 +426,7 @@ paths:
         patch:
             tags:
                 - MirrorService
-            description: UpdateMirror updates the details of a Mirror.
+            description: Updates the details of a mirror.
             operationId: MirrorService_UpdateMirror
             parameters:
                 - name: mirror
@@ -460,11 +460,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/mirrors/{mirror}/packages:
+    /v1/mirrors/{mirror}/packages:
         get:
             tags:
                 - MirrorService
-            description: ListMirrorPackages retrieves a list of packages available in the Mirror.
+            description: Retrieves the list of packages available in a mirror.
             operationId: MirrorService_ListMirrorPackages
             parameters:
                 - name: mirror
@@ -479,17 +479,17 @@ paths:
                     The maximum number of packages to return.
                      The service may return fewer than this value.
                      If unspecified, at most 100 packages will be returned.
-                     The maximum value is 1000; values above 1000 will be coerced to 1000.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
                   schema:
                     type: integer
                     format: int32
                 - name: pageToken
                   in: query
                   description: |-
-                    A page token, received from a previous `ListMirrorPackages` call.
+                    A page token, received from a previous call.
                      Provide this to retrieve the subsequent page.
 
-                     When paginating, all other parameters provided to `ListMirrorPackages` must match
+                     When paginating, all other request parameters provided must match
                      the call that provided the page token.
                   schema:
                     type: string
@@ -506,11 +506,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/mirrors/{mirror}:sync:
+    /v1/mirrors/{mirror}:sync:
         post:
             tags:
                 - MirrorService
-            description: SyncMirror synchronizes a Mirror.
+            description: Synchronizes a mirror.
             operationId: MirrorService_SyncMirror
             parameters:
                 - name: mirror
@@ -538,11 +538,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/mirrors:batchGet:
+    /v1/mirrors:batchGet:
         post:
             tags:
                 - MirrorService
-            description: BatchGetMirrors retrieves a list of mirrors based on their name.
+            description: Retrieves a batch of mirrors based on their name.
             operationId: MirrorService_BatchGetMirrors
             requestBody:
                 content:
@@ -563,14 +563,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/operations/{operation}:
+    /v1/operations/{operation}:
         get:
             tags:
                 - OperationService
             description: |-
-                Gets the latest state of a long-running operation.  Clients can use this
-                 method to poll the operation result at intervals as recommended by the API
-                 service.
+                Retrieves the latest state of a long-running operation. Use this
+                 to poll the operation result.
             operationId: OperationService_GetOperation
             parameters:
                 - name: operation
@@ -592,11 +591,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/operations:batchGet:
+    /v1/operations:batchGet:
         post:
             tags:
                 - OperationService
-            description: BatchGetOperations retrieves a list of operations based on their name.
+            description: Retrieves a batch of long-running operations based on their names.
             operationId: OperationService_BatchGetOperations
             requestBody:
                 content:
@@ -617,11 +616,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/publicationTargets:
+    /v1/publicationTargets:
         get:
             tags:
                 - PublicationTargetService
-            description: ListPublicationTargets lists all PublicationTargets.
+            description: Lists publication targets.
             operationId: PublicationTargetService_ListPublicationTargets
             parameters:
                 - name: pageSize
@@ -630,17 +629,17 @@ paths:
                     The maximum number of publication targets to return.
                      The service may return fewer than this value.
                      If unspecified, at most 100 publication targets will be returned.
-                     The maximum value is 1000; values above 1000 will be coerced to 1000.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
                   schema:
                     type: integer
                     format: int32
                 - name: pageToken
                   in: query
                   description: |-
-                    A page token, received from a previous `ListPublicationTargets` call.
+                    A page token, received from a previous call.
                      Provide this to retrieve the subsequent page.
 
-                     When paginating, all other parameters provided to `ListPublicationTargets` must match
+                     When paginating, all other request parameters provided must match
                      the call that provided the page token.
                   schema:
                     type: string
@@ -674,7 +673,7 @@ paths:
         post:
             tags:
                 - PublicationTargetService
-            description: CreatePublicationTarget creates a new PublicationTarget.
+            description: Creates a new publication target.
             operationId: PublicationTargetService_CreatePublicationTarget
             parameters:
                 - name: publicationTargetId
@@ -703,11 +702,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/publicationTargets/{publicationTarget}:
+    /v1/publicationTargets/{publicationTarget}:
         get:
             tags:
                 - PublicationTargetService
-            description: GetPublicationTarget gets details of a single PublicationTarget.
+            description: Retrieves details of a single publication target.
             operationId: PublicationTargetService_GetPublicationTarget
             parameters:
                 - name: publicationTarget
@@ -732,7 +731,7 @@ paths:
         delete:
             tags:
                 - PublicationTargetService
-            description: DeletePublicationTarget deletes a PublicationTarget.
+            description: Deletes a PublicationTarget. This does not necessarily clean up published artifacts.
             operationId: PublicationTargetService_DeletePublicationTarget
             parameters:
                 - name: publicationTarget
@@ -754,7 +753,7 @@ paths:
         patch:
             tags:
                 - PublicationTargetService
-            description: UpdatePublicationTarget replaces (full replacement) an existing PublicationTarget.
+            description: Updates an existing publication target.
             operationId: PublicationTargetService_UpdatePublicationTarget
             parameters:
                 - name: publicationTarget
@@ -788,11 +787,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/publicationTargets:batchGet:
+    /v1/publicationTargets:batchGet:
         post:
             tags:
                 - PublicationTargetService
-            description: BatchGetPublicationTargets retrieves a list of publication targets based on their name.
+            description: Retrieves a list of publication targets based on their names.
             operationId: PublicationTargetService_BatchGetPublicationTargets
             requestBody:
                 content:
@@ -813,11 +812,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/publications:
+    /v1/publications:
         get:
             tags:
                 - PublicationService
-            description: ListPublications returns a list of Publications.
+            description: Returns a list of publications.
             operationId: PublicationService_ListPublications
             parameters:
                 - name: pageSize
@@ -826,17 +825,17 @@ paths:
                     The maximum number of publications to return.
                      The service may return fewer than this value.
                      If unspecified, at most 100 publications will be returned.
-                     The maximum value is 1000; values above 1000 will be coerced to 1000.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
                   schema:
                     type: integer
                     format: int32
                 - name: pageToken
                   in: query
                   description: |-
-                    A page token, received from a previous `ListPublication` call.
+                    A page token, received from a previous call.
                      Provide this to retrieve the subsequent page.
 
-                     When paginating, all other parameters provided to `ListPublication` must match
+                     When paginating, all other request parameters provided must match
                      the call that provided the page token.
                   schema:
                     type: string
@@ -871,7 +870,7 @@ paths:
         post:
             tags:
                 - PublicationService
-            description: CreatePublication creates a new Publication.
+            description: Creates a new publication.
             operationId: PublicationService_CreatePublication
             parameters:
                 - name: publicationId
@@ -898,11 +897,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/publications/{publication}:
+    /v1/publications/{publication}:
         get:
             tags:
                 - PublicationService
-            description: GetPublication retrieves a Publication by its resource name.
+            description: Retrieves a publication by its resource name.
             operationId: PublicationService_GetPublication
             parameters:
                 - name: publication
@@ -927,9 +926,7 @@ paths:
         delete:
             tags:
                 - PublicationService
-            description: |-
-                DeletePublication deletes a Publication.
-                 Note: This operation may trigger a background Task to clean up published artifacts.
+            description: Deletes a Publication.
             operationId: PublicationService_DeletePublication
             parameters:
                 - name: publication
@@ -951,7 +948,7 @@ paths:
         patch:
             tags:
                 - PublicationService
-            description: UpdatePublication updates the details of a Publication.
+            description: Updates the details of a publication.
             operationId: PublicationService_UpdatePublication
             parameters:
                 - name: publication
@@ -985,13 +982,11 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1beta1/publications/{publication}:publish:
+    /v1/publications/{publication}:publish:
         post:
             tags:
                 - PublicationService
-            description: |-
-                PublishPublication triggers the actual publication process.
-                 This is a custom method that returns a background Task.
+            description: Publishes a publication to its publication target.
             operationId: PublicationService_PublishPublication
             parameters:
                 - name: publication
@@ -1031,10 +1026,16 @@ components:
                     items:
                         type: string
                     description: |-
-                        The names of the locals to retrieve.
-                         A maximum of 100 locals can be retrieved in a batch.
+                        The names of the local repositories to retrieve.
+                         A maximum of 100 local repositories can be retrieved in a batch.
                          Format: locals/{local}
-            description: BatchGetLocalsRequest is the request message for BatchGetLocals
+                returnPartialSuccess:
+                    type: boolean
+                    description: |-
+                        Setting this field to `true` will opt the request into returning the
+                         locals that are reachable, and into including the names of those that
+                         were unreachable in the [BatchGetLocalsResponse.unreachable] field.
+            description: The request message for retrieving a batch of local repositories.
         BatchGetLocalsResponse:
             type: object
             properties:
@@ -1042,8 +1043,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Local'
-                    description: Locals requested.
-            description: BatchGetLocalsResponse is the response message for BatchGetLocals
+                    description: Local repositories requested.
+                unreachable:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Unreachable locals. Populated when the request opts into
+                         `return_partial_success` and reading across collections.
+            description: The response message for retrieving a batch of local repositories.
         BatchGetMirrorsRequest:
             required:
                 - names
@@ -1057,7 +1065,13 @@ components:
                         The names of the mirrors to retrieve.
                          A maximum of 100 mirrors can be retrieved in a batch.
                          Format: mirrors/{mirror}
-            description: BatchGetMirrorsRequest is the request message for BatchGetMirrors
+                returnPartialSuccess:
+                    type: boolean
+                    description: |-
+                        Setting this field to `true` will opt the request into returning the
+                         mirrors that are reachable, and into including the names of those that
+                         were unreachable in the [BatchGetMirrorsResponse.unreachable] field.
+            description: The request message for retrieving a batch of mirrors.
         BatchGetMirrorsResponse:
             type: object
             properties:
@@ -1066,7 +1080,14 @@ components:
                     items:
                         $ref: '#/components/schemas/Mirror'
                     description: Mirrors requested.
-            description: BatchGetMirrorsResponse is the response message for BatchGetMirrors
+                unreachable:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Unreachable mirrors. Populated when the request opts into
+                         `return_partial_success` and reading across collections.
+            description: The response message for retrieving a batch of mirrors.
         BatchGetOperationsRequest:
             required:
                 - names
@@ -1077,10 +1098,16 @@ components:
                     items:
                         type: string
                     description: |-
-                        The names of the operations to retrieve.
-                         A maximum of 100 operations can be retrieved in a batch.
+                        The names of the long-running operations to retrieve.
+                         A maximum of 100 long-running operations can be retrieved in a batch.
                          Format: operations/{operation}
-            description: BatchGetOperationsRequest is the request message for BatchGetOperations.
+                returnPartialSuccess:
+                    type: boolean
+                    description: |-
+                        Setting this field to `true` will opt the request into returning the
+                         operations that are reachable, and into including the names of those that
+                         were unreachable in the [BatchGetOperationsResponse.unreachable] field.
+            description: The request message for retrieving a batch of long-running operations.
         BatchGetOperationsResponse:
             type: object
             properties:
@@ -1088,8 +1115,15 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/Operation'
-                    description: Operations requested.
-            description: BatchGetOperationsResponse is the response message for BatchGetOperations.
+                    description: Long-running operations requested.
+                unreachable:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Unreachable operations. Populated when the request opts into
+                         `return_partial_success` and reading across collections.
+            description: The response message for retrieving a batch of long-running operations.
         BatchGetPublicationTargetsRequest:
             required:
                 - names
@@ -1103,7 +1137,14 @@ components:
                         The names of the publication targets to retrieve.
                          A maximum of 100 publication targets can be retrieved in a batch.
                          Format: publicationTargets/{publication_target}
-            description: BatchGetPublicationTargetsRequest is the request message for BatchGetPublicationTargets
+                returnPartialSuccess:
+                    type: boolean
+                    description: |-
+                        Setting this field to `true` will opt the request into returning the
+                         publication targets that are reachable, and into including the names of
+                         those that were unreachable in the
+                         [BatchGetPublicationTargetsResponse.unreachable] field.
+            description: The request message for retrieving a batch of publication targets.
         BatchGetPublicationTargetsResponse:
             type: object
             properties:
@@ -1112,7 +1153,14 @@ components:
                     items:
                         $ref: '#/components/schemas/PublicationTarget'
                     description: Publication targets requested.
-            description: BatchGetPublicationTargetsResponse is the response message for BatchGetPublicationTargets
+                unreachable:
+                    type: array
+                    items:
+                        type: string
+                    description: |-
+                        Unreachable publication targets. Populated when the request opts into
+                         `return_partial_success` and reading across collections.
+            description: The response message for retrieving a batch of publication targets.
         FilesystemTarget:
             required:
                 - path
@@ -1120,16 +1168,18 @@ components:
             properties:
                 path:
                     type: string
-                    description: The absolute path to the directory where files should be published.
+                    description: |-
+                        The path to the directory where files should be published.
+                         This is relative to the server's configured `FILESYSTEM_PUBLISHED_ROOT`.
                 linkMethod:
                     enum:
                         - HARDLINK
                         - SYMLINK
                         - COPY
                     type: string
-                    description: The link method to use for published files.
+                    description: The link method to use for published files. Defaults to `HARDLINK`.
                     format: enum
-            description: FilesystemTarget represents a local filesystem storage destination.
+            description: A local filesystem storage destination.
         GoogleProtobufAny:
             type: object
             properties:
@@ -1155,7 +1205,7 @@ components:
                     readOnly: true
                     type: string
                     description: The fingerprint of the key.
-            description: GpgKey represents a gpg key.
+            description: A GPG key resource.
         ImportLocalPackagesRequest:
             required:
                 - name
@@ -1176,7 +1226,7 @@ components:
                         If set to true, the request is validated without actually performing the import.
                          The set of packages that would be imported is returned as the result of the task.
                          See: https://google.aip.dev/163
-            description: ImportLocalPackagesRequest is the request message for ImportLocalPackages.
+            description: The request message for importing packages into a local repository.
         ListLocalPackagesResponse:
             type: object
             properties:
@@ -1185,14 +1235,14 @@ components:
                     items:
                         type: string
                     description: |-
-                        The list of package strings.
+                        The list of package name strings.
                          Example: ["snap-http_1.4.0_source", ...]
                 nextPageToken:
                     type: string
                     description: |-
                         A token, which can be sent as `page_token` to retrieve the next page.
                          If this field is omitted, there are no subsequent pages.
-            description: ListLocalPackagesResponse is the response message for ListLocalPackages.
+            description: The response message for listing local repository packages.
         ListLocalsResponse:
             type: object
             properties:
@@ -1206,7 +1256,7 @@ components:
                     description: |-
                         A token, which can be sent as `page_token` to retrieve the next page.
                          If this field is omitted, there are no subsequent pages.
-            description: ListLocalsResponse is the response message for ListLocals.
+            description: The response message for listing local repositories.
         ListMirrorPackagesResponse:
             type: object
             properties:
@@ -1222,7 +1272,7 @@ components:
                     description: |-
                         A token, which can be sent as `page_token` to retrieve the next page.
                          If this field is omitted, there are no subsequent pages.
-            description: ListMirrorPackagesResponse is the response message for ListMirrorPackages.
+            description: The response message for listing packages in a mirror.
         ListMirrorsResponse:
             type: object
             properties:
@@ -1236,7 +1286,7 @@ components:
                     description: |-
                         A token, which can be sent as `page_token` to retrieve the next page.
                          If this field is omitted, there are no subsequent pages.
-            description: ListMirrorsResponse is the response message for ListMirrors.
+            description: The response message for listing mirrors.
         ListPublicationTargetsResponse:
             type: object
             properties:
@@ -1250,7 +1300,7 @@ components:
                     description: |-
                         A token, which can be sent as `page_token` to retrieve the next page.
                          If this field is omitted, there are no subsequent pages.
-            description: ListPublicationTargetsResponse is the response message for ListPublicationTargets.
+            description: The response message for listing publication targets.
         ListPublicationsResponse:
             type: object
             properties:
@@ -1264,7 +1314,7 @@ components:
                     description: |-
                         A token, which can be sent as `page_token` to retrieve the next page.
                          If this field is omitted, there are no subsequent pages.
-            description: ListPublicationsResponse is the response message for ListPublications.
+            description: The response message for listing publications.
         Local:
             required:
                 - displayName
@@ -1302,7 +1352,7 @@ components:
                     type: string
                     description: The timestamp of the last successful package import.
                     format: date-time
-            description: Local represents a local repository configuration.
+            description: Represents a local repository.
         Mirror:
             required:
                 - displayName
@@ -1391,7 +1441,7 @@ components:
                 lastOperation:
                     readOnly: true
                     type: string
-                    description: The last associated LRO with the mirror
+                    description: The most recent long-running operation associated with the mirror.
                 mirrorType:
                     enum:
                         - MIRROR_TYPE_UNSPECIFIED
@@ -1402,7 +1452,7 @@ components:
                     type: string
                     description: The type of upstream repository being mirrored.
                     format: enum
-            description: Mirror represents a repository mirror configuration and status.
+            description: A repository mirror configuration and status.
         Operation:
             type: object
             properties:
@@ -1450,7 +1500,6 @@ components:
                 - displayName
                 - publicationTarget
                 - source
-                - architectures
             type: object
             properties:
                 name:
@@ -1473,38 +1522,42 @@ components:
                 source:
                     type: string
                     description: |-
-                        The resource name of the source mirror or local.
+                        The resource name of the source mirror or local repository.
                          Format: "mirrors/{mirror}" or "locals/{local}"
                 distribution:
                     type: string
                     description: |-
-                        The name of the distribution.
+                        The name of the distribution to publish.
                          Inferred from the source if omitted.
                 label:
                     type: string
-                    description: Value for the `Label:` field in the Release file.
+                    description: Value for the `Label:` field in the published repository's Release file.
                 origin:
                     type: string
                     description: |-
-                        Value for the `Origin:` field in the Release file.
+                        Value for the `Origin:` field in the published repository's Release file.
                          Inferred from the source if omitted.
                 architectures:
                     type: array
                     items:
                         type: string
-                    description: List of architectures to publish.
+                    description: |-
+                        List of architectures to publish.
+                         Defaults to all source architectures if omitted.
                 acquireByHash:
                     type: boolean
-                    description: Provides index file by hash if unique.
+                    description: Provides index files by hash in the published repository, if the files are unique.
                 butAutomaticUpgrades:
                     type: boolean
-                    description: 'Sets `ButAutomaticUpgrade: yes|no` in the Release file if provided.'
+                    description: 'Sets `ButAutomaticUpgrade: yes|no` in the published repository''s Release file if provided.'
                 notAutomatic:
                     type: boolean
-                    description: 'Sets `NotAutomatic: yes|no` in the Release file if provided.'
+                    description: 'Sets `NotAutomatic: yes|no` in the published repository''s Release file if provided.'
                 multiDist:
                     type: boolean
-                    description: Indicates if multiple distributions are supported.
+                    description: |-
+                        Indicates if multiple distributions can be published to the same location, sharing a package
+                         pool.
                 skipBz2:
                     type: boolean
                     description: Indicates if bz2 compression should be skipped for index files.
@@ -1514,7 +1567,7 @@ components:
                 gpgKey:
                     allOf:
                         - $ref: '#/components/schemas/GpgKey'
-                    description: Optional GPG key to sign the release file(s).
+                    description: Optional GPG key to sign the release file(s). If not provided, the files will be unsigned.
                 publishTime:
                     readOnly: true
                     type: string
@@ -1523,10 +1576,10 @@ components:
                 lastOperation:
                     readOnly: true
                     type: string
-                    description: The last associated LRO with the publication
+                    description: The name of the most recent long-running operation performed on the publication.
             description: |-
-                Publication represents the configuration for publishing Debian artifacts
-                 from a Source (Mirror or Local) to a Target.
+                The configuration for publishing Debian artifacts from a Source (mirror or local repository) to
+                 a publication target.
         PublicationTarget:
             required:
                 - displayName
@@ -1547,16 +1600,16 @@ components:
                 s3:
                     allOf:
                         - $ref: '#/components/schemas/S3Target'
-                    description: The S3 storage.
+                    description: S3 storage.
                 swift:
                     allOf:
                         - $ref: '#/components/schemas/SwiftTarget'
-                    description: The Swift storage.
+                    description: Swift storage.
                 filesystem:
                     allOf:
                         - $ref: '#/components/schemas/FilesystemTarget'
-                    description: The Filesystem storage.
-            description: PublicationTarget represents a storage destination (currently supports S3 or Swift).
+                    description: Filesystem storage.
+            description: Represents a publication storage destination (S3, Swift, or filesystem).
         PublishPublicationRequest:
             required:
                 - name
@@ -1573,7 +1626,7 @@ components:
                 forceCleanup:
                     type: boolean
                     description: Force cleanup of old artifacts.
-            description: PublishPublicationRequest is the request message for PublishPublication.
+            description: The request message for publishing a publication.
         S3Target:
             required:
                 - region
@@ -1584,27 +1637,27 @@ components:
             properties:
                 region:
                     type: string
-                    description: The AWS region for the S3 bucket.
+                    description: The AWS region for the S3 bucket. Possibly unused if using S3-compatible storage without regions.
                 bucket:
                     type: string
-                    description: The name of the S3 bucket.
+                    description: The name of the target bucket.
                 endpoint:
                     type: string
                     description: |-
-                        Hostname used for S3 compatible storage.
+                        Hostname used for S3-compatible storage.
                          If set, the region is ignored.
                 awsAccessKeyId:
                     writeOnly: true
                     type: string
-                    description: AWS credentials (Access Key ID) to access the S3 bucket.
+                    description: AWS-style access key ID for the bucket.
                 awsSecretAccessKey:
                     writeOnly: true
                     type: string
-                    description: AWS credentials (Secret Access Key) to access the S3 bucket.
+                    description: AWS-style secret access key for the bucket.
                 prefix:
                     type: string
                     description: |-
-                        Prefix used in the bucket.
+                        Path prefix under which artifacts will be published.
                          Defaults to the bucket root if not specified.
                 acl:
                     type: string
@@ -1633,7 +1686,7 @@ components:
                 debug:
                     type: boolean
                     description: Enables debug logging for S3 operations.
-            description: S3Target represents an S3 storage destination.
+            description: An S3 publication target destination.
         Status:
             type: object
             properties:
@@ -1664,15 +1717,15 @@ components:
                 username:
                     writeOnly: true
                     type: string
-                    description: OpenStack credentials (Username) to access Keystone.
+                    description: OpenStack username for Keystone access.
                 password:
                     writeOnly: true
                     type: string
-                    description: OpenStack credentials (Password) to access Keystone.
+                    description: OpenStack password for Keystone access.
                 prefix:
                     type: string
                     description: |-
-                        Prefix used in the container.
+                        Path prefix under which artifacts will be published.
                          Defaults to the container root if not specified.
                 authUrl:
                     type: string
@@ -1695,7 +1748,7 @@ components:
                 tenantDomainId:
                     type: string
                     description: The OpenStack domain ID the tenant/project belongs to.
-            description: SwiftTarget represents a Swift (OpenStack) storage destination.
+            description: A Swift (OpenStack) storage destination.
         SyncMirrorRequest:
             required:
                 - name
@@ -1723,15 +1776,15 @@ components:
                 skipExistingPackages:
                     type: boolean
                     description: Skip downloading packages that already exist.
-            description: SyncMirrorRequest is the request message for SyncMirror.
+            description: The request message for syncing a mirror.
 tags:
     - name: LocalService
-      description: LocalService manages local repositories.
+      description: Manages local repositories.
     - name: MirrorService
-      description: MirrorService manages repository mirrors.
+      description: Methods for managing repository mirrors.
     - name: OperationService
-      description: OperationService manages long-running operations.
+      description: Manages long-running operations.
     - name: PublicationService
-      description: PublicationService manages the publication of Debian artifacts.
+      description: Manages the publication of Debian artifacts.
     - name: PublicationTargetService
-      description: PublicationTargetService manages the storage destinations for Debian archives.
+      description: Manages the storage destinations for publishing Debian archives.
