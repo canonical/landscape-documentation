@@ -117,7 +117,8 @@ Multiple security fixes are included in this release:
 
 See our 26.04 upgrade guide for detailed steps: {ref}`how-to-upgrade-to-26-04-lts`
 
-If you use repository management in Landscape, we recommend upgrading to the 26.04.1 point release. There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
+If you use repository management in Landscape, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS.
+There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
 
 Landscape Server 26.04 LTS requires the `landscape-outbox` snap.
 
