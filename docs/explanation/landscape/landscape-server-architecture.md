@@ -24,7 +24,7 @@ A Landscape Server deployment has eight required services:
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
-* [Deb Archive](#deb-archive) - for repository mirroring and publishing
+* [Debarchive](#deb-archive) - for repository mirroring and publishing
 * [Hostagent consumer](#hostagent-consumer) - for WSL instance management
 * [Hostagent messenger](#hostagent-messenger) - for WSL instance management
 * [Package search](#package-search) - for improved package management performance
@@ -106,15 +106,15 @@ The Hostagent messenger service communicates with Ubuntu Pro for WSL on managed 
 The Package search service responds to internal HTTP requests with the Debian package state information of instances. It acts as an in-memory cache of this information, improving the performance of package queries. Without it, package queries go directly to the database. It primarily interacts with the PostgreSQL database.
 
 (explanation-server-architecture-deb-archive)=
-### Deb Archive
+### Debarchive
 
-Deb Archive was introduced in Landscape 26.04 LTS, replacing the previous reprepro-based repository mirroring implementation.
+Debarchive was introduced in Landscape 26.04 LTS, replacing the previous reprepro-based repository mirroring implementation.
 
-The Deb Archive service (`landscape-debarchive`) provides Debian repository mirroring and publishing for Landscape. It is distributed as a separate snap and installed alongside Landscape Server (or deployed as a charm in the same Juju model). It exposes a REST API that Landscape Server consumes to manage mirrors, local repositories, publications, and publication targets.
+The Debarchive service (`landscape-debarchive`) provides Debian repository mirroring and publishing for Landscape. It is distributed as a separate snap and installed alongside Landscape Server (or deployed as a charm in the same Juju model). It exposes a REST API that Landscape Server consumes to manage mirrors, local repositories, publications, and publication targets.
 
-Deb Archive uses its own PostgreSQL database within the same cluster as Landscape Server. It supports publishing to filesystem, S3, and OpenStack Swift storage backends. Long-running operations such as mirror syncs and publishes run asynchronously in the background.
+Debarchive uses its own PostgreSQL database within the same cluster as Landscape Server. It supports publishing to filesystem, S3, and OpenStack Swift storage backends. Long-running operations such as mirror syncs and publishes run asynchronously in the background.
 
-* {ref}`Set up Deb Archive <how-to-debarchive-repository-management>`
+* {ref}`Set up Debarchive <how-to-debarchive-repository-management>`
 * {ref}`Repository mirroring explanation <explanation-repo-mirroring-2604>`
 
 (explanation-server-architecture-package-upload)=

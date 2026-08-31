@@ -14,10 +14,10 @@ The [Landscape Server charm](https://charmhub.io/landscape-server) requires inte
 - `postgresql`
 - `rabbitmq-server`
 
-**Landscape 26.04 LTS beta+:**
-- `haproxy` (at `2.8/edge`, via `haproxy-route` interface)
+**Landscape 26.04 LTS:**
+- `haproxy` (at `2.8/stable`, via `haproxy-route` interface)
 - A TLS certificates provider integrated with HAProxy (e.g., `self-signed-certificates`, `lego`)
-- `landscape-debarchive` (for Deb Archive repository management)
+- `landscape-debarchive` (for Debarchive repository management)
 - `landscape-task-handler` (for task processing)
 
 **Before Landscape 26.04:**
@@ -35,11 +35,11 @@ Learn more about [Juju integrations](https://canonical.com/juju/integrations).
 
 The Landscape Server charm supports two deployment architectures:
 
-**Landscape 26.04 LTS beta+ (recommended):**
-- External HAProxy charm (`2.8/edge`) for load balancing, using the `haproxy-route` interface
+**Landscape 26.04 LTS (recommended):**
+- External HAProxy charm (`2.8/stable`) for load balancing, using the `haproxy-route` interface
 - PostgreSQL 14+ with modern `database` interface
 - TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
-- `landscape-debarchive` charm for Deb Archive repository management
+- `landscape-debarchive` charm for Debarchive repository management
 - `landscape-task-handler` charm for task processing
 
 ```{include} /reuse/charm-ha-architecture-2604.md
@@ -52,22 +52,22 @@ The Landscape Server charm supports two deployment architectures:
 ```{include} /reuse/charm-ha-architecture-pre-2604.md
 ```
 
-For migration from older deployments to 26.04 beta+, see {ref}`how-to-migrate-to-26-04-charm`.
+For migration from older deployments to 26.04, see {ref}`how-to-migrate-to-26-04-charm`.
 
 ## Required integrations by version
 
-| Charm                         | Landscape 26.04 LTS beta+                                            | Before 26.04                                    |
+| Charm                         | Landscape 26.04 LTS                                            | Before 26.04                                    |
 | ----------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
 | **PostgreSQL**                | Required (PostgreSQL 14+, `database` interface)                      | Required (PostgreSQL 14, `pgsql` interface)     |
 | **RabbitMQ Server**           | Required                                                             | Required                                        |
 | **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface)                        | Required (`latest/x`, `reverseproxy` interface) |
 | **TLS Certificates Provider** | Required (integrated with HAProxy, e.g., `self-signed-certificates`) | Not used                                        |
-| **landscape-debarchive**      | Required (Deb Archive repository management)                         | Not available                                   |
+| **landscape-debarchive**      | Required (Debarchive repository management)                         | Not available                                   |
 | **landscape-task-handler**    | Required (task processing)                                           | Not available                                   |
 
 ## TLS certificates charm interface
 
-Starting with the 26.04 beta version, TLS is managed by the HAProxy charm. The HAProxy charm integrates with a provider of the [`tls-certificates` charm interface](https://charmhub.io/integrations/tls-certificates) to obtain certificates for HTTPS connections.
+Starting with the 26.04 version, TLS is managed by the HAProxy charm. The HAProxy charm integrates with a provider of the [`tls-certificates` charm interface](https://charmhub.io/integrations/tls-certificates) to obtain certificates for HTTPS connections.
 
 ### Available TLS certificate providers
 
@@ -91,12 +91,16 @@ For deployment examples and configuration, see {ref}`how-to-juju-ha-installation
 
 Landscape Server is currently only distributed as a machine (VM) charm and cannot be directly integrated with any version of K8s Charmed Operators, such as the HAProxy K8s operator or the Charmed PostgreSQL K8s operator.
 
+```{note}
+Landscape Server can still consume a cross-model offer from a K8s charm since cross-model relations don't require both applications to be in the same model.
+```
+
 ## HAProxy
 
 The relationship between Landscape Server and HAProxy varies significantly between Landscape versions:
 
-**Landscape 26.04 LTS beta+:**
-- Requires the HAProxy charm at `2.8/edge`
+**Landscape 26.04 LTS:**
+- Requires the HAProxy charm at `2.8/stable`
 - Integrates via 8 `haproxy-route` relation endpoints directly from landscape-server to haproxy
 - HAProxy handles TLS termination and load balancing
 - Cannot be integrated with the `latest/x` channels of the HAProxy charm (different interface)
@@ -119,7 +123,7 @@ For migrating from older deployments to the new HAProxy architecture, see {ref}`
 
 PostgreSQL charm compatibility varies by Landscape Server version:
 
-**Landscape 26.04 LTS beta+:**
+**Landscape 26.04 LTS:**
 - Compatible with PostgreSQL 14+ using the modern `database` interface
 - Landscape Server integrates using the `database` relation endpoint: `landscape-server:database` → `postgresql:database`
 - It is recommended to use PostgreSQL 16 for new deployments

@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new debarchive repository service, and multiple security fixes."
+    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new Debarchive repository service, and multiple security fixes."
 ---
 
 (reference-release-notes-26-04-lts)=
@@ -18,7 +18,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 - **Repository management improvements**:
 
-  - Introduces the new `debarchive` service for repository management.
+  - Introduces the new Debarchive (`debarchive`) service for repository management.
   - Repository profiles have been updated with improved workflows.
   - The legacy API endpoints for repository management have been removed; the new archive management system replaces them.
 
@@ -94,6 +94,16 @@ Multiple security fixes are included in this release:
   - fix!: No longer enable computer soft deletion by default. (To enable computer soft deletion, set `computer_soft_deletion = true` under `[features]` in the `service.conf` file)
   - feat: add /usg-profiles API aliases and usg query filter
   - feat: login endpoint supports PAM authn
+
+- 26.04.1 published August 28 2026
+  - fix: add missing cleanup for soft deleted computers
+  - feat: add --allow-connections flag to schema script for PGBouncer support
+  - feat: add outbox message type for hard deletion
+  - fix: persist description field when edited
+  - fix: fallback to ipv4 when ipv6 fails
+  - fix: make wsl instances soft-deleted aware
+  - fix: allow scoped (non-global) admins to manage repository and reboot profiles (LP: #2151742)
+  - fix: keep [schema] ssl settings separate from [stores] in read_service_configuration
 
 ## Supported third-party services
 
