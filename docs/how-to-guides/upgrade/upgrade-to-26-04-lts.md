@@ -15,9 +15,9 @@ Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not s
 
 ## If you use repository management
 
-If you use repository management in your Landscape deployment, we recommend waiting to upgrade to 26.04 LTS until the 26.04.1 point release (expected August 2026).
+If you use repository management in your Landscape deployment, we recommend upgrading to the 26.04.1 point release.
 
-If you still want to upgrade, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS. See the {ref}`dedicated guide <how-to-migrate-repository-mirrors-to-debarchive>` for instructions on how to do this.
+When you upgrade, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS. See the {ref}`dedicated guide <how-to-migrate-repository-mirrors-to-debarchive>` for instructions on how to do this.
 
 ## Begin your upgrade
 

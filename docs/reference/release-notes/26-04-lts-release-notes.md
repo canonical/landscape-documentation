@@ -117,8 +117,8 @@ Multiple security fixes are included in this release:
 
 See our 26.04 upgrade guide for detailed steps: {ref}`how-to-upgrade-to-26-04-lts`
 
-If you use repository management in Landscape, we recommend waiting to upgrade until the 26.04.1 point release (expected August 2026). There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
+If you use repository management in Landscape, we recommend upgrading to the 26.04.1 point release. There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
 
 Landscape Server 26.04 LTS requires the `landscape-outbox` snap.
 
-The updated Landscape Server Charm will not be released until the Landscape Server 26.04.1 LTS point release in August 2026.
+The updated Landscape Server charm is available in the `26.04/stable` channel, starting with the Landscape Server 26.04.1 LTS point release.
