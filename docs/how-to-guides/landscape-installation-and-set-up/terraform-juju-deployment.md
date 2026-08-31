@@ -76,9 +76,17 @@ cp terraform.tfvars.modern terraform.tfvars   # or terraform.tfvars.example for 
 
 Open `terraform.tfvars` and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`; when set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
 
+```{warning}
+Setting `min_install = "true"` configures the deployment to not install the `landscape-hashids` package, which means the hash-id database will not be set up, resulting in slower package reporting. This should not be used for production deployments.
+```
+
 ### Deploying against legacy (pre-26.04) topologies
 
 This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation); you don't need a different plan to support an older revision, just the matching `terraform.tfvars.example` file above.
+
+```{note}
+Both the legacy `pgsql` database interface and the legacy `reverseproxy`/`website` HAProxy interface are still available for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the modern interfaces.
+```
 
 ### Alternative: vendoring the module into your own Terraform plan
 
@@ -175,14 +183,18 @@ HAProxy routes traffic based on the `hostname` configured in `landscape_server.c
 The same hostname resolution requirement applies internally: the outbox component on the `landscape_server` units connects to the Task Handler's gRPC server through HAProxy's `haproxy-route-tcp` passthrough, using the same hostname. If it doesn't resolve on the `landscape_server` units (for example, deploying locally without a real domain), add an `/etc/hosts` entry on those units pointing the hostname at the HAProxy unit's IP address. This dependency is one-directional: outbox (on `landscape_server`) connects to Task Handler, not the other way around.
 ```
 
-## Get the initial credentials and finish setup
+## Get the initial credentials and finish setup (optional)
 
-The module's outputs include `admin_email` and `admin_password` (sensitive) for the initial Landscape administrator account, and `registration_key` for registering clients. Retrieve them with:
+If provided as variables at apply time, the module's outputs include `admin_email` and `admin_password` (sensitive) for the initial Landscape administrator account, and `registration_key` for registering clients. Retrieve them with:
 
 ```sh
 terraform output admin_email
 terraform output admin_password
 terraform output registration_key
+```
+
+```{note}
+These commands will fail if these values were not set when the plan was applied.
 ```
 
 The outputs also include `applications` (the deployed charms and their integration endpoints), `has_modern_amqp_relations`, and `has_modern_postgres_interface`. See the {ref}`reference page <reference-landscape-product-modules-landscape-scalable>` for the full list.
@@ -194,6 +206,9 @@ This module can be configured for high availability by configuring the `units` v
 ```hcl
 landscape_server = {
   units = 3
+  config = {
+    min_install = "false"
+  }
 }
 
 postgresql = {
@@ -235,7 +250,7 @@ haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
 
 ## Using PgBouncer as a connection pooler
 
-For improved database performance and scalability in high-load deployments, set the `pgbouncer` input to deploy [PgBouncer](https://charmhub.io/pgbouncer) as a subordinate charm between Landscape Server and PostgreSQL. This requires a Landscape Server revision that supports the modern `database` interface (rather than the legacy `pgsql`/`db` endpoint):
+For improved database performance and scalability in high-load deployments, set the `pgbouncer` input to deploy [PgBouncer](https://charmhub.io/pgbouncer) as a subordinate charm between Landscape Server and PostgreSQL. This requires a Landscape Server revision that supports the modern `postgresql_client` interface (rather than the legacy `pgsql` interface):
 
 ```hcl
 pgbouncer = {
@@ -243,6 +258,10 @@ pgbouncer = {
     pool_mode = "transaction"
   }
 }
+```
+
+```{tip}
+Set the PgBouncer charm's [`max_db_connections`](https://charmhub.io/pgbouncer/configurations#max_db_connections) charm config option to control how many connections Landscape Server can use at a time.
 ```
 
 If you're also deploying PostgreSQL through this module's `postgresql` input, the module automatically integrates PgBouncer's `backend-database` endpoint with it. If instead you're using an external PostgreSQL deployment (`postgresql = null`), you need to create that integration yourself, connecting PgBouncer's `backend-database` endpoint to your PostgreSQL application's `database` endpoint (the application name is `"postgresql"` by default; override it below if you deployed it under a different name):
