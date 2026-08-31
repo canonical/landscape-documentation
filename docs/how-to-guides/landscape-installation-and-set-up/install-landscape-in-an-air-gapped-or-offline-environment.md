@@ -20,15 +20,18 @@ You won’t need the online machine anymore after you’ve downloaded the packag
 ## Install Landscape Server
 
 ```{note}
-This example uses {ref}`reference-release-notes-24-04-lts` and the {ref}`how-to-quickstart-installation` package.
+This example uses the {ref}`how-to-quickstart-installation` package.
 ```
 
 ### Add the Landscape Server PPA
 
-On an online machine with network access, you need to add the Landscape Server PPA. To add the Landscape Server 24.04 LTS PPA, run:
+On an online machine with network access, you need to add the Landscape Server PPA, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
 
 ```bash
-sudo add-apt-repository -y ppa:landscape/self-hosted-24.04
+sudo add-apt-repository -y <LANDSCAPE_PPA>
+```
+
+```{include} /reuse/landscape-ppa-description.md
 ```
 
 ### Download the Landscape Server packages
