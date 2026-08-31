@@ -22,7 +22,7 @@ The 26.04 version introduces significant architectural changes:
 | Aspect                   | Landscape 26.04 LTS                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                     | External HAProxy charm (`reverseproxy` interface)            |
-| **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
+| **PostgreSQL interface** | Modern `postgresql_client` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
 | **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                  | `landscape-server:website` → `haproxy:reverseproxy`          |
@@ -232,9 +232,9 @@ juju integrate landscape-server:outbound-amqp rabbitmq-server
 If you want to upgrade to a newer PostgreSQL version (e.g., from 14 to 16) as part of this migration, follow the backup and restore procedures in {ref}`how-to-back-up-restore-tear-down-charmed-deployment` to migrate your data to a new PostgreSQL deployment.
 
 ```{note}
-PostgreSQL upgrade is optional. The 26.04 charm uses the modern `database` interface which works with PostgreSQL 14 and above.
+PostgreSQL upgrade is optional. The 26.04 charm uses the modern `postgresql_client` interface which works with PostgreSQL 14 and above.
 
-The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14. It is recommended to migrate to the modern `database` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
+The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14. It is recommended to migrate to the modern `postgresql_client` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
 ```
 
 ### Step 8: Verify the deployment

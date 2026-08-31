@@ -37,7 +37,7 @@ The Landscape Server charm supports two deployment architectures:
 
 **Landscape 26.04 LTS (recommended):**
 - External HAProxy charm (`2.8/stable`) for load balancing, using the `haproxy-route` interface
-- PostgreSQL 14+ with modern `database` interface
+- PostgreSQL 14+ with modern `postgresql_client` interface
 - TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
 - `landscape-debarchive` charm for Debarchive repository management
 - `landscape-task-handler` charm for task processing
@@ -56,13 +56,13 @@ For migration from older deployments to 26.04, see {ref}`how-to-migrate-to-26-04
 
 ## Required integrations by version
 
-| Charm                         | Landscape 26.04 LTS                                            | Before 26.04                                    |
+| Charm                         | Landscape 26.04 LTS                                                  | Before 26.04                                    |
 | ----------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
-| **PostgreSQL**                | Required (PostgreSQL 14+, `database` interface)                      | Required (PostgreSQL 14, `pgsql` interface)     |
+| **PostgreSQL**                | Required (PostgreSQL 14+, `postgresql_client` interface)             | Required (PostgreSQL 14, `pgsql` interface)     |
 | **RabbitMQ Server**           | Required                                                             | Required                                        |
 | **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface)                        | Required (`latest/x`, `reverseproxy` interface) |
 | **TLS Certificates Provider** | Required (integrated with HAProxy, e.g., `self-signed-certificates`) | Not used                                        |
-| **landscape-debarchive**      | Required (Debarchive repository management)                         | Not available                                   |
+| **landscape-debarchive**      | Required (Debarchive repository management)                          | Not available                                   |
 | **landscape-task-handler**    | Required (task processing)                                           | Not available                                   |
 
 ## TLS certificates charm interface
@@ -124,7 +124,7 @@ For migrating from older deployments to the new HAProxy architecture, see {ref}`
 PostgreSQL charm compatibility varies by Landscape Server version:
 
 **Landscape 26.04 LTS:**
-- Compatible with PostgreSQL 14+ using the modern `database` interface
+- Compatible with PostgreSQL 14+ using the modern `postgresql_client` interface
 - Landscape Server integrates using the `database` relation endpoint: `landscape-server:database` → `postgresql:database`
 - It is recommended to use PostgreSQL 16 for new deployments
 - Supports [PgBouncer](https://charmhub.io/pgbouncer) as a connection pooler via the `database` relation endpoint; see {ref}`explanation-pgbouncer-integration`
