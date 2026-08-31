@@ -63,6 +63,7 @@ CIS
 CISOs
 CLA
 CLI's
+CNs
 Cognito
 conf
 config
@@ -96,6 +97,7 @@ decodeable
 decrypt
 deduplication
 deprivileged
+dequeue
 deterministically
 DirectoryAPI
 Diátaxis
@@ -274,6 +276,7 @@ PITR
 pgSQL
 pgtune
 pingserver
+plaintext
 pluggable
 png
 pooler
@@ -283,6 +286,7 @@ postgres
 PostgreSQL
 postgresql
 Postfix
+passthrough
 PowerShell
 PowerShell's
 pocketname
@@ -309,6 +313,7 @@ ReleaseNotes
 repo
 reprepro
 restorable
+retryable
 revalidated
 RewriteRule
 RHEL
@@ -320,6 +325,7 @@ RSS
 rsyslog
 rsyslogd
 SaaS
+sandboxed
 Sanitization
 sanitization
 scalable
@@ -401,6 +407,7 @@ USNs
 UTF
 vCPU
 vCPUs
+vendoring
 vhost
 vhosts
 VMM

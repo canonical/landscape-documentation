@@ -75,6 +75,44 @@ relations:
 
 The Landscape Server charm relates to PgBouncer using the `database` endpoint, and PgBouncer relates to PostgreSQL using its `backend-database` endpoint. This creates the connection pooling layer between the application and the database.
 
+In a 26.04 HA deployment, {ref}`Debarchive <how-to-debarchive-repository-management>` and {ref}`Landscape Task Handler <how-to-juju-ha-installation>` are required components alongside Landscape Server. Since a PgBouncer application's `database` endpoint can only serve one principal application, they cannot share Landscape Server's PgBouncer; each would need its own dedicated PgBouncer application if pooling were used for them.
+
+**Debarchive** may optionally use a dedicated PgBouncer application, since it only ever needs its own single database:
+
+```yaml
+relations:
+  - [landscape-debarchive:database, pgbouncer-debarchive:database]
+  - [pgbouncer-debarchive:backend-database, postgresql:database]
+```
+
+```{important}
+PgBouncer's `backend-database` relation to PostgreSQL can intermittently fail to initialise on first setup, due to a known upstream race condition ([postgresql-operator#1927](https://github.com/canonical/postgresql-operator/issues/1927)): PostgreSQL can grant the new PgBouncer relation user a `pg_hba.conf` rule scoped to only its own database instead of `all`, which blocks PgBouncer's own auth-function bootstrap. If the PgBouncer unit's status shows `blocked`/`waiting for backend-database relation to connect` shortly after relating it, this is likely the cause. It is a one-time issue at initial setup, not an ongoing operational risk: once resolved, the relation works normally going forward, including through leader/primary changes and restarts. To resolve it, trigger PostgreSQL to recompute `pg_hba.conf` and PgBouncer to retry its deferred setup, by toggling a value on each application's config back and forth (any value works; this is done purely to trigger the `config-changed` hook on every unit):
+
+```bash
+juju config postgresql connection_authentication_timeout=61
+juju config postgresql connection_authentication_timeout=60
+juju config pgbouncer-debarchive max_db_connections=101
+juju config pgbouncer-debarchive max_db_connections=100
+```
+
+Wait for the PgBouncer unit to reach `active` before proceeding. If it doesn't recover, repeat the toggle: the underlying condition is a replication-timing race, so it may need more than one attempt.
+```
+
+**Landscape Task Handler must always connect directly to PostgreSQL**, never through a dedicated PgBouncer of its own:
+
+```yaml
+relations:
+  - [landscape-task-handler:task-db, postgresql:database]
+```
+
+```{important}
+This is a known limitation, not a configuration choice: the Task Handler charm also uses `task-db` to reach the shared `main`/`account`/`resource` stores when Landscape Server's own published address isn't directly reachable, so `task-db` needs a direct connection to PostgreSQL to work correctly.
+```
+
+## Interaction with Landscape Server schema migration
+
+Historically, Landscape Server has rejected attempts to run schema migrations when there are active connections other than Postgres itself to the database. However, given the fact that PgBouncer connects to Postgres in between Landscape Server (the client) and Postgres (the server), it needs to stay connected to provide Landscape with a database connection so it can run the schema migration. To accommodate this, the Landscape Server charm's `migrate-schema` action has an `allow-connections` flag, which defaults to `false`. Due to the design of charm interfaces, we cannot reliably know if the database connection for Landscape is being provided directly or via PgBouncer without making assumptions (ex. checking if the port is the default for PgBouncer or not).
+
 ## See also
 
 - {ref}`explanation-charm-compatibility` - Charm revision compatibility information
