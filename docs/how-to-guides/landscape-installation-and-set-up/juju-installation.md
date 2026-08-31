@@ -71,7 +71,7 @@ Once the deployment has finished, Landscape Server is accessible in different wa
   - Access via the IP address of the first `haproxy` unit
   - HAProxy typically runs on port 443 (HTTPS)
 
-**26.04 beta+ deployment:**
+**26.04+ deployment:**
 
   - HAProxy routes traffic based on the `hostname` set in the `haproxy-route` relation, **not** by port alone, so you must connect using that hostname (for example, with `--resolve` or a DNS entry pointing it at the HAProxy unit's IP). Connecting directly to the HAProxy unit's own IP address (with no matching `Host` header) hits HAProxy's default page instead of Landscape.
   - If you set `root_url`, that hostname is what you must connect with.
@@ -85,5 +85,5 @@ Once the deployment has finished, Landscape Server is accessible in different wa
   - The external HAProxy distributes traffic across Landscape Server units
 
 ```{tip}
-For the 26.04 beta+ deployment, set `root_url` to a real hostname and point that hostname (via DNS or `curl --resolve`) at your HAProxy unit's IP address (or external load balancer) before testing.
+For the 26.04+ deployment, set `root_url` to a real hostname and point that hostname (via DNS or `curl --resolve`) at your HAProxy unit's IP address (or external load balancer) before testing.
 ```
