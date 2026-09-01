@@ -1,0 +1,27 @@
+# Configuration for https://github.com/canonical/gh-jira-sync-bot
+#
+# Syncing is opt-in: only GitHub issues carrying the `jira` label are
+# synchronized to Jira.
+settings:
+  jira_project_key: "LNDENG"
+
+  status_mapping:
+    opened: Untriaged
+    closed: done
+    not_planned: rejected
+
+  # Only issues with one of these labels are synchronized.
+  labels:
+    - jira
+
+  add_gh_comment: true
+  add_gh_synced_label: true
+
+  sync_description: true
+  sync_comments: true
+
+  epic_key: "LNDENG-845"
+
+  summary: "{issue.title}"
+
+  sync_labels: false

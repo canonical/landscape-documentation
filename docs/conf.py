@@ -173,6 +173,10 @@ linkcheck_ignore = [
     "http://nfs.sourceforge.net/#faq_d2",
     "https://www.hashicorp.com/en/products/vault",
     "https://developer.hashicorp.com/vault/docs/concepts/production-hardening",
+    # terraform-docs renders Terraform module `source` strings (git::.../repo//path)
+    # as markdown links; these use Terraform's git:: subdirectory syntax, not
+    # real URLs, so they 404 when linkcheck fetches them directly.
+    r"https://github\.com/canonical/.*-operator\.git//.*",
 ]
 
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
@@ -198,6 +202,12 @@ linkcheck_retries = 3
 
 # MyST configuration
 myst_heading_anchors = 4
+
+# terraform-docs generates tables with `<a name="...">` HTML anchors and
+# `[text](#anchor)` links between them; MyST treats these as cross-references
+# and warns that the anchor isn't a Sphinx target, so silence that class of
+# warning rather than hand-editing generated content.
+suppress_warnings = ["myst.xref_missing"]
 
 # Custom Sphinx extensions; see
 # https://www.sphinx-doc.org/en/master/usage/extensions/index.html

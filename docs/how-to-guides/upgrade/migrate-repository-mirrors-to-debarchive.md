@@ -1,23 +1,23 @@
 ---
 myst:
   html_meta:
-    description: "Migrate repository mirrors from pre-26.04 reprepro-managed repositories (Landscape 25.10 and earlier) to the new debarchive service introduced in Landscape 26.04 LTS."
+    description: "Migrate repository mirrors from pre-26.04 reprepro-managed repositories (Landscape 25.10 and earlier) to the new Debarchive service introduced in Landscape 26.04 LTS."
 ---
 
 (how-to-migrate-repository-mirrors-to-debarchive)=
-# How to migrate repository mirrors to Deb Archive
+# How to migrate repository mirrors to Debarchive
 
-This guide describes how to migrate your existing reprepro-managed repository mirrors from Landscape 25.10 (and earlier) to the new Deb Archive service introduced in Landscape 26.04 LTS.
+This guide describes how to migrate your existing reprepro-managed repository mirrors from Landscape 25.10 (and earlier) to the new Debarchive service introduced in Landscape 26.04 LTS.
 
 ## Overview
 
-In Landscape 25.10 and earlier, repository management was handled by an internal reprepro-based system that managed mirrors through distributions, series, and pockets. In Landscape 26.04 LTS, this system is replaced by the `debarchive` service, which provides a REST API for managing mirrors, local repositories, and publications.
+In Landscape 25.10 and earlier, repository management was handled by an internal reprepro-based system that managed mirrors through distributions, series, and pockets. In Landscape 26.04 LTS, this system is replaced by the Debarchive (`debarchive`) service, which provides a REST API for managing mirrors, local repositories, and publications.
 
 The migration strategy depends on the type of pocket you're migrating:
 
 | Pre-26.04 pocket type | Migration strategy |
 |---|---|
-| **Sync (mirror) pocket** | Create a new mirror in Deb Archive pointing at the original upstream source and sync it |
+| **Sync (mirror) pocket** | Create a new mirror in Debarchive pointing at the original upstream source and sync it |
 | **Pull pocket** | Create a new mirror with a `filter` matching your existing allowlist/blocklist |
 | **Upload pocket** | Create a local repository and import packages from the existing reprepro pool |
 
@@ -39,7 +39,7 @@ Set the following environment variables for use throughout this guide, using the
 
 ```bash
 export LANDSCAPE_FQDN="landscape.example.com"
-export API_BASE="https://$LANDSCAPE_FQDN/debarchive/v1beta1"
+export API_BASE="https://$LANDSCAPE_FQDN/debarchive/v1"
 export JWT="<your-jwt-token>"
 ```
 
@@ -95,7 +95,7 @@ Use this information to decide which migration sections to follow. For example, 
 
 ## Migrate sync (mirror) pockets
 
-For sync pockets that mirror an upstream archive, create a new mirror in Deb Archive pointing at the same upstream source.
+For sync pockets that mirror an upstream archive, create a new mirror in Debarchive pointing at the same upstream source.
 
 ### 1. Identify the upstream source
 
@@ -207,7 +207,7 @@ libssl3 install
 
 ### 2. Migrate allowlists and blocklists to filtered mirrors
 
-Deb Archive mirrors support package filtering using a straightforward filter syntax. Translate your allowlist into a filter expression:
+Debarchive mirrors support package filtering using a straightforward filter syntax. Translate your allowlist into a filter expression:
 
 - **Allowlist** (only include these packages): Use a filter expression that matches the package names:
 
@@ -287,7 +287,7 @@ The reprepro pool directory is shared across all distributions in the same repre
 
 The `importPackages` API accepts a URL pointing to a `.deb` file. You need to make your existing packages accessible via HTTP or a `file://` URL.
 
-If the Deb Archive service runs on the same machine as your existing repository, you can use `file://` URLs directly:
+If the Debarchive service runs on the same machine as your existing repository, you can use `file://` URLs directly:
 
 ```bash
 # Example: find all .deb files for the staging pocket's component
@@ -418,14 +418,14 @@ If you need to preserve the precise package versions currently in a sync mirror,
 
 ## Upgrade to Landscape 26.04 LTS
 
-Once you have confirmed that all packages are present in the new Deb Archive service, clean up the pre-26.04 reprepro Distribution records and then upgrade.
+Once you have confirmed that all packages are present in the new Debarchive service, clean up the pre-26.04 reprepro Distribution records and then upgrade.
 
 ### 1. Delete existing reprepro Distribution records
 
 In the Landscape web portal, navigate to **Repositories**. Each distribution (for example, `ubuntu` or `ubuntu-staging`) has a **Delete** button. Delete each distribution.
 
 ```{important}
-Only delete a distribution after confirming that its packages have been successfully migrated to the new Deb Archive service. This action cannot be undone, though you could restore from a database backup if needed.
+Only delete a distribution after confirming that its packages have been successfully migrated to the new Debarchive service. This action cannot be undone, though you could restore from a database backup if needed.
 ```
 
 ### 2. Upgrade Landscape Server
@@ -450,7 +450,7 @@ Trigger the publication. Landscape will generate the repository metadata and mak
 
 ## Update client machines
 
-After publishing, update the repository profiles on your managed machines to point to the new Deb Archive publication URLs instead of the pre-26.04 repository paths.
+After publishing, update the repository profiles on your managed machines to point to the new Debarchive publication URLs instead of the pre-26.04 repository paths.
 
 The pre-26.04 repository was served at:
 
@@ -458,7 +458,7 @@ The pre-26.04 repository was served at:
 deb https://$LANDSCAPE_FQDN/repository/standalone/ubuntu <codename>-<pocket> <components>
 ```
 
-The new Deb Archive filesystem publications can be served from the configured published root path using a web server, such as Nginx or Apache. Consult your publication target configuration for the exact URL.
+The new Debarchive filesystem publications can be served from the configured published root path using a web server, such as Nginx or Apache. Consult your publication target configuration for the exact URL.
 
 ## See also
 

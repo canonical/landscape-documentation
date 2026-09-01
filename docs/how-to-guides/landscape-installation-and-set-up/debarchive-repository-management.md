@@ -1,15 +1,15 @@
 ---
 myst:
   html_meta:
-    description: "Set up Landscape Deb Archive alongside a working Landscape Server installation. Step-by-step guide for installing and configuring the landscape-debarchive snap."
+    description: "Set up Landscape Debarchive alongside a working Landscape Server installation. Step-by-step guide for installing and configuring the landscape-debarchive snap."
 ---
 
 (how-to-debarchive-repository-management)=
-# How to set up Deb Archive with Landscape
+# How to set up Debarchive with Landscape
 
-This guide walks you through installing and configuring the `landscape-debarchive` snap alongside an existing {ref}`manual <how-to-manual-installation>` or {ref}`quickstart <how-to-quickstart-installation>` installation of Landscape Server. By the end, you'll have the Deb Archive service running and accessible through your existing reverse proxy, enabling repository management from the Landscape web portal.
+This guide walks you through installing and configuring the `landscape-debarchive` snap alongside an existing {ref}`manual <how-to-manual-installation>` or {ref}`quickstart <how-to-quickstart-installation>` installation of Landscape Server. By the end, you'll have the Debarchive service running and accessible through your existing reverse proxy, enabling repository management from the Landscape web portal.
 
-Deb Archive was introduced in **Landscape 26.04 LTS**.
+Debarchive was introduced in **Landscape 26.04 LTS**.
 
 ```{note}
 This guide covers snap-based Manual and Quickstart installations. If you deployed Landscape with Juju, see {ref}`how-to-juju-ha-installation` instead.
@@ -42,14 +42,14 @@ sudo snap install landscape-debarchive --channel=latest/beta
 
 The snap installs as a daemon that will start automatically. It will fail to connect to the database until the remaining configuration steps are completed.
 
-## Create the Deb Archive database
+## Create the Debarchive database
 
-The Deb Archive service requires its own database in the PostgreSQL cluster already used by Landscape Server.
+The Debarchive service requires its own database in the PostgreSQL cluster already used by Landscape Server.
 
 - For Quickstart installations, run the following commands on the Landscape Server machine.
 - For Manual installations, run the commands on the PostgreSQL database server.
 
-Create a dedicated database user for Deb Archive, replacing `<PASSWORD>` with a strong password of your choice. The `--pwprompt` flag will prompt you to enter the password securely:
+Create a dedicated database user for Debarchive, replacing `<PASSWORD>` with a strong password of your choice. The `--pwprompt` flag will prompt you to enter the password securely:
 
 ```bash
 sudo -u postgres createuser --pwprompt landscape_debarchive
@@ -79,9 +79,9 @@ Then reload PostgreSQL:
 sudo systemctl reload postgresql
 ```
 
-The Deb Archive service automatically applies its schema on first successful connection. No manual schema import is needed.
+The Debarchive service automatically applies its schema on first successful connection. No manual schema import is needed.
 
-## Configure the Deb Archive snap to connect to the database
+## Configure the Debarchive snap to connect to the database
 
 Configure the snap with the database name, user, and password you created in the previous step. Replace `<PASSWORD>` with the password you set for `landscape_debarchive`:
 
@@ -93,7 +93,7 @@ sudo snap set landscape-debarchive \
 ```
 
 ```{note}
-**Manual installations**: Additionally, the Deb Archive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on the machine you're installing Deb Archive on, you'll need to manually copy it to that machine.
+**Manual installations**: Additionally, the Debarchive snap must be able to read `/etc/landscape/service.conf`. If this file isn't on the machine you're installing Debarchive on, you'll need to manually copy it to that machine.
 ```
 
 ```{note}
@@ -150,7 +150,7 @@ The snap automatically restarts when configuration changes are applied via `snap
 
 ## Configure the root directory for filesystem publications
 
-When you publish a repository to a filesystem target, Deb Archive writes the published repository tree to a location on disk. The `filesystem-published-root` setting defines the base directory that is combined with each publication target's configured path to form the full output location.
+When you publish a repository to a filesystem target, Debarchive writes the published repository tree to a location on disk. The `filesystem-published-root` setting defines the base directory that is combined with each publication target's configured path to form the full output location.
 
 By default, the snap uses `$SNAP_COMMON/publications` (typically `/var/snap/landscape-debarchive/common/publications`) as the root. If you need published repositories written to a different location — for example, a dedicated mount point or a directory served directly by a web server — override this setting:
 
@@ -253,9 +253,9 @@ sudo systemctl restart nginx
 
 ## Configure the reverse proxy
 
-You need to expose the Deb Archive service at `/debarchive` on your Landscape URL.
+You need to expose the Debarchive service at `/debarchive` on your Landscape URL.
 
-This requires updating your reverse proxy to forward requests to the Deb Archive service while stripping the `/debarchive` prefix.
+This requires updating your reverse proxy to forward requests to the Debarchive service while stripping the `/debarchive` prefix.
 
 ### Apache (Quickstart and most Manual installations)
 
@@ -264,7 +264,7 @@ Add the following rules to the `<VirtualHost *:443>` block in `/etc/apache2/site
 Add these lines **before** the final catch-all `RewriteRule` at the bottom of the block (the line that starts with `RewriteRule ^/(.*) http://localhost:8080/...`):
 
 ```apache
-    # Landscape Deb Archive
+    # Landscape Debarchive
     RewriteRule ^/debarchive$ /debarchive/ [R=permanent]
     RewriteRule ^/debarchive/(.*) http://localhost:8100/$1 [P,L]
 ```
@@ -277,7 +277,7 @@ sudo systemctl reload apache2
 
 ### HAProxy (some Manual installations)
 
-If your deployment uses HAProxy, add a routing rule and backend for the Deb Archive service. Edit your HAProxy configuration (typically `/etc/haproxy/haproxy.cfg`):
+If your deployment uses HAProxy, add a routing rule and backend for the Debarchive service. Edit your HAProxy configuration (typically `/etc/haproxy/haproxy.cfg`):
 
 In the existing `frontend` section, add:
 
@@ -295,7 +295,7 @@ backend debarchive
 ```
 
 ```{note}
-If the Deb Archive service runs on a different machine from HAProxy, replace `127.0.0.1` with the appropriate IP address or hostname.
+If the Debarchive service runs on a different machine from HAProxy, replace `127.0.0.1` with the appropriate IP address or hostname.
 ```
 
 Then reload HAProxy:
@@ -321,20 +321,20 @@ Service                              Startup  Current  Notes
 landscape-debarchive.debarchive      enabled  active   -
 ```
 
-### Verify Deb Archive is reachable
+### Verify Debarchive is reachable
 
 Send a probe request through the reverse proxy. Replace `$LANDSCAPE_FQDN` with the FQDN of your Landscape Server, or set it as an environment variable:
 
 ```bash
-curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1beta1/mirrors"
+curl -sk -o /dev/null -w "%{http_code}" "https://$LANDSCAPE_FQDN/debarchive/v1/mirrors"
 ```
 
-A response of `401` (unauthorized) confirms the Deb Archive service is reachable through the reverse proxy. Deb Archive uses the same authentication as the main Landscape Server API. You should receive a `200` response instead if you include a JWT token in the request via bearer authentication, or include a cookie from a logged-in session in the Landscape web portal.
+A response of `401` (unauthorized) confirms the Debarchive service is reachable through the reverse proxy. Debarchive uses the same authentication as the main Landscape Server API. You should receive a `200` response instead if you include a JWT token in the request via bearer authentication, or include a cookie from a logged-in session in the Landscape web portal.
 
 You can also test directly against the service (bypassing the proxy) to isolate connectivity issues:
 
 ```bash
-curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1beta1/mirrors
+curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
 ```
 
 ### Verify in the Landscape web portal
@@ -343,7 +343,7 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1beta1/mirrors
 2. Navigate to the **Repository management** page
 3. Confirm that you can create or add a new repository mirror
 
-If the repository management page loads and allows you to begin adding mirrors, the Deb Archive service is fully operational.
+If the repository management page loads and allows you to begin adding mirrors, the Debarchive service is fully operational.
 
 ## Troubleshooting
 
@@ -357,11 +357,11 @@ sudo snap logs landscape-debarchive -n 50
 
 Common issues include:
 
-- **Database connection errors**: Verify the database host, port, user, and password. Ensure the Deb Archive database exists and the configured user has access.
+- **Database connection errors**: Verify the database host, port, user, and password. Ensure the Debarchive database exists and the configured user has access.
 - **Missing secrets**: If not using the configuration shim with `service.conf`, the `deb.archive.pagination.secret` (base64url-encoded) and `deb.archive.jwt.secret` (base64-encoded) must be set.
 
 ### Health check returns an error through the proxy
 
-- Confirm the Deb Archive gateway port matches what the proxy expects (default: `8100`)
+- Confirm the Debarchive gateway port matches what the proxy expects (default: `8100`)
 - Test direct connectivity to `http://localhost:8100/` to determine whether the issue is with the service or the proxy configuration
 - Check Apache or HAProxy error logs for rewrite or proxy errors

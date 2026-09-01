@@ -15,9 +15,8 @@ Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not s
 
 ## If you use repository management
 
-If you use repository management in your Landscape deployment, we recommend waiting to upgrade to 26.04 LTS until the 26.04.1 point release (expected August 2026).
-
-If you still want to upgrade, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS. See the {ref}`dedicated guide <how-to-migrate-repository-mirrors-to-debarchive>` for instructions on how to do this.
+If you use repository management in your Landscape deployment, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS.
+See the {ref}`dedicated guide <how-to-migrate-repository-mirrors-to-debarchive>` for instructions on how to do this.
 
 ## Begin your upgrade
 
@@ -106,7 +105,7 @@ To view outbox logs, run:
 sudo snap logs landscape-outbox -n 50
 ```
 
-### Install the debarchive snap
+### Install the Debarchive snap
 
 The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`.
 

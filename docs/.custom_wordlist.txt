@@ -286,6 +286,7 @@ postgres
 PostgreSQL
 postgresql
 Postfix
+passthrough
 PowerShell
 PowerShell's
 pocketname
@@ -406,6 +407,7 @@ USNs
 UTF
 vCPU
 vCPUs
+vendoring
 vhost
 vhosts
 VMM

@@ -8,19 +8,21 @@ myst:
 # How to migrate to Landscape 26.04 LTS (charm)
 
 ```{note}
-The Landscape Server charm for 26.04 is currently in beta. See the {ref}`reference-release-notes-26-04-lts` for details on our changes introduced in 26.04. Note the recommendations for repository management users.
+The Landscape Server charm for 26.04 is available in the `26.04/stable` channel. See the {ref}`reference-release-notes-26-04-lts` for details on our changes introduced in 26.04. Note the recommendations for repository management users.
 ```
 
-This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS beta+ version with an external HAProxy charm using the `haproxy-route` interface.
+This guide explains how to migrate from an older Landscape Server charm deployment (pre-26.04) to the 26.04 LTS version with an external HAProxy charm using the `haproxy-route` interface.
+
+You can follow the manual `juju integrate` steps below, or use the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` (see its {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`) to manage the migration as code instead.
 
 ## Architectural changes
 
-The 26.04 beta version introduces significant architectural changes:
+The 26.04 version introduces significant architectural changes:
 
-| Aspect                   | Landscape 26.04 LTS beta+                                                                         | Pre-26.04                                                    |
+| Aspect                   | Landscape 26.04 LTS                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/edge`, `haproxy-route` interface)                       | External HAProxy charm (`reverseproxy` interface)            |
-| **PostgreSQL interface** | Modern `database` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                     | External HAProxy charm (`reverseproxy` interface)            |
+| **PostgreSQL interface** | Modern `postgresql_client` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
 | **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                  | `landscape-server:website` → `haproxy:reverseproxy`          |
@@ -39,7 +41,11 @@ Before making any changes, back up your Landscape database following the backup 
 Remove the older HAProxy relation:
 
 ```bash
-juju remove-relation landscape-server:website haproxy:reverseproxy --force
+juju remove-relation landscape-server:website haproxy:reverseproxy
+```
+
+```{note}
+The legacy `website` relation (`reverseproxy` interface) is still available for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10, so it is recommended to complete this migration to the `haproxy-route` interface rather than continuing to rely on the legacy relation.
 ```
 
 **For deployments older than 25.10 only:**
@@ -47,7 +53,7 @@ juju remove-relation landscape-server:website haproxy:reverseproxy --force
 Remove the older RabbitMQ relation:
 
 ```bash
-juju remove-relation landscape-server:amqp rabbitmq-server:amqp --force
+juju remove-relation landscape-server:amqp rabbitmq-server:amqp
 ```
 
 ```{note}
@@ -61,7 +67,13 @@ Deploy the HAProxy charm and a TLS certificates provider before refreshing the c
 First, deploy the HAProxy charm:
 
 ```bash
-juju deploy haproxy --channel 2.8/edge
+juju deploy haproxy --channel 2.8/stable
+```
+
+Alternatively, if you still have HAProxy deployed from the `latest/x` track, you can simply refresh it to the `2.8/stable` channel:
+
+```sh
+juju refresh haproxy --channel 2.8/stable
 ```
 
 **For testing/development with self-signed certificates:**
@@ -169,10 +181,10 @@ If the machine ID of the HAProxy charm is not 0, adjust the above command with t
 
 ### Step 4: Refresh the charm
 
-Refresh the Landscape Server charm to the 26.04 beta version:
+Refresh the Landscape Server charm to the 26.04 version:
 
 ```bash
-juju refresh landscape-server --channel 26.04/beta
+juju refresh landscape-server --channel 26.04/stable
 ```
 
 ```{note}
@@ -203,7 +215,7 @@ juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:ha
 ```
 
 ```{important}
-The `ssl_cert` and `ssl_key` charm configuration have been removed and are no longer supported in the 26.04 beta charm. TLS is now managed by the HAProxy charm via the `tls-certificates` interface.
+When using HAProxy charm from the `2.8/x` track, the `ssl_cert` and `ssl_key` charm configuration options for Landscape Server are unused since TLS is now managed by the HAProxy charm via the `tls-certificates` interface.
 ```
 
 ### Step 6: Add new RabbitMQ relations (pre-25.10 deployments only)
@@ -224,9 +236,9 @@ juju integrate landscape-server:outbound-amqp rabbitmq-server
 If you want to upgrade to a newer PostgreSQL version (e.g., from 14 to 16) as part of this migration, follow the backup and restore procedures in {ref}`how-to-back-up-restore-tear-down-charmed-deployment` to migrate your data to a new PostgreSQL deployment.
 
 ```{note}
-PostgreSQL upgrade is optional. The 26.04 beta charm uses the modern `database` interface which works with PostgreSQL 14 and above.
+PostgreSQL upgrade is optional. The 26.04 charm uses the modern `postgresql_client` interface which works with PostgreSQL 14 and above.
 
-The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14. It is recommended to migrate to the modern `database` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
+The legacy `db` endpoint (legacy `pgsql` interface) is still supported for backwards compatibility but only works with PostgreSQL 14, and is deprecated: support will be removed in Landscape 26.10. It is recommended to migrate to the modern `postgresql_client` interface since Charmed PostgreSQL 16+ does not support the legacy interface.
 ```
 
 ### Step 8: Verify the deployment
@@ -250,9 +262,45 @@ Log in and verify:
 
 For more information about `juju refresh`, see the [Juju documentation on charm upgrades](https://documentation.ubuntu.com/juju/3.6/howto/manage-charms/#update-a-charm).
 
+### Step 9: Deploy Debarchive and Task Handler
+
+The 26.04 architecture also introduces two required companion charms: **Debarchive** for repository mirroring, and **Landscape Task Handler** for offloaded background task processing. Deploy them:
+
+```bash
+juju deploy landscape-debarchive --channel latest/stable --base ubuntu@24.04
+juju deploy landscape-task-handler --channel latest/stable --base ubuntu@24.04 --config task-handler-snap-channel=latest/stable
+```
+
+Integrate Debarchive with Landscape Server, PostgreSQL, and HAProxy:
+
+```bash
+juju integrate landscape-server:debarchive landscape-debarchive:landscape-server
+juju integrate landscape-debarchive:database postgresql:database
+juju integrate landscape-debarchive:debarchive-haproxy-route haproxy:haproxy-route
+```
+
+Integrate Landscape Task Handler with Landscape Server, PostgreSQL, your TLS certificates provider, and HAProxy's gRPC route:
+
+```bash
+juju integrate landscape-task-handler:landscape-server landscape-server:task-handler
+juju integrate landscape-task-handler:task-db postgresql:database
+juju integrate landscape-task-handler:certificates self-signed-certificates:certificates
+juju integrate landscape-task-handler:grpc-haproxy-route haproxy:haproxy-route-tcp
+```
+
+```{note}
+Substitute `self-signed-certificates` above with whichever TLS provider you deployed in Step 3.
+```
+
+```{important}
+The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy gRPC route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the HAProxy unit's IP address. This dependency is one-directional: outbox connects to Task Handler, not the other way around.
+```
+
 ## Additional resources
 
 - {ref}`how-to-juju-ha-installation` - Full HA deployment guide
 - {ref}`explanation-charm-compatibility` - Charm compatibility details
+- {ref}`how-to-terraform-juju-deployment` - How to deploy Landscape with Terraform and Juju
+- {ref}`reference-landscape-product-modules-landscape-scalable` - Terraform module reference
 - [Landscape Server charm documentation](https://charmhub.io/landscape-server)
 - [PostgreSQL charm documentation](https://charmhub.io/postgresql)

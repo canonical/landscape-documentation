@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new debarchive repository service, and multiple security fixes."
+    description: "Release notes for Landscape 26.04 LTS (April 2026). Introduces security event logging, FDE recovery key management, release upgrade REST API, the new Debarchive repository service, and multiple security fixes."
 ---
 
 (reference-release-notes-26-04-lts)=
@@ -18,7 +18,7 @@ You can now access Landscape 26.04 LTS in our 26.04 LTS PPA: `ppa:landscape/self
 
 - **Repository management improvements**:
 
-  - Introduces the new `debarchive` service for repository management.
+  - Introduces the new Debarchive (`debarchive`) service for repository management.
   - Repository profiles have been updated with improved workflows.
   - The legacy API endpoints for repository management have been removed; the new archive management system replaces them.
 
@@ -95,6 +95,16 @@ Multiple security fixes are included in this release:
   - feat: add /usg-profiles API aliases and usg query filter
   - feat: login endpoint supports PAM authn
 
+- 26.04.1 published August 28 2026
+  - fix: add missing cleanup for soft deleted computers
+  - feat: add --allow-connections flag to schema script for PGBouncer support
+  - feat: add outbox message type for hard deletion
+  - fix: persist description field when edited
+  - fix: fallback to ipv4 when ipv6 fails
+  - fix: make wsl instances soft-deleted aware
+  - fix: allow scoped (non-global) admins to manage repository and reboot profiles (LP: #2151742)
+  - fix: keep [schema] ssl settings separate from [stores] in read_service_configuration
+
 ## Supported third-party services
 
 | Service | Compatible versions |
@@ -107,8 +117,9 @@ Multiple security fixes are included in this release:
 
 See our 26.04 upgrade guide for detailed steps: {ref}`how-to-upgrade-to-26-04-lts`
 
-If you use repository management in Landscape, we recommend waiting to upgrade until the 26.04.1 point release (expected August 2026). There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
+If you use repository management in Landscape, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS.
+There's currently a safeguard in place to block automatic upgrades to 26.04 LTS for repository management users.
 
 Landscape Server 26.04 LTS requires the `landscape-outbox` snap.
 
-The updated Landscape Server Charm will not be released until the Landscape Server 26.04.1 LTS point release in August 2026.
+The updated Landscape Server charm is available in the `26.04/stable` channel, starting with the Landscape Server 26.04.1 LTS point release.

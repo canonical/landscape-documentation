@@ -46,6 +46,7 @@ Manual installation <manual-installation>
 Juju installation <juju-installation>
 Juju HA installation <juju-ha-installation>
 Install in a LXD container <install-in-a-lxd-container>
+Deploy with Terraform <terraform-juju-deployment>
 ```
 
 ### Specialized environments
@@ -85,5 +86,5 @@ Configure RabbitMQ <configure-rabbitmq>
 Configure Outbox <configure-outbox>
 Configure Task Handler <configure-task-handler>
 Configure Postfix <configure-postfix>
-Set up Deb Archive <debarchive-repository-management>
+Set up Debarchive <debarchive-repository-management>
 ```
