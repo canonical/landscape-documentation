@@ -272,6 +272,11 @@ Moves a package from one specific version to another, in either direction.
 
 The two IDs must differ and must be two versions of the same package. Otherwise the request returns `400`.
 
+Instances are excluded from the operation if:
+
+- `from_package_id` is not installed or is currently held.
+- `to_package_id` is not available or is already installed.
+
 Example request:
 
 ```bash
@@ -420,7 +425,9 @@ Example response (200 OK)--`install` plan:
       }
     }
   ],
-  "count": 1
+  "count": 1,
+  "next": null,
+  "previous": null,
 }
 ```
 
@@ -451,6 +458,8 @@ Example response (200 OK)--`change_version` plan:
     }
   ],
   "count": 1
+  "next": null,
+  "previous": null,
 }
 ```
 
@@ -465,6 +474,8 @@ Response fields:
     - `id`: ID of the computer.
     - `name`: Instance name of the computer.
 - `count`: Total number of items.
+- `next`: The link to the next page.
+- `previous`: The link to the previous page.
 
 (package-change-plan-exclusions)=
 ## GET `/package-change-plans/<id>/exclusions`

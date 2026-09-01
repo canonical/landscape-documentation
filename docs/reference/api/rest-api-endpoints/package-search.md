@@ -20,9 +20,9 @@ This feature is available on self-hosted and **select accounts on SaaS**. It is 
 
 Some parameters are tri-state filters. Accepted values are:
 
-- `true`: keep only packages matching the condition.
-- `false`: keep only packages not matching the condition.
-- `unspecified` *(default)*: don't filter on it.
+- `"true"`: keep only packages matching the condition.
+- `"false"`: keep only packages not matching the condition.
+- `"unspecified"` *(default)*: don't filter on it.
 
 ## POST `/packages:search`
 
@@ -148,8 +148,6 @@ Example response (200 OK):
       "computers": {
         "count": 50
       },
-      "usn": null,
-      "cves": []
     },
     {
       "id": 4,
@@ -159,8 +157,6 @@ Example response (200 OK):
       "computers": {
         "count": 31
       },
-      "usn": null,
-      "cves": []
     }
   ],
   "count": 2,
