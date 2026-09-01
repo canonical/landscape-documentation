@@ -427,7 +427,7 @@ Example response (200 OK)--`install` plan:
   ],
   "count": 1,
   "next": null,
-  "previous": null,
+  "prev": null,
 }
 ```
 
@@ -459,7 +459,7 @@ Example response (200 OK)--`change_version` plan:
   ],
   "count": 1,
   "next": null,
-  "previous": null,
+  "prev": null,
 }
 ```
 
@@ -475,7 +475,7 @@ Response fields:
     - `name`: Instance name of the computer.
 - `count`: Total number of items.
 - `next`: The link to the next page.
-- `previous`: The link to the previous page.
+- `prev`: The link to the previous page.
 
 (package-change-plan-exclusions)=
 ## GET `/package-change-plans/<id>/exclusions`
