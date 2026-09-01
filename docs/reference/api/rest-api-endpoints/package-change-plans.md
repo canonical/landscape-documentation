@@ -457,7 +457,7 @@ Example response (200 OK)--`change_version` plan:
       }
     }
   ],
-  "count": 1
+  "count": 1,
   "next": null,
   "previous": null,
 }

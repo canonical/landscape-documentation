@@ -55,6 +55,9 @@ Search packages across a computer selection.
   - `version`: Version string.
   - `computers.count`: Number of selected computers that have this package.
 - `count`: Total number of matching packages.
+- `next`: The link to the next page.
+- `previous`: The link to the previous page.
+
 
 ### Example
 
@@ -88,6 +91,8 @@ Example response (200 OK):
     }
   ],
   "count": 1,
+  "next": null,
+  "previous": null,
 }
 ```
 
@@ -120,6 +125,8 @@ Same shape as `/packages:search`, where each package is the upgrade candidate ra
   - `version`: Version string of the new version.
   - `computers.count`: Number of selected computers that can take this upgrade.
 - `count`: Total number of matching upgrades.
+- `next`: The link to the next page.
+- `previous`: The link to the previous page.
 
 ### Example
 
@@ -160,5 +167,7 @@ Example response (200 OK):
     }
   ],
   "count": 2,
+  "next": null,
+  "previous": null,
 }
 ```
