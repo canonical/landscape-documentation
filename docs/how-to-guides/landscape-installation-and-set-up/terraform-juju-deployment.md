@@ -151,10 +151,10 @@ Initialize the working directory so Terraform can download the required provider
 terraform init
 ```
 
-Then, review and apply the plan, supplying the Juju model UUID as a variable:
+Then, review and apply the plan, supplying the Juju model UUID and the selected `.tfvars` file:
 
 ```sh
-terraform apply -var model_uuid=<model-uuid> -var-file=terraform.tfvars
+terraform apply -var model_uuid=<model-uuid> -var-file=terraform.tfvars # or terraform.legacy.tfvars
 ```
 
 ## Monitor the deployment
