@@ -1580,7 +1580,7 @@ sudo snap set landscape-debarchive deb.archive.service-conf-file=/root/snap/land
 
 ````
 
-````{tab-item} Landscape Server 25.10 and earlier
+````{tab-item} Landscape Server 25.10
 
 These service installation steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
 
