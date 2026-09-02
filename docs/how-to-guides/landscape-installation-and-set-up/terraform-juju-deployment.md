@@ -65,16 +65,12 @@ cd landscape-server-operator/terraform/product/modules/landscape-scalable
 Check out a tagged revision (e.g. `git checkout rev485`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
 ```
 
-This directory ships two example variable files, one per topology; copy the one matching your target `landscape-server` revision to `terraform.tfvars`:
+This directory ships two example variable files:
 
-- **`terraform.tfvars.example`** (legacy, pre-26.04): `24.04/stable` channel, `ppa:landscape/self-hosted-24.04`.
-- **`terraform.tfvars.modern`** (modern, 26.04+): `26.04/stable` channel, `ppa:landscape/self-hosted-26.04`, `2.8/stable` HAProxy, `16/stable` PostgreSQL, and `enable_hostagent_messenger`/`enable_ubuntu_installer_attach` set.
+- **`terraform.legacy.tfvars`** (legacy, pre-26.04): `24.04/stable` channel, `ppa:landscape/self-hosted-24.04`.
+- **`terraform.tfvars`** (modern, 26.04+): `26.04/stable` channel, `ppa:landscape/self-hosted-26.04`, `2.8/stable` HAProxy, `16/stable` PostgreSQL, and `enable_hostagent_messenger`/`enable_ubuntu_installer_attach` set.
 
-```sh
-cp terraform.tfvars.modern terraform.tfvars   # or terraform.tfvars.example for legacy
-```
-
-Open `terraform.tfvars` and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`; when set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
+Open `terraform.tfvars` (or `terraform.legacy.tfvars` if using the legacy deployment topology) and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`; when set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
 
 ```{warning}
 Setting `min_install = "true"` configures the deployment to not install the `landscape-hashids` package, which means the hash-id database will not be set up, resulting in slower package reporting. This should not be used for production deployments.
@@ -158,7 +154,7 @@ terraform init
 Then, review and apply the plan, supplying the Juju model UUID as a variable:
 
 ```sh
-terraform apply -var model_uuid=<model-uuid>
+terraform apply -var model_uuid=<model-uuid> -var-file=terraform.tfvars
 ```
 
 ## Monitor the deployment
