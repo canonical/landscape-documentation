@@ -21,7 +21,7 @@ You still need to invite users and assign their roles and permissions within Lan
 
 `````{tab-set}
 
-````{tab-item} Landscape 25.10 and later
+````{tab-item} Landscape Server 25.10 and later
 
 
 For Landscape 25.10+, to enable OIDC support, add `oidc_issuer`, `oidc_client_id` and `oidc_client_secret` to `/etc/landscape/service.conf` in the `[appserver]` section. For example:
@@ -40,7 +40,7 @@ The `oidc_client_id` and `oidc_client_secret` should be provided by your OIDC pr
 
 ````
 
-````{tab-item} Landscape versions earlier than 25.10
+````{tab-item} Landscape Server versions earlier than 25.10
 
 
 For versions earlier than 25.10, to enable OIDC support, add `oidc-issuer`, `oidc-client-id` and `oidc-client-secret` to `/etc/landscape/service.conf` in the `[landscape]` section. For example:
@@ -75,7 +75,7 @@ sudo lsctl restart
 
 `````{tab-set}
 
-````{tab-item} Landscape 25.10 and later
+````{tab-item} Landscape Server 25.10 and later
 
 
 A logout URL can be configured with `oidc_logout_url` if the provider doesn’t expose one. For example:
@@ -88,7 +88,7 @@ oidc_logout_url = <https://accounts.google.com/logout>
 
 ````
 
-````{tab-item} Landscape versions earlier than 25.10
+````{tab-item} Landscape Server versions earlier than 25.10
 
 
 A logout URL can be configured with `oidc-logout-url` if the provider doesn’t expose one. For example:

@@ -33,7 +33,7 @@ Learn more about [Juju integrations](https://canonical.com/juju/integrations).
 
 ## Deployment architectures
 
-The Landscape Server charm supports two deployment architectures:
+The Landscape Server charm supports two deployment architectures. The Landscape 26.04 LTS architecture is recommended.
 
 **Select your Landscape Server version:**
 
