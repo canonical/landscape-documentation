@@ -10,7 +10,7 @@ myst:
 
 > See also: {ref}`explanation-repo-mirroring`
 
-Repository management in the web portal works differently in Landscape Server 26.04 LTS and later than it does in earlier releases..
+Repository management in the web portal works differently in Landscape Server 26.04 LTS and later than it does in earlier releases.
 
 **Select your Landscape Server version:**
 

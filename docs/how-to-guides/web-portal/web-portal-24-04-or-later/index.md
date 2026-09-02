@@ -5,9 +5,9 @@ myst:
 ---
 
 (how-to-guides-web-portal-web-portal-24-04-or-later-index)=
-# Current web portal (24.04 LTS or later)
+# Web portal (24.04 or later)
 
-The web portal (24.04 LTS or later) is Landscape's newer interface. We're actively building new features to this portal and migrating the remaining, existing features from the {ref}`classic web portal <how-to-guides-web-portal-classic-web-portal-index>`.
+The web portal (24.04 LTS or later) is Landscape's newer interface. We're actively building new features to this portal and migrating the remaining, existing features from the {ref}`how-to-guides-web-portal-classic-web-portal-index`.
 
 ## Instance management
 
