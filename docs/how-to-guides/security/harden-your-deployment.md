@@ -135,17 +135,9 @@ Keep in mind that management features will be unavailable in Monitor-only mode.
 
 ## Secure your GPG keys
 
+**Select your Landscape Server version:**
+
 `````{tab-set}
-
-````{tab-item} Landscape Server 25.10 and earlier
-
-If you use Landscape's repository management features, you'll need to {ref}`upload a GPG key to Landscape Server <how-to-heading-create-import-gpg-key>`. Do not reuse an existing key—you should generate a new key for this purpose.
-
-This GPG private key is used to sign repository package indices. The public key is used by registered clients to validate these signatures. Because the use of the private key is automated, it's required that the key is **not** secured with a passphrase.
-
-If for any reason you suspect that the key has been compromised, create a new key, upload it to Landscape, and edit your repository mirrors to use the new key. Landscape will re-sign your repository using the new key. You should then delete the previously-used key.
-
-````
 
 ````{tab-item} Landscape Server 26.04 LTS and later
 
@@ -159,7 +151,15 @@ Keep the following in mind when managing these keys:
 - Do not reuse an existing key for signing—generate a new key for this purpose.
 - Because signing is automated, the signing private key must **not** be secured with a passphrase.
 - If you suspect a signing key has been compromised, generate a new key, update the affected publications to use it, and republish. Distribute the new verification (public) key to any registered clients that don't already have it in their keyring, then delete the compromised key.
+````
 
+````{tab-item} Landscape Server 25.10 and earlier
+
+If you use Landscape's repository management features, you'll need to {ref}`upload a GPG key to Landscape Server <how-to-heading-create-import-gpg-key>`. Do not reuse an existing key—you should generate a new key for this purpose.
+
+This GPG private key is used to sign repository package indices. The public key is used by registered clients to validate these signatures. Because the use of the private key is automated, it's required that the key is **not** secured with a passphrase.
+
+If for any reason you suspect that the key has been compromised, create a new key, upload it to Landscape, and edit your repository mirrors to use the new key. Landscape will re-sign your repository using the new key. You should then delete the previously-used key.
 ````
 
 `````

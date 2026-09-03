@@ -115,7 +115,7 @@ The Debarchive service (`landscape-debarchive`) provides Debian repository mirro
 Debarchive uses its own PostgreSQL database within the same cluster as Landscape Server. It supports publishing to filesystem, S3, and OpenStack Swift storage backends. Long-running operations such as mirror syncs and publishes run asynchronously in the background.
 
 * {ref}`Set up Debarchive <how-to-debarchive-repository-management>`
-* {ref}`Repository mirroring explanation <explanation-repo-mirroring-2604>`
+* {ref}`Repository mirroring explanation <explanation-repo-mirroring>`
 
 (explanation-server-architecture-package-upload)=
 ### Package upload

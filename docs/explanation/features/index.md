@@ -29,8 +29,7 @@ Landscape enables you to control software across your instances, including mirro
 :titlesonly:
 :maxdepth: 2
 
-Repository mirroring (pre-26.04)<repository-mirroring>
-Repository mirroring (26.04+)<repository-mirroring-2604>
+Repository mirroring <repository-mirroring>
 Package reporting <package-reporting>
 ```
 
