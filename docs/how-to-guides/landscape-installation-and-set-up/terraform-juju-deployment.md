@@ -70,7 +70,7 @@ This directory ships two example variable files:
 - **`terraform.legacy.tfvars`** (legacy, pre-26.04): `24.04/stable` channel, `ppa:landscape/self-hosted-24.04`.
 - **`terraform.tfvars`** (modern, 26.04+): `26.04/stable` channel, `ppa:landscape/self-hosted-26.04`, `2.8/stable` HAProxy, `16/stable` PostgreSQL, and `enable_hostagent_messenger`/`enable_ubuntu_installer_attach` set.
 
-Open `terraform.tfvars` (or `terraform.legacy.tfvars` if using the legacy deployment topology) and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required and should not be set to `null`; when set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
+Open `terraform.tfvars` (or `terraform.legacy.tfvars` if using the legacy deployment topology) and adjust it for your deployment, at minimum setting `landscape_server.config.root_url` to your own domain name. `landscape_debarchive` and `landscape_task_handler` are both required for 26.04+ (modern) deployments and should not be set to `null` unless you are creating a legacy deployment. When set, the module automatically integrates both with `landscape_server`, `postgresql`, `tls_certificates`, and, for the task handler's gRPC route, `haproxy`.
 
 ```{warning}
 Setting `min_install = "true"` configures the deployment to not install the `landscape-hashids` package, which means the hash-id database will not be set up, resulting in slower package reporting. This should not be used for production deployments.
@@ -78,7 +78,7 @@ Setting `min_install = "true"` configures the deployment to not install the `lan
 
 ### Deploying against legacy (pre-26.04) topologies
 
-This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation); you don't need a different plan to support an older revision, just the matching `terraform.tfvars.example` file above.
+This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation); you don't need a different plan to support an older revision, just the matching `terraform.legacy.tfvars` file above.
 
 ```{note}
 Both the legacy `pgsql` database interface and the legacy `reverseproxy`/`website` HAProxy interface are still available for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the modern interfaces.
