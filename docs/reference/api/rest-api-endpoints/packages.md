@@ -7,6 +7,10 @@ myst:
 (reference-rest-api-packages)=
 # Packages
 
+```{note}
+TODO(srunde3): clarify deprecation or this API or a preference for `POST /packages:search` once fully-released.
+```
+
 ## GET `/packages`
 
 Get a list of packages that have been reported to this Landscape account.
