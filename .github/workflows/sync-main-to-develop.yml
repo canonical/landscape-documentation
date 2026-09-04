@@ -57,7 +57,7 @@ jobs:
 
       - name: Check out the repository
         if: steps.compare.outputs.ahead_by != '0'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
