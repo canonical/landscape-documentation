@@ -18,6 +18,7 @@ jobs:
 
     env:
       GH_TOKEN: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
+      SYNC_BRANCH: sync-main-into-develop
 
     steps:
       - name: Check whether develop is already up to date
@@ -33,51 +34,110 @@ jobs:
             echo "main is ${ahead_by} commit(s) ahead of develop – sync required."
           fi
 
-      - name: Create or reuse sync PR
+      - name: Check out the repository
         if: steps.compare.outputs.ahead_by != '0'
-        id: ensure-pr
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
+
+      # The PR head must be a throwaway branch, not main itself. If the PR head
+      # is main, conflicts can only be resolved by committing develop into main.
+      - name: Update the sync branch
+        if: steps.compare.outputs.ahead_by != '0'
+        id: branch
         run: |
-          pr_number=$(gh pr list \
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          existing_pr=$(gh pr list \
             --repo "${{ github.repository }}" \
             --base develop \
-            --head main \
+            --head "${SYNC_BRANCH}" \
             --state open \
             --json number \
             --jq '.[0].number // ""')
 
-          if [ -n "${pr_number}" ]; then
-            echo "Reusing existing open PR #${pr_number}."
+          if [ -n "${existing_pr}" ]; then
+            # The branch may carry manual conflict resolutions, so advance it
+            # instead of resetting it onto main.
+            echo "Reusing sync branch behind open PR #${existing_pr}."
+            git checkout -B "${SYNC_BRANCH}" "origin/${SYNC_BRANCH}"
+            if git merge --no-edit origin/main; then
+              git push origin "${SYNC_BRANCH}"
+            else
+              git merge --abort
+              echo "::warning::main does not merge cleanly into ${SYNC_BRANCH}. Resolve the conflicts on PR #${existing_pr}."
+              echo "blocked=true" >> "$GITHUB_OUTPUT"
+            fi
           else
+            git checkout -B "${SYNC_BRANCH}" origin/main
+            git push --force-with-lease origin "${SYNC_BRANCH}"
+          fi
+
+          echo "pr_number=${existing_pr}" >> "$GITHUB_OUTPUT"
+
+      - name: Create or reuse sync PR
+        if: steps.compare.outputs.ahead_by != '0' && steps.branch.outputs.blocked != 'true'
+        id: ensure-pr
+        run: |
+          pr_number="${{ steps.branch.outputs.pr_number }}"
+
+          if [ -z "${pr_number}" ]; then
             pr_url=$(gh pr create \
               --repo "${{ github.repository }}" \
               --base develop \
-              --head main \
+              --head "${SYNC_BRANCH}" \
               --title "merge: sync main into develop" \
               --body "Automated sync of main into develop. Triggered by commit ${{ github.sha }}.")
             pr_number=$(echo "${pr_url}" | grep -oE '[0-9]+$')
             echo "Created PR #${pr_number}: ${pr_url}"
+          else
+            echo "Reusing existing open PR #${pr_number}."
           fi
 
           echo "pr_number=${pr_number}" >> "$GITHUB_OUTPUT"
 
-      - name: Enable auto-merge on the sync PR
+      - name: Merge the sync PR
         if: steps.compare.outputs.ahead_by != '0' && steps.ensure-pr.outputs.pr_number != ''
         run: |
           pr_number="${{ steps.ensure-pr.outputs.pr_number }}"
-          already_set=$(gh pr view "${pr_number}" \
-            --repo "${{ github.repository }}" \
-            --json autoMergeRequest \
-            --jq '.autoMergeRequest != null')
 
-          if [ "${already_set}" = "true" ]; then
-            echo "Auto-merge already enabled on PR #${pr_number}."
+          # GitHub computes mergeability asynchronously and reports UNKNOWN until it finishes.
+          mergeable=UNKNOWN
+          for _ in $(seq 1 12); do
+            mergeable=$(gh pr view "${pr_number}" \
+              --repo "${{ github.repository }}" \
+              --json mergeable --jq '.mergeable')
+            [ "${mergeable}" = "UNKNOWN" ] || break
+            sleep 5
+          done
+
+          if [ "${mergeable}" = "CONFLICTING" ]; then
+            echo "::warning::PR #${pr_number} has conflicts. Resolve them on the ${SYNC_BRANCH} branch, then re-run this workflow."
+            exit 0
+          fi
+
+          if [ "${mergeable}" != "MERGEABLE" ]; then
+            echo "::warning::PR #${pr_number} is not mergeable (state: ${mergeable})."
+            exit 0
+          fi
+
+          if gh pr merge --merge "${pr_number}" \
+            --subject "auto: sync main into develop" \
+            --delete-branch \
+            --repo "${{ github.repository }}"; then
+            echo "Merged PR #${pr_number}."
+            exit 0
+          fi
+
+          # Required checks or reviews can block an immediate merge; queue it instead.
+          output=$(gh pr merge --auto --merge "${pr_number}" \
+            --subject "auto: sync main into develop" \
+            --delete-branch \
+            --repo "${{ github.repository }}" 2>&1) && rc=0 || rc=$?
+          if [ "${rc}" -eq 0 ]; then
+            echo "Immediate merge was blocked; auto-merge enabled on PR #${pr_number}."
           else
-            output=$(gh pr merge --auto --merge "${pr_number}" \
-              --subject "auto: sync main into develop" \
-              --repo "${{ github.repository }}" 2>&1) && rc=0 || rc=$?
-            if [ "${rc}" -eq 0 ]; then
-              echo "Auto-merge (merge commit) enabled on PR #${pr_number}."
-            else
-              echo "::warning::Could not enable auto-merge on PR #${pr_number}: ${output}"
-            fi
+            echo "::warning::Could not merge PR #${pr_number}: ${output}"
           fi
