@@ -205,7 +205,7 @@ Once everything is installed and settled, the `Status` for every application wil
 App                       Version  Status  Scale  Charm                      Channel       Rev  
 haproxy                            active      1  haproxy                    2.8/stable     485
 landscape-debarchive               active      1  landscape-debarchive       latest/stable  2
-landscape-server                   active      3  landscape-server           26.04/stable   485
+landscape-server                   active      3  landscape-server           26.04/stable   505
 landscape-task-handler             active      1  landscape-task-handler     latest/stable  3 
 postgresql                16.11    active      3  postgresql                 16/stable      1047 
 rabbitmq-server           3.12.1   active      3  rabbitmq-server            latest/edge    252
