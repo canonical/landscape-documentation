@@ -582,7 +582,15 @@ Use `lsctl`:
 sudo lsctl restart
 ```
 
-### (Landscape 26.04 only) Install the task handler snap
+### Install additional services
+
+**Select your Landscape Server version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+
+#### Install the task handler snap
 
 Install the `landscape-task-handler` snap on the same machine as your Landscape Server installation.
 
@@ -635,7 +643,7 @@ To view task handler logs, run:
 sudo snap logs landscape-task-handler -n 50
 ```
 
-### (Landscape 26.04 only) Install the outbox snap
+#### Install the outbox snap
 
 Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
 
@@ -663,9 +671,19 @@ To view outbox logs, run:
 sudo snap logs landscape-outbox -n 50
 ```
 
-### (Landscape 26.04 only) Install the Debarchive snap
+#### Install the Debarchive snap
 
 The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`.
+
+````
+
+````{tab-item} Landscape Server 25.10 and earlier
+
+These service installation steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
+
+````
+
+`````
 
 ### Create the first user
 

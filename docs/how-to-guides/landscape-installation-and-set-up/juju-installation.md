@@ -66,24 +66,34 @@ Previously, there were additional bundles: `landscape-dense` and `landscape-dens
 
 Once the deployment has finished, Landscape Server is accessible in different ways depending on the deployment approach:
 
-**Pre-26.04 deployment:**
+**Select your Landscape Server version:**
 
-  - Access via the IP address of the first `haproxy` unit
-  - HAProxy typically runs on port 443 (HTTPS)
+`````{tab-set}
 
-**26.04+ deployment:**
+````{tab-item} Landscape Server 26.04 LTS and later
 
   - HAProxy routes traffic based on the `hostname` set in the `haproxy-route` relation, **not** by port alone, so you must connect using that hostname (for example, with `--resolve` or a DNS entry pointing it at the HAProxy unit's IP). Connecting directly to the HAProxy unit's own IP address (with no matching `Host` header) hits HAProxy's default page instead of Landscape.
   - If you set `root_url`, that hostname is what you must connect with.
   - If you leave `root_url` unset, the `landscape-server` charm falls back to using the leader unit's IP address as the routing hostname, so you'd need to connect using *that* IP as the `Host` header/SNI value (not the HAProxy unit's IP). In practice, setting `root_url` to a real hostname is much simpler for testing.
   - HAProxy handles load balancing across all Landscape Server units once you're routed correctly.
 
-**With external load balancer (LBaaS):**
+```{tip}
+For the 26.04+ deployment, set `root_url` to a real hostname and point that hostname (via DNS or `curl --resolve`) at your HAProxy unit's IP address (or external load balancer) before testing.
+```
+
+````
+
+````{tab-item} Landscape Server 25.10 and earlier
+
+  - Access via the IP address of the first `haproxy` unit
+  - HAProxy typically runs on port 443 (HTTPS)
+
+````
+
+`````
+
+### With an external load balancer (LBaaS)
 
   - When using a cross-model HAProxy deployment
   - Access via the hostname specified in your `root_url`
   - The external HAProxy distributes traffic across Landscape Server units
-
-```{tip}
-For the 26.04+ deployment, set `root_url` to a real hostname and point that hostname (via DNS or `curl --resolve`) at your HAProxy unit's IP address (or external load balancer) before testing.
-```

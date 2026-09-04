@@ -7,7 +7,7 @@ myst:
 (how-to-set-up-repository-mirroring-end-to-end)=
 # How to set up repository mirroring end-to-end (26.04 and later)
 
-> See also: {ref}`explanation-repo-mirroring-2604`
+> See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
 This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
@@ -15,7 +15,7 @@ This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}
 
 This guide demonstrates how to mirror part of the Ubuntu archive, publish it to object storage, and configure a client machine to install packages from the published repository. By the end of this guide, you'll have a repository mirror set up and a package on your client machine.
 
-It uses an opinionated setup with Amazon S3 as the publication target, but the steps generally apply to other object stores and configurations. For a broader set of repository management tasks, see {ref}`how-to-manage-repos-web-portal-2604`.
+It uses an opinionated setup with Amazon S3 as the publication target, but the steps generally apply to other object stores and configurations. For a broader set of repository management tasks, see {ref}`how-to-manage-repos-web-portal`.
 
 The workflow uses these repository management components:
 
@@ -169,6 +169,6 @@ sudo apt install <PACKAGE>
 
 ## See also
 
-- {ref}`explanation-repo-mirroring-2604`
-- {ref}`how-to-manage-repos-web-portal-2604`
+- {ref}`explanation-repo-mirroring`
+- {ref}`how-to-manage-repos-web-portal`
 - {ref}`how-to-debarchive-repository-management`

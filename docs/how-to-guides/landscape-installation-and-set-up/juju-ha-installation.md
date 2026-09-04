@@ -21,7 +21,11 @@ The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` 
 
 ## Architecture overview
 
-### 26.04 architecture (recommended)
+**Select your Landscape Server version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
 
 Starting with the 26.04 version, Landscape Server uses the following architecture:
 
@@ -38,7 +42,9 @@ HAProxy sits in front of all Landscape Server units and routes traffic to the ap
 ```{include} /reuse/charm-ha-architecture-2604.md
 ```
 
-### Before 26.04
+````
+
+````{tab-item} Landscape Server 25.10 and earlier
 
 The older approach uses:
 
@@ -49,6 +55,10 @@ The older approach uses:
 
 ```{include} /reuse/charm-ha-architecture-pre-2604.md
 ```
+
+````
+
+`````
 
 ## Prerequisites
 
@@ -66,13 +76,14 @@ For improved database performance and scalability in high-load deployments, cons
 
 ## Deployment approach selection
 
-Choose the appropriate deployment approach based on your needs:
+Choose the appropriate deployment approach based on your needs, then follow that section:
 
-- **For new deployments:** Use the 26.04 approach (recommended)
-- **For existing deployments:** Continue with the older approach or migrate using {ref}`how-to-migrate-to-26-04-charm`
+- **For new deployments:** Use the {ref}`26.04 deployment <how-to-ha-deployment-2604>` (recommended)
+- **For existing deployments:** Continue with the {ref}`pre-26.04 deployment <how-to-ha-deployment-pre-2604>` or migrate using {ref}`how-to-migrate-to-26-04-charm`
 
 ---
 
+(how-to-ha-deployment-2604)=
 ## 26.04 deployment (recommended)
 
 This section covers deploying Landscape Server with the external HAProxy charm introduced in version 26.04.
@@ -194,7 +205,7 @@ Once everything is installed and settled, the `Status` for every application wil
 App                       Version  Status  Scale  Charm                      Channel       Rev  
 haproxy                            active      1  haproxy                    2.8/stable     485
 landscape-debarchive               active      1  landscape-debarchive       latest/stable  2
-landscape-server                   active      3  landscape-server           26.04/stable   485
+landscape-server                   active      3  landscape-server           26.04/stable   505
 landscape-task-handler             active      1  landscape-task-handler     latest/stable  3 
 postgresql                16.11    active      3  postgresql                 16/stable      1047 
 rabbitmq-server           3.12.1   active      3  rabbitmq-server            latest/edge    252
@@ -385,6 +396,7 @@ flowchart TD
     LS0 & LS1 & LS2 --- RMQ
 ```
 
+(how-to-ha-deployment-pre-2604)=
 ## Pre-26.04 deployment
 
 ```{warning}
