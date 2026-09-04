@@ -5,6 +5,17 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      source_branch:
+        description: "Branch to sync from. Override only to test the workflow."
+        required: false
+        default: main
+        type: string
+      target_branch:
+        description: "Branch to sync into. Override only to test the workflow."
+        required: false
+        default: develop
+        type: string
 
 concurrency:
   group: sync-main-to-develop
@@ -18,20 +29,30 @@ jobs:
 
     env:
       GH_TOKEN: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
-      SYNC_BRANCH: sync-main-into-develop
 
     steps:
-      - name: Check whether develop is already up to date
+      - name: Resolve the branches to sync
+        run: |
+          source_branch="${{ inputs.source_branch || 'main' }}"
+          target_branch="${{ inputs.target_branch || 'develop' }}"
+          {
+            echo "SOURCE_BRANCH=${source_branch}"
+            echo "TARGET_BRANCH=${target_branch}"
+            echo "SYNC_BRANCH=sync-${source_branch//\//-}-into-${target_branch//\//-}"
+          } >> "$GITHUB_ENV"
+          echo "Syncing ${source_branch} into ${target_branch}."
+
+      - name: Check whether the target branch is already up to date
         id: compare
         run: |
           ahead_by=$(gh api \
-            "repos/${{ github.repository }}/compare/develop...main" \
+            "repos/${{ github.repository }}/compare/${TARGET_BRANCH}...${SOURCE_BRANCH}" \
             --jq '.ahead_by')
           echo "ahead_by=${ahead_by}" >> "$GITHUB_OUTPUT"
           if [ "${ahead_by}" = "0" ]; then
-            echo "develop is already up to date with main – no sync needed."
+            echo "${TARGET_BRANCH} is already up to date with ${SOURCE_BRANCH} – no sync needed."
           else
-            echo "main is ${ahead_by} commit(s) ahead of develop – sync required."
+            echo "${SOURCE_BRANCH} is ${ahead_by} commit(s) ahead of ${TARGET_BRANCH} – sync required."
           fi
 
       - name: Check out the repository
@@ -41,8 +62,9 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
 
-      # The PR head must be a throwaway branch, not main itself. If the PR head
-      # is main, conflicts can only be resolved by committing develop into main.
+      # The PR head must be a throwaway branch, not the source branch itself.
+      # If the PR head is main, conflicts can only be resolved by committing
+      # develop into main.
       - name: Update the sync branch
         if: steps.compare.outputs.ahead_by != '0'
         id: branch
@@ -52,7 +74,7 @@ jobs:
 
           existing_pr=$(gh pr list \
             --repo "${{ github.repository }}" \
-            --base develop \
+            --base "${TARGET_BRANCH}" \
             --head "${SYNC_BRANCH}" \
             --state open \
             --json number \
@@ -60,18 +82,18 @@ jobs:
 
           if [ -n "${existing_pr}" ]; then
             # The branch may carry manual conflict resolutions, so advance it
-            # instead of resetting it onto main.
+            # instead of resetting it onto the source branch.
             echo "Reusing sync branch behind open PR #${existing_pr}."
             git checkout -B "${SYNC_BRANCH}" "origin/${SYNC_BRANCH}"
-            if git merge --no-edit origin/main; then
+            if git merge --no-edit "origin/${SOURCE_BRANCH}"; then
               git push origin "${SYNC_BRANCH}"
             else
               git merge --abort
-              echo "::warning::main does not merge cleanly into ${SYNC_BRANCH}. Resolve the conflicts on PR #${existing_pr}."
+              echo "::warning::${SOURCE_BRANCH} does not merge cleanly into ${SYNC_BRANCH}. Resolve the conflicts on PR #${existing_pr}."
               echo "blocked=true" >> "$GITHUB_OUTPUT"
             fi
           else
-            git checkout -B "${SYNC_BRANCH}" origin/main
+            git checkout -B "${SYNC_BRANCH}" "origin/${SOURCE_BRANCH}"
             git push --force-with-lease origin "${SYNC_BRANCH}"
           fi
 
@@ -86,10 +108,10 @@ jobs:
           if [ -z "${pr_number}" ]; then
             pr_url=$(gh pr create \
               --repo "${{ github.repository }}" \
-              --base develop \
+              --base "${TARGET_BRANCH}" \
               --head "${SYNC_BRANCH}" \
-              --title "merge: sync main into develop" \
-              --body "Automated sync of main into develop. Triggered by commit ${{ github.sha }}.")
+              --title "merge: sync ${SOURCE_BRANCH} into ${TARGET_BRANCH}" \
+              --body "Automated sync of ${SOURCE_BRANCH} into ${TARGET_BRANCH}. Triggered by commit ${{ github.sha }}.")
             pr_number=$(echo "${pr_url}" | grep -oE '[0-9]+$')
             echo "Created PR #${pr_number}: ${pr_url}"
           else
@@ -124,7 +146,7 @@ jobs:
           fi
 
           if gh pr merge --merge "${pr_number}" \
-            --subject "auto: sync main into develop" \
+            --subject "auto: sync ${SOURCE_BRANCH} into ${TARGET_BRANCH}" \
             --delete-branch \
             --repo "${{ github.repository }}"; then
             echo "Merged PR #${pr_number}."
@@ -133,7 +155,7 @@ jobs:
 
           # Required checks or reviews can block an immediate merge; queue it instead.
           output=$(gh pr merge --auto --merge "${pr_number}" \
-            --subject "auto: sync main into develop" \
+            --subject "auto: sync ${SOURCE_BRANCH} into ${TARGET_BRANCH}" \
             --delete-branch \
             --repo "${{ github.repository }}" 2>&1) && rc=0 || rc=$?
           if [ "${rc}" -eq 0 ]; then
