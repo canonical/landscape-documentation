@@ -20,15 +20,18 @@ You won’t need the online machine anymore after you’ve downloaded the packag
 ## Install Landscape Server
 
 ```{note}
-This example uses {ref}`reference-release-notes-24-04-lts` and the {ref}`how-to-quickstart-installation` package.
+This example uses the {ref}`how-to-quickstart-installation` package.
 ```
 
 ### Add the Landscape Server PPA
 
-On an online machine with network access, you need to add the Landscape Server PPA. To add the Landscape Server 24.04 LTS PPA, run:
+On an online machine with network access, you need to add the Landscape Server PPA, replacing `<LANDSCAPE_PPA>` with the appropriate repository:
 
 ```bash
-sudo add-apt-repository -y ppa:landscape/self-hosted-24.04
+sudo add-apt-repository -y <LANDSCAPE_PPA>
+```
+
+```{include} /reuse/landscape-ppa-description.md
 ```
 
 ### Download the Landscape Server packages
@@ -43,7 +46,13 @@ sudo apt --download-only -y install landscape-server-quickstart
 
 All of the necessary packages for Landscape Server should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
 
-#### (Landscape 26.04 only) Download the Landscape Server snap services
+**Select your Landscape Server version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+
+#### Download the Landscape Server snap services
 
 Landscape 26.04 LTS depends on the following snap services, `landscape-task-handler`, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately. The `landscape-outbox` and `landscape-debarchive` snaps currently use the `core22` base and require the `snapd` system snap to be available on the offline machine, so download all five snaps:
 
@@ -59,6 +68,16 @@ snap download landscape-debarchive --beta
 
 For each snap, a `.snap` file and a `.assert` file will be produced.
 
+````
+
+````{tab-item} Landscape Server 25.10 and earlier
+
+These steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
+
+````
+
+`````
+
 ### Install Landscape Server in the offline environment
 
 Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and transfer them into a directory readable by APT (for example, `/srv/landscape-packages`). The `apt --download-only` command above downloads the full dependency closure into the APT cache, so APT can resolve package dependencies locally without reaching the network. Install the packages with commands similar to:
@@ -72,7 +91,13 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
   /srv/landscape-packages/*.deb
 ```
 
-#### (Landscape 26.04 only) Install the Landscape Server snap services
+**Select your Landscape Server version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+
+#### Install the Landscape Server snap services
 
 Copy the downloaded snap artifacts, carry them into the offline or airgapped environment, and install them with `snap`. You can install the packages with a command similar to:
 
@@ -92,6 +117,16 @@ sudo snap install landscape-outbox_*.snap
 sudo snap ack landscape-debarchive_*.assert
 sudo snap install landscape-debarchive_*.snap
 ```
+
+````
+
+````{tab-item} Landscape Server 25.10 and earlier
+
+These steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
+
+````
+
+`````
 
 Once Landscape Server is installed, you can finish setting up Landscape similar to how you would with an online server. See the {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installation guides for more details. This also includes setting up your first administrator and attaching your {ref}`explanation-licenses`.
 

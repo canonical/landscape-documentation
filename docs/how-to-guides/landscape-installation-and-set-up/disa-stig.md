@@ -474,6 +474,8 @@ sudo -u postgres createuser --no-createdb --no-createrole --no-superuser landsca
 
 Landscape uses multiple databases. To create them:
 
+**Select your Landscape Server version:**
+
 `````{tab-set}
 
 ````{tab-item} Landscape Server 26.04 LTS and later
@@ -1028,6 +1030,8 @@ The following changes are required in the sections below. Remove any passwords i
 
 The `[schema]` section's SSL settings apply only to the superuser (`landscape_superuser`) connection. They're independent of the `[stores]` SSL settings, which apply to the regular `landscape` user connection. PostgreSQL certificate authentication requires the certificate CN to match the connecting username, so each role must have its own client certificate.
 
+**Select your Landscape Server version:**
+
 `````{tab-set}
 
 ````{tab-item} Landscape Server 26.04 LTS and later
@@ -1313,6 +1317,8 @@ sudo chmod 600 /etc/landscape/service.conf
 
 Click on the link to download the following sample file. Remember to replace any placeholder values with the correct ones for your configuration.
 
+**Select your Landscape Server version:**
+
 `````{tab-set}
 
 ````{tab-item} Landscape Server 26.04 LTS and later
@@ -1388,7 +1394,13 @@ If `core22` is already installed, refresh it to the FIPS channel instead:
 snap refresh core22 --channel=fips-updates/stable
 ```
 
-### Install and configure the Landscape Task Handler (Landscape 26.04+)
+**Select your Landscape Server version:**
+
+`````{tab-set}
+
+````{tab-item} Landscape Server 26.04 LTS and later
+
+#### Install and configure the Landscape Task Handler
 
 The {ref}`Landscape Task Handler <explanation-server-architecture-task-handler>` interacts with the Landscape databases and its own database. Since the task handler runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
 
@@ -1466,7 +1478,7 @@ sudo snap set landscape-task-handler landscape.service-conf-file=/root/snap/land
 
 See {ref}`how to configure the task-handler <how-to-configure-task-handler>` for additional information.
 
-### Install and configure the Landscape Outbox (Landscape 26.04+)
+#### Install and configure the Landscape Outbox
 
 The {ref}`Landscape Outbox <explanation-server-architecture-outbox>` interacts with the message broker and databases. Since the outbox runs as a snap under the `root` user, it requires its own copies of the client certificates for authentication.
 
@@ -1541,7 +1553,7 @@ sudo snap restart landscape-outbox
 See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional information.
 
 
-### Install and configure the Landscape Deb Archive (Landscape 26.04+)
+#### Install and configure the Landscape Deb Archive
 
 The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`. When configuring connections to the database, be sure to follow the instructions to connect using SSL. It is recommended to create a separate `landscape_debarchive` user for the database, which will require its own client certificates.
 
@@ -1565,6 +1577,16 @@ sudo cp /etc/landscape/service.conf /root/snap/landscape-debarchive/common/servi
 sudo chown -R root:root /root/snap/landscape-debarchive/common/
 sudo snap set landscape-debarchive deb.archive.service-conf-file=/root/snap/landscape-debarchive/common/service.conf
 ```
+
+````
+
+````{tab-item} Landscape Server 25.10
+
+These service installation steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
+
+````
+
+`````
 
 ## Configure authentication
 

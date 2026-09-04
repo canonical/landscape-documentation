@@ -14,3 +14,14 @@ You can use the Landscape legacy API primarily through HTTPS calls, but you can 
 For details on how to use the legacy API with HTTPS and a JWT, see {ref}`how-to-use-legacy-api-http`.
 
 For details on how to use the legacy API command-line client (snap), see {ref}`how-to-use-legacy-api-cli`.
+
+For details on how to use the legacy API Python module, see {ref}`how-to-use-legacy-api-python`.
+
+```{toctree}
+:titlesonly:
+:maxdepth: 1
+
+Use the legacy API command-line client <use-the-legacy-api-command-line-client>
+Use the legacy API via HTTPS requests <use-the-legacy-api-via-http-requests>
+Use the legacy API Python module <use-the-legacy-api-python-module>
+```
