@@ -290,7 +290,7 @@ Add a new backend section:
 
 ```text
 backend debarchive
-    http-request set-path %[path,regsub(^/debarchive,/)]
+    http-request replace-path ^/debarchive/(.*) /\1
     server debarchive 127.0.0.1:8100 check
 ```
 
