@@ -70,6 +70,6 @@ Example response:
 
 ```json
 {
-  "max_people_count": 10
+  "max_people_count": 5
 }
 ```
