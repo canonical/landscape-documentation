@@ -128,6 +128,7 @@ Optional parameters:
 
 - `available_only`: only include licenses that have open seats.
 - `active_only`: only include licenses that are not expired.
+- `include_details`: include the additional fields `used_seats` and `license_type` in each result.
 
 Example request:
 
