@@ -47,3 +47,29 @@ Example response:
   ]
 }
 ```
+
+## GET `/max-people-count`
+
+Get the maximum number of administrators allowed in the current account.
+
+Path parameters:
+
+- None
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET https://landscape.canonical.com/api/v2/max-people-count -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "max_people_count": 5
+}
+```

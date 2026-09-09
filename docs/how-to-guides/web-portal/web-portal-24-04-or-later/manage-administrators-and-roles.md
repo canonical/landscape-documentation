@@ -30,6 +30,8 @@ Users who receive an invitation will see an HTML link in the email. Clicking thi
 
 The first person to click on the link and submit information becomes an administrator, even if it’s not the person with the name and email address to which you sent the invitation. Take care to keep track of the status of administrator invitations.
 
+There is a default limit of 5 administrators for an account. To increase that limit, reach out to support.
+
 ## Remove administrators
 
 To remove an administrator from Landscape:
