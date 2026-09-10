@@ -48,3 +48,17 @@ If you've investigated with these steps and still have issues with your activiti
 If activities are stuck in progress, this means the client received the activity, but the client has not yet sent a response back to the server. This could be for many different reasons, such as a timeout, network issues, the Landscape Client service restarted, a large message backlog on the client, slow message processing on the server, or the activity taking longer than expected to complete.
 
 For those with Support contracts, we recommend you contact [Support](https://support-portal.canonical.com/) if you observe idle "in progress" activities because the underlying issues can have many different root causes.
+
+## Repository activities (Landscape 25.10 and earlier)
+
+> See also: {ref}`how-to-migrate-repository-mirrors-to-debarchive`
+
+In Landscape 25.10 and earlier, repository mirroring activities were handled by an internal reprepro-based system. If a repository sync remains queued or in progress for an excessive amount of time, it may be stuck on a lock held by that system.
+
+Landscape Server includes an `unblock-repo-activities` script, located in `/opt/canonical/landscape/`, that cancels the stuck activities and clears the associated locks. Run it as the `landscape` user with no arguments:
+
+```bash
+/opt/canonical/landscape/unblock-repo-activities
+```
+
+This script does not apply to Landscape 26.04 LTS and later, where repository management is handled by the Debarchive service instead of reprepro.
