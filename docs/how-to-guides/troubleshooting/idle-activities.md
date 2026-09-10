@@ -51,11 +51,9 @@ For those with Support contracts, we recommend you contact [Support](https://sup
 
 ## Repository activities (Landscape 25.10 and earlier)
 
-> See also: {ref}`how-to-migrate-repository-mirrors-to-debarchive`
-
 In Landscape 25.10 and earlier, repository mirroring activities were handled by an internal reprepro-based system. If a repository sync remains queued or in progress for an excessive amount of time, it may be stuck on a lock held by that system.
 
-Landscape Server includes an `unblock-repo-activities` script, located in `/opt/canonical/landscape/`, that cancels the stuck activities and clears the associated locks. Run it as the `landscape` user with no arguments:
+Landscape Server includes an `unblock-repo-activities` script, that cancels the stuck activities and clears the associated locks. Run it as the `landscape` user with no arguments:
 
 ```bash
 /opt/canonical/landscape/unblock-repo-activities
