@@ -96,13 +96,15 @@ To upgrade a basic Juju deployment:
 
     ```bash
     juju config landscape-server landscape_ppa="ppa:landscape/self-hosted-24.04"
-
-    juju ssh landscape-server/0 "sudo add-apt-repository ppa:landscape/self-hosted-24.04 -y"
     ```
 
     If you’re upgrading to a different version of Landscape, use the appropriate PPA.
 
-    **Note**: At the moment, the `landscape-server` charm only adds the PPA source during installation, so you will need to manually update this PPA on each of the `landscape-server` units. When the charm is updated, this will no longer be necessary.
+    **Note**: From the 26.04 version of the `landscape-server` charm onwards, the `upgrade` action adds the configured PPA before it upgrades the packages, so no further action is needed. On earlier versions of the charm, the PPA source is only added during installation, so you must also add it manually on each of the `landscape-server` units:
+
+    ```bash
+    juju ssh landscape-server/0 "sudo add-apt-repository ppa:landscape/self-hosted-24.04 -y"
+    ```
 3. Pause Landscape services on all `landscape-server` units
 
     ```bash

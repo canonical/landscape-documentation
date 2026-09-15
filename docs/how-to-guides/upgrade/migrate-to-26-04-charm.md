@@ -190,7 +190,7 @@ juju refresh landscape-server --channel 26.04/stable
 ```{note}
 `juju refresh` updates the charm revision, but it does not upgrade the installed `landscape-server` deb packages on existing units.
 
-The landscape-server charm only adds the PPA source during installation, so you will need to manually update this PPA on each of the landscape-server units. For the PPA and package upgrade steps, see {ref}`how-to-heading-upgrade-juju`. You've already refreshed the charm, so skip the `juju refresh landscape-server` step at the start of that procedure.
+Set `landscape_ppa` to `ppa:landscape/self-hosted-26.04` in the charm configuration, then follow the package upgrade steps in {ref}`how-to-heading-upgrade-juju`. The 26.04 charm's `upgrade` action adds the configured PPA before it upgrades the packages, so you don't need to add it manually on each unit. You've already refreshed the charm, so skip the `juju refresh landscape-server` step at the start of that procedure.
 ```
 
 Wait for the refresh to complete and the services to restart:
