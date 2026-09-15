@@ -238,7 +238,7 @@ Substitute `self-signed-certificates` above with whichever TLS provider you depl
 The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy gRPC route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the HAProxy unit's IP address. This dependency is one-directional: outbox connects to Task Handler, not the other way around.
 ```
 
-Restart the Landscape Task Handler and Debarchive snaps on each unit after the integrations are complete:
+Restart the Landscape Task Handler and Debarchive snaps on each unit after the integrations are complete. Repeat the following for each unit:
 
 ```bash
 juju run landscape-task-handler/0 restart-snap
