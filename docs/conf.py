@@ -177,6 +177,7 @@ linkcheck_ignore = [
     # as markdown links; these use Terraform's git:: subdirectory syntax, not
     # real URLs, so they 404 when linkcheck fetches them directly.
     r"https://github\.com/canonical/.*-operator\.git//.*",
+    r"https?://landscape\.local(/.*)?",
 ]
 
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
