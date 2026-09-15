@@ -1609,7 +1609,7 @@ Obtain an SSL certificate signed from a DoD Certificate Authority. This will usu
 To configure the Landscape Client package, run the following command. You choose the computer name.
 
 ```bash
-sudo landscape-config --computer-title "<COMPUTER_NAME>" --account-name standalone --url https://<SERVER_NAME>/message-system --ping-url http://<SERVER_NAME>/ping –ssl-public-key /location/of/ca-certificates.crt  
+sudo landscape-config --computer-title "<COMPUTER_NAME>" --account-name standalone --url https://<SERVER_NAME>/message-system --ping-url http://<SERVER_NAME>/ping --ssl-public-key /location/of/ca-certificates.crt  
 ```
 
 You can now accept your client in the Landscape web portal, and it will begin to upload data.
