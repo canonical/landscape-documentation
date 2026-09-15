@@ -41,7 +41,7 @@ The Landscape Server charm supports two deployment architectures. The Landscape 
 
 ````{tab-item} Landscape Server 26.04 LTS and later
 
-- External HAProxy charm (`2.8/stable`) for load balancing, using the `haproxy-route` interface
+- External HAProxy charm (`2.8/stable` or `latest/stable`) for load balancing, using the `haproxy-route` or `reverseproxy` interface
 - PostgreSQL 14+ with modern `postgresql_client` interface
 - TLS certificates via a `tls-certificates` interface provider integrated with HAProxy
 - `landscape-debarchive` charm for Debarchive repository management
@@ -55,7 +55,7 @@ The Landscape Server charm supports two deployment architectures. The Landscape 
 ````{tab-item} Landscape Server 25.10 and earlier
 
 - External HAProxy charm for load balancing, using the `reverseproxy` interface
-- PostgreSQL ≥ 14 with legacy `pgsql` interface
+- PostgreSQL ≤ 14 with legacy `pgsql` interface
 
 ```{include} /reuse/charm-ha-architecture-pre-2604.md
 ```
@@ -70,7 +70,7 @@ For migration from older deployments to 26.04, see {ref}`how-to-migrate-to-26-04
 
 | Charm                         | Landscape 26.04 LTS                                                  | Before 26.04                                    |
 | ----------------------------- | -------------------------------------------------------------------- | ----------------------------------------------- |
-| **PostgreSQL**                | Required (PostgreSQL 14+, `postgresql_client` interface)             | Required (PostgreSQL 14, `pgsql` interface, deprecated)     |
+| **PostgreSQL**                | Required (PostgreSQL 14+, `postgresql_client` interface)             | Required (PostgreSQL ≤ 14, `pgsql` interface, deprecated)     |
 | **RabbitMQ Server**           | Required                                                             | Required                                        |
 | **HAProxy**                   | Required (`2.8/x`, `haproxy-route` interface recommended; `latest/x`, `reverseproxy` interface (available for backwards compatibility but deprecated)) | Required (`latest/x`, `reverseproxy` interface) |
 | **TLS Certificates Provider** | Required (integrated with HAProxy, e.g., `self-signed-certificates`) | Not used                                        |
