@@ -236,9 +236,9 @@ Section `[schema]`:
 - Change the value of `store_user` to the landscape super user you created above during the DB installation
 - Add an entry for `store_password` with the password that was chosen in that same step
 
-Section `[appserver]`:
+Section `[landscape]` (Landscape 24.04 LTS) or `[appserver]` (Landscape 26.04 LTS):
 
-- Add an entry for `secret_token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`. Note that Landscape Server 24.04 LTS uses percent signs % for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as %% so that it is interpreted as %.
+- Add an entry for `secret-token` (Landscape 24.04 LTS) or `secret_token` (Landscape 26.04 LTS) and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`. Note that Landscape Server 24.04 LTS uses percent signs % for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as %% so that it is interpreted as %.
 
 If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names. For example, to only allow connections on localhost, you may have a configuration like the following:
 
