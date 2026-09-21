@@ -591,6 +591,38 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /v1/operations/{operation}:cancel:
+        post:
+            tags:
+                - OperationService
+            description: Cancels the operation.
+            operationId: OperationService_CancelOperation
+            parameters:
+                - name: operation
+                  in: path
+                  description: The operation id.
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CancelOperationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CancelOperationResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /v1/operations:batchGet:
         post:
             tags:
@@ -1161,6 +1193,19 @@ components:
                         Unreachable publication targets. Populated when the request opts into
                          `return_partial_success` and reading across collections.
             description: The response message for retrieving a batch of publication targets.
+        CancelOperationRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: The name of the operation resource to be cancelled.
+            description: |-
+                The request message for
+                 [Operations.CancelOperation][google.longrunning.Operations.CancelOperation].
+        CancelOperationResponse:
+            type: object
+            properties: {}
+            description: The response message for cancelling a long-running operation.
         FilesystemTarget:
             required:
                 - path
