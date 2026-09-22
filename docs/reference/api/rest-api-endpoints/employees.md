@@ -7,8 +7,19 @@ myst:
 (reference-rest-api-employees)=
 # Employees
 
-The employee endpoints manage employee records and the computers associated with
-them. These endpoints require the employee management feature to be enabled.
+The employee endpoints manage employee records and the computers associated with them. These endpoints require the employee management feature to be enabled.
+
+```{note}
+This feature is available from Landscape server `25.10` onwards, and only on self-hosted deployments. It is not intended for {ref}`Quickstart <how-to-quickstart-installation>` deployments.
+
+To enable employee management features in self-hosted Landscape, add:
+
+```ini
+[features]
+employee_management = true
+```
+
+The employee management feature is intended to be used with autoinstall provisioning. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment` to configure the deployment and enable employee management and autoinstall provisioning.
 
 ## GET `/employees`
 
@@ -20,10 +31,8 @@ Query parameters:
 - `offset`: The offset inside the list of employees.
 - `search`: Return employees whose names match the search string.
 - `is_active`: If true, return active employees. If false, return inactive employees.
-- `issuer_ids`: A comma-separated list of OIDC issuer IDs. Return only employees
-  associated with one of these issuers.
-- `with_computers`: If true, include the computers associated with each employee.
-  Defaults to false.
+- `issuer_ids`: A comma-separated list of OIDC issuer IDs. Return only employees associated with one of these issuers.
+- `with_computers`: If true, include the computers associated with each employee. Defaults to false.
 
 Example request:
 
@@ -82,14 +91,11 @@ Example response:
 }
 ```
 
-Each object in `computers` contains the fields shown in the example. The field
-is `null` unless `with_computers` is true.
+Each object in `computers` contains the fields shown in the example. The field is `null` unless `with_computers` is true.
 
 ## POST `/employees`
 
-Create an employee record. Employees are usually created automatically during
-authentication; use this endpoint when an employee record must be created
-explicitly.
+Create an employee record. Employees are usually created automatically during authentication; use this endpoint when an employee record must be created explicitly.
 
 Required request body parameters:
 
@@ -116,8 +122,20 @@ curl -X POST https://landscape.canonical.com/api/v2/employees \
   }'
 ```
 
-The endpoint returns `201 Created` and an employee object with the fields
-described in the GET response.
+Example response (`201 Created`):
+
+```json
+{
+  "id": 12,
+  "name": "Alex Example",
+  "email": "alex@example.com",
+  "issuer_id": 4,
+  "subject": "alex-example",
+  "is_active": true,
+  "autoinstall_file": null,
+  "computers": null
+}
+```
 
 ## GET `/employees/<int:id>`
 
@@ -129,8 +147,7 @@ Path parameters:
 
 Query parameters:
 
-- `with_computers`: If true, include the computers associated with the employee.
-  Defaults to false.
+- `with_computers`: If true, include the computers associated with the employee. Defaults to false.
 
 Example request:
 
@@ -139,7 +156,22 @@ curl -X GET "https://landscape.canonical.com/api/v2/employees/12?with_computers=
   -H "Authorization: Bearer $JWT"
 ```
 
-The endpoint returns `200 OK` and an employee object containing:
+Example response (`200 OK`):
+
+```json
+{
+  "id": 12,
+  "name": "Alex Example",
+  "email": "alex@example.com",
+  "issuer_id": 4,
+  "subject": "alex-example",
+  "is_active": true,
+  "autoinstall_file": null,
+  "computers": null
+}
+```
+
+The response contains:
 
 - `id`: The employee ID.
 - `name`: The employee's name.
@@ -150,14 +182,11 @@ The endpoint returns `200 OK` and an employee object containing:
 - `autoinstall_file`: Always `null`. This field is reserved for future use.
 - `computers`: The associated computers, or `null` unless `with_computers` is true.
 
-All employees currently receive the account's default autoinstall file. The API
-does not yet support different autoinstall files for individual employees, so
-`autoinstall_file` is always returned as `null` and is reserved for future use.
+All employees currently receive the account's default autoinstall file. The API does not yet support different autoinstall files for individual employees, so `autoinstall_file` is always returned as `null` and is reserved for future use.
 
 ## PATCH `/employees/<int:id>`
 
-Modify an employee record. Include only the fields to change. Sending an empty
-object, or setting fields to `null`, leaves those fields unchanged.
+Modify an employee record. Include only the fields to change. Sending an empty object, or setting fields to `null`, leaves those fields unchanged.
 
 Path parameters:
 
@@ -180,13 +209,24 @@ curl -X PATCH https://landscape.canonical.com/api/v2/employees/12 \
   -d '{"is_active": false}'
 ```
 
-The endpoint returns `200 OK` and the updated employee object.
+Example response (`200 OK`):
+
+```json
+{
+  "id": 12,
+  "name": "Alex Example",
+  "email": "alex@example.com",
+  "issuer_id": 4,
+  "subject": "alex-example",
+  "is_active": false,
+  "autoinstall_file": null,
+  "computers": null
+}
+```
 
 ## DELETE `/employees/<int:id>`
 
-Delete an employee record. This is a break-glass operation that is not exposed
-in the Landscape web portal. Deleting an employee also removes the associated
-auditing.
+Delete an employee record.
 
 Path parameters:
 
@@ -203,8 +243,7 @@ The endpoint returns `204 No Content`.
 
 ## POST `/employees/<int:id>/offboard`
 
-Offboard an employee. This deactivates the employee and can optionally sanitize
-and/or remove the computers associated with the employee.
+Offboard an employee. This deactivates the employee and can optionally sanitize and/or remove the computers associated with the employee.
 
 Path parameters:
 
@@ -212,10 +251,8 @@ Path parameters:
 
 Optional request body parameters:
 
-- `sanitize_instances`: If true, sanitize all computers associated with the
-  employee. Defaults to false.
-- `remove_instances`: If true, remove all computers associated with the employee
-  from Landscape. Defaults to false.
+- `sanitize_instances`: If true, sanitize all computers associated with the employee. Defaults to false.
+- `remove_instances`: If true, remove all computers associated with the employee from Landscape. Defaults to false.
 
 Example request:
 
@@ -226,8 +263,28 @@ curl -X POST https://landscape.canonical.com/api/v2/employees/12/offboard \
   -d '{"sanitize_instances": true}'
 ```
 
-The endpoint returns `202 Accepted` and an activity object for the offboarding
-operation.
+Example response (`202 Accepted`):
+
+```json
+{
+  "activity_status": "succeeded",
+  "approval_time": null,
+  "completion_time": null,
+  "creation_time": "2026-09-22T10:15:00Z",
+  "creator": {
+    "email": "admin@example.com",
+    "id": 1,
+    "name": "Admin Example"
+  },
+  "deliver_delay_window": 0,
+  "id": 115,
+  "parent_id": null,
+  "result_code": null,
+  "result_text": null,
+  "summary": "Offboarding employee",
+  "type": "ActivityGroup"
+}
+```
 
 ## POST `/employees/<int:employee_id>/computers`
 
