@@ -38,14 +38,40 @@ Create a plan.
 
 - `id`: UUID of the new plan.
 - `action`: The package operation. One of `install`, `remove`, `hold`, `unhold`, `upgrade`, `change_version`.
+- `state`: Current plan state. Known values are `pending`, `generating`, `ready`, `executing`, `executed`, `failed`, `expired`.
 - `created_at`: ISO 8601 timestamp of when the plan was created.
-- `item_count`: Number of computer/package pairs the plan targets.
+- `expires_at`: ISO 8601 timestamp when a `ready` plan expires, or `null` in other states.
+- `item_count`: Number of computer/package pairs the plan targets, or `null` if content hasn't been generated.
 - `executed_at`: ISO 8601 timestamp of execution, or `null` if the plan hasn't been executed.
 - `activity_id`: ID of the activity created by execution, or `null` if the plan hasn't been executed.
 
+The plan is created in the `pending` state and will become `ready` once the plan is fully generated. Use `GET /package-change-plans/<id>` to poll until the plan is ready.
+
 ### Limits
 
-Creation returns `400` if the query selects more than 10,000 computers, if the plan references more than 50 packages, or if the account has created more than 100,000 plan items in the last 24 hours. Referencing a package ID that doesn't exist also returns `400`.
+Landscape enforces limits on the number of selected computers and the number of distinct resolved target package IDs. Requests to create change plans that exceed either of these limits return a `too_many_instances` or `too_many_packages` error.
+
+TODO: add specific limits
+
+### Quotas
+
+Landscape SaaS applies an account quota based on plan items created in the previous 24 hours. There is no quota on self-hosted deployments. Requests to create change plans that exceed the daily quota will return a `quota_exceeded` error.
+
+TODO: add specific limit
+
+### Creation errors
+
+- `400 Bad Request`: `invalid_computer_query`, `too_many_instances`, `too_many_packages`, `quota_exceeded`, `unknown_packages`, or `invalid_version_change`.
+
+Error responses use the standard API error response:
+
+```json
+{
+  "error": "invalid_computer_query",
+  "message": "The computer query is invalid.",
+  "detail": null
+}
+```
 
 (install_config)=
 ### `install_config`
@@ -93,8 +119,10 @@ Example response (201 Created):
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "install",
+  "state": "pending",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 50,
+  "expires_at": null,
+  "item_count": null,
   "executed_at": null,
   "activity_id": null
 }
@@ -130,8 +158,10 @@ Example response (201 Created):
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "remove",
+  "state": "pending",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 12,
+  "expires_at": null,
+  "item_count": null,
   "executed_at": null,
   "activity_id": null
 }
@@ -164,8 +194,10 @@ Example response (201 Created):
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "hold",
+  "state": "pending",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 20,
+  "expires_at": null,
+  "item_count": null,
   "executed_at": null,
   "activity_id": null
 }
@@ -198,8 +230,10 @@ Example response (201 Created):
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "unhold",
+  "state": "pending",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 20,
+  "expires_at": null,
+  "item_count": null,
   "executed_at": null,
   "activity_id": null
 }
@@ -254,8 +288,10 @@ Example response (201 Created):
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "upgrade",
+  "state": "pending",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 85,
+  "expires_at": null,
+  "item_count": null,
   "executed_at": null,
   "activity_id": null
 }
@@ -299,8 +335,10 @@ Example response (201 Created):
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "change_version",
+  "state": "pending",
   "created_at": "2026-01-15T10:00:00+00:00",
-  "item_count": 10,
+  "expires_at": null,
+  "item_count": null,
   "executed_at": null,
   "activity_id": null
 }
@@ -309,6 +347,14 @@ Example response (201 Created):
 ## GET `/package-change-plans/<id>`
 
 Retrieve a plan's status and metadata. Unknown IDs return `404`.
+
+Clients should stop status polling on `ready`, `executed`, `failed`, or `expired`. Treat `pending`, `generating`, `executing`, and unrecognized states as still in progress.
+
+`executed` means the activity was created. Use the activity status to track package execution.
+
+A plan expires 24 hours after entering `ready`. Plans in `executed`, `failed`, or `expired` are removed 24 hours after entering that state.
+
+Items, summaries, and exclusions are readable only while a plan is `ready`, `executing`, or `executed`. These endpoints return `409` with `invalid_plan_state` and the current `state` otherwise.
 
 Path parameters:
 
@@ -331,12 +377,18 @@ Example response (200 OK), for a plan that has been executed:
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "action": "install",
+  "state": "executed",
   "created_at": "2026-01-15T10:00:00+00:00",
+  "expires_at": null,
   "item_count": 50,
   "executed_at": "2026-01-15T10:05:00+00:00",
   "activity_id": 42
 }
 ```
+
+### Retrieval errors
+
+Unknown plan IDs return `404 Not Found` with the standard error object.
 
 ## POST `/package-change-plans/<id>:execute`
 
@@ -355,6 +407,28 @@ Request body:
 - None
 
 This endpoint is idempotent: the second call returns the activity created by the first.
+
+Only `ready` and `executed` plans can be executed. Other states return `409` with `invalid_plan_state`; a `ready` plan with no items returns `409` with `empty_plan`. If another operation changes the state concurrently, execution returns `409` with `transition_conflict`; retry the request to act on the current state. If the retained activity no longer exists, an `executed` plan returns `404` with `activity_not_found` without dispatching another activity.
+
+A dispatch failure marks the plan `failed` and returns `500` with `dispatch_timeout` or `internal_error`.
+
+### Execution errors
+
+- `409 Conflict`: `invalid_plan_state` when the plan cannot be executed, or `empty_plan` when a ready plan has no items.
+- `404 Not Found`: `activity_not_found` when an executed plan's retained activity no longer exists.
+- `500 Internal Server Error`: `dispatch_timeout` or `internal_error` when dispatch fails.
+
+Each error is returned as the standard error object. An `invalid_plan_state` response also includes the plan's current `state`:
+
+```json
+{
+  "error": "invalid_plan_state",
+  "message": "The plan cannot be executed in its current state.",
+  "detail": {
+    "state": "generating"
+  }
+}
+```
 
 Example request:
 
@@ -394,8 +468,19 @@ Query parameters:
 
 - `computer_ids`: Comma-separated computer IDs to filter by.
 - `computer_instance_name`: Case-insensitive prefix match on a computer's instance name.
-- `limit`: Maximum number of items to return.
+- `install`, `remove`, `hold`, `unhold`: Package ID to match for the corresponding plan action.
+- `upgrade`: Destination package ID to match for an upgrade plan.
+- `change_version`: JSON object with `from_package_id` and `to_package_id` to match for a change-version plan.
+- `limit`: Maximum number of items to return (default: `50`, maximum: `1000`).
 - `offset`: Offset into the result list (default: `0`).
+
+Set at most one action filter, and use the filter matching the plan's action. Invalid or mismatched action filters return `400` with `filter_mismatch`.
+
+### Item-list errors
+
+- `400 Bad Request`: `filter_mismatch` for invalid or mismatched action filters.
+- `404 Not Found`: when the plan does not exist.
+- `409 Conflict`: `invalid_plan_state` when plan contents are unavailable in the plan's current state.
 
 Example request:
 
@@ -427,7 +512,7 @@ Example response (200 OK)--`install` plan:
   ],
   "count": 1,
   "next": null,
-  "prev": null,
+  "previous": null
 }
 ```
 
@@ -459,7 +544,7 @@ Example response (200 OK)--`change_version` plan:
   ],
   "count": 1,
   "next": null,
-  "prev": null,
+  "previous": null
 }
 ```
 
@@ -469,20 +554,26 @@ Response fields:
 - `items`: The plan items.
   - `action`: A discriminated union keyed on `type`:
     - `install`, `remove`, `hold`, `unhold`: includes `package`, with `id`, `name`, and `version`.
-    - `upgrade`, `change_version`: includes `from_package` and `to_package`, each with `id`, `name`, and `version`.
+    - `upgrade`: includes `to_package`, with `id`, `name`, and `version`.
+    - `change_version`: includes `from_package` and `to_package`, each with `id`, `name`, and `version`.
   - `computer`: The targeted computer.
     - `id`: ID of the computer.
     - `name`: Instance name of the computer.
 - `count`: Total number of items.
 - `next`: The link to the next page.
-- `prev`: The link to the previous page.
+- `previous`: The link to the previous page.
 
 (package-change-plan-exclusions)=
 ## GET `/package-change-plans/<id>/exclusions`
 
 List the packages that couldn't be applied to some computers while resolving the plan, with the number of affected computers per package. These are the same aggregations returned in the `exclusions` field of `/summary`.
 
-A plan references at most 50 packages, so this endpoint isn't paginated and takes no filters.
+This endpoint isn't paginated and takes no filters.
+
+### Exclusion-list errors
+
+- `404 Not Found`: when the plan does not exist.
+- `409 Conflict`: `invalid_plan_state` when plan contents are unavailable in the plan's current state.
 
 Path parameters:
 
@@ -543,6 +634,11 @@ Query parameters:
 - `computer_ids`: Comma-separated computer IDs to filter by.
 - `computer_instance_name`: Case-insensitive prefix match on a computer's instance name.
 
+### Exclusion-detail errors
+
+- `404 Not Found`: when the plan does not exist or `package_name` is not excluded by the plan.
+- `409 Conflict`: `invalid_plan_state` when plan contents are unavailable in the plan's current state.
+
 Example request--filter by instance name:
 
 ```bash
@@ -592,6 +688,11 @@ Query parameters:
 
 - None
 
+### Summary errors
+
+- `404 Not Found`: when the plan does not exist.
+- `409 Conflict`: `invalid_plan_state` when plan contents are unavailable in the plan's current state.
+
 Example request:
 
 ```bash
@@ -636,7 +737,7 @@ Response fields:
 
 ## DELETE `/package-change-plans/<id>`
 
-Delete a plan.
+Delete a plan in any state.
 
 Path parameters:
 
@@ -658,3 +759,5 @@ curl -s -X DELETE "https://landscape.canonical.com/api/v2/package-change-plans/5
 ```
 
 Response: `204 No Content` with an empty body.
+
+Deleting an unknown or already-deleted plan also returns `204`.
