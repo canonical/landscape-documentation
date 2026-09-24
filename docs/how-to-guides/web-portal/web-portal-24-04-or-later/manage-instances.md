@@ -97,6 +97,6 @@ You can also use {ref}`removal profiles <reference-terms-removal-profile>` to au
 
 ## Manage licenses for instances
 
-You can view your current licenses from the web portal in **Org. Settings** > **Licenses**. Clicking **Add license** takes you to [ubuntu.com/pro](ubuntu.com/pro) to manage your Pro licenses.
+You can view your current licenses from the web portal in **Org. Settings** > **Licenses**. To get additional licenses, click **Add license**, which takes you to the [Ubuntu Pro](https://ubuntu.com/pro) page.
 
 For more information about how licensing works in Landscape, see the {ref}`licensing documentation <explanation-licenses>`.
