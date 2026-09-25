@@ -43,12 +43,13 @@ To create a new mirror:
     - Note: You can't use the same name for multiple mirrors, so you should make this name unique and descriptive of the repository. If you want to reuse a name later, you'll have to delete the original mirror.
 1. Select the type of mirror from the **Source Type** dropdown menu. For example, select **Ubuntu archive** if you're mirroring an Ubuntu repository.
 1. In the **Source URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
-1. For signature preserving mirrors, select the **Preserve upstream signing key** checkbox.
+1. (Optional) For signature preserving mirrors, select the **Preserve upstream signing key** checkbox.
 1. Enter the distribution you want to mirror. If you're mirroring an Ubuntu repository, select the distribution from the dropdown menu. Otherwise, enter the distribution name. For example, `bookworm`.
 1. Select the components you want to mirror. If you're mirroring an Ubuntu repository, select the components from the dropdown menu. Otherwise, enter a comma-separated list of components. For example, `non-free-firmware, main`.
 1. Select the architectures you want to mirror. If you're mirroring an Ubuntu repository, select the architectures from the dropdown menu. Otherwise, enter a comma-separated list of architectures. For example, `amd64, arm64`.
-1. For filtered mirrors, use the **Filter** text box to narrow down which packages are retrieved instead of mirroring the entire selected component(s).
-1. If you're not preserving the upstream signing key, and using a third-party repository, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
+1. (Optional) For filtered mirrors, use the **Filter** text box to narrow down which packages are retrieved instead of mirroring the entire selected component(s).
+1. (Optional) Select the download options you want to include.
+1. (Optional) If you're using a third-party repository and not preserving the upstream signing key, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
 
 ### Use repository snapshots
 
