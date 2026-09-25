@@ -195,6 +195,12 @@ juju remove-relation landscape-server:db postgresql:db-admin
 juju integrate landscape-server:database postgresql:database
 ```
 
+Wait for the services to restart:
+
+```bash
+juju status --watch 2s
+```
+
 ### Step 8: Update PostgreSQL (optional)
 
 If you want to upgrade to a newer PostgreSQL version (e.g., from 14 to 16) as part of this migration, follow the backup and restore procedures in {ref}`how-to-back-up-restore-tear-down-charmed-deployment` to migrate your data to a new PostgreSQL deployment.
@@ -237,14 +243,6 @@ Substitute `self-signed-certificates` above with whichever TLS provider you depl
 ```{important}
 The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy gRPC route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the HAProxy unit's IP address. This dependency is one-directional: outbox connects to Task Handler, not the other way around.
 ```
-
-Restart the Landscape Task Handler and Debarchive snaps on each unit after the integrations are complete. Repeat the following for each unit:
-
-```bash
-juju run landscape-task-handler/0 restart-snap
-juju run landscape-debarchive/0 restart-snap
-```
-
 
 ### Step 10: Verify the deployment
 
