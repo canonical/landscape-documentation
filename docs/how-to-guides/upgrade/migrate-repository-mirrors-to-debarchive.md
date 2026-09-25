@@ -35,6 +35,12 @@ This guide assumes you have already:
 
 - Installed and configured the `landscape-debarchive` snap ({ref}`how-to-debarchive-repository-management`)
 
+If you are upgrading from a version prior to Landscape 25.10, Debarchive will not be able to read a pagination secret from the Landscape `service.conf` file. You will need to use a manually set pagination secret for the duration of the upgrade.
+
+```bash
+sudo snap set landscape-debarchive deb.archive.pagination.secret=$(openssl rand -base64 32 | tr '+/' '-_')
+```
+
 ## Set environment variables
 
 Set the following environment variables for use throughout this guide, using the FQDN of your Landscape deployment and a JWT token for authentication with the REST API:
@@ -443,6 +449,12 @@ Only remove a distribution after confirming that its packages have been successf
 ### 2. Upgrade Landscape Server
 
 Follow {ref}`how-to-upgrade-to-26-04-lts` to upgrade to Landscape 26.04 LTS.
+
+If you set Debarchive's pagination secret manually earlier you should unset it and have Debarchive read it from the upgraded Landscape's `service.conf` file instead:
+
+```bash
+sudo snap unset landscape-debarchive deb.archive.pagination.secret
+```
 
 ## Publish the migrated repositories
 
