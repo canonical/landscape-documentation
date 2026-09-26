@@ -247,6 +247,8 @@ NodeJS
 NPM
 OAuth
 Ocata
+offboard
+offboarding
 oidc
 OIDC
 Okta
