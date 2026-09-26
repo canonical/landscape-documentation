@@ -141,3 +141,13 @@ We published the 24.04.13 point release on 5 June 2026.
 We published the 24.04.14 point release on 12 June 2026.
 
 - fix: add recursive chown to gnupg directory(landscape-server)
+
+## Landscape 24.04.15 Point Release
+
+We published the 24.04.15 point release on 23 Sept 2026.
+
+- fix: UI bug fixes from landscape-ui commits 6d50652 and 2c25e90
+- feat: add about healthcheck endpoint
+- fix: update unblock repo activities script to cancel queued activities
+- fix: backport python 3.12 regex warning (LP: #2069468)
+- fix: allow scoped (non-global) admins to manage repository profiles (LP: #2151742)
