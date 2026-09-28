@@ -144,7 +144,7 @@ We published the 24.04.14 point release on 12 June 2026.
 
 ## Landscape 24.04.15 Point Release
 
-We published the 24.04.15 point release on 23 Sept 2026.
+We published the 24.04.15 point release on 28 Sept 2026.
 
 - fix: UI bug fixes from landscape-ui commits 6d50652 and 2c25e90
 - feat: add about healthcheck endpoint
