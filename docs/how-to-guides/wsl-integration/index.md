@@ -19,7 +19,6 @@ Prepare your Landscape environment and register Windows hosts to enable WSL mana
 
 Configure Landscape after upgrade <configure-landscape-after-upgrade>
 Register WSL hosts <register-wsl-hosts>
-Scripted deployments <configure-scripted-deployments>
 ```
 
 ## Manage WSL instances
