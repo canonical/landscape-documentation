@@ -21,7 +21,7 @@ The 26.04 version introduces significant architectural changes:
 
 | Aspect                   | Landscape 26.04 LTS                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` and `haproxy-route-tcp` interfaces)                     | External HAProxy charm (`reverseproxy` interface)            |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` and `haproxy-route-tcp` interfaces)                     | External HAProxy charm (`http` interface)            |
 | **PostgreSQL interface** | Modern `postgresql_client` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
