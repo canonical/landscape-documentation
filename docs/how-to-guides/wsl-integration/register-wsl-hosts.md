@@ -96,7 +96,7 @@ From your Windows machine:
     ssl_public_key = C:\Users\username\Downloads\landscape_server.pem
     ```
 
-```{note}
+````{note}
 If your scripts start `ubuntu-pro-agent.exe` directly rather than through the Ubuntu Pro for WSL app, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable to `false` in the same session before starting the agent:
 
 ```powershell
@@ -104,7 +104,7 @@ $env:GRPC_ENFORCE_ALPN_ENABLED = "false"
 ```
 
 When the agent is started by the app, its launcher sets this variable for you. Without it, the agent can't connect to Landscape. The value must be exactly `false` (case-insensitive). Don't use `[Environment]::SetEnvironmentVariable(..., "User")` here: it writes to the registry but doesn't update the current PowerShell process, so an agent launched from the same session won't see it. This is a temporary requirement until the Landscape server negotiates ALPN on the hostagent endpoint (port 6554).
-```
+````
 
 ## Finalize the Windows machine registration
 
