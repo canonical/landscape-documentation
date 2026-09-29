@@ -21,7 +21,7 @@ The 26.04 version introduces significant architectural changes:
 
 | Aspect                   | Landscape 26.04 LTS                                                                         | Pre-26.04                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` interface)                     | External HAProxy charm (`reverseproxy` interface)            |
+| **Load balancing**       | External HAProxy charm (`haproxy` at `2.8/stable`, `haproxy-route` and `haproxy-route-tcp` interfaces)                     | External HAProxy charm (`reverseproxy` interface)            |
 | **PostgreSQL interface** | Modern `postgresql_client` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
@@ -46,7 +46,7 @@ juju remove-relation landscape-server:website haproxy:reverseproxy
 ```
 
 ```{note}
-The legacy `website` relation (`reverseproxy` interface) is still available for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10, so it is recommended to complete this migration to the `haproxy-route` interface rather than continuing to rely on the legacy relation.
+The legacy `website` relation (`http` interface) is still available for backwards compatibility, but is deprecated. Support will be removed in Landscape 26.10, so it is recommended to complete this migration to the `haproxy-route` interface rather than continuing to rely on the legacy relation.
 ```
 
 **For deployments older than 25.10 only:**
@@ -67,6 +67,7 @@ Deploy the HAProxy charm and a TLS certificates provider before refreshing the c
 
 ````{important}
 If your existing HAProxy application is not running on Ubuntu 24.04 LTS, remove the application and redeploy it on the `2.8/stable` channel. The `2.8/stable` HAProxy charm runs on Ubuntu 24.04 LTS, and `juju refresh` does not change the base of existing units.
+
 ```sh
 juju remove-application haproxy
 juju deploy haproxy --channel 2.8/stable
@@ -158,16 +159,24 @@ juju integrate landscape-server:message-server-haproxy-route haproxy:haproxy-rou
 juju integrate landscape-server:api-haproxy-route haproxy:haproxy-route
 juju integrate landscape-server:package-upload-haproxy-route haproxy:haproxy-route
 juju integrate landscape-server:repository-haproxy-route haproxy:haproxy-route
-juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
 ```
 
 ```{important}
 When using HAProxy charm from the `2.8/x` track, the `ssl_cert` and `ssl_key` charm configuration options for Landscape Server are unused since TLS is now managed by the HAProxy charm via the `tls-certificates` interface.
 ```
 
+#### Hostagent Mesenger (WSL)
+
+The Hostagent Messenger service is optional and only needs to be enabled if using {ref}`Landscape's WSL integration <how-to-guides-wsl-integration-index>`. To use the service with the charm, enable it via [the `enable_hostagent_messenger` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_hostagent_messenger) and integrate it with HAProxy via the `haproxy-tcp-route` interface:
+
+```sh
+juju config landscape-server enable_hostagent_messenger=true
+juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
+```
+
 #### Ubuntu Installer Attach
 
-The Ubuntu Installer Attach service requires the `landscape-ubuntu-installer-attach` package. If you are migrating from a version earlier than 25.10, enable the service after the Landscape Server package upgrade is complete.
+The Ubuntu Installer Attach service is optional and requires the `landscape-ubuntu-installer-attach` package. If you are {ref}`using Landscape to provision an autoinstall file <how-to-ubuntu-installer-set-up-landscape>`,  enable the service via [the `enable_ubuntu_installer_attach` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_ubuntu_installer_attach) and integrate it with HAProxy via the `haproxy-tcp-route` interace:
 
 ```bash
 juju config landscape-server enable_ubuntu_installer_attach=true
