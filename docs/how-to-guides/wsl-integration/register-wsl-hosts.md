@@ -108,6 +108,10 @@ To finish registering your WSL host to Landscape:
 
 Your Windows host machine is now registered in Landscape. To register WSL-Ubuntu instances, see {ref}`how-to-manage-wsl-instances`.
 
+```{note}
+If you configure Ubuntu Pro for WSL through scripts that start `ubuntu-pro-agent.exe` directly instead of the app, see {ref}`how-to-wsl-configure-scripted-deployments` for a required environment variable.
+```
+
 (howto-heading-register-wsl-host-troubleshoot)=
 ## (If necessary) Troubleshoot
 
