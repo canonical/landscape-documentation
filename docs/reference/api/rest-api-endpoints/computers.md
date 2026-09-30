@@ -1217,6 +1217,63 @@ Example response:
 }
 ```
 
+## GET `/computers/<int:computer_id>/users/<string:username>/pending-activities`
+
+Get pending profile-edit and group-membership activities for an existing Linux
+user. Requires `ViewActivity` permission for the computer.
+
+Path parameters:
+
+- `computer_id`: The numerical ID of the computer.
+- `username`: The Linux username on that computer.
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/john/pending-activities" \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "count": 2,
+  "results": [
+    {
+      "activity_id": 73,
+      "summary": "Edit user john (UID 1000)",
+      "activity_status": "undelivered",
+      "creation_time": "2026-08-18T08:39:08Z",
+      "completion_time": null,
+      "changes": [
+        {"kind": "profile", "field": "name"},
+        {"kind": "profile", "field": "location"}
+      ]
+    },
+    {
+      "activity_id": 61,
+      "summary": "Remove user john from group admin",
+      "activity_status": "undelivered",
+      "creation_time": "2026-08-18T08:38:43Z",
+      "completion_time": null,
+      "changes": [
+        {"kind": "additional_group", "group_name": "admin", "operation": "remove"}
+      ]
+    }
+  ]
+}
+```
+
+Results contain the latest pending activity for each editable profile field
+and for additional groups, newest first (up to seven activities). `changes`
+identifies affected fields or group operations without exposing profile values.
+Succeeded, failed, and canceled activities are excluded.
+
 ## GET `/computers/activities`
 
 Get details of the activities for specified computer(s).
