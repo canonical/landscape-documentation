@@ -17,4 +17,6 @@ Canonical and the Ubuntu Security Team have the following documents which are re
 
 ## How to report a security issue
 
-To report security issues with Landscape, you can follow the guidance in [Ubuntu Security’s security disclosure and embargo policy](https://ubuntu.com/security/disclosure-policy), or you can [report a bug to the Landscape team on Launchpad](https://bugs.launchpad.net/landscape-project). Launchpad lets you flag a bug as "security", and you can optionally mark the bug as private.
+To report a security issue, file a Private Security Report in the corresponding repository or email [security@ubuntu.com](mailto:security@ubuntu.com) with a description of the issue, the steps you took to create the issue, affected versions, and, if known, mitigations for the issue.
+
+The [Ubuntu Security disclosure and embargo policy](https://ubuntu.com/security/disclosure-policy) contains more information about what you can expect when you contact us and what we expect from you.
