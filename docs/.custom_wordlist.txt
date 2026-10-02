@@ -223,6 +223,7 @@ miscategorized
 misconfigured
 misconfigurations
 Mitaka
+mitigations
 MITM
 mTLS
 MTU
