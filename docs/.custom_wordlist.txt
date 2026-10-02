@@ -146,6 +146,7 @@ HashiCorp’s
 HashiCorp's
 hashid
 Hashids
+healthcheck
 heredoc
 heredocs
 HMAC
