@@ -44,6 +44,8 @@ Create a plan.
 - `item_count`: Number of computer/package pairs the plan targets, or `null` if content hasn't been generated.
 - `executed_at`: ISO 8601 timestamp of execution, or `null` if the plan hasn't been executed.
 - `activity_id`: ID of the activity created by execution, or `null` if the plan hasn't been executed.
+- `error_code`: Error code when the plan is in the `failed` state, or `null` otherwise.
+- `error_message`: Error message when the plan is in the `failed` state, or `null` otherwise.
 
 The plan is created in the `pending` state and will become `ready` once the plan is fully generated. Use `GET /package-change-plans/<id>` to poll until the plan is ready.
 
@@ -124,7 +126,9 @@ Example response (201 Created):
   "expires_at": null,
   "item_count": null,
   "executed_at": null,
-  "activity_id": null
+  "activity_id": null,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -163,7 +167,9 @@ Example response (201 Created):
   "expires_at": null,
   "item_count": null,
   "executed_at": null,
-  "activity_id": null
+  "activity_id": null,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -199,7 +205,9 @@ Example response (201 Created):
   "expires_at": null,
   "item_count": null,
   "executed_at": null,
-  "activity_id": null
+  "activity_id": null,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -235,7 +243,9 @@ Example response (201 Created):
   "expires_at": null,
   "item_count": null,
   "executed_at": null,
-  "activity_id": null
+  "activity_id": null,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -293,7 +303,9 @@ Example response (201 Created):
   "expires_at": null,
   "item_count": null,
   "executed_at": null,
-  "activity_id": null
+  "activity_id": null,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -340,7 +352,9 @@ Example response (201 Created):
   "expires_at": null,
   "item_count": null,
   "executed_at": null,
-  "activity_id": null
+  "activity_id": null,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -382,7 +396,9 @@ Example response (200 OK), for a plan that has been executed:
   "expires_at": null,
   "item_count": 50,
   "executed_at": "2026-01-15T10:05:00+00:00",
-  "activity_id": 42
+  "activity_id": 42,
+  "error_code": null,
+  "error_message": null
 }
 ```
 
@@ -410,7 +426,7 @@ This endpoint is idempotent: the second call returns the activity created by the
 
 Only `ready` and `executed` plans can be executed. Other states return `409` with `invalid_plan_state`; a `ready` plan with no items returns `409` with `empty_plan`. If another operation changes the state concurrently, execution returns `409` with `transition_conflict`; retry the request to act on the current state. If the retained activity no longer exists, an `executed` plan returns `404` with `activity_not_found` without dispatching another activity.
 
-A dispatch failure marks the plan `failed` and returns `500` with `dispatch_timeout` or `internal_error`.
+A dispatch failure marks the plan `failed` and returns `500` with `execution_timeout` or `internal_error`.
 
 ### Execution errors
 
