@@ -366,6 +366,58 @@ Example response (201 Created):
 }
 ```
 
+## GET `/package-change-plans`
+
+List the package change plans created by the authenticated user.
+
+Query parameters:
+
+- `states`: Comma-separated plan states. The endpoint returns plans that match any listed state. Known values are `pending`, `generating`, `ready`, `executing`, `executed`, `failed`, and `expired`. If omitted, the endpoint returns plans in every state.
+- `limit`: Maximum number of plans to return (default: `50`, maximum: `100`).
+- `offset`: Offset into the result list (default: `0`).
+
+Plans are ordered by creation time, newest first. Plans with the same creation time are ordered by ID in descending order.
+
+Example request:
+
+```bash
+curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans?states=ready,failed&limit=50&offset=0" \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response (200 OK):
+
+```json
+{
+  "count": 1,
+  "results": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "action": "install",
+      "state": "ready",
+      "created_at": "2026-01-15T10:00:00+00:00",
+      "expires_at": "2026-01-16T10:00:05+00:00",
+      "item_count": 50,
+      "executed_at": null,
+      "activity_id": null,
+      "error_code": null,
+      "error_message": null
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
+
+Response fields:
+
+- `count`: Total number of plans that match the request before pagination.
+- `results`: Matching plans. Each entry has the same fields as a single package change plan response.
+- `next`: Relative URL for the next page, or `null` when there isn't one.
+- `previous`: Relative URL for the previous page, or `null` when there isn't one.
+
+Invalid state or pagination values return `400 Bad Request`.
+
 ## GET `/package-change-plans/<id>`
 
 Retrieve a plan's status and metadata. Unknown IDs return `404`.
