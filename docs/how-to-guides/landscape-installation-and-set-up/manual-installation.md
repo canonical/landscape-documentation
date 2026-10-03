@@ -149,7 +149,7 @@ The application server will host the following Landscape services:
 Additionally, other services needed by Landscape will also be running on this machine, such as:
 
 - `apache`
-- `rabbitmq-server`
+- `rabbitmq-server` (on Ubuntu 22.04 or 24.04)
 
 ### Attach your Ubuntu Pro token
 
@@ -168,14 +168,20 @@ sudo add-apt-repository <LANDSCAPE_PPA>
 
 ### Install the server package
 
-Install the server package and its dependencies:
+```{warning}
+Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x, so the Quickstart installation is not supported on Ubuntu 26.04. For a manual installation on Ubuntu 26.04, RabbitMQ must run on a separate machine with Ubuntu 22.04 LTS or Ubuntu 24.04 LTS.
+```
+
+On an Ubuntu 22.04 or 24.04 application server, install Landscape and RabbitMQ:
 
 ```bash
 sudo apt-get install landscape-server rabbitmq-server apache2
 ```
 
-```{note}
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x, so the Quickstart installation is not supported on Ubuntu 26.04. For a manual installation on Ubuntu 26.04, RabbitMQ must run on a separate machine with Ubuntu 22.04 LTS or Ubuntu 24.04 LTS.
+On an Ubuntu 26.04 application server, install Landscape without the local RabbitMQ package:
+
+```bash
+sudo apt-get install landscape-server apache2
 ```
 
 ### (If needed) Install the (legacy) license file
@@ -191,6 +197,8 @@ Make sure it's readable by the `landscape` user and root.
 If you don't have a legacy license file, Landscape will manage client machines with Ubuntu Pro subscriptions associated with them.
 
 ### Configure rabbitmq
+
+The following steps configure a local RabbitMQ server on Ubuntu 22.04 or 24.04.
 
 ```{note}
 You may want to change the default timeout of 30 minutes in RabbitMQ. See {ref}`how-to-configure-rabbitmq`.
