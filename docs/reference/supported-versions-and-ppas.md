@@ -20,6 +20,8 @@ The following versions of Landscape Server are currently supported. This table a
 
 **Latest stable releases** are published every six months, typically in April and October. Support ends when the next release ships. Users must upgrade to maintain support.
 
+Versions of landscape-debarchive, landscape-outbox, and landscape-task-handler tied to a Landscape Server release follow that release's support lifecycle.
+
 ## PPAs
 
 ```{include} _includes/landscape-ppas-table.md
