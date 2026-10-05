@@ -328,7 +328,7 @@ A pending registration can belong to an existing machine instead of a new one. T
 
 Note that this must be done in the *classic* web portal.
 
-Map the pending registration to the existing machine entry instead of accepting it as a new machine. In the classic web portal, use the **Computer** field on the pending registration form to select the existing registered computer. Then **Accept** the registration.
+Map the pending registration to the existing machine entry instead of accepting it as a new machine. In the legacy portal, use the **Computer** field on the pending registration form to select the existing registered computer. Then **Accept** the registration.
 
 (heading-client-duplicate-instances)=
 ## Client appears as a duplicate instance/machine

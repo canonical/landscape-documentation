@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Discover Landscape's two web portals: the modern 24.04+ interface and the classic portal with comprehensive management features."
+    description: "Discover Landscape's two web portals: the modern 24.04+ interface and the legacy portal with comprehensive management features."
 ---
 
 (how-to-guides-web-portal-index)=
@@ -9,8 +9,8 @@ myst:
 
 Landscape currently supports two web portals.
 
-- **Web portal (24.04 LTS or later)**: Our newer interface, which is focused on usability. We're actively building new features to this portal and migrating the remaining, existing features from the classic portal.
-- **Classic web portal**: Our original interface, which includes some features not yet available in the newer web portal.
+- **Portal (24.04 LTS or later)**: Our newer interface, which is focused on usability. We're actively building new features to this portal and migrating the remaining, existing features from the legacy portal.
+- **Legacy portal**: Our original interface, which includes some features not yet available in the portal.
 
 There are some differences in features between the two portals. You may use both portals, depending on the task.
 

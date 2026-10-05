@@ -28,7 +28,7 @@ After you're registered, you’ll receive a confirmation email to validate your 
 ## Log in to Landscape SaaS
 
 ```{note}
-The instructions in this guide use Landscape's **classic** web portal. These steps still broadly apply to the newer web portal, which you can preview by clicking **New Web Portal** from the header in your Landscape account.
+The instructions in this guide use Landscape's **legacy portal**. These steps still broadly apply to the portal, which you can preview by clicking **New Web Portal** from the header in your Landscape account.
 ```
 
 Once your account is set up, you can access Landscape SaaS at the following address: https://landscape.canonical.com/.

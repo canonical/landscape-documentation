@@ -29,9 +29,9 @@ For the `license.txt` method, you get your first `license.txt` file from Canonic
 
 Note that new `license.txt` files become available on their start date. For renewal customers, the start date is the day after your old licenses expire.
 
-## License types (classic web portal)
+## License types (legacy portal)
 
-In the classic web portal, you can view the number of seats used per license type for each computer from the **Licenses** tab.
+In the legacy portal, you can view the number of seats used per license type for each computer from the **Licenses** tab.
 
 Here’s a summary of the different license types in Landscape and what they indicate:
 
