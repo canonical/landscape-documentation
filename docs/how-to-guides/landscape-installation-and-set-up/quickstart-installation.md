@@ -29,7 +29,7 @@ The following minimum requirements are needed to install Landscape Server 24.04 
 To install prerequisites, run:
 
 ```bash
-sudo apt update && sudo apt install -y ca-certificates software-properties-common
+sudo apt update && sudo apt install -y software-properties-common
 ```
 
 The `add-apt-repository` command line utility is necessary to add the PPA which contains the Landscape Server software. The `software-properties-common` package must be added to access `add-apt-repository`.

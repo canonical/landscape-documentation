@@ -146,6 +146,7 @@ HashiCorp’s
 HashiCorp's
 hashid
 Hashids
+healthcheck
 heredoc
 heredocs
 HMAC
@@ -222,6 +223,7 @@ miscategorized
 misconfigured
 misconfigurations
 Mitaka
+mitigations
 MITM
 mTLS
 MTU

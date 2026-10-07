@@ -22,9 +22,9 @@ You can register new WSL instances from the Landscape web portal. To do this:
 1. Go to **Instances** > Open the Windows host machine > **WSL** tab > **Create new instance**
 1. Complete the form
 
-This creates an activity to create the new WSL instance. Once that activity succeeds, accept the pending WSL instance. You can do this from the homepage or under **Instances** > **Review pending instances**.
+This creates an activity for the Windows host to create the new WSL instance. Once that activity succeeds, accept the pending WSL instance. You can do this from the homepage or under **Instances** > **Review pending instances**.
 
-Now, your WSL instance is registered in your Landscape account. You can view it from the **WSL** tab under your Windows host machine.
+Now, your WSL instance is registered in your Landscape account. You can view it from the **WSL** tab under your Windows host machine. Whenever an activity is created for the WSL instance, two activities will be created for the Windows host: one to notify Ubuntu Pro for WSL that there is an activity queued for the WSL instance, and another to notify Ubuntu Pro for WSL when the activity for the WSL instance is finished.
 
 ## Use a Landscape API
 
