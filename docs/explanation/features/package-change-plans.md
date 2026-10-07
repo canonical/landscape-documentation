@@ -28,11 +28,11 @@ Landscape does not query instances while generating a plan. The plan is a snapsh
 | State | What it means | What you can do |
 | --- | --- | --- |
 | `pending` or `generating` | Landscape is preparing the plan. | Check the plan status and wait until it is ready. |
-| `ready` | The plan is ready to review and execute. It expires after the review period. | Review its items and exclusions, then execute it before it expires. |
+| `ready` | The plan is ready to review and execute. It expires after the 24 hour review period. | Review its items and exclusions, then execute it before it expires. |
 | `executing` | Landscape is creating the package activity. | Wait for the activity to be created. |
 | `executed` | The package activity has been created; package operations may still be running. | Follow the activity to check progress and results. |
 | `failed` | Landscape could not create the package activity. | Review the plan's error details and create a new plan to try again. |
-| `expired` | The review period has passed. | Create a new plan if you still want to execute the changes. |
+| `expired` | The 24 hour review period has passed. | Create a new plan if you still want to execute the changes. |
 
 ## Plan items, exclusions, and summary
 

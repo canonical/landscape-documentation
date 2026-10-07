@@ -7,7 +7,7 @@ myst:
 (reference-rest-api-package-change-plans)=
 # Package Change Plans
 
-A package change plan stages a bulk package operation over a computer selection. Creating a plan resolves the selection into concrete computer/package pairs.
+A package change plan stages a bulk package action over a computer selection. The plan asynchronously resolves the selection into concrete computer/package pairs which may be reviewed before execution.
 
 ```{note}
 You must be running Landscape Server 26.10 or later to use the REST API for package management.
@@ -432,7 +432,7 @@ A dispatch failure marks the plan `failed` and returns `500` with `execution_tim
 
 - `409 Conflict`: `invalid_plan_state` when the plan cannot be executed, or `empty_plan` when a ready plan has no items.
 - `404 Not Found`: `activity_not_found` when an executed plan's retained activity no longer exists.
-- `500 Internal Server Error`: `dispatch_timeout` or `internal_error` when dispatch fails.
+- `500 Internal Server Error`: `execution_timeout` or `internal_error` when dispatch fails.
 
 Each error is returned as the standard error object. An `invalid_plan_state` response also includes the plan's current `state`:
 
