@@ -28,10 +28,11 @@ Landscape Server logs are located in `/var/log/landscape-server/`.
 - `api.log`: Logs for the API services that handles requests from the web UI (`landscape-ui`) and `landscape-api` clients
 - `appserver.log`: Logs for the application server for the *legacy* web UI
 - `async-frontend.log`: Logs for the `async-frontend` server for the *legacy* web UI
-- `cancel-expired-activities.log`: Logs output from the cron job that cancels activities not delivered before their deadline
+- `cancel-expired-activities.log`: (Landscape 26.10 and later) Logs output from the cron job that cancels activities not delivered before their deadline
 - `distributed-lock.log`: Logs for the distributed lock, which ensures there is at most one instance of critical scripts running at a time (such as cron jobs that modify shared state)
 - `hash-id-databases.log`: Logs from the script which builds the list of available packages for clients
 - `job-handler.log`: Logs for the `job-handler` service, which controls the execution of back-end tasks queued by the server, such as repository operations or reporting jobs
+- `landscape-profiles.log`: (Landscape 26.04 LTS and earlier) Logs output from the cron job generating profiles. In Landscape 26.10 and later, this is replaced by `upgrade-profiles.log`, `scheduled-profiles.log`, `script-profiles.log` and `usg-profiles.log`, and activity cancellation is logged in `cancel-expired-activities.log`
 - `landscape-quickstart.log`: (Quickstart only) Logs from the post-installation script
 - `landscape-setup.log`: (Quickstart only) Logs from the setup script
 - `maintenance-script.log`: Logs output from the maintenance cron job, which removes old monitoring data and performs other maintenance tasks
@@ -41,14 +42,14 @@ Landscape Server logs are located in `/var/log/landscape-server/`.
 - `package-upload.log`: Logs output of the `package-upload` server, which is used in repository management for upload pockets.
 - `pingserver.log`: Logs the output of `pingserver`, which tracks client heartbeats to monitor for unresponsive clients
 - `process-alerts.log`: Logs output of the cron job used to trigger alerts and send out alert email messages
-- `scheduled-profiles.log`: Logs output from the cron job that applies scheduled package profiles
+- `scheduled-profiles.log`: (Landscape 26.10 and later) Logs output from the cron job that applies scheduled package profiles
 - `schema-maintenance.log`: Logs from the maintenance cron job that cleans up old monitoring data, such as historical temperature, network traffic, and CPU load data.
-- `script-profiles.log`: Logs output from the cron job that applies script profiles
+- `script-profiles.log`: (Landscape 26.10 and later) Logs output from the cron job that applies script profiles
 - `syncldsreleases.log`: Logs from the daily cron job that checks for new self-hosted Landscape release versions
 - `update-alerts.log`: Logs output of the cron job that determines which clients are offline
 - `update-security-db.log`: Logs output of the cron job that checks for new Ubuntu Security Notices
-- `upgrade-profiles.log`: Logs output from the cron job that applies upgrade profiles
-- `usg-profiles.log`: Logs output from the cron job that applies USG profiles
+- `upgrade-profiles.log`: (Landscape 26.10 and later) Logs output from the cron job that applies upgrade profiles
+- `usg-profiles.log`: (Landscape 26.10 and later) Logs output from the cron job that applies USG profiles
 - `usn-script.log`: Logs output from the `usn-script`, which process the new data from the Ubuntu Security Notices
 
 ## Other logs
