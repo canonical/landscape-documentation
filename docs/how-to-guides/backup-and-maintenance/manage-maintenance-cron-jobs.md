@@ -21,8 +21,16 @@ The following are automatically scheduled cron jobs. These scripts are all locat
   - Updates alert rules that require periodic checks (e.g., detecting offline client instances and expired accounts).
 - `process_alerts.sh`
   - Process alert rules for all accounts and sends pending alert notifications emails.
-- `landscape_profiles.sh`
-  - Applies {ref}`profiles <reference-terms-profiles>` to client instances.
+- `upgrade_profiles.sh`
+  - Applies upgrade {ref}`profiles <reference-terms-profiles>` to client instances.
+- `scheduled_profiles.sh`
+  - Applies scheduled package profiles to client instances.
+- `script_profiles.sh`
+  - Applies script profiles to client instances.
+- `usg_profiles.sh`
+  - Applies USG profiles to client instances.
+- `cancel_expired_activities.sh`
+  - Cancels activities that were not delivered before their deadline.
 - `hash_id_databases.sh`
   - Regenerates packages hash-ids mapping files. Enables newly registered computers to report installed and available packages quickly. Out-of-date hash-id mapping files causes computers to report packages at a slower rate (approximately 500 packages at a time).
 - `meta_releases.sh`
