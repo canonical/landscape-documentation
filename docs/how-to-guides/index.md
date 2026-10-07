@@ -84,7 +84,7 @@ repository-mirrors/index
 (how-to-index-heading-web-portal)=
 ## Web portal
 
-Use Landscape's web interface to manage computers, packages, users, and more. Landscape currently has two web portals: the modern interface (24.04+) and the legacy portal.
+Use Landscape's web interface to manage computers, packages, users, and more. Landscape currently has two web portals: the modern web portal (24.04+) and a legacy web portal (the is in the process of being retired).
 
 ```{toctree}
 :titlesonly:

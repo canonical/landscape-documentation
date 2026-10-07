@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Install, upgrade, remove, and hold packages and snaps for managed instances using Landscape's 24.04+ web portal."
+   description: "Install, upgrade, remove, and hold packages and snaps for managed instances using Landscape's web portal."
 ---
 
 (how-to-web-portal-manage-snaps)=

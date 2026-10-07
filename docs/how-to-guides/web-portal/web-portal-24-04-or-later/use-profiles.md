@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Create and manage profiles in Landscape's 24.04+ portal including package, reboot, removal, script, security, and upgrade profiles."
+    description: "Create and manage profiles in Landscape's web portal including package, reboot, removal, script, security, and upgrade profiles."
 ---
 
 (how-to-web-portal-use-profiles)=

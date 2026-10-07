@@ -47,9 +47,9 @@ pro fix CVE-YYYY-NNNN
 
 Landscape will create script execution activities for each selected instance. Use the **Activities** page or the instance’s **Activities** tab to review the status and output.
 
-### Legacy portal
+### Legacy web portal
 
-You can view security updates available and upgrade on a per-computer basis. To do this, select each computer in the legacy portal, and click **Packages**. In this tab, you can view and apply any reported security updates.
+You can view security updates available and upgrade on a per-computer basis. To do this, select each computer in the legacy web portal, and click **Packages**. In this tab, you can view and apply any reported security updates.
 
 ### Upgrade profiles
 

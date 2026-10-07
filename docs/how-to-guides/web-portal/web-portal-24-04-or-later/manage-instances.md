@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "View, search, and manage instances in Landscape's 24.04+ portal. Learn to manage instances, use saved searches, view details, and perform bulk operations."
+    description: "View, search, and manage instances in Landscape's web portal. Learn to manage instances, use saved searches, view details, and perform bulk operations."
 ---
 
 (how-to-web-portal-manage-instances)=

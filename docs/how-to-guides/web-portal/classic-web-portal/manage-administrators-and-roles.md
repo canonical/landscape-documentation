@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Invite and disable administrators, create roles, and manage access permissions in Landscape's legacy portal."
+    description: "Invite and disable administrators, create roles, and manage access permissions in Landscape's legacy web portal."
 ---
 
 (how-to-classic-web-portal-manage-admins-and-roles)=

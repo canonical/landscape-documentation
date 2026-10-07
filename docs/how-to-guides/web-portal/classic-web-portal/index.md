@@ -1,13 +1,13 @@
 ---
 myst:
   html_meta:
-    description: "Access Landscape's original legacy portal with comprehensive features for managing computers, packages, and administrators."
+    description: "Access Landscape's original legacy web portal with comprehensive features for managing computers, packages, and administrators."
 ---
 
 (how-to-guides-web-portal-classic-web-portal-index)=
-# Legacy portal
+# Legacy web portal
 
-The legacy portal is Landscape's original interface, which includes some features not yet available in the {ref}`how-to-guides-web-portal-web-portal-24-04-or-later-index`.
+The legacy web portal is Landscape's previous interface and is being retired. Some features are not yet available in the web portal; see the {ref}`how-to-guides-web-portal-index` for available guides.
 
 ## Computer management
 

@@ -15,11 +15,11 @@ This guide describes how to remove duplicate instances.
 
 If you have any duplicate client instances, you can manually remove them one-by-one in the web portal.
 
-### Web portal (24.04 LTS and later)
+### Web portal
 
 Duplicate instances will appear on the home page dashboard. To remove the duplicate, click the instances in the *Duplicate* tile, select your instance, and remove it from Landscape (**More actions** > **Remove from Landscape**).
 
-### Legacy portal
+### Legacy web portal
 
 If you have any duplicate instances, you'll see them as an alert, "\<n\> computers have duplicates". To remove the duplicate, click this alert, select your computer, and remove it from Landscape.
 

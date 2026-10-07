@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "View and manage kernel versions and Livepatch status from Landscape 24.10+ portal's Kernel tab for seamless system updates."
+    description: "View and manage kernel versions and Livepatch status from the web portal's Kernel tab for seamless system updates."
 ---
 
 (how-to-web-portal-manage-livepatch)=

@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Permanently delete LUKS encryption keys on instances using Landscape's 24.04+ portal, making encrypted data unrecoverable."
+    description: "Permanently delete LUKS encryption keys on instances using Landscape's web portal, making encrypted data unrecoverable."
 ---
 
 (how-to-web-portal-sanitize-computers)=
