@@ -890,6 +890,10 @@ Query parameters:
 
 ## GET `/computers/<int:computer_id>/packages`
 
+```{note}
+This endpoint is deprecated in v2 of the REST API as the implementation is neither correct nor performant. It will be removed in v3 of the REST API.
+```
+
 Get packages associated with a computer ID.
 
 Path parameters:

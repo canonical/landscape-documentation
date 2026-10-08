@@ -9,6 +9,10 @@ myst:
 
 ## GET `/packages`
 
+```{note}
+This endpoint is deprecated in v2 of the REST API as the implementation is neither correct nor performant. It will be removed in v3 of the REST API.
+```
+
 Get a list of packages that have been reported to this Landscape account.
 
 Query parameters:

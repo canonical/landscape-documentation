@@ -31,6 +31,7 @@ Landscape enables you to control software across your instances, including mirro
 
 Repository mirroring <repository-mirroring>
 Package reporting <package-reporting>
+Package change plans <package-change-plans>
 ```
 
 ## Scripting
@@ -53,4 +54,4 @@ Understand security-related Landscape features such as Full Disk Encryption.
 :maxdepth: 2
 
 Full Disk Encryption recovery keys <fde-recovery-key>
-
+```
