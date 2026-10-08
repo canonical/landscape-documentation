@@ -78,11 +78,11 @@ You need to accept the pending registration from the web portal:
 
 1. Accept the pending computer using one of these methods:
 
-   **In the new web portal:**
+   **In the web portal:**
    - Click the **Pending** tile on the home page, or
    - Go to **Instances** > review pending instances > select your machine > click **Accept**
 
-   **In the classic web portal:**
+   **In the legacy web portal:**
    - Click the **notifications** icon (arrow icon) in the header
    - Click the notification about a pending computer
    - Select your machine from the list > **Accept**
@@ -95,8 +95,8 @@ We recommend adding at least one secondary administrator to your Landscape accou
 
 1. Navigate to:
 
-    - New web portal: **Org. settings** > **Administrators** > **Invite administrator**
-    - Classic web portal: **Administrators** > *Invite an administrator* section
+   - Web portal: **Org. settings** > **Administrators** > **Invite administrator**
+   - Legacy web portal: **Administrators** > *Invite an administrator* section
 
 1. Complete the form, entering the name and email address of the person you want to invite
 

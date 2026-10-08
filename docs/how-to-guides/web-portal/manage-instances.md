@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "View, search, and manage instances in Landscape's 24.04+ portal. Learn to manage instances, use saved searches, view details, and perform bulk operations."
+    description: "View, search, and manage instances in Landscape's web portal. Learn to manage instances, use saved searches, view details, and perform bulk operations."
 ---
 
 (how-to-web-portal-manage-instances)=
-# How to manage instances
+# Manage instances
 
 You can use the web portal to view, manage, and perform actions on your Ubuntu client instances.
 

@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Create, delete, and manage access groups in Landscape's 24.04+ portal to organize instances and control administrator permissions."
+    description: "Create, delete, and manage access groups in Landscape's web portal to organize instances and control administrator permissions."
 ---
 
 (how-to-web-portal-manage-access-groups)=
-# How to manage access groups
+# Manage access groups
 
 > See also: {ref}`reference-terms-access-groups`
 

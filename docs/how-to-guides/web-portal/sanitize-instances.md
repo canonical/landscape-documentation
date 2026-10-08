@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Permanently delete LUKS encryption keys on instances using Landscape's 24.04+ portal, making encrypted data unrecoverable."
+    description: "Permanently delete LUKS encryption keys on instances using Landscape's web portal, making encrypted data unrecoverable."
 ---
 
 (how-to-web-portal-sanitize-computers)=
-# How to sanitize instances
+# Sanitize instances
 
 You can sanitize instances in Landscape. This action permanently deletes the encryption keys for all LUKS encrypted volumes on that instance, making data on those volumes unrecoverable.
 
