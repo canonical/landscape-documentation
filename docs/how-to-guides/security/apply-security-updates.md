@@ -55,7 +55,7 @@ You can view security updates available and upgrade on a per-computer basis. To 
 
 You can use an {ref}`reference-terms-upgrade-profile` to schedule any package updates, and you can choose to only upgrade security issues.
 
-For more details, see [how to manage upgrade profiles](/how-to-guides/web-portal/classic-web-portal/manage-computers.md#manage-upgrade-profiles).
+For more details, see [how to manage upgrade profiles](/how-to-guides/web-portal/legacy-web-portal/manage-computers.md#manage-upgrade-profiles).
 
 ## Apply updates from Livepatch
 

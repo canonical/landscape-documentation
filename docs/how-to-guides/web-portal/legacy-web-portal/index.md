@@ -7,7 +7,7 @@ myst:
 (how-to-guides-web-portal-classic-web-portal-index)=
 # Legacy web portal
 
-The legacy web portal is Landscape's previous interface and is being retired. Some features are not yet available in the web portal; see the {ref}`how-to-guides-web-portal-index` for available guides.
+The legacy web portal is Landscape's previous interface and the default UI for Landscape versions earlier than 26.10. See the {ref}`how-to-guides-web-portal-index` for available guides on our modern web portal.
 
 ## Computer management
 

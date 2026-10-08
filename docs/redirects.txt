@@ -32,6 +32,20 @@ how-to-guides/repository-mirrors/manage-repositories-in-the-web-portal-2604/ how
 
 how-to-guides/web-portal/web-portal-24-04-or-later/ how-to-guides/web-portal/
 
+how-to-guides/web-portal/classic-web-portal/ how-to-guides/web-portal/legacy-web-portal/
+
+how-to-guides/web-portal/classic-web-portal/manage-access-groups/ how-to-guides/web-portal/legacy-web-portal/manage-access-groups/
+
+how-to-guides/web-portal/classic-web-portal/manage-administrators-and-roles/ how-to-guides/web-portal/legacy-web-portal/manage-administrators-and-roles/
+
+how-to-guides/web-portal/classic-web-portal/manage-computers/ how-to-guides/web-portal/legacy-web-portal/manage-computers/
+
+how-to-guides/web-portal/classic-web-portal/manage-packages/ how-to-guides/web-portal/legacy-web-portal/manage-packages/
+
+how-to-guides/web-portal/classic-web-portal/manage-snaps/ how-to-guides/web-portal/legacy-web-portal/manage-snaps/
+
+how-to-guides/web-portal/classic-web-portal/other-tasks/ how-to-guides/web-portal/legacy-web-portal/other-tasks/
+
 how-to-guides/security/use-security-profiles/ how-to-guides/security/use-usg-profiles/
 
 how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/manage-packages-and-snaps

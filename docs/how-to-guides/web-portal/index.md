@@ -74,11 +74,11 @@ sanitize-instances
 
 ## Legacy web portal
 
-Access legacy workflows that are not yet available in the web portal.
+Use Landscape's legacy web portal, which was the default UI for Landscape versions earlier than 26.10
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 1
 
-classic-web-portal/index
+legacy-web-portal/index
 ```
