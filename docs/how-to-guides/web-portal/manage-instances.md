@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-manage-instances)=
-# How to manage instances
+# Manage instances
 
 You can use the web portal to view, manage, and perform actions on your Ubuntu client instances.
 

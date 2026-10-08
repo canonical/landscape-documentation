@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-use-annotations)=
-# How to use annotations
+# Use annotations
 
 Annotations in Landscape provide a mechanism for sending custom metadata from a client device to your Landscape server. These annotations can then be used to monitor, group and search for devices.
 

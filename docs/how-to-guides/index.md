@@ -84,7 +84,7 @@ repository-mirrors/index
 (how-to-index-heading-web-portal)=
 ## Web portal
 
-Use Landscape's web interface to manage computers, packages, users, and more. Landscape currently has two web portals: the modern web portal (24.04+) and a legacy web portal (the is in the process of being retired).
+Use Landscape's web interface to manage client instances, packages, users, and more. Landscape has two web portals. The modern web portal was introduced in Landscape 24.04 LTS and is the default starting in Landscape 26.10. The legacy web portal is the default in Landscape 24.04 LTS through 26.04 LTS.
 
 ```{toctree}
 :titlesonly:

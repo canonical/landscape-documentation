@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-manage-snaps)=
-# How to manage packages and snaps
+# Manage packages and snaps
 
 You can manage packages (Debian) and snaps from the web portal for each managed instance in your Landscape account. You can also use package profiles and remote script execution to apply package management policies across multiple instances.
 

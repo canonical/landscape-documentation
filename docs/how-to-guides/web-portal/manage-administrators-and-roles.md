@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-manage-admins-and-roles)=
-# How to manage administrators and roles
+# Manage administrators and roles
 
 See also: {ref}`reference-terms-administrators`, {ref}`reference-terms-roles`
 

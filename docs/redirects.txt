@@ -34,11 +34,29 @@ how-to-guides/web-portal/web-portal-24-04-or-later/ how-to-guides/web-portal/
 
 how-to-guides/security/use-security-profiles/ how-to-guides/security/use-usg-profiles/
 
-how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/manage-packages-and-snaps
 
-how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-instances/ how-to-guides/web-portal/manage-instances/
 
-how-to-guides/web-portal/web-portal-24-04-or-later/use-script-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-administrators-and-roles/ how-to-guides/web-portal/manage-administrators-and-roles/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-access-groups/ how-to-guides/web-portal/manage-access-groups/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps/ how-to-guides/web-portal/manage-packages-and-snaps/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-livepatch-and-kernel-updates/ how-to-guides/web-portal/manage-livepatch-and-kernel-updates/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/ how-to-guides/web-portal/use-profiles/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-remote-script-execution/ how-to-guides/web-portal/use-remote-script-execution/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-annotations/ how-to-guides/web-portal/use-annotations/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/sanitize-instances/ how-to-guides/web-portal/sanitize-instances/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-guides/web-portal/use-profiles/
+
+how-to-guides/web-portal/web-portal-24-04-or-later/use-script-profiles/ how-to-guides/web-portal/use-profiles/
 
 how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/use-usg-profiles/
 

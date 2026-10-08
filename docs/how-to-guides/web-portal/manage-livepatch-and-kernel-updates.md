@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-manage-livepatch)=
-# How to manage Livepatch and kernel updates from the Landscape web portal
+# Manage Livepatch and kernel updates
 
 ```{note}
 The **Kernel** tab is available in the web portal in **Landscape 24.10** and later.

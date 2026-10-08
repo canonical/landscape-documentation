@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-manage-access-groups)=
-# How to manage access groups
+# Manage access groups
 
 > See also: {ref}`reference-terms-access-groups`
 

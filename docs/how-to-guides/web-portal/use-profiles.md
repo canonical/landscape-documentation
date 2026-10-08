@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-use-profiles)=
-# How to use profiles
+# Use profiles
 
 Profiles in Landscape are reusable sets of rules that define how Landscape should manage specified instances. You can use profiles for different types of tasks, such as applying automatic upgrades on groups of client instances, or manage packages and their dependencies as a group, This guide describes how to create and manage different types of profiles in the web portal.
 
