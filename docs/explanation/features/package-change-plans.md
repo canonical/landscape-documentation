@@ -17,6 +17,14 @@ You must be running Landscape Server 26.10 or later to use the REST API for pack
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
 
+On self-hosted deployments, this feature may be enabled by setting both of the following flags in your service.conf:
+
+```ini
+[features]
+package_change_plans = true
+package_search_rest_api = true
+```
+
 ## How plans are generated
 
 Landscape uses the latest package state reported for each selected instance through {ref}`package reporting <explanation-package-reporting>`. Plans are created in the `pending` state, and Landscape automatically generates the plan in the background to populate the package changes that will occur on each instance. Check the plan status and wait until it is `ready` before reviewing or executing it.
