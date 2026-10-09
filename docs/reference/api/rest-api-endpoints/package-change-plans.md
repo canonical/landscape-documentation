@@ -53,13 +53,13 @@ The plan is created in the `pending` state and will become `ready` once the plan
 
 Landscape enforces limits on the number of selected computers and the number of distinct resolved target package IDs. Requests to create change plans that exceed either of these limits return a `too_many_instances` or `too_many_packages` error.
 
-TODO: add specific limits
+The instance selection may target at most 500 instances. The package selection may target at most 50 packages.
 
 ### Quotas
 
 Landscape SaaS applies an account quota based on plan items created in the previous 24 hours. There is no quota on self-hosted deployments. Requests to create change plans that exceed the daily quota will return a `quota_exceeded` error.
 
-TODO: add specific limit
+Up to 100,000 change plan items may be created per day.
 
 ### Creation errors
 
