@@ -2,9 +2,7 @@
 
 # HAProxy route endpoints
 
-The Landscape Server charm exposes six HTTP route endpoints using the `haproxy-route` interface and two optional TCP/gRPC route endpoints. Integrate the endpoints with the HAProxy charm (`2.8/stable`). The optional endpoints are needed only when the corresponding service is enabled.
-
-The Ubuntu Installer Attach endpoint uses the `haproxy-route` interface over HTTPS. The Hostagent Messenger endpoint uses `haproxy-route-tcp`.
+The Landscape Server charm exposes seven route endpoints using the `haproxy-route` interface and one optional gRPC route endpoint using `haproxy-route-tcp`. Integrate the endpoints with the HAProxy charm (`2.8/stable`). The optional endpoints are needed only when the corresponding service is enabled.
 
 ## Relation endpoints
 
@@ -40,17 +38,11 @@ The Hostagent Messenger and Ubuntu Installer Attach services are optional and di
 juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
 ```
 
-If you enable the Ubuntu Installer Attach service, integrate its endpoint with HAProxy's `haproxy-route` endpoint. HAProxy negotiates ALPN `h2` on the external port and re-encrypts traffic to the backend, so you must also provide TLS certificates to the Landscape Server units and make HAProxy trust the issuing CA, using the same TLS certificates provider for both:
+If you enable the Ubuntu Installer Attach service, integrate its endpoint with HAProxy's `haproxy-route` endpoint and provide TLS certificates to the Landscape Server units. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`:
 
 ```bash
-juju integrate landscape-server:certificates <tls-provider>:certificates
-juju integrate haproxy:receive-ca-certs <tls-provider>:<ca-endpoint>
 juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
-
-`<ca-endpoint>` depends on the provider: `send-ca-cert` for `self-signed-certificates` and `lego`, and `trust_certificate` for `manual-tls-certificates`.
-
-For more information, see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
 ## HTTP redirect behaviour and `redirect_https`
 

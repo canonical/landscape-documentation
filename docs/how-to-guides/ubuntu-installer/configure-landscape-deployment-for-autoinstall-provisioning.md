@@ -64,16 +64,13 @@ juju integrate haproxy:receive-ca-certs self-signed-certificates:send-ca-cert
 juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
 
-If you use a different provider, substitute it in the first two commands, using the endpoint names that provider documents (for example, `manual-tls-certificates` provides `trust_certificate` instead of `send-ca-cert`; see {ref}`how-to-migrate-to-26-04-charm`).
+If you use a different provider, substitute it in the first two commands, using the endpoint names that provider documents. For example, `manual-tls-certificates` provides `trust_certificate` instead of `send-ca-cert`.
 
 ```{important}
 The `haproxy:receive-ca-certs` integration is required. Without it, HAProxy can't verify the Landscape Server unit certificates and marks the Ubuntu Installer Attach backend as `DOWN`.
 ```
 
-#### Certificate requirements
-
-- **Public hostname:** the certificate that HAProxy presents on port 50051 is the one HAProxy manages for your Landscape hostname (through `haproxy:certificates`). It must be signed by a CA that the Ubuntu installer trusts, because the installer verifies it using its system trust store. See {ref}`how-to-ubuntu-installer-verify-connection`.
-- **Backend:** the Landscape Server unit certificates only need to be trusted by HAProxy, which is why the CA must be integrated through `receive-ca-certs`. The charm configures only the server certificate and private key (`ssl_server_cert` and `ssl_server_private_key` in the `[ubuntu_installer_attach]` section of `service.conf`). It doesn't set a client CA, so clients aren't required to present certificates.
+The certificate that HAProxy presents on port 50051 must be signed by a CA that the Ubuntu installer trusts, because the installer verifies it using its system trust store. See {ref}`how-to-ubuntu-installer-verify-connection`.
 
 ### Disable the service
 
@@ -116,39 +113,19 @@ The installer isn't reachable on port 50051 between removing the old relation an
 (how-to-ubuntu-installer-verify-juju)=
 ### Verify the Juju deployment
 
-Check that HAProxy negotiates ALPN `h2` on port 50051:
+Check that HAProxy negotiates ALPN `h2` on port 50051. The output should include `ALPN protocol: h2`:
 
 ```sh
 openssl s_client -alpn h2 -connect <LANDSCAPE_SERVER_HOST>:50051 </dev/null 2>/dev/null | grep "ALPN protocol"
-```
-
-Expected output:
-
-```text
-ALPN protocol: h2
 ```
 
 Then follow {ref}`how-to-ubuntu-installer-verify-connection` to confirm that a gRPC client can reach the service.
 
 ### Troubleshoot
 
-**The output has no `ALPN protocol: h2` line**
-
-The endpoint might still be integrated with `haproxy:haproxy-route-tcp`, which doesn't negotiate ALPN. Run `juju status --relations` to check which HAProxy endpoint `ubuntu-installer-attach-haproxy-route` uses, and follow {ref}`how-to-ubuntu-installer-juju-upgrade` to switch.
-
-**The connection fails and the HAProxy backend is `DOWN`**
-
-HAProxy can't verify the Landscape Server unit certificates. Confirm that:
-
-- `landscape-server:certificates` and `haproxy:receive-ca-certs` are integrated with the same TLS certificates provider.
-- The `landscape-server` units have received their certificates (`juju status` shows no waiting or blocked status related to certificates).
-- `enable_ubuntu_installer_attach` is `true`.
-
-To inspect the backend state, check the HAProxy statistics or logs on the `haproxy` unit.
-
-**The installer rejects the certificate**
-
-The certificate on port 50051 isn't signed by a CA that the installer trusts. Use a certificate for your public hostname from a CA in the installer's trust store.
+- **The output has no `ALPN protocol: h2` line:** the endpoint might still be integrated with `haproxy:haproxy-route-tcp`. Run `juju status --relations` to check, and follow {ref}`how-to-ubuntu-installer-juju-upgrade`.
+- **The HAProxy backend is `DOWN`:** HAProxy can't verify the Landscape Server unit certificates. Confirm that `landscape-server:certificates` and `haproxy:receive-ca-certs` are integrated with the same provider, and that `enable_ubuntu_installer_attach` is `true`.
+- **The installer rejects the certificate:** the certificate on port 50051 isn't signed by a CA in the installer's trust store.
 
 ## On a manual install
 
@@ -182,7 +159,7 @@ employee_management = true
 
 ### Configure the proxy
 
-This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination. On a manual install, the `landscape-ubuntu-installer-attach` service listens for plaintext HTTP/2 (h2c) on the local port, which is a valid configuration for the examples below.
+This feature uses gRPC and requires an upstream proxy to perform HTTP/2 and TLS termination.
 
 #### Requirements
 
