@@ -42,9 +42,11 @@ If you enable the Ubuntu Installer Attach service, integrate its endpoint with H
 
 ```bash
 juju integrate landscape-server:certificates <tls-provider>:certificates
-juju integrate haproxy:receive-ca-certs <tls-provider>:send-ca-cert
+juju integrate haproxy:receive-ca-certs <tls-provider>:<ca-endpoint>
 juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
+
+`<ca-endpoint>` depends on the provider: `send-ca-cert` for `self-signed-certificates` and `lego`, and `trust_certificate` for `manual-tls-certificates`.
 
 For more information, see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 

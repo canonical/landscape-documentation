@@ -170,11 +170,11 @@ juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haprox
 
 #### Ubuntu Installer Attach
 
-The Ubuntu Installer Attach service is optional and requires the `landscape-ubuntu-installer-attach` package. If you are {ref}`using Landscape to provision an autoinstall file <how-to-ubuntu-installer-set-up-landscape>`, enable the service via [the `enable_ubuntu_installer_attach` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_ubuntu_installer_attach), provide TLS certificates to the Landscape Server units, and integrate it with HAProxy via the `haproxy-route` interface. HAProxy must trust the CA that signed the unit certificates, so integrate `haproxy:receive-ca-certs` with the same TLS provider you deployed in Step 3 (the example below uses `self-signed-certificates`):
+The Ubuntu Installer Attach service is optional and requires the `landscape-ubuntu-installer-attach` package. If you are {ref}`using Landscape to provision an autoinstall file <how-to-ubuntu-installer-set-up-landscape>`, enable the service via [the `enable_ubuntu_installer_attach` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_ubuntu_installer_attach), provide TLS certificates to the Landscape Server units, and integrate it with HAProxy via the `haproxy-route` interface. HAProxy must trust the CA that signed the unit certificates, so integrate `haproxy:receive-ca-certs` with the same TLS provider you deployed in Step 3 (the example below uses `<tls-provider>`, for example `self-signed-certificates`, `lego` or `manual-tls-certificates`):
 
 ```bash
 juju config landscape-server enable_ubuntu_installer_attach=true
-juju integrate landscape-server:certificates self-signed-certificates:certificates
+juju integrate landscape-server:certificates <tls-provider>:certificates
 juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
 

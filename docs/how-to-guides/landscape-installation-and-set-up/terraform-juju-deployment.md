@@ -61,6 +61,10 @@ git clone https://github.com/canonical/landscape-server-operator.git
 cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
+```{note}
+Serving Ubuntu Installer Attach over HTTPS with the `haproxy-route` interface requires a module tag at or after `rev540`. Earlier tags, including `rev505`, integrate this endpoint with `haproxy-route-tcp`.
+```
+
 ```{tip}
 Check out a tagged revision (e.g. `git checkout rev505`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
 ```
@@ -236,7 +240,9 @@ haproxy                 = null
 haproxy_route_offer_url = "<model-owner>/<offering-model>.<offer-name>"
 ```
 
-If `enable_hostagent_messenger` is enabled in `landscape_server.config`, that endpoint uses the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and needs its own offer, consumed via `haproxy_route_tcp_offer_url`. The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` instead, and also needs the Landscape Server `certificates` relation and the HAProxy `receive-ca-certs` relation to be integrated with the same TLS provider; see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
+The Landscape Task Handler gRPC endpoint, and the Hostagent Messenger endpoint if `enable_hostagent_messenger` is enabled in `landscape_server.config`, use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
+
+The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` over HTTPS when the module deploys `tls_certificates` and the `landscape-server` charm revision is at least 540 (use a module tag at or after `rev540`). The module then relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint; see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With an older revision, or `tls_certificates = null`, the module uses `haproxy-route-tcp` and `haproxy_route_tcp_offer_url` for this endpoint instead, which is not suitable for strict gRPC clients.
 
 ```hcl
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"

@@ -350,11 +350,25 @@ juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-r
 
 If you enable the optional hostagent messenger service on `landscape-server`, integrate its HAProxy endpoint with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
 
-If you enable the optional Ubuntu installer attach service, integrate it with `lbaas-haproxy:haproxy-route`, and give the `landscape-server` units a certificate from the same TLS provider that the external HAProxy trusts. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`:
+If you enable the optional Ubuntu installer attach service, the external HAProxy connects to the `landscape-server` units over TLS. This needs two things in addition to the route:
+
+1. A TLS certificates provider in the Landscape model that issues certificates to the `landscape-server` units.
+2. The external HAProxy trusting the CA of that provider.
+
+Deploy or reuse a provider in the Landscape model (the example uses `self-signed-certificates`) and integrate it:
 
 ```sh
+juju integrate landscape-server:certificates self-signed-certificates:certificates
 juju integrate landscape-server:ubuntu-installer-attach-haproxy-route lbaas-haproxy:haproxy-route
 ```
+
+Then offer the provider's CA endpoint so the operator of the external HAProxy can integrate it with `receive-ca-certs` in the LBaaS model. The CA endpoint depends on the provider, for example `send-ca-cert` for `self-signed-certificates` and `trust_certificate` for `manual-tls-certificates`:
+
+```sh
+juju offer self-signed-certificates:send-ca-cert landscape-ca
+```
+
+See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
 ```{important}
 The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the external HAProxy's IP address.
