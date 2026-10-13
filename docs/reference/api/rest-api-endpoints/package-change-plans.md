@@ -365,7 +365,7 @@ List the package change plans created by the authenticated user.
 Query parameters:
 
 - `states`: Comma-separated plan states. The endpoint returns plans that match any listed state. Known values are `pending`, `generating`, `ready`, `executing`, `executed`, `failed`, and `expired`. If omitted, the endpoint returns plans in every state.
-- `limit`: Maximum number of plans to return (default: `50`, maximum: `100`).
+- `limit`: Maximum number of plans to return (default: `50`).
 - `offset`: Offset into the result list (default: `0`).
 
 Plans are ordered by creation time, newest first. Plans with the same creation time are ordered by ID in descending order.
