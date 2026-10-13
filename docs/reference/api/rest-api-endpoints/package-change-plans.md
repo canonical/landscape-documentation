@@ -15,14 +15,6 @@ You must be running Landscape Server 26.10 or later to use the REST API for pack
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
 
-On self-hosted deployments, this feature may be enabled by setting both of the following flags in your service.conf:
-
-```ini
-[features]
-package_change_plans = true
-package_search_rest_api = true
-```
-
 ## POST `/package-change-plans`
 
 Create a plan.
@@ -61,7 +53,7 @@ The plan is created in the `pending` state and will become `ready` once the plan
 
 Landscape enforces limits on the number of selected computers and the number of distinct resolved target package IDs. Requests to create change plans that exceed either of these limits return a `too_many_instances` or `too_many_packages` error.
 
-The instance selection may target at most 500 instances. The package selection may target at most 50 packages.
+The instance selection may target at most 100 instances. The package selection may target at most 500 packages.
 
 ### Quotas
 
