@@ -13,6 +13,12 @@ You must be running Ubuntu 26.04 LTS Resolute Raccoon, 24.04 Noble Numbat, or 22
 
 Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
 
+## If you use a Juju deployment
+
+If your Landscape deployment is managed with Juju, follow the charm migration guide first. See {ref}`How to migrate to Landscape 26.04 LTS (charm) <how-to-migrate-to-26-04-charm>` for the Juju-specific migration steps.
+
+For Juju deployments, use the Juju actions and charm migration steps from that guide instead of manually installing the additional snaps described later in this guide.
+
 ## If you use repository management
 
 If you use repository management in your Landscape deployment, you must migrate your repository mirrors to the new `landscape-debarchive` snap as part of your upgrade to 26.04 LTS.

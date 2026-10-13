@@ -310,6 +310,8 @@ Such a repository will be accessible via this sources.list entry:
 deb http://your-server.com/repository/standalone/ubuntu bionic-staging main
 ```
 
+> ⓘ Note: The suite name (`bionic-staging` in this example), follows the `$SERIES-$POCKET` format, unless the pocket is named `release`, in which case it will just be `$SERIES`.
+
 You can choose who is allowed to upload packages to this pocket. Since the option `--upload-allow-unsigned` was not used when creating the pocket, only uploads signed by any of the `uploader gpg keys` will be allowed. Unsigned uploads, or signed by a key not in that list, will be rejected. To add or remove a key from that list, use `add-uploader-gpg-keys-to-pocket` and `remove-uploader-gpg-keys-from-pocket` respectively.
 
 To upload packages to this pocket we use the tool `dput` with this configuration section in `~/.dput.cf`:

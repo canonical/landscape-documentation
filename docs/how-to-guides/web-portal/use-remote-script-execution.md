@@ -5,7 +5,7 @@ myst:
 ---
 
 (how-to-web-portal-use-remote-script-execution)=
-# How to use remote script execution
+# Use remote script execution
 
 > See also: {ref}`explanation-remote-script-execution`, {ref}`reference-terms-script-profile`
 
