@@ -74,3 +74,24 @@ You can perform different actions with snaps from an instance's **Snaps** tab, e
    - You can only switch channels on individual snap, not multiple snaps at once.
 
 All actions will ask you to complete a form or confirm before Landscape sends an activity to perform the action. You can check the status of activities in the **Activities** page from the sidebar.
+
+### Manage snaps across multiple instances
+
+You can install, uninstall, refresh, hold, unhold, or change the channel of snaps on up to 100 instances at once from the **Instances** page. You can add at most 10 snaps per action.
+
+1. On the **Instances** page, select anywhere from 1 to 100 instances.
+2. In the actions menu, choose the snap operation you want. Each operation opens a side panel.
+3. From the side panel, you can search for and add up to 10 snaps to act on.
+   - **Install** shows snaps available in the public snap store. When installing snaps, you must type at least 1 character to show snap options.
+   - **Unhold** shows snaps held in at least 1 of the selected instances.
+   - **Uninstall**, **Refresh**, **Hold**, and **Change channel** search snaps installed in at least 1 of the selected instances.
+4. Once you click to submit, a popup will ask you to confirm the action.
+
+When installing snaps or changing their channel, you can pin each snap by either:
+
+- **Channel**, for example `latest/stable`. The snap is set to that channel's latest revision and keeps tracking it.
+- **Revision**, a specific revision number. The snap is set to that revision, but its tracking channel does not change.  Unless the snap is held, any subsequent manual or automatic refresh will update it to the latest revision of its tracking channel.
+
+If a snap requires classic confinement, Landscape flags it and asks you to acknowledge that the snap may access your files and system before proceeding. Only proceed if you trust the publisher.
+
+As with per-instance actions, these operations are queued as activities. You can track their progress on the **Activities** page.
