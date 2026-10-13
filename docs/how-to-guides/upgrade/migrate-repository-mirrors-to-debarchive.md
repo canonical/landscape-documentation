@@ -17,13 +17,15 @@ The migration strategy depends on the type of pocket you're migrating:
 
 | Pre-26.04 pocket type | Migration strategy |
 |---|---|
-| **Sync (mirror) pocket** | Create a new mirror in Debarchive pointing at the original upstream source and sync it |
-| **Pull pocket** | Create a new mirror with a `filter` matching your existing allowlist/blocklist |
+| **Sync (mirror) pocket** | Recreate the mirror in Debarchive by pointing a new mirror at the original upstream source and syncing it |
+| **Pull pocket** | Recreate the pull pocket as a new Debarchive mirror with a `filter` matching your existing allowlist/blocklist |
 | **Upload pocket** | Create a local repository and import packages from the existing reprepro pool |
 
 ```{important}
 If you need to preserve the **exact state** of a sync mirror (the precise set of package versions currently stored, rather than the latest upstream state), you should treat it as an upload pocket and import its packages into a new local repository instead.
 ```
+
+For sync and pull pockets, this migration recreates mirrors in Debarchive from the upstream source. It doesn't copy the exact mirror contents from the pre-26.04 reprepro repository.
 
 For details on how repository mirroring works in 26.04, see {ref}`Repository mirroring <explanation-repo-mirroring>`.
 
@@ -50,6 +52,8 @@ export JWT="<your-jwt-token>"
 ```
 
 To obtain a JWT token, authenticate against the Landscape REST API. See {ref}`reference-rest-api-login` for details.
+
+The examples in this guide use the Debarchive grpc-gateway REST API. The request bodies use the REST resource shape, such as a mirror object for `POST /mirrors`, rather than the wrapped Connect RPC shape.
 
 ## Identify your existing repositories
 
@@ -101,7 +105,7 @@ Use this information to decide which migration sections to follow. For example, 
 
 ## Migrate sync (mirror) pockets
 
-For sync pockets that mirror an upstream archive, create a new mirror in Debarchive pointing at the same upstream source.
+For sync pockets that mirror an upstream archive, recreate the mirror in Debarchive by creating a new mirror that points at the same upstream source.
 
 ### 1. Identify the upstream source
 
@@ -132,13 +136,15 @@ curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "displayName": "<CODENAME>",
+    "displayName": "<MIRROR_NAME>",
     "archiveRoot": "http://archive.ubuntu.com/ubuntu",
-    "distribution": "<CODENAME>",
+    "distribution": "<UPSTREAM_SUITE>",
     "architectures": ["amd64"],
     "components": ["main", "restricted", "universe", "multiverse"]
   }'
 ```
+
+Replace `<UPSTREAM_SUITE>` with the upstream suite from the `Suite:` field in the update rule, such as `noble-updates`. The Debarchive `distribution` value isn't always the same as the reprepro pocket codename.
 
 The response includes a `mirrorId` that you'll use in subsequent requests.
 
@@ -152,7 +158,7 @@ curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Content-Type: application/json"
 ```
 
-This returns a long-running operation. Poll for its completion. Example call:
+This returns a long-running operation with a `name` value such as `operations/<OPERATION_ID>`. Poll that operation for completion. Example call:
 
 ```bash
 curl -X GET "$API_BASE/operations/<OPERATION_ID>" \
@@ -236,15 +242,17 @@ curl -X POST "$API_BASE/mirrors" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "displayName": "<CODENAME>",
+    "displayName": "<FILTERED_MIRROR_NAME>",
     "archiveRoot": "http://archive.ubuntu.com/ubuntu",
-    "distribution": "<CODENAME>",
+    "distribution": "<UPSTREAM_SUITE>",
     "architectures": ["amd64"],
     "components": ["main"],
     "filter": "Name (= nginx) | Name (= curl) | Name (= libssl3)",
     "filterWithDeps": true
   }'
 ```
+
+Replace `<UPSTREAM_SUITE>` with the upstream suite used by the source pocket. The Debarchive `distribution` value isn't always the same as the reprepro pull pocket codename.
 
 Set `filterWithDeps` to `true` if you want the filter to also include dependencies of matched packages (recommended for allowlists).
 
@@ -257,6 +265,8 @@ curl -X POST "$API_BASE/mirrors/<MIRROR_ID>:sync" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json"
 ```
+
+This returns a long-running operation. Poll the returned operation for completion before verifying the filtered mirror.
 
 ### 5. Verify the filtered mirror
 
@@ -315,11 +325,13 @@ curl -X POST "$API_BASE/locals" \
   -H "Authorization: Bearer $JWT" \
   -H "Content-Type: application/json" \
   -d '{
-    "displayName": "<CODENAME>",
-    "defaultDistribution": "<CODENAME>",
+    "displayName": "<LOCAL_REPOSITORY_NAME>",
+    "defaultDistribution": "<DEFAULT_DISTRIBUTION>",
     "defaultComponent": "main"
   }'
 ```
+
+Replace `<DEFAULT_DISTRIBUTION>` with the distribution name you want Debarchive to use by default when publishing packages from this local repository.
 
 The response includes a `localId`.
 
@@ -426,12 +438,12 @@ If you need to preserve the precise package versions currently in a sync mirror,
 
 Once you have confirmed that all packages are present in the new Debarchive service, clean up the pre-26.04 reprepro Distribution records and then upgrade.
 
-### 1. Delete existing reprepro Distribution records
+### 1. Remove existing reprepro Distribution records
 
-In the Landscape web portal, navigate to **Repositories**. Each distribution (for example, `ubuntu` or `ubuntu-staging`) has a **Delete** button. Delete each distribution.
+In the Landscape web portal, navigate to **Repositories**. Each distribution (for example, `ubuntu` or `ubuntu-staging`) has a **Remove distribution** button. Remove each distribution.
 
 ```{important}
-Only delete a distribution after confirming that its packages have been successfully migrated to the new Debarchive service. This action cannot be undone, though you could restore from a database backup if needed.
+Only remove a distribution after confirming that its packages have been successfully migrated to the new Debarchive service. This action cannot be undone, though you could restore from a database backup if needed.
 ```
 
 ### 2. Upgrade Landscape Server

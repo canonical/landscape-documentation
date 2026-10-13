@@ -80,7 +80,8 @@ Example response:
     "primary_gid": 65534,
     "uid": 105,
     "username": "_apt",
-    "work_phone": null
+    "work_phone": null,
+    "pending_activity": null
   },
   {
     "enabled": true,
@@ -90,10 +91,22 @@ Example response:
     "primary_gid": 34,
     "uid": 34,
     "username": "backup",
-    "work_phone": null
+    "work_phone": null,
+    "pending_activity": {
+      "activity_id": 103,
+      "summary": "Lock out user backup (UID 34)",
+      "activity_status": "undelivered",
+      "operation": "lock"
+    }
   }
+  ]
 }
 ```
+
+`pending_activity` is the latest pending lock, unlock, or delete child activity
+for that user. It is `null` when no such activity is pending or the caller lacks
+`ViewActivity` permission for the computer. Its `activity_id` can be used with
+`GET /activities/<int:id>`.
 
 ## POST `/users`
 
