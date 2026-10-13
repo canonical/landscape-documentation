@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Create, edit, and delete hierarchical access groups in Landscape's classic portal to organize computers and delegate management."
+   description: "Create, edit, and delete hierarchical access groups in Landscape's legacy portal to organize computers and delegate management."
 ---
 
 (how-to-classic-web-portal-manage-access-groups)=

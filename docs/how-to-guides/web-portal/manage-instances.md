@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "View, search, and manage instances in Landscape's 24.04+ portal. Learn to manage instances, use saved searches, view details, and perform bulk operations."
+    description: "View, search, and manage instances in Landscape's web portal. Learn to manage instances, use saved searches, view details, and perform bulk operations."
 ---
 
 (how-to-web-portal-manage-instances)=
-# How to manage instances
+# Manage instances
 
 You can use the web portal to view, manage, and perform actions on your Ubuntu client instances.
 
@@ -94,3 +94,9 @@ To remove an instance from Landscape, go to **Instances** > click the name of th
 Removing an instance only removes it from Landscape's management. This action doesn't affect the actual machine.
 
 You can also use {ref}`removal profiles <reference-terms-removal-profile>` to automate removal of inactive client instances.
+
+## Manage licenses for instances
+
+You can view your current licenses from the web portal in **Org. Settings** > **Licenses**. To get additional licenses, click **Add license**, which takes you to the [Ubuntu Pro](https://ubuntu.com/pro) page.
+
+For more information about how licensing works in Landscape, see the {ref}`licensing documentation <explanation-licenses>`.
