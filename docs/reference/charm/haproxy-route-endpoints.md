@@ -4,7 +4,7 @@
 
 The Landscape Server charm exposes six HTTP route endpoints using the `haproxy-route` interface and two optional TCP/gRPC route endpoints. Integrate the endpoints with the HAProxy charm (`2.8/stable`). The optional endpoints are needed only when the corresponding service is enabled.
 
-The Ubuntu Installer Attach endpoint uses the `haproxy-route` interface over HTTPS in the `26.10` charm, and the `haproxy-route-tcp` interface in the `26.04` charm. The Hostagent Messenger endpoint uses `haproxy-route-tcp` in both.
+The Ubuntu Installer Attach endpoint uses the `haproxy-route` interface over HTTPS. The Hostagent Messenger endpoint uses `haproxy-route-tcp`.
 
 ## Relation endpoints
 
@@ -40,13 +40,7 @@ The Hostagent Messenger and Ubuntu Installer Attach services are optional and di
 juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
 ```
 
-If you enable the Ubuntu Installer Attach service with the `26.04` charm, integrate its endpoint with HAProxy's `haproxy-route-tcp` endpoint:
-
-```bash
-juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route-tcp
-```
-
-With the `26.10` charm, integrate its endpoint with HAProxy's `haproxy-route` endpoint instead. HAProxy negotiates ALPN `h2` on the external port and re-encrypts traffic to the backend, so you must also provide TLS certificates to the Landscape Server units and make HAProxy trust the issuing CA, using the same TLS certificates provider for both:
+If you enable the Ubuntu Installer Attach service, integrate its endpoint with HAProxy's `haproxy-route` endpoint. HAProxy negotiates ALPN `h2` on the external port and re-encrypts traffic to the backend, so you must also provide TLS certificates to the Landscape Server units and make HAProxy trust the issuing CA, using the same TLS certificates provider for both:
 
 ```bash
 juju integrate landscape-server:certificates <tls-provider>:certificates

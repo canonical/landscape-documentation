@@ -47,7 +47,7 @@ employee_management = true
 ### Integrate with HAProxy and a TLS certificates provider
 
 ```{note}
-The steps in this section require the Landscape Server `26.10` charm. The `26.04` charm exposes `ubuntu-installer-attach-haproxy-route` through the `haproxy-route-tcp` interface instead. To move a `26.04` deployment to the HTTPS route, see {ref}`how-to-ubuntu-installer-juju-upgrade`.
+The steps in this section require the Landscape Server `26.10` charm. In this charm, `ubuntu-installer-attach-haproxy-route` uses the `haproxy-route` interface over HTTPS. The `haproxy-route-tcp` interface is no longer supported for this endpoint, because it doesn't negotiate ALPN. If you already integrated the endpoint with `haproxy:haproxy-route-tcp`, see {ref}`how-to-ubuntu-installer-juju-upgrade`.
 ```
 
 The Ubuntu installer uses gRPC, which requires HTTP/2 to be negotiated with ALPN (`h2`) during the TLS handshake. To support this, the charm and HAProxy work together:
@@ -86,21 +86,23 @@ juju config landscape-server enable_ubuntu_installer_attach=false
 (how-to-ubuntu-installer-juju-upgrade)=
 ### Switch an existing deployment to the 26.10 charm
 
-With the `26.04` charm, `landscape-server:ubuntu-installer-attach-haproxy-route` is integrated with `haproxy:haproxy-route-tcp`. In that configuration HAProxy doesn't negotiate ALPN, which gRPC clients that require HTTP/2 negotiation need. The `26.10` charm uses the `haproxy-route` interface over HTTPS instead.
+Earlier charms integrated `landscape-server:ubuntu-installer-attach-haproxy-route` with `haproxy:haproxy-route-tcp`. HAProxy doesn't negotiate ALPN on that interface, so gRPC clients that require HTTP/2 negotiation can't connect.
 
-1. Refresh the charm to the `26.10` track, then upgrade the packages as described in {ref}`how-to-heading-upgrade-juju`:
+The `26.10` charm replaces that relation with `haproxy-route` over HTTPS. It doesn't keep the `haproxy-route-tcp` relation, and Juju refuses to refresh the charm while that relation exists. Remove the old relation first, then refresh and create the new relations:
 
-   ```sh
-   juju refresh landscape-server --channel 26.10/stable
-   ```
-
-1. Integrate `landscape-server:certificates` with your TLS certificates provider, and integrate `haproxy:receive-ca-certs` with the same provider, as shown above.
 1. Remove the old relation:
 
    ```sh
    juju remove-relation landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route-tcp
    ```
 
+1. Refresh the charm, then upgrade the packages as described in {ref}`how-to-heading-upgrade-juju`:
+
+   ```sh
+   juju refresh landscape-server --channel 26.10/stable
+   ```
+
+1. Integrate `landscape-server:certificates` with your TLS certificates provider, and integrate `haproxy:receive-ca-certs` with the same provider, as shown above.
 1. Integrate the endpoint with `haproxy:haproxy-route`:
 
    ```sh
@@ -132,7 +134,7 @@ Then follow {ref}`how-to-ubuntu-installer-verify-connection` to confirm that a g
 
 **The output has no `ALPN protocol: h2` line**
 
-The endpoint is integrated with `haproxy:haproxy-route-tcp`, which doesn't negotiate ALPN. Run `juju status --relations` to check which HAProxy endpoint `ubuntu-installer-attach-haproxy-route` uses. To switch to `haproxy:haproxy-route`, follow {ref}`how-to-ubuntu-installer-juju-upgrade`.
+The endpoint might still be integrated with `haproxy:haproxy-route-tcp`, which doesn't negotiate ALPN. Run `juju status --relations` to check which HAProxy endpoint `ubuntu-installer-attach-haproxy-route` uses, and follow {ref}`how-to-ubuntu-installer-juju-upgrade` to switch.
 
 **The connection fails and the HAProxy backend is `DOWN`**
 
