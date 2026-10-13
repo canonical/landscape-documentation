@@ -309,7 +309,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 juju offer haproxy:haproxy-route,haproxy-route-tcp
 ```
 
-This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler` (required), and also if you enable the optional hostagent messenger service on `landscape-server`. The optional Ubuntu installer attach service uses `haproxy-route`.
+This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler` (required), and also if you enable the optional hostagent messenger service on `landscape-server`. In the `26.10` charm, the optional Ubuntu installer attach service uses `haproxy-route`; in the `26.04` charm, it uses `haproxy-route-tcp`.
 
 #### Step 4: Consume the HAProxy offer and integrate Landscape Server
 
@@ -350,7 +350,7 @@ juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-r
 
 If you enable the optional hostagent messenger service on `landscape-server`, integrate its HAProxy endpoint with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
 
-If you enable the optional Ubuntu installer attach service, the external HAProxy connects to the `landscape-server` units over TLS. This needs two things in addition to the route:
+If you enable the optional Ubuntu installer attach service with the `26.10` charm, the external HAProxy connects to the `landscape-server` units over TLS. This needs two things in addition to the route:
 
 1. A TLS certificates provider in the Landscape model that issues certificates to the `landscape-server` units.
 2. The external HAProxy trusting the CA of that provider.
