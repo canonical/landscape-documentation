@@ -62,7 +62,7 @@ cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
 ```{note}
-Serving Ubuntu Installer Attach over HTTPS with the `haproxy-route` interface requires a module tag at or after `rev540`. Earlier tags, including `rev505`, integrate this endpoint with `haproxy-route-tcp`.
+Serving Ubuntu Installer Attach over HTTPS with the `haproxy-route` interface requires the `landscape-server` charm revision 566 or later,. Earlier tags, including `rev505`, integrate this endpoint with `haproxy-route-tcp`.
 ```
 
 ```{tip}
@@ -242,7 +242,7 @@ haproxy_route_offer_url = "<model-owner>/<offering-model>.<offer-name>"
 
 The Landscape Task Handler gRPC endpoint, and the Hostagent Messenger endpoint if `enable_hostagent_messenger` is enabled in `landscape_server.config`, use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
 
-The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` over HTTPS when the module deploys `tls_certificates` and the `landscape-server` charm revision is at least 540 (use a module tag at or after `rev540`). The module then relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint; see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With an older revision, or `tls_certificates = null`, the module uses `haproxy-route-tcp` and `haproxy_route_tcp_offer_url` for this endpoint instead, which is not suitable for strict gRPC clients.
+The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` over HTTPS when the module deploys `tls_certificates` and the `landscape-server` charm revision is at least 566. The module then relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint; see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With an older revision, or `tls_certificates = null`, the module uses `haproxy-route-tcp` and `haproxy_route_tcp_offer_url` for this endpoint instead, which is not suitable for strict gRPC clients.
 
 ```hcl
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
