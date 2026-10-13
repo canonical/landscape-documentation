@@ -62,7 +62,7 @@ cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
 ```{note}
-Serving Ubuntu Installer Attach over HTTPS with the `haproxy-route` interface requires the `landscape-server` charm revision 566 or later,. Earlier tags, including `rev505`, integrate this endpoint with `haproxy-route-tcp`.
+Serving Ubuntu Installer Attach over HTTPS with the `haproxy-route` interface requires the `landscape-server` charm revision 566 or later. Earlier module tags, including `rev505`, integrate this endpoint with `haproxy-route-tcp`.
 ```
 
 ```{tip}
