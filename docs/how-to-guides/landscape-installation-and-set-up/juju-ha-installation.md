@@ -309,7 +309,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 juju offer haproxy:haproxy-route,haproxy-route-tcp
 ```
 
-This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler` (required), and also if you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`.
+This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler` (required), and also if you enable the optional hostagent messenger service on `landscape-server`. The optional Ubuntu installer attach service uses `haproxy-route`.
 
 #### Step 4: Consume the HAProxy offer and integrate Landscape Server
 
@@ -348,7 +348,13 @@ Integrate `landscape-task-handler`'s gRPC route with the `haproxy-route-tcp` end
 juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-route-tcp
 ```
 
-If you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`, integrate their HAProxy endpoints with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
+If you enable the optional hostagent messenger service on `landscape-server`, integrate its HAProxy endpoint with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
+
+If you enable the optional Ubuntu installer attach service, integrate it with `lbaas-haproxy:haproxy-route`, and give the `landscape-server` units a certificate from the same TLS provider that the external HAProxy trusts. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`:
+
+```sh
+juju integrate landscape-server:ubuntu-installer-attach-haproxy-route lbaas-haproxy:haproxy-route
+```
 
 ```{important}
 The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the external HAProxy's IP address.
