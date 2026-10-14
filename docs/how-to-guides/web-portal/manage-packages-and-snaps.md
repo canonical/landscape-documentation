@@ -83,7 +83,7 @@ You can install, uninstall, refresh, hold, unhold, or change the channel of snap
 2. In the actions menu, choose the snap operation you want. Each operation opens a side panel.
 3. From the side panel, you can search for and add up to 10 snaps to act on.
    - **Install** shows snaps available in the public snap store. When installing snaps, you must type at least 1 character to show snap options.
-   - **Unhold** shows snaps held in at least 1 of the selected instances. Instances where the snap isn't held are skipped.
+   - **Unhold** shows snaps held in at least 1 of the selected instances.
    - **Uninstall**, **Refresh**, **Hold**, and **Change channel** search snaps installed in at least 1 of the selected instances. Instances where the snap isn't installed are skipped.
 4. Once you click to submit, a popup will ask you to confirm the action.
 
