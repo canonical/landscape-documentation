@@ -17,14 +17,6 @@ You must be running Landscape Server 26.10 or later to use the REST API for pack
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
 
-On self-hosted deployments, this feature may be enabled by setting both of the following flags in your service.conf:
-
-```ini
-[features]
-package_change_plans = true
-package_search_rest_api = true
-```
-
 ## How plans are generated
 
 Landscape uses the latest package state reported for each selected instance through {ref}`package reporting <explanation-package-reporting>`. Plans are created in the `pending` state, and Landscape automatically generates the plan in the background to populate the package changes that will occur on each instance. Check the plan status and wait until it is `ready` before reviewing or executing it.
@@ -68,7 +60,7 @@ Install packages across the instance selection by package ID (a specific version
 
 ### Remove
 
-Remove packages by package ID or package name. When targeting by ID, an instance receives a remove item only when a requested version is installed. When targeting by name, Landscape removes the package from any instance that has the package installed at any version. An instance with no version installed is excluded for that package name.
+Remove packages by package ID or package name. When targeting by ID, an instance receives a remove item only when a requested version is installed and not held. When targeting by name, Landscape removes the package from any instance that has the package installed at any version. An instance with no version installed is excluded for that package name.
 
 ### Hold
 
@@ -85,7 +77,9 @@ Upgrade packages by selecting package IDs or by category:
 - **All upgrades**: every package with an available upgrade.
 - **Security upgrades only**: packages with an available security upgrade.
 
-When selecting a category, you can exclude specific packages from the upgrade set.
+When selecting a category, you can exclude specific packages from the upgrade set. Any package IDs that are excluded will not be considered as upgrade candidates. Any package that could upgrade to a candidate that is excluded will upgrade to the next-highest-version upgrade candidate, if one is available.
+
+For example, suppose an instance `A` has `vim` version `1.0` installed, with upgrades to `2.0` (ID `101`) and `3.0` (ID `102`) available. A second instance `B` has version `2.0` installed, with upgrades to `3.0` (ID `102`) and `4.0` (ID `103`) available. If you exclude ID `102`, the first instance upgrades to `2.0`, while the second upgrades to `4.0`. Landscape skips the excluded candidate and selects the highest remaining upgrade available to each instance.
 
 ### Change version
 

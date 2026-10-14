@@ -15,14 +15,6 @@ You must be running Landscape Server 26.10 or later to use the REST API for pack
 This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts.
 ```
 
-On self-hosted deployments, this feature may be enabled by setting both of the following flags in your service.conf:
-
-```ini
-[features]
-package_change_plans = true
-package_search_rest_api = true
-```
-
 ## POST `/package-change-plans`
 
 Create a plan.
@@ -61,7 +53,7 @@ The plan is created in the `pending` state and will become `ready` once the plan
 
 Landscape enforces limits on the number of selected computers and the number of distinct resolved target package IDs. Requests to create change plans that exceed either of these limits return a `too_many_instances` or `too_many_packages` error.
 
-The instance selection may target at most 500 instances. The package selection may target at most 50 packages.
+The instance selection may target at most 100 instances. The package selection may target at most 500 packages.
 
 ### Quotas
 
@@ -365,6 +357,58 @@ Example response (201 Created):
   "error_message": null
 }
 ```
+
+## GET `/package-change-plans`
+
+List the package change plans created by the authenticated user.
+
+Query parameters:
+
+- `states`: Comma-separated plan states. The endpoint returns plans that match any listed state. Known values are `pending`, `generating`, `ready`, `executing`, `executed`, `failed`, and `expired`. If omitted, the endpoint returns plans in every state.
+- `limit`: Maximum number of plans to return (default: `50`).
+- `offset`: Offset into the result list (default: `0`).
+
+Plans are ordered by creation time, newest first. Plans with the same creation time are ordered by ID in descending order.
+
+Example request:
+
+```bash
+curl -s -X GET "https://landscape.canonical.com/api/v2/package-change-plans?states=ready,failed&limit=50&offset=0" \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response (200 OK):
+
+```json
+{
+  "count": 1,
+  "results": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "action": "install",
+      "state": "ready",
+      "created_at": "2026-01-15T10:00:00+00:00",
+      "expires_at": "2026-01-16T10:00:05+00:00",
+      "item_count": 50,
+      "executed_at": null,
+      "activity_id": null,
+      "error_code": null,
+      "error_message": null
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
+
+Response fields:
+
+- `count`: Total number of plans that match the request before pagination.
+- `results`: Matching plans. Each entry has the same fields as a single package change plan response.
+- `next`: Relative URL for the next page, or `null` when there isn't one.
+- `previous`: Relative URL for the previous page, or `null` when there isn't one.
+
+Invalid state or pagination values return `400 Bad Request`.
 
 ## GET `/package-change-plans/<id>`
 
