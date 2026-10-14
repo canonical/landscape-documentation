@@ -80,7 +80,7 @@ All actions will ask you to complete a form or confirm before Landscape sends an
 You can install, uninstall, refresh, hold, unhold, or change the channel of snaps on up to 100 instances at once from the **Instances** page. You can add at most 10 snaps per action.
 
 1. On the **Instances** page, select anywhere from 1 to 100 instances.
-2. In the actions menu, choose the snap operation you want. Each operation opens a side panel.
+2. In the actions menu, choose the snap management operation you want. Each operation opens a side panel.
 3. From the side panel, you can search for and add up to 10 snaps to act on.
    - **Install** shows snaps available in the public snap store. When installing snaps, you must type at least 1 character to show snap options.
    - **Unhold** shows snaps held in at least 1 of the selected instances.
