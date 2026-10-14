@@ -92,6 +92,6 @@ When installing snaps or changing their channel, you can pin each snap by either
 - **Channel**, for example `latest/stable`. The snap is set to that channel's latest revision and keeps tracking it.
 - **Revision**, a specific revision number. The snap is set to that revision, but its tracking channel does not change.  Unless the snap is held, any subsequent manual or automatic refresh will update it to the latest revision of its tracking channel.
 
-If a snap requires classic confinement, Landscape flags it and asks you to acknowledge that the snap may access your files and system before proceeding. In some cases, we can't confirm the confinement requirements, so we provide the option to choose the confinement. As per the [Snap documentation](https://snapcraft.io/docs/explanation/snap-development/install-modes/#classic-confinement), snaps that do not require classic confinement will ignore the choice. 
+If a snap requires classic confinement, Landscape flags it and asks you to acknowledge that the snap may access your files and system before proceeding. When the confinement requirements of a snap can't be determined, you are given the option to choose the confinement. As per the [Snap documentation](https://snapcraft.io/docs/explanation/snap-development/install-modes/#classic-confinement), snaps that do not require classic confinement will ignore the choice. 
 
 As with per-instance actions, these operations are queued as activities. You can track their progress on the **Activities** page.
