@@ -5,6 +5,7 @@ myst:
 ---
 
 (reference-rest-api-users)=
+
 # Users
 
 ## DELETE `/users`
@@ -34,9 +35,9 @@ Example response:
   "completion_time": null,
   "creation_time": "2024-04-11T15:50:26Z",
   "creator": {
-      "email": "john@example.com",
-      "id": 1,
-      "name": "John Allen Smith"
+    "email": "john@example.com",
+    "id": 1,
+    "name": "John Allen Smith"
   },
   "deliver_delay_window": 0,
   "id": 218,
@@ -142,7 +143,7 @@ To update only some fields, or to clear the location or phone numbers of a user,
 This endpoint is available from Landscape Server 26.10 onwards.
 ```
 
-Create an activity to edit information of a user on the specified computers. The request body is a JSON merge patch ([RFC 7386](https://datatracker.ietf.org/doc/html/rfc7386)): fields that are absent stay unchanged.
+Create an activity to edit information of a user on the specified computers. Fields that are absent stay unchanged.
 
 Required parameters:
 
@@ -165,19 +166,24 @@ Example request bodies:
 - Clear the location only:
 
   ```json
-  {"computer_ids": [1], "username": "bob", "location": null}
+  { "computer_ids": [1], "username": "bob", "location": null }
   ```
 
 - Set the work phone and clear the home phone:
 
   ```json
-  {"computer_ids": [1], "username": "bob", "work_phone": "555-0100", "home_phone": null}
+  {
+    "computer_ids": [1],
+    "username": "bob",
+    "work_phone": "555-0100",
+    "home_phone": null
+  }
   ```
 
 - Change only the name:
 
   ```json
-  {"computer_ids": [1], "username": "bob", "name": "Bob B"}
+  { "computer_ids": [1], "username": "bob", "name": "Bob B" }
   ```
 
 Example request:
@@ -286,7 +292,6 @@ curl -X POST https://landscape.canonical.com/api/v2/users/unlock \
     "usernames": ["john"]
   }'
 ```
-
 
 Example response:
 
