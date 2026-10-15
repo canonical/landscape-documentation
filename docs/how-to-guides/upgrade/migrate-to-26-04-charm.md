@@ -168,6 +168,8 @@ juju config landscape-server enable_hostagent_messenger=true
 juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
 ```
 
+To serve this endpoint over HTTPS with the `haproxy-route` interface, so that Ubuntu Pro for WSL doesn't need the `GRPC_ENFORCE_ALPN_ENABLED` workaround, use the `26.10` charm. See {ref}`how-to-wsl-juju-upgrade`.
+
 #### Ubuntu Installer Attach
 
 The Ubuntu Installer Attach service is optional and requires the `landscape-ubuntu-installer-attach` package. If you are {ref}`using Landscape to provision an autoinstall file <how-to-ubuntu-installer-set-up-landscape>`, enable the service via [the `enable_ubuntu_installer_attach` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_ubuntu_installer_attach) and integrate it with HAProxy via the `haproxy-route-tcp` interface:

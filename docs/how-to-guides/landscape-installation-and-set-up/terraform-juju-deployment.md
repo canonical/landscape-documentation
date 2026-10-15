@@ -62,7 +62,7 @@ cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
 ```{note}
-Ubuntu Installer Attach is served over HTTPS with the `haproxy-route` interface when you deploy the `26.10` charm. With the `26.04` charm, the module integrates this endpoint with `haproxy-route-tcp`.
+Hostagent Messenger and Ubuntu Installer Attach are served over HTTPS with the `haproxy-route` interface when you deploy the `26.10` charm. With the `26.04` charm, the module integrates these endpoints with `haproxy-route-tcp`.
 ```
 
 ```{tip}
@@ -240,9 +240,9 @@ haproxy                 = null
 haproxy_route_offer_url = "<model-owner>/<offering-model>.<offer-name>"
 ```
 
-The Landscape Task Handler gRPC endpoint, and the Hostagent Messenger endpoint if `enable_hostagent_messenger` is enabled in `landscape_server.config`, use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
+The Landscape Task Handler gRPC endpoint uses the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
 
-The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` over HTTPS when the module deploys `tls_certificates` and the `landscape-server` charm is `26.10` or later. The module then relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint; see {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With the `26.04` charm, or with `tls_certificates = null`, the module uses `haproxy-route-tcp` and `haproxy_route_tcp_offer_url` for this endpoint instead.
+The Hostagent Messenger (`enable_hostagent_messenger`) and Ubuntu Installer Attach (`enable_ubuntu_installer_attach`) endpoints use `haproxy-route` over HTTPS when the module deploys `tls_certificates` and the `landscape-server` charm is `26.10` or later. The module then relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint; see {ref}`how-to-wsl-configure-juju-deployment` and {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With the `26.04` charm, or with `tls_certificates = null`, the module uses `haproxy-route-tcp` and `haproxy_route_tcp_offer_url` for these endpoints instead.
 
 ```hcl
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
