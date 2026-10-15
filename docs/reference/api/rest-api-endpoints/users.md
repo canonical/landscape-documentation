@@ -166,7 +166,7 @@ Example request bodies:
 - Clear the location only:
 
   ```json
-  { "computer_ids": [1], "username": "bob", "location": null }
+  { "computer_ids": [1], "username": "john", "location": null }
   ```
 
 - Set the work phone and clear the home phone:
@@ -174,7 +174,7 @@ Example request bodies:
   ```json
   {
     "computer_ids": [1],
-    "username": "bob",
+    "username": "john",
     "work_phone": "555-0100",
     "home_phone": null
   }
@@ -183,7 +183,7 @@ Example request bodies:
 - Change only the name:
 
   ```json
-  { "computer_ids": [1], "username": "bob", "name": "Bob B" }
+  { "computer_ids": [1], "username": "john", "name": "John Allen Smith" }
   ```
 
 Example request:
@@ -194,7 +194,7 @@ curl -X PATCH https://landscape.canonical.com/api/v2/users \
   -H "Authorization: Bearer $JWT" \
   -d '{
     "computer_ids": [1],
-    "username": "bob",
+    "username": "john",
     "location": null
   }'
 ```
@@ -211,7 +211,7 @@ Example response:
     "id": 1
   },
   "type": "ActivityGroup",
-  "summary": "Edit user bob (UID 1000)",
+  "summary": "Edit user john (UID 1000)",
   "completion_time": null,
   "parent_id": null,
   "deliver_delay_window": 0,
