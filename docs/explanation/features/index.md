@@ -31,7 +31,7 @@ Landscape enables you to control software across your instances, including mirro
 
 Repository mirroring <repository-mirroring>
 Package reporting <package-reporting>
-Package change plans <package-change-plans>
+Bulk package management <package-change-plans>
 ```
 
 ## Scripting
