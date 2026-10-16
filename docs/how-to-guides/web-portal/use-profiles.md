@@ -103,7 +103,15 @@ The same access group of this script will be assigned to the new profile.
      - **All instances**: The profile will affect all instances in the same access group as the profile.
      - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
 
-Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
+Once you've created your profile, you can edit, archive, and more using the dot menu under **Actions** for each profile.
+
+### Archive a script profile
+
+Archiving a script profile stops it from running in the future. The profile is kept for reference, but it can no longer be edited or run, and its name can't be reused for a new script profile. This can't be undone.
+
+To archive a script profile, go to **Profiles** > **Script profiles** > open the dot menu under **Actions** for the profile > **Archive**. Review the confirmation dialog and follow the instructions to confirm the archive.
+
+You can view archived script profiles using the **Status** filter.
 
 ## USG profiles
 
