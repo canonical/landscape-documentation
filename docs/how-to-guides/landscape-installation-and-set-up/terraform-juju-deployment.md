@@ -61,6 +61,10 @@ git clone https://github.com/canonical/landscape-server-operator.git
 cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
+```{note}
+Hostagent Messenger and Ubuntu Installer Attach are served over HTTPS with the `haproxy-route` interface when you deploy the `26.10` charm. With the `26.04` charm, the module integrates these endpoints with `haproxy-route-tcp`.
+```
+
 ```{tip}
 Check out a tagged revision (e.g. `git checkout rev505`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
 ```
@@ -236,7 +240,9 @@ haproxy                 = null
 haproxy_route_offer_url = "<model-owner>/<offering-model>.<offer-name>"
 ```
 
-If `enable_hostagent_messenger` or `enable_ubuntu_installer_attach` are enabled in `landscape_server.config`, those endpoints use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`:
+The Landscape Task Handler gRPC endpoint uses the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
+
+The Hostagent Messenger (`enable_hostagent_messenger`) and Ubuntu Installer Attach (`enable_ubuntu_installer_attach`) endpoints use `haproxy-route` over HTTPS when the module deploys `tls_certificates` and the `landscape-server` charm is `26.10` or later. The module then relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint; see {ref}`how-to-wsl-configure-juju-deployment` and {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With the `26.04` charm, or with `tls_certificates = null`, the module uses `haproxy-route-tcp` and `haproxy_route_tcp_offer_url` for these endpoints instead.
 
 ```hcl
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
