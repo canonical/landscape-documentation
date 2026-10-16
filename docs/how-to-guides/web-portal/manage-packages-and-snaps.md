@@ -52,6 +52,7 @@ APT preferences prevent future installation, but they don't remove a package tha
 
 To allow the package again later, remove the APT preferences file from target instances, then remove or update the related package profile constraint.
 
+(how-to-web-portal-manage-packages-multiple-instances)=
 ### Manage packages across multiple instances
 
 You can upgrade, install, uninstall, change the version of, hold, or unhold packages on up to 100 instances at once from the **Instances** page. You can add at most 500 packages per action.
