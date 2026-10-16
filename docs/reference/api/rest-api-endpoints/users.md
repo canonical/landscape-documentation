@@ -134,10 +134,10 @@ Optional parameters:
 - `work_phone`: The work phone number of the existing user.
 
 ```{note}
-To update only some fields, or to clear the location or phone numbers of a user, use PATCH `/users`.
+To update only some fields, or to clear the location or phone numbers of a user, use POST `/users:edit`.
 ```
 
-## PATCH `/users`
+## POST `/users:edit`
 
 ```{note}
 This endpoint is available from Landscape Server 26.10 onwards.
@@ -189,7 +189,7 @@ Example request bodies:
 Example request:
 
 ```bash
-curl -X PATCH https://landscape.canonical.com/api/v2/users \
+curl -X POST https://landscape.canonical.com/api/v2/users:edit \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $JWT" \
   -d '{
