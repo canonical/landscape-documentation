@@ -38,6 +38,8 @@ If the script is used by script profiles, archiving or redacting it also archive
 
 To archive or redact a script, go to **Scripts** > open the dot menu under **Actions** for the script > **Archive** or **Redact**. Review the confirmation dialog and follow the instructions to confirm the action.
 
+You can view archived and redacted scripts using the **Status** filter.
+
 ## Run a script on one or more instances
 
 To run a script on one or more instances:

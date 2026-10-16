@@ -111,6 +111,8 @@ Archiving a script profile stops it from running in the future. The profile is k
 
 To archive a script profile, go to **Profiles** > **Script profiles** > open the dot menu under **Actions** for the profile > **Archive**. Review the confirmation dialog and follow the instructions to confirm the archive.
 
+You can view archived script profiles using the **Status** filter.
+
 ## USG profiles
 
 > Reference: {ref}`reference-terms-usg-profile`
