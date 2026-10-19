@@ -239,7 +239,7 @@ exit
 
 ## Explore the web portal
 
-Continue experimenting with the environment you've created to discover more of Landscape's management features. See the {ref}`how-to-guides-web-portal-classic-web-portal-index` and {ref}`how-to-guides-web-portal-web-portal-24-04-or-later-index` for more information on available features to explore in the web portal.
+Continue experimenting with the environment you've created to discover more of Landscape's management features. See the {ref}`how-to-guides-web-portal-index` and {ref}`how-to-guides-web-portal-classic-web-portal-index` for guides to explore the web portal and legacy web portal.
 
 ## Cleanup
 
