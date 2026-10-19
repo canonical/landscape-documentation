@@ -6,6 +6,43 @@ info:
     title: debarchive
     version: 0.1.0
 paths:
+    /v1/features:
+        get:
+            tags:
+                - FeatureService
+            description: Returns a list of features, ordered by feature ID.
+            operationId: FeatureService_ListFeatures
+            parameters:
+                - name: pageSize
+                  in: query
+                  description: |-
+                    The maximum number of features to return.
+                     The service may return fewer than this value.
+                     If unspecified, at most 100 features will be returned.
+                     The maximum value is 1000; values above 1000 will be treated as 1000.
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageToken
+                  in: query
+                  description: |-
+                    A page token, received from a previous call.
+                     Provide this to retrieve the subsequent page.
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListFeaturesResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /v1/locals:
         get:
             tags:
@@ -1206,6 +1243,33 @@ components:
             type: object
             properties: {}
             description: The response message for cancelling a long-running operation.
+        Feature:
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: |-
+                        The resource name of the feature.
+                         Format: "features/{feature}"
+                featureId:
+                    readOnly: true
+                    type: string
+                    description: |-
+                        The stable, kebab-case feature ID, e.g. "temporal-lros".
+                         Matches the last segment of `name`. Never renamed.
+                displayName:
+                    readOnly: true
+                    type: string
+                    description: The human-readable name of the feature.
+                description:
+                    readOnly: true
+                    type: string
+                    description: A user-facing description of what the feature does when enabled.
+                enabled:
+                    readOnly: true
+                    type: boolean
+                    description: Indicates if the feature is in effect in this deployment.
+            description: Represents an optional debarchive feature of this deployment.
         FilesystemTarget:
             required:
                 - path
@@ -1276,6 +1340,20 @@ components:
                          The set of packages that would be imported is returned as the result of the task.
                          See: https://google.aip.dev/163
             description: The request message for importing packages into a local repository.
+        ListFeaturesResponse:
+            type: object
+            properties:
+                features:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Feature'
+                    description: The list of features.
+                nextPageToken:
+                    type: string
+                    description: |-
+                        A token, which can be sent as `page_token` to retrieve the next page.
+                         If this field is omitted, there are no subsequent pages.
+            description: The response message for listing features.
         ListLocalPackagesResponse:
             type: object
             properties:
@@ -1827,6 +1905,11 @@ components:
                     description: Skip downloading packages that already exist.
             description: The request message for syncing a mirror.
 tags:
+    - name: FeatureService
+      description: |-
+        Reports optional debarchive features.
+         (-- api-linter: core::0121::resource-must-support-get=disabled
+             aip.dev/not-precedent: Features are only ever listed; a Get RPC would be unused. --)
     - name: LocalService
       description: Manages local repositories.
     - name: MirrorService
