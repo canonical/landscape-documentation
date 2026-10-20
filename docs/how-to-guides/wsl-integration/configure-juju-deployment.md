@@ -20,7 +20,7 @@ juju config landscape-server enable_hostagent_messenger=true
 ## Integrate with HAProxy and a TLS certificates provider
 
 ```{note}
-The steps in this section require the Landscape Server `26.10` charm. In this charm, `hostagent-messenger-haproxy-route` uses the `haproxy-route` interface over HTTPS. The `haproxy-route-tcp` interface is no longer supported for this endpoint, because it doesn't negotiate ALPN. If you already integrated the endpoint with `haproxy:haproxy-route-tcp`, see {ref}`how-to-wsl-juju-upgrade`.
+`hostagent-messenger-haproxy-route` uses the `haproxy-route` interface over HTTPS. The `haproxy-route-tcp` interface isn't supported for this endpoint, because it doesn't negotiate ALPN. If you already integrated the endpoint with `haproxy:haproxy-route-tcp`, see {ref}`how-to-wsl-juju-upgrade`.
 ```
 
 Ubuntu Pro for WSL uses gRPC, which requires HTTP/2 to be negotiated with ALPN (`h2`) during the TLS handshake. To support this, the charm and HAProxy work together:
@@ -54,11 +54,11 @@ juju config landscape-server enable_hostagent_messenger=false
 ```
 
 (how-to-wsl-juju-upgrade)=
-## Switch an existing deployment to the 26.10 charm
+## Switch an existing deployment to `haproxy-route`
 
-Earlier charms integrated `landscape-server:hostagent-messenger-haproxy-route` with `haproxy:haproxy-route-tcp`. HAProxy doesn't negotiate ALPN on that interface, so Ubuntu Pro for WSL can only connect if the `GRPC_ENFORCE_ALPN_ENABLED` environment variable is set to `false` for its agent.
+Earlier charm revisions integrated `landscape-server:hostagent-messenger-haproxy-route` with `haproxy:haproxy-route-tcp`. HAProxy doesn't negotiate ALPN on that interface, so Ubuntu Pro for WSL can only connect if the `GRPC_ENFORCE_ALPN_ENABLED` environment variable is set to `false` for its agent.
 
-The `26.10` charm replaces that relation with `haproxy-route` over HTTPS. It doesn't keep the `haproxy-route-tcp` relation, and Juju refuses to refresh the charm while that relation exists. Remove the old relation first, then refresh and create the new relations:
+The current charm replaces that relation with `haproxy-route` over HTTPS. It doesn't keep the `haproxy-route-tcp` relation, and Juju refuses to refresh the charm while that relation exists. Remove the old relation first, then refresh and create the new relations:
 
 1. Remove the old relation:
 
@@ -69,7 +69,7 @@ The `26.10` charm replaces that relation with `haproxy-route` over HTTPS. It doe
 1. Refresh the charm, then upgrade the packages as described in {ref}`how-to-heading-upgrade-juju`:
 
    ```sh
-   juju refresh landscape-server --channel 26.10/stable
+   juju refresh landscape-server --channel 26.04/stable
    ```
 
 1. Integrate `landscape-server:certificates` with your TLS certificates provider, and integrate `haproxy:receive-ca-certs` with the same provider, as shown above.
