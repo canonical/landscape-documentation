@@ -977,7 +977,7 @@ When `group_by_name` is true (the default), each entry in `results` has the foll
 - `installed_id`: The ID of the installed package, or `null` if the package is not installed.
 - `held`: Whether the installed package is held.
 - `security`: Whether the installed package, or one of its installation candidates, is from the security pocket.
-- `installation_candidates`: The available, non-installed versions of the package, each with:
+- `installation_candidates`: The available, non-installed versions of the package, ordered with security candidates first, then upgrades, then by version with the highest version first. Each candidate has:
   - `id`: The package ID.
   - `version`: The version string.
   - `upgrade`: Whether this candidate is an upgrade for the installed version.
