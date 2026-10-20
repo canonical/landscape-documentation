@@ -52,6 +52,23 @@ APT preferences prevent future installation, but they don't remove a package tha
 
 To allow the package again later, remove the APT preferences file from target instances, then remove or update the related package profile constraint.
 
+(how-to-web-portal-manage-packages-multiple-instances)=
+### Manage packages across multiple instances
+
+You can upgrade, install, uninstall, change the version of, hold, or unhold packages on up to 100 instances at once from the **Instances** page. You can add at most 500 packages per action.
+
+1. On the **Instances** page, select anywhere from 1 to 100 instances.
+2. Click **Deb management** and choose the operation you want. Each operation opens a side panel.
+3. From the side panel, search for and add the packages to act on. The search only shows packages that the operation applies to on the selected instances:
+   - **Install** shows packages that are available but not installed on the selected instances.
+   - **Uninstall**, **Change version**, and **Hold** show packages installed on at least 1 of the selected instances. Held packages are excluded.
+   - **Unhold** shows packages held on at least 1 of the selected instances.
+   - **Upgrade** shows packages with upgrades available on the selected instances.
+   - For **Change version**, select the version to switch to for each package. Only versions available on the selected instances are listed.
+4. Click **Next** to review the summary, then confirm the action.
+
+As with per-instance actions, these operations are queued as activities. You can track their progress on the **Activities** page.
+
 ## Snaps
 
 ### View snap information

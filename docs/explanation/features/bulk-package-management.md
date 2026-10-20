@@ -1,15 +1,18 @@
 ---
 myst:
   html_meta:
-    description: "Understand how Landscape package change plans use a snapshot of package data on Landscape Server, and how that can differ from the actual state on your instances."
+    description: "Understand how bulk package management works in Landscape, including how package change plans use a snapshot of package data on Landscape Server, and how that can differ from the actual state on your instances."
 ---
 
-(explanation-package-change-plan-snapshot)=
-# Package change plans
+(explanation-bulk-package-management)=
+# Bulk package management
 
-A package change plan is a staged set of package actions to apply across an instance selection. Landscape calculates the target instances and packages before it makes any changes. You can review the plan and then execute it to create the package activities.
+Landscape lets you manage Debian packages across multiple instances at once. Before applying changes, Landscape prepares a package change plan that identifies the affected instances and package operations. You can review the planned changes before confirming the operation.
 
-Each plan has exactly one action (e.g. install, remove, ...), which determines how the affected instances and packages are resolved.
+A package change plan is a staged set of package actions to apply across an instance selection. Each plan has exactly one action (e.g. install, remove, ...), which determines how the affected instances and packages are resolved.
+
+The web portal uses package change plans when you {ref}`manage packages across multiple instances <how-to-web-portal-manage-packages-multiple-instances>`. You can also use package change plans through the {ref}`REST API <reference-rest-api-package-change-plans>`. 
+This page explains how Landscape generates and executes plans, and how it resolves each package action.
 
 ```{note}
 You must be running Landscape Server 26.10 or later to use the REST API for package management.
