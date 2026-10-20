@@ -5,6 +5,7 @@ myst:
 ---
 
 (reference-rest-api-users)=
+
 # Users
 
 ## DELETE `/users`
@@ -34,9 +35,9 @@ Example response:
   "completion_time": null,
   "creation_time": "2024-04-11T15:50:26Z",
   "creator": {
-      "email": "john@example.com",
-      "id": 1,
-      "name": "John Allen Smith"
+    "email": "john@example.com",
+    "id": 1,
+    "name": "John Allen Smith"
   },
   "deliver_delay_window": 0,
   "id": 218,
@@ -80,7 +81,8 @@ Example response:
     "primary_gid": 65534,
     "uid": 105,
     "username": "_apt",
-    "work_phone": null
+    "work_phone": null,
+    "pending_activity": null
   },
   {
     "enabled": true,
@@ -90,10 +92,22 @@ Example response:
     "primary_gid": 34,
     "uid": 34,
     "username": "backup",
-    "work_phone": null
+    "work_phone": null,
+    "pending_activity": {
+      "activity_id": 103,
+      "summary": "Lock out user backup (UID 34)",
+      "activity_status": "undelivered",
+      "operation": "lock"
+    }
   }
+  ]
 }
 ```
+
+`pending_activity` is the latest pending lock, unlock, or delete child activity
+for that user. It is `null` when no such activity is pending or the caller lacks
+`ViewActivity` permission for the computer. Its `activity_id` can be used with
+`GET /activities/<int:id>`.
 
 ## POST `/users`
 
@@ -131,6 +145,94 @@ Optional parameters:
 - `location`: location of the existing user.
 - `home_phone`: The home phone number of the existing user.
 - `work_phone`: The work phone number of the existing user.
+
+```{note}
+To update only some fields, or to clear the location or phone numbers of a user, use POST `/users:edit`.
+```
+
+## POST `/users:edit`
+
+```{note}
+This endpoint is available from Landscape Server 26.10 onwards.
+```
+
+Create an activity to edit information of a user on the specified computers. Fields that are absent stay unchanged.
+
+Required parameters:
+
+- `computer_ids`: The numerical IDs of the computers.
+- `username`: The username of an existing user. The username can't be changed.
+
+Optional parameters:
+
+- `name`: The new title name of the existing user. Must be a non-empty string.
+- `password`: The new password for the existing user. Must be a non-empty string.
+- `primary_groupname`: The new group the existing user will be assigned to. Must be a non-empty string.
+- `location`: The location of the existing user. Set to `null` to clear it.
+- `home_phone`: The home phone number of the existing user. Set to `null` to clear it.
+- `work_phone`: The work phone number of the existing user. Set to `null` to clear it.
+
+`name`, `password`, and `primary_groupname` can't be cleared; don't set them to `null` or an empty string.
+
+Example request bodies:
+
+- Clear the location only:
+
+  ```json
+  { "computer_ids": [1], "username": "john", "location": null }
+  ```
+
+- Set the work phone and clear the home phone:
+
+  ```json
+  {
+    "computer_ids": [1],
+    "username": "john",
+    "work_phone": "555-0100",
+    "home_phone": null
+  }
+  ```
+
+- Change only the name:
+
+  ```json
+  { "computer_ids": [1], "username": "john", "name": "John Allen Smith" }
+  ```
+
+Example request:
+
+```bash
+curl -X POST https://landscape.canonical.com/api/v2/users:edit \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $JWT" \
+  -d '{
+    "computer_ids": [1],
+    "username": "john",
+    "location": null
+  }'
+```
+
+Example response:
+
+```json
+{
+  "id": 230,
+  "creation_time": "2024-04-11T16:02:41Z",
+  "creator": {
+    "name": "John Allen Smith",
+    "email": "john@example.com",
+    "id": 1
+  },
+  "type": "ActivityGroup",
+  "summary": "Edit user john (UID 1000)",
+  "completion_time": null,
+  "parent_id": null,
+  "deliver_delay_window": 0,
+  "result_text": null,
+  "result_code": null,
+  "activity_status": "undelivered"
+}
+```
 
 ## POST `/users/lock`
 
@@ -203,7 +305,6 @@ curl -X POST https://landscape.canonical.com/api/v2/users/unlock \
     "usernames": ["john"]
   }'
 ```
-
 
 Example response:
 

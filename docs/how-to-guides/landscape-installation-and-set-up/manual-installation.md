@@ -496,6 +496,7 @@ If you're using a custom certificate authority for your SSL certificate, then yo
     RewriteRule ^/attachment/(.*) http://localhost:8090/attachment/$1 [P,L]
     RewriteRule ^/upload/(.*) http://localhost:9100/$1 [P,L]
     RewriteRule ^/(new_dashboard.*) http://localhost:8080/$1 [P,L]
+    RewriteRule ^/(portal.*) http://localhost:8080/$1 [P,L]
     RewriteRule ^/(assets.*) http://localhost:8080/$1 [P,L]
 
     RewriteCond %{REQUEST_URI} !^/robots.txt$

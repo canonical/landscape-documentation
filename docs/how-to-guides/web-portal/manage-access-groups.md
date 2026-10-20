@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Create, delete, and manage access groups in Landscape's 24.04+ portal to organize instances and control administrator permissions."
+    description: "Create, delete, and manage access groups in Landscape's web portal to organize instances and control administrator permissions."
 ---
 
 (how-to-web-portal-manage-access-groups)=
-# How to manage access groups
+# Manage access groups
 
 > See also: {ref}`reference-terms-access-groups`
 
@@ -44,6 +44,17 @@ You can add instances individually to access groups. To do this:
 3. Click **Edit**
 4. Select the access group you want from the dropdown menu
 5. Click **Save changes**
+
+### Assign an access group or tags to multiple instances
+
+You can also assign an access group, or add tags, to several instances at once:
+
+1. Click **Instances** from the sidebar
+2. Select the instances you want to update
+3. Click **Grouping** > **Assign access group** or **Assign tags**
+4. Select the access group or tags you want, then click **Assign**
+
+Adding tags associates the instances with any profiles linked to those tags, which may change the configuration of those instances.
 
 ## Associate roles with access groups
 

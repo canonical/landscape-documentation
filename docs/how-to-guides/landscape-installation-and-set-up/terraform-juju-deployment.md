@@ -236,11 +236,13 @@ haproxy                 = null
 haproxy_route_offer_url = "<model-owner>/<offering-model>.<offer-name>"
 ```
 
-If `enable_hostagent_messenger` or `enable_ubuntu_installer_attach` are enabled in `landscape_server.config`, those endpoints use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`:
+The Landscape Task Handler gRPC endpoint, and the Hostagent Messenger endpoint if `enable_hostagent_messenger` is enabled in `landscape_server.config`, use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
 
 ```hcl
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
 ```
+
+The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` over HTTPS, so it doesn't need a `haproxy_route_tcp_offer_url`. The module relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
 `haproxy_route_offer_url` and `haproxy_route_tcp_offer_url` are independent of each other and of `haproxy`: `haproxy` controls whether this module deploys its own HAProxy, while the offer URLs control whether Landscape Server's `*-haproxy-route`/`*-haproxy-route-tcp` endpoints are integrated with that in-model HAProxy or with an external offer instead.
 
