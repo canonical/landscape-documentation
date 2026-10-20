@@ -102,6 +102,8 @@ We recommend adding at least one secondary administrator to your Landscape accou
 
 Once you send the invite, the invited user will receive an email with subject line "You have been invited to the Landscape account [...]" from `noreply+landscape@canonical.com`. Note that the invitation email may land in the recipient's spam folder.
 
+Landscape SaaS accounts have a default limit of 5 administrators. Pending administrator invitations count toward this limit. To request a higher limit, contact Canonical Support.
+
 (join-an-existing-landscape-account)=
 ## Alternative: Join an existing Landscape account
 
