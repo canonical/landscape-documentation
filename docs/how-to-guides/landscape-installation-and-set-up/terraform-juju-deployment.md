@@ -4,8 +4,6 @@
 
 Landscape can be deployed in a scalable, configurable, and reproducible way by using the {ref}`Landscape Scalable product module <reference-landscape-product-modules-landscape-scalable>`, which is powered by Juju and managed by Terraform.
 
-This guide covers Landscape 26.04 LTS using the `26.04` branch of the `landscape-server-operator` repository and the `26.04/stable` Landscape Server charm channel.
-
 In this deployment, Terraform manages the Landscape applications and their Juju integrations. You must first have a Juju controller and model available, and Terraform then deploys the Landscape module into that model.
 
 ## Install prerequisites
@@ -59,12 +57,12 @@ The Landscape Scalable product module is a Terraform module that deploys the Lan
 Clone the `landscape-server-operator` repository, which contains the module itself along with a ready-to-use Terraform root configuration for it:
 
 ```sh
-git clone --branch 26.04 https://github.com/canonical/landscape-server-operator.git
+git clone https://github.com/canonical/landscape-server-operator.git
 cd landscape-server-operator/terraform/product/modules/landscape-scalable
 ```
 
 ```{tip}
-The `26.04` branch receives updates. For a reproducible module version, pin a specific commit from that branch. Pin the charm revisions separately using the module's `revision` inputs.
+Check out a tagged revision (e.g. `git checkout rev505`) rather than using the default branch, so the module version, and the `landscape-server` revision it deploys, doesn't shift under you. See the repository's tags for available revisions: https://github.com/canonical/landscape-server-operator/tags
 ```
 
 This directory ships two example variable files:
@@ -110,7 +108,7 @@ variable "model_uuid" {
 }
 
 module "landscape_landscape-scalable" {
-  source = "git::https://github.com/canonical/landscape-server-operator//terraform/product/modules/landscape-scalable?ref=26.04"
+  source = "git::https://github.com/canonical/landscape-server-operator//terraform/product/modules/landscape-scalable?ref=rev505"
 
   model_uuid = var.model_uuid
 
