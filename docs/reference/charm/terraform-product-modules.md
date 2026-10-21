@@ -49,11 +49,12 @@ The module is maintained in the `landscape-server-operator` repository. See the 
 | [juju_integration.landscape_server_api_haproxy_route_lbaas](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)                        | resource |
 | [juju_integration.landscape_server_appserver_haproxy_route_in_model](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)               | resource |
 | [juju_integration.landscape_server_appserver_haproxy_route_lbaas](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)                  | resource |
+| [juju_integration.landscape_server_grpc_certificates](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)                              | resource |
 | [juju_integration.landscape_server_haproxy](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)                                        | resource |
+| [juju_integration.landscape_server_hostagent_messenger_haproxy_route_https_in_model](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration) | resource |
+| [juju_integration.landscape_server_hostagent_messenger_haproxy_route_https_lbaas](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)  | resource |
 | [juju_integration.landscape_server_hostagent_messenger_haproxy_route_in_model](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)     | resource |
 | [juju_integration.landscape_server_hostagent_messenger_haproxy_route_lbaas](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)        | resource |
-| [juju_integration.landscape_server_hostagent_messenger_haproxy_route_tcp_in_model](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration) | resource |
-| [juju_integration.landscape_server_hostagent_messenger_haproxy_route_tcp_lbaas](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)    | resource |
 | [juju_integration.landscape_server_inbound_amqp](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)                                   | resource |
 | [juju_integration.landscape_server_message_server_haproxy_route_in_model](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)          | resource |
 | [juju_integration.landscape_server_message_server_haproxy_route_lbaas](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration)             | resource |

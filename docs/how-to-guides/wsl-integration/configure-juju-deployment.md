@@ -40,7 +40,7 @@ juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haprox
 If you use a different provider, substitute it in the first two commands, using the endpoint names that provider documents. For example, `manual-tls-certificates` provides `trust_certificate` instead of `send-ca-cert`.
 
 ```{important}
-The `haproxy:receive-ca-certs` integration is required. Without it, HAProxy can't verify the Landscape Server unit certificates and marks the Hostagent Messenger backend as `DOWN`.
+The `haproxy:receive-ca-certs` integration is required. Without it, HAProxy rejects the Hostagent Messenger route and doesn't serve port 6554.
 ```
 
 The certificate that HAProxy presents on port 6554 must be trusted by the Windows machines. Ubuntu Pro for WSL uses the Windows certificate stores, or the certificate set in `ssl_public_key` of its Landscape configuration. See {ref}`how-to-register-wsl-hosts`.
@@ -97,5 +97,6 @@ Then register a Windows machine as described in {ref}`how-to-register-wsl-hosts`
 ## Troubleshoot
 
 - **The output has no `ALPN protocol: h2` line:** the endpoint might still be integrated with `haproxy:haproxy-route-tcp`. Run `juju status --relations` to check, and follow {ref}`how-to-wsl-juju-upgrade`.
-- **The HAProxy backend is `DOWN`:** HAProxy can't verify the Landscape Server unit certificates. Confirm that `landscape-server:certificates` and `haproxy:receive-ca-certs` are integrated with the same provider, and that `enable_hostagent_messenger` is `true`.
+- **Port 6554 doesn't accept connections:** the route isn't published or HAProxy rejected it. Landscape Server publishes the route only after the unit has a certificate from the `certificates` relation and the installed Landscape Server packages can serve TLS for Hostagent Messenger, so confirm that `enable_hostagent_messenger` is `true`, that `landscape-server:certificates` is integrated, and that the packages are upgraded. HAProxy rejects the route if `haproxy:receive-ca-certs` isn't integrated.
+- **The HAProxy backend is `DOWN`:** HAProxy can't verify the Landscape Server unit certificates. Confirm that `landscape-server:certificates` and `haproxy:receive-ca-certs` are integrated with the same provider.
 - **Ubuntu Pro for WSL rejects the certificate:** the certificate on port 6554 isn't signed by a CA in the Windows certificate stores, and isn't set in `ssl_public_key`.
