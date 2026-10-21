@@ -97,7 +97,7 @@ From your Windows machine:
     ```
 
 ````{note}
-If you deploy Landscape with a Landscape Server charm revision earlier than 599, such as the `26.04/stable` charm, HAProxy doesn't negotiate ALPN on port 6554. If your scripts start `ubuntu-pro-agent.exe` directly rather than through the Ubuntu Pro for WSL app, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable to `false` in the same session before starting the agent:
+If you deploy Landscape with a Landscape Server charm revision earlier than 599, HAProxy doesn't negotiate ALPN on port 6554. If your scripts start `ubuntu-pro-agent.exe` directly rather than through the Ubuntu Pro for WSL app, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable to `false` in the same session before starting the agent:
 
 ```powershell
 $env:GRPC_ENFORCE_ALPN_ENABLED = "false"
