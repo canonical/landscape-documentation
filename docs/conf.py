@@ -117,9 +117,10 @@ sitemap_excludes = [
 ################################
 
 html_static_path = ["_static"]
-# _templates overrides only the footer, to restore the "Manage your tracker
-# settings" link (the canonical-sphinx built-in footer leaves that slot empty).
-# The header uses the canonical-sphinx built-in template.
+# _templates overrides the canonical-sphinx built-in header and footer to add the
+# Google Analytics tag (header) and the "Manage your tracker settings" link
+# (footer). header.html is the built-in template with only the tag added; see
+# https://documentation.ubuntu.com/sphinx-stack/latest/how-to/optional-customisation/enable-google-analytics/
 templates_path = ["_templates"]
 
 #############

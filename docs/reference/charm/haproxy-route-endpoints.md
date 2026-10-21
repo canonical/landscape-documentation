@@ -2,7 +2,7 @@
 
 # HAProxy route endpoints
 
-The Landscape Server charm exposes 8 relation endpoints using the `haproxy-route` interface. Each endpoint routes traffic for a specific Landscape service. All endpoints must be integrated with the HAProxy charm (`2.8/x`).
+The Landscape Server charm exposes six HTTP route endpoints using the `haproxy-route` interface and two optional TCP/gRPC route endpoints using `haproxy-route-tcp`. Integrate the HTTP endpoints with the HAProxy charm (`2.8/stable`). The TCP/gRPC endpoints are needed only when the corresponding optional service is enabled.
 
 ## Relation endpoints
 
@@ -21,7 +21,7 @@ Backend ports are configurable via the charm config options shown above (e.g. `j
 
 ## Integration
 
-Integrate all endpoints with the HAProxy charm:
+Integrate the six HTTP endpoints with the HAProxy charm:
 
 ```bash
 juju integrate landscape-server:appserver-haproxy-route haproxy:haproxy-route
@@ -30,11 +30,14 @@ juju integrate landscape-server:message-server-haproxy-route haproxy:haproxy-rou
 juju integrate landscape-server:api-haproxy-route haproxy:haproxy-route
 juju integrate landscape-server:package-upload-haproxy-route haproxy:haproxy-route
 juju integrate landscape-server:repository-haproxy-route haproxy:haproxy-route
-juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route
-juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
 
-The `hostagent-messenger-haproxy-route` and `ubuntu-installer-attach-haproxy-route` endpoints are only active when `enable_hostagent_messenger` and `enable_ubuntu_installer_attach` are set to `True` respectively.
+The Hostagent Messenger and Ubuntu Installer Attach services are optional and disabled by default. If you enable either service, integrate its TCP/gRPC endpoint with HAProxy's `haproxy-route-tcp` endpoint:
+
+```bash
+juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
+juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route-tcp
+```
 
 ## HTTP redirect behaviour and `redirect_https`
 
