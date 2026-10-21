@@ -32,7 +32,9 @@ juju integrate landscape-server:package-upload-haproxy-route haproxy:haproxy-rou
 juju integrate landscape-server:repository-haproxy-route haproxy:haproxy-route
 ```
 
-The Hostagent Messenger and Ubuntu Installer Attach services are optional and disabled by default. If you enable the Hostagent Messenger service, integrate its endpoint with HAProxy's `haproxy-route` endpoint and provide TLS certificates to the Landscape Server units. See {ref}`how-to-wsl-configure-juju-deployment`:
+The Hostagent Messenger and Ubuntu Installer Attach services are optional and disabled by default.
+
+If you enable the Hostagent Messenger service, integrate its endpoint with HAProxy's `haproxy-route` endpoint and provide TLS certificates to the Landscape Server units. See {ref}`how-to-wsl-configure-juju-deployment`:
 
 ```bash
 juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route

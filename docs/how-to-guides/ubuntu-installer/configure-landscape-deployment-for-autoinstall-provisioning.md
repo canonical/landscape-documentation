@@ -95,10 +95,10 @@ Revision 595 and later replace that relation with `haproxy-route` over HTTPS. It
    juju remove-relation landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route-tcp
    ```
 
-1. Refresh the charm to revision 595 or later, then upgrade the packages as described in {ref}`how-to-heading-upgrade-juju`. Replace `<CHANNEL>` with a channel that provides revision 595 or later:
+1. Refresh the charm, then upgrade the packages as described in {ref}`how-to-heading-upgrade-juju`.
 
    ```sh
-   juju refresh landscape-server --channel <CHANNEL>
+   juju refresh landscape-server --channel 26.10/edge
    ```
 
 1. Integrate `landscape-server:certificates` with your TLS certificates provider, and integrate `haproxy:receive-ca-certs` with the same provider, as shown above.
@@ -111,37 +111,6 @@ Revision 595 and later replace that relation with `haproxy-route` over HTTPS. It
 1. Verify the connection as described in {ref}`how-to-ubuntu-installer-verify-juju`.
 
 The installer isn't reachable on port 50051 between removing the old relation and the new one becoming active.
-
-#### Switch with an external HAProxy
-
-If Landscape Server uses an external HAProxy through a cross-model offer, such as `lbaas-haproxy` in {ref}`how-to-juju-ha-installation`, follow the same steps with these changes:
-
-1. Remove the relation with the offered `haproxy-route-tcp` endpoint:
-
-   ```sh
-   juju remove-relation landscape-server:ubuntu-installer-attach-haproxy-route lbaas-haproxy:haproxy-route-tcp
-   ```
-
-1. After refreshing the charm, integrate `landscape-server:certificates` with a TLS certificates provider in the Landscape Server model. The external HAProxy must trust that provider's CA, so offer the provider's CA endpoint, and integrate it with `haproxy:receive-ca-certs` in the HAProxy model. For example, with `self-signed-certificates`:
-
-   ```sh
-   juju offer self-signed-certificates:send-ca-cert
-   ```
-
-   Then, in the HAProxy model:
-
-   ```sh
-   juju consume <model-owner>/<landscape-model>.self-signed-certificates landscape-ca
-   juju integrate haproxy:receive-ca-certs landscape-ca:send-ca-cert
-   ```
-
-1. Integrate the endpoint with the offered `haproxy-route` endpoint:
-
-   ```sh
-   juju integrate landscape-server:ubuntu-installer-attach-haproxy-route lbaas-haproxy:haproxy-route
-   ```
-
-If the HAProxy model already trusts the CA that signs the Landscape Server unit certificates, skip the CA offer.
 
 (how-to-ubuntu-installer-verify-juju)=
 ### Verify the Juju deployment
@@ -156,7 +125,7 @@ Then follow {ref}`how-to-ubuntu-installer-verify-connection` to confirm that a g
 
 ### Troubleshoot
 
-- **The output has no `ALPN protocol: h2` line:** the endpoint might still be integrated with `haproxy:haproxy-route-tcp`, or the charm revision might be earlier than 595. Run `juju status --relations` to check, and follow {ref}`how-to-ubuntu-installer-juju-upgrade`.
+- **The output has no `ALPN protocol: h2` line:** the endpoint might still be integrated with `haproxy:haproxy-route-tcp`. Run `juju status --relations` to check, and follow {ref}`how-to-ubuntu-installer-juju-upgrade`.
 - **Port 50051 doesn't accept connections:** the route isn't published or HAProxy rejected it. Landscape Server publishes the route only after the unit has a certificate from the `certificates` relation, so confirm that `enable_ubuntu_installer_attach` is `true` and that `landscape-server:certificates` is integrated. HAProxy rejects the route if `haproxy:receive-ca-certs` isn't integrated.
 - **The HAProxy backend is `DOWN`:** HAProxy can't verify the Landscape Server unit certificates. Confirm that `landscape-server:certificates` and `haproxy:receive-ca-certs` are integrated with the same provider.
 - **The installer rejects the certificate:** the certificate on port 50051 isn't signed by a CA in the installer's trust store.
