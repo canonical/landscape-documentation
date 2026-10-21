@@ -11,10 +11,10 @@ myst:
 
 ## Working with tags
 
-### In the new web portal
+### In the web portal
 You can assign tags from the **Instances** tab by selecting a list of instances and then selecting **Assign** > **Tags**. You can also add or remove tags from a single instance by navigating to its page and selecting **Edit**. 
 
-### In the classic web portal
+### In the legacy web portal
 There is no menu choice for tags; rather, you can navigate to **Computers** > **Info** to apply or remove one or more tags to all the instances you have selected. If you want to specify more than one tag at a time for your selected instances, separate the tags by spaces.
 
 ### Via the API

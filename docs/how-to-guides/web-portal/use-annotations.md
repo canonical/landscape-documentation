@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Use annotations in Landscape's 24.04+ portal to send custom metadata from clients, enabling device monitoring, grouping, and search."
+    description: "Use annotations in Landscape's web portal to send custom metadata from clients, enabling device monitoring, grouping, and search."
 ---
 
 (how-to-web-portal-use-annotations)=
-# How to use annotations
+# Use annotations
 
 Annotations in Landscape provide a mechanism for sending custom metadata from a client device to your Landscape server. These annotations can then be used to monitor, group and search for devices.
 
