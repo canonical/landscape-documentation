@@ -97,13 +97,13 @@ From your Windows machine:
     ```
 
 ````{note}
-If your Landscape server doesn't negotiate ALPN on port 6554, and your scripts start `ubuntu-pro-agent.exe` directly rather than through the Ubuntu Pro for WSL app, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable to `false` in the same session before starting the agent:
+If you deploy Landscape with a Landscape Server charm revision earlier than 599, such as the `26.04/stable` charm, HAProxy doesn't negotiate ALPN on port 6554. If your scripts start `ubuntu-pro-agent.exe` directly rather than through the Ubuntu Pro for WSL app, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable to `false` in the same session before starting the agent:
 
 ```powershell
 $env:GRPC_ENFORCE_ALPN_ENABLED = "false"
 ```
 
-When the agent is started by the app, its launcher sets this variable for you. Without it, the agent can't connect to Landscape. The value must be exactly `false` (case-insensitive). Don't use `[Environment]::SetEnvironmentVariable(..., "User")` here: it writes to the registry but doesn't update the current PowerShell process, so an agent launched from the same session won't see it. This applies to Juju deployments that route the Hostagent Messenger endpoint through `haproxy-route-tcp`, such as earlier charm revisions. With the current charm, HAProxy negotiates ALPN on port 6554 and the variable isn't needed. See {ref}`how-to-wsl-configure-juju-deployment`.
+When the agent is started by the app, its launcher sets this variable for you. Without it, the agent can't connect to Landscape. The value must be exactly `false` (case-insensitive). Don't use `[Environment]::SetEnvironmentVariable(..., "User")` here: it writes to the registry but doesn't update the current PowerShell process, so an agent launched from the same session won't see it. Revision 599 and later negotiate ALPN, so the variable isn't needed. To switch an existing deployment, see {ref}`how-to-wsl-juju-upgrade`.
 ````
 
 ## Finalize the Windows machine registration
