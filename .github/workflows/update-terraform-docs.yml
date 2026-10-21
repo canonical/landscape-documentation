@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout landscape-documentation
         uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
 
       - name: Checkout landscape-server-operator
         uses: actions/checkout@v5
