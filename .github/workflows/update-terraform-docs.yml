@@ -23,10 +23,11 @@ jobs:
         with:
           token: ${{ secrets.LANDSCAPE_SYNC_TOKEN }}
 
-      - name: Checkout landscape-server-operator
+      - name: Checkout landscape-server-operator 26.04
         uses: actions/checkout@v5
         with:
           repository: canonical/landscape-server-operator
+          ref: "26.04"
           path: vendor/landscape-server-operator
 
       - name: Install terraform-docs
@@ -35,6 +36,7 @@ jobs:
           curl -sSLo terraform-docs.tar.gz \
             "https://github.com/terraform-docs/terraform-docs/releases/download/${version}/terraform-docs-${version}-linux-amd64.tar.gz"
           tar -xzf terraform-docs.tar.gz terraform-docs
+          rm terraform-docs.tar.gz
           chmod +x terraform-docs
           sudo mv terraform-docs /usr/local/bin/terraform-docs
 
@@ -89,5 +91,5 @@ jobs:
               --base main \
               --head "${branch}" \
               --title "chore(docs): update Terraform module reference docs" \
-              --body "Automated regeneration of the Terraform module reference pages from canonical/landscape-server-operator."
+              --body "Automated regeneration of the Terraform module reference pages for Landscape 26.04 LTS from the 26.04 branch of canonical/landscape-server-operator."
           fi
