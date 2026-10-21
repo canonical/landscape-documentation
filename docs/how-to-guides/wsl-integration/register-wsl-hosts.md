@@ -103,7 +103,7 @@ If your Landscape server doesn't negotiate ALPN on port 6554, and your scripts s
 $env:GRPC_ENFORCE_ALPN_ENABLED = "false"
 ```
 
-When the agent is started by the app, its launcher sets this variable for you. Without it, the agent can't connect to Landscape. The value must be exactly `false` (case-insensitive). Don't use `[Environment]::SetEnvironmentVariable(..., "User")` here: it writes to the registry but doesn't update the current PowerShell process, so an agent launched from the same session won't see it. This applies to Juju deployments that route the Hostagent Messenger endpoint through `haproxy-route-tcp`, which includes all Landscape Server charm revisions earlier than 599. With revision 599 or later and the `haproxy-route` relation, HAProxy negotiates ALPN on port 6554 and the variable isn't needed. See {ref}`how-to-wsl-configure-juju-deployment`.
+When the agent is started by the app, its launcher sets this variable for you. Without it, the agent can't connect to Landscape. The value must be exactly `false` (case-insensitive). Don't use `[Environment]::SetEnvironmentVariable(..., "User")` here: it writes to the registry but doesn't update the current PowerShell process, so an agent launched from the same session won't see it. This applies to Juju deployments that route the Hostagent Messenger endpoint through `haproxy-route-tcp`, such as earlier charm revisions. With the current charm, HAProxy negotiates ALPN on port 6554 and the variable isn't needed. See {ref}`how-to-wsl-configure-juju-deployment`.
 ````
 
 ## Finalize the Windows machine registration
@@ -157,7 +157,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
 
 - **If you start `ubuntu-pro-agent.exe` directly (outside the app), check the log for TLS handshake errors**
 
-    If your automation starts the agent directly, a connection failure with `missing selected ALPN property` in `%USERPROFILE%\.ubuntupro\log` means the server didn't negotiate ALPN. On a Juju deployment with charm revision 599 or later, switch the endpoint to `haproxy-route` as described in {ref}`how-to-wsl-juju-upgrade`. Otherwise, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable as described in the note in the Windows Registry configuration step above.
+    If your automation starts the agent directly, a connection failure with `missing selected ALPN property` in `%USERPROFILE%\.ubuntupro\log` means the server didn't negotiate ALPN. On a Juju deployment, switch the endpoint to `haproxy-route` as described in {ref}`how-to-wsl-juju-upgrade`. Otherwise, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable as described in the note in the Windows Registry configuration step above.
 
 - **Ensure your firewall settings are configured appropriately**
 

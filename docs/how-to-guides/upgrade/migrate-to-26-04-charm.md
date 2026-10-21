@@ -161,9 +161,7 @@ When using HAProxy charm from the `2.8/x` track, the `ssl_cert` and `ssl_key` ch
 
 #### Hostagent Messenger (WSL)
 
-The Hostagent Messenger service is optional and only needs to be enabled if using {ref}`Landscape's WSL integration <how-to-guides-wsl-integration-index>`. To use the service with the charm, enable it via [the `enable_hostagent_messenger` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_hostagent_messenger) and integrate it with HAProxy.
-
-With charm revision 599 or later, integrate it via the `haproxy-route` interface. The service is served over HTTPS, so also integrate the Landscape Server units with your TLS certificates provider (from Step 3), and HAProxy with the provider's CA:
+The Hostagent Messenger service is optional and only needs to be enabled if using {ref}`Landscape's WSL integration <how-to-guides-wsl-integration-index>`. To use the service with the charm, enable it via [the `enable_hostagent_messenger` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_hostagent_messenger) and integrate it with HAProxy via the `haproxy-route` interface. The service is served over HTTPS, so also integrate the Landscape Server units with your TLS certificates provider (from Step 3), and HAProxy with the provider's CA:
 
 ```sh
 juju config landscape-server enable_hostagent_messenger=true
@@ -173,13 +171,6 @@ juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haprox
 ```
 
 See {ref}`how-to-wsl-configure-juju-deployment` for the CA endpoint of each provider. If you previously integrated this endpoint with `haproxy-route-tcp`, see {ref}`how-to-wsl-juju-upgrade`.
-
-Earlier revisions don't have the `certificates` endpoint, so integrate the service via the `haproxy-route-tcp` interface instead:
-
-```sh
-juju config landscape-server enable_hostagent_messenger=true
-juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
-```
 
 #### Ubuntu Installer Attach
 
