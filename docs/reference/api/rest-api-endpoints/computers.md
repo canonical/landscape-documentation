@@ -965,6 +965,7 @@ Query parameters:
 - `upgrade`: If true, only packages that are upgrades for an installed package of the same name are returned. If false, only packages that are not upgrades are returned. If omitted, no filtering on upgrade status is applied.
 - `held`: If true, only installed packages that are held are returned. If false, only packages that are not held are returned. If omitted, no filtering on held status is applied.
 - `security`: If true, only packages from the security pocket are returned. If false, only packages not from the security pocket are returned. If omitted, no filtering on security status is applied.
+- `security-upgrades-available`: If true, only installed packages with an installation candidate that is both an upgrade and from the security pocket are returned. Implies `installed=true`. Only `true` is supported; `false` returns a 400 error. If omitted, no filtering on security upgrades is applied.
 - `group_by_name`: If true (default), returns one result per package name, combining its installed row (if any) with every available candidate for that name. If false, returns one result per package ID/version instead.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results. It defaults to 0.
