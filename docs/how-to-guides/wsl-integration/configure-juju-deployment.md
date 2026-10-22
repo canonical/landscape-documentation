@@ -77,7 +77,7 @@ Revision 599 and later replace that relation with `haproxy-route` over HTTPS. It
 1. Refresh the charm, then upgrade the packages as described in {ref}`how-to-heading-upgrade-juju`.
 
    ```sh
-   juju refresh landscape-server --channel latest/stable
+   juju refresh landscape-server --channel 26.10/stable
    ```
 
 1. Integrate `landscape-server:certificates` with your TLS certificates provider, and integrate `haproxy:receive-ca-certs` with the same provider, as shown above.

@@ -157,7 +157,7 @@ If your Windows host machine doesn’t appear as a pending instance in your Land
 
 - **If you start `ubuntu-pro-agent.exe` directly (outside the app), check the log for TLS handshake errors**
 
-    If your automation starts the agent directly, a connection failure with `missing selected ALPN property` in `%USERPROFILE%\.ubuntupro\log` means the server didn't negotiate ALPN. On a Juju deployment, switch the endpoint to `haproxy-route` as described in {ref}`how-to-wsl-juju-upgrade`. Otherwise, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable as described in the note in the Windows Registry configuration step above.
+    If your automation starts the agent directly, a connection failure with `missing selected ALPN property` in `%USERPROFILE%\.ubuntupro\log` means the server didn't negotiate ALPN. This is still the case on Juju deployments that use a Landscape Server charm revision earlier than 599, including Landscape 24.04 LTS charm deployments, which is why the Ubuntu Pro for WSL launcher sets `GRPC_ENFORCE_ALPN_ENABLED` for its agent. To fix it on the server, switch the endpoint to `haproxy-route` as described in {ref}`how-to-wsl-juju-upgrade`. Otherwise, set the `GRPC_ENFORCE_ALPN_ENABLED` environment variable as described in the note in the Windows Registry configuration step above.
 
 - **Ensure your firewall settings are configured appropriately**
 
