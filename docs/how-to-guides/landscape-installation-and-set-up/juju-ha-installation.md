@@ -309,7 +309,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 juju offer haproxy:haproxy-route,haproxy-route-tcp
 ```
 
-This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler`. The optional hostagent messenger and Ubuntu installer attach services on `landscape-server` use `haproxy-route`.
+This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler`. `haproxy-route` is needed for other services. See {ref}`reference-charm-haproxy-route-endpoints`.
 
 #### Step 4: Consume the HAProxy offer and integrate Landscape Server
 
