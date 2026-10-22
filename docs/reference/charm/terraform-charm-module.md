@@ -4,7 +4,7 @@
 
 The Landscape Server charm Terraform module is a reusable Terraform module for deploying the Landscape Server charm with Juju. Use it when you want to include Landscape Server as a component in a larger Terraform deployment.
 
-The module is maintained in the `landscape-server-operator` repository. See the [module source](https://github.com/canonical/landscape-server-operator/tree/main/terraform/charm) for its implementation, and {ref}`how-to-terraform-juju-deployment` for an example of deploying Landscape with Terraform.
+This reference covers the module on the `26.04` branch of the `landscape-server-operator` repository for Landscape 26.04 LTS. See the [module source](https://github.com/canonical/landscape-server-operator/tree/26.04/terraform/charm) for its implementation, and {ref}`how-to-terraform-juju-deployment` for an example of deploying Landscape with Terraform.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -19,10 +19,6 @@ The module is maintained in the `landscape-server-operator` repository. See the 
 | Name | Version |
 |------|---------|
 | <a name="provider_juju"></a> [juju](#provider\_juju) | ~> 1.0 |
-
-## Modules
-
-No modules.
 
 ## Resources
 
@@ -50,7 +46,10 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_app_name"></a> [app\_name](#output\_app\_name) | Name of the deployed application. |
+| <a name="output_has_debarchive_relation"></a> [has\_debarchive\_relation](#output\_has\_debarchive\_relation) | Indicates whether the deployed revision provides the debarchive relation (added in rev 357). |
+| <a name="output_has_hostagent_messenger_https"></a> [has\_hostagent\_messenger\_https](#output\_has\_hostagent\_messenger\_https) | Indicates whether the deployed revision exposes hostagent-messenger-haproxy-route as haproxy-route (HTTPS) rather than haproxy-route-tcp (changed in rev 599). |
 | <a name="output_has_modern_haproxy_interface"></a> [has\_modern\_haproxy\_interface](#output\_has\_modern\_haproxy\_interface) | Indicates whether the deployed revision uses haproxy-route relations (26.04+) rather than the legacy external HAProxy website endpoint. |
+| <a name="output_has_task_handler_relation"></a> [has\_task\_handler\_relation](#output\_has\_task\_handler\_relation) | Indicates whether the deployed revision provides the task-handler relation (added in rev 447). |
 | <a name="output_provides"></a> [provides](#output\_provides) | Map of integration endpoints this charm provides. |
 | <a name="output_requires"></a> [requires](#output\_requires) | Map of integration endpoints this charm requires. |
 <!-- END_TF_DOCS -->
