@@ -350,6 +350,7 @@ snapd
 sslmode
 sssd
 stateful
+streamable
 STIG
 Subiquity
 subkeys
