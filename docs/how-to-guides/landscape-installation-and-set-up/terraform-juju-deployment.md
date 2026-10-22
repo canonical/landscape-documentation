@@ -238,13 +238,13 @@ haproxy                 = null
 haproxy_route_offer_url = "<model-owner>/<offering-model>.<offer-name>"
 ```
 
-The Landscape Task Handler gRPC endpoint, and the Hostagent Messenger endpoint if `enable_hostagent_messenger` is enabled in `landscape_server.config`, use the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and need their own offer, consumed via `haproxy_route_tcp_offer_url`.
+The Landscape Task Handler gRPC endpoint uses the separate `haproxy-route-tcp` interface (for gRPC/TCP passthrough) and needs its own offer, consumed via `haproxy_route_tcp_offer_url`.
 
 ```hcl
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
 ```
 
-The Ubuntu Installer Attach endpoint (`enable_ubuntu_installer_attach`) uses `haproxy-route` over HTTPS, so it doesn't need a `haproxy_route_tcp_offer_url`. The module relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
+The Hostagent Messenger (`enable_hostagent_messenger`) and Ubuntu Installer Attach (`enable_ubuntu_installer_attach`) endpoints use `haproxy-route` over HTTPS through `haproxy_route_offer_url` for a Landscape Server charm revision over 599. If you are at an earlier revision, you will use `haproxy_route_tcp_offer_url` for these services as well. The module relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint. See {ref}`how-to-wsl-configure-juju-deployment` and {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With `tls_certificates = null`, the module doesn't integrate these endpoints with HAProxy, because they can't be served without a certificate.
 
 `haproxy_route_offer_url` and `haproxy_route_tcp_offer_url` are independent of each other and of `haproxy`: `haproxy` controls whether this module deploys its own HAProxy, while the offer URLs control whether Landscape Server's `*-haproxy-route`/`*-haproxy-route-tcp` endpoints are integrated with that in-model HAProxy or with an external offer instead.
 

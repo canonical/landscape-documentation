@@ -2,7 +2,7 @@
 
 # HAProxy route endpoints
 
-The Landscape Server charm exposes seven route endpoints using the `haproxy-route` interface and one optional gRPC route endpoint using `haproxy-route-tcp`. Integrate the endpoints with the HAProxy charm (`2.8/stable`). The optional endpoints are needed only when the corresponding service is enabled.
+The Landscape Server charm exposes eight route endpoints using the `haproxy-route` interface. Integrate the endpoints with the HAProxy charm (`2.8/stable`). The optional endpoints are needed only when the corresponding service is enabled.
 
 ## Relation endpoints
 
@@ -14,7 +14,7 @@ The Landscape Server charm exposes seven route endpoints using the `haproxy-rout
 | `api-haproxy-route`                     | REST API                  | `/api`                           | HTTP     | `api_base_port` (default `9080`)           |
 | `package-upload-haproxy-route`          | Package upload            | `/upload`                        | HTTP     | `package_upload_base_port` (default `9100`) |
 | `repository-haproxy-route`              | Repository mirror         | `/repository`                    | HTTP     | `appserver_base_port` (default `8080`)     |
-| `hostagent-messenger-haproxy-route`     | Host agent gRPC messenger | (gRPC)                           | gRPC     | `hostagent_server_base_port` (default `50052`) |
+| `hostagent-messenger-haproxy-route`     | Host agent gRPC messenger | (gRPC)                           | gRPC (HTTPS) | `hostagent_server_base_port` (default `50052`) |
 | `ubuntu-installer-attach-haproxy-route` | Ubuntu Installer Attach   | (gRPC)                           | gRPC (HTTPS) | `ubuntu_installer_attach_base_port` (default `53354`) |
 
 Backend ports are configurable via the charm config options shown above (e.g. `juju config landscape-server appserver_base_port=8080`). For multi-worker services (`appserver`, `pingserver`, `message-server`, `api`), the charm allocates one port per worker starting at the base port — e.g., with `worker_counts=2` and `appserver_base_port=8080`, ports `8080` and `8081` are used. Metrics paths (e.g. `/ping/metrics`, `/api/metrics`) are denied on all endpoints.
@@ -32,10 +32,12 @@ juju integrate landscape-server:package-upload-haproxy-route haproxy:haproxy-rou
 juju integrate landscape-server:repository-haproxy-route haproxy:haproxy-route
 ```
 
-The Hostagent Messenger and Ubuntu Installer Attach services are optional and disabled by default. If you enable the Hostagent Messenger service, integrate its endpoint with HAProxy's `haproxy-route-tcp` endpoint:
+The Hostagent Messenger and Ubuntu Installer Attach services are optional and disabled by default.
+
+If you enable the Hostagent Messenger service, integrate its endpoint with HAProxy's `haproxy-route` endpoint and provide TLS certificates to the Landscape Server units. See {ref}`how-to-wsl-configure-juju-deployment`:
 
 ```bash
-juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
+juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route
 ```
 
 If you enable the Ubuntu Installer Attach service, integrate its endpoint with HAProxy's `haproxy-route` endpoint and provide TLS certificates to the Landscape Server units. See {ref}`how-to-ubuntu-installer-configure-landscape-deployment`:
