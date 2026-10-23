@@ -13,6 +13,7 @@ Release notes documenting new features, bug fixes, and changes across all Landsc
 :titlesonly:
 :maxdepth: 1
 
+26.10-release-notes
 26-04-lts-release-notes
 24-04-lts-release-notes
 25.10-release-notes
