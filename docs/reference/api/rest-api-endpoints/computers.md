@@ -890,6 +890,10 @@ Query parameters:
 
 ## GET `/computers/<int:computer_id>/packages`
 
+```{note}
+This endpoint is deprecated in v2 of the REST API as the implementation is neither correct nor performant. It will be removed in v3 of the REST API.
+```
+
 Get packages associated with a computer ID.
 
 Path parameters:
@@ -936,6 +940,131 @@ Example response:
     }
   ],
   "next": "https://landscape.canonical.com/api/v2/computers/23/packages?limit=2&offset=2",
+  "previous": null
+}
+```
+
+## GET `/computers/<int:computer_id>/packages/search`
+
+```{note}
+You must be running Landscape Server 26.10 or later to use this endpoint.
+```
+
+Search for packages known to a single computer. Replaces the deprecated `GET /computers/<int:computer_id>/packages` endpoint above with a correct, better-performing query scoped to the one computer being queried.
+
+Path parameters:
+
+- `computer_id`: An ID assigned to a specific computer.
+
+Query parameters:
+
+- `search`: A string to restrict the search to. Matches against the package name, summary, and description. Cannot be combined with `names`; providing both returns a 400 error.
+- `names`: Restrict the search to these exact package names, given as one comma-separated string (e.g. `curl,nginx`). Cannot be combined with `search`; providing both returns a 400 error.
+- `installed`: If true, only installed packages are returned. If false, only packages that are not installed are returned. If omitted, no filtering on installed status is applied.
+- `available`: If true, only packages available from an APT source are returned. If false, only packages that are not available are returned. If omitted, no filtering on availability is applied.
+- `upgrade`: If true, only packages that are upgrades for an installed package of the same name are returned. If false, only packages that are not upgrades are returned. If omitted, no filtering on upgrade status is applied.
+- `held`: If true, only installed packages that are held are returned. If false, only packages that are not held are returned. If omitted, no filtering on held status is applied.
+- `security`: If true, only packages from the security pocket are returned. If false, only packages not from the security pocket are returned. If omitted, no filtering on security status is applied.
+- `group_by_name`: If true (default), returns one result per package name, combining its installed row (if any) with every available candidate for that name. If false, returns one result per package ID/version instead.
+- `limit`: The maximum number of results returned by the method. It defaults to 1000.
+- `offset`: The offset inside the list of results. It defaults to 0.
+
+When `group_by_name` is true (the default), each entry in `results` has the following fields:
+
+- `name`: The package name.
+- `summary`: A short description of the package.
+- `installed_version`: The installed version, or `null` if the package is not installed.
+- `installed_id`: The ID of the installed package, or `null` if the package is not installed.
+- `held`: Whether the installed package is held.
+- `security`: Whether the installed package, or one of its installation candidates, is from the security pocket.
+- `installation_candidates`: The available, non-installed versions of the package, ordered with security candidates first, then upgrades, then by version with the highest version first. Each candidate has:
+  - `id`: The package ID.
+  - `version`: The version string.
+  - `upgrade`: Whether this candidate is an upgrade for the installed version.
+  - `security`: Whether this candidate is from the security pocket.
+
+When `group_by_name` is false, each entry in `results` instead describes a single package ID/version directly:
+
+- `id`: The package ID.
+- `name`: The package name.
+- `version`: The version string.
+- `summary`: A short description of the package.
+- `available`: Whether this package can be installed from an APT source.
+- `installed`: Whether this package is installed.
+- `held`: Whether this package is held.
+- `security`: Whether this package is from the security pocket.
+- `upgrade`: Whether this package is an upgrade for an installed package of the same name.
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/23/packages/search?installed=true&search=ssh" -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "count": 1,
+  "results": [
+    {
+      "name": "openssh-server",
+      "summary": "secure shell (SSH) server, for secure access from remote machines",
+      "installed_version": "1:9.6p1-3ubuntu13.5",
+      "installed_id": 101,
+      "held": false,
+      "security": false,
+      "installation_candidates": [
+        {
+          "id": 205,
+          "version": "1:9.6p1-3ubuntu13.9",
+          "upgrade": true,
+          "security": true
+        }
+      ]
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
+
+Example request with `group_by_name=false`:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/23/packages/search?installed=true&search=ssh&group_by_name=false" -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "count": 2,
+  "results": [
+    {
+      "id": 101,
+      "name": "openssh-server",
+      "version": "1:9.6p1-3ubuntu13.5",
+      "summary": "secure shell (SSH) server, for secure access from remote machines",
+      "available": false,
+      "installed": true,
+      "held": false,
+      "security": false,
+      "upgrade": false
+    },
+    {
+      "id": 205,
+      "name": "openssh-server",
+      "version": "1:9.6p1-3ubuntu13.9",
+      "summary": "secure shell (SSH) server, for secure access from remote machines",
+      "available": true,
+      "installed": false,
+      "held": false,
+      "security": true,
+      "upgrade": true
+    }
+  ],
+  "next": null,
   "previous": null
 }
 ```
@@ -1216,6 +1345,63 @@ Example response:
   ]
 }
 ```
+
+## GET `/computers/<int:computer_id>/users/<string:username>/pending-activities`
+
+Get pending profile-edit and group-membership activities for an existing Linux
+user. Requires `ViewActivity` permission for the computer.
+
+Path parameters:
+
+- `computer_id`: The numerical ID of the computer.
+- `username`: The Linux username on that computer.
+
+Query parameters:
+
+- None
+
+Example request:
+
+```bash
+curl -X GET "https://landscape.canonical.com/api/v2/computers/22/users/john/pending-activities" \
+  -H "Authorization: Bearer $JWT"
+```
+
+Example response:
+
+```json
+{
+  "count": 2,
+  "results": [
+    {
+      "activity_id": 73,
+      "summary": "Edit user john (UID 1000)",
+      "activity_status": "undelivered",
+      "creation_time": "2026-08-18T08:39:08Z",
+      "completion_time": null,
+      "changes": [
+        {"kind": "profile", "field": "name"},
+        {"kind": "profile", "field": "location"}
+      ]
+    },
+    {
+      "activity_id": 61,
+      "summary": "Remove user john from group admin",
+      "activity_status": "undelivered",
+      "creation_time": "2026-08-18T08:38:43Z",
+      "completion_time": null,
+      "changes": [
+        {"kind": "additional_group", "group_name": "admin", "operation": "remove"}
+      ]
+    }
+  ]
+}
+```
+
+Results contain the latest pending activity for each editable profile field
+and for additional groups, newest first (up to seven activities). `changes`
+identifies affected fields or group operations without exposing profile values.
+Succeeded, failed, and canceled activities are excluded.
 
 ## GET `/computers/activities`
 
