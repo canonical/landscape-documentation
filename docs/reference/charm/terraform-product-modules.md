@@ -80,6 +80,7 @@ This reference covers the module on the `26.04` branch of the `landscape-server-
 | [juju_integration.landscape_task_handler_postgresql](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration) | resource |
 | [juju_integration.pgbouncer_debarchive_postgresql](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration) | resource |
 | [juju_integration.pgbouncer_server_postgresql](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/integration) | resource |
+| [juju_offer.tls_certificates_send_ca_cert](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/offer) | resource |
 
 ## Inputs
 
@@ -108,4 +109,5 @@ This reference covers the module on the `26.04` branch of the `landscape-server-
 | <a name="output_has_modern_haproxy_interface"></a> [has\_modern\_haproxy\_interface](#output\_has\_modern\_haproxy\_interface) | Indicates whether the deployment uses the modern haproxy-route relation/interface instead of the legacy website interface. |
 | <a name="output_has_modern_postgres_interface"></a> [has\_modern\_postgres\_interface](#output\_has\_modern\_postgres\_interface) | Indicates whether the deployment supports the modern PostgreSQL charm interface. |
 | <a name="output_registration_key"></a> [registration\_key](#output\_registration\_key) | Registration key from the Landscape Server config. |
+| <a name="output_tls_certificates_ca_offer_url"></a> [tls\_certificates\_ca\_offer\_url](#output\_tls\_certificates\_ca\_offer\_url) | Offer URL for the CA that issues the gRPC backends' certificates. Integrate it with the receive-ca-certs endpoint of the cross-model haproxy (LBaaS) so it can verify those backends. Null when not needed. |
 <!-- END_TF_DOCS -->

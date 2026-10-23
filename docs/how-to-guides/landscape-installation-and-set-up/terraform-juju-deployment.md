@@ -244,7 +244,13 @@ The Landscape Task Handler gRPC endpoint uses the separate `haproxy-route-tcp` i
 haproxy_route_tcp_offer_url = "<model-owner>/<offering-model>.<tcp-offer-name>"
 ```
 
-The Hostagent Messenger (`enable_hostagent_messenger`) and Ubuntu Installer Attach (`enable_ubuntu_installer_attach`) endpoints use `haproxy-route` over HTTPS through `haproxy_route_offer_url` for a Landscape Server charm revision over 599. If you are at an earlier revision, you will use `haproxy_route_tcp_offer_url` for these services as well. The module relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must still trust that provider's CA through its `receive-ca-certs` endpoint. See {ref}`how-to-wsl-configure-juju-deployment` and {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With `tls_certificates = null`, the module doesn't integrate these endpoints with HAProxy, because they can't be served without a certificate.
+The Hostagent Messenger (`enable_hostagent_messenger`) and Ubuntu Installer Attach (`enable_ubuntu_installer_attach`) endpoints use `haproxy-route` over HTTPS through `haproxy_route_offer_url` for a Landscape Server charm revision over 599. If you are at an earlier revision, you will use `haproxy_route_tcp_offer_url` for these services as well. The module relates `landscape-server:certificates` to `tls_certificates`, but the external HAProxy must also trust that provider's CA, or it can't verify the Landscape Server units and doesn't serve these endpoints. The module offers the provider's `send-ca-cert` endpoint and returns the offer URL in the `tls_certificates_ca_offer_url` output. Integrate it with the external HAProxy's `receive-ca-certs` endpoint from the HAProxy model:
+
+```bash
+juju integrate -m <haproxy-model> <haproxy-app>:receive-ca-certs "$(terraform output -raw tls_certificates_ca_offer_url)"
+```
+
+See {ref}`how-to-wsl-configure-juju-deployment` and {ref}`how-to-ubuntu-installer-configure-landscape-deployment`. With `tls_certificates = null`, the module doesn't integrate these endpoints with HAProxy, because they can't be served without a certificate.
 
 `haproxy_route_offer_url` and `haproxy_route_tcp_offer_url` are independent of each other and of `haproxy`: `haproxy` controls whether this module deploys its own HAProxy, while the offer URLs control whether Landscape Server's `*-haproxy-route`/`*-haproxy-route-tcp` endpoints are integrated with that in-model HAProxy or with an external offer instead.
 
