@@ -12,7 +12,7 @@ This guide walks you through installing and configuring the `landscape-debarchiv
 Debarchive was introduced in **Landscape 26.04 LTS**.
 
 ```{note}
-This guide covers snap-based Manual and Quickstart installations. If you deployed Landscape with Juju, see {ref}`how-to-juju-ha-installation` instead.
+This guide covers Manual and Quickstart installations, where you install Debarchive as the `landscape-debarchive` snap. If you deployed Landscape with Juju, see {ref}`how-to-juju-ha-installation` instead.
 ```
 
 ## Prerequisites
@@ -148,6 +148,7 @@ sudo snap restart landscape-debarchive
 
 The snap automatically restarts when configuration changes are applied via `snap set`.
 
+(how-to-debarchive-filesystem-publications)=
 ## Configure the root directory for filesystem publications
 
 When you publish a repository to a filesystem target, Debarchive writes the published repository tree to a location on disk. The `filesystem-published-root` setting defines the base directory that is combined with each publication target's configured path to form the full output location.
@@ -160,11 +161,14 @@ sudo snap set landscape-debarchive deb.archive.filesystem-published-root=/srv/pu
 
 The directory must exist and be writable by the snap. After the setting is applied, any new filesystem publication will write its repository tree under the specified root, joined with the target path configured in the publication.
 
-For example, if the published root is `/srv/published-repos` and a publication target has the path `myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`.
+For example, if the published root is `/srv/published-repos` and a publication target has the path `/myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`. The web portal requires a filesystem publication target's path to start with `/`, but the path is still relative to the published root, not to the root of the filesystem.
 
 Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. The example configurations for Apache and Nginx below illustrate how you can achieve this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
 
+With these example configurations, client machines use `http://<FQDN>:8000/` as the repository URL in the `deb` line of a {ref}`repository profile <how-to-create-repo-profile>`, where `<FQDN>` is the fully qualified domain name of the web server.
+
 If the published repositories should not be publicly accessible, restrict access at the web server and/or network layer (e.g. firewall rules, IP allowlists, or HTTP authentication).
+
 ### Apache
 
 If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apache2/ports.conf` (or another included config file) before enabling the site.
@@ -172,7 +176,7 @@ If Apache isn't already listening on port 8000, add `Listen 8000` to `/etc/apach
 Install the file below as `/etc/apache2/sites-available/filesystem-repo.conf` and change the following values:
 
 - `@hostname@`: The fully qualified domain name for your server.
-- `@publication_target_file_path@`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
+- `@publication_target_file_path@`: The full path of the published repository directory, which is the published root joined with the path you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
 
 ```apache
 <VirtualHost *:8000>
@@ -212,7 +216,7 @@ sudo systemctl restart apache2
 Create `/etc/nginx/sites-available/filesystem-repo.conf` with the following contents, then replace:
 
 - `<YOUR_FQDN>`: The fully qualified domain name for your server.
-- `<PUBLICATION_TARGET_FILE_PATH>`: The path of the local directory you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
+- `<PUBLICATION_TARGET_FILE_PATH>`: The full path of the published repository directory, which is the published root joined with the path you chose when creating the filesystem publication target (e.g. `/srv/published-repos/myrepo/ubuntu`).
 
 ```nginx
 server {
@@ -340,10 +344,10 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
 ### Verify in the Landscape web portal
 
 1. Log in to the Landscape web portal at `https://$LANDSCAPE_FQDN`
-2. Navigate to the **Repository management** page
-3. Confirm that you can create or add a new repository mirror
+2. From the sidebar, navigate to **Repositories** > **Mirrors**
+3. Confirm that you can add a mirror
 
-If the repository management page loads and allows you to begin adding mirrors, the Debarchive service is fully operational.
+If the **Mirrors** page loads and allows you to begin adding mirrors, the Debarchive service is fully operational.
 
 ## Troubleshooting
 

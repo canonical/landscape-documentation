@@ -53,7 +53,7 @@ graph TD
 
 A mirror is a local copy of an upstream Debian repository (for example, `archive.ubuntu.com`). When you create a mirror, you specify:
 
-- **Archive root:** The upstream repository URL to mirror from (e.g. `http://archive.ubuntu.com/ubuntu/`)
+- **Archive root:** The upstream repository URL to mirror from (e.g. `http://archive.ubuntu.com/ubuntu/`). This is the **Source URL** field in the web portal.
 - **Distribution:** The repository suite to mirror. This corresponds to what the Ubuntu archive calls a series and pocket combination. For example, `noble` (the release pocket of Ubuntu 24.04 LTS), `noble-updates` (the updates pocket), or `noble-security` (the security pocket). For more info, see the [Ubuntu project docs](https://documentation.ubuntu.com/project/release-team/ubuntu-releases/).
 - **Components:** The categories of packages to include. Upstream Ubuntu repositories use `main`, `restricted`, `universe`, and `multiverse`. For more info, see [Ubuntu package archive](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/).
 - **Architectures:** The CPU architectures to mirror (e.g. `amd64`, `arm64`). For more info, see [Ubuntu supported architectures](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/supported-architectures/).
@@ -117,9 +117,12 @@ A publication target is the storage location where Landscape writes a published 
 
 Publication targets are separate from mirrors and local repositories. You can define a target once and reuse it for multiple publications. The publication target must have enough storage available to hold the entire contents of the publication source.
 
+```{include} /reuse/repository-storage-locations.md
+```
+
 If you are in a restricted environment (e.g. in an air-gapped environment, or with a manual Landscape deployment on a single machine, etc.), you may wish to use a filesystem publication target. Otherwise, we recommend using S3 or Swift publication targets.
 
-Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem.
+A filesystem publication target writes to a directory on the machine where the Debarchive service runs. The target's path is relative to Debarchive's configurable published root. Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. For details, see {ref}`how-to-debarchive-filesystem-publications`.
 
 (explanation-repo-mirroring-2604-repository-profiles)=
 ### Repository profiles
@@ -155,6 +158,7 @@ Consider the following example scenario which illustrates how a user could use r
 1. Once testing is complete and the packages are approved, the administrator creates publications for the same mirrors targeting `prod-target` and publishes them. The `prod-profile` is configured to point client machines at `prod-target`, so machines tagged with `prod-tag` now receive the approved packages. The decision of *when* to publish to `prod-target` is what controls the release to production.
 1. The administrator repeats steps #3-7 every time they want to distribute new packages to their client machines. They can re-use the publications they created steps #5 and #7, since the publication configuration is the same each time. They just need to republish to update the content at the publication target.
 
+(explanation-repo-mirroring-2604-gpg-keys)=
 ## GPG keys
 
 GPG keys are used with repository mirroring in Landscape to establish trust in the mirror and verify the packages originating from a trusted source. The GPG keys are used for two purposes:

@@ -116,6 +116,7 @@ Debarchive uses its own PostgreSQL database within the same cluster as Landscape
 
 * {ref}`Set up Debarchive <how-to-debarchive-repository-management>`
 * {ref}`Repository mirroring explanation <explanation-repo-mirroring>`
+* {ref}`Debarchive API reference <reference-api-debarchive>`
 
 (explanation-server-architecture-package-upload)=
 ### Package upload

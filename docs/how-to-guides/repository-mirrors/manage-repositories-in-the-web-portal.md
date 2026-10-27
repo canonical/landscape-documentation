@@ -24,7 +24,10 @@ See the {ref}`reference-release-notes-26-04-lts` for details on our changes to r
 
 The repository mirroring feature in Landscape lets you mirror Ubuntu and third-party repositories, create local repositories for personal packages, and publish repositories to different targets. This adds an extra layer of control over the software versions available to your client machines. If you're not familiar with repository mirroring in Landscape, read our explanation before continuing through this how-to guide: {ref}`explanation-repo-mirroring-2604`.
 
-This guide demonstrates how to mirror Ubuntu and other third-party debian repositories. For a complete guide that publishes a mirror to object storage and installs a package from it on a client, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
+```{include} /reuse/debarchive-setup-links.md
+```
+
+This guide demonstrates how to mirror Ubuntu and other third-party debian repositories. For a complete guide that publishes a mirror to S3 or a local filesystem and installs a package from it on a client, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
 
 (how-to-heading-disk-space-requirements-2604)=
 ## Disk space requirements
@@ -78,9 +81,17 @@ To create a new publication target:
 1. Enter the name of the publication target. For example, `s3-target-1`.
 1. In the **Type** dropdown menu, select the type of publication target you want to create and enter the required information for your publication target.
 
-```{note}
-If you use a filesystem publication target for a mirror that doesn't preserve upstream signatures, the target system must have enough storage available for both the synced mirror and the published repository. Plan for roughly double the repository disk space.
+For filesystem publication targets:
+
+```{include} /reuse/filesystem-publication-target-path.md
 ```
+
+```{include} /reuse/filesystem-publication-target-disk-space.md
+```
+
+For S3 publication targets, if you use an S3-compatible object store other than Amazon S3, enter the object store's hostname in the **Endpoint** field. If you set a **Prefix**, the repository is published under that path in the bucket, and the URL in your repository profile must include it.
+
+For a complete example with S3 and filesystem publication targets, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
 
 (how-to-heading-create-new-publication)=
 ## Create a new publication
@@ -94,6 +105,8 @@ To create a new publication:
     - In the **Source** dropdown menu, select the mirror or local repository you want to publish.
 1. In the **Publication target** dropdown menu, select the publication target you want to publish to.
 1. To resign packages in your publication target, enter the ASCII-armored GPG private key you want to use in the **Signing GPG key** text box.
+
+For guidance on signing keys, see {ref}`how-to-harden-deployment-secure-gpg-keys`.
 
 (how-to-create-repo-profile)=
 ## Create a repository profile and associate client machines to the profile
