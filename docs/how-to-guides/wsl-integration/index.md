@@ -18,6 +18,7 @@ Prepare your Landscape environment and register Windows hosts to enable WSL mana
 :maxdepth: 2
 
 Configure Landscape after upgrade <configure-landscape-after-upgrade>
+Configure a Juju deployment <configure-juju-deployment>
 Register WSL hosts <register-wsl-hosts>
 ```
 

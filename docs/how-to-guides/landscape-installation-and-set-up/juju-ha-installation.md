@@ -309,7 +309,7 @@ juju integrate haproxy:receive-ca-certs lego:send-ca-cert
 juju offer haproxy:haproxy-route,haproxy-route-tcp
 ```
 
-This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler` (required), and also if you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`.
+This creates a single offer exposing both the `haproxy-route` and `haproxy-route-tcp` endpoints, which can be consumed from other Juju models. `haproxy-route-tcp` is needed for `landscape-task-handler`. `haproxy-route` is needed for other services. See {ref}`reference-charm-haproxy-route-endpoints`.
 
 #### Step 4: Consume the HAProxy offer and integrate Landscape Server
 
@@ -348,7 +348,7 @@ Integrate `landscape-task-handler`'s gRPC route with the `haproxy-route-tcp` end
 juju integrate landscape-task-handler:grpc-haproxy-route lbaas-haproxy:haproxy-route-tcp
 ```
 
-If you enable the optional hostagent messenger or Ubuntu installer attach services on `landscape-server`, integrate their HAProxy endpoints with `lbaas-haproxy:haproxy-route-tcp` the same way, after enabling the matching charm config.
+If you enable the optional hostagent messenger or Ubuntu installer attach service, integrate its endpoint with `lbaas-haproxy:haproxy-route`. The external HAProxy connects to the `landscape-server` units over TLS, so also integrate `landscape-server:certificates` with a TLS certificates provider in the Landscape model, and offer that provider's CA endpoint so the external HAProxy can integrate it with `receive-ca-certs`. See {ref}`how-to-wsl-configure-juju-deployment` and {ref}`how-to-ubuntu-installer-configure-landscape-deployment`.
 
 ```{important}
 The outbox component on the `landscape-server` units reaches Task Handler through this HAProxy route by hostname, not by IP. If that hostname doesn't resolve on the `landscape-server` units (for example, testing locally without a real domain), add an `/etc/hosts` entry there pointing it at the external HAProxy's IP address.

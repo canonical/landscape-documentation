@@ -47,6 +47,7 @@ This reference covers the module on the `26.04` branch of the `landscape-server-
 |------|-------------|
 | <a name="output_app_name"></a> [app\_name](#output\_app\_name) | Name of the deployed application. |
 | <a name="output_has_debarchive_relation"></a> [has\_debarchive\_relation](#output\_has\_debarchive\_relation) | Indicates whether the deployed revision provides the debarchive relation (added in rev 357). |
+| <a name="output_has_hostagent_messenger_https"></a> [has\_hostagent\_messenger\_https](#output\_has\_hostagent\_messenger\_https) | Indicates whether the deployed revision exposes hostagent-messenger-haproxy-route as haproxy-route (HTTPS) rather than haproxy-route-tcp (changed in rev 599). |
 | <a name="output_has_modern_haproxy_interface"></a> [has\_modern\_haproxy\_interface](#output\_has\_modern\_haproxy\_interface) | Indicates whether the deployed revision uses haproxy-route relations (26.04+) rather than the legacy external HAProxy website endpoint. |
 | <a name="output_has_task_handler_relation"></a> [has\_task\_handler\_relation](#output\_has\_task\_handler\_relation) | Indicates whether the deployed revision provides the task-handler relation (added in rev 447). |
 | <a name="output_provides"></a> [provides](#output\_provides) | Map of integration endpoints this charm provides. |

@@ -25,8 +25,8 @@ The 26.04 version introduces significant architectural changes:
 | **PostgreSQL interface** | Modern `postgresql_client` interface (PostgreSQL 14+)                                                      | Legacy `pgsql` interface (PostgreSQL 14)                     |
 | **PostgreSQL relation**  | `landscape-server:database` → `postgresql:database`                                               | `landscape-server:db` → `postgresql:db-admin`                |
 | **RabbitMQ relation**    | `landscape-server:inbound-amqp` and `landscape-server:outbound-amqp` → `rabbitmq-server` (25.10+) | `landscape-server:amqp` → `rabbitmq-server:amqp` (pre-25.10) |
-| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (6 route endpoints)                  | `landscape-server:website` → `haproxy:reverseproxy`          |
-| **HAProxy TCP relation** | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route-tcp` (3 route endpoints) for optional services                  | None          |
+| **HAProxy relation**     | `landscape-server:*-haproxy-route` → `haproxy:haproxy-route` (8 route endpoints)                  | `landscape-server:website` → `haproxy:reverseproxy`          |
+| **HAProxy TCP relation** | `landscape-task-handler:grpc-haproxy-route` → `haproxy:haproxy-route-tcp`               | None          |
 | **TLS certificates**     | `haproxy:certificates` → TLS provider (e.g., `self-signed-certificates`, `lego`)                  | HAProxy self-signed or manual config                         |
 | **Access method**        | HAProxy unit IP or `root_url`                                                                     | HAProxy unit IP                                              |
 | **HA capabilities**      | HAProxy units for load balancing                                                                  | HAProxy units for load balancing                             |
@@ -161,21 +161,29 @@ When using HAProxy charm from the `2.8/x` track, the `ssl_cert` and `ssl_key` ch
 
 #### Hostagent Messenger (WSL)
 
-The Hostagent Messenger service is optional and only needs to be enabled if using {ref}`Landscape's WSL integration <how-to-guides-wsl-integration-index>`. To use the service with the charm, enable it via [the `enable_hostagent_messenger` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_hostagent_messenger) and integrate it with HAProxy via the `haproxy-route-tcp` interface:
+The Hostagent Messenger service is optional and only needs to be enabled if using {ref}`Landscape's WSL integration <how-to-guides-wsl-integration-index>`. To use the service with the charm, enable it via [the `enable_hostagent_messenger` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_hostagent_messenger) and integrate it with HAProxy via the `haproxy-route` interface. The service is served over HTTPS, so also integrate the Landscape Server units with your TLS certificates provider (from Step 3), and HAProxy with the provider's CA:
 
 ```sh
 juju config landscape-server enable_hostagent_messenger=true
-juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route-tcp
+juju integrate landscape-server:certificates <tls-provider>:certificates
+juju integrate haproxy:receive-ca-certs <tls-provider>:<ca-endpoint>
+juju integrate landscape-server:hostagent-messenger-haproxy-route haproxy:haproxy-route
 ```
+
+See {ref}`how-to-wsl-configure-juju-deployment` for the CA endpoint of each provider. If you previously integrated this endpoint with `haproxy-route-tcp`, see {ref}`how-to-wsl-juju-upgrade`.
 
 #### Ubuntu Installer Attach
 
-The Ubuntu Installer Attach service is optional and requires the `landscape-ubuntu-installer-attach` package. If you are {ref}`using Landscape to provision an autoinstall file <how-to-ubuntu-installer-set-up-landscape>`, enable the service via [the `enable_ubuntu_installer_attach` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_ubuntu_installer_attach) and integrate it with HAProxy via the `haproxy-route-tcp` interface:
+The Ubuntu Installer Attach service is optional and requires the `landscape-ubuntu-installer-attach` package. If you are {ref}`using Landscape to provision an autoinstall file <how-to-ubuntu-installer-set-up-landscape>`, enable the service via [the `enable_ubuntu_installer_attach` charm config option](https://charmhub.io/landscape-server/configurations?channel=26.04/stable#enable_ubuntu_installer_attach) and integrate it with HAProxy via the `haproxy-route` interface. The service is served over HTTPS, so also integrate the Landscape Server units with your TLS certificates provider (from Step 3), and HAProxy with the provider's CA:
 
 ```bash
 juju config landscape-server enable_ubuntu_installer_attach=true
-juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route-tcp
+juju integrate landscape-server:certificates <tls-provider>:certificates
+juju integrate haproxy:receive-ca-certs <tls-provider>:<ca-endpoint>
+juju integrate landscape-server:ubuntu-installer-attach-haproxy-route haproxy:haproxy-route
 ```
+
+See {ref}`how-to-ubuntu-installer-configure-landscape-deployment` for the CA endpoint of each provider. If you previously integrated this endpoint with `haproxy-route-tcp`, see {ref}`how-to-ubuntu-installer-juju-upgrade`.
 
 ### Step 6: Add new RabbitMQ relations (pre-25.10 deployments only)
 

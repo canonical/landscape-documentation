@@ -1,11 +1,11 @@
 ---
 myst:
   html_meta:
-    description: "Install, upgrade, remove, and hold packages and snaps for managed instances using Landscape's 24.04+ web portal."
+   description: "Install, upgrade, remove, and hold packages and snaps for managed instances using Landscape's web portal."
 ---
 
 (how-to-web-portal-manage-snaps)=
-# How to manage packages and snaps
+# Manage packages and snaps
 
 You can manage packages (Debian) and snaps from the web portal for each managed instance in your Landscape account. You can also use package profiles and remote script execution to apply package management policies across multiple instances.
 
@@ -52,6 +52,23 @@ APT preferences prevent future installation, but they don't remove a package tha
 
 To allow the package again later, remove the APT preferences file from target instances, then remove or update the related package profile constraint.
 
+(how-to-web-portal-manage-packages-multiple-instances)=
+### Manage packages across multiple instances
+
+You can upgrade, install, uninstall, change the version of, hold, or unhold packages on up to 100 instances at once from the **Instances** page. You can add at most 500 packages per action.
+
+1. On the **Instances** page, select anywhere from 1 to 100 instances.
+2. Click **Deb management** and choose the operation you want. Each operation opens a side panel.
+3. From the side panel, search for and add the packages to act on. The search only shows packages that the operation applies to on the selected instances:
+   - **Install** shows packages that are available but not installed on the selected instances.
+   - **Uninstall**, **Change version**, and **Hold** show packages installed on at least 1 of the selected instances. Held packages are excluded.
+   - **Unhold** shows packages held on at least 1 of the selected instances.
+   - **Upgrade** shows packages with upgrades available on the selected instances.
+   - For **Change version**, select the version to switch to for each package. Only versions available on the selected instances are listed.
+4. Click **Next** to review the summary, then confirm the action.
+
+As with per-instance actions, these operations are queued as activities. You can track their progress on the **Activities** page.
+
 ## Snaps
 
 ### View snap information
@@ -74,3 +91,24 @@ You can perform different actions with snaps from an instance's **Snaps** tab, e
    - You can only switch channels on individual snap, not multiple snaps at once.
 
 All actions will ask you to complete a form or confirm before Landscape sends an activity to perform the action. You can check the status of activities in the **Activities** page from the sidebar.
+
+### Manage snaps across multiple instances
+
+You can install, uninstall, refresh, hold, unhold, or change the channel of snaps on up to 100 instances at once from the **Instances** page. You can add at most 10 snaps per action.
+
+1. On the **Instances** page, select anywhere from 1 to 100 instances.
+2. In the actions menu, choose the snap management operation you want. Each operation opens a side panel.
+3. From the side panel, you can search for and add up to 10 snaps to act on.
+   - **Install** shows snaps available in the public snap store. When installing snaps, you must type at least 1 character to show snap options.
+   - **Unhold** shows snaps held in at least 1 of the selected instances.
+   - **Uninstall**, **Refresh**, **Hold**, and **Change channel** search snaps installed in at least 1 of the selected instances. Instances where the snap isn't installed are skipped.
+4. Once you click to submit, a popup will ask you to confirm the action.
+
+When installing snaps or changing their channel, you can pin each snap by either:
+
+- **Channel**, for example `latest/stable`. The snap is set to that channel's latest revision and keeps tracking it.
+- **Revision**, a specific revision number. The snap is set to that revision, but its tracking channel does not change.  Unless the snap is held, any subsequent manual or automatic refresh will update it to the latest revision of its tracking channel.
+
+If a snap requires classic confinement, Landscape flags it and asks you to acknowledge that the snap may access your files and system before proceeding. When the confinement requirements of a snap can't be determined, you are given the option to choose the confinement. As per the [Snap documentation](https://snapcraft.io/docs/explanation/snap-development/install-modes/#classic-confinement), snaps that do not require classic confinement will ignore the choice. 
+
+As with per-instance actions, these operations are queued as activities. You can track their progress on the **Activities** page.
