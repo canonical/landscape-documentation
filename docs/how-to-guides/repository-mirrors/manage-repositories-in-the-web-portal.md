@@ -45,6 +45,7 @@ To create a new mirror:
 1. Enter the name of the mirror. For example, `noble-backports-mirror`.
     - Note: You can't use the same name for multiple mirrors, so you should make this name unique and descriptive of the repository. If you want to reuse a name later, you'll have to delete the original mirror.
 1. Select the type of mirror from the **Source Type** dropdown menu. For example, select **Ubuntu archive** if you're mirroring an Ubuntu repository.
+    - If you select **Ubuntu Pro**, enter the bearer token for the Pro service you want to mirror in the **Bearer token** field. This is not your Ubuntu Pro subscription token. For ESM repositories, you can find the token in `/etc/apt/auth.conf.d/90ubuntu-advantage` on a machine attached to Ubuntu Pro.
 1. In the **Source URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
 1. (Optional) For signature preserving mirrors, select the **Preserve upstream signing key** checkbox.
 1. Enter the distribution you want to mirror. If you're mirroring an Ubuntu repository, select the distribution from the dropdown menu. Otherwise, enter the distribution name. For example, `bookworm`.
