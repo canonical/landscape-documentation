@@ -1,3 +1,5 @@
+The version-specific PPA for Landscape 26.10 is `ppa:landscape/self-hosted-26.10`.
+
 | Release channel | PPA source to add | Support | Recommended for |
 |-----------------|-------------------|---------|-----------------|
 | LTS (versioned) | Pattern: `ppa:landscape/self-hosted-<VERSION>`<br>Example: `ppa:landscape/self-hosted-24.04` | 10 years; 5 point releases | Production |
