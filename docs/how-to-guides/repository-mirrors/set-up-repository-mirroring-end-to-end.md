@@ -71,7 +71,7 @@ You also need the following, depending on your publication target type:
 :sync: filesystem
 
 - A **Quickstart or Manual installation** of Landscape Server. The filesystem steps in this guide use the published root and web server configuration from {ref}`how-to-debarchive-repository-management`, which covers Quickstart and Manual installations only.
-- **Apache or Nginx** on the Debarchive machine, to serve the published repository directory. Quickstart installations already use Apache. Step 4 shows how to configure the web server. Your client machine must be able to reach it.
+- **Apache or Nginx** on the Debarchive machine, to serve the published repository directory. Quickstart installations already use Apache. {ref}`Step 4 <how-to-set-up-repository-mirroring-end-to-end-publish>` shows how to configure the web server. Your client machine must be able to reach it.
 ````
 
 `````
@@ -122,6 +122,8 @@ A publication target is the storage location where your published repository is 
 
 ```{include} /reuse/filesystem-publication-target-path.md
 ```
+
+Landscape doesn't serve filesystem publication targets. {ref}`Step 4 <how-to-set-up-repository-mirroring-end-to-end-publish>` shows how to serve this repository with Apache or Nginx. To change the published root, see {ref}`how-to-debarchive-filesystem-publications`.
 ````
 
 `````
@@ -163,9 +165,10 @@ When prompted, do not set a passphrase on the key. Landscape needs direct access
 
 Use this key pair in the next steps: paste the private key in the publication and the public key in the repository profile.
 
+(how-to-set-up-repository-mirroring-end-to-end-publish)=
 ## Step 4: Publish the mirror
 
-A publication connects your mirror to your publication target and writes the repository into your object store.
+A publication connects your mirror to your publication target and writes the repository there.
 
 To create the publication:
 
@@ -243,7 +246,7 @@ Use the URL of your web server, replacing `<WEB_SERVER_FQDN>` with the fully qua
 deb http://<WEB_SERVER_FQDN>:8000/ noble-backports main
 ```
 
-This example assumes that the web server's document root is the full publication directory, and that it listens on port 8000, as in the example configurations in {ref}`how-to-debarchive-filesystem-publications`.
+This example assumes that the web server's document root is the full publication directory, and that it listens on port 8000, as in the example configurations in {ref}`Step 4 <how-to-set-up-repository-mirroring-end-to-end-publish>`.
 ````
 
 `````

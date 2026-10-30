@@ -469,6 +469,8 @@ For a filesystem target, set the path to the directory where the published repos
 ```{include} /reuse/filesystem-publication-target-path.md
 ```
 
+To change the published root, see {ref}`how-to-debarchive-filesystem-publications`.
+
 ### 2. Create a publication
 
 Navigate to **Repositories > Publications** and create a new publication. Select the migrated mirror or local repository as the source, choose the publication target you created, and configure the distribution, architectures, and GPG signing key. For details, see {ref}`how-to-heading-create-new-publication`.

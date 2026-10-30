@@ -87,6 +87,8 @@ For filesystem publication targets:
 ```{include} /reuse/filesystem-publication-target-path.md
 ```
 
+Landscape doesn't serve filesystem publication targets. To serve them with Apache or Nginx or to change the published root, see {ref}`how-to-debarchive-filesystem-publications`.
+
 ```{include} /reuse/filesystem-publication-target-disk-space.md
 ```
 
