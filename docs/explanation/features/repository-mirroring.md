@@ -122,7 +122,7 @@ Publication targets are separate from mirrors and local repositories. You can de
 
 If you are in a restricted environment (e.g. in an air-gapped environment, or with a manual Landscape deployment on a single machine, etc.), you may wish to use a filesystem publication target. Otherwise, we recommend using S3 or Swift publication targets.
 
-A filesystem publication target writes to a directory on the machine where the Debarchive service runs. The target's path is relative to Debarchive's configurable published root. Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. For details, see {ref}`how-to-debarchive-filesystem-publications`.
+A filesystem publication target writes to a directory on the machine where the Debarchive service runs. The target's path is relative to Debarchive's configurable published root. Landscape itself does not serve filesystem publication targets, so you serve the directory with a web server, such as Apache or Nginx. For example configurations, see {ref}`how-to-debarchive-filesystem-publications`.
 
 (explanation-repo-mirroring-2604-repository-profiles)=
 ### Repository profiles

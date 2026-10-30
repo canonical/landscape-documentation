@@ -163,7 +163,7 @@ The directory must exist and be writable by the snap. After the setting is appli
 
 For example, if the published root is `/srv/published-repos` and a publication target has the path `/myrepo/ubuntu`, the resulting published repository will be located at `/srv/published-repos/myrepo/ubuntu`. The web portal requires a filesystem publication target's path to start with `/`, but the path is still relative to the published root, not to the root of the filesystem.
 
-Landscape itself does not serve filesystem publication targets. Instead, you must configure a web server to serve your packages from your filesystem. The example configurations for Apache and Nginx below illustrate how you can achieve this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
+Landscape itself does not serve filesystem publication targets. To make published repositories available to clients, serve them with a web server. The following example configurations for Apache and Nginx show how to do this. Both examples configure the service to listen on port 8000 to avoid conflicts with Landscape Server.
 
 With these example configurations, client machines use `http://<FQDN>:8000/` as the repository URL in the `deb` line of a {ref}`repository profile <how-to-create-repo-profile>`, where `<FQDN>` is the fully qualified domain name of the web server.
 

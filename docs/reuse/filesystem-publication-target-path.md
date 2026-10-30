@@ -1,3 +1,3 @@
 The **Path** of a filesystem publication target must start with `/`, but it's relative to Debarchive's published root, not to the root of the filesystem. Debarchive writes the published repository to the published root joined with the path. For example, with the default published root, `/var/snap/landscape-debarchive/common/publications`, the path `/noble-backports` results in `/var/snap/landscape-debarchive/common/publications/noble-backports`.
 
-Landscape doesn't serve filesystem publication targets. To change the published root, or to configure a web server that serves the published repository to your clients, see {ref}`how-to-debarchive-filesystem-publications`.
+Landscape doesn't serve filesystem publication targets. To serve the published repository to your clients with Apache or Nginx, or to change the published root, see {ref}`how-to-debarchive-filesystem-publications`.

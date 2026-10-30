@@ -32,7 +32,7 @@ The workflow uses these repository management components:
 This guide covers the following publication target types:
 
 - **S3**: An Amazon S3 bucket or S3-compatible object store (such as MinIO). In this guide, clients download packages directly from the bucket.
-- **Filesystem**: A directory on the local filesystem of the machine where Debarchive runs. You must configure a web server, such as Apache or Nginx, to serve the directory to your clients.
+- **Filesystem**: A directory on the local filesystem of the machine where Debarchive runs. Clients download packages from a web server, such as Apache or Nginx, that serves this directory. This guide uses the {ref}`example web server configurations <how-to-debarchive-filesystem-publications>` from the Debarchive setup guide.
 
 For more information about choosing a publication target type, see {ref}`explanation-repo-mirroring-2604-publication-targets`.
 
@@ -71,7 +71,7 @@ You also need the following, depending on your publication target type:
 :sync: filesystem
 
 - A **Quickstart or Manual installation** of Landscape Server. The filesystem steps in this guide use the published root and web server configuration from {ref}`how-to-debarchive-repository-management`, which covers Quickstart and Manual installations only.
-- A **web server**, such as Apache or Nginx, that can serve the published repository directory on the Debarchive machine. Your client machine must be able to reach this web server.
+- **Apache or Nginx** on the Debarchive machine, to serve the published repository directory. Quickstart installations already use Apache. Step 4 shows how to configure the web server. Your client machine must be able to reach it.
 ````
 
 `````
@@ -203,7 +203,7 @@ When the publish finishes, the repository is available for clients from your buc
 
 When the publish finishes, the repository is written to the publication directory on the Debarchive machine. For example, `/var/snap/landscape-debarchive/common/publications/noble-backports`.
 
-Configure a web server to serve the publication directory by following {ref}`how-to-debarchive-filesystem-publications`. Use the full publication directory as the web server's document root. The example Apache and Nginx configurations in that guide serve the directory on port 8000.
+Serve the publication directory with Apache or Nginx by following the example configurations in {ref}`how-to-debarchive-filesystem-publications`. Use the full publication directory as the web server's document root. Both example configurations serve the directory on port 8000.
 ````
 
 `````
