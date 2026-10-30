@@ -189,24 +189,29 @@ To publish the mirror:
 
 Landscape copies the packages and writes a complete APT repository to your publication target, signed with your key.
 
-`````{tab-set}
+``````{tab-set}
 :sync-group: publication-target
 
-````{tab-item} S3
+`````{tab-item} S3
 :sync: s3
 
 When the publish finishes, the repository is available for clients from your bucket.
-````
+`````
 
-````{tab-item} Filesystem
+`````{tab-item} Filesystem
 :sync: filesystem
 
 When the publish finishes, the repository is written to the publication directory on the Debarchive machine. For example, `/var/snap/landscape-debarchive/common/publications/noble-backports`.
 
-Serve the publication directory with Apache or Nginx by following the example configurations in {ref}`how-to-debarchive-filesystem-publications`. Use the full publication directory as the web server's document root. Both example configurations serve the directory on port 8000.
-````
+Landscape doesn't serve this directory. Serve it to your clients with Apache or Nginx, using the full publication directory as the document root. The example configurations below listen on port 8000. For more detail, including how to change the published root, see {ref}`how-to-debarchive-filesystem-publications`.
 
+````{dropdown} Example Apache and Nginx web server configurations
+```{include} /reuse/filesystem-web-server-config.md
+```
+````
 `````
+
+``````
 
 ## Step 5: Create a repository profile and associate client machines
 

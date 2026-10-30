@@ -117,8 +117,7 @@ A publication target is the storage location where Landscape writes a published 
 
 Publication targets are separate from mirrors and local repositories. You can define a target once and reuse it for multiple publications. The publication target must have enough storage available to hold the entire contents of the publication source.
 
-```{include} /reuse/repository-storage-locations.md
-```
+Debarchive stores the synced contents of mirrors and local repositories on the machine where it runs; publishing writes a separate copy to the publication target, which is what client machines download from.
 
 If you are in a restricted environment (e.g. in an air-gapped environment, or with a manual Landscape deployment on a single machine, etc.), you may wish to use a filesystem publication target. Otherwise, we recommend using S3 or Swift publication targets.
 
