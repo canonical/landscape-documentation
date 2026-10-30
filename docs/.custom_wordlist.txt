@@ -142,6 +142,7 @@ HAProxy
 haproxy
 HashiCorp
 hardcoded
+Hardlink
 HashiCorp’s
 HashiCorp's
 hashid
