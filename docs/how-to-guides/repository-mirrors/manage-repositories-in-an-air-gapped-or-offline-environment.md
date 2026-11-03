@@ -9,6 +9,10 @@ myst:
 
 > See also: {ref}`explanation-repo-mirroring`
 
+```{note}
+Parts of this guide use the Legacy API and the pre-26.04 repository storage location (`/var/lib/landscape/landscape-repository/standalone/`), which apply to **Landscape 25.10 and earlier** only. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
+```
+
 You can manage repositories with Landscape in an airgapped or offline environment, although the setup is more involved than in a standard online environment. This guide provides a high-level overview of how to set up Landscape in an airgapped environment. If you aren’t familiar with repository mirroring and management in Landscape, it’s recommended that you read our {ref}`About repository mirroring <explanation-repo-mirroring>` guide first.
 
 This guide assumes you already have Landscape installed and set up in your airgapped environment. If you don’t have Landscape installed yet, follow the instructions in {ref}`how-to-install-airgapped` before completing this guide.
