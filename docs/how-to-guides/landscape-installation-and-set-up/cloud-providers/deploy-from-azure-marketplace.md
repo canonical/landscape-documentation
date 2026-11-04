@@ -83,15 +83,15 @@ The portal shows the deployment's progress. When the deployment is complete, the
 
 ## Sign in to Landscape
 
-% TODO(LNDENG-5612): confirm how customers receive the Landscape address, and the administrator email or user name for password authentication (the wizard doesn't ask for them)
-Canonical sends the address of your Landscape server to the **Customer Email** address that you entered when you deployed the offer.
+Canonical sends onboarding information, including the address of your Landscape server, to the **Customer Email** address that you entered when you deployed the offer.
 
 1. In a browser, go to the address of your Landscape server.
 2. Sign in:
 
-    - For password authentication: use the administrator account, with the **Admin Password** that you entered when you deployed the offer.
+    - For password authentication: use the administrator account and the **Admin Password** that you entered when you deployed the offer.
     - For OIDC authentication: sign in with your OIDC provider.
 
+% TODO(LNDENG-5612): confirm how customers receive the administrator email address or user name for password authentication (the wizard doesn't ask for them)
 To register client machines with your Landscape server, see {ref}`how-to-install-landscape-client`.
 
 (how-to-deploy-from-azure-marketplace-managed-rg)=
