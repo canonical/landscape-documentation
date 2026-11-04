@@ -11,7 +11,9 @@ Canonical provides Landscape Server as an Azure Marketplace managed application.
 
 Canonical operates the deployment. It uses Juju to deploy Landscape Server, together with HAProxy, PostgreSQL, and RabbitMQ, on Ubuntu 24.04 LTS VMs in your subscription, and pins the Landscape Server version that it deploys.
 
-The deployment doesn't provide a domain name or TLS certificate for your Landscape server.
+The deployment uses a configured URL for your Landscape server and obtains its TLS certificate through the `lego` charm, which is configured to use Cloudflare. The Azure wizard doesn't ask you to provide a URL or certificate.
+
+% TODO(LNDENG-5612): confirm how the configured Landscape URL and Cloudflare token are provided to the deployment, and how customers receive the URL
 
 A managed application uses two resource groups in your subscription:
 
