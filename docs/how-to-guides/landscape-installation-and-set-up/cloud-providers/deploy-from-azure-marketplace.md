@@ -11,9 +11,9 @@ Canonical provides Landscape Server as an Azure Marketplace managed application.
 
 Canonical operates the deployment. It uses Juju to deploy Landscape Server, together with HAProxy, PostgreSQL, and RabbitMQ, on Ubuntu 24.04 LTS VMs in your subscription, and pins the Landscape Server version that it deploys.
 
-The deployment uses a configured URL for your Landscape server and obtains its TLS certificate through the `lego` charm, which is configured to use Cloudflare. The Azure wizard doesn't ask you to provide a URL or certificate.
+Landscape Server uses a URL in the form `https://landscape-<project-unique-string>.<region>.azure.canonicalmanagedapps.com`. The deployment creates a public load balancer and sends its DNS record to the portal to publish. The `lego` charm obtains the Landscape TLS certificate using Cloudflare. The Azure wizard doesn't ask you to provide a URL, certificate, or Cloudflare token.
 
-% TODO(LNDENG-5612): confirm how the configured Landscape URL and Cloudflare token are provided to the deployment, and how customers receive the URL
+% TODO(LNDENG-5612): confirm how the Cloudflare token is provided to the deployment and how customers receive the Landscape URL
 
 A managed application uses two resource groups in your subscription:
 
@@ -76,17 +76,16 @@ You need:
 6. If the **SMTP configuration** section is shown, enter your SMTP relay's **SMTP relay server**, **SMTP port**, **Sender address**, **SMTP user**, and **SMTP password**. The wizard hides this section if you use OIDC authentication and approve new OIDC accounts automatically.
 7. On the **Review + create** tab, check your settings and the offer's terms and price, then select **Create**.
 
-The portal shows the deployment's progress. When the deployment is complete, the managed application is in the resource group that you selected, and the deployed resources are in the managed resource group. Canonical then finishes setting up Landscape Server on the deployed resources.
+The portal shows the deployment's progress. When the deployment is complete, the managed application is in the resource group that you selected, and the deployed resources are in the managed resource group. Canonical then finishes setting up Landscape Server on the deployed resources, and the portal sends a welcome email to the **Customer Email** address.
 
 ## Sign in to Landscape
 
 1. In a browser, go to the address of your Landscape server.
 2. Sign in:
 
-    - For password authentication: use the administrator account and the **Admin Password** that you entered when you deployed the offer.
+    - For password authentication: use the **Customer Email** address as the administrator's user name and email address, and the **Admin Password** that you entered when you deployed the offer.
     - For OIDC authentication: sign in with your OIDC provider.
 
-% TODO(LNDENG-5612): confirm how customers receive the administrator email address or user name for password authentication (the wizard doesn't ask for them)
 To register client machines with your Landscape server, see {ref}`how-to-install-landscape-client`.
 
 (how-to-deploy-from-azure-marketplace-managed-rg)=
@@ -96,19 +95,11 @@ The publisher of a managed application chooses how much access you have to the m
 
 To check your access, open the managed resource group in the Azure portal, select **Access control (IAM)**, and check the **Deny assignments** tab.
 
-## Set up SSH access to the VMs
+## SSH access to the VMs
 
-The deployment doesn't configure SSH access for you, and its network security group doesn't allow inbound SSH traffic. Landscape Server VMs also don't have public IP addresses.
+The deployment doesn't provide a customer SSH procedure for the Landscape Server VMs. The bootstrap configures Tailscale SSH for deployment management and adds an SSH key to the Landscape Juju model; this isn't customer access to the VMs. The bootstrap script's inbound port 22 rule and imported SSH keys are in a section marked as staging-only, so don't rely on them for production access.
 
-% TODO(LNDENG-5612): confirm that the offer's deny assignment allows customers to reset SSH keys and change the network security group, and how customers reach VMs without public IP addresses
-To sign in to a VM with SSH, set up access separately for each VM that you want to sign in to:
-
-1. In the Azure portal, open the managed resource group and select the VM.
-2. Select **Help** > **Reset password**.
-3. Select **Reset SSH public key** as the mode, enter a user name and your SSH public key, then select **Update**.
-4. Allow inbound SSH traffic on port 22 to the VM from your network, for example by adding an inbound security rule to the network security group.
-
-If the deny assignment on the managed resource group doesn't allow these changes, they fail.
+% TODO(LNDENG-5612): confirm whether customers can SSH to individual Landscape Server VMs and, if so, the supported network path and required managed resource group permissions
 
 (how-to-deploy-from-azure-marketplace-delete)=
 ## Delete the deployment
