@@ -253,6 +253,7 @@ Ocata
 oidc
 OIDC
 Okta
+onboarding
 onwards
 OTPs
 OpenStack
@@ -353,6 +354,7 @@ sssd
 stateful
 STIG
 Subiquity
+Tailscale
 subkeys
 submodule
 subpaths
@@ -413,6 +415,7 @@ vCPUs
 vendoring
 vhost
 vhosts
+VMAccess
 VMM
 VMs
 VM's
