@@ -15,12 +15,7 @@ Landscape Server uses a URL in the form `https://landscape-<project-unique-strin
 
 % TODO(LNDENG-5612): confirm how the Cloudflare token is provided to the deployment and how customers receive the Landscape URL
 
-A managed application uses two resource groups in your subscription:
-
-- **Application resource group**: Contains the managed application resource. You have full access to this resource group, and you use the managed application to manage the deployment's lifecycle.
-- **Managed resource group**: Contains the resources that the application deploys, such as the VMs, an Azure Kubernetes Service (AKS) cluster, their disks, and their network resources. Your access to this resource group is limited. For more information, see {ref}`how-to-deploy-from-azure-marketplace-managed-rg`.
-
-The AKS cluster also creates a resource group for its nodes, named after the managed resource group with an `-AKS` suffix.
+Azure places the managed application in the application resource group you select and creates a separate managed resource group for its deployed resources. Your access to the managed resource group is limited; see {ref}`how-to-deploy-from-azure-marketplace-managed-rg`.
 
 For more information about managed applications, see [Microsoft's overview of Azure Managed Applications](https://learn.microsoft.com/en-us/azure/azure-resource-manager/managed-applications/overview).
 
@@ -104,7 +99,7 @@ The deployment doesn't provide a customer SSH procedure for the Landscape Server
 (how-to-deploy-from-azure-marketplace-delete)=
 ## Delete the deployment
 
-When you no longer need the deployment, delete the managed application. Azure then deletes the managed resource group and all the resources in it, including the AKS cluster and its node resource group, and the charges for them stop.
+When you no longer need the deployment, delete the managed application. Azure then deletes the managed resource group and its resources, and the charges for them stop.
 
 1. In the Azure portal, open the managed application.
 2. Select **Delete**, and confirm.
