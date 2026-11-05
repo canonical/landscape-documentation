@@ -11,9 +11,7 @@ Canonical provides Landscape Server as an Azure Marketplace managed application.
 
 Canonical operates the deployment. It uses Juju to deploy Landscape Server, together with HAProxy, PostgreSQL, and RabbitMQ, on Ubuntu 24.04 LTS VMs in your subscription, and pins the Landscape Server version that it deploys.
 
-Landscape Server uses a URL in the form `https://landscape-<project-unique-string>.<region>.azure.canonicalmanagedapps.com`. The deployment creates a public load balancer and sends its DNS record to the portal to publish. The `lego` charm obtains the Landscape TLS certificate using Cloudflare. The Azure wizard doesn't ask you to provide a URL, certificate, or Cloudflare token.
-
-% TODO(LNDENG-5612): confirm how the Cloudflare token is provided to the deployment and how customers receive the Landscape URL
+The deployment provides the Landscape URL and its TLS certificate. The URL is in the form `https://landscape-<project-unique-string>.<region>.azure.canonicalmanagedapps.com`. You don't need to provide a domain name or certificate, but you need to provide your own SMTP relay credentials.
 
 Azure places the managed application in the application resource group you select and creates a separate managed resource group for its deployed resources. Your access to the managed resource group is limited; see {ref}`how-to-deploy-from-azure-marketplace-managed-rg`.
 
@@ -24,10 +22,30 @@ To build your own Landscape Server VM on Azure with cloud-init instead, see {ref
 ```
 
 ```{warning}
-Deploying this offer costs money. The Azure resources that it creates, such as VMs, an AKS cluster, disks, public IP addresses, and network traffic, are billed to your Azure subscription for as long as they exist. A high availability deployment uses three Landscape Server VMs instead of one. Any software or plan charges for the offer are shown on the offer's page in the Azure portal and are also billed through your subscription.
+Deploying this offer costs money. The Azure resources that it creates, such as VMs, an AKS cluster, disks, public IP addresses, and network traffic, are billed to your Azure subscription for as long as they exist. A high availability deployment uses more VMs; see {ref}`how-to-deploy-from-azure-marketplace-includes`. Any software or plan charges for the offer are shown on the offer's page in the Azure portal and are also billed through your subscription.
 
 To stop these charges, delete the managed application as described in {ref}`how-to-deploy-from-azure-marketplace-delete`.
 ```
+
+(how-to-deploy-from-azure-marketplace-includes)=
+## What the deployment includes
+
+Every deployment includes:
+
+- A bootstrap VM that Canonical uses to set up and operate the deployment.
+- An AKS cluster with one node, which runs the Canonical Observability Stack (COS) Lite that Canonical uses to monitor the deployment.
+- A public load balancer for Landscape.
+
+The **Enable High Availability** setting changes the rest of the deployment:
+
+| | Without high availability | With high availability |
+| --- | --- | --- |
+| Landscape Server VMs | 1 | 3 |
+| Units of Landscape Server, HAProxy, PostgreSQL, RabbitMQ, the task handler, and the Debian archive service | 1 of each | 3 of each, one on each Landscape Server VM |
+| RabbitMQ | Single node | Three-node cluster |
+| Juju controller VMs | 1 | 3 |
+
+The Landscape Server VMs use the **Landscape VM Size** that you select. The bootstrap VM and the AKS node use the **Components VM Size**.
 
 ## Prerequisites
 
@@ -56,7 +74,7 @@ You need:
 
 4. On the **Landscape Configuration** tab, select the size of the deployment:
 
-    - **Enable High Availability**: Select this to deploy three Landscape Server VMs for redundancy. This is the default, and is suitable for production. Without high availability, the deployment uses a single Landscape Server VM, which is suitable only for proofs of concept, development, and testing.
+    - **Enable High Availability**: Select this to deploy three Landscape Server VMs for redundancy. For the full differences, see {ref}`how-to-deploy-from-azure-marketplace-includes`. This is the default, and is suitable for production. Without high availability, the deployment uses a single Landscape Server VM, which is suitable only for proofs of concept, development, and testing.
     - **Components VM Size**: The VM size for the deployment's supporting components. Each components VM needs at least 16 GB of RAM. The default size is enough for most deployments.
     - **Deployment size**: The number of machines that Landscape will manage: **Small (up to 500 machines)**, **Medium (500-5000 machines)**, or **Large (5000+ machines)**. This filters the VM sizes that you can select for Landscape Server.
     - **Landscape VM Size**: The VM size for each Landscape Server VM.
@@ -68,10 +86,12 @@ You need:
     - **Admin user + password**: Enter and confirm the **Admin Password** for the first Landscape administrator.
     - **OpenID Connect (OIDC)**: Enter your OIDC provider's **OIDC Client ID**, **OIDC Client Secret**, and **OIDC Issuer URL**. Select **Automatically approve new OIDC accounts** to add people that you invite to Landscape after their first OIDC sign-in, without invitation emails.
 
-6. If the **SMTP configuration** section is shown, enter your SMTP relay's **SMTP relay server**, **SMTP port**, **Sender address**, **SMTP user**, and **SMTP password**. The wizard hides this section if you use OIDC authentication and approve new OIDC accounts automatically.
+6. If the **SMTP configuration** section is shown, enter your SMTP relay's **SMTP relay server**, **SMTP port**, **Sender address**, **SMTP user**, and **SMTP password**. Landscape uses the relay to send invitation emails. The wizard hides this section only if you use OIDC authentication and select **Automatically approve new OIDC accounts**, because Landscape doesn't send invitation emails then.
 7. On the **Review + create** tab, check your settings and the offer's terms and price, then select **Create**.
 
-The portal shows the deployment's progress. When the deployment is complete, the managed application is in the resource group that you selected, and the deployed resources are in the managed resource group. Canonical then finishes setting up Landscape Server on the deployed resources, and the portal sends a welcome email to the **Customer Email** address.
+The portal shows the deployment's progress. When the deployment is complete, the managed application is in the resource group that you selected, and the deployed resources are in the managed resource group. Canonical then finishes setting up Landscape Server on the deployed resources.
+
+The provisioning process takes about an hour to complete. When it's complete, you receive an email at the **Customer Email** address with instructions to access Landscape.
 
 ## Sign in to Landscape
 
@@ -89,12 +109,6 @@ To register client machines with your Landscape server, see {ref}`how-to-install
 The publisher of a managed application chooses how much access you have to the managed resource group. In the default permission scenario, a deny assignment on the managed resource group limits you to read actions, plus any actions that the publisher allows. You might not be able to change, stop, or delete individual resources in the managed resource group, such as the VMs or their network security groups.
 
 To check your access, open the managed resource group in the Azure portal, select **Access control (IAM)**, and check the **Deny assignments** tab.
-
-## SSH access to the VMs
-
-The deployment doesn't provide a customer SSH procedure for the Landscape Server VMs. The bootstrap configures Tailscale SSH for deployment management and adds an SSH key to the Landscape Juju model; this isn't customer access to the VMs. The bootstrap script's inbound port 22 rule and imported SSH keys are in a section marked as staging-only, so don't rely on them for production access.
-
-% TODO(LNDENG-5612): confirm whether customers can SSH to individual Landscape Server VMs and, if so, the supported network path and required managed resource group permissions
 
 (how-to-deploy-from-azure-marketplace-delete)=
 ## Delete the deployment
