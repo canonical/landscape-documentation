@@ -11,7 +11,7 @@ Canonical provides Landscape Server as an Azure Marketplace managed application.
 
 Canonical operates the deployment. It uses Juju to deploy Landscape Server, together with HAProxy, PostgreSQL, and RabbitMQ, on Ubuntu 24.04 LTS VMs in your subscription, and pins the Landscape Server version that it deploys.
 
-The deployment provides the Landscape URL, and Azure provides its SSL/TLS certificate. The URL is in the form `https://landscape-<project-unique-string>.<region>.azure.canonicalmanagedapps.com`. You don't need to provide a domain name or certificate, but you need to provide your own SMTP relay credentials.
+The deployment uses a URL in the form `https://landscape-<project-unique-string>.<region>.azure.canonicalmanagedapps.com`. The bootstrap uses `lego` with Cloudflare to obtain TLS certificates; Terraform deploys the `lego` charm and integrates it with HAProxy. You don't need to provide a domain name or certificate, but you need to provide your own SMTP relay credentials.
 
 Azure places the managed application in the application resource group you select and creates a separate managed resource group for its deployed resources. Your access to the managed resource group is limited; see {ref}`how-to-deploy-from-azure-marketplace-managed-rg`.
 
@@ -68,7 +68,7 @@ You need:
     - **Resource group**: The resource group for the managed application. You can create a new one. If you select an existing resource group, it must be in the same region as the deployment.
     - **Deployment location**: The Azure region to deploy to.
     - **Customer Name**: A short name that identifies your organization.
-    - **Customer Email**: The email address that receives onboarding information and contact details.
+    - **Customer Email**: The contact email address for the deployment. With password authentication, it is also the first Landscape administrator's email address and user name.
     - **Application name**: A name for the managed application.
     - **Managed resource group**: The name of the managed resource group that Azure creates for the deployed resources. You can keep the default name.
 
@@ -91,7 +91,7 @@ You need:
 
 The portal shows the deployment's progress. When the deployment is complete, the managed application is in the resource group that you selected, and the deployed resources are in the managed resource group. Canonical then finishes setting up Landscape Server on the deployed resources.
 
-The provisioning process takes about an hour to complete. When it's complete, Microsoft sends an email to the **Customer Email** address with instructions to access Landscape.
+Allow about an hour for provisioning to complete. The bootstrap then reports deployment details to Canonical's portal. The bootstrap and Terraform configuration don't specify whether an access email is sent or who sends it.
 
 ## Sign in to Landscape
 
