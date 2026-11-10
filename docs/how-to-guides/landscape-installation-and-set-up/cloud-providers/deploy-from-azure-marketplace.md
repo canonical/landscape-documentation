@@ -41,15 +41,11 @@ The **Enable High Availability** setting changes the rest of the deployment:
 | | Without high availability | With high availability |
 | --- | --- | --- |
 | Landscape Server VMs | 1 | 3 |
-| Landscape Server units | 1 | 3 |
-| HAProxy units | 1 | 3 |
-| PostgreSQL units | 1 | 3 |
-| RabbitMQ units | 1 | 3 (clustered) |
-| Task handler units | 1 | 1 |
-| Debarchive units | 1 | 1 |
+| Units of Landscape Server, HAProxy, PostgreSQL, and RabbitMQ | 1 of each | 3 of each, one on each Landscape Server VM |
+| Task handler and Debarchive | 1 of each, on one VM | 1 of each, on one VM |
 | Juju controller VMs | 1 | 3 |
 
-With high availability, each Landscape Server VM runs one unit of Landscape Server, HAProxy, PostgreSQL, and RabbitMQ. The task handler and Debarchive always have one unit. In both cases, the `lego` certificate service, an internal certificate authority, and the SMTP integrator (if used) run as single units on the first Landscape Server VM.
+In both cases, the `lego` certificate service, an internal certificate authority, and the SMTP integrator (if used) run as single units on the first Landscape Server VM.
 
 The Landscape Server VMs use the **Landscape VM Size** that you select. The bootstrap VM and the AKS node use the **Components VM Size**.
 
