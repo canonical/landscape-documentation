@@ -78,7 +78,7 @@ You need:
 
     - **Enable High Availability**: Select this to deploy three Landscape Server VMs for redundancy. For the full differences, see {ref}`how-to-deploy-from-azure-marketplace-includes`. This is the default, and is suitable for production. Without high availability, the deployment uses a single Landscape Server VM, which is suitable only for proofs of concept, development, and testing.
     - **Components VM Size**: The VM size for the deployment's supporting components. Each components VM needs at least 16 GB of RAM. The default size is enough for most deployments.
-    - **Deployment size**: The number of machines that Landscape will manage: **Small (up to 500 machines)**, **Medium (500-5000 machines)**, or **Large (5000+ machines)**. This filters the VM sizes that you can select for Landscape Server.
+    - **Deployment size**: The number of machines that Landscape will manage: **Small (up to 500 machines)**, **Medium (500-5,000 machines)**, or **Large (5,000+ machines)**. This filters the VM sizes that you can select for Landscape Server.
     - **Landscape VM Size**: The VM size for each Landscape Server VM.
 
     The tab checks that the VM sizes are available to your subscription in the region, and that you have enough vCPU quota for them. If it shows an error, select different VM sizes, clear **Enable High Availability**, or request more quota for the VM families that it lists. If the quota check doesn't finish, you can select **I understand and want to proceed** to continue. Azure still checks the quota when you create the deployment.
