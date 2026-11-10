@@ -59,9 +59,9 @@ You need:
 
 ## Deploy the managed application
 
-% TODO(LNDENG-5612): add a direct link to the public listing when it's published (production offer and plan: `canonical:managed-landscape:self-service`, see CPC-12375)
-1. Sign in to the Azure portal, go to **Marketplace**, and search for **Landscape**.
-2. Select the Landscape offer from Canonical, then select **Create**.
+% TODO(LNDENG-5612): replace MISSING_LINK with the public listing URL when it's published (production offer and plan: `canonical:managed-landscape:self-service`, see CPC-12375)
+1. Sign in to the Azure portal and open the Landscape offer: `MISSING_LINK`.
+2. Select **Create**.
 3. On the **Basics** tab, enter:
 
     - **Subscription**: The subscription to deploy to, and to bill.
