@@ -83,7 +83,7 @@ Setting `min_install = "true"` configures the deployment to not install the `lan
 This module is version-aware: it doesn't take a "mode" variable. Instead, once `landscape_server` is deployed, the module inspects the relation interfaces that revision actually supports (its `database`, `has_modern_haproxy_interface`, and `inbound_amqp`/`outbound_amqp` requires) and wires the matching integrations automatically. The same module works unmodified against a pre-26.04 `landscape_server.channel` revision (legacy `pgsql` database interface, `reverseproxy`/`website` HAProxy relation, single `amqp` relation); you don't need a different plan to support an older revision, just the matching `terraform.legacy.tfvars` file above.
 
 ```{note}
-Both the legacy `pgsql` database interface and the legacy `reverseproxy`/`website` HAProxy interface are still available for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10. See {ref}`how-to-migrate-to-26-04-charm` to migrate to the modern interfaces.
+Both the legacy `pgsql` database interface and the legacy `reverseproxy`/`website` HAProxy interface are still available for backwards compatibility, but are deprecated. Support for both will be removed in Landscape 26.10.
 ```
 
 ### Alternative: vendoring the module into your own Terraform plan

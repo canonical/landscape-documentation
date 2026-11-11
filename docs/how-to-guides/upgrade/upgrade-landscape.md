@@ -1,13 +1,13 @@
 ---
 myst:
   html_meta:
-    description: "Upgrade self-hosted Landscape Server to newer versions. Backup database, update PPA, run schema migrations, and configure version-specific settings."
+    description: "Upgrade self-hosted Landscape Server to 24.04 LTS. Backup database, update PPA, run schema migrations, and configure version-specific settings."
 ---
 
 (how-to-upgrade)=
 # How to upgrade your Landscape server
 
-This document is for upgrading Landscape Server 23.03 or later to a newer version. If you’re upgrading from a version of Landscape earlier than 23.03, see the manual upgrade guides for a [quickstart installation](https://discourse.ubuntu.com/t/upgrade-a-landscape-19-10-quickstart-installation-to-landscape-23-03/34336) and [manual installation](https://discourse.ubuntu.com/t/upgrade-a-landscape-19-10-manual-installation-to-landscape-23-03/34335).
+This document is for upgrading Landscape Server 23.03 or later to 24.04 LTS, including 24.04 point releases. If you’re upgrading from a version of Landscape earlier than 23.03, see the manual upgrade guides for a [quickstart installation](https://discourse.ubuntu.com/t/upgrade-a-landscape-19-10-quickstart-installation-to-landscape-23-03/34336) and [manual installation](https://discourse.ubuntu.com/t/upgrade-a-landscape-19-10-manual-installation-to-landscape-23-03/34335).
 
 Note that you don’t need to upgrade your client machines when you upgrade your Landscape server.
 
@@ -29,7 +29,7 @@ When you upgrade, you should use your existing configuration file. This file is 
 
 To upgrade your existing Landscape server:
 
-1. Add the new PPA. If you’re upgrading to Landscape 24.04 LTS, run:
+1. Add the Landscape 24.04 LTS PPA:
 
     ```bash
     sudo add-apt-repository ppa:landscape/self-hosted-24.04 -y
@@ -80,27 +80,21 @@ For Juju deployments, see {ref}`how-to-heading-upgrade-juju` in this guide. For 
 
 > See also: [Landscape-server charm on Charmhub](https://charmhub.io/landscape-server)
 
-```{important}
-If you are upgrading to **Landscape 26.04**, you must also follow the steps to migrate to the 26.04 version of the charm. Follow {ref}`this guide <how-to-migrate-to-26-04-charm>` to migrate your charmed deployment to 26.04.
-```
-
 To upgrade a basic Juju deployment:
 
-1. Upgrade the `landscape-server` charm
+1. Upgrade the `landscape-server` charm using the `24.04/stable` channel
 
     ```bash
-    juju refresh landscape-server
+    juju refresh landscape-server --channel=24.04/stable
     ```
 
-2. Update the Landscape self-hosted PPA configured in Juju. For example, if you’re upgrading to Landscape 24.04 LTS, run:
+2. Update the Landscape self-hosted PPA configured in Juju:
 
     ```bash
     juju config landscape-server landscape_ppa="ppa:landscape/self-hosted-24.04"
     ```
 
-    If you’re upgrading to a different version of Landscape, use the appropriate PPA.
-
-    **Note**: From the 26.04 version of the `landscape-server` charm onwards, the `upgrade` action adds the configured PPA before it upgrades the packages, so no further action is needed. On earlier versions of the charm, the PPA source is only added during installation, so you must also add it manually on each of the `landscape-server` units:
+    The PPA source is only added during installation, so you must also add it manually on each of the `landscape-server` units:
 
     ```bash
     juju exec --application landscape-server "sudo add-apt-repository ppa:landscape/self-hosted-24.04 -y"
@@ -145,6 +139,4 @@ To upgrade a basic Juju deployment:
 
 Landscape commonly has version-specific steps that must be taken to complete your upgrade.
 
-If you're upgrading to Landscape 24.04 LTS, follow {ref}`how-to-upgrade-to-24-04-lts`.
-
-If you're upgrading to Landscape 26.04 LTS, follow {ref}`how-to-upgrade-to-26-04-lts`.
+To finish upgrading to Landscape 24.04 LTS, follow {ref}`how-to-upgrade-to-24-04-lts`.

@@ -18,10 +18,6 @@ Repository management in the web portal works differently in Landscape Server 26
 
 ````{tab-item} Landscape Server 26.04 LTS and later
 
-```{note}
-See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
-```
-
 The repository mirroring feature in Landscape lets you mirror Ubuntu and third-party repositories, create local repositories for personal packages, and publish repositories to different targets. This adds an extra layer of control over the software versions available to your client machines. If you're not familiar with repository mirroring in Landscape, read our explanation before continuing through this how-to guide: {ref}`explanation-repo-mirroring-2604`.
 
 ```{include} /reuse/debarchive-setup-links.md
