@@ -54,17 +54,6 @@ Network requirements, ports, and firewall configurations.
 networking/index
 ```
 
-## Landscape Server charm
-
-References specifically related to the Landscape Server charm.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-charm/index
-```
-
 ## Terminology
 
 Definitions of key terms and concepts used in Landscape.

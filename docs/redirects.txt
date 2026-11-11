@@ -51,6 +51,16 @@ how-to-guides/upgrade/upgrade-to-26-04-lts/ how-to-guides/upgrade/
 how-to-guides/upgrade/migrate-to-26-04-charm/ how-to-guides/upgrade/
 how-to-guides/upgrade/migrate-repository-mirrors-to-debarchive/ how-to-guides/upgrade/
 
+# Charm and Terraform pages added after 24.04 are not part of the 24.04 documentation.
+how-to-guides/landscape-installation-and-set-up/terraform-juju-deployment/ how-to-guides/landscape-installation-and-set-up/
+explanation/charm/ explanation/
+explanation/charm/charm-compatibility/ explanation/
+explanation/charm/pgbouncer-integration/ explanation/
+reference/charm/ reference/
+reference/charm/haproxy-route-endpoints/ reference/
+reference/charm/terraform-charm-module/ reference/
+reference/charm/terraform-product-modules/ reference/
+
 # Explanation
 
 explanation/repository-mirroring/repository-mirroring/ explanation/features/repository-mirroring/

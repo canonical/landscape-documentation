@@ -11,8 +11,6 @@ myst:
 
 You can create a scalable, high availability (HA) deployment of Landscape Server with Juju. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
-You can follow the manual bundle approach below, or use the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` instead: it manages the same HA architecture reproducibly, and its inputs/outputs are documented in the {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`.
-
 ```{important}
 This guide covers both the **26.04 deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach.
 
@@ -69,10 +67,6 @@ Before you can deploy Landscape with Juju, you need to:
   1. Attach your Ubuntu Pro token to each machine that will host Landscape Server components. For guidance, see {ref}`how-to-attach-ubuntu-pro`.
 
 These steps prepare your environment to deploy [machine charms](https://canonical.com/juju/charms-architecture) with Juju and [integrate them using relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
-
-```{note}
-For improved database performance and scalability in high-load deployments, consider using PgBouncer as a connection pooler between Landscape Server and PostgreSQL. PgBouncer integrates via the Landscape Server charm's `database` relation endpoint, which uses the underlying `postgresql_client` interface. This requires recent Landscape Server charm revisions with `postgresql_client` support. See {ref}`explanation-pgbouncer-integration` for more information.
-```
 
 ## Deployment approach selection
 
