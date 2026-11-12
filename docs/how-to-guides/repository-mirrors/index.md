@@ -11,7 +11,7 @@ Landscape can mirror Ubuntu package repositories and third-party repositories, e
 
 ## Core workflows
 
-Use these guides for standard repository mirror setup and management. The web portal guide covers both the Landscape Server 26.04 LTS and later repository model and the model used in 25.10 and earlier.
+Use these guides for standard repository mirror setup and management.
 
 ```{toctree}
 :titlesonly:
@@ -19,7 +19,6 @@ Use these guides for standard repository mirror setup and management. The web po
 
 Manage repositories in the web portal <manage-repositories-in-the-web-portal>
 Manage repositories with the Legacy API <manage-repositories-with-the-api>
-Set up repository mirroring end-to-end (26.04 and later) <set-up-repository-mirroring-end-to-end>
 ```
 
 ## Specialized environments
@@ -37,6 +36,4 @@ Create tiered-repository mirrors <create-tiered-repository-mirrors>
 ## See also
 
 - {ref}`explanation-repo-mirroring`
-- {ref}`how-to-debarchive-repository-management`
-- {ref}`reference-api-debarchive`
 - {ref}`how-to-guides-landscape-installation-and-set-up-index`

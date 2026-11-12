@@ -1555,7 +1555,7 @@ See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional 
 
 #### Install and configure Debarchive
 
-The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`. When configuring connections to the database, be sure to follow the instructions to connect using SSL. It is recommended to create a separate `landscape_debarchive` user for the database, which will require its own client certificates.
+The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. When configuring connections to the database, be sure to follow the instructions to connect using SSL. It is recommended to create a separate `landscape_debarchive` user for the database, which will require its own client certificates.
 
 Here's an example of how to configure the certificates once they are placed in the appropriate directory:
 

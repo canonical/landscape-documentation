@@ -10,8 +10,6 @@ myst:
 > See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
-This document applies to **Landscape 25.10 and earlier**.
-
 Repository mirroring is available for self-hosted users.
 ```
 

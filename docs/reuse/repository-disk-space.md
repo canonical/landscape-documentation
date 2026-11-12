@@ -2,7 +2,6 @@ As of April 2026, these are the estimates for the amount of disk space needed to
 
 | Series | amd64 | i386  | Both |
 | ------ | ----- | ----- | ----- |
-| Resolute | 150GB | 110GB | 180GB |
 | Noble  | 625GB | 170GB | 680GB |
 | Jammy  | 945GB | 140GB | 975GB |
 | Focal  | 655GB | 115GB | 670GB |
