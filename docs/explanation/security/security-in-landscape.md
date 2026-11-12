@@ -41,7 +41,7 @@ If you’re using Landscape in an airgapped environment, we have the following g
 
 ## Security updates
 
-You can use Landscape to apply security updates to your client machines. For information about Ubuntu Livepatch, see the [Livepatch documentation](https://ubuntu.com/security/livepatch/docs). For guidance on applying security updates with Landscape, see:
+You can use Landscape to apply security updates to your client machines. For guidance, see:
 
 - {ref}`how-to-apply-security-updates`
 
