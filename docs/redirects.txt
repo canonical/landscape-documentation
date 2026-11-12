@@ -26,6 +26,8 @@ how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure/ how-
 
 how-to-guides/landscape-installation-and-set-up/debarchive-repository-management/ how-to-guides/repository-mirrors/
 
+how-to-guides/landscape-installation-and-set-up/disa-stig/ how-to-guides/landscape-installation-and-set-up/
+
 how-to-guides/repository-mirrors/set-up-repository-mirroring-end-to-end/ how-to-guides/repository-mirrors/
 
 how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment/ how-to-guides/landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment/
