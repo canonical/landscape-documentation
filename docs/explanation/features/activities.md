@@ -40,7 +40,7 @@ Activities can start in the `Queued`, `Scheduled`, `Waiting`, or `Blocked` state
 
 ## Server activities
 
-Server activities run on Landscape Server without interacting with Landscape Client. For example, syncing a pocket of a repository mirror. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
+Server activities run on Landscape Server without interacting with Landscape Client. For example, {ref}`downloading USG profile reports <reference-rest-api-usg-profiles>`. These activities are placed into a RabbitMQ queue and are processed by the `job-handler` service.
 
 ### Server activity states
 
