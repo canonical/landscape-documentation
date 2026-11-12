@@ -25,14 +25,14 @@ To add a new script:
 1. Copy your script into the editor or populate it from a file
 1. Complete the other portions of a form, including a title for the script, access group, and optional attachments, then **Add script**
 
-You can edit, archive, run and more on the script using the dot menu under **Actions** for each script.
+You can run, duplicate, edit, or remove a script using the action icons for that script.
 
 ## Run a script on one or more instances
 
 To run a script on one or more instances:
 
 1. From **Instances**, select the target instances, then select **Run script**
-1. In the side panel that opens, complete the form > **Run**
+1. In the side panel that opens, complete the form > **Run script**
    - Note: **Time limit** is the maximum time the script can run before Landscape forcibly terminates it
 
 ## View script execution status and results

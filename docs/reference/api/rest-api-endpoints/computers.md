@@ -1190,46 +1190,6 @@ Example response:
 }
 ```
 
-## POST `/computers/<computer_id>/delete-children`
-
-Creates an activity to delete WSL instances on a Windows host. The WSL instance does not have to be managed in Landscape.
-
-Required parameters:
-
-- `computer_names`
-
-Example request:
-
-```bash
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/delete-children \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"computer_names": ["Ubuntu-24.04", "Focal WSL"]}'
-```
-
-Example response:
-
-```json
-{
-  "id": 119,
-  "creation_time": "2025-02-22T02:03:26Z",
-  "creator": {
-    "email": "john@example.com",
-    "id": 1,
-    "name": "John Smith"
-  },
-  "summary": "Deleting child computer(s)",
-  "type": "ActivityGroup",
-  "deliver_delay_window": 0,
-  "approval_time": null,
-  "completion_time": null,
-  "parent_id": null,
-  "result_code": null,
-  "result_text": null,
-  "activity_status": "undelivered"
-}
-```
-
 ## POST `/computers/<computer_id>/sanitize`
 
 ```{note}
