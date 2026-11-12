@@ -7,7 +7,7 @@ myst:
 (how-to-web-portal-use-remote-script-execution)=
 # How to use remote script execution
 
-> See also: {ref}`explanation-remote-script-execution`, {ref}`reference-terms-script-profile`
+> See also: {ref}`explanation-remote-script-execution`
 
 Remote script execution allows you to run scripts on your registered client instances directly from the Landscape web portal. Scripts can be in any language, as long as an appropriate interpreter is available on the clients where they will run.
 
@@ -31,7 +31,7 @@ You can edit, archive, run and more on the script using the dot menu under **Act
 
 To run a script on one or more instances:
 
-1. Go to **Instances** from the sidebar > Select the target instance(s) > **Operations** > **Run script**
+1. From **Instances**, select the target instances, then select **Run script**
 1. In the side panel that opens, complete the form > **Run**
    - Note: **Time limit** is the maximum time the script can run before Landscape forcibly terminates it
 
@@ -47,9 +47,3 @@ The **Activities** page shows the activity status for all instances and all acti
 
 1. Go to **Instances** > Select your instance > **Activities** tab to view all activities for that instance, including script executions.
 1. Click on a script execution activity to view details, such as status, when the script was run, and output/results from the script (if any).
-
-## Schedule scripts with script profiles
-
-To run scripts on a recurring schedule or at specific times, use {ref}`script profiles <reference-terms-script-profile>`. Script profiles allow you to run scripts based on certain triggers.
-
-For details, see {ref}`how to use script profiles<how-to-web-portal-use-script-profiles>`.

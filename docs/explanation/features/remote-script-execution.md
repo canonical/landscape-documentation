@@ -13,7 +13,7 @@ This document explains how Landscape Client executes scripts.
 
 ## Overview
 
-When an administrator requests a script execution, or when a script profile is scheduled, Landscape Server creates an `ExecuteScriptRequest` activity. See {ref}`explanation-activities` for details on how activities are delivered to clients.
+When an administrator requests a script execution, Landscape Server creates an `ExecuteScriptRequest` activity. See {ref}`explanation-activities` for details on how activities are delivered to clients.
 
 ## `execute-script` message
 
