@@ -133,6 +133,7 @@ If you want to further restrict Landscape Client's access to the system, configu
 
 Keep in mind that management features will be unavailable in Monitor-only mode.
 
+(how-to-harden-deployment-secure-gpg-keys)=
 ## Secure your GPG keys
 
 **Select your Landscape Server version:**
@@ -321,9 +322,9 @@ The Task Handler can connect to the Landscape databases and its own database usi
 
 The Outbox can connect to the Landscape databases and the RabbitMQ broker using TLS. To set this up, see the SSL mode configuration settings for the {ref}`database <reference-outbox-database-ssl>` and {ref}`broker <reference-outbox-broker-ssl>`.
 
-#### Deb Archive
+#### Debarchive
 
-Deb Archive can connect to its own database using TLS. To set this up, see the {ref}`configuration settings <reference-debarchive-snap-config>`.
+Debarchive can connect to its own database using TLS. To set this up, see the {ref}`configuration settings <reference-debarchive-snap-config>`.
 
 
 #### Secrets Service (with HashiCorp Vault)
