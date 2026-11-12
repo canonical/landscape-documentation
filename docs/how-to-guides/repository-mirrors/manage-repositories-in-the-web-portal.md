@@ -168,7 +168,7 @@ To create a new pull pocket:
 1. In the **GPG Key** dropdown menu, select the same private key you previously generated.
 1. (Optional) If you want to use filters in your pull pocket, select the type in the **Filter type** dropdown menu.
 1. Change any selections in **Components** and **Architectures** as necessary for your configuration.
-1. Click **Create**
+1. Click **Add**
 
 To update your pull pocket:
 
@@ -178,15 +178,15 @@ To update your pull pocket:
 
 ### Derive series
 
-If you're making multiple pull pockets, you can also use the **Derive series** feature, which creates a "snapshot" of the source series. The new series will contain the same packages and versions as the source at the time it was created, but it won't automatically track future changes. This process allows you to promote packages through separate environments without the packages changing unexpectedly.
+If you're making multiple pull pockets, you can use the **Derive series** feature. It creates a new series with a pull pocket for each pocket in the source series. Each pull pocket is configured to pull from the corresponding source pocket. The new pockets are initially empty; pull them to copy packages from their source pockets.
 
-For example, you could define the following pull pockets by deriving the series:
+For example, you could define the following series:
 
 - `dev`
 - `test` (derived from `dev`)
 - `prod` (derived from `test`)
 
-In this example, updates flow from `dev` > `test` > `prod`, with each stage using a fixed set of package versions.
+In this example, you can promote packages from `dev` to `test` to `prod` by pulling the corresponding pockets at each stage.
 
 When deriving series to make cascading pull pockets, we recommend you include the date in the series name. For example, `noble-2026-03-29`.
 
