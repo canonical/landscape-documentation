@@ -1007,7 +1007,7 @@ Landscape does not support password-based authentication for administrators unde
 Be sure to set up and verify your chosen authentication method before proceeding with this guide.
 
 ```{note}
-If your chosen method mentions setting a value in `service.conf`, ensure you use the correct environment variable instead. See {ref}`reference-service-conf` for the corresponding variables. It is recommended to put these environment variables in `/etc/environment` to ensure they are available if the system reboots.
+If your chosen method mentions setting a value in `service.conf`, ensure you use the correct environment variable instead. It is recommended to put these environment variables in `/etc/environment` to ensure they are available if the system reboots.
 
 If you encounter a step that depends on Landscape Server being installed, complete the installation first, then return to that step.
 ```
@@ -1412,7 +1412,12 @@ sudo snap install landscape-task-handler
 
 Create a database for the task handler:
 
-```{include} /reuse/task-handler-create-database.md
+```bash
+sudo -u postgres createdb landscape-standalone-task-handler
+sudo -u postgres psql landscape-standalone-task-handler -c \
+  "GRANT CONNECT ON DATABASE \"landscape-standalone-task-handler\" TO landscape;"
+sudo -u postgres psql landscape-standalone-task-handler -c \
+  "GRANT CREATE ON SCHEMA public TO landscape;"
 ```
 
 Copy the CA certificate and the PostgreSQL client certificates that you created on the Landscape server earlier:
@@ -1475,8 +1480,6 @@ sudo cp /etc/landscape/service.conf /root/snap/landscape-task-handler/common/ser
 sudo chown -R root:root /root/snap/landscape-task-handler/common/
 sudo snap set landscape-task-handler landscape.service-conf-file=/root/snap/landscape-task-handler/common/service.conf
 ```
-
-See {ref}`how to configure the task-handler <how-to-configure-task-handler>` for additional information.
 
 #### Install and configure the Landscape Outbox
 
@@ -1549,8 +1552,6 @@ Restart the outbox service to apply the new configuration:
 ```bash
 sudo snap restart landscape-outbox
 ```
-
-See {ref}`how to configure the outbox <how-to-configure-outbox>` for additional information.
 
 
 #### Install and configure Debarchive

@@ -9,13 +9,11 @@ myst:
 
 The quickstart mode of deploying Landscape consists of installing all the necessary software on a single machine. Quickstart mode has limited scalability, so it may not be ideal for large production deployments.
 
-Note that Quickstart installations and upgrades to Landscape 26.04 LTS are not supported on Ubuntu 26.04. You must use Ubuntu 24.04 LTS or 22.04 LTS for Quickstart installations.
-
 If you're new to Landscape and want to learn how it works first, see the {ref}`getting-started-with-landscape` tutorial, which creates a test environment.
 
 ## Check minimum requirements
 
-The following minimum requirements are needed to install Landscape Server 24.04 LTS or 26.04 LTS:
+The following minimum requirements are needed to install Landscape Server 24.04 LTS:
 
 - **Operating system**: Ubuntu 22.04 LTS (Jammy Jellyfish) or Ubuntu 24.04 LTS (Noble Numbat)
 - **Hardware**: A dual-core 2 GHz processor, 8 GB of RAM, and 20 GB of disk space
@@ -98,105 +96,6 @@ To install `landscape-server-quickstart`:
     ```
 
    - This installation takes approximately five minutes.
-
-### Install additional services
-
-**Select your Landscape Server version:**
-
-`````{tab-set}
-
-````{tab-item} Landscape Server 26.04 LTS and later
-
-#### Install the task handler snap
-
-Install the `landscape-task-handler` snap.
-
-```bash
-sudo snap install landscape-task-handler
-```
-
-Create the task handler's own database and grant the `landscape` user access to it.
-
-```{include} /reuse/task-handler-create-database.md
-```
-
-Configure the snap to connect to the task handler database. Replace `<DB-PASSWORD>` with the `landscape` database user's password, found in the `password` key of the `[stores]` section of `/etc/landscape/service.conf`. This value may be stored as plain text or, if prefixed with `b64:`, as base64-encoded text; in the latter case, decode it (for example, `echo '<value-without-b64-prefix>' | base64 -d`) to get the plaintext password. For the main, account, and resource databases this decoding happens automatically, but it must be done manually here because the task handler's own database is not read from `service.conf`.
-
-```bash
-sudo snap set landscape-task-handler \
-  landscape.database.task-handler.host=localhost \
-  landscape.database.task-handler.port=5432 \
-  landscape.database.task-handler.name=landscape-standalone-task-handler \
-  landscape.database.task-handler.user=landscape \
-  landscape.database.task-handler.password=<DB-PASSWORD> \
-  landscape.database.task-handler.ssl=disable \
-  landscape.task-handler.server.grpc-port=50053 \
-  landscape.task-handler.server.host=localhost
-```
-
-```{seealso}
-This example uses `ssl=disable` because Quickstart mode runs PostgreSQL on the same machine. If your PostgreSQL connection requires SSL, see {ref}`task-handler-ssl-tls`.
-```
-
-```{include} /reuse/task-handler-outbox-grpc-address-note.md
-```
-
-`landscape-task-handler` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
-
-```bash
-sudo snap services landscape-task-handler
-```
-
-```{include} /reuse/task-handler-services-active.md
-```
-
-To view task handler logs, run:
-
-```bash
-sudo snap logs landscape-task-handler -n 50
-```
-
-#### Install the outbox snap
-
-Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
-
-```bash
-sudo snap install landscape-outbox
-sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
-```
-
-`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
-
-```bash
-sudo snap services landscape-outbox
-```
-
-The output should show the `outbox` service as **active**:
-
-```bash
-Service                  Startup  Current  Notes
-landscape-outbox.outbox  enabled  active   -
-```
-
-To view outbox logs, run:
-
-```bash
-sudo snap logs landscape-outbox -n 50
-```
-
-#### Install the Debarchive snap
-
-The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`.
-
-````
-
-````{tab-item} Landscape Server 25.10 and earlier
-
-These service installation steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
-
-````
-
-`````
 
 ## Install an SSL certificate
 

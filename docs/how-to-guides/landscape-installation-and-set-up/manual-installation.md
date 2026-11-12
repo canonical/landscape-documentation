@@ -9,10 +9,10 @@ myst:
 
 This is the production deployment recommendation for Landscape Server when Juju isn't used. At a minimum, you need two machines: the database server and application server.
 
-For a manual installation of Landscape 24.04 LTS or 26.04 LTS:
+For a manual installation of Landscape 24.04 LTS:
 
-- **Database server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16. Landscape 26.04 LTS also runs on Ubuntu 26.04 ("resolute"), which uses PostgreSQL 18.
-- **Application server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services. Landscape 26.04 also runs Ubuntu 26.04 LTS ("resolute").
+- **Database server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble"), with the versions of PostgreSQL that are in the Ubuntu archives for Jammy and Noble. Jammy uses PostgreSQL 14 and Noble uses PostgreSQL 16.
+- **Application server**: Runs Ubuntu 22.04 LTS ("jammy") or Ubuntu 24.04 ("noble") and hosts the Landscape services.
 
 You'll also need {ref}`certain PostgreSQL extensions <how-to-header-install-postgresql>` to setup Landscape. If you're using a managed PostgreSQL solution, check with your provider to make sure these extensions are available.
 
@@ -50,16 +50,6 @@ For an Ubuntu 24.04 ("noble") database server:
 
 ```bash
 sudo apt install postgresql postgresql-16-debversion postgresql-plpython3-16 postgresql-contrib
-```
-
-For an Ubuntu 26.04 ("resolute") database server:
-
-```bash
-sudo apt install postgresql postgresql-18-debversion postgresql-plpython3-18
-```
-
-```{note}
-Starting with PostgreSQL 18 (the version packaged for Ubuntu 26.04 LTS "Resolute"), there's no separate `postgresql-contrib` package. Its extensions are now bundled directly into the `postgresql-<version>` package, so no extra package is required. This doesn't apply to earlier PostgreSQL versions, even if installed on Resolute.
 ```
 
 ### Create a superuser Landscape can use
@@ -169,19 +159,13 @@ sudo add-apt-repository <LANDSCAPE_PPA>
 ### Install the server package
 
 ```{warning}
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x, so the Quickstart installation is not supported on Ubuntu 26.04. For a manual installation on Ubuntu 26.04, RabbitMQ must run on a separate machine with Ubuntu 22.04 LTS or Ubuntu 24.04 LTS.
+Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported.
 ```
 
 On an Ubuntu 22.04 or 24.04 application server, install Landscape and RabbitMQ:
 
 ```bash
 sudo apt-get install landscape-server rabbitmq-server apache2
-```
-
-On an Ubuntu 26.04 application server, install Landscape without the local RabbitMQ package:
-
-```bash
-sudo apt-get install landscape-server apache2
 ```
 
 ### (If needed) Install the (legacy) license file
@@ -244,9 +228,9 @@ Section `[schema]`:
 - Change the value of `store_user` to the landscape super user you created above during the DB installation
 - Add an entry for `store_password` with the password that was chosen in that same step
 
-Section `[landscape]` (Landscape 24.04 LTS) or `[appserver]` (Landscape 26.04 LTS):
+Section `[landscape]`:
 
-- Add an entry for `secret-token` (Landscape 24.04 LTS) or `secret_token` (Landscape 26.04 LTS) and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`. Note that Landscape Server 24.04 LTS uses percent signs % for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as %% so that it is interpreted as %.
+- Add an entry for `secret-token` and set it as a random string. You can set any string you want, but it should be reasonably long. You can use `openssl` to create a random string. For example, `openssl rand -base64 128 | tr -d '\n'`. Note that Landscape Server 24.04 LTS uses percent signs % for templated configuration. If you must include a percent sign in a configuration value, it can be escaped as %% so that it is interpreted as %.
 
 If you want the services to allow only certain interfaces, you can set `allowed_interfaces` in each of the services listed in the configuration file. These must be space-separated IP addresses or host names. For example, to only allow connections on localhost, you may have a configuration like the following:
 
@@ -268,24 +252,27 @@ Depending on the hardware, this may take several minutes to complete.
 
 ### Configure Landscape services and schema upgrades
 
-Landscape's services are managed as systemd units, all grouped under the `landscape-server.target`. You'll start these with `lsctl` once the web server is configured, in the next section.
+Enable the Landscape services now. Edit `/etc/default/landscape-server` and change the `RUN_ALL` line to `yes`:
+
+```ini
+RUN_ALL="yes"
+```
 
 ```{note}
 If more performance and availability is needed from Landscape Server, it's possible to spread out the services amongst several machines. In that case, for example, you could run message servers on one machine, application servers on another, etc.
 ```
 
-The message, application, and ping services can each be configured to run multiple worker processes. If your hardware has several cores and enough memory (4GB or more), running two or more workers of each will improve performance. To do this, set `workers` in the corresponding section of `/etc/landscape/service.conf` to the number of workers you want. For example, to run two message server workers:
+The message, application, and ping services can be configured to run multiple instances. If your hardware has several cores and enough memory, running two or more of each will improve performance. To run multiple instances of a service, set the value in the respective `RUN_*` line to the number of instances. For example, if you want to run two message servers, set:
 
 ```ini
-[message_server]
-workers = 2
+RUN_MSGSERVER="2"
 ```
 
 ```{note}
-To take advantage of multiple workers, you need to configure a load balancer or proxy in front of the service.
+To take advantage of this multiple-instances setting, you need to configure a load balancer or proxy. See the `README.multiple-services` file in the `landscape-server` package documentation directory for an example using Apache's `proxy_loadbalancer` module.
 ```
 
-Review the `UPGRADE_SCHEMA` option in `/etc/default/landscape-server`. If set to `yes`, whenever the package `landscape-server` is updated, it will attempt to update the database schema too. It's a convenient setting, but consider the following before enabling it:
+In the same `/etc/default/landscape-server` file, review the `UPGRADE_SCHEMA` option. If set to `yes`, whenever the package `landscape-server` is updated, it will attempt to update the database schema too. It's a convenient setting, but consider the following before enabling it:
 
 - Schema updates can take several minutes
 - If the package is updated while the database is offline, or unreachable, the update will fail
@@ -552,8 +539,8 @@ Listen 6554
   # directive. Try using SSLCACertificateFile instead
   # SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt
  
-  ProxyPass / h2c://localhost:50052/
-  ProxyPassReverse / http://localhost:50052/
+  ProxyPass / h2c://localhost:50051/
+  ProxyPassReverse / http://localhost:50051/
 </VirtualHost>
 ```
 
@@ -589,109 +576,6 @@ Use `lsctl`:
 ```bash
 sudo lsctl restart
 ```
-
-### Install additional services
-
-**Select your Landscape Server version:**
-
-`````{tab-set}
-
-````{tab-item} Landscape Server 26.04 LTS and later
-
-#### Install the task handler snap
-
-Install the `landscape-task-handler` snap on the same machine as your Landscape Server installation.
-
-```bash
-sudo snap install landscape-task-handler
-```
-
-On the **database server**, create the task handler's own database and grant the `landscape` user access to it.
-
-```{include} /reuse/task-handler-create-database.md
-```
-
-On the **application server**, configure the snap with the connection details for the task handler database.
-
-```bash
-sudo snap set landscape-task-handler \
-  landscape.database.task-handler.host=<DB-HOST> \
-  landscape.database.task-handler.port=<DB-PORT> \
-  landscape.database.task-handler.user=landscape \
-  landscape.database.task-handler.password=<DB-PASSWORD> \
-  landscape.database.task-handler.name=landscape-standalone-task-handler \
-  landscape.database.task-handler.ssl=disable \
-  landscape.task-handler.server.grpc-port=50053 \
-  landscape.task-handler.server.host=localhost
-```
-
-Replace `<DB-HOST>` with the IP address or hostname of the PostgreSQL server, `<DB-PORT>` with the port, and `<DB-PASSWORD>` with the database password you selected for the `landscape` database user.
-
-```{seealso}
-This example uses `ssl=disable` for simplicity. If your PostgreSQL connection requires SSL, see {ref}`task-handler-ssl-tls`.
-```
-
-```{include} /reuse/task-handler-outbox-grpc-address-note.md
-```
-
-The Landscape server databases (`main`, `account`, and `resource`) are read automatically from `/etc/landscape/service.conf` via the `etc-landscape` snap connection. No additional database configuration is needed for those.
-
-`landscape-task-handler` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
-
-```bash
-sudo snap services landscape-task-handler
-```
-
-```{include} /reuse/task-handler-services-active.md
-```
-
-To view task handler logs, run:
-
-```bash
-sudo snap logs landscape-task-handler -n 50
-```
-
-#### Install the outbox snap
-
-Install the `landscape-outbox` snap on the same machine as your Landscape Server installation.
-
-```bash
-sudo snap install landscape-outbox
-sudo snap connect landscape-outbox:grpc-client-certs landscape-task-handler:grpc-client-certs
-```
-
-`landscape-outbox` is configured to work automatically with an existing Landscape Server by default. Confirm that the snap service is running.
-
-```bash
-sudo snap services landscape-outbox
-```
-
-The output should show the `outbox` service as **active**:
-
-```bash
-Service                  Startup  Current  Notes
-landscape-outbox.outbox  enabled  active   -
-```
-
-To view outbox logs, run:
-
-```bash
-sudo snap logs landscape-outbox -n 50
-```
-
-#### Install the Debarchive snap
-
-The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`.
-
-````
-
-````{tab-item} Landscape Server 25.10 and earlier
-
-These service installation steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
-
-````
-
-`````
 
 ### Create the first user
 

@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for Landscape systems management, including API, configuration, networking, database, logs, and terminology."
+    description: "Reference documentation for Landscape systems management, including API, networking, database, logs, and terminology."
 ---
 
 (reference-index)=
@@ -30,17 +30,6 @@ Version history, new features, and changes in Landscape releases.
 :maxdepth: 2
 
 release-notes/index
-```
-
-## Configuration
-
-Configuration file references for Landscape Server and Client.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-config/index
 ```
 
 ## Networking
