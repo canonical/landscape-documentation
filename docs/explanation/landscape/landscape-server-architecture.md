@@ -11,7 +11,7 @@ Landscape Server is the server-side component of the Landscape ecosystem. It is 
 
 ![Landscape Service Diagram](/assets/images/landscape-services.jpg "Landscape Services")
 
-A Landscape Server deployment has eight required services:
+A Landscape Server deployment has six required services:
 
 * [API](#api) - serves REST API and Legacy API requests
 * [Appserver](#appserver) - serves Legacy UI and static files for the new UI
@@ -19,8 +19,6 @@ A Landscape Server deployment has eight required services:
 * [Job handler](#job-handler) - runs background jobs such as repository mirror syncs
 * [Message system](#message-system) - exchanges messages with Landscape Clients
 * [Pingserver](#pingserver) - records Landscape Client heartbeat pings
-* [Outbox](#outbox) - ensures reliable, eventually-consistent delivery of events across databases and the message broker
-* [Task Handler](#task-handler) - runs background jobs such as resource cleanup
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
@@ -41,7 +39,7 @@ A deployment requires a number of third-party components as well:
 
 There is also one optional third-party component:
 
-* [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) - secrets storage, used to store sensitive data for delivery to managed instances. Alternatively, secrets can be encrypted for storage in the PostgreSQL database.
+* [HashiCorp Vault](https://www.hashicorp.com/en/products/vault) - secrets storage, used to store sensitive data for delivery to managed instances.
 
 ## Service descriptions
 
@@ -73,6 +71,7 @@ HTTP requests made to `/api` are routed to the Legacy API.
 
 The Appserver service responds to HTTP requests that are not routed to another service. It either responds directly to requests, or routes them again to other services. When responding directly to requests, responses are generally in the form of HTML, but it also serves JavaScript and CSS for the new and legacy Landscape UIs. It interacts with all third-party components and most other Landscape Server services.
 
+(explanation-server-architecture-async-frontend)=
 ### Async frontend
 
 The Async frontend service supports live status updates in the legacy Landscape UI for long-running Landscape Activities such as repository mirror syncs or intermittently-updated Alert notifications. It primarily interacts with RabbitMQ Server and the Appserver service.
@@ -124,15 +123,15 @@ Debarchive uses its own PostgreSQL database within the same cluster as Landscape
 The Package upload service responds to dput or FTP requests to upload Debian packages to Landscape-managed package repositories. It maintains a queue of package uploads and processes them into the appropriate repositories. It primarily interacts with the PostgreSQL database and the filesystem.
 
 (explanation-server-architecture-outbox)=
-### Outbox
+### Outbox (not in 24.04)
 
-The Outbox is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-outbox`. It runs continuously as a background worker and connects to the Landscape databases and the Landscape broker. The outbox pattern guarantees correctness and eventual consistency for operations that span multiple databases or span a database and broker.
+The Outbox is a required component in Landscape 26.04 LTS and later. It isn't part of Landscape 24.04 deployments.
 
 (explanation-server-architecture-task-handler)=
-### Task-Handler
+### Task Handler (not in 24.04)
 
-The Task Handler is a required component for Landscape 26.04 LTS and later. It is distributed as a separate snap, `landscape-task-handler`. It runs continuously as a background worker and connects to the Landscape databases. It also stores its own state in its own separate database. The Task Handler processes background tasks in retryable chunks to get work done as reliably as possible.
+The Task Handler is a required component in Landscape 26.04 LTS and later. It isn't part of Landscape 24.04 deployments.
 
 ### Secrets
 
-The Secrets service responds to internal HTTP requests with scoped access tokens for the secrets back-end. It is only needed if HashiCorp Vault is being used to store secrets. If secrets are instead being stored in the PostgreSQL database, then the Secrets service does not need to be running.
+The Secrets service responds to internal HTTP requests with scoped access tokens for the secrets back-end. It is only needed if HashiCorp Vault is being used to store secrets.
