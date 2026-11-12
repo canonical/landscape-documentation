@@ -117,18 +117,6 @@ Manage Windows Subsystem for Linux (WSL) instances with Landscape, including reg
 wsl-integration/index
 ```
 
-(how-to-index-heading-ubuntu-installer)=
-## Ubuntu installer
-
-Automate Ubuntu workstation provisioning using Landscape with autoinstall, including OIDC authentication integration.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-ubuntu-installer/index
-```
-
 (how-to-index-heading-security)=
 ## Security
 

@@ -17,7 +17,7 @@ If you have any duplicate client instances, you can manually remove them one-by-
 
 ### Web portal (24.04 LTS and later)
 
-Duplicate instances will appear on the home page dashboard. To remove the duplicate, click the instances in the *Duplicate* tile, select your instance, and remove it from Landscape (**More actions** > **Remove from Landscape**).
+Duplicate instances will appear on the home page dashboard. To remove the duplicate, click the instances in the *Duplicate* tile, select your instance, and remove it from Landscape (**Remove**).
 
 ### Classic web portal
 

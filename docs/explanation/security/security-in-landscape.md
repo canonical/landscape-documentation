@@ -39,14 +39,11 @@ If you’re using Landscape in an airgapped environment, we have the following g
 - {ref}`how-to-manage-repos-airgapped`
 - {ref}`how-to-create-tiered-repo-mirrors`
 
-## Security updates and Livepatch
+## Security updates
 
-> See also: [Livepatch documentation](https://ubuntu.com/security/livepatch/docs)
-
-You can use Landscape to apply security updates to your client machines, and Livepatch (within Landscape) to schedule high and critical Linux kernel vulnerability patches. We have the following guides on applying security updates with Landscape:
+You can use Landscape to apply security updates to your client machines. For information about Ubuntu Livepatch, see the [Livepatch documentation](https://ubuntu.com/security/livepatch/docs). For guidance on applying security updates with Landscape, see:
 
 - {ref}`how-to-apply-security-updates`
-- {ref}`how-to-web-portal-manage-livepatch` (24.04 or later)
 
 ## Additional Landscape security topics
 
