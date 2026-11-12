@@ -1,0 +1,187 @@
+# Creates the shared release-notes draft PR that the per-repository
+# changelog bots then update. Each bot owns one marked island in the draft
+# and pushes to this PR's branch; centralizing creation here means no bot
+# ever creates the PR (no create-when-missing race between bots running at
+# the same time) and every bot finds the PR already open before its run.
+#
+# Runs weekly on Friday, ahead of the bots' Saturday schedule. The job is
+# idempotent: if an open PR with the changelog+automation labels already
+# exists, it exits without changes.
+
+name: Open shared release-notes draft PR
+
+on:
+  schedule:
+    - cron: "0 12 * * 5" # Fridays at 12:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  open-draft:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+
+      - name: Compute in-development release
+        id: rel
+        run: |
+          # Landscape releases are YY.04 and YY.10. The in-development
+          # release is the next boundary strictly in the future.
+          year=$(date +%y)
+          month=$(date +%-m)
+          if [ "$month" -lt 4 ]; then
+            rel="${year}.04"
+          elif [ "$month" -lt 10 ]; then
+            rel="${year}.10"
+          else
+            rel="$((year + 1)).04"
+          fi
+          echo "rel=$rel" >> "$GITHUB_OUTPUT"
+
+      - name: Exit if a shared draft PR is already open
+        run: |
+          existing=$(gh pr list \
+            --repo canonical/landscape-documentation \
+            --label changelog --label automation \
+            --state open --json number --jq 'length')
+          if [ "$existing" -gt 0 ]; then
+            echo "A changelog+automation PR is already open; nothing to do."
+            exit 0
+          fi
+          echo "no_draft=1" >> "$GITHUB_ENV"
+
+      - name: Create the release-notes page from the island template
+        if: env.no_draft == '1'
+        run: |
+          rel="${{ steps.rel.outputs.rel }}"
+          anchor=$(echo "$rel" | tr . -)
+          page="docs/reference/release-notes/${rel}-release-notes.md"
+          branch="changelog-bot/release-notes-${rel}"
+
+          git checkout -b "$branch"
+
+          if [ ! -f "$page" ]; then
+            cat > "$page" <<EOF
+          ---
+          myst:
+            html_meta:
+              description: "Release notes for Landscape ${rel}. Draft; updated automatically until release."
+          ---
+
+          (reference-release-notes-${anchor})=
+          # ${rel} release notes
+
+          > Landscape Server ${rel} runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish.
+
+          \`\`\`{note}
+          This page is a draft maintained automatically until release.
+          \`\`\`
+
+          ## Highlights
+
+          (pending - written at release time)
+
+          ## Additional updates
+
+          <!-- changelog-bot:landscape-server:start -->
+          ### Landscape Server
+
+          (pending)
+          <!-- changelog-bot:landscape-server:end -->
+          <!-- changelog-bot:landscape-client:start -->
+          ### Landscape Client
+
+          (pending)
+          <!-- changelog-bot:landscape-client:end -->
+          <!-- changelog-bot:landscape-ui:start -->
+          ### Web portal
+
+          (pending)
+          <!-- changelog-bot:landscape-ui:end -->
+          <!-- changelog-bot:landscape-go:start -->
+          ### Snaps (debarchive, outbox, task-handler services)
+
+          (pending)
+          <!-- changelog-bot:landscape-go:end -->
+          <!-- changelog-bot:landscape-server-operator:start -->
+          ### Landscape Server charm
+
+          (pending)
+          <!-- changelog-bot:landscape-server-operator:end -->
+          <!-- changelog-bot:landscape-client-charm:start -->
+          ### Landscape Client charm
+
+          (pending)
+          <!-- changelog-bot:landscape-client-charm:end -->
+          <!-- changelog-bot:landscape-debarchive-operator:start -->
+          ### Debarchive charm
+
+          (pending)
+          <!-- changelog-bot:landscape-debarchive-operator:end -->
+          <!-- changelog-bot:landscape-task-handler-operator:start -->
+          ### Task handler charm
+
+          (pending)
+          <!-- changelog-bot:landscape-task-handler-operator:end -->
+
+          ## Upgrade
+
+          (pending - written at release time)
+
+          ## Bug fixes
+
+          (pending - written at release time)
+          EOF
+            git add "$page"
+          fi
+
+          # Insert the page into the toctree directly after the LTS entries
+          # (newest non-LTS first), unless it is already listed.
+          index="docs/reference/release-notes/index.md"
+          entry="${rel}-release-notes"
+          if ! grep -q "^${entry}$" "$index"; then
+            awk -v entry="$entry" '
+              /```\{toctree\}/ { inblock=1; print; next }
+              inblock && /^```/ { inblock=0 }
+              inblock && /^\S/ && !/^:/ && !/lts-release-notes/ && !done {
+                print entry
+                done=1
+              }
+              { print }
+            ' "$index" > "$index.tmp" && mv "$index.tmp" "$index"
+            git add "$index"
+          fi
+
+          if git diff --cached --quiet; then
+            echo "Page and toctree already up to date on develop; nothing to PR."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: draft ${rel} release notes skeleton"
+
+          git push -f origin "$branch"
+          gh pr create \
+            --repo canonical/landscape-documentation \
+            --base develop \
+            --head "canonical:${branch}" \
+            --title "build: draft release notes for Landscape ${rel}" \
+            --label changelog --label automation \
+            --body "$(cat <<'EOF'
+          Shared draft of the in-development release notes. The per-repository
+          changelog bots each own one marked island in this page and push their
+          updates to this branch every other week. Do not merge manually before
+          release: the release owner edits the highlights and merges this PR as
+          part of the release.
+          EOF
+          )"
