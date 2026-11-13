@@ -27,11 +27,11 @@ Landscape Server sends a message to Landscape Client in the following form:
   "username": "USER",
   "time-limit": "TIME_LIMIT",
   "operation-id": "ACTIVITY_ID",
-  "attachments": ["ATTACHMENT_IDS"],
+  "attachments": {"FILENAME": "ATTACHMENT_ID"},
   "env": {
     "LANDSCAPE_ACCOUNT": "ACCOUNT_NAME",
     "LANDSCAPE_COMPUTER_ID": "COMPUTER_ID",
-    "LANDSCAPE_COMPUTER_TAGS": ["COMPUTER_TAGS"],
+    "LANDSCAPE_COMPUTER_TAGS": "COMPUTER_TAGS",
     "LANDSCAPE_URL": "LANDSCAPE_URL",
     "LANDSCAPE_ACTIVITY_ID": "ACTIVITY_ID",
     "LANDSCAPE_ACTIVITY_CREATOR_ID": "CREATOR_ID",
@@ -47,7 +47,7 @@ Field descriptions:
 - `username`: The user under which the script will run. If you're using the Landscape Client snap, this is always root.
 - `time_limit`: Maximum execution time before the process is forcibly terminated.
 - `activity_id`: Unique identifier of the activity.
-- `attachments`: List of attachment IDs stored on Landscape Server.
+- `attachments`: Attachment file names and their IDs on Landscape Server.
 - `env`: Environment variables provided by Landscape Server, including account name, computer metadata, and activity metadata.
 
 If an attachment is included in a script, the attachment is stored on Landscape Server. Clients can fetch attachments before executing the script.
@@ -58,18 +58,18 @@ Once Landscape Client receives the `execute-script` message, it executes the fol
 
 1. Save the message to the message store.
 1. Passes the message to the script execution manager plugin.
-1. Create a temporary file via `tempfile.mkstemp`. The directory location is defined by the `script_tempdir` configuration option or defaults to `/tmp/`.
+1. Create a temporary file via `tempfile.mkstemp`. The directory location defaults to `/tmp/`. In Landscape Client 25.04+6542 and later, you can change it with the `script_tempdir` configuration option.
     1. File permissions are set to `700`.
-    1. In the snap version, the specified user is given ownership.
+    1. If you're not using the Landscape Client snap, the specified user is given ownership.
 1. Set up environment variables:
     1. `PATH` -> `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`
     1. `USER` and `HOME` -> set according to the requested user.
     1. `LANG`, `LC_ALL`, `LC_CTYPE`, `LD_LIBRARY_PATH`, `PYTHONPATH` -> copied from root.
     1. All variables from the message's `env` block are set.
 1. If attachments are included:
-    1. Create a new temporary directory via `tempfile.mkdtemp`. The directory location is defined by the `script_tempdir` configuration or defaults to `/tmp/`. Give the directory `700` permissions. Give ownership to the specified user if on the snap.
+    1. Create a new temporary directory via `tempfile.mkdtemp`, in the same location as the script file. Give the directory `700` permissions. If you're not using the snap, give ownership to the specified user.
     1. Download attachments from Landscape Server using their IDs.
-    1. Save each attachment with `600` permissions to this temporary directory. Grant ownership if on the snap.
+    1. Save each attachment with `600` permissions to this temporary directory. If you're not using the snap, grant ownership to the specified user.
     1. Set the `LANDSCAPE_ATTACHMENTS` environment variable to the attachments directory path.
 1. Execute the script with the configured environment.
     1. The output is limited by the `script_output_limit` configuration.
