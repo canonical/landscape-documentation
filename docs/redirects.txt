@@ -20,9 +20,21 @@ getting-started-with-landscape tutorial/
 
 how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/backup-and-maintenance/manage-maintenance-cron-jobs/
 
-how-to-guides/landscape-installation-and-set-up/install-on-google-cloud/ how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-google-cloud/
+how-to-guides/landscape-installation-and-set-up/install-on-google-cloud/ how-to-guides/landscape-installation-and-set-up/
 
-how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure/ how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-microsoft-azure/
+how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-google-cloud/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-microsoft-azure/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/install-in-a-lxd-container/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/configure-outbox/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/configure-task-handler/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/disa-stig/ how-to-guides/landscape-installation-and-set-up/
 
 how-to-guides/security/install-landscape-in-an-air-gapped-or-offline-environment/ how-to-guides/landscape-installation-and-set-up/install-landscape-in-an-air-gapped-or-offline-environment/
 
@@ -68,6 +80,12 @@ explanation/repository-mirroring/repository-mirroring/ explanation/features/repo
 explanation/features/repository-mirroring-2604/ explanation/features/repository-mirroring/
 
 # Reference
+
+reference/config/ reference/
+reference/config/service-conf/ reference/
+reference/config/immutable-settings/ reference/
+reference/config/outbox-configuration/ reference/
+reference/config/task-handler-configuration/ reference/
 
 reference/api/rest-api-endpoints/security_profiles/ reference/api/rest-api-endpoints/usg_profiles/
 

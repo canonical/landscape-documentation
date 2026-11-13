@@ -20,11 +20,7 @@ Most Landscape deployments need the following users:
 - `landscape_maintenance`: User with read and write access to all databases.
 - `landscape_superuser`: Superuser with read and write access to all databases, and permission to apply schema changes to any database.
 
-For details on configuring these users in a manual installation of Landscape, see {ref}```the `service.conf` reference <reference-service-conf>```. Landscape Quickstart creates these users by default. Charmed deployments will use the default `postgres` superuser if one is not provided to the Landscape charm.
-
-```{note}
-If the PostgreSQL `set_user` extension is available, Landscape authenticates to the database using the `landscape_maintenance` role instead of `landscape_superuser` when performing schema updates. After authentication, Landscape switches the session to `landscape_superuser`.
-```
+For details on configuring these users in a manual installation of Landscape, see {ref}`how-to-manual-installation`. Landscape Quickstart creates these users by default. Charmed deployments will use the default `postgres` superuser if one is not provided to the Landscape charm.
 
 ## Database tables
 
@@ -41,7 +37,6 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `activity_ordering`
 - `activity_parent`
 - `activity_parent_access`
-- `activity_request`
 - `add_group_member_request`
 - `add_juju_charm_request`
 - `add_juju_machine_request`
@@ -54,7 +49,6 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `change_package_profile_request`
 - `change_package_request`
 - `change_upgrade_profile_request`
-- `child_instance_profile`
 - `cloud`
 - `computer_group`
 - `computer_group_item`
@@ -66,6 +60,7 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `create_glance_image_request`
 - `create_group_request`
 - `create_project_request`
+- `create_user_request`
 - `custom_graph`
 - `delete_user_request`
 - `deploy_juju_service_request`
@@ -95,7 +90,6 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `node_maintenance_request`
 - `openstack_region_request`
 - `openstack_token`
-- `outbox`
 - `package_profile`
 - `package_profile_constraint`
 - `patch`
@@ -122,13 +116,8 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `sample_account_rule`
 - `sample_computer_rule`
 - `saved_search`
-- `scheduled_activity_profile`
 - `script`
 - `script_attachment`
-- `script_profile`
-- `script_profile_limits`
-- `script_profile_run`
-- `script_version`
 - `series`
 - `signal_process_request`
 - `stored_stub_request`
@@ -137,15 +126,8 @@ Each database managed by Landscape contains a defined set of tables, as listed b
 - `unlock_user_request`
 - `upgrade_profile`
 - `upload`
-- `usg_history`
-- `usg_profile`
-- `wsl_feature_limit`
 
 ### `knowledge`
-
-```{note}
-The knowledge database was deprecated in Landscape Server 25.10 and dropped in Landscape Server 26.04 LTS.
-```
 
 - `article`
 - `article_category`
@@ -160,13 +142,8 @@ The knowledge database was deprecated in Landscape Server 25.10 and dropped in L
 - `access_context`
 - `account`
 - `account_invitation`
-- `account_oidc_configuration`
 - `api_credentials`
-- `autoinstall_file`
-- `cloud_init`
 - `computer`
-- `computer_autoinstall_provision`
-- `computer_contract`
 - `computer_license`
 - `computer_message_type`
 - `computer_relationship`
@@ -174,15 +151,9 @@ The knowledge database was deprecated in Landscape Server 25.10 and dropped in L
 - `computer_status`
 - `computer_tag`
 - `computer_utilisation`
-- `contract`
 - `distributed_lock`
 - `distribution`
-- `employee`
-- `employee_computer`
-- `employee_group`
-- `employee_group_membership`
 - `enabled_feature`
-- `google_service_account`
 - `installed_snap`
 - `invitation_role`
 - `lds_available_release`
@@ -193,9 +164,6 @@ The knowledge database was deprecated in Landscape Server 25.10 and dropped in L
 - `license_lds_license`
 - `message_type`
 - `meta_release`
-- `oidc_authn_configuration`
-- `oidc_group_import_session`
-- `oidc_issuer`
 - `password_recovery`
 - `patch`
 - `pending_computer`
@@ -203,7 +171,6 @@ The knowledge database was deprecated in Landscape Server 25.10 and dropped in L
 - `person_access`
 - `person_account`
 - `person_computer`
-- `person_oidc_identity`
 - `ping_server`
 - `ping_time`
 - `removed_account_name`
@@ -216,16 +183,12 @@ The knowledge database was deprecated in Landscape Server 25.10 and dropped in L
 - `server_identity`
 - `snap`
 - `snap_publisher`
-- `staged_oidc_group`
-- `stored_secret`
 - `system_configuration`
 - `tag`
 - `trial_account`
-- `ubuntu_installer_attach_session`
 - `utility_cost`
 - `utility_credit`
 - `vat_rate`
-- `wsl_instance`
 
 ### `package`
 

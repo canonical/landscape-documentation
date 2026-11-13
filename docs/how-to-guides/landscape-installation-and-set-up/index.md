@@ -11,7 +11,7 @@ Install and configure Landscape Server and Landscape Client using various deploy
 
 ## Cloud providers
 
-Deploy Landscape Server on major cloud platforms including Google Cloud and Microsoft Azure.
+Manage Ubuntu Amazon WorkSpaces with Landscape SaaS.
 
 ```{toctree}
 :titlesonly:
@@ -45,7 +45,6 @@ Install Landscape Server for production use with manual configuration or Juju-ma
 Manual installation <manual-installation>
 Juju installation <juju-installation>
 Juju HA installation <juju-ha-installation>
-Install in a LXD container <install-in-a-lxd-container>
 ```
 
 ### Specialized environments
@@ -57,7 +56,6 @@ Deploy Landscape in environments with specific compliance or connectivity requir
 :maxdepth: 1
 
 Install on FIPS-compliant machines <install-on-fips-compliant-machines>
-Install in a DISA STIG compliant environment <disa-stig>
 Install in an airgapped environment <install-landscape-in-an-air-gapped-or-offline-environment>
 ```
 
@@ -82,8 +80,6 @@ Configure supporting services for your Landscape deployment.
 :maxdepth: 1
 
 Configure RabbitMQ <configure-rabbitmq>
-Configure Outbox <configure-outbox>
-Configure Task Handler <configure-task-handler>
 Configure Postfix <configure-postfix>
 Set up Debarchive <debarchive-repository-management>
 ```

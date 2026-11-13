@@ -1,63 +1,45 @@
 ---
 myst:
   html_meta:
-    description: "Reference guide for lsctl command line tool that manages Landscape systemd services including start, stop, enable, disable, and status."
+    description: "Reference for lsctl in Landscape Server 24.04 LTS, including starting, stopping, restarting, and checking enabled services."
 ---
 
 (reference-lsctl)=
 # `lsctl`
 
-`lsctl` is a command line tool that simplifies managing Landscape systemd services. It allows you to apply `systemctl` commands to all of the services at once. It must be run with root privileges.
+`lsctl` is a command line tool that manages Landscape services. It must be run with root privileges.
+
+It reads `/etc/default/landscape-server` and applies the requested command to services enabled by `RUN_ALL` or their individual `RUN_*` settings. Services that are not enabled are skipped.
 
 ## Usage
 
 ```bash
-lsctl <COMMAND>
+sudo lsctl <COMMAND>
 ```
 
-Internally, this executes:
+The available commands are `start`, `stop`, `restart`, and `status`.
 
-```bash
-systemctl <COMMAND> landscape-server.target
-```
-
-## Common commands
-
-Certain commands extend the basic `systemctl` behavior with extra functionality.
-
-### `disable`
-
-Prevents Landscape services from starting automatically at boot.
-
-### `enable`
-
-Configures Landscape services to start automatically at boot.
+## Commands
 
 ### `start`
 
-Starts all Landscape services and also enables any Landscape cron jobs.
+Starts the enabled Landscape services.
 
 ### `status`
 
-Shows the status of all Landscape services. You can use this to determine which services are active or inactive for troubleshooting.
-
-Equivalent `systemctl` command:
-
-```bash
-systemctl list-dependencies landscape-server.target
-```
-
-To check the status of an individual service, you can use:
-
-```bash
-systemctl status <SERVICE-NAME>
-```
+Shows the status of the enabled Landscape services.
 
 ### `stop`
 
-Stops all Landscape services cleanly, waiting for any batch scripts to complete. This also disables Landscape cron jobs.
+Stops the enabled Landscape services in reverse startup order.
 
 (reference-lsctl-restart)=
 ### `restart`
 
-Restart Landscape services. Currently, this {ref}`does not enable or disable Landscape cron jobs <reference-known-issues-lsctl-restart>`.
+Restarts the enabled Landscape services. This {ref}`does not enable or disable Landscape cron jobs <reference-known-issues-lsctl-restart>`.
+
+## Cron jobs
+
+For charmed deployments, when cron jobs are enabled through `RUN_ALL` or `RUN_CRON`, `lsctl stop` prevents new jobs from starting and waits for running batch scripts to complete. `lsctl start` re-enables cron jobs.
+
+For Quickstart and manual deployments, `lsctl` does not enable or disable cron jobs. To control them separately, see {ref}`reference-known-issues-lsctl-restart`.

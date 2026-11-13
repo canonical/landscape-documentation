@@ -28,18 +28,18 @@ Internal network traffic is "behind" a reverse proxy. In most Landscape Server d
 (reference-internal-network-requirements-client-serving)=
 ### Components that receive client traffic
 
-The reverse proxy accepts external HTTP traffic originating from clients and proxies it to internal components. It also performs TLS termination. By default, each internal component listens for HTTP traffic on a different range of ports. A range is used to allow for scalability as multiple workers for each component can be active at the same time.
+The reverse proxy accepts external HTTP traffic originating from clients and proxies it to internal components. It also performs TLS termination. Each internal component has a default port. For services configured with a base port, additional instances use successive ports starting at that base port.
 
-These are the current port ranges for each internal component that accepts traffic from the reverse proxy. Each range is inclusive.
+These are the default ports for each internal component that accepts traffic from the reverse proxy:
 
-- 8070-8079: {ref}`explanation-server-architecture-appserver`
-- 8080-8089: {ref}`explanation-server-architecture-pingserver`
-- 8090-8099: {ref}`explanation-server-architecture-message-system`
-- 8100: {ref}`explanation-server-architecture-deb-archive`
-- 9080-9098: {ref}`explanation-server-architecture-api`
+- 8070: {ref}`explanation-server-architecture-pingserver`
+- 8080: {ref}`explanation-server-architecture-appserver`
+- 8090: {ref}`explanation-server-architecture-message-system`
+- 9080: {ref}`explanation-server-architecture-api`
+- 9090: {ref}`explanation-server-architecture-async-frontend`
 - 9099: {ref}`explanation-server-architecture-package-search`
 - 9100: {ref}`explanation-server-architecture-package-upload`
-- 50052: {ref}`explanation-server-architecture-hostagent-messenger`
+- 50051: {ref}`explanation-server-architecture-hostagent-messenger`
   
 ### Third-party components
 

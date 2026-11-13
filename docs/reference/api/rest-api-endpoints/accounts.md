@@ -94,7 +94,7 @@ Required parameters:
 
 - `email`: The email of the first administrator.
 - `name`: The name of the first administrator.
-- `password`: The password of the first administrator. Set {ref}`enforce_password_strength <service-conf-system-enforce-password-strength>` to `True` to enforce password strength requirements.
+- `password`: The password of the first administrator.
 
 Example request:
 

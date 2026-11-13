@@ -44,89 +44,15 @@ sudo apt clean
 sudo apt --download-only -y install landscape-server-quickstart
 ```
 
-All of the necessary packages for Landscape Server should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
-
-**Select your Landscape Server version:**
-
-`````{tab-set}
-
-````{tab-item} Landscape Server 26.04 LTS and later
-
-#### Download the Landscape Server snap services
-
-Landscape 26.04 LTS depends on the following snap services, `landscape-task-handler`, `landscape-outbox` and `landscape-debarchive`, which are downloaded separately. The `landscape-outbox` and `landscape-debarchive` snaps currently use the `core22` base and require the `snapd` system snap to be available on the offline machine, so download all five snaps:
-
-```bash
-snap download core22
-snap download snapd
-snap download landscape-task-handler
-snap download core22
-snap download snapd
-snap download landscape-outbox
-snap download landscape-debarchive --beta
-```
-
-For each snap, a `.snap` file and a `.assert` file will be produced.
-
-````
-
-````{tab-item} Landscape Server 25.10 and earlier
-
-These steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
-
-````
-
-`````
+The downloaded packages are in the APT cache directory: `/var/cache/apt/archives`. APT doesn't download packages that are already installed on the online machine, so make sure the offline machine has all the dependencies Landscape Server needs.
 
 ### Install Landscape Server in the offline environment
 
-Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and transfer them into a directory readable by APT (for example, `/srv/landscape-packages`). The `apt --download-only` command above downloads the full dependency closure into the APT cache, so APT can resolve package dependencies locally without reaching the network. Install the packages with commands similar to:
+Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
 
 ```bash
-sudo mkdir -p /srv/landscape-packages
-sudo cp /PATH/TO/PACKAGES/*.deb /srv/landscape-packages/
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  -o Acquire::http::No=true \
-  -o Acquire::https::No=true \
-  /srv/landscape-packages/*.deb
+sudo dpkg -i /PATH/TO/PACKAGES/*.deb
 ```
-
-**Select your Landscape Server version:**
-
-`````{tab-set}
-
-````{tab-item} Landscape Server 26.04 LTS and later
-
-#### Install the Landscape Server snap services
-
-Copy the downloaded snap artifacts, carry them into the offline or airgapped environment, and install them with `snap`. You can install the packages with a command similar to:
-
-```bash
-sudo snap ack core22_*.assert
-sudo snap install core22_*.snap
-sudo snap ack snapd_*.assert
-sudo snap install snapd_*.snap
-sudo snap ack landscape-task-handler_*.assert
-sudo snap install landscape-task-handler_*.snap
-sudo snap ack core22_*.assert
-sudo snap install core22_*.snap
-sudo snap ack snapd_*.assert
-sudo snap install snapd_*.snap
-sudo snap ack landscape-outbox_*.assert
-sudo snap install landscape-outbox_*.snap
-sudo snap ack landscape-debarchive_*.assert
-sudo snap install landscape-debarchive_*.snap
-```
-
-````
-
-````{tab-item} Landscape Server 25.10 and earlier
-
-These steps apply to Landscape 26.04 LTS and later only. Continue to the next step.
-
-````
-
-`````
 
 Once Landscape Server is installed, you can finish setting up Landscape similar to how you would with an online server. See the {ref}`Quickstart <how-to-quickstart-installation>` and {ref}`Manual <how-to-manual-installation>` installation guides for more details. This also includes setting up your first administrator and attaching your {ref}`explanation-licenses`.
 
@@ -148,19 +74,14 @@ sudo apt clean
 sudo apt --download-only -y install landscape-client
 ```
 
-All of the necessary packages for Landscape Client should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
+The downloaded packages are in the APT cache directory: `/var/cache/apt/archives`. APT doesn't download packages that are already installed on the online machine, so make sure the offline machine has all the dependencies Landscape Client needs.
 
 ### Install Landscape Client in an offline environment
 
-Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and transfer them into a directory readable by APT (for example, `/srv/landscape-packages`). Install them with APT so package dependencies are resolved locally. You can install the packages with commands similar to:
+Copy the downloaded `.deb` packages, carry them into the offline or airgapped environment, and manually transfer and install them onto your machine with `dpkg`. You can install the packages with a command similar to:
 
 ```bash
-sudo mkdir -p /srv/landscape-packages
-sudo cp /PATH/TO/PACKAGES/*.deb /srv/landscape-packages/
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  -o Acquire::http::No=true \
-  -o Acquire::https::No=true \
-  /srv/landscape-packages/*.deb
+sudo dpkg -i /PATH/TO/PACKAGES/*.deb
 ```
 
 Once Landscape Client is installed, you can configure the client and register it with your Landscape server similar to how you would in an online environment. See {ref}`how-to-configure-landscape-client` for more details.
