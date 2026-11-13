@@ -35,7 +35,6 @@ These are the default ports for each internal component that accepts traffic fro
 - 8070: {ref}`explanation-server-architecture-pingserver`
 - 8080: {ref}`explanation-server-architecture-appserver`
 - 8090: {ref}`explanation-server-architecture-message-system`
-- 8100: {ref}`explanation-server-architecture-deb-archive`
 - 9080: {ref}`explanation-server-architecture-api`
 - 9090: {ref}`explanation-server-architecture-async-frontend`
 - 9099: {ref}`explanation-server-architecture-package-search`
