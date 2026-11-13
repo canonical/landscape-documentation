@@ -43,7 +43,7 @@ Once you've created your profile, you can edit, remove, and more using the dot m
 
 > Reference: {ref}`reference-terms-repository-profile`
 
-To create or manage a repository profile, see {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
+To create or manage a repository profile, see {ref}`the repository profile instructions <how-to-heading-manage-repos-create-repo-profile>`. Note that repository mirroring is only available for self-hosted Landscape users.
 
 ## Upgrade profiles
 
