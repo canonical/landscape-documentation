@@ -15,4 +15,5 @@ Access Landscape via the API to automate system management tasks. Landscape prov
 
 Make a REST API request <make-a-rest-api-request>
 Legacy API <use-the-legacy-api>
+Deploy the Landscape MCP server <deploy-the-landscape-mcp-server>
 ```
