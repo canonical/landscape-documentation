@@ -71,7 +71,9 @@ explanation/features/repository-mirroring-2604/ explanation/features/repository-
 
 reference/api/rest-api-endpoints/security_profiles/ reference/api/rest-api-endpoints/usg_profiles/
 
-reference/known-issues/known-issues/ reference/known-issues/
+reference/known-issues/known-issues/ reference/
+
+reference/known-issues/ reference/
 
 reference/logs/logs/ reference/logs/
 

@@ -38,12 +38,12 @@ For any external authentication method, Landscape uses the identity provider for
 
 Prior to Landscape 24.04 LTS, Landscape used sessions for UI authentication and an access key/secret pair for API authentication. Beginning in 24.04 LTS, Landscape introduced JWTs for API and UI authentication.
 
-|            | 24.04 LTS                     | 24.10                         | 25.04                         | 25.10                         |
-|------------|-------------------------------|-------------------------------|-------------------------------|-------------------------------|
-| Classic UI | Session only                  | Session <br> or JWT           | Session <br> or JWT           | Session <br> or JWT           |
-| New UI     | JWT only                      | JWT only                      | JWT only                      | JWT only                      |
-| Legacy API | Access key/secret <br> or JWT | Access key/secret <br> or JWT | Access key/secret <br> or JWT | Access key/secret <br> or JWT |
-| REST API   | JWT only                      | JWT only                      | JWT only                      | JWT only                      |
+|            | 24.04 LTS                     |
+|------------|-------------------------------|
+| Classic UI | Session only                  |
+| New UI     | JWT only                      |
+| Legacy API | Access key/secret <br> or JWT |
+| REST API   | JWT only                      |
 
 ### Sessions
 
@@ -51,15 +51,15 @@ Landscape sets a session with the browser when a user logs into the classic UI. 
 
 ### JWTs
 
-Landscape issues a JWT and stores it as a cookie when a user logs into the new UI. The cookie is cleared when the user logs out of either the classic or new UI. JWTs are valid access credentials for the classic and new UIs, and both APIs.
+Landscape issues a JWT when a user logs into the new UI. The new UI stores the JWT in the browser's local storage and removes it when the user logs out of the new UI. JWTs are valid access credentials for the new UI and both APIs. The classic UI accepts sessions only.
 
 See {ref}`explanation-cryptographic-technology` for details on JWT encryption. JWTs are used for identity only; they do not contain any authorization information.
 
-JWTs expire after 24 hours. JWTs can be invalidated for a user, an account, or the entire system. See {ref}`reference-rest-api-tokens`.
+JWTs expire after 24 hours.
 
 ### Access key/secret pairs
 
-Access key/secret pairs are issued when a user creates API credentials in the classic UI. Access key/secret pairs may only be used to access the legacy API. However, they can be exchanged for a JWT that is valid in the REST API. See {ref}`reference-rest-api-login`.
+Access key/secret pairs are issued when a user creates API credentials in the classic UI. Access key/secret pairs may only be used to access the legacy API.
 
 Access key/secret pairs may be regenerated at any time, which will invalidate the old credentials. See {ref}`reference-rest-api-credentials`.
 

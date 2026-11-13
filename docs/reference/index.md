@@ -86,6 +86,5 @@ Additional technical documentation and command-line tools.
 
 logs
 database
-known-issues
 lsctl
 ```

@@ -60,4 +60,4 @@ Stops all Landscape services cleanly, waiting for any batch scripts to complete.
 (reference-lsctl-restart)=
 ### `restart`
 
-Restart Landscape services. Currently, this {ref}`does not enable or disable Landscape cron jobs <reference-known-issues-lsctl-restart>`.
+Restart Landscape services. Currently, this does not enable or disable Landscape cron jobs.
