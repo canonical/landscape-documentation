@@ -18,7 +18,7 @@ Landscape installs its own version of `python3-protobuf` and `python3-grpcio` fr
 
 ## Pydantic with ESM enabled
 
-Since version 24.10, Landscape Server relies on `python3-pydantic (>= 2.4.2)`. However, the ESM repositories for jammy and noble have a lower version of that package available with a higher `apt` pin priority. This conflict can cause Landscape Server upgrades and installations to fail on instances with ESM enabled.
+Since version 24.04.11, Landscape Server relies on `python3-pydantic (>= 2.4.2)`. However, the ESM repositories for jammy and noble have a lower version of that package available with a higher `apt` pin priority. This conflict can cause Landscape Server upgrades and installations to fail on instances with ESM enabled.
 
 To work around this conflict, you can add the following to a `/etc/apt/preferences.d/landscape-server` file:
 
@@ -26,8 +26,6 @@ To work around this conflict, you can add the following to a `/etc/apt/preferenc
 Explanation: The ESM archives have a version of python3-pydantic that
 Explanation: is a lower version than the one required by Landscape Server.
 Package: python3-pydantic
-Pin: release o=LP-PPA-landscape-latest-stable
+Pin: release o=LP-PPA-landscape-self-hosted-24.04
 Pin-Priority: 550
 ```
-
-Replace the PPA on the `Pin:` line with the appropriate one for your Landscape Server installation (e.g. use `LP-PPA-landscape-self-hosted-beta` for the beta PPA).
