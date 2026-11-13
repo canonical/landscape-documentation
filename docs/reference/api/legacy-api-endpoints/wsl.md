@@ -177,6 +177,7 @@ Example outputs:
         "last_exchange_time": null,
         "last_ping_time": "2023-10-25T18:45:37Z",
         "reboot_required_flag": false,
+        "secrets_name": null,
         "tags": [
             "laptop",
             "windows"
@@ -199,6 +200,7 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:21:43Z",
         "reboot_required_flag": false,
+        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
@@ -223,6 +225,7 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:22:30Z",
         "reboot_required_flag": false,
+        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
