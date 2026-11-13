@@ -64,7 +64,7 @@ sudo systemctl reload apache2.service
 
 **HAProxy**
 
-For pre-26.04 {ref}`Juju <how-to-juju-ha-installation>` deployments, the classic `haproxy` charm exposes bind options for this:
+For {ref}`Juju <how-to-juju-ha-installation>` deployments, the `haproxy` charm exposes bind options for this:
 
 ```bash
 juju config haproxy global_default_bind_options='no-sslv3 no-tlsv10 no-tlsv11'
@@ -75,10 +75,6 @@ This disables SSL 3.0 and TLS 1.0/1.1 and restricts the TLS 1.2 cipher suites, b
 
 ```bash
 juju exec --application haproxy "sudo systemctl restart haproxy.service"
-```
-
-```{note}
-Landscape 26.04 LTS and later use a different HAProxy charm, from the `2.8/stable` channel, that doesn't expose these options, so these steps apply only to pre-26.04 deployments. For that charm, see its [security documentation](https://canonical.com/juju/docs/haproxy-charm/latest/explanation/security/) for maintained guidance.
 ```
 
 **Verify the result**
