@@ -37,27 +37,17 @@ Query parameters:
   - `profile:usg:<profile-id>:<status>`: Instances associated with the specified USG profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
   - `profile:security:<profile-id>:<status>`: Instances associated with the specified security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress` (deprecated: use `profile:usg` instead).
   - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
-  - `release-upgrade:available`: (Landscape 26.04+) Search for computers with a supported Ubuntu release upgrade available.
   - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
   - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.
-  - `license-type:<license-type>`: Instances associated with the specified `<license-type>`. The `license-type` must be one of `unlicensed`, `pro`, `free_pro`, `legacy`.
-  - `contract:<contract-id>`: Instances associated with the specified `<contract-id>`.
-  - `contract-expires-within-days:<days>`: Instances associated with a Ubuntu Pro contract that expires within `<days>` days.
-  - `license-expires-within-days:<days>`: Instances associated with a Legacy License that expires within `<days>` days.
-  - `has-pro-management:<option>`: Instances with pro management enabled if `<option>` is a truthy value or disabled if falsy.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 - `with_alerts`: If true, includes alert information in each computer object if that alert is active. Defaults to false.
 - `with_upgrades`: If true, includes how many regular and security upgrades that computer has. Defaults to false.
-- `with_release_upgrades`: (Landscape 26.04+) If true, includes a `has_release_upgrades` boolean in each computer object indicating whether an Ubuntu release upgrade is available. Defaults to false.
-- `with_reboot_packages`: Show packages needing reboot. Defaults to false.
 - `with_network`: If true, include the details of all network devices attached to the computer. Defaults to false.
-- `with_all_network`: If true, include the details of all active and inactive network devices attached to the computer. Defaults to false.
 - `with_hardware`: If true, include the details of all hardware information known. Defaults to false.
 - `with_annotations`: If true, include the details of all custom annotation information known. Defaults to false.
 - `with_grouped_hardware`: If true, include the details of all known hardware information grouped by device category. Defaults to false.
 - `with_wsl_profiles`: If true, include {ref}`WSL profiles <reference-terms-wsl-profile>` associated with Windows computers. Defaults to false.
-- `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
 - `root_only`: Whether or not to include only the root member of a computer family tree. Defaults to true. If false, all computers will be included.
 - `wsl_parents`: If true, restrict the result to WSL parent instances (i.e. Windows machines). This parameter can be used in conjunction with the `wsl_children` parameter. Defaults to false (no additional filtering).
 - `wsl_children`: If true, restrict the result to WSL child instances. This parameter can be used in conjunction with the `wsl_parents` parameter. This parameter requires the `root_only` flag be set to false. Defaults to false (no additional filtering).
@@ -318,32 +308,19 @@ Example response:
 ```json
 {
   "access_group": "server",
-  "archived": false,
   "children": [],
   "clone_id": null,
-  "cloud_init": {
-    "availability_zone": "us-east-1"
-  },
   "cloud_instance_metadata": {},
   "comment": "",
   "container_info": null,
   "default_child": null,
   "distribution": "10.04",
-  "distribution_info": {
-    "code_name": "lucid",
-    "description": "Ubuntu 10.04 LTS",
-    "distributor": "Ubuntu",
-    "release": "10.04"
-  },
-  "employee_id": null,
   "hostname": "appserv1",
   "id": 1,
   "is_default_child": null,
   "is_wsl_instance": false,
   "last_exchange_time": null,
   "last_ping_time": "2025-06-27T21:17:37Z",
-  "livepatch_info": null,
-  "num_child": 0,
   "parent": null,
   "profiles": [
     {
@@ -381,7 +358,6 @@ Example response:
   "total_memory": 1024,
   "total_swap": 1024,
   "ubuntu_pro_info": null,
-  "ubuntu_pro_reboot_required_info": null,
   "update_manager_prompt": "normal",
   "vm_info": null
 }
@@ -993,50 +969,6 @@ Example response:
 }
 ```
 
-## POST `/computers/<int:computer_id>/restart`
-
-Restarts the specified computer
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-
-Optional query parameters:
-
-- `deliver_after`: A time in the future to deliver the reboot activity
-- `deliver_delay_window`: Randomize delivery within the given time frame (minutes)
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/restart" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT"
-```
-
-Example response:
-
-```json
-{
-  "activity_status": "undelivered",
-  "approval_time": null,
-  "completion_time": null,
-  "creation_time": "2024-11-22T00:01:18Z",
-  "creator": {
-    "email": "john@example.com",
-    "id": 1,
-    "name": "John Smith"
-  },
-  "deliver_delay_window": 0,
-  "id": 2225,
-  "parent_id": null,
-  "result_code": null,
-  "result_text": null,
-  "summary": "Restart computer",
-  "type": "ActivityGroup"
-}
-```
-
 ## GET `/computers/<int:computer_id>/snaps/installed`
 
 List all installed snaps on a single computer.
@@ -1150,33 +1082,6 @@ Example response:
 ```
 
 
-## POST `/computers:delete`
-
-```{warning}
-This endpoint is available from Landscape Server 26.04 LTS onwards for select accounts.
-```
-
-Delete computers with the given computer IDs.
-
-Required parameters:
-
-- `computer_ids`: A list of computer IDs to delete with minimum length 1 and maximum length 1000
-
-Optional parameters:
-
-- None
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers:delete" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"computer_ids": [1, 2, 3]}'
-```
-
-This endpoint returns an empty response.
-
 ## GET `/computers/<int:computer_id>/users/<string:username>/groups`
 
 Get all the groups for the provided username on the given computer ID.
@@ -1285,50 +1190,6 @@ Example response:
 }
 ```
 
-## POST `/computers/<computer_id>/archive`
-
-Archives the selected computer after it has been manually sanitized.
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-
-Required parameters:
-
-- `computer_title`: Confirm the name of the computer to archive
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/archive" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"computer_title": "test computer"}'
-```
-
-Example response:
-
-```json
-{
- "id": 124,
- "activity_status": "succeeded",
- "approval_time": null,
- "completion_time": "2025-02-22T02:14:19Z",
- "creation_time": "2025-02-22T02:14:19Z",
- "creator": {
-     "email": "john@example.com",
-     "id": 1,
-     "name": "John Smith"
- },
- "deliver_delay_window": 0,
- "parent_id": null,
- "result_code": null,
- "result_text": null,
- "summary": "Archive computer",
- "type": "ActivityGroup"
-}
-```
-
 ## POST `/computers/<computer_id>/delete-children`
 
 Creates an activity to delete WSL instances on a Windows host. The WSL instance does not have to be managed in Landscape.
@@ -1366,156 +1227,6 @@ Example response:
   "result_code": null,
   "result_text": null,
   "activity_status": "undelivered"
-}
-```
-
-## POST `/computers/<computer_id>/sanitize`
-
-```{note}
-**Please make sure you are sanitizing the correct computer. This action is irreversible.**
-```
-
-Sanitizes the selected computer. This action will make the data on the selected computer permanently irrecoverable by erasing the keyslots of every encrypted volume. A configurable delay can be set in the service.conf file.
-
-Path parameters:
-
-- `computer_id`: An ID assigned to a specific computer.
-
-Required parameters:
-
-- `computer_title`: Confirm the name of the computer to sanitize
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/29/sanitize" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"computer_title": "test computer"}'
-```
-
-Example response:
-
-```json
-{
- "id": 119,
- "activity_status": "scheduled",
- "approval_time": null,
- "completion_time": null,
- "creation_time": "2025-01-07T05:27:39Z",
- "creator": {
-     "email": "john@example.com",
-     "id": 1,
-     "name": "John Smith"
- },
- "deliver_delay_window": 0,
- "parent_id": null,
- "result_code": null,
- "result_text": null,
- "summary": "Sanitizing computer",
- "type": "ActivityGroup"
-}
-```
-
-```{note}
-This endpoint is available starting in Landscape 26.04 LTS.
-```
-
-## GET `/computers/release-upgrade-targets`
-
-Get the maximum release-upgrade target for each provided computer.
-A release upgrade moves a machine to a newer Ubuntu release. An upgrade is considered available if the computer meets the minimum supported OS version and its local upgrade policy allows the move.
-
-Path parameters:
-
-- None
-
-Query parameters:
-
-- `computer_ids`: A comma-separated list of computer IDs.
-
-Example request:
-
-```bash
-curl -X GET "https://landscape.canonical.com/api/v2/computers/release-upgrade-targets?computer_ids=1,2" -H "Authorization: Bearer $JWT"
-```
-
-Example response:
-
-```json
-{
-  "results": [
-    {
-      "computer_id": 1,
-      "computer_title": "Application Server 1",
-      "current_release_name": "Ubuntu 18.04 LTS",
-      "current_release_version": "18.04",
-      "target_release_code_name": "jammy",
-      "target_release_name": "Jammy Jellyfish",
-      "target_release_version": "22.04",
-      "reason_code": null,
-      "reason_detail": null
-    },
-    {
-      "computer_id": 2,
-      "computer_title": "Application Server 2",
-      "current_release_name": "Ubuntu 11.04",
-      "current_release_version": "11.04",
-      "target_release_code_name": null,
-      "target_release_name": null,
-      "target_release_version": null,
-      "reason_code": "no_upgrade_target",
-      "reason_detail": "No release upgrades are available."
-    }
-  ]
-}
-```
-
-```{note}
-This endpoint is available starting in Landscape 26.04 LTS
-```
-
-## POST `/computers/release-upgrades`
-
-Create a release-upgrade activity for the provided computers, which upgrades their operating system to the next available Ubuntu release.
-
-Path parameters:
-
-- None
-
-Required parameters:
-
-- `computer_ids`: A list of computer IDs.
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/computers/release-upgrades" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"computer_ids": [1, 2]}'
-```
-
-Example response:
-
-```json
-{
-  "activity_status": "undelivered",
-  "approval_time": null,
-  "completion_time": null,
-  "creation_time": "2026-03-02T12:00:00Z",
-  "creator": {
-    "email": "john@example.com",
-    "id": 1,
-    "name": "John Smith"
-  },
-  "deliver_delay_window": 0,
-  "id": 98765,
-  "parent_id": null,
-  "result_code": null,
-  "result_text": null,
-  "summary": "Release upgrade computers",
-  "type": "ActivityGroup"
 }
 ```
 
