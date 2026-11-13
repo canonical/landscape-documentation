@@ -20,17 +20,6 @@ Learn about Landscape's architecture, deployment models, and other concepts.
 landscape/index
 ```
 
-## Landscape Server Charm
-
-Understand the charmed deployment option for Landscape Server.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-charm/index
-```
-
 ## Features
 
 Explore key Landscape features including activities, repository mirroring, package reporting, and remote script execution.

@@ -11,10 +11,8 @@ myst:
 
 You can create a scalable, high availability (HA) deployment of Landscape Server with Juju. The result is a Juju-managed deployment of Landscape Server and the other services it depends on.
 
-You can follow the manual bundle approach below, or use the {ref}`Landscape Scalable Terraform product module <how-to-terraform-juju-deployment>` instead: it manages the same HA architecture reproducibly, and its inputs/outputs are documented in the {ref}`module reference <reference-landscape-product-modules-landscape-scalable>`.
-
 ```{important}
-This guide covers both the **26.04 deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach. For existing deployments, see {ref}`how-to-migrate-to-26-04-charm`.
+This guide covers both the **26.04 deployment approach** and the older **pre-26.04 deployment approach**. The 26.04 version integrates directly with the external HAProxy charm (`2.8/stable`) using the `haproxy-route` interface, replacing the older `reverseproxy` interface. For new deployments, use the 26.04 approach.
 
 The Charmhub `landscape-scalable` bundle does not currently publish a `26.04/*` track, so 26.04 (and later) bundle deployments require a custom bundle such as the one shown in this guide.
 ```
@@ -70,16 +68,12 @@ Before you can deploy Landscape with Juju, you need to:
 
 These steps prepare your environment to deploy [machine charms](https://canonical.com/juju/charms-architecture) with Juju and [integrate them using relations](https://documentation.ubuntu.com/juju/3.6/howto/manage-relations/).
 
-```{note}
-For improved database performance and scalability in high-load deployments, consider using PgBouncer as a connection pooler between Landscape Server and PostgreSQL. PgBouncer integrates via the Landscape Server charm's `database` relation endpoint, which uses the underlying `postgresql_client` interface. This requires recent Landscape Server charm revisions with `postgresql_client` support. See {ref}`explanation-pgbouncer-integration` for more information.
-```
-
 ## Deployment approach selection
 
 Choose the appropriate deployment approach based on your needs, then follow that section:
 
 - **For new deployments:** Use the {ref}`26.04 deployment <how-to-ha-deployment-2604>` (recommended)
-- **For existing deployments:** Continue with the {ref}`pre-26.04 deployment <how-to-ha-deployment-pre-2604>` or migrate using {ref}`how-to-migrate-to-26-04-charm`
+- **For existing deployments:** Continue with the {ref}`pre-26.04 deployment <how-to-ha-deployment-pre-2604>`
 
 ---
 
@@ -400,7 +394,7 @@ flowchart TD
 ## Pre-26.04 deployment
 
 ```{warning}
-This deployment approach is **deprecated**. For new deployments, use the 26.04 approach described above. For existing deployments, consider migrating using {ref}`how-to-migrate-to-26-04-charm`.
+This deployment approach is **deprecated**. For new deployments, use the 26.04 approach described above.
 ```
 
 This section covers the older deployment approach using the external HAProxy charm. This approach is maintained for existing deployments only.

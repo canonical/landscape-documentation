@@ -25,7 +25,7 @@ We offer three installation options for self-hosted Landscape Server:
 
 ## Supported versions and release cycles
 
-Landscape Server has the following active or ESM-supported releases:
+The following table lists Landscape Server 24.04 LTS and older releases with standard or ESM support:
 
 ```{include} ../../reference/_includes/landscape-versions-table.md
 ```
@@ -38,7 +38,7 @@ For more information, see {ref}`reference-supported-versions-and-ppas`.
 
 ## Package sources (PPAs)
 
-Self-hosted Landscape is distributed via the following PPAs:
+The PPA for Landscape Server 24.04 LTS is:
 
 ```{include} ../../reference/_includes/landscape-ppas-table.md
 ```

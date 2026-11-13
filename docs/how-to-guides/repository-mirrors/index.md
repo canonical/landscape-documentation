@@ -38,6 +38,5 @@ Create tiered-repository mirrors <create-tiered-repository-mirrors>
 
 - {ref}`explanation-repo-mirroring`
 - {ref}`how-to-debarchive-repository-management`
-- {ref}`how-to-migrate-repository-mirrors-to-debarchive`
 - {ref}`reference-api-debarchive`
 - {ref}`how-to-guides-landscape-installation-and-set-up-index`

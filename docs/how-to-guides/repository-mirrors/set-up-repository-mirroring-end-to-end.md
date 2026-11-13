@@ -10,7 +10,7 @@ myst:
 > See also: {ref}`explanation-repo-mirroring`
 
 ```{note}
-This document applies to **Landscape Server 26.04 LTS and later**. See the {ref}`reference-release-notes-26-04-lts` for details on our changes to repository management in 26.04.
+This document applies to **Landscape Server 26.04 LTS and later**.
 ```
 
 This guide demonstrates how to mirror part of the Ubuntu archive, publish it to a publication target, and configure a client machine to install packages from the published repository. By the end of this guide, you'll have a repository mirror set up and a package on your client machine.
@@ -48,7 +48,7 @@ For more information about verification and signing keys, see {ref}`explanation-
 
 Before you start, make sure you have:
 
-- A **Landscape Server 26.04 LTS (or later)** deployment with repository management set up. See {ref}`how-to-guides-landscape-installation-and-set-up-index` for installation. If you're on a version earlier than 26.04, upgrade first by following {ref}`how-to-upgrade-to-26-04-lts`.
+- A **Landscape Server 26.04 LTS (or later)** deployment with repository management set up. See {ref}`how-to-guides-landscape-installation-and-set-up-index` for installation.
 
     ```{include} /reuse/debarchive-setup-links.md
     ```

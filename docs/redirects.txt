@@ -46,6 +46,21 @@ how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integr
 
 how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
 
+# Later-release upgrade guides are not part of the 24.04 documentation.
+how-to-guides/upgrade/upgrade-to-26-04-lts/ how-to-guides/upgrade/
+how-to-guides/upgrade/migrate-to-26-04-charm/ how-to-guides/upgrade/
+how-to-guides/upgrade/migrate-repository-mirrors-to-debarchive/ how-to-guides/upgrade/
+
+# Charm and Terraform pages added after 24.04 are not part of the 24.04 documentation.
+how-to-guides/landscape-installation-and-set-up/terraform-juju-deployment/ how-to-guides/landscape-installation-and-set-up/
+explanation/charm/ explanation/
+explanation/charm/charm-compatibility/ explanation/
+explanation/charm/pgbouncer-integration/ explanation/
+reference/charm/ reference/
+reference/charm/haproxy-route-endpoints/ reference/
+reference/charm/terraform-charm-module/ reference/
+reference/charm/terraform-product-modules/ reference/
+
 # Explanation
 
 explanation/repository-mirroring/repository-mirroring/ explanation/features/repository-mirroring/
@@ -65,6 +80,12 @@ reference/release-notes/23-03-release-notes/ reference/release-notes/older-relea
 reference/release-notes/23-10-release-notes/ reference/release-notes/older-release-notes/23-10-release-notes/
 
 reference/release-notes/what-s-new-in-beta/ reference/release-notes/
+
+# Later-release notes are not part of the 24.04 documentation.
+reference/release-notes/24-10-release-notes/ reference/release-notes/
+reference/release-notes/25.04-release-notes/ reference/release-notes/
+reference/release-notes/25.10-release-notes/ reference/release-notes/
+reference/release-notes/26-04-lts-release-notes/ reference/release-notes/
 
 reference/terms/alerts/ explanation/features/alerts/
 
