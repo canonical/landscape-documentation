@@ -106,3 +106,9 @@ reference/terms/repositories/ explanation/features/repository-mirroring/
 reference/terms/scripts/ explanation/features/remote-script-execution/
 
 reference/terms/series/ explanation/features/repository-mirroring/
+reference/api/rest-api-endpoints/accounts/ reference/api/rest-api-endpoints/
+reference/api/rest-api-endpoints/license-management/ reference/api/rest-api-endpoints/
+reference/api/rest-api-endpoints/livepatch/ reference/api/rest-api-endpoints/
+reference/api/rest-api-endpoints/recovery-key/ reference/api/rest-api-endpoints/
+reference/api/rest-api-endpoints/repositories/ reference/api/rest-api-endpoints/
+reference/api/rest-api-endpoints/tokens/ reference/api/rest-api-endpoints/

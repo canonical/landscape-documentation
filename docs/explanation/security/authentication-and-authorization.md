@@ -55,7 +55,7 @@ Landscape issues a JWT and stores it as a cookie when a user logs into the new U
 
 See {ref}`explanation-cryptographic-technology` for details on JWT encryption. JWTs are used for identity only; they do not contain any authorization information.
 
-JWTs expire after 24 hours. JWTs can be invalidated for a user, an account, or the entire system. See {ref}`reference-rest-api-tokens`.
+JWTs expire after 24 hours.
 
 ### Access key/secret pairs
 
