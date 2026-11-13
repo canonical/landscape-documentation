@@ -20,9 +20,15 @@ getting-started-with-landscape tutorial/
 
 how-to-guides/backup-and-maintenance/manage-maintenance-tasks/ how-to-guides/backup-and-maintenance/manage-maintenance-cron-jobs/
 
-how-to-guides/landscape-installation-and-set-up/install-on-google-cloud/ how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-google-cloud/
+how-to-guides/landscape-installation-and-set-up/install-on-google-cloud/ how-to-guides/landscape-installation-and-set-up/
 
-how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure/ how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-microsoft-azure/
+how-to-guides/landscape-installation-and-set-up/install-on-microsoft-azure/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-google-cloud/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/cloud-providers/install-on-microsoft-azure/ how-to-guides/landscape-installation-and-set-up/
+
+how-to-guides/landscape-installation-and-set-up/install-in-a-lxd-container/ how-to-guides/landscape-installation-and-set-up/
 
 how-to-guides/landscape-installation-and-set-up/configure-outbox/ how-to-guides/landscape-installation-and-set-up/
 

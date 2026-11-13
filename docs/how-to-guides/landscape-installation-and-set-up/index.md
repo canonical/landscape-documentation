@@ -11,7 +11,7 @@ Install and configure Landscape Server and Landscape Client using various deploy
 
 ## Cloud providers
 
-Deploy Landscape Server on major cloud platforms including Google Cloud and Microsoft Azure.
+Manage Ubuntu Amazon WorkSpaces with Landscape SaaS.
 
 ```{toctree}
 :titlesonly:
@@ -45,7 +45,6 @@ Install Landscape Server for production use with manual configuration or Juju-ma
 Manual installation <manual-installation>
 Juju installation <juju-installation>
 Juju HA installation <juju-ha-installation>
-Install in a LXD container <install-in-a-lxd-container>
 ```
 
 ### Specialized environments
