@@ -44,7 +44,7 @@ sudo apt clean
 sudo apt --download-only -y install landscape-server-quickstart
 ```
 
-All of the necessary packages for Landscape Server should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
+The downloaded packages are in the APT cache directory: `/var/cache/apt/archives`. APT doesn't download packages that are already installed on the online machine, so make sure the offline machine has all the dependencies Landscape Server needs.
 
 ### Install Landscape Server in the offline environment
 
@@ -74,7 +74,7 @@ sudo apt clean
 sudo apt --download-only -y install landscape-client
 ```
 
-All of the necessary packages for Landscape Client should now be downloaded to the APT cache directory: `/var/cache/apt/archives`.
+The downloaded packages are in the APT cache directory: `/var/cache/apt/archives`. APT doesn't download packages that are already installed on the online machine, so make sure the offline machine has all the dependencies Landscape Client needs.
 
 ### Install Landscape Client in an offline environment
 

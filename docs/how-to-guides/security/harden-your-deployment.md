@@ -23,10 +23,7 @@ Landscape's gRPC services currently support only unencrypted HTTP/2 (h2c). Exter
 
 If you're using Landscape's repository mirroring features, Landscape Server may need outgoing network access depending on the location of the repositories you're pulling from.
 
-Port 80 is only needed for Landscape's repository mirroring features. If you don't use these features, then you don't need to expose Port 80. In this case, you would configure your Landscape clients to use HTTPS for all traffic:
-
-1. Edit `/etc/landscape/client.conf` to ensure that the entries for `url`, `package_hash_id_url`, and `ping_url` all start with `https` instead of `http`
-1. Restart Landscape Client: `sudo systemctl restart landscape-client`
+In the default Apache configuration for Quickstart and manual installations, port 80 serves the `/ping` endpoint, which Landscape Clients access over HTTP, and the repository mirroring endpoints. Allow clients to reach port 80 in these deployments.
 
 The other applications in your deployment only require enough network access to communicate with each other. Using the default configuration, these applications use the following ports for incoming traffic:
 
@@ -42,7 +39,7 @@ For more security, configure HAProxy or Apache with a TLS certificate. LetsEncry
 
 ### Restrict TLS versions and cipher suites
 
-A TLS certificate encrypts traffic, but on its own it still lets the reverse proxy negotiate old protocol versions and weak cipher suites. You can configure your proxy to disable older versions.
+A TLS certificate encrypts traffic, but on its own it still lets the reverse proxy negotiate old protocol versions and weak cipher suites. You can configure your reverse proxy to disable older versions. The following steps apply to Apache.
 
 **Apache**
 
@@ -60,21 +57,6 @@ This disables the older SSL and TLS 1.0/1.1 protocols and restricts the TLS 1.2 
 ```bash
 sudo apache2ctl -t
 sudo systemctl reload apache2.service
-```
-
-**HAProxy**
-
-For {ref}`Juju <how-to-juju-ha-installation>` deployments, the `haproxy` charm exposes bind options for this:
-
-```bash
-juju config haproxy global_default_bind_options='no-sslv3 no-tlsv10 no-tlsv11'
-juju config haproxy global_default_bind_ciphers='HIGH:!aNULL:!NULL:!3DES:!DSS:!EXP:!PSK:!SRP:!MD5:!SHA:!CBC:!CAMELLIA'
-```
-
-This disables SSL 3.0 and TLS 1.0/1.1 and restricts the TLS 1.2 cipher suites, but doesn't affect TLS 1.3. Then restart HAProxy on each unit to apply the change:
-
-```bash
-juju exec --application haproxy "sudo systemctl restart haproxy.service"
 ```
 
 **Verify the result**
