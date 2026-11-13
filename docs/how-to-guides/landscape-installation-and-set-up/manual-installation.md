@@ -158,10 +158,6 @@ sudo add-apt-repository <LANDSCAPE_PPA>
 
 ### Install the server package
 
-```{warning}
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported.
-```
-
 On an Ubuntu 22.04 or 24.04 application server, install Landscape and RabbitMQ:
 
 ```bash
