@@ -108,7 +108,7 @@ iot-for-devices/index
 (how-to-index-heading-wsl)=
 ## WSL integration
 
-Manage Windows Subsystem for Linux (WSL) instances with Landscape, including registration, profiles, and common management tasks.
+Manage Windows Subsystem for Linux (WSL) instances with Landscape, including host registration and instance management.
 
 ```{toctree}
 :titlesonly:
@@ -151,18 +151,6 @@ Access Landscape programmatically using the REST API or legacy API for automatio
 :maxdepth: 2
 
 api/index
-```
-
-(how-to-index-heading-nvidia-dgx-spark)=
-## NVIDIA DGX Spark
-
-Register NVIDIA DGX Spark systems with Landscape and use NVIDIA's Landscape reference scripts with Landscape remote script execution.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 1
-
-nvidia-dgx-spark/index
 ```
 
 (how-to-index-heading-troubleshooting)=

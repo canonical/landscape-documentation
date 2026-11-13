@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Create and manage profiles in Landscape's 24.04+ portal including package, reboot, removal, script, security, and upgrade profiles."
+    description: "Create and manage package, removal, repository, and upgrade profiles in Landscape 24.04."
 ---
 
 (how-to-web-portal-use-profiles)=
@@ -29,35 +29,6 @@ To create a package profile, go to **Profiles** from the sidebar > **Package pro
 
 Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
 
-(how-to-web-portal-use-reboot-profiles)=
-## Reboot profiles
-
-```{note}
-This feature is only available in **Landscape 25.04** and later.
-
-Reference: {ref}`reference-terms-reboot-profile`
-```
-
-You can use reboot profiles to automatically restart specific Landscape Client instances on a scheduled basis.
-
-To create a reboot profile, go to **Profiles** from the sidebar > **Reboot profiles**. Then **Add reboot profile** and complete the form. The following fields appear in the form:
-
-   - **Name**: Name of the profile.
-   - **Access group**: The access group the profile will apply to.
-   - **Schedule**:
-
-     - **Days**: The day(s) the reboot will occur
-     - **Time**: The time (in 24-hour format) when the reboot will occur. The scheduled time is interpreted in UTC.
-     - **Expires after**: A time window for retrying the reboot if it fails. The request will be retried until this window closes.
-
-   - **Randomize delivery over a time window**: Select **Yes** if you want to stagger the delivery of reboots to the selected instances. This avoids rebooting them all simultaneously.
-   - **Association**:
-
-     - **All instances**: The profile will affect all instances in the same access group as the profile
-     - **Tag(s)**: Only instances having the specific tag(s) will be affected
-
-After you've created your reboot profile, you'll see the new profile listed along with its next scheduled reboot time. You can manage existing profiles using the dot menu under **Actions**.
-
 ## Removal profiles
 
 > Reference: {ref}`reference-terms-removal-profile`
@@ -72,44 +43,7 @@ Once you've created your profile, you can edit, remove, and more using the dot m
 
 > Reference: {ref}`reference-terms-repository-profile`
 
-To create or manage a repository profile, see {ref}`how-to-heading-manage-repos-create-repo-profile`. Note that repository mirroring is only available for self-hosted Landscape users.
-
-(how-to-web-portal-use-script-profiles)=
-## Script profiles
-
-```{note}
-This feature is only available in self-hosted **Landscape 25.04** and later.
-
-Reference: {ref}`reference-terms-script-profile`
-```
-
-You can use script profiles to execute scripts based on certain triggers. The possible triggers are: post-enrollment, date, and a recurring schedule.
-
-To create a script profile, go to **Profiles** from the sidebar > **Script profiles**. Then **Add script profile** and complete the form. The following fields appear in the form:
-
-   - **Name**: Name of the profile.
-   - **Script**: Name of a corresponding script.
-The same access group of this script will be assigned to the new profile.
-   - **Run as user**: The username to execute the script as on the client.
-   - **Time limit**: The time, in seconds, after which the script is considered defunct.
-   - **Trigger**:
-
-     - **Post Enrollment**: Triggers after a computer is enrolled in an account.
-     - **On a date**: A UTC time at which the script profile should execute.
-     - **Recurring**: A start date after which the profile will execute the specified [Cron](https://en.wikipedia.org/wiki/Cron) schedule.
-
-   - **Association**:
-
-     - **All instances**: The profile will affect all instances in the same access group as the profile.
-     - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
-
-Once you've created your profile, you can edit, remove, and more using the dot menu under **Actions** for each profile.
-
-## USG profiles
-
-> Reference: {ref}`reference-terms-usg-profile`
-
-To create or manage USG profiles, see {ref}`how-to-security-use-usg-profiles`.
+To create or manage a repository profile, see {ref}`the repository profile instructions <how-to-heading-manage-repos-create-repo-profile>`. Note that repository mirroring is only available for self-hosted Landscape users.
 
 ## Upgrade profiles
 
@@ -120,9 +54,3 @@ Upgrade profiles let you schedule and control when package updates are applied t
 To create an upgrade profile, go to **Profiles** from the sidebar > **Upgrade profiles**. Then **Add upgrade profile** and complete the form. You'll need to specify the type of upgrades (e.g., security-only upgrades), the schedule of upgrades, and which access group and (optional) tags to apply the profile to.
 
 Once you've created your profile, you can edit or remove it using the dot menu under **Actions** for each profile.
-
-## WSL profiles
-
-> Reference: {ref}`reference-terms-wsl-profile`
-
-To create or manage a WSL profile, see {ref}`how-to-use-wsl-profiles`.

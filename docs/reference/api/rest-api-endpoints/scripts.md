@@ -46,7 +46,6 @@ Example response:
         "name": "John Smith"
       },
       "last_edited_at": "2025-04-16T21:09:19.872660",
-      "script_profiles": [],
       "status": "REDACTED",
       "attachments": [],
       "code": "The code for this script has been redacted.",
@@ -72,12 +71,6 @@ Example response:
         "name": "John Smith"
       },
       "last_edited_at": "2025-04-10T07:01:39.062323",
-      "script_profiles": [
-        {
-          "title": "Script Profile 1",
-          "id": 12
-        }
-      ],
       "status": "ACTIVE",
       "attachments": [],
       "code": "\nls /tmp",
@@ -127,7 +120,6 @@ Example response:
     "name": "John Smith"
   },
   "last_edited_at": "2025-04-22T09:01:33.196083",
-  "script_profiles": [],
   "status": "ACTIVE",
   "attachments": [
     {
@@ -268,67 +260,6 @@ then
 else
   echo "reboot not required"
 fi
-```
-
-## GET `/scripts/<id>/script-profiles`
-
-Get all the script profiles associated with a script.
-
-Path parameters:
-
-- `id`: The identification number of the script.
-- `offset`: The offset inside the list of results, used for pagination.
-- `limit`: The maximum number of results returned, defaults to 1000.
-
-Example request:
-
-```bash
-curl -X GET https://landscape.canonical.com/api/v2/scripts/34/script-profiles -H "Authorization: Bearer $JWT"
-```
-
-Example response:
-
-```json
-{
-  "results": [
-    {
-      "id": 14,
-      "title": "Script Profile 6",
-      "script_id": 34,
-      "access_group": "global",
-      "created_by": {
-        "name": "John Smith",
-        "id": 1
-      },
-      "created_at": "2025-04-16T06:34:08.631937",
-      "last_edited_at": "2025-04-16T21:48:12.933605",
-      "trigger": {
-        "trigger_type": "recurring",
-        "interval": "0 0 5-10 */2 *",
-        "start_after": "2025-04-17T12:00:00Z",
-        "last_run": null,
-        "next_run": "2025-04-17T12:00:00Z"
-      },
-      "all_computers": false,
-      "tags": [
-        "server",
-        "laptop"
-      ],
-      "time_limit": 360,
-      "username": "root",
-      "computers": {
-        "num_associated_computers": 10
-      },
-      "activities": {
-        "last_activity": null
-      },
-      "archived": false
-    }
-  ],
-  "count": 1,
-  "next": null,
-  "previous": null
-}
 ```
 
 ## POST `/scripts/<id>:archive`

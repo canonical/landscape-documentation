@@ -30,7 +30,9 @@ how-to-guides/security/manage-repositories-in-an-air-gapped-or-offline-environme
 
 how-to-guides/repository-mirrors/manage-repositories-in-the-web-portal-2604/ how-to-guides/repository-mirrors/manage-repositories-in-the-web-portal/
 
-how-to-guides/security/use-security-profiles/ how-to-guides/security/use-usg-profiles/
+how-to-guides/security/use-security-profiles/ how-to-guides/security/
+
+how-to-guides/security/use-usg-profiles/ how-to-guides/security/
 
 how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps
 
@@ -38,13 +40,15 @@ how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-g
 
 how-to-guides/web-portal/web-portal-24-04-or-later/use-script-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
 
-how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/use-usg-profiles/
+how-to-guides/web-portal/web-portal-24-04-or-later/use-security-profiles/ how-to-guides/security/
 
-how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/ how-to-guides/security/use-usg-profiles/
+how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/ how-to-guides/security/
 
 how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integration/configure-landscape-after-upgrade/
 
-how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
+how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/manage-wsl-instances/
+
+how-to-guides/wsl-integration/use-wsl-profiles/ how-to-guides/wsl-integration/
 
 # Later-release upgrade guides are not part of the 24.04 documentation.
 how-to-guides/upgrade/upgrade-to-26-04-lts/ how-to-guides/upgrade/
@@ -69,7 +73,21 @@ explanation/features/repository-mirroring-2604/ explanation/features/repository-
 
 # Reference
 
-reference/api/rest-api-endpoints/security_profiles/ reference/api/rest-api-endpoints/usg_profiles/
+reference/api/rest-api-endpoints/security_profiles/ reference/api/rest-api-endpoints/
+
+reference/api/rest-api-endpoints/child-instance-profiles/ reference/api/rest-api-endpoints/wsl/
+
+reference/api/rest-api-endpoints/reboot-profiles/ reference/api/rest-api-endpoints/
+
+reference/api/rest-api-endpoints/script_profiles/ reference/api/rest-api-endpoints/scripts/
+
+reference/api/rest-api-endpoints/usg_profiles/ reference/api/rest-api-endpoints/
+
+# NVIDIA DGX Spark was added after Landscape 24.04.
+how-to-guides/nvidia-dgx-spark/ how-to-guides/
+how-to-guides/nvidia-dgx-spark/manage-nvidia-dgx-spark/ how-to-guides/
+how-to-guides/nvidia-dgx-spark/set-up-nvidia-dgx-spark/ how-to-guides/
+explanation/related-tools/nvidia-dgx-spark/ explanation/related-tools/
 
 reference/known-issues/known-issues/ reference/known-issues/
 

@@ -33,10 +33,6 @@ Query parameters:
   - `license-id`: Search for computers licensed to the specified `license-id`.
   - `needs:license` OR `license-id:none`: Search for computers that do not have a Landscape license, and, as a result, are not managed.
   - `annotation`: Search for computers which define the specified annotation key. Optionally specify `annotation:<key>:<string>` which will only return computers whose key matches and value also contains the `<string>` specified.
-  - `profile:<profile-type>:<profile-id>`: Instances associated with the specified profile. The `<profile-type>` must be one of `security`, `script`, `repository`, `package`, `upgrade`, `reboot`, `removal`, or `wsl`. The `<profile-id>` is the database id of the profile.
-  - `profile:usg:<profile-id>:<status>`: Instances associated with the specified USG profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress`.
-  - `profile:security:<profile-id>:<status>`: Instances associated with the specified security profile with the indicated last audit result. The `<profile-id>` is the database id of the profile. The `<status>` must be one of `pass`, `fail`, or `in-progress` (deprecated: use `profile:usg` instead).
-  - `profile:wsl:<profile-id>:<status>`: Instances associated with the specified WSL Child Instance Profile. The `<profile-id>` is the database id of the profile. The `<status>` must either be `compliant` or `noncompliant`.
   - `release-upgrade:available`: (Landscape 26.04+) Search for computers with a supported Ubuntu release upgrade available.
   - `OR`: Search for computers matching term A or term B. The text `OR` must be in all-caps.
   - `NOT`: search for computers not matching the next term. The text `NOT` must be in all-caps.
@@ -56,11 +52,9 @@ Query parameters:
 - `with_hardware`: If true, include the details of all hardware information known. Defaults to false.
 - `with_annotations`: If true, include the details of all custom annotation information known. Defaults to false.
 - `with_grouped_hardware`: If true, include the details of all known hardware information grouped by device category. Defaults to false.
-- `with_wsl_profiles`: If true, include {ref}`WSL profiles <reference-terms-wsl-profile>` associated with Windows computers. Defaults to false.
 - `archived_only`: If true, only includes archived computers. If false, only includes non-archived computers. Defaults to false.
-- `root_only`: Whether or not to include only the root member of a computer family tree. Defaults to true. If false, all computers will be included.
-- `wsl_parents`: If true, restrict the result to WSL parent instances (i.e. Windows machines). This parameter can be used in conjunction with the `wsl_children` parameter. Defaults to false (no additional filtering).
-- `wsl_children`: If true, restrict the result to WSL child instances. This parameter can be used in conjunction with the `wsl_parents` parameter. This parameter requires the `root_only` flag be set to false. Defaults to false (no additional filtering).
+- `root_only`: Whether or not to include only the root member of a computer family tree. Defaults to true. If false, all computers will be included. Must be false when `wsl_only` is true.
+- `wsl_only`: If true, only includes WSL instances. Defaults to false.
 
 Example request:
 
@@ -183,112 +177,6 @@ Example response:
 }
 ```
 
-Example request:
-
-```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers/?query=profile:wsl:1:compliant&with_wsl_profiles=true -H "Authorization: Bearer $JWT"
-```
-
-Example response:
-
-```json
-{
-  "count": 1,
-  "results": [
-    {
-      "id": 6,
-      "title": "Jane's Windows Laptop",
-      "comment": "",
-      "hostname": "jane",
-      "total_memory": 1024,
-      "total_swap": 1024,
-      "reboot_required_flag": false,
-      "update_manager_prompt": "normal",
-      "clone_id": null,
-      "last_exchange_time": null,
-      "last_ping_time": "2024-02-07T21:16:41Z",
-      "tags": [
-        "laptop",
-        "windows"
-      ],
-      "access_group": "server",
-      "distribution": "10 / 11",
-      "cloud_instance_metadata": {},
-      "vm_info": null,
-      "container_info": null,
-      "ubuntu_pro_info": null,
-      "is_wsl_instance": false,
-      "children": [
-        {
-          "id": 11,
-          "title": "Bionic WSL",
-          "comment": "",
-          "hostname": "bionic-wsl",
-          "total_memory": 1024,
-          "total_swap": 1024,
-          "reboot_required_flag": false,
-          "update_manager_prompt": "normal",
-          "clone_id": null,
-          "last_exchange_time": null,
-          "last_ping_time": "2024-02-07T21:11:41Z",
-          "tags": [
-            "bionic",
-            "wsl"
-          ],
-          "access_group": "global",
-          "distribution": "18.04",
-          "cloud_instance_metadata": {},
-          "vm_info": null,
-          "container_info": null,
-          "ubuntu_pro_info": null,
-          "is_wsl_instance": true
-        },
-        {
-          "id": 12,
-          "title": "Focal WSL",
-          "comment": "",
-          "hostname": "focal-wsl",
-          "total_memory": 1024,
-          "total_swap": 1024,
-          "reboot_required_flag": false,
-          "update_manager_prompt": "normal",
-          "clone_id": null,
-          "last_exchange_time": null,
-          "last_ping_time": "2024-02-07T21:10:41Z",
-          "tags": [
-            "focal",
-            "wsl"
-          ],
-          "access_group": "global",
-          "distribution": "20.04",
-          "cloud_instance_metadata": {},
-          "vm_info": null,
-          "container_info": null,
-          "ubuntu_pro_info": null,
-          "is_wsl_instance": true
-        }
-      ],
-      "parent": null,
-      "wsl_profiles": [
-        {
-          "id": 1,
-          "name": "Bionic WSL",
-          "title": "Bionic Profile",
-          "type": "wsl"
-        },
-        {
-          "id": 2,
-          "name": "Focal WSL",
-          "title": "Focal Profile",
-          "type": "wsl"
-        }
-      ]
-    }
-  ],
-  "next": null,
-  "previous": null
-}
-```
 
 ## GET `/computers/<int:computer_id>`
 
@@ -304,13 +192,12 @@ Query parameters:
 - `with_grouped_hardware`: If true, include the details of all hardware information known, grouped by hardware  type.
 - `with_hardware`: If true, include the details of all hardware information known.
 - `with_network`: If true, include the details of all network devices attached to the computer.
-- `with_profiles`: If true, include details about all profiles the computer is associated with.
 - `with_alerts`: If true, includes alert information if that alert is active.
 
 Example request:
 
 ```bash
-curl -X GET https://landscape.canonical.com/api/v2/computers/1?with_profiles=true -H "Authorization: Bearer $JWT" 
+curl -X GET https://landscape.canonical.com/api/v2/computers/1 -H "Authorization: Bearer $JWT"
 ```
 
 Example response:
@@ -345,32 +232,6 @@ Example response:
   "livepatch_info": null,
   "num_child": 0,
   "parent": null,
-  "profiles": [
-    {
-      "id": 7,
-      "name": "desktop-packages",
-      "title": "Desktop Packages",
-      "type": "package"
-    },
-    {
-      "id": 7,
-      "name": "engineering-repos",
-      "title": "Engineering Repos",
-      "type": "repository"
-    },
-    {
-      "id": 22,
-      "name": "one-month-removal",
-      "title": "One Month Removal",
-      "type": "removal"
-    }
-    {
-      "id": 4,
-      "name": "server-packages",
-      "title": "Server Packages",
-      "type": "package",
-    },
-  ],
   "reboot_required_flag": false,
   "tags": [
     "lucid",
@@ -1329,46 +1190,6 @@ Example response:
 }
 ```
 
-## POST `/computers/<computer_id>/delete-children`
-
-Creates an activity to delete WSL instances on a Windows host. The WSL instance does not have to be managed in Landscape.
-
-Required parameters:
-
-- `computer_names`
-
-Example request:
-
-```bash
-curl -X POST https://landscape.canonical.com/api/v2/computers/20/delete-children \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"computer_names": ["Ubuntu-24.04", "Focal WSL"]}'
-```
-
-Example response:
-
-```json
-{
-  "id": 119,
-  "creation_time": "2025-02-22T02:03:26Z",
-  "creator": {
-    "email": "john@example.com",
-    "id": 1,
-    "name": "John Smith"
-  },
-  "summary": "Deleting child computer(s)",
-  "type": "ActivityGroup",
-  "deliver_delay_window": 0,
-  "approval_time": null,
-  "completion_time": null,
-  "parent_id": null,
-  "result_code": null,
-  "result_text": null,
-  "activity_status": "undelivered"
-}
-```
-
 ## POST `/computers/<computer_id>/sanitize`
 
 ```{note}
@@ -1518,4 +1339,3 @@ Example response:
   "type": "ActivityGroup"
 }
 ```
-
