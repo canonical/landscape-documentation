@@ -18,17 +18,6 @@ Complete reference documentation for Landscape's APIs. Each section below covers
 REST API endpoints <rest-api-endpoints/index>
 ```
 
-## Debarchive API
-
-The Debarchive API is the repository management API provided by the `landscape-debarchive` service.
-
-```{toctree}
-:titlesonly:
-:maxdepth: 2
-
-Debarchive API <debarchive>
-```
-
 ## Legacy API (v1)
 
 ```{toctree}

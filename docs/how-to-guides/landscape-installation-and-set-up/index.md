@@ -57,7 +57,6 @@ Deploy Landscape in environments with specific compliance or connectivity requir
 :maxdepth: 1
 
 Install on FIPS-compliant machines <install-on-fips-compliant-machines>
-Install in a DISA STIG compliant environment <disa-stig>
 Install in an airgapped environment <install-landscape-in-an-air-gapped-or-offline-environment>
 ```
 
@@ -85,5 +84,4 @@ Configure RabbitMQ <configure-rabbitmq>
 Configure Outbox <configure-outbox>
 Configure Task Handler <configure-task-handler>
 Configure Postfix <configure-postfix>
-Set up Debarchive <debarchive-repository-management>
 ```
