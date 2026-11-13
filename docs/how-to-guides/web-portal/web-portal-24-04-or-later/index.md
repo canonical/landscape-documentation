@@ -34,14 +34,13 @@ Manage access groups <manage-access-groups>
 
 ## Package and update management
 
-Manage software on your instances, including Debian packages, snaps, Livepatch, and the kernel.
+Manage Debian packages and snaps on your instances.
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
 
 Manage packages and snaps <manage-packages-and-snaps>
-Manage Livepatch and kernel updates <manage-livepatch-and-kernel-updates>
 ```
 
 ## Profiles and scripting
@@ -58,11 +57,10 @@ Use remote script execution <use-remote-script-execution>
 
 ## Additional actions
 
-Perform supporting instance actions such as adding annotations for context and sanitizing machines before decommissioning.
+Perform supporting instance actions such as adding annotations for context.
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
 Use annotations <use-annotations>
-Sanitize instances <sanitize-instances>
 ```
