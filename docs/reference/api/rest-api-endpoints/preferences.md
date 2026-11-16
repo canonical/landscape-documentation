@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "REST API endpoints to manage account preferences in Landscape. Update audit retention, auto-registration, and organization settings."
+    description: "REST API endpoints to manage account preferences in Landscape. Update auto-registration, registration password, and organization settings."
 ---
 
 (reference-rest-api-preferences)=
@@ -18,7 +18,6 @@ Required parameters:
 
 Optional parameters:
 
-- `audit_retention_period`: The time period in days to retain USG profile audit records. A negative value means that records should be retained indefinitely.
 - `auto_register_new_computers`: Toggle to automatically register new computers.
 - `registration_password`: Registration key for auto-registering computers. A valid input is a non-empty string (3-50 chars, single line). To clear the registration password, explicitly set this field to `null` in the request.
 - `title`: The title of organization name.
