@@ -42,7 +42,7 @@ Here are some Canonical products that are commonly used with Landscape:
 
 - **Ubuntu**: You can manage [Ubuntu Server](https://documentation.ubuntu.com/server/), [Ubuntu Desktop](https://help.ubuntu.com/), and [Ubuntu Core](https://ubuntu.com/core/docs) systems with Landscape.
 - [**Ubuntu Pro**](https://documentation.ubuntu.com/pro/): A subscription service that extends the security and maintenance support for Ubuntu LTS releases. Landscape is included in Ubuntu Pro subscriptions.
-- [**Livepatch**](https://ubuntu.com/security/livepatch/docs): Enables kernel patching without reboots and is integrated into Landscape.
+- [**Livepatch**](https://ubuntu.com/security/livepatch/docs): Enables kernel patching without reboots and can be used alongside Landscape.
 - [**Juju**](https://documentation.ubuntu.com/juju/latest/): Handles service orchestration and simplifies the deployment of Landscape for high-availability deployments.
 
 The following products are also sometimes used in large-scale deployments that include Landscape:
