@@ -20,6 +20,24 @@ Go to **Instances** from the sidebar to view your instances. The default view di
 
 You can also use the search bar to find specific client instances.
 
+## Save and reuse instance searches
+
+To create a saved search:
+
+1. Type your query in the **Instances** search bar
+2. Click **Save search**
+3. Enter a search name > **Save search**
+
+**Apply a saved search**
+
+To filter your instances, click the search bar on the **Instances** page and select a saved search from the list.
+
+**Delete a saved search**
+
+You can manage your saved searches from the dropdown list.
+
+To **delete**, click the **trash can** icon next to the saved search and confirm the deletion.
+
 ## Manage individual instances
 
 You can perform several management tasks from each individual instance's page. Go to **Instances** > click the instance you want to manage.
