@@ -54,7 +54,7 @@ The Landscape Server VMs use the **Landscape VM Size** that you select. The boot
 You need:
 
 - An Azure subscription with a valid payment method. Your account needs at least the Contributor role on the subscription, or on the resource group that you deploy the managed application to. Your organization might also restrict Marketplace purchases. For more information, see [Microsoft's documentation on purchasing from the Marketplace](https://learn.microsoft.com/en-us/marketplace/azure-purchasing-invoicing).
-- The `Microsoft.Compute` and `Microsoft.Capacity` resource providers registered for the subscription. To register them, open the subscription in the Azure portal, select **Settings** > **Resource providers**, select each provider, then select **Register**. For more information, see [Microsoft's documentation on resource providers](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types).
+- The `Microsoft.Compute` and `Microsoft.Capacity` resource providers registered for the subscription. To register them, open the subscription in the Azure portal, select **Settings** > **Resource providers**, select each provider, then click **Register**. For more information, see [Microsoft's documentation on resource providers](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types).
 - Enough vCPU quota in the region that you deploy to, for the VM sizes that you select. A high availability deployment needs quota for three Landscape Server VMs. For more information, see [Microsoft's documentation on vCPU quotas](https://learn.microsoft.com/en-us/azure/virtual-machines/quotas).
 - If you use password authentication or OIDC without automatic account approval, you need your own SMTP relay. Landscape uses it to send invitation and notification emails. You need its host, port, sender address, user name, and password. The relay must support PLAIN authentication with a user name and password. Other authentication mechanisms aren't supported.
 - If users sign in to Landscape with OIDC, you need a client registered with your OIDC provider. You need its issuer URL, client ID, and client secret. For more information, see {ref}`how-to-external-auth-oidc`.
@@ -62,7 +62,7 @@ You need:
 ## Deploy the managed application
 
 1. Sign in to the Azure portal and open the [Landscape offer](https://portal.azure.com/#view/Microsoft_Azure_Marketplace/GalleryItemDetailsBladeNopdl/id/canonical.managed-landscape).
-2. Select **Create**.
+2. Click **Create**.
 3. On the **Basics** tab, enter:
 
     - **Subscription**: The subscription to deploy to, and to bill.
@@ -75,12 +75,12 @@ You need:
 
 4. On the **Landscape Configuration** tab, select the size of the deployment:
 
-    - **Enable High Availability**: Select this to deploy three Landscape Server VMs for redundancy. For the full differences, see {ref}`how-to-deploy-from-azure-marketplace-includes`. This is the default, and is suitable for production. Without high availability, the deployment uses a single Landscape Server VM, which is suitable only for proofs of concept, development, and testing.
+    - **Enable High Availability**: Select this to deploy three Landscape Server VMs for redundancy. For the full differences, see {ref}`how-to-deploy-from-azure-marketplace-includes`. This is the default, and is suitable for production. Without high availability, the deployment uses a single Landscape Server VM, which is generally suitable for proofs of concept, development, and testing.
     - **Components VM Size**: The VM size for the deployment's supporting components. Each components VM needs at least 16 GB of RAM. The default size is enough for most deployments.
     - **Deployment size**: The number of machines that Landscape will manage: **Small (up to 500 machines)**, **Medium (500-5,000 machines)**, or **Large (5,000+ machines)**. This filters the VM sizes that you can select for Landscape Server.
     - **Landscape VM Size**: The VM size for each Landscape Server VM.
 
-    The tab checks that the VM sizes are available to your subscription in the region, and that you have enough vCPU quota for them. If it shows an error, select different VM sizes, clear **Enable High Availability**, or request more quota for the VM families that it lists. If the quota check doesn't finish, you can select **I understand and want to proceed** to continue. Azure still checks the quota when you create the deployment.
+    The tab checks that the VM sizes are available to your subscription in the region, and that you have enough vCPU quota for them. If a VM size isn't available, select a different size. If there isn't enough quota, select different VM sizes or request more quota for the VM families listed. If your deployment doesn't require high availability, you can also clear **Enable High Availability** to reduce the required quota. If the quota check doesn't finish, you can select **I understand and want to proceed** to continue. Azure still checks the quota when you create the deployment.
 
 5. On the same tab, select the **Authentication type**, then enter its settings:
 
@@ -88,7 +88,7 @@ You need:
     - **OpenID Connect (OIDC)**: Enter your OIDC provider's **OIDC Client ID**, **OIDC Client Secret**, and **OIDC Issuer URL**. Select **Automatically approve new OIDC accounts** to add people that you invite to Landscape after their first OIDC sign-in, without invitation emails.
 
 6. If you use OIDC and select **Automatically approve new OIDC accounts**, skip this step. The deployment doesn't use an SMTP relay. Otherwise, in the **SMTP configuration** section, enter your SMTP relay's **SMTP relay server**, **SMTP port**, **Sender address**, **SMTP user**, and **SMTP password**.
-7. On the **Review + create** tab, check your settings and the offer's terms and price, then select **Create**.
+7. On the **Review + create** tab, check your settings and the offer's terms and price, then click **Create**.
 
 The portal shows the deployment's progress. When the deployment is complete, the managed application is in the resource group that you selected, and the deployed resources are in the managed resource group. Canonical then finishes setting up Landscape Server on the deployed resources.
 
@@ -100,9 +100,9 @@ Allow about an hour for provisioning to complete. When Landscape is ready, Canon
 2. Sign in:
 
     - For password authentication, use the **Customer Email** address as the administrator's user name and email address, and the **Admin Password** that you entered when you deployed the offer.
-    - For OIDC authentication, sign in with your OIDC provider.
+    - For OIDC authentication, configure your OIDC provider's client to use `https://<LANDSCAPE_FQDN>/new_dashboard/handle-auth/oidc` as an authorization redirect URI. Replace `<LANDSCAPE_FQDN>` with the hostname in the Landscape URL. Then sign in with your OIDC provider.
 
-To register client machines with your Landscape server, see {ref}`how-to-install-landscape-client`.
+To register client machines with your Landscape server, see {ref}`how-to-install-landscape-client`. For this deployment, set `LANDSCAPE_ACCOUNT_NAME` to `standalone` and `LANDSCAPE_FQDN` to the hostname in the Landscape URL, without `https://` or a trailing slash.
 
 (how-to-deploy-from-azure-marketplace-delete)=
 ## Delete the deployment
@@ -110,6 +110,6 @@ To register client machines with your Landscape server, see {ref}`how-to-install
 When you no longer need the deployment, delete the managed application. Azure then deletes the managed resource group and its resources, and the charges for them stop.
 
 1. In the Azure portal, open the managed application.
-2. Select **Delete**, and confirm.
+2. Click **Delete**, and confirm.
 
 If you created a resource group only for the managed application, you can then delete that resource group too.
