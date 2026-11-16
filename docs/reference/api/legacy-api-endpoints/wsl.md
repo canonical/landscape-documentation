@@ -9,19 +9,6 @@ myst:
 
 The methods available here are for managing Windows Subsystem for Linux (WSL) clients registered with Landscape.
 
-```{note}
-WSL features are available starting in Landscape 25.10.
-```
-
-To enable WSL features in self-hosted Landscape, add:
-
-```ini
-[features]
-wsl_management = true
-```
-
-to the `service.conf` file.
-
 ## CreateChildComputer
 
 Create child computer instances on a parent host machine.
@@ -34,8 +21,10 @@ Required arguments:
 Optional arguments:
 
 - `cloud_init`: The b64 encoded cloud-init file contents.
+- `data_id`: The name of the vault secret containing the cloud-init file.
+- `token`: The authentication token to pass to the secrets manager.
 
-If `cloud_init` is provided, the new instance will be created according to the cloud-init file specified.
+If `cloud_init` or `data_id` is provided, the new instance will be created according to the cloud-init file specified or the file stored with the specified vault secret. Specifying both `cloud_init` and `data_id` results in an error.
 
 Example calls:
 
@@ -45,6 +34,14 @@ Example calls:
 
 ```bash
 ?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&cloud_init=<b64 encoded cloud_init file>
+```
+
+```bash
+?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&data_id=data-id&token=vault-token
+```
+
+```{note}
+When Landscape 24.04 LTS was released, Ubuntu Pro for WSL didn't yet support cloud-init configuration.
 ```
 
 Example response:
@@ -76,16 +73,16 @@ Delete a list of child computers by ID.
 
 Required argument:
 
-- `computer_id`: A list of child computer IDs to delete.
+- `computer_ids`: A list of child computer IDs to delete.
 
 Example calls:
 
 ```bash
-?action=DeleteChildComputers&computer_id.1=21
+?action=DeleteChildComputers&computer_ids.1=21
 ```
 
 ```bash
-?action=DeleteChildComputers&computer_id.1=21&computer_id.2=22
+?action=DeleteChildComputers&computer_ids.1=21&computer_ids.2=22
 ```
 
 Example outputs:
@@ -180,6 +177,7 @@ Example outputs:
         "last_exchange_time": null,
         "last_ping_time": "2023-10-25T18:45:37Z",
         "reboot_required_flag": false,
+        "secrets_name": null,
         "tags": [
             "laptop",
             "windows"
@@ -202,6 +200,7 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:21:43Z",
         "reboot_required_flag": false,
+        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
@@ -226,6 +225,7 @@ Example outputs:
         "last_exchange_time": "2023-10-25T18:54:26Z",
         "last_ping_time": "2023-10-25T20:22:30Z",
         "reboot_required_flag": false,
+        "secrets_name": null,
         "tags": [],
         "title": "Machine12345",
         "total_memory": null,
@@ -270,6 +270,165 @@ Example response:
     "result_code": null,
     "result_text": null,
     "summary": "Set instance Ubuntu as default",
+    "type": "ActivityGroup"
+}
+```
+
+(reference-legacy-api-wsl-shutdown-host-computer)=
+## ShutdownHostComputer
+
+Send a message to shut down a host computer.
+
+Required argument:
+
+- `parent_id`: The ID of the parent host computer.
+
+Example call:
+
+```bash
+?action=ShutdownHostComputer&parent_id=20
+```
+
+Example response:
+
+```json
+{
+    "activity_status": "delivered",
+    "completion_time": null,
+    "creation_time": "2023-10-25T20:19:50Z",
+    "creator": {
+        "email": "john@example.com",
+        "id": 1,
+        "name": "John Smith"
+    },
+    "deliver_delay_window": 0,
+    "id": 146,
+    "parent_id": null,
+    "result_code": null,
+    "result_text": null,
+    "summary": "Shutdown host Machine12345",
+    "type": "ActivityGroup"
+}
+```
+
+(reference-legacy-api-wsl-start-child-computers)=
+## StartChildComputers
+
+Start a list of child computers by ID.
+
+Required argument:
+
+- `computer_ids`: A list of child computer IDs to start.
+
+Example calls:
+
+```bash
+?action=StartChildComputers&computer_ids.1=21
+```
+
+```bash
+?action=StartChildComputers&computer_ids.1=21&computer_ids.2=22
+```
+
+Example outputs:
+
+```json
+{
+    "activity_status": "delivered",
+    "completion_time": null,
+    "creation_time": "2023-10-25T20:17:02Z",
+    "creator": {
+        "email": "john@example.com",
+        "id": 1,
+        "name": "John Smith"
+    },
+    "deliver_delay_window": 0,
+    "id": 142,
+    "parent_id": null,
+    "result_code": null,
+    "result_text": null,
+    "summary": "Start instance Ubuntu",
+    "type": "ActivityGroup"
+}
+```
+
+```json
+{
+    "activity_status": "delivered",
+    "completion_time": null,
+    "creation_time": "2023-10-25T19:03:05Z",
+    "creator": {
+        "email": "john@example.com",
+        "id": 1,
+        "name": "John Smith"
+    },
+    "deliver_delay_window": 0,
+    "id": 118,
+    "parent_id": null,
+    "result_code": null,
+    "result_text": null,
+    "summary": "Starting child computer(s)",
+    "type": "ActivityGroup"
+}
+```
+
+(reference-legacy-api-wsl-stop-child-computers)=
+## StopChildComputers
+
+Stop a list of child computers by ID.
+
+Required argument:
+
+- `computer_ids`: A list of child computer IDs to stop.
+
+Example calls:
+
+```bash
+?action=StopChildComputers&computer_ids.1=21
+```
+
+```bash
+?action=StopChildComputers&computer_ids.1=21&computer_ids.2=22
+```
+
+Example outputs:
+
+```json
+{
+    "activity_status": "delivered",
+    "completion_time": null,
+    "creation_time": "2023-10-25T20:18:17Z",
+    "creator": {
+        "email": "john@example.com",
+        "id": 1,
+        "name": "John Smith"
+    },
+    "deliver_delay_window": 0,
+    "id": 144,
+    "parent_id": null,
+    "result_code": null,
+    "result_text": null,
+    "summary": "Stop instance Ubuntu",
+    "type": "ActivityGroup"
+}
+```
+
+```json
+{
+    "activity_status": "delivered",
+    "completion_time": null,
+    "creation_time": "2023-10-25T19:03:39Z",
+    "creator": {
+        "email": "john@example.com",
+        "id": 1,
+        "name": "John Smith"
+    },
+    "deliver_delay_window": 0,
+    "id": 121,
+    "parent_id": null,
+    "result_code": null,
+    "result_text": null,
+    "summary": "Stopping child computer(s)",
     "type": "ActivityGroup"
 }
 ```
