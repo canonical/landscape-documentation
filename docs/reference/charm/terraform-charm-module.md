@@ -12,19 +12,20 @@ This reference covers the module on the `26.04` branch of the `landscape-server-
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.10 |
-| <a name="requirement_juju"></a> [juju](#requirement\_juju) | ~> 1.0 |
+| <a name="requirement_juju"></a> [juju](#requirement\_juju) | >= 1.5.6, < 2.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_juju"></a> [juju](#provider\_juju) | ~> 1.0 |
+| <a name="provider_juju"></a> [juju](#provider\_juju) | >= 1.5.6, < 2.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [juju_application.landscape_server](https://registry.terraform.io/providers/juju/juju/latest/docs/resources/application) | resource |
+| [juju_charm.landscape_server](https://registry.terraform.io/providers/juju/juju/latest/docs/data-sources/charm) | data source |
 
 ## Inputs
 
@@ -38,7 +39,7 @@ This reference covers the module on the `26.04` branch of the `landscape-server-
 | <a name="input_constraints"></a> [constraints](#input\_constraints) | Juju constraints to apply for this application. | `string` | `"arch=amd64"` | no |
 | <a name="input_machines"></a> [machines](#input\_machines) | Set of machine IDs to deploy units to. When specified, the 'units' variable is ignored. | `set(string)` | `null` | no |
 | <a name="input_model_uuid"></a> [model\_uuid](#input\_model\_uuid) | UUID of a Juju model. | `string` | n/a | yes |
-| <a name="input_revision"></a> [revision](#input\_revision) | Revision number of the charm. | `number` | `null` | no |
+| <a name="input_revision"></a> [revision](#input\_revision) | Revision number of the charm. When null, resolve the latest revision for the selected channel, base, and architecture during planning. | `number` | `null` | no |
 | <a name="input_units"></a> [units](#input\_units) | Number of units to deploy. Ignored when 'machines' is set. | `number` | `1` | no |
 
 ## Outputs
