@@ -122,16 +122,6 @@ Debarchive uses its own PostgreSQL database within the same cluster as Landscape
 
 The Package upload service responds to dput or FTP requests to upload Debian packages to Landscape-managed package repositories. It maintains a queue of package uploads and processes them into the appropriate repositories. It primarily interacts with the PostgreSQL database and the filesystem.
 
-(explanation-server-architecture-outbox)=
-### Outbox (not in 24.04)
-
-The Outbox is a required component in Landscape 26.04 LTS and later. It isn't part of Landscape 24.04 deployments.
-
-(explanation-server-architecture-task-handler)=
-### Task Handler (not in 24.04)
-
-The Task Handler is a required component in Landscape 26.04 LTS and later. It isn't part of Landscape 24.04 deployments.
-
 ### Secrets
 
 The Secrets service responds to internal HTTP requests with scoped access tokens for the secrets back-end. It is only needed if HashiCorp Vault is being used to store secrets.
