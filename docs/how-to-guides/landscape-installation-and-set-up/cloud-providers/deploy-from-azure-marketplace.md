@@ -22,7 +22,7 @@ To build your own Landscape Server VM on Azure with cloud-init instead, see {ref
 ```
 
 ```{warning}
-Deploying this offer costs money. The Azure resources that it creates, such as VMs, an AKS cluster, disks, public IP addresses, and network traffic, are billed to your Azure subscription for as long as they exist. A high availability deployment uses more VMs. For details, see {ref}`how-to-deploy-from-azure-marketplace-includes`. Any software or plan charges for the offer are shown on the offer's page in the Azure portal and are also billed through your subscription.
+Deploying this offer costs money. The Azure resources that it creates, such as VMs, an AKS cluster, disks, public IP addresses, and network traffic, are billed to your Azure subscription for as long as they exist. A high availability deployment uses more VMs. For details, see {ref}`how-to-deploy-from-azure-marketplace-includes`.
 
 To stop these charges, delete the managed application as described in {ref}`how-to-deploy-from-azure-marketplace-delete`.
 ```
@@ -56,8 +56,8 @@ You need:
 - An Azure subscription with a valid payment method. Your account needs at least the Contributor role on the subscription, or on the resource group that you deploy the managed application to. Your organization might also restrict Marketplace purchases. For more information, see [Microsoft's documentation on purchasing from the Marketplace](https://learn.microsoft.com/en-us/marketplace/azure-purchasing-invoicing).
 - The `Microsoft.Compute` and `Microsoft.Capacity` resource providers registered for the subscription. To register them, open the subscription in the Azure portal, select **Settings** > **Resource providers**, select each provider, then select **Register**. For more information, see [Microsoft's documentation on resource providers](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-providers-and-types).
 - Enough vCPU quota in the region that you deploy to, for the VM sizes that you select. A high availability deployment needs quota for three Landscape Server VMs. For more information, see [Microsoft's documentation on vCPU quotas](https://learn.microsoft.com/en-us/azure/virtual-machines/quotas).
-- Your own SMTP relay, if you use password authentication or OIDC without automatic account approval. Landscape uses it to send invitation and notification emails. You need its host, port, sender address, user name, and password. The relay must support PLAIN authentication with a user name and password. Other authentication mechanisms aren't supported.
-- A client registered with your OIDC provider, if users sign in to Landscape with OIDC. You need its issuer URL, client ID, and client secret. For more information, see {ref}`how-to-external-auth-oidc`.
+- If you use password authentication or OIDC without automatic account approval, you need your own SMTP relay. Landscape uses it to send invitation and notification emails. You need its host, port, sender address, user name, and password. The relay must support PLAIN authentication with a user name and password. Other authentication mechanisms aren't supported.
+- If users sign in to Landscape with OIDC, you need a client registered with your OIDC provider. You need its issuer URL, client ID, and client secret. For more information, see {ref}`how-to-external-auth-oidc`.
 
 ## Deploy the managed application
 
