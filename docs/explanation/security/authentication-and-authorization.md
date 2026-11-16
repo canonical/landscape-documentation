@@ -51,7 +51,7 @@ Landscape sets a session with the browser when a user logs into the classic UI. 
 
 ### JWTs
 
-Landscape issues a JWT when a user logs into the new UI. The new UI stores the JWT in the browser's local storage and removes it when the user logs out of the new UI. JWTs are valid access credentials for the new UI and both APIs. The classic UI accepts sessions only.
+Landscape issues a JWT when a user logs into the new UI. The new UI can store the JWT in the browser's local storage and removes it when the user logs out of the new UI. JWTs are valid access credentials for the new UI and both APIs. The classic UI accepts sessions only.
 
 See {ref}`explanation-cryptographic-technology` for details on JWT encryption. JWTs are used for identity only; they do not contain any authorization information.
 
