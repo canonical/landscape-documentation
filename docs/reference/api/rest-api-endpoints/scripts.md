@@ -7,7 +7,7 @@ myst:
 # Scripts
 
 The endpoints available here are related to the management of scripts. Creation, and modification of scripts must still
-happen through the legacy API, this is subject to change in the future.
+happen through the legacy API.
 
 ## GET `/scripts`
 

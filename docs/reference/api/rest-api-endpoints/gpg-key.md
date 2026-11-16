@@ -9,10 +9,6 @@ myst:
 
 The endpoint(s) here are for GPG key management.
 
-```{note}
-For Landscape 26.04 LTS and later, these endpoints are deprecated.
-```
-
 ## POST `/gpg-key`
 
 Import a GPG key.
