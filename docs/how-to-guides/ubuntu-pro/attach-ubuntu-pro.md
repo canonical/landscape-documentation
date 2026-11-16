@@ -81,51 +81,6 @@ When the machine has successfully been attached, you will also see a summary of 
 
 Available services can be enabled or disabled on the command line with `pro enable <service name>` and `pro disable <service name>` after you have attached.
 
-## Automated attachment across multiple clients
-
-```{note}
-You must be running Landscape Server 25.10 or above and Landscape Client 25.10 or above to use automated attachment on clients for licensing.
-
-This feature is available on self-hosted and **select accounts on SaaS**. It is not generally available to all SaaS accounts and is unavailable for offline client deployments as well as snap and Core devices.
-```
-
-### Step 1: Enable Ubuntu Pro management on Landscape Client
-
-On each instance you want to manage, do the following:
-
-1. Edit the client configuration file `/etc/landscape/client.conf`, add this line:
-
-    ```ini
-    include_manager_plugins = ProManagement
-    ```
-
-    If your `client.conf` already includes an `include_manager_plugins` line, then add `ProManagement` to it. For example:
-
-    ```ini
-    include_manager_plugins = ScriptExecution,ProManagement
-    ```
-
-2. Restart Landscape Client:
-
-    ```ini
-    sudo systemctl restart landscape-client
-    ```
-
-### Step 2: Register clients with Landscape Server
-
-You first need to register your client machines with Landscape Server. At this stage, your clients will be considered "unlicensed". Landscape will be aware of the client, but Ubuntu Pro must be added for Landscape to fully license and manage the client.
-
-### Step 3: Attach Ubuntu Pro to registered clients
-
-To attach Ubuntu Pro in the web portal:
-
-1. Go to **Instances**
-1. Select your instance(s) that you want to attach an Ubuntu Pro subscription to
-1. Click **Attach Token**
-1. Provide your token and complete the remaining prompts
-
-This will send a separate activity to each client to attach Ubuntu Pro. After the activity succeeds, that client will become licensed.
-
 ## Related topics
 
 - [Ubuntu Pro Client documentation](https://documentation.ubuntu.com/pro-client/en/latest/)
