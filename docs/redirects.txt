@@ -33,6 +33,8 @@ how-to-guides/repository-mirrors/manage-repositories-in-the-web-portal-2604/ how
 how-to-guides/security/use-security-profiles/ how-to-guides/security/use-usg-profiles/
 
 how-to-guides/web-portal/web-portal-24-04-or-later/manage-snaps how-to-guides/web-portal/web-portal-24-04-or-later/manage-packages-and-snaps
+how-to-guides/web-portal/web-portal-24-04-or-later/manage-livepatch-and-kernel-updates/ how-to-guides/security/apply-security-updates/
+how-to-guides/web-portal/web-portal-24-04-or-later/sanitize-instances/ how-to-guides/web-portal/web-portal-24-04-or-later/
 
 how-to-guides/web-portal/web-portal-24-04-or-later/use-reboot-profiles/ how-to-guides/web-portal/web-portal-24-04-or-later/use-profiles/
 
@@ -45,6 +47,12 @@ how-to-guides/web-portal/web-portal-24-04-or-later/use-usg-profiles/ how-to-guid
 how-to-guides/wsl-integration/configure-landscape-beta/ how-to-guides/wsl-integration/configure-landscape-after-upgrade/
 
 how-to-guides/wsl-integration/use-a-specific-image-source/ how-to-guides/wsl-integration/use-wsl-profiles/
+
+# Ubuntu Installer
+how-to-guides/ubuntu-installer/ how-to-guides/landscape-installation-and-set-up/
+how-to-guides/ubuntu-installer/configure-landscape-deployment-for-autoinstall-provisioning/ how-to-guides/landscape-installation-and-set-up/
+how-to-guides/ubuntu-installer/provision-a-workstation/ how-to-guides/landscape-installation-and-set-up/
+how-to-guides/ubuntu-installer/set-up-autoinstall-provisioning/ how-to-guides/landscape-installation-and-set-up/
 
 # Later-release upgrade guides are not part of the 24.04 documentation.
 how-to-guides/upgrade/upgrade-to-26-04-lts/ how-to-guides/upgrade/
@@ -88,6 +96,7 @@ reference/release-notes/25.10-release-notes/ reference/release-notes/
 reference/release-notes/26-04-lts-release-notes/ reference/release-notes/
 
 reference/terms/alerts/ explanation/features/alerts/
+explanation/features/fde-recovery-key/ explanation/features/
 
 reference/terms/components/ explanation/features/repository-mirroring/
 

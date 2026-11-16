@@ -1,13 +1,13 @@
 ---
 myst:
   html_meta:
-    description: "Apply security patches and kernel updates using Landscape. Schedule security upgrades with Livepatch for high and critical vulnerabilities."
+    description: "Apply security updates to client machines using Landscape's web portal."
 ---
 
 (how-to-apply-security-updates)=
 # How to apply security patches and upgrades
 
-You can use Landscape to apply security updates to your client machines. This includes Livepatch for kernel patches within Landscape’s web portal.
+You can use Landscape to apply security updates to your client machines.
 
 Landscape Server gets security update information from [Ubuntu Security Notices](https://ubuntu.com/security/notices) (USNs), many of which are based on [Common Vulnerabilities and Exposures](https://www.cve.org/) (CVE) reports. Landscape Client can also report security updates, but these updates come from a variety of sources because they’re reported from the package sources each client is configured to use.
 
@@ -57,10 +57,6 @@ You can use an {ref}`reference-terms-upgrade-profile` to schedule any package up
 
 For more details, see [how to manage upgrade profiles](/how-to-guides/web-portal/classic-web-portal/manage-computers.md#manage-upgrade-profiles).
 
-## Apply updates from Livepatch
+## Related topics
 
-> See also: [Livepatch documentation](https://ubuntu.com/security/livepatch/docs)
-
-You can use Livepatch to schedule high and critical Linux kernel vulnerability patches, which removes the immediate need to reboot to upgrade the kernel on critical infrastructure.
-
-For more information, see our documentation on {ref}`how-to-web-portal-manage-livepatch` (24.04 and later).
+- [Ubuntu Livepatch documentation](https://ubuntu.com/security/livepatch/docs)
