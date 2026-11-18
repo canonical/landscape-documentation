@@ -49,14 +49,12 @@ If activities are stuck in progress, this means the client received the activity
 
 For those with Support contracts, we recommend you contact [Support](https://support-portal.canonical.com/) if you observe idle "in progress" activities because the underlying issues can have many different root causes.
 
-## Repository sync pocket activities (Landscape 25.10 and earlier)
+## Repository sync pocket activities
 
-In Landscape 25.10 and earlier, repository mirroring activities were handled by an internal reprepro-based system. If a repository sync remains queued or in progress for an excessive amount of time, it may be stuck on a lock held by that system.
+Repository mirroring activities are handled by an internal reprepro-based system. If a repository sync remains queued or in progress for an excessive amount of time, it may be stuck on a lock held by that system.
 
 Landscape Server includes an `unblock-repo-activities` script, that cancels the stuck activities and clears the associated locks. Run it as the `landscape` user with no arguments:
 
 ```bash
 /opt/canonical/landscape/unblock-repo-activities
 ```
-
-This script does not apply to Landscape 26.04 LTS and later, where repository management is handled by the Debarchive service instead of reprepro.

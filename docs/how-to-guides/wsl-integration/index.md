@@ -1,13 +1,17 @@
 ---
 myst:
   html_meta:
-    description: "Manage Windows Subsystem for Linux instances with Landscape. Register WSL hosts, use profiles, and perform remote management tasks."
+    description: "Manage Windows Subsystem for Linux instances with Landscape. Register WSL hosts and perform remote management tasks."
 ---
 
 (how-to-guides-wsl-integration-index)=
 # WSL integration
 
 Landscape can manage Windows Subsystem for Linux (WSL) instances, allowing you to centrally control and monitor Ubuntu running on Windows machines.
+
+```{note}
+When Landscape 24.04 LTS was released, Ubuntu Pro for WSL was in beta and wasn't yet available to everyone in the Microsoft Store. For its current status and requirements, see the [Ubuntu on WSL documentation](https://ubuntu.com/wsl/docs/latest/).
+```
 
 ## Set up and register WSL
 
@@ -23,14 +27,13 @@ Register WSL hosts <register-wsl-hosts>
 
 ## Manage WSL instances
 
-Create, provision, and manage WSL instances from the Landscape web portal or API.
+Create and manage WSL instances from the Landscape web portal or API.
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
 
 Manage WSL instances <manage-wsl-instances>
-Use WSL profiles <use-wsl-profiles>
 ```
 
 ## Perform tasks on WSL instances
