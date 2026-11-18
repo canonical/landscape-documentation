@@ -118,6 +118,10 @@ Required parameters:
 - `title`: The display name of the profile.
 - `start_date`: An ISO 8601-formatted datestamp that sets the first run time of the profile. If it is the current date or in the past, the profile will start its first run immediately.
 
+```{note}
+Scheduled USG profile runs may occur later than the selected date and time.
+```
+
 Optional parameters:
 
 - `access_group`: The instance access group to apply the profile to. Defaults to `"global"`.
