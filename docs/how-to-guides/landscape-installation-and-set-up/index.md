@@ -81,5 +81,4 @@ Configure supporting services for your Landscape deployment.
 
 Configure RabbitMQ <configure-rabbitmq>
 Configure Postfix <configure-postfix>
-Set up Debarchive <debarchive-repository-management>
 ```
