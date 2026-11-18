@@ -1,16 +1,18 @@
 ---
 myst:
   html_meta:
-    description: "Manage Ubuntu Amazon WorkSpaces with Landscape SaaS."
+    description: "Install Landscape Server on major cloud providers including Google Cloud, Microsoft Azure, and Amazon WorkSpaces with step-by-step guides."
 ---
 
 (how-to-guides-landscape-installation-and-set-up-cloud-index)=
 # Cloud providers
 
-Manage Ubuntu Amazon WorkSpaces with Landscape SaaS.
+Deploy Landscape Server on major cloud platforms with these installation guides.
 
 ```{toctree}
 :titlesonly:
 :maxdepth: 2
 
+Install on Google Cloud <install-on-google-cloud>
+Install on Microsoft Azure <install-on-microsoft-azure>
 Set up Ubuntu Amazon WorkSpaces <get-started-ubuntu-amazon-workspaces>
