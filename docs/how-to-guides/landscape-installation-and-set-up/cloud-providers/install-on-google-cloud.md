@@ -152,7 +152,7 @@ Once you’ve chosen your configuration template, complete the following steps.
 
         ```bash
         curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/cloud-init-24.04-v1/provisioning/cloud-init-quickstart-fips.yaml -o cloud-init.yaml
-        IMAGE_FAMILY=ubuntu-pro-fips-2004-lts
+        IMAGE_FAMILY=ubuntu-pro-fips-updates-2204-lts
         ```
 
 2. Open the downloaded cloud-init YAML file in an editor, determine which configuration parameters need to be changed between lines 4 and 32 and change these parameters.
