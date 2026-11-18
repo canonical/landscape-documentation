@@ -9,10 +9,6 @@ myst:
 
 These methods give access to repository management.
 
-```{note}
-For Landscape 26.04 LTS and later, these endpoints are deprecated, except for [RemoveRepositoryProfile](#removerepositoryprofile).
-```
-
 ## CreateDistribution
 
 Create a repository distribution associated with the account.

@@ -9,10 +9,6 @@ myst:
 
 The methods available here are for GPG key handling.
 
-```{note}
-For Landscape 26.04 LTS and later, these endpoints are deprecated.
-```
-
 ## GetGPGKeys
 
 Get info about GPG keys.
