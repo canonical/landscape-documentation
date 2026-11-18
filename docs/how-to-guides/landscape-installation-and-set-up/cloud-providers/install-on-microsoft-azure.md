@@ -127,9 +127,9 @@ Once you’ve chosen your configuration template, complete the following steps.
     IMAGE_FAMILY=Canonical:ubuntu-22_04-lts:ubuntu-pro-fips:latest
     ```
 
-2. Open the downloaded cloud-init YAML file in an editor, determine which configuration parameters need to be changed between lines 4 and 32 and change these parameters.
+2. Open the downloaded cloud-init YAML file in an editor, determine which configuration parameters need to be changed between lines 4 and 40 and change these parameters.
 
-The `HOSTNAME` on line 16 and `DOMAIN` on line 19 must be changed. Updating `EMAIL` on line 9, and adding your SendGrid API key on line 29 as the `SMTP_PASSWORD` are optional.
+The `HOSTNAME` on line 16 and `DOMAIN` on line 19 must be changed. Updating `EMAIL` on line 9, and adding your SendGrid API key on line 33 as the `SMTP_PASSWORD` are optional.
 
 ### Create VM
 
