@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Complete reference for Landscape profiles including package, reboot, removal, script, security, upgrade, and WSL profile types."
+    description: "Reference for package, removal, repository, and upgrade profiles in Landscape 24.04."
 ---
 
 (reference-terms-profiles)=
@@ -29,10 +29,6 @@ Package profiles must be associated with an access group which determines the se
 
 Package profiles are evaluated periodically, and can be used for ensuring compliance over time. If package profiles are used to install packages, it is important to ensure any prerequisite repository configurations have been applied so the package can be downloaded, otherwise the package profile will fail to install the package, and report the machine as non-compliant.
 
-(reference-terms-reboot-profile)=
-## Reboot profile
-A **reboot profile** defines how and when Landscape executes system reboots on managed instances. Reboot profiles can automatically restart instances on select days of the week with a frequency of no more than once per week. Reboots can be staggered by configuring the delivery window. Reboot profiles are associated with instances using tags and an access group. You can manage reboot profiles from the **Profiles** page.
-
 (reference-terms-removal-profile)=
 ## Removal profile
 
@@ -44,20 +40,6 @@ Removal profiles must be associated with an access group which determines the se
 ## Repository profile
 
 A **repository profile** defines a set of pockets and APT sources for managed instances to use to source packages. When a managed instance is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations. You can associate zero or more managed instances with each repository profile via tags. You can also associate a repository profile with an access group, which limits its use to only managed instances within the specified access group. You can manage repository profiles from the **Profiles** page.
-(reference-terms-script-profile)=
-## Script profile
-
-A **script profile** defines how and when a script is automatically executed on managed instances based on specific triggers. It specifies the script, the user account that executes the script, the time limit, and a trigger that determines when the script runs. A script profile also defines which instances the script applies to, either through tags or to all instances within an access group. You can manage script profiles from **Scripts** > **Profiles** page.
-
-(reference-terms-usg-profile)=
-## USG profile
-
-```{note}
-Beginning in Landscape 26.04 LTS, "security profiles" were renamed to "USG profiles".
-```
-
-A **USG profile** defines how Landscape should monitor and manage security compliance on managed instances using the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/compliance/usg/). USG profiles evaluate instances against established security benchmarks, such as CIS and DISA-STIG, to collect compliance data on a scheduled basis. With additional configuration, USG profiles can attempt to resolve detected compliance issues. USG profiles are associated with instances using tags and an access group. You can manage USG profiles from the **Profiles** page.
-
 
 (reference-terms-upgrade-profile)=
 ## Upgrade profile
@@ -67,21 +49,3 @@ An **upgrade profile** defines a schedule for the times when upgrades are to be 
 Upgrade profiles run according to a configurable weekly schedule. You can set what days of the week you want upgrades to run, and at what times you want upgrades to run on those days. You can also randomize the delivery time of the updates across your estate. Upgrade profiles can be set to only apply security upgrades or to apply all upgrades.
 
 You can manage upgrade profiles from the sidebar by navigating to **Profiles** > **Upgrade Profiles**.
-
-(reference-terms-wsl-profile)=
-## WSL profile
-
-A **WSL profile** defines a single Ubuntu WSL instance that Landscape should install on Windows instances (host machines) in a given access group. You associate Windows instances with WSL profiles using tags. A profile can specify:
-
-- Which Ubuntu distribution to install, either from the Microsoft store or from a custom image
-- cloud-init configuration (optional)
-- Compliance settings that specify how to interact with any WSL instances that were not created by Landscape
-
- Each Windows instance can be associated with zero or more WSL profiles.
-
-WSL profiles are evaluated periodically for compliance. A Windows instance is considered **compliant** if the following are true:
-
-- Landscape has installed a WSL instance on that Windows instance as specified by each of its associated WSL profiles, or the installation is in progress
-- All Ubuntu WSL instances installed on that Windows instance were created through Landscape if any associated WSL profiles use this compliance settings
-
-Landscape will alert you when a registered Windows instance is out of compliance with any of its WSL profiles. You can then take action to bring any non-compliant Windows instances into compliance with their WSL profiles.

@@ -41,8 +41,6 @@ Account-scoped alerts are relevant to the Landscape estate as a whole.
 
 - `PendingComputersAlert` Instances are pending acceptance or rejection
 - `LicenseExpiryAlert` A license is approaching expiration
-- `UbuntuProContractExpirationAlert` An Ubuntu Pro contract is approaching expiration
-  - Available from 25.10 onwards
 
 #### Self-hosted alerts
 
@@ -66,5 +64,3 @@ Instance-scoped alerts are relevant to individual managed instances.
 - `ComputerOfflineAlert` An instance has not contacted Landscape within the last five minutes
 - `ComputerRebootAlert` An instance needs to be rebooted in order for a package update (such as a kernel update) to take effect
 - `ComputerDuplicateAlert` A duplicate instance exists
-- `ChildInstanceProfileAlert` An instance is not compliant with a child instance profile
-  - Available from 24.10 onwards
