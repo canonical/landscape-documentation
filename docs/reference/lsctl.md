@@ -36,10 +36,10 @@ Stops the enabled Landscape services in reverse startup order.
 (reference-lsctl-restart)=
 ### `restart`
 
-Restarts the enabled Landscape services. This {ref}`does not enable or disable Landscape cron jobs <reference-known-issues-lsctl-restart>`.
+Restarts the enabled Landscape services. This does not enable or disable Landscape cron jobs.
 
 ## Cron jobs
 
 For charmed deployments, when cron jobs are enabled through `RUN_ALL` or `RUN_CRON`, `lsctl stop` prevents new jobs from starting and waits for running batch scripts to complete. `lsctl start` re-enables cron jobs.
 
-For Quickstart and manual deployments, `lsctl` does not enable or disable cron jobs. To control them separately, see {ref}`reference-known-issues-lsctl-restart`.
+For Quickstart and manual deployments, `lsctl` does not enable or disable cron jobs.
