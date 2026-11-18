@@ -186,7 +186,7 @@ sudo snap logs landscape-outbox -n 50
 
 #### Install the Debarchive snap
 
-The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards. Follow the instructions in the {ref}`dedicated guide <how-to-debarchive-repository-management>`.
+The `landscape-debarchive` snap is required for repository management from Landscape 26.04 LTS onwards.
 
 ````
 

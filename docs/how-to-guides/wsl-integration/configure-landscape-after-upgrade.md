@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Configure WSL services after upgrading from Landscape 23.10. Update service.conf and Apache config for WSL child instance profiles."
+    description: "Configure WSL services after upgrading from Landscape 23.10. Update service.conf, Apache, and RabbitMQ configuration for WSL."
 ---
 
 (how-to-wsl-configure-landscape-after-upgrade)=
@@ -22,16 +22,12 @@ Open the `service.conf` file located in the `/etc/landscape` directory and add:
 hostagent_virtual_host = landscape-hostagent
 hostagent_task_queue = landscape-server-hostagent-task-queue
 
-[hostagent_consumer]
+[grpc]
+grpc.max_connection_age_ms = 2592000000  # 30 days
+
+[hostagent-message-consumer]
+threads = 1
 stores = main account-1 resource-1
-threads = 1
-
-[hostagent_server]
-stores = main
-threads = 1
-
-[features]
-wsl_management = true
 ```
 
 ## Update your Apache config
@@ -62,8 +58,8 @@ Listen 6554
   # directive. Try using SSLCACertificateFile instead
   # SSLCertificateChainFile /etc/ssl/certs/landscape_server_ca.crt
  
-  ProxyPass / h2c://localhost:50052/
-  ProxyPassReverse / http://localhost:50052/
+  ProxyPass / h2c://localhost:50051/
+  ProxyPassReverse / http://localhost:50051/
 </VirtualHost>
 ```
 
