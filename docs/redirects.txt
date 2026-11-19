@@ -97,7 +97,9 @@ how-to-guides/nvidia-dgx-spark/manage-nvidia-dgx-spark/ how-to-guides/
 how-to-guides/nvidia-dgx-spark/set-up-nvidia-dgx-spark/ how-to-guides/
 explanation/related-tools/nvidia-dgx-spark/ explanation/related-tools/
 
-reference/known-issues/known-issues/ reference/known-issues/
+reference/known-issues/known-issues/ reference/
+
+reference/known-issues/ reference/
 
 reference/logs/logs/ reference/logs/
 

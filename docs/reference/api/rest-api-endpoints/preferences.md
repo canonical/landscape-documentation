@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "REST API endpoints to manage account preferences in Landscape. Update audit retention, auto-registration, and organization settings."
+    description: "REST API endpoints to manage account preferences in Landscape. Update auto-registration, registration password, and organization settings."
 ---
 
 (reference-rest-api-preferences)=
@@ -21,7 +21,6 @@ Optional parameters:
 - `auto_register_new_computers`: Toggle to automatically register new computers.
 - `registration_password`: Registration key for auto-registering computers. A valid input is a non-empty string (3-50 chars, single line). To clear the registration password, explicitly set this field to `null` in the request.
 - `title`: The title of organization name.
-- `ubuntu_one`: Enable or disable Ubuntu One as an identity provider.
 
 ```{note}
 - If you don't provide a value for any field in the request, the current value is unchanged.
@@ -45,10 +44,8 @@ Example response:
 
 ```json
 {
-    "audit_retention_period": -1,
     "auto_register_new_computers": false,
     "registration_password": null,
-    "title": "changed_title",
-    "ubuntu_one": true
+    "title": "changed_title"
 }
 ```
