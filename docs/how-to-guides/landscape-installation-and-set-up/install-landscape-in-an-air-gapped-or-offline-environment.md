@@ -60,8 +60,6 @@ Landscape 26.04 LTS depends on the following snap services, `landscape-task-hand
 snap download core22
 snap download snapd
 snap download landscape-task-handler
-snap download core22
-snap download snapd
 snap download landscape-outbox
 snap download landscape-debarchive --beta
 ```
@@ -108,10 +106,6 @@ sudo snap ack snapd_*.assert
 sudo snap install snapd_*.snap
 sudo snap ack landscape-task-handler_*.assert
 sudo snap install landscape-task-handler_*.snap
-sudo snap ack core22_*.assert
-sudo snap install core22_*.snap
-sudo snap ack snapd_*.assert
-sudo snap install snapd_*.snap
 sudo snap ack landscape-outbox_*.assert
 sudo snap install landscape-outbox_*.snap
 sudo snap ack landscape-debarchive_*.assert
