@@ -57,9 +57,9 @@ We have the following recommendations for secure deployments.
 
 ### TLS/HTTPS
 
-We recommend using TLS for all endpoints. By default, traffic to Landscape Server is secured using TLS for most endpoints. Landscape Server charm installations use HAProxy with TLS and other installations typically use Apache Server with TLS. There are a few select endpoints that allow non-TLS traffic: `ping`, `repository`, and `hash-id-databases`. However, TLS can be used for these endpoints by modifying the Landscape Client and repository profile configurations.
+We recommend using TLS for all endpoints. By default, traffic to Landscape Server is secured using TLS for most endpoints. Landscape Server charm installations use HAProxy with TLS and other installations typically use Apache Server with TLS. There are a few select endpoints that allow non-TLS traffic: `ping`, `repository`, and `hash-id-databases`. TLS can be used for these endpoints with appropriate reverse proxy, Landscape Client, and repository profile configurations.
 
-To enable HTTPS for the `ping` and `hash-id-databases` endpoints, Landscape Clients can be configured using the `ping_url` and `package_hash_id_url` settings to use HTTPS.
+To enable HTTPS for the `ping` and `hash-id-databases` endpoints, Landscape Clients can be configured using the `ping_url` and `package_hash_id_url` settings to use HTTPS. For the default Quickstart Apache configuration and the Apache example in the manual installation guide, serving `/ping` over HTTPS also requires configuring the reverse proxy.
 
 To enable HTTPS for the `repository` endpoint, Landscape repository profiles can be configured to use HTTPS APT sources, but this may require creating those APT sources manually rather than having Landscape determine them automatically based on created repository mirrors.
 

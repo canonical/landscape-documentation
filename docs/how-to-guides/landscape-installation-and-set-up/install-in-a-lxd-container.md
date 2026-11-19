@@ -18,7 +18,7 @@ This guide uses a sample cloud-init file created by the Landscape team. You can 
 To download the cloud-init configuration file and save it as `cloud-init.yaml`, run:
 
 ```bash
-curl -o cloud-init.yaml https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart.yaml
+curl -o cloud-init.yaml https://raw.githubusercontent.com/canonical/landscape-scripts/cloud-init-24.04-v1/provisioning/cloud-init-quickstart.yaml
 ```
 
 ### Set cloud-init variables
