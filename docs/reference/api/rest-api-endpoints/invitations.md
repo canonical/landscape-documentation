@@ -8,32 +8,6 @@ myst:
 
 # Invitations
 
-## POST `/accept-invitation`
-
-Accept an invitation for the current user.
-
-Required parameters:
-
-- `invitation_id`: The alphanumeric string used to identify the invitation.
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/accept-invitation" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
-```
-
-Example response:
-
-```json
-{
-  "account_id": 4,
-  "account_title": "My Account"
-}
-```
-
 ## GET `/invitations`
 
 Get all invitations for the account that the principal is associated with.
@@ -158,21 +132,4 @@ Example response:
   "email": "ted@example.com",
   "creation_time": "2024-03-20T14:49:25Z"
 }
-```
-
-## POST `/reject-invitation`
-
-Reject an invitation. This will remove the invitation and an administrator will have to create a new invitation request.
-
-Required parameters:
-
-- `invitation_id`: The alphanumeric string used to identify the invitation.
-
-Example request:
-
-```bash
-curl -X POST "https://landscape.canonical.com/api/v2/reject-invitation" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $JWT" \
-  -d '{"invitation_id": "rqRmwFduPFTM1uy5cO0tOSovS4KNGG"}'
 ```

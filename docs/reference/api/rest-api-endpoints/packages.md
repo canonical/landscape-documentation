@@ -25,7 +25,6 @@ Query parameters:
 - `available`: If true only packages in the available state will be returned, if false only packages not available will be returned. If not given both available and not available packages will be returned.
 - `upgrade`: If true, only installable packages that are upgrades for an installed one are returned. If false, only installable packages that are not upgrades are returned. If not given, packages will be returned regardless of whether they are upgrades or not.
 - `held`: If true, only installed packages that are held on computers are returned. If false, only packages that are not held on computers are returned. If not given, packages will be returned regardless of the held state.
-- `security`: If true, only packages in the security upgrade state will be returned. If false, only packages not in the security upgrade state will be returned. If omitted, packages in both states will be returned.
 - `limit`: The maximum number of results returned by the method. It defaults to 1000.
 - `offset`: The offset inside the list of results.
 
