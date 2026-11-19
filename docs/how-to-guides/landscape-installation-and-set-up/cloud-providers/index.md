@@ -15,4 +15,5 @@ Deploy Landscape Server on major cloud platforms with these installation guides.
 
 Install on Google Cloud <install-on-google-cloud>
 Install on Microsoft Azure <install-on-microsoft-azure>
+Deploy from the Azure Marketplace <deploy-from-azure-marketplace>
 Set up Ubuntu Amazon WorkSpaces <get-started-ubuntu-amazon-workspaces>
