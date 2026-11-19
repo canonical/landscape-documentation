@@ -105,7 +105,7 @@ If the address value in the `nslookup` output matches the value of the `Landscap
 
 ## Deploy Landscape Server VM with cloud-init
 
-Before beginning the deployment process with cloud-init, you must choose which of the two cloud-init configuration automation templates you want to use. In the [Landscape Scripts](https://github.com/canonical/landscape-scripts) Github repository, there are two Landscape Quickstart cloud-init configuration templates: [`cloud-init-quickstart.yaml`](https://github.com/canonical/landscape-scripts/blob/main/provisioning/cloud-init-quickstart.yaml) and [`cloud-init-quickstart-fips.yaml`](https://github.com/canonical/landscape-scripts/blob/main/provisioning/cloud-init-quickstart-fips.yaml).
+Before beginning the deployment process with cloud-init, you must choose which of the two cloud-init configuration automation templates you want to use. In the [Landscape Scripts](https://github.com/canonical/landscape-scripts) Github repository, there are two Landscape Quickstart cloud-init configuration templates: [`cloud-init-quickstart.yaml`](https://github.com/canonical/landscape-scripts/blob/cloud-init-24.04-v1/provisioning/cloud-init-quickstart.yaml) and [`cloud-init-quickstart-fips.yaml`](https://github.com/canonical/landscape-scripts/blob/cloud-init-24.04-v1/provisioning/cloud-init-quickstart-fips.yaml).
 
 The `cloud-init-quickstart.yaml` template is designed for anyone, and the `cloud-init-quickstart-fips.yaml` is designed for FIPS compliant deployments of Landscape Server. For more information, see {ref}`how-to-install-fips-compliant`.
 
@@ -116,20 +116,20 @@ Once you’ve chosen your configuration template, complete the following steps.
     If you’re using `cloud-init-quickstart.yaml`, run:
 
     ```bash
-    curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart.yaml -o cloud-init.yaml 
+    curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/cloud-init-24.04-v1/provisioning/cloud-init-quickstart.yaml -o cloud-init.yaml 
     IMAGE_FAMILY=Canonical:0001-com-ubuntu-pro-jammy:pro-22_04-lts-gen2:latest
     ```
 
     If you’re using `cloud-init-quickstart-fips.yaml`, run:
 
     ```bash
-    curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/main/provisioning/cloud-init-quickstart-fips.yaml -o cloud-init.yaml
-    IMAGE_FAMILY=Canonical:0001-com-ubuntu-pro-focal-fips:pro-fips-20_04-gen2:latest
+    curl -s https://raw.githubusercontent.com/canonical/landscape-scripts/cloud-init-24.04-v1/provisioning/cloud-init-quickstart-fips.yaml -o cloud-init.yaml
+    IMAGE_FAMILY=Canonical:ubuntu-22_04-lts:ubuntu-pro-fips:latest
     ```
 
-2. Open the downloaded cloud-init YAML file in an editor, determine which configuration parameters need to be changed between lines 4 and 32 and change these parameters.
+2. Open the downloaded cloud-init YAML file in an editor, determine which configuration parameters need to be changed between lines 4 and 40 and change these parameters.
 
-The `HOSTNAME` on line 16 and `DOMAIN` on line 19 must be changed. Updating `EMAIL` on line 9, and adding your SendGrid API key on line 29 as the `SMTP_PASSWORD` are optional.
+The `HOSTNAME` on line 16 and `DOMAIN` on line 19 must be changed. Updating `EMAIL` on line 9, and adding your SendGrid API key on line 33 as the `SMTP_PASSWORD` are optional.
 
 ### Create VM
 

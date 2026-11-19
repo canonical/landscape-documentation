@@ -73,6 +73,7 @@ HTTP requests made to `/api` are routed to the Legacy API.
 
 The Appserver service responds to HTTP requests that are not routed to another service. It either responds directly to requests, or routes them again to other services. When responding directly to requests, responses are generally in the form of HTML, but it also serves JavaScript and CSS for the new and legacy Landscape UIs. It interacts with all third-party components and most other Landscape Server services.
 
+(explanation-server-architecture-async-frontend)=
 ### Async frontend
 
 The Async frontend service supports live status updates in the legacy Landscape UI for long-running Landscape Activities such as repository mirror syncs or intermittently-updated Alert notifications. It primarily interacts with RabbitMQ Server and the Appserver service.

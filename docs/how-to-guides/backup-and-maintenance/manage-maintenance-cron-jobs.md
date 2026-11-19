@@ -27,10 +27,10 @@ The following are automatically scheduled cron jobs. These scripts are all locat
   - Regenerates packages hash-ids mapping files. Enables newly registered computers to report installed and available packages quickly. Out-of-date hash-id mapping files causes computers to report packages at a slower rate (approximately 500 packages at a time).
 - `meta_releases.sh`
   - Checks for new releases of Ubuntu.
-- `sync_lds_releases.sh` (Landscape 25.08 and earlier)
-  - Checks for available Landscape Server upgrades. This job was removed in Landscape 25.10.
-- `report_anonymous_metrics.sh` (Landscape 25.04 and earlier)
-  - Reports anonymous metrics (e.g., the installed Landscape Server version). This job was removed in Landscape 25.08.
+- `sync_lds_releases.sh`
+  - Checks for available Landscape Server upgrades.
+- `report_anonymous_metrics.sh`
+  - Reports anonymous metrics (e.g., the installed Landscape Server version).
 
 These scripts depend on a PID file located in `/run/landscape/` to prevent multiple instances of a script from running concurrently. This directory is created at boot by a systemd tmpfiles configuration located at `/etc/tmpfiles.d/landscape-server-tmpfile.conf`.
 
