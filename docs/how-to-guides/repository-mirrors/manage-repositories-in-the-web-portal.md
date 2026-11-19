@@ -1,166 +1,13 @@
 ---
 myst:
   html_meta:
-    description: "Manage repository mirrors from the Landscape web portal. Configure repositories, generate GPG keys, and create repository profiles."
+    description: "Manage repository mirrors from Landscape 24.04 LTS web portal. Configure Ubuntu repositories, generate GPG keys, and create profiles."
 ---
 
 (how-to-manage-repos-web-portal)=
-(how-to-manage-repos-web-portal-2604)=
 # How to manage and mirror repositories from the web portal
 
 > See also: {ref}`explanation-repo-mirroring`
-
-Repository management in the web portal works differently in Landscape Server 26.04 LTS and later than it does in earlier releases.
-
-**Select your Landscape Server version:**
-
-`````{tab-set}
-
-````{tab-item} Landscape Server 26.04 LTS and later
-
-The repository mirroring feature in Landscape lets you mirror Ubuntu and third-party repositories, create local repositories for personal packages, and publish repositories to different targets. This adds an extra layer of control over the software versions available to your client machines. If you're not familiar with repository mirroring in Landscape, read our explanation before continuing through this how-to guide: {ref}`explanation-repo-mirroring-2604`.
-
-```{include} /reuse/debarchive-setup-links.md
-```
-
-This guide demonstrates how to mirror Ubuntu and other third-party debian repositories. For a complete guide that publishes a mirror to S3 or a local filesystem and installs a package from it on a client, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
-
-(how-to-heading-disk-space-requirements-2604)=
-## Disk space requirements
-
-```{include} /reuse/repository-disk-space.md
-```
-
-(how-to-heading-create-new-mirror)=
-## Create a new mirror
-
-To create a new mirror:
-
-1. From the sidebar, navigate to **Repositories** > **Mirrors**
-1. Click **Add mirror**
-1. Enter the name of the mirror. For example, `noble-backports-mirror`.
-    - Note: You can't use the same name for multiple mirrors, so you should make this name unique and descriptive of the repository. If you want to reuse a name later, you'll have to delete the original mirror.
-1. Select the type of mirror from the **Source Type** dropdown menu. For example, select **Ubuntu archive** if you're mirroring an Ubuntu repository.
-1. In the **Source URL** field, use the default mirror URL if you're mirroring an Ubuntu repository. Otherwise, enter the URL for the Debian repository you want to mirror. For example, `https://deb.debian.org/debian/`.
-1. (Optional) For signature preserving mirrors, select the **Preserve upstream signing key** checkbox.
-1. Enter the distribution you want to mirror. If you're mirroring an Ubuntu repository, select the distribution from the dropdown menu. Otherwise, enter the distribution name. For example, `bookworm`.
-1. Select the components you want to mirror. If you're mirroring an Ubuntu repository, select the components from the dropdown menu. Otherwise, enter a comma-separated list of components. For example, `non-free-firmware, main`.
-1. Select the architectures you want to mirror. If you're mirroring an Ubuntu repository, select the architectures from the dropdown menu. Otherwise, enter a comma-separated list of architectures. For example, `amd64, arm64`.
-1. (Optional) For filtered mirrors, use the **Filter** text box to narrow down which packages are retrieved instead of mirroring the entire selected component(s).
-1. (Optional) Select the download options you want to include.
-1. (Optional) If you're using a third-party repository and not preserving the upstream signing key, provide the ASCII-armored GPG key for the mirror in the **Verification GPG key** text box.
-
-### Use repository snapshots
-
-[Snapshots](https://snapshot.ubuntu.com/) are another source you can use to mirror packages. They allow Landscape to mirror packages from the Ubuntu archive at a specific point in time.
-
-To use a snapshot, follow the same process as you would to {ref}`how-to-heading-create-new-mirror`, but change the type to **Ubuntu Snapshot**, and choose a snapshot date.
-
-(how-to-heading-create-new-local)=
-## Create a new local repository
-
-To create a new local repository:
-
-1. From the sidebar, navigate to **Repositories** > **Local repositories**
-1. Click **Add local repository**
-1. Enter the name of the local repository. For example, `my-local-repo`.
-    - Note: You can't use the same name for multiple local repositories, so you should make this name unique and descriptive. If you want to reuse a name later, you'll have to delete the original local repository.
-1. Complete the remaining fields. Note that if you're mirroring multiple components, they need to be a comma-separated list of components. For example, `non-free-firmware, main`.
-
-(how-to-heading-create-new-publication-target)=
-## Create a new publication target
-
-To create a new publication target:
-
-1. From the sidebar, navigate to **Repositories** > **Publication targets**
-1. Click **Add publication target**
-1. Enter the name of the publication target. For example, `s3-target-1`.
-1. In the **Type** dropdown menu, select the type of publication target you want to create and enter the required information for your publication target.
-
-For filesystem publication targets:
-
-```{include} /reuse/filesystem-publication-target-path.md
-```
-
-Landscape doesn't serve filesystem publication targets. To serve them with Apache or Nginx or to change the published root, see {ref}`how-to-debarchive-filesystem-publications`.
-
-```{include} /reuse/filesystem-publication-target-disk-space.md
-```
-
-For S3 publication targets, if you use an S3-compatible object store other than Amazon S3, enter the object store's hostname in the **Endpoint** field. If you set a **Prefix**, the repository is published under that path in the bucket, and the URL in your repository profile must include it.
-
-For a complete example with S3 and filesystem publication targets, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
-
-(how-to-heading-create-new-publication)=
-## Create a new publication
-
-To create a new publication:
-
-1. From the sidebar, navigate to **Repositories** > **Publications**
-1. Click **Add publication**
-1. Enter the name of the publication. For example, `noble-backports-publication`.
-1. In the **Source type** dropdown menu, select whether you want to publish a local repository or mirror.
-    - In the **Source** dropdown menu, select the mirror or local repository you want to publish.
-1. In the **Publication target** dropdown menu, select the publication target you want to publish to.
-1. To resign packages in your publication target, enter the ASCII-armored GPG private key you want to use in the **Signing GPG key** text box.
-
-For guidance on signing keys, see {ref}`how-to-harden-deployment-secure-gpg-keys`.
-
-(how-to-create-repo-profile)=
-## Create a repository profile and associate client machines to the profile
-
-A {ref}`repository profile <reference-terms-repository-profile>` in Landscape is useful for updating repository configurations. When a machine (instance) is associated with a repository profile, the repository configurations are applied one time. Repository profiles don't perform ongoing monitoring of repository configurations.
-
-To create a profile:
-
-1. From the sidebar, go to **Repositories** > **Repository profiles**
-1. Click **Add repository profile**
-1. In the **Profile name** field, enter a name for this profile. For example, `noble-test`.
-1. Select **Add source** to specify a Debian repository for this repository profile.
-    1. In the **Source name** field, enter a name for the source.
-    1. Add the `deb` line for the Debian repository. For example, `deb [trusted=yes] https://debarchive-test-bucket.s3.us-west-1.amazonaws.com/ devel main`.
-    1. If the repository's GPG verification key isn't already in the client machine's keyring, provide the verification key in the **GPG key** field.
-1. Use the **Access group** dropdown menu and **Association** category to associate this profile with an access group or specific instances/computers (tags).
-1. Optionally fill out the **Description** field.
-
-Note that you may want to create multiple repository profiles for different groups of managed instances.
-
-(how-to-manage-created-repositories-publishing)=
-## Manage existing repositories
-
-(how-to-sync-a-mirror)=
-### Sync a mirror
-
-1. From the sidebar, navigate to **Repositories** > **Mirrors**.
-1. Select the mirror you want to sync.
-1. Click **Update**.
-
-(how-to-import-local-packages)=
-### Import packages to a local repository
-
-1. From the sidebar, navigate to **Repositories** > **Local repositories**.
-1. Select the local repository where you want to import packages.
-1. Click **Import packages**, provide the URI for the packages you want to import, then click **Import packages**.
-
-### Publish (or republish) an existing mirror
-
-If you're publishing or republishing a mirror that doesn't preserve upstream signatures, update the mirror before publishing. For instructions, see {ref}`To sync a mirror <how-to-sync-a-mirror>`.
-
-1. From the sidebar, navigate to **Repositories** > **Mirrors**.
-1. Select the mirror you want to publish.
-1. Click **Publish**, then select an existing publication or fill out the required information for a new publication.
-
-### Publish (or republish) an existing local repository
-
-If the local repository doesn't contain the packages you want to publish, import the packages before publishing. For instructions, see {ref}`To import packages into a local repository <how-to-import-local-packages>`.
-
-1. From the sidebar, navigate to **Repositories** > **Local repositories**.
-1. Select the local repository you want to publish.
-1. Click **Publish**, then select an existing publication or fill out the required information for a new publication.
-
-````
-
-````{tab-item} Landscape Server 25.10 and earlier
 
 ```{note}
 Web-based repository mirroring is available starting in Landscape 24.04 LTS for self-hosted users.
@@ -174,8 +21,8 @@ This guide demonstrates how to mirror an Ubuntu repository, but most of the info
 ## Disk space requirements
 
 ```{include} /reuse/repository-disk-space.md
-
 ```
+
 Packages will be downloaded to `/var/lib/landscape/landscape-repository/standalone/`.
 
 (how-to-heading-create-import-gpg-key)=
@@ -321,7 +168,7 @@ To create a new pull pocket:
 1. In the **GPG Key** dropdown menu, select the same private key you previously generated.
 1. (Optional) If you want to use filters in your pull pocket, select the type in the **Filter type** dropdown menu.
 1. Change any selections in **Components** and **Architectures** as necessary for your configuration.
-1. Click **Create**
+1. Click **Add**
 
 To update your pull pocket:
 
@@ -331,15 +178,15 @@ To update your pull pocket:
 
 ### Derive series
 
-If you're making multiple pull pockets, you can also use the **Derive series** feature, which creates a "snapshot" of the source series. The new series will contain the same packages and versions as the source at the time it was created, but it won't automatically track future changes. This process allows you to promote packages through separate environments without the packages changing unexpectedly.
+If you're making multiple pull pockets, you can use the **Derive series** feature. It creates a new series with a pull pocket for each pocket in the source series. Each pull pocket is configured to pull from the corresponding source pocket. The new pockets are initially empty; pull them to copy packages from their source pockets.
 
-For example, you could define the following pull pockets by deriving the series:
+For example, you could define the following series:
 
 - `dev`
 - `test` (derived from `dev`)
 - `prod` (derived from `test`)
 
-In this example, updates flow from `dev` > `test` > `prod`, with each stage using a fixed set of package versions.
+In this example, you can promote packages from `dev` to `test` to `prod` by pulling the corresponding pockets at each stage.
 
 When deriving series to make cascading pull pockets, we recommend you include the date in the series name. For example, `noble-2026-03-29`.
 
@@ -348,7 +195,3 @@ When deriving series to make cascading pull pockets, we recommend you include th
 [Snapshots](https://snapshot.ubuntu.com/) are another source you can use to mirror packages. They allow Landscape to mirror packages from the Ubuntu archive at a specific point in time.
 
 To use a snapshot, follow the same process as you would to {ref}`how-to-heading-manage-repos-create-mirror`, but change the type to **Ubuntu Snapshot**, and choose a snapshot date.
-
-````
-
-`````

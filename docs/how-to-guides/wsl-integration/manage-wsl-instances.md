@@ -1,44 +1,70 @@
 ---
 myst:
   html_meta:
-    description: "Create, register, and provision WSL instances in Landscape. Use web portal, REST API, or WSL profiles to manage Ubuntu on Windows."
+    description: "Create and register WSL instances in Landscape from the web portal or the legacy API."
 ---
 
 (how-to-manage-wsl-instances)=
 # How to manage WSL instances
 
-This guide describes how to create, register, and provision new WSL instances to Landscape.
+> See also: {ref}`reference-legacy-api-wsl`
+
+This guide describes how to create and register new WSL instances to Landscape.
 
 You must have a Windows host machine registered with Landscape before making any WSL instances. To register a new Windows host with Landscape, visit {ref}`how-to-register-wsl-hosts`.
 
 ## Create and register new WSL instances in the Landscape web portal
 
+### Web portal (24.04 LTS and later)
+
+1. Go to **Instances** > Open the Windows host machine > **Instances** tab > **Install new instance**
+1. Select the Ubuntu image under **Instance type**
+1. Click **Install**
+
+### Classic web portal
+
 ```{note}
 Only one instance of each Ubuntu image can be created per Windows host machine using the web portal.
 ```
 
-You can register new WSL instances from the Landscape web portal. To do this:
+1. Navigate to the **Computers** page in the header
+1. Click the name of the Windows machine that will host the new WSL instance
+1. Click **Install new** above the **WSL Instances** table
+1. Select the Ubuntu image that will be installed on the new WSL instance under **Instance Type**
+1. Click **Submit**
 
-1. Go to **Instances** > Open the Windows host machine > **WSL** tab > **Create new instance**
-1. Complete the form
+Once this process is complete, your new WSL instance will appear in the **Select computers** list and in the Windows host machine's **Info** tab.
 
-This creates an activity for the Windows host to create the new WSL instance. Once that activity succeeds, accept the pending WSL instance. You can do this from the homepage or under **Instances** > **Review pending instances**.
+## Create and register new WSL instances with the API
 
-Now, your WSL instance is registered in your Landscape account. You can view it from the **WSL** tab under your Windows host machine. Whenever an activity is created for the WSL instance, two activities will be created for the Windows host: one to notify Ubuntu Pro for WSL that there is an activity queued for the WSL instance, and another to notify Ubuntu Pro for WSL when the activity for the WSL instance is finished.
+You can register new WSL instances via the legacy API. To register new WSL instances with Landscape, make an API call such as:
 
-## Use a Landscape API
+```bash
+?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu
+```
 
-You can register new WSL instances and manage existing ones with the REST API or legacy API. See the following endpoints:
+The `parent_id` is assigned by Landscape. You assign `computer_name` as the name of the child computer you're creating. If you don't know the ID of your parent computer, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
 
-- {ref}`reference-rest-api-wsl`
-- {ref}`reference-rest-api-child-instance-profiles`
-- {ref}`reference-rest-api-computers`
-- {ref}`WSL (Legacy API) <reference-legacy-api-wsl-set-default-child-computer>`
+## Create and register new WSL instances with the API and cloud-init
 
-Note that you'll need IDs for many of the requests. If you don’t know the ID of your parent instance, visit {ref}`how to get computer IDs <howto-heading-manage-computers-get-ids>`.
+```{note}
+When Landscape 24.04 LTS was released, Ubuntu Pro for WSL didn't yet support cloud-init configuration.
+```
 
-## Use WSL profiles
+To register new WSL instances based on cloud-init configurations, make an API call such as:
 
-You can use {ref}`WSL profiles <reference-terms-wsl-profile>` to provision WSL instances from official Ubuntu images in the Microsoft Store or from custom images. These WSL instances can be configured with cloud-init at the time of provisioning.
+```bash
+?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&cloud_init=<b64 encoded cloud_init file>
+```
 
-For more information, see {ref}`how-to-use-wsl-profiles`.
+Or:
+
+```bash
+?action=CreateChildComputer&parent_id=20&computer_name=Ubuntu&data_id=data-id&token=vault-token
+```
+
+If your cloud-init file is not located in a vault, you can specify it in `cloud_init`. If it's located in a vault, you can specify the name of the vault secret in `data_id` and the authentication token to be passed to the secrets manager in `token`.
+
+```{note}
+Specifying both a cloud-init file and a vault secret will result in an error.
+```
