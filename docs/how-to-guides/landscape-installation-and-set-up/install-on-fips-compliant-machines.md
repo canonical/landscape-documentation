@@ -42,5 +42,5 @@ If you're {ref}`configuring Postfix for emails <how-to-configure-postfix>`, add 
 Outside of Landscape, there are additional steps you may need when setting up your full FIPS-compliant deployment. See the following related topics:
 
 - [Ubuntu Security | FIPS for Ubuntu](https://ubuntu.com/security/fips)
-- [Ubuntu Security | FIPS for Ubuntu 22.04](https://ubuntu.com/security/certifications/docs/2204/fips)
+- [Ubuntu Security | FIPS for Ubuntu 22.04](https://documentation.ubuntu.com/security/compliance/fips/)
 - [Ubuntu Pro | How to manage FIPS](https://documentation.ubuntu.com/pro/pro-client/enable_fips/)
