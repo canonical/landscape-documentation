@@ -9,7 +9,8 @@ Usage:
 
 Each argument is a Markdown file under docs/ (relative to the current
 directory, the repository root, or docs/) or a `(label)=` reference label. A
-label is reported as the file that defines it.
+label is reported as the file that defines it. Markdown files outside docs/
+that a page includes, such as README.md, are scanned too.
 
 For each file, the report lists:
   * labels defined in the file (`(label)=`);
@@ -29,6 +30,7 @@ path or label). Nothing is reported after an error.
 
 import argparse
 import json
+import os
 import posixpath
 import re
 import sys
@@ -44,8 +46,9 @@ SKIP_DIRS = {"_build", ".venv", "node_modules"}
 FENCE_RE = re.compile(r"^(?P<indent>\s*)(?P<fence>`{3,}|~{3,})\s*(?P<info>.*?)\s*$")
 DIRECTIVE_RE = re.compile(r"^\{(?P<name>[\w:-]+)\}\s*(?P<arg>.*)$")
 LABEL_DEF_RE = re.compile(r"^\s*\((?P<label>[^()\s]+)\)=\s*$")
-REF_RE = re.compile(r"\{ref\}`(?P<body>[^`]+)`")
-DOC_RE = re.compile(r"\{doc\}`(?P<body>[^`]+)`")
+# Role bodies may be delimited by any run of backticks, e.g. {ref}``text `code` <label>``.
+REF_RE = re.compile(r"\{ref\}(?P<ticks>`+)(?P<body>.+?)(?P=ticks)(?!`)")
+DOC_RE = re.compile(r"\{doc\}(?P<ticks>`+)(?P<body>.+?)(?P=ticks)(?!`)")
 LINK_RE = re.compile(r"(?<!!)\[[^\]]*\]\((?P<target>[^)\s]+)(?:\s+\"[^\"]*\")?\)")
 SUBST_RE = re.compile(r"\{\{\s*(?P<key>[A-Za-z_][\w.-]*)\s*\}\}")
 MARKER_RE = re.compile(
@@ -83,7 +86,13 @@ class Page:
 
 
 def rel_to_docs(path: Path) -> str:
-    return path.resolve().relative_to(DOCS).as_posix()
+    """Path relative to docs/; files outside docs/ start with "../"."""
+    return Path(os.path.relpath(path.resolve(), DOCS)).as_posix()
+
+
+def display_path(rel: str) -> str:
+    """Repository-relative path for output, e.g. "docs/reuse/x.md" or "README.md"."""
+    return posixpath.normpath(posixpath.join("docs", rel))
 
 
 def resolve_doc_target(target: str, page: Page) -> str:
@@ -278,6 +287,27 @@ def iter_markdown_files():
         yield path
 
 
+def load_pages() -> dict:
+    """Parse every page under docs/, then any Markdown file outside docs/ that
+    a parsed page includes (repeating until no new files are found)."""
+    pages = {}
+    for path in iter_markdown_files():
+        page = parse_page(path)
+        pages[page.rel] = page
+    pending = list(pages.values())
+    while pending:
+        page = pending.pop()
+        for use in page.includes:
+            if use.target in pages or not use.target.startswith("../"):
+                continue
+            path = DOCS / use.target
+            if use.target.endswith(".md") and path.is_file():
+                included = parse_page(path)
+                pages[included.rel] = included
+                pending.append(included)
+    return pages
+
+
 def load_substitution_keys() -> set:
     """Read top-level keys of the flat substitutions.yaml without PyYAML."""
     if not SUBSTITUTIONS.exists():
@@ -322,10 +352,9 @@ def resolve_argument(arg: str, pages: dict) -> tuple:
     for base in (Path.cwd(), REPO, DOCS):
         candidate = (base / arg).resolve()
         if candidate.is_file():
-            try:
-                rel = rel_to_docs(candidate)
-            except ValueError:
-                raise SystemExit(f"error: {arg} is not under {DOCS}") from None
+            rel = rel_to_docs(candidate)
+            if rel not in pages and rel.startswith("../"):
+                raise SystemExit(f"error: {arg} is not under {DOCS} or included from it")
             if rel not in pages:
                 raise SystemExit(f"error: {arg} is not a Markdown file scanned under docs/")
             return rel, None
@@ -373,7 +402,7 @@ def build_report(rel: str, queried_label, pages: dict, subst_keys: set, redirect
                      for key, line in page.substitutions]
 
     return {
-        "file": f"docs/{rel}",
+        "file": display_path(rel),
         "queried_label": queried_label,
         "labels_defined": [{"label": label, "line": line} for label, line in page.labels],
         "inbound_label_refs": inbound_refs,
@@ -402,15 +431,15 @@ def print_report(report: dict) -> None:
 
     section("Labels defined", report["labels_defined"], lambda i: f"{i['label']}  (line {i['line']})")
     section("Inbound label references", report["inbound_label_refs"],
-            lambda i: f"docs/{i['file']}:{i['line']}  {i['kind']} -> {i['target']}  {i['text']}")
+            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['kind']} -> {i['target']}  {i['text']}")
     section("Inbound doc links", report["inbound_doc_links"],
-            lambda i: f"docs/{i['file']}:{i['line']}  {i['kind']}  {i['text']}")
+            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['kind']}  {i['text']}")
     section("Included by", report["included_by"],
-            lambda i: f"docs/{i['file']}:{i['line']}  {i['text']}")
+            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['text']}")
     section("Includes", report["includes"],
-            lambda i: f"docs/{i['target']}  (line {i['line']})" + ("" if i["exists"] else "  MISSING"))
+            lambda i: f"{display_path(i['target'])}  (line {i['line']})" + ("" if i["exists"] else "  MISSING"))
     section("Toctree entries", report["toctree_entries"],
-            lambda i: f"docs/{i['file']}:{i['line']}  {i['entry']}")
+            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['entry']}")
     section("Redirects (docs/redirects.txt)", report["redirects"],
             lambda i: f"line {i['line']}: {i['text']}")
     section("Substitutions used", report["substitutions"],
@@ -427,10 +456,7 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        pages = {}
-        for path in iter_markdown_files():
-            page = parse_page(path)
-            pages[page.rel] = page
+        pages = load_pages()
         subst_keys = load_substitution_keys()
         redirects = load_redirects()
     except ParseError as exc:

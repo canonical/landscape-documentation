@@ -152,9 +152,9 @@ internal language and style guide, follow it. Otherwise follow neighboring pages
   marketing language, filler, and idioms. Preserve good SME wording; don't
   substitute synonyms or polish prose that isn't part of the task.
 - **Landing pages**: a brief orientation, then links grouped by a structure that
-  any logical progression. Keep small landing pages small; don't repeat each
- ere they help readers choose. Keep
-  small landing pages small; don't repeat each page's introduction.
+  fits the content, keeping any logical progression, with short descriptions
+  where they help readers choose. Keep small landing pages small; don't repeat
+  each page's introduction.
 - **Terminology**: "Managed Landscape" (not "Landscape Managed"); "REST API" and
   "legacy API"; "web portal" and "legacy web portal"; "instances" for managed
   machines in prose, keeping "computers" where it's a literal UI label or API
