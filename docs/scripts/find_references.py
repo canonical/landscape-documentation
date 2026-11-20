@@ -372,8 +372,9 @@ def build_report(rel: str, queried_label, pages: dict, subst_keys: set, redirect
     labels = {label for label, _ in page.labels}
     others = [p for p in pages.values()]
 
+    # Every "file" path in the report is repository-relative, like the top-level "file".
     def use_dict(use):
-        return {"file": use.file, "line": use.line, "kind": use.kind,
+        return {"file": display_path(use.file), "line": use.line, "kind": use.kind,
                 "target": use.target, "text": use.text}
 
     inbound_refs = [use_dict(u) for p in others for u in p.refs if u.target in labels]
@@ -387,7 +388,7 @@ def build_report(rel: str, queried_label, pages: dict, subst_keys: set, redirect
             if entry == page.docname or (
                 glob and any(c in entry for c in "*?[") and sphinx_glob_match(page.docname, entry)
             ):
-                toctree.append({"file": p.rel, "line": line, "entry": entry})
+                toctree.append({"file": display_path(p.rel), "line": line, "entry": entry})
 
     page_url = url_path(page.docname)
     redirect_lines = [
@@ -396,7 +397,7 @@ def build_report(rel: str, queried_label, pages: dict, subst_keys: set, redirect
         if page_url and page_url in parts
     ]
 
-    includes = [{"line": u.line, "target": u.target,
+    includes = [{"line": u.line, "target": display_path(u.target),
                  "exists": (DOCS / u.target).is_file()} for u in page.includes]
     substitutions = [{"key": key, "line": line, "defined": key in subst_keys}
                      for key, line in page.substitutions]
@@ -431,15 +432,15 @@ def print_report(report: dict) -> None:
 
     section("Labels defined", report["labels_defined"], lambda i: f"{i['label']}  (line {i['line']})")
     section("Inbound label references", report["inbound_label_refs"],
-            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['kind']} -> {i['target']}  {i['text']}")
+            lambda i: f"{i['file']}:{i['line']}  {i['kind']} -> {i['target']}  {i['text']}")
     section("Inbound doc links", report["inbound_doc_links"],
-            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['kind']}  {i['text']}")
+            lambda i: f"{i['file']}:{i['line']}  {i['kind']}  {i['text']}")
     section("Included by", report["included_by"],
-            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['text']}")
+            lambda i: f"{i['file']}:{i['line']}  {i['text']}")
     section("Includes", report["includes"],
-            lambda i: f"{display_path(i['target'])}  (line {i['line']})" + ("" if i["exists"] else "  MISSING"))
+            lambda i: f"{i['target']}  (line {i['line']})" + ("" if i["exists"] else "  MISSING"))
     section("Toctree entries", report["toctree_entries"],
-            lambda i: f"{display_path(i['file'])}:{i['line']}  {i['entry']}")
+            lambda i: f"{i['file']}:{i['line']}  {i['entry']}")
     section("Redirects (docs/redirects.txt)", report["redirects"],
             lambda i: f"line {i['line']}: {i['text']}")
     section("Substitutions used", report["substitutions"],

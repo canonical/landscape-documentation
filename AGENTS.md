@@ -50,6 +50,12 @@ Check policy (run what applies, nothing more):
 - Don't run `vale`, `woke`, `pa11y`, or `lint-md` unless asked or CI reports a
   failure.
 
+`make html` doesn't catch broken Markdown-style internal links (`[text](#label)`,
+`[text](page.md)`): `docs/conf.py` suppresses `myst.xref_missing` for
+terraform-docs output, and `make linkcheck` checks only external URLs. Prefer
+`{ref}`, which still fails the build. If you add a Markdown-style internal link,
+confirm that its target exists.
+
 ## Scope and proportionality
 
 - Change only what the task needs. List other observations at the end of your

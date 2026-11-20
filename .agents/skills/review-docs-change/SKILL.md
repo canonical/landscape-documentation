@@ -31,12 +31,14 @@ rules are in `AGENTS.md`; this skill doesn't repeat them.
    or removed labels, and renamed, moved, or deleted pages. Run
    `docs/scripts/find_references.py` on them, and check that inbound references,
    toctrees, and `docs/redirects.txt` are updated. For a snippet change, check
-   that the new text reads correctly on every page that includes it.
+   that the new text reads correctly on every page that includes it. Check
+   new Markdown-style internal links by hand; the build doesn't (see
+   `AGENTS.md`).
 6. **Weigh each finding.** Report only what you can support with evidence: a
    location and a quote, a source, or a contradiction within the docs. Mark it:
-   - **Blocking**: wrong or unverifiable technical content, a reader can't
-     complete the task, broken references or navigation, or the change doesn't
-     resolve its issue.
+   - **Blocking**: technical content that contradicts the docs or a source, a
+     reader can't complete the task, broken references or navigation, or the
+     change doesn't resolve its issue.
    - **Non-blocking**: a real but minor improvement. Report at most three; drop
      the weakest.
    Don't suggest synonyms or rewrites based on style preference.
@@ -58,12 +60,12 @@ A small, correct change gets a one-sentence approval and nothing else.
 - Don't edit files or push suggestions as commits.
 - Stop at the verdict. Don't expand the review to unchanged pages or to a
   general audit of the section.
-- If you can't verify a technical claim the change depends on, say so as a
-  question or a blocking finding. Don't approve it by assumption, and don't
-  reject it by assumption.
+- Trust the author's technical claims by default (see `AGENTS.md`). Being
+  unable to verify a claim isn't a reason to block. Block only when you have
+  evidence that it's wrong; otherwise, at most, ask one non-blocking question.
 
 ## Without internal access
 
-- Check claims against public sources from `AGENTS.md`. If a claim can only be
-  checked in an internal repository, say what you couldn't verify and ask the
-  author.
+- Check claims against public sources from `AGENTS.md` when a claim looks
+  doubtful. If it can only be checked in an internal repository, say what you
+  couldn't verify; that's a question for the author, not a blocking finding.
