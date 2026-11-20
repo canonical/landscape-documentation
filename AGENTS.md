@@ -1,143 +1,193 @@
 # Landscape documentation – agent guide
 
-This file orients AI coding agents working in this repository. It is context to
-improve agent-generated changes, not an enforcement mechanism and not a
-replacement for the contributor guide in [`docs/contributing.md`](docs/contributing.md).
-Support for `AGENTS.md` and GitHub instruction files varies by tool, so keep the
-most important rules here durable and concise.
+Guidance for AI agents working in this repository. It complements the contributor
+guide in [`docs/contributing.md`](docs/contributing.md); it doesn't replace review.
 
-## Repository purpose
+## Purpose, audience, and repository map
 
-- Landscape is Canonical's systems management tool for managing and monitoring
-  Ubuntu deployments (desktops, servers, cloud instances, and IoT devices).
-- This repository contains the Landscape product documentation. It does not
-  contain Landscape's source code.
-- The main audience is system administrators and technical operators who deploy and
-  run Landscape, along with related security, IT, and compliance roles.
-- Landscape uses a client–server model: an agent (Landscape Client) runs on each
-  managed machine and communicates with Landscape Server, which is administered
-  through the web portal or the API.
-- The documentation covers different Landscape editions (SaaS, Managed, and
-  self-hosted), different interfaces (web portal and API), different installation
-  methods (for example Quickstart, manual, Juju/charm), and multiple product
-  releases. Applicability often differs between these.
+- Landscape is Canonical's systems management tool for Ubuntu desktops, servers,
+  cloud instances, and IoT devices. Landscape Client runs on each managed machine
+  and talks to Landscape Server, which is administered through the web portal or
+  the API.
+- This repository holds the product documentation only, not product source code.
+- Readers are system administrators and technical operators, plus related
+  security, IT, and compliance roles.
+- Content is MyST Markdown under `docs/`, built with Sphinx (Canonical Sphinx
+  Stack) and organized by [Diátaxis](https://diataxis.fr/):
+  - `docs/tutorial.md`, `docs/how-to-guides/`, `docs/reference/` (including
+    `docs/reference/release-notes/`), `docs/explanation/`.
+  - `docs/what-is-landscape.md`: product overview and the edition definitions.
+  - `docs/index.md` and each section's `index.md`: landing pages and `{toctree}`.
+  - `docs/reuse/` and `**/_includes/`: snippets pulled in with `{include}`
+    (excluded from the build as standalone pages). `docs/reuse/substitutions.yaml`
+    defines MyST substitutions.
+  - `docs/redirects.txt`: redirects for moved, renamed, or deleted pages.
+  - `docs/.custom_wordlist.txt`: spelling exceptions.
+  - `docs/conf.py`: Sphinx configuration. `docs/_dev/`: Sphinx Stack tooling.
+  - `docs/scripts/`: helper scripts. `.github/workflows/`: CI and sync bots.
 
-## Repository structure
+## Build and checks
 
-Documentation source lives under `docs/`. Content follows the
-[Diátaxis](https://diataxis.fr/) framework with some additions:
+The first build creates `docs/.venv` and installs dependencies. Prerequisites:
+`make`, `python3`, `python3-venv`, `python3-pip`.
 
-- `docs/tutorial.md` – learning-oriented getting-started tutorial.
-- `docs/how-to-guides/` – task-oriented guides, grouped by topic.
-- `docs/reference/` – technical reference (API, configuration, logs, database,
-  networking, terms, and `docs/reference/release-notes/`).
-- `docs/explanation/` – concept and background material.
-- `docs/what-is-landscape.md` – product overview, including the edition
-  definitions.
-- `docs/contributing.md` – contributor documentation.
+Targets: `make install`, `make html` (fails on warnings), `make run` (build,
+watch, and serve at `http://127.0.0.1:8000`), `make spelling`, `make linkcheck`,
+`make vale`, `make woke`, `make lint-md`, `make pa11y`.
 
-Supporting files:
+Run them from the repository root or from `docs/`. They're equivalent except for
+`html` and `run`: from the root, these first run `docs/scripts/apply_overlay.py`,
+which merges the Debarchive OpenAPI examples into
+`docs/_static/openapi-with-examples.yaml` (as Read the Docs does). From `docs/`
+they skip that step, so the Debarchive API reference can be stale locally.
 
-- `docs/conf.py` – Sphinx configuration.
-- `docs/index.md` and the `index.md` file at the root of each section – landing
-  pages and `toctree` navigation.
-- `docs/reuse/` – reusable snippets and `substitutions.yaml` (MyST
-  substitutions).
-- `docs/redirects.txt` – redirects for moved, renamed, or deleted pages.
-- `docs/.custom_wordlist.txt` – spelling exceptions for the Vale spell check.
-- `docs/_dev/` – Canonical Sphinx Stack tooling and check configuration.
+Check policy (run what applies, nothing more):
 
-## Build and validation
+- Any docs edit: `make html` and `make spelling`.
+- Links added or changed: also `make linkcheck`.
+- Overlay or OpenAPI changes: also, from the root,
+  `docs/.venv/bin/python docs/scripts/apply_overlay.py`.
+- Don't run `vale`, `woke`, `pa11y`, or `lint-md` unless asked or CI reports a
+  failure.
 
-Run all commands from the `docs/` directory (the top-level `Makefile` forwards
-targets there, but running from `docs/` is the reliable path). The first build
-creates a Python virtual environment and installs dependencies.
+## Scope and proportionality
 
-```bash
-make install     # set up the virtualenv and dependencies
-make html        # build the docs (fails on Sphinx warnings)
-make run         # build, watch, and serve at http://127.0.0.1:8000
-make spelling    # spell check (Vale; exceptions in .custom_wordlist.txt)
-make linkcheck   # verify links
-make lint-md     # Markdown lint (pymarkdown)
-make vale        # Canonical style-guide check
-make woke        # inclusive-language check
-```
+- Change only what the task needs. List other observations at the end of your
+  response instead of fixing them.
+- Ask only questions whose answer changes the result. Batch them and keep them
+  precise.
+- Match effort to the change. A small, correct change gets a short answer.
+- Never run product installs or product commands on the user's machine. Test
+  procedures only on request, in a disposable environment (see the
+  `test-procedure` skill).
 
-Prerequisites for a local build: `make`, `python3`, `python3-venv`, and
-`python3-pip`.
+## Accuracy and applicability
 
-`make spelling` and `make linkcheck` are the two checks contributors are expected
-to pass, and they also run in CI. Run the checks relevant to your change; you do
-not need to restate their mechanical rules in prose.
+- Trust existing, contributor-provided content by default; don't routinely
+  re-verify or rewrite it. Raise a concern only when you have a specific reason,
+  and flag it for the contributor or a subject-matter expert (SME) rather than
+  silently changing it.
+- Don't infer Landscape behavior from terminology, UI labels, or nearby prose.
+  Verify claims you write against the sources below.
+- Don't invent commands, configuration keys, defaults, output, file paths, API
+  behavior, navigation paths, prerequisites, limitations, or troubleshooting
+  causes. In examples, use real content from this repository or neutral
+  placeholders.
+- Distinguish current availability from planned, preview, or future behavior.
+- Preserve uncertainty. Report missing or contradictory information; don't
+  resolve it with an assumption or a silent rewrite. Prefer exact, limited claims.
 
-## Authoring format and structure
+When a claim depends on applicability, check each of these and state the ones
+that matter:
 
-- Pages are Markdown (`.md`) using MyST syntax.
-- Follow the existing Diátaxis organization. Keep tutorials learning-oriented and
-  keep how-to guides task-oriented; do not turn a how-to guide into a tutorial.
-- Each page starts with a reference anchor `(slug)=` immediately above the single
-  `#` H1, followed by a short introduction before the first `##` heading.
-- Frontmatter uses a MyST `html_meta` `description`, as on existing pages.
-- Use `{ref}` for internal cross-references and descriptive link text. Use
-  `{toctree}` for navigation. Reuse shared content with `{include}` and MyST
-  substitutions from `docs/reuse/`.
-- Follow the conventions already visible in neighboring pages for headings,
-  anchors, code blocks, directives, admonitions, tables, images, and UI
-  terminology.
-- Keep UI documentation proportionate and lightweight. Do not describe every 
-  obvious interaction that the interface already makes clear.
-- Preserve good existing wording from subject-matter experts. Do not perform
-  broad cosmetic rewriting or unsolicited prose polishing.
-- When you move, rename, or delete a page, add a redirect to `docs/redirects.txt`
-  (the site uses the `dirhtml` builder; include trailing slashes and no file
-  extension).
+- **Release**: which Landscape release or releases.
+- **Edition**: Landscape SaaS, Managed Landscape, or self-hosted Landscape (terms
+  as in `docs/what-is-landscape.md`).
+- **Install method**: Quickstart, manual, Juju or Terraform, cloud images.
+- **Path**: fresh install, or upgrade or migration.
+- **Component**: Landscape Server, Landscape Client, charms, snaps, web portal,
+  REST API, or legacy API.
 
-## Landscape-specific accuracy rules
+## Sources and access
 
-Accuracy matters more than completeness. Treat these as the highest-value rules:
+Prefer, roughly in this order: product source, supplied design documents, current
+docs, official Canonical or Ubuntu docs, official upstream docs. Public sources:
 
-- Do not infer Landscape behavior from terminology, nearby prose, or UI labels
-  alone. Verify technical claims against authoritative sources for the task.
-- Do not invent commands, configuration keys, default values, output, file paths,
-  API behavior, navigation paths, prerequisites, limitations, or troubleshooting
-  causes.
-- Distinguish between the editions when applicability matters: Landscape SaaS,
-  Landscape Managed, and self-hosted Landscape. Some features are not available in
-  every edition. Do not generalize behavior across editions without evidence.
-- Distinguish Landscape Server, Landscape Client, and the interfaces used to
-  manage Landscape (web portal and API).
-- Identify version-specific behavior where relevant. Do not generalize current
-  behavior to every supported Landscape release, and do not describe planned,
-  preview, or unreleased behavior as currently available unless the task and
-  sources establish that context.
-- Preserve uncertainty when sources are incomplete or contradictory. Report
-  missing information rather than resolving it with an unsupported assumption.
-- Prefer exact, limited claims over broad claims that merely sound complete.
-- Use the edition and product terminology already used in the repository (see
-  `docs/what-is-landscape.md`). Do not introduce a new product taxonomy.
+- This repository and its Git history.
+- Public Canonical repositories, such as `canonical/landscape-ui`,
+  `canonical/landscape-client`, `canonical/landscape-server-operator`, and
+  `canonical/landscape-scripts`.
+- Charmhub and `snap info` for charm and snap channels.
+- Launchpad PPA publishing history for package versions.
+- Discourse history of the pre-migration docs.
 
-## Editing scope
+Rules:
 
-- Make focused changes that address the requested task. Avoid unrelated cleanup.
-- Avoid synonym substitution that does not improve accuracy or clarity, and
-  preserve technically precise language.
-- When a change affects navigation, terminology, version applicability, or shared
-  content, check the surrounding pages, parent landing pages, and includes.
-- Do not silently resolve an apparent product inconsistency by rewriting the
-  documentation. Flag inconsistencies that need product or SME judgment.
+- Prefer release tags over branch tips when checking behavior for a release.
+- Some product source repositories are internal. If you can't access a source,
+  say what you couldn't verify and ask. Don't guess.
+- Never put internal links, internal discussion, or confidential details in
+  public docs, commit messages, or PR text. Cite public changelog or release-note
+  entries instead.
+- Existing docs aren't authoritative when the task is to correct them.
 
-## Sources and verification
+## Generated and synced content
 
-Source availability depends on the task. When sources are available, prefer, in
-roughly this order:
+| What | Source | Edit instead |
+| --- | --- | --- |
+| `docs/_static/openapi.yaml` (Debarchive API) | Generated with `protoc-gen-openapi` from the Landscape proto definitions; updated by "update openapi.yaml from landscape-proto" PRs | Don't edit by hand. |
+| Debarchive API examples | `docs/_static/openapi-overlay.yaml`, merged by `docs/scripts/apply_overlay.py` | The overlay. Targets must be literal JSONPaths (no `*` or `[?`); then run the overlay script. |
+| Regions between `<!-- BEGIN_TF_DOCS -->` and `<!-- END_TF_DOCS -->` in `docs/reference/charm/terraform-*.md` | `terraform-docs`, run by `.github/workflows/update-terraform-docs.yml` against `canonical/landscape-server-operator` | Don't edit by hand. Fix the upstream Terraform module. Prose outside the markers is editable. |
+| Regions between `<!-- changelog-bot:*:start -->` and `<!-- changelog-bot:*:end -->` in release notes | Changelog bots, which keep the draft release notes updated until release | Don't edit by hand. Edit outside the markers. |
 
-- Landscape source repositories.
-- Supplied design or engineering documents for the task.
-- Existing current Landscape documentation.
-- Official Canonical or Ubuntu documentation.
-- Official upstream documentation.
+`docs/_static/openapi-with-examples.yaml` is build output and is gitignored.
 
-Existing public documentation is a useful reference, but it is not automatically
-authoritative when the task is specifically to correct it. Do not fabricate
-support for a claim; if you cannot verify something, say so.
+## Writing conventions
+
+Follow neighboring pages for headings, code blocks, directives, admonitions,
+tables, images, and version tabs. If you have access to the Landscape team's
+internal language and style guide, follow it. Otherwise follow neighboring pages.
+
+- **Page opening**: MyST `html_meta` `description` frontmatter, a `(label)=`
+  anchor directly above the single `#` title, then a short introduction before
+  the first `##` heading.
+- **Links and navigation**: `{ref}` with descriptive link text for internal
+  links; `{toctree}` for navigation. Keep toctrees and visible link groups on
+  landing pages consistent. When a change affects navigation, landing pages,
+  includes, or cross-references, update those too.
+- **Reuse**: shared text goes in `docs/reuse/` with `{include}`; shared values go
+  in `docs/reuse/substitutions.yaml`. A snippet edit affects every page that
+  includes it.
+- **Moves**: when you move, rename, or delete a page, add a line to
+  `docs/redirects.txt` (`old/path/ new/path/`, trailing slashes, no extension).
+  Keep or alias anchors that other pages use.
+- **Diátaxis**: identify the page type before restructuring. Tutorials teach;
+  how-to guides get a task done; reference is factual and scannable; explanation
+  covers concepts. Don't mix or invent types.
+- **Prerequisites**: include one only when it must be true before the reader can
+  complete the task.
+- **UI docs**: keep them lightweight. Don't narrate interactions the interface
+  already makes obvious.
+- **Wording**: use direct, precise language and shorter sentences. Avoid
+  marketing language, filler, and idioms. Preserve good SME wording; don't
+  substitute synonyms or polish prose that isn't part of the task.
+- **Landing pages**: a brief orientation, then links grouped by a structure that
+  any logical progression. Keep small landing pages small; don't repeat each
+ ere they help readers choose. Keep
+  small landing pages small; don't repeat each page's introduction.
+- **Terminology**: "Managed Landscape" (not "Landscape Managed"); "REST API" and
+  "legacy API"; "web portal" and "legacy web portal"; "instances" for managed
+  machines in prose, keeping "computers" where it's a literal UI label or API
+  name.
+
+Release notes:
+
+- Follow the existing page structure. State the release at page level, and name
+  the edition or component only where it differs.
+- Keep entry categories (added, changed, fixed, deprecated, removed, known
+  issues). Don't move entries between categories without evidence.
+- Describe the user-visible effect. Don't invent upgrade steps, compatibility
+  implications, breaking changes, or security impact.
+- Never add notes for a later release than the one being documented.
+
+## Versions
+
+Follow `docs/contributing.md` for which branch to target.
+
+## Skills
+
+Task-specific workflows live in `.agents/skills/`. If your agent doesn't load
+skills automatically, read the `SKILL.md` file before starting that kind of task.
+
+| Skill | Purpose | Path |
+| --- | --- | --- |
+| `plan-docs-for-change` | Decide what docs a product change needs, without editing | `.agents/skills/plan-docs-for-change/SKILL.md` |
+| `update-docs` | Make a defined docs change or carry out an approved plan | `.agents/skills/update-docs/SKILL.md` |
+| `edit-technical-draft` | Editorial pass on an engineer's technically correct draft | `.agents/skills/edit-technical-draft/SKILL.md` |
+| `test-procedure` | Check whether a documented procedure works | `.agents/skills/test-procedure/SKILL.md` |
+| `review-docs-change` | Review a docs PR or diff | `.agents/skills/review-docs-change/SKILL.md` |
+
+`docs/scripts/find_references.py` reports labels, inbound references, includes,
+toctree entries, redirects, substitutions, and generated markers for a page.
+Run it before renaming, moving, or deleting a page, or changing an anchor,
+include, or snippet.
