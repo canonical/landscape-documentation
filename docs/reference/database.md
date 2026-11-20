@@ -243,7 +243,6 @@ The knowledge database was deprecated in Landscape Server 25.10 and dropped in L
 - `annotation`
 - `ceph_usage`
 - `cloud_instance_metadata`
-- `computer_apt_preferences_file`
 - `computer_group`
 - `computer_packages`
 - `computer_packages_buffer`
