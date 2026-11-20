@@ -80,8 +80,13 @@ paths:
 
                      Some examples of using filters are:
 
-                       * `display_name="local"`  --> The local has the display name "local".
-                       * `display_name="local*"` --> The local has the prefix "local" in its display name.
+                       * `display_name="local"`  --> The local display name is "local", ignoring case.
+                       * `display_name="local*"` --> The local display name starts with "local", ignoring case.
+                       * `display_name="*local"` --> The local display name ends with "local", ignoring case.
+                       * `display_name="*local*"` --> The local display name contains "local", ignoring case.
+
+                     `display_name` matching is case-insensitive. A leading or trailing `*` is
+                     a wildcard; any other `*` is matched literally.
                   schema:
                     type: string
             responses:
@@ -356,8 +361,13 @@ paths:
 
                      Some examples of using filters are:
 
-                       * `display_name="mirror"`  --> The mirror has the display name "mirror".
-                       * `display_name="mirror*"` --> The mirror has the prefix "mirror" in its display name.
+                       * `display_name="mirror"`  --> The mirror display name is "mirror", ignoring case.
+                       * `display_name="mirror*"` --> The mirror display name starts with "mirror", ignoring case.
+                       * `display_name="*mirror"` --> The mirror display name ends with "mirror", ignoring case.
+                       * `display_name="*mirror*"` --> The mirror display name contains "mirror", ignoring case.
+
+                     `display_name` matching is case-insensitive. A leading or trailing `*` is
+                     a wildcard; any other `*` is matched literally.
                   schema:
                     type: string
             responses:
@@ -722,8 +732,13 @@ paths:
 
                      Some examples of using filters are:
 
-                       * `display_name="target"`  --> The publication target has the display name "target".
-                       * `display_name="target*"` --> The publication target has the prefix "target" in its display name.
+                       * `display_name="target"`  --> The publication target display name is "target", ignoring case.
+                       * `display_name="target*"` --> The publication target display name starts with "target", ignoring case.
+                       * `display_name="*target"` --> The publication target display name ends with "target", ignoring case.
+                       * `display_name="*target*"` --> The publication target display name contains "target", ignoring case.
+
+                     `display_name` matching is case-insensitive. A leading or trailing `*` is
+                     a wildcard; any other `*` is matched literally.
                   schema:
                     type: string
             responses:
@@ -916,11 +931,17 @@ paths:
 
                        * `source`
                        * `publication_target`
+                       * `display_name`
 
                      Some examples of using filters are:
 
                        * `source="locals/123"`  --> The publication has source "locals/123".
                        * `publication_target="publicationTargets/456"` --> The publication has target "publicationTargets/456".
+                       * `display_name="*noble*"` --> The publication display name contains "noble", ignoring case.
+
+                     `source` and `publication_target` require an exact match. `display_name`
+                     matching is case-insensitive; a leading or trailing `*` is a wildcard and
+                     any other `*` is matched literally.
                   schema:
                     type: string
             responses:
@@ -1529,12 +1550,12 @@ components:
                     type: array
                     items:
                         type: string
-                    description: List of architectures to fetch.
+                    description: List of architectures to fetch. This field cannot be changed after the mirror is created.
                 components:
                     type: array
                     items:
                         type: string
-                    description: List of components to fetch.
+                    description: List of components to fetch. This field cannot be changed after the mirror is created.
                 downloadInstaller:
                     type: boolean
                     description: Indicates if installer files should be downloaded.
