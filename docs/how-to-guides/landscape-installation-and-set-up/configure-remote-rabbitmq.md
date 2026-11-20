@@ -129,7 +129,7 @@ If Landscape Server is already set up, restart the Landscape services to apply t
 sudo lsctl restart
 ```
 
-If you're doing a new installation, continue with the {ref}`manual installation <how-to-manual-installation>` steps. The Landscape services start after you configure the web server.
+If you're doing a new installation, return to [Configure database and broker access](/how-to-guides/landscape-installation-and-set-up/manual-installation.md#configure-database-and-broker-access) in the manual installation guide and complete the remaining settings in `/etc/landscape/service.conf`. You've already configured `[broker]`. Then continue with the manual installation steps. After you [start the Landscape services](/how-to-guides/landscape-installation-and-set-up/manual-installation.md#start-landscape-services), return here to [verify the connection](#verify-the-connection).
 
 ## Verify the connection
 
