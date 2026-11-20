@@ -40,7 +40,7 @@ You may want to change the default timeout of 30 minutes in RabbitMQ. See {ref}`
 
 ### Create the Landscape user and virtual hosts
 
-Landscape Server uses two RabbitMQ virtual hosts: `landscape` and `landscape-hostagent`. Create a `landscape` user and give it permissions on both virtual hosts. Replace `<PASSWORD>` with a strong password of your choice. You'll need it later, when you configure the application server.
+Landscape Server uses two RabbitMQ virtual hosts: `landscape` and `landscape-hostagent`. Create a `landscape` user and give it permissions on both virtual hosts. Replace `<PASSWORD>` with a strong password of your choice. You'll need it later when you configure the application server.
 
 ```bash
 sudo rabbitmqctl add_user landscape <PASSWORD>
@@ -50,13 +50,11 @@ sudo rabbitmqctl add_vhost landscape-hostagent
 sudo rabbitmqctl set_permissions -p landscape-hostagent landscape ".*" ".*" ".*"
 ```
 
-The `".*"` characters in the `set_permissions` command are regular expressions that grant the `landscape` user configure, write, and read permissions on all resources in the virtual host.
-
 ### Listen on the network interface
 
 RabbitMQ must listen on a network interface that the application server can reach, not only on the loopback interface (`127.0.0.1`).
 
-Open `/etc/rabbitmq/rabbitmq-env.conf`. If it contains `NODE_IP_ADDRESS=127.0.0.1`, remove that line or comment it out to listen on all interfaces. Alternatively, set `NODE_IP_ADDRESS` to the IP address of the interface that the application server connects to. For example:
+Open `/etc/rabbitmq/rabbitmq-env.conf`. If it contains `NODE_IP_ADDRESS=127.0.0.1`, remove that line or comment it out to listen on all interfaces. Alternatively, set `NODE_IP_ADDRESS` to the IP address of the RabbitMQ server interface that the application server connects to. For example:
 
 ```ini
 NODE_IP_ADDRESS=192.168.122.200
@@ -119,7 +117,6 @@ user = landscape
 password = <PASSWORD>
 vhost = landscape
 hostagent_virtual_host = landscape-hostagent
-hostagent_task_queue = landscape-server-hostagent-task-queue
 ```
 
 Keep any other settings that already exist in the `[broker]` section. For a description of each setting, see {ref}`reference-service-conf`.
