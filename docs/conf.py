@@ -179,12 +179,14 @@ linkcheck_ignore = [
     # real URLs, so they 404 when linkcheck fetches them directly.
     r"https://github\.com/canonical/.*-operator\.git//.*",
     r"https?://landscape\.local(/.*)?",
+    r"https://bugs\.launchpad\.net/landscape/\+bug/1725282",
 ]
 
 # A regex list of URLs where anchors are ignored by 'make linkcheck'
 linkcheck_anchors_ignore_for_url = [
     r"https://github\.com/.*",
     r"https://ubuntu.com/landscape",
+    r"https://portal\.azure\.com/.*",
 ]
 
 # Give linkcheck multiple tries on failure
