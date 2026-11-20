@@ -17,7 +17,7 @@ This guide describes how to set up RabbitMQ on that separate machine and how to 
 ## Network requirements
 
 - The application server must be able to resolve and reach the RabbitMQ server.
-- The RabbitMQ server must accept TCP connections from the application server on the AMQP port. The default AMQP port is `5672`. If you use a TLS listener, open that port instead. RabbitMQ conventionally uses port `5671` for TLS.
+- The RabbitMQ server must accept TCP connections from the application server on the AMQP port. The default AMQP port is `5672`.
 
 For more information on the ports that Landscape components use, see {ref}`reference-internal-network-requirements`.
 
@@ -82,7 +82,7 @@ If a firewall runs on the RabbitMQ server, allow connections from the applicatio
 sudo ufw allow from <IP-OF-APP> to any port 5672 proto tcp
 ```
 
-If you use a TLS listener, use its port instead of `5672`. Only expose the AMQP port to the machines that run Landscape Server services.
+Only expose the AMQP port to the machines that run Landscape Server services.
 
 ## Configure Landscape Server to use the RabbitMQ server
 
@@ -123,16 +123,6 @@ hostagent_task_queue = landscape-server-hostagent-task-queue
 ```
 
 Keep any other settings that already exist in the `[broker]` section. For a description of each setting, see {ref}`reference-service-conf`.
-
-#### (Optional) Use TLS
-
-To encrypt the connection between Landscape Server and RabbitMQ, configure a TLS listener on the RabbitMQ server. For details, see the [RabbitMQ TLS documentation](https://www.rabbitmq.com/docs/ssl). Then, in the `[broker]` section on the application server:
-
-- Set `port` to the port of the RabbitMQ TLS listener.
-- Set `ssl_client_ca_cert` to the path of the CA certificate that signed the RabbitMQ server certificate.
-- (Optional) To authenticate with a client certificate (mTLS), also set `ssl_client_cert` and `ssl_client_private_key`.
-
-These files must be readable by the `landscape` system user. For more information, see {ref}`shared TLS client settings <shared-tls-client-settings>`. For an example of an mTLS configuration, see {ref}`howto-install-disa-stig-compliant`.
 
 ### Restart Landscape Server
 
