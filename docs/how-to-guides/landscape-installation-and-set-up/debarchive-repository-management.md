@@ -129,6 +129,8 @@ The available settings and their defaults are:
 | Filesystem published root | `deb.archive.filesystem-published-root` | `$SNAP_COMMON/publications` |
 | Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
 | JWT secret | `deb.archive.jwt.secret` | *(empty, read from service.conf)* |
+| Temporal address | `deb.archive.temporal.address` | *(empty)*. See {ref}`how-to-debarchive-temporal` |
+| Temporal namespace | `deb.archive.temporal.namespace` | `debarchive` |
 
 For example, to point at a database server on a different host:
 
@@ -265,6 +267,137 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:8100/v1/mirrors
 3. Confirm that you can add a mirror
 
 If the **Mirrors** page loads and allows you to begin adding mirrors, the Debarchive service is fully operational.
+
+(how-to-debarchive-temporal)=
+## (Optional) Run long-running operations with Temporal
+
+By default, Debarchive runs long-running operations, such as mirror syncs, in memory. If the Debarchive service restarts, any operation that's in progress is lost.
+
+You can configure Debarchive to run these operations on [Temporal](https://docs.temporal.io/temporal), a durable workflow engine. Debarchive then records each operation in its database and runs it as a Temporal workflow, so the operation continues after the Debarchive service restarts. Operations that run on Temporal can also be cancelled.
+
+Using Temporal is optional. If you don't configure it, Debarchive keeps running long-running operations in memory.
+
+Temporal requires Debarchive to use a PostgreSQL database, as described in this guide.
+
+You can use Temporal in one of two ways:
+
+- Run the Temporal server that's bundled in the `landscape-debarchive` snap. This is the recommended option.
+- Connect Debarchive to an external Temporal server that you deploy and manage yourself.
+
+### Use the bundled Temporal server (recommended)
+
+The `landscape-debarchive` snap includes a Temporal server. When you enable it, the snap:
+
+- Creates two databases, `temporal` and `temporal_visibility`, in the same PostgreSQL server as the Debarchive database, and keeps their schemas up to date
+- Starts the Temporal server, which listens only on the loopback interface (`127.0.0.1`)
+- Registers the Temporal namespace that Debarchive uses
+- Starts Debarchive and connects it to the bundled server
+
+The bundled server uses the same database user and password as Debarchive. It runs as a single process on the Debarchive machine.
+
+#### Allow the Debarchive database user to create databases
+
+The snap creates the Temporal databases with the database user that Debarchive connects as (`landscape_debarchive` if you followed this guide), so this user needs permission to create databases.
+
+- For Quickstart installations, run the following command on the Landscape Server machine.
+- For Manual installations, run the command on the PostgreSQL database server.
+
+```bash
+sudo -u postgres psql -c "ALTER ROLE landscape_debarchive CREATEDB;"
+```
+
+For **Manual installations** where the PostgreSQL server is on a separate host, also allow the Debarchive database user to connect to the `postgres`, `temporal`, and `temporal_visibility` databases from the application server. Add the following line to `/etc/postgresql/<VERSION>/main/pg_hba.conf` on the database server:
+
+```text
+host postgres,temporal,temporal_visibility landscape_debarchive <IP-OF-APP>/32 scram-sha-256
+```
+
+Then reload PostgreSQL:
+
+```bash
+sudo systemctl reload postgresql
+```
+
+#### Enable the bundled Temporal server
+
+Set the Temporal address to `internal`:
+
+```bash
+sudo snap set landscape-debarchive deb.archive.temporal.address=internal
+```
+
+The snap restarts its services when the configuration changes. On startup, the bundled Temporal server sets up its databases, so the first start can take longer than later ones.
+
+The bundled server listens on the following TCP ports on `127.0.0.1`. These ports must be available on the Debarchive machine: `6933`, `6934`, `6935`, `6939`, `7233`, `7234`, `7235`, and `7239`.
+
+#### Verify the bundled Temporal server
+
+Check the snap services:
+
+```bash
+sudo snap services landscape-debarchive
+```
+
+The `temporal` and `debarchive` services should be **active**. The `temporal-setup` service runs once to register the Temporal namespace and then exits, so it shows as **inactive**:
+
+```text
+Service                              Startup  Current   Notes
+landscape-debarchive.debarchive      enabled  active    -
+landscape-debarchive.temporal        enabled  active    -
+landscape-debarchive.temporal-setup  enabled  inactive  -
+```
+
+Check the Temporal server logs:
+
+```bash
+sudo snap logs landscape-debarchive.temporal -n 50
+```
+
+The logs should include `temporal address is internal; starting bundled temporal-server`.
+
+Check that the namespace was registered:
+
+```bash
+sudo snap logs landscape-debarchive.temporal-setup -n 50
+```
+
+The logs should include `temporal namespace "debarchive" created`, or `temporal namespace "debarchive" already exists` if the namespace was registered on an earlier start.
+
+Then check that Debarchive connected to Temporal:
+
+```bash
+sudo snap logs landscape-debarchive.debarchive -n 50
+```
+
+The logs should include a `temporal worker started` message.
+
+### Use an external Temporal server
+
+If you already run a Temporal server, or you need a Temporal deployment that you can scale or make highly available, you can connect Debarchive to it instead of using the bundled server. When you set an external address, the bundled Temporal server doesn't run.
+
+To set up a Temporal server, see the [Temporal self-hosted guide](https://docs.temporal.io/self-hosted-guide).
+
+Debarchive doesn't create the namespace on an external Temporal server. Before you configure Debarchive, create a [namespace](https://docs.temporal.io/namespaces) for it on your Temporal server. By default, Debarchive uses a namespace called `debarchive`.
+
+Set the address of your Temporal server's frontend service in `<HOST>:<PORT>` format. If your namespace isn't called `debarchive`, also set the namespace:
+
+```bash
+sudo snap set landscape-debarchive \
+    deb.archive.temporal.address=<HOST>:<PORT> \
+    deb.archive.temporal.namespace=<NAMESPACE>
+```
+
+```{note}
+The snap doesn't provide settings for TLS or authentication between Debarchive and an external Temporal server.
+```
+
+To verify the connection, check the Debarchive logs:
+
+```bash
+sudo snap logs landscape-debarchive.debarchive -n 50
+```
+
+The logs should include a `temporal worker started` message.
 
 ## Troubleshooting
 
