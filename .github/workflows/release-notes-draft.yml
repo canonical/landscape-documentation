@@ -19,6 +19,10 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: release-notes-draft
+  cancel-in-progress: false
+
 jobs:
   open-draft:
     runs-on: ubuntu-latest
@@ -80,7 +84,7 @@ jobs:
           (reference-release-notes-${anchor})=
           # ${rel} release notes
 
-          > Landscape Server ${rel} runs on Ubuntu 26.04 LTS Resolute Raccoon, 24.04 LTS Noble Numbat, or 22.04 LTS Jammy Jellyfish.
+          > TODO: update the supported Ubuntu releases for this release.
 
           \`\`\`{note}
           This page is a draft maintained automatically until release.
@@ -177,6 +181,7 @@ jobs:
             --head "canonical:${branch}" \
             --title "build: draft release notes for Landscape ${rel}" \
             --label changelog --label automation \
+            --draft \
             --body "$(cat <<'EOF'
           Shared draft of the in-development release notes. The per-repository
           changelog bots each own one marked island in this page and push their
