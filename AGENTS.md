@@ -25,6 +25,8 @@ guide in [`docs/contributing.md`](docs/contributing.md); it doesn't replace revi
   - `docs/.custom_wordlist.txt`: spelling exceptions.
   - `docs/conf.py`: Sphinx configuration. `docs/_dev/`: Sphinx Stack tooling.
   - `docs/scripts/`: helper scripts. `.github/workflows/`: CI and sync bots.
+  - `.github/copilot-instructions.md`: a short summary of this file for Copilot
+    surfaces that don't read `AGENTS.md`. Keep the two consistent.
 
 ## Build and checks
 
@@ -178,7 +180,9 @@ Release notes:
 
 ## Versions
 
-Follow `docs/contributing.md` for which branch to target.
+Open PRs against `main`, including fixes that also apply to older releases. Use
+a `release-XX.YY` branch only when a change applies only to an older LTS
+release.
 
 ## Skills
 
@@ -197,3 +201,8 @@ skills automatically, read the `SKILL.md` file before starting that kind of task
 toctree entries, redirects, substitutions, and generated markers for a page.
 Run it before renaming, moving, or deleting a page, or changing an anchor,
 include, or snippet.
+
+The script doesn't report links to auto-generated heading anchors
+(`[text](#heading-slug)`, enabled by `myst_heading_anchors = 4` in
+`docs/conf.py`). Renaming a heading that has no `(label)=` can break those links
+without a build warning, so search for the old slug before you rename one.

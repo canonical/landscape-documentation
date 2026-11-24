@@ -24,6 +24,10 @@ For each file, the report lists:
     docs/reuse/substitutions.yaml defines them;
   * generated-region markers it contains (terraform-docs, changelog bots).
 
+Not reported: links to auto-generated heading anchors (`[text](#heading-slug)`,
+enabled by `myst_heading_anchors = 4` in docs/conf.py). Renaming a heading that
+has no `(label)=` can break those links without a build warning.
+
 Exit status: 0 on success, 1 on a parse error, 2 on a usage error (unknown
 path or label). Nothing is reported after an error.
 """
