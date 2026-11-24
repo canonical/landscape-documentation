@@ -80,8 +80,14 @@ You also need the following, depending on your publication target type:
 
 This guide uses the `main` component and `amd64` architecture in `noble-backports` to keep the example mirror small. Larger distributions with more components and architectures require more storage.
 
+The machine where Debarchive runs always needs enough local disk space for the mirror itself. When you sync a mirror, Debarchive downloads the packages into its own storage (under `/var/snap/landscape-debarchive/common` by default), and they stay there after you publish. This applies even when the publication target is external, such as S3 or Swift: publishing uploads the packages from Debarchive's storage to the target, so the storage for the published repository is consumed at the target, not on the Debarchive machine. Plan for these two storage needs separately.
+
 ```{include} /reuse/filesystem-publication-target-disk-space.md
 ```
+
+The "roughly double" guidance above applies only to filesystem publication targets, where the published repository is written to a directory on the same Debarchive machine that also stores the synced mirror. With S3 or Swift publication targets, the Debarchive machine needs disk space only for the synced mirror.
+
+Mirrors that preserve the upstream signing key are handled differently. They aren't synced into Debarchive storage. When you publish, Debarchive downloads the packages from the upstream repository and writes them directly to the publication target. With an S3 or Swift target, this needs little local disk space on the Debarchive machine. With a filesystem target, the packages are written to the publication directory on the Debarchive machine, so plan for the full repository size there.
 
 For disk space estimates, see {ref}`how-to-heading-disk-space-requirements-2604`.
 
