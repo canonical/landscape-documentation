@@ -197,12 +197,21 @@ skills automatically, read the `SKILL.md` file before starting that kind of task
 | `test-procedure` | Check whether a documented procedure works | `.agents/skills/test-procedure/SKILL.md` |
 | `review-docs-change` | Review a docs PR or diff | `.agents/skills/review-docs-change/SKILL.md` |
 
-`docs/scripts/find_references.py` reports labels, inbound references, includes,
-toctree entries, redirects, substitutions, and generated markers for a page.
-Run it before renaming, moving, or deleting a page, or changing an anchor,
-include, or snippet.
+## Checking references
 
-The script doesn't report links to auto-generated heading anchors
-(`[text](#heading-slug)`, enabled by `myst_heading_anchors = 4` in
-`docs/conf.py`). Renaming a heading that has no `(label)=` can break those links
-without a build warning, so search for the old slug before you rename one.
+Before you rename, move, or delete a page, or change a label, heading, include,
+snippet, or substitution, search `docs/` and `README.md` (which `docs/index.md`
+includes) for:
+
+- the label, in `{ref}` roles and in `(#label)` or `(label)` Markdown links;
+- the file path, in `{include}` directives (relative or starting with `/`),
+  `{doc}` roles, and `.md` links;
+- the docname, in `{toctree}` entries, including `:glob:` patterns;
+- the page path, in `docs/redirects.txt`;
+- the substitution key, as `{{ key }}`;
+- the heading's slug, in `(#slug)` links, when you rename a heading that has no
+  `(label)=`. `myst_heading_anchors = 4` in `docs/conf.py` generates these
+  anchors.
+
+Update what you find. `make html` catches broken `{ref}` links, but not broken
+Markdown links or missing redirects.

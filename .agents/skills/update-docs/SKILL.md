@@ -31,17 +31,12 @@ working. Shared rules are in `AGENTS.md`; this skill doesn't repeat them.
    notes. State applicability only where it matters (see the checklist in
    `AGENTS.md`).
 4. **Check ripple effects.** When you rename, move, or delete a page, or change
-   a label, an include, a snippet, or a substitution, run:
-
-   ```bash
-   python3 docs/scripts/find_references.py <path-or-label>
-   ```
-
-   Update every inbound reference and toctree entry it reports, and any
-   redirect it lists that points to the old path. For a moved or deleted page,
-   also add a new redirect (format in `AGENTS.md`). To retire a label that other
-   pages or external links may use, keep it as an alias: a second `(label)=`
-   line above the heading that replaces it.
+   a heading, a label, an include, a snippet, or a substitution, follow
+   "Checking references" in `AGENTS.md`. Update every inbound reference and
+   toctree entry you find, and any redirect that points to the old path. For a
+   moved or deleted page, also add a new redirect (format in `AGENTS.md`). To
+   retire a label that other pages or external links may use, keep it as an
+   alias: a second `(label)=` line above the heading that replaces it.
 5. **Run the tiered checks** from "Build and checks" in `AGENTS.md`, and fix
    failures your change caused. Don't fix unrelated failures; report them.
 

@@ -30,8 +30,8 @@ Turn a product change into a short, evidence-backed docs plan. Shared rules
    - reference pages (configuration, API, charm, logs);
    - explanation pages that describe the behavior;
    - landing pages and toctrees, if a new page might be needed;
-   - snippets in `docs/reuse/` and `**/_includes/`. Use
-     `docs/scripts/find_references.py` to see which pages include them.
+   - snippets in `docs/reuse/` and `**/_includes/`. Search for `{include}`
+     directives that use them to see which pages include them.
 3. **Choose the smallest change that serves the reader.** Prefer extending an
    existing page over creating one. One sentence, one table row, or one
    configuration entry may be enough. "No docs change needed" is a valid result;

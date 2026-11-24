@@ -28,8 +28,8 @@ rules are in `AGENTS.md`; this skill doesn't repeat them.
    listed in "Generated and synced content" in `AGENTS.md`.
 5. **Check ripple effects for ripple-prone files.** These are snippets in
    `docs/reuse/` and `**/_includes/`, `docs/reuse/substitutions.yaml`, changed
-   or removed labels, and renamed, moved, or deleted pages. Run
-   `docs/scripts/find_references.py` on them, and check that inbound references,
+   or removed labels and headings, and renamed, moved, or deleted pages. Using
+   "Checking references" in `AGENTS.md`, check that inbound references,
    toctrees, and `docs/redirects.txt` are updated. For a snippet change, check
    that the new text reads correctly on every page that includes it. Check
    new Markdown-style internal links by hand; the build doesn't (see

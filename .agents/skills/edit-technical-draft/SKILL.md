@@ -45,8 +45,7 @@ technically. Shared rules are in `AGENTS.md`; this skill doesn't repeat them.
    - **Obvious UI narration**: remove clicks and descriptions the interface
      already makes clear. Keep anything non-obvious.
    - **Headings, anchors, and terminology**: follow `AGENTS.md`. When you change
-     a heading that has a label, or a label, check inbound references with
-     `docs/scripts/find_references.py`.
+     a heading or a label, follow "Checking references" in `AGENTS.md`.
 5. **Never change technical content.** Leave commands, values, configuration
    keys, versions, names, and claims exactly as written, even if you suspect
    they're wrong. Raise each doubt as a question with its location.
