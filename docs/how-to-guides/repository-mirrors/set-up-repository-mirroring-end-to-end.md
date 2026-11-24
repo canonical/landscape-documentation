@@ -104,7 +104,7 @@ A publication target is the storage location where your published repository is 
     - **Bucket name**: the bucket's name.
     - **AWS access key ID**: your access key ID.
     - **AWS secret access key**: your secret access key.
-    - **Endpoint** (optional): leave this empty for Amazon S3. For other S3-compatible object stores, enter the object store's hostname. If you set an endpoint, the region is ignored.
+    - **Endpoint** (optional): leave this empty for Amazon S3. For other S3-compatible object stores, enter the object store's hostname. If you set an endpoint, the region is ignored. If your object store is on a private network, endpoint validation fails unless you enable `deb.archive.allow-private-ips` on the Debarchive snap; see {ref}`how-to-debarchive-allow-private-ips`.
     - **Prefix** (optional): a path in the bucket to publish under. This guide leaves it empty, so the repository is published at the root of the bucket.
 1. Click **Add publication target**.
 ````

@@ -125,6 +125,7 @@ The available settings and their defaults are:
 | Database SSL client key | `deb.archive.database.ssl-key` | *(empty)* — path to the private key for the client certificate; must be set together with the SSL certificate |
 | Logging level | `deb.archive.logging.level` | `info` |
 | Human-readable logs | `deb.archive.logging.human-readable` | `false` |
+| Allow private IP addresses | `deb.archive.allow-private-ips` | `false` |
 | Filesystem storage path | `deb.archive.filesystem-storage-path` | `$SNAP_COMMON/filesystem_storage` |
 | Filesystem published root | `deb.archive.filesystem-published-root` | `$SNAP_COMMON/publications` |
 | Pagination secret | `deb.archive.pagination.secret` | *(empty, read from service.conf)* |
@@ -147,6 +148,29 @@ sudo snap restart landscape-debarchive
 ```
 
 The snap automatically restarts when configuration changes are applied via `snap set`.
+
+(how-to-debarchive-allow-private-ips)=
+### (Optional) Allow private-network S3 endpoints
+
+For security, Debarchive blocks publication targets whose endpoints resolve to private, loopback, link-local, or unspecified network addresses. This protects against server-side request forgery (SSRF), where an attacker with access to the web portal could make the service send requests to internal hosts.
+
+If you use an S3-compatible object store on your internal network (for example, MinIO on a private subnet), creating or publishing to the S3 publication target fails with an error such as:
+
+```text
+storage credentials validation failed: publication target backend configuration is invalid: invalid S3 endpoint URL: cannot allow URL "<endpoint>": cannot allow private network address: blocked for security
+```
+
+To allow endpoints on private networks, enable the setting:
+
+```bash
+sudo snap set landscape-debarchive deb.archive.allow-private-ips=true
+```
+
+When this setting is enabled, `http://` endpoints are also accepted for S3 publication targets; otherwise, only `https://` endpoints are accepted. The same setting applies to the authentication and storage URLs of Swift publication targets.
+
+```{warning}
+Keep `deb.archive.allow-private-ips` set to `false` unless you need to publish to an object store on a private network. Enabling it removes the SSRF protection, so anyone who can create or edit publication targets can point Debarchive at arbitrary internal hosts, including localhost and link-local addresses such as cloud metadata services.
+```
 
 (how-to-debarchive-filesystem-publications)=
 ## Configure the root directory for filesystem publications
