@@ -61,4 +61,4 @@ We also have the following explanations about security in Landscape:
 
 - [Ubuntu Pro documentation](https://documentation.ubuntu.com/pro/)
 - [Ubuntu Security documentation](https://ubuntu.com/security)
-- [Ubuntu Security | Security compliance and certifications for 22.04](https://ubuntu.com/security/certifications/docs/2204)
+- [Ubuntu Security | Security compliance and certifications for 22.04](https://documentation.ubuntu.com/security/compliance/)

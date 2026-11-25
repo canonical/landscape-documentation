@@ -103,6 +103,10 @@ The same access group of this script will be assigned to the new profile.
      - **All instances**: The profile will affect all instances in the same access group as the profile.
      - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected.
 
+```{note}
+Scheduled script profile runs may occur later than the selected date and time.
+```
+
 Once you've created your profile, you can edit, archive, and more using the dot menu under **Actions** for each profile.
 
 ### Archive a script profile

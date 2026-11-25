@@ -282,6 +282,10 @@ Each `trigger_type` has corresponding required parameters.
 - `start_after`: An ISO 8601-formatted datestamp that sets the earliest time after which the profile should be scheduled to execute.
 - `interval`: A 5 digit, [Cron](https://en.wikipedia.org/wiki/Cron) string.
 
+```{note}
+Scheduled script profile runs may occur later than the selected date and time.
+```
+
 ## PATCH `/script-profiles/<id>`
 
 Update a script profile.

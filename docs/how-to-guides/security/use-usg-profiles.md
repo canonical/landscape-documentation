@@ -62,6 +62,10 @@ In the USG profile creation form, complete the following fields:
   - **Associate to all instances**: The profile will affect all instances in the same access group as the profile
   - **Tag(s)**: Only instances having the specific tag(s), in the same access group as the profile will be affected
 
+```{note}
+Scheduled USG profile runs may occur later than the selected date and time.
+```
+
 After you've created your USG profile, you can view, download audit reports, edit, run, duplicate, or archive it using the dot menu under **Actions**.
 
 ## Download audit for a USG profile

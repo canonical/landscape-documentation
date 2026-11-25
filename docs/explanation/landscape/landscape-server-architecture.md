@@ -24,7 +24,7 @@ A Landscape Server deployment has eight required services:
 
 There are also optional services. Without these, Landscape Server is usable, but certain features will not be available:
 
-* [Debarchive](#deb-archive) - for repository mirroring and publishing
+* [Debarchive](#debarchive) - for repository mirroring and publishing
 * [Hostagent consumer](#hostagent-consumer) - for WSL instance management
 * [Hostagent messenger](#hostagent-messenger) - for WSL instance management
 * [Package search](#package-search) - for improved package management performance
@@ -116,6 +116,7 @@ Debarchive uses its own PostgreSQL database within the same cluster as Landscape
 
 * {ref}`Set up Debarchive <how-to-debarchive-repository-management>`
 * {ref}`Repository mirroring explanation <explanation-repo-mirroring>`
+* {ref}`Debarchive API reference <reference-api-debarchive>`
 
 (explanation-server-architecture-package-upload)=
 ### Package upload

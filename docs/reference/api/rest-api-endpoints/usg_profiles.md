@@ -112,11 +112,15 @@ Create a USG profile. The new USG profile will perform its first run according t
 
 Required parameters:
 
-- `benchmark`: The USG benchmark the USG profile will enforce. See the [Ubuntu Security Guide](https://ubuntu.com/security/certifications/docs/usg) for options.
+- `benchmark`: The USG benchmark the USG profile will enforce. See the [Ubuntu Security Guide](https://documentation.ubuntu.com/security/compliance/usg/) for options.
 - `mode`: The run mode of the profile. One of `"audit"`, `"fix-audit"`, or `"fix-restart-audit"`.
 - `schedule`: An [RFC 5545 "Recurrence Rule"](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10), determining how frequently the profile will audit its instances. Cannot be more frequent than weekly.
 - `title`: The display name of the profile.
 - `start_date`: An ISO 8601-formatted datestamp that sets the first run time of the profile. If it is the current date or in the past, the profile will start its first run immediately.
+
+```{note}
+Scheduled USG profile runs may occur later than the selected date and time.
+```
 
 Optional parameters:
 

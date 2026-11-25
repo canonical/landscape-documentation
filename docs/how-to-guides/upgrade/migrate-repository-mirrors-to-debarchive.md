@@ -458,15 +458,22 @@ sudo snap unset landscape-debarchive deb.archive.pagination.secret
 
 ## Publish the migrated repositories
 
-After upgrading to Landscape 26.04 LTS, publish your migrated mirrors and local repositories so they're accessible to client machines. This involves creating a publication target and a publication in the Landscape web portal.
+After upgrading to Landscape 26.04 LTS, publish your migrated mirrors and local repositories so they're accessible to client machines. This involves creating a publication target and a publication in the Landscape web portal. For a complete example, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
 
 ### 1. Create a publication target
 
-In the Landscape web portal, navigate to **Repositories > Publication Targets** and create a new publication target. For a filesystem target that serves repositories from the Landscape Server itself, set the path to the directory where published repositories should be written.
+In the Landscape web portal, navigate to **Repositories > Publication targets** and create a new publication target. For details, see {ref}`how-to-heading-create-new-publication-target`.
+
+For a filesystem target, set the path to the directory where the published repository should be written:
+
+```{include} /reuse/filesystem-publication-target-path.md
+```
+
+To change the published root, see {ref}`how-to-debarchive-filesystem-publications`.
 
 ### 2. Create a publication
 
-Navigate to **Repositories > Publications** and create a new publication. Select the migrated mirror or local repository as the source, choose the publication target you created, and configure the distribution, architectures, and GPG signing key.
+Navigate to **Repositories > Publications** and create a new publication. Select the migrated mirror or local repository as the source, choose the publication target you created, and configure the distribution, architectures, and GPG signing key. For details, see {ref}`how-to-heading-create-new-publication`.
 
 ### 3. Publish
 
@@ -474,7 +481,7 @@ Trigger the publication. Landscape will generate the repository metadata and mak
 
 ## Update client machines
 
-After publishing, update the repository profiles on your managed machines to point to the new Debarchive publication URLs instead of the pre-26.04 repository paths.
+After publishing, update the repository profiles on your managed machines to point to the new Debarchive publication URLs instead of the pre-26.04 repository paths. For instructions, see {ref}`how-to-create-repo-profile`.
 
 The pre-26.04 repository was served at:
 
@@ -482,7 +489,7 @@ The pre-26.04 repository was served at:
 deb https://$LANDSCAPE_FQDN/repository/standalone/ubuntu <codename>-<pocket> <components>
 ```
 
-The new Debarchive filesystem publications can be served from the configured published root path using a web server, such as Nginx or Apache. Consult your publication target configuration for the exact URL.
+Landscape doesn't serve Debarchive filesystem publications. To serve them with a web server, such as Apache or Nginx, see {ref}`how-to-debarchive-filesystem-publications`. The URL to use in your repository profiles depends on your web server configuration.
 
 ## See also
 

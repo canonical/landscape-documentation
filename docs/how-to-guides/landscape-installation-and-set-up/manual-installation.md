@@ -169,7 +169,7 @@ sudo add-apt-repository <LANDSCAPE_PPA>
 ### Install the server package
 
 ```{warning}
-Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x, so the Quickstart installation is not supported on Ubuntu 26.04. For a manual installation on Ubuntu 26.04, RabbitMQ must run on a separate machine with Ubuntu 22.04 LTS or Ubuntu 24.04 LTS.
+Landscape requires RabbitMQ 3.x. RabbitMQ 4.0 dropped support for the AMQP 0-8 protocol that Landscape depends on, so RabbitMQ 4.0 and later are not supported. Ubuntu 26.04 LTS (Resolute) ships RabbitMQ 4.x, so the Quickstart installation is not supported on Ubuntu 26.04. For a manual installation on Ubuntu 26.04, RabbitMQ must run on a separate machine with Ubuntu 22.04 LTS or Ubuntu 24.04 LTS. For more information, see {ref}`how-to-configure-remote-rabbitmq`.
 ```
 
 On an Ubuntu 22.04 or 24.04 application server, install Landscape and RabbitMQ:
@@ -199,6 +199,8 @@ If you don't have a legacy license file, Landscape will manage client machines w
 ### Configure rabbitmq
 
 The following steps configure a local RabbitMQ server on Ubuntu 22.04 or 24.04.
+
+If your application server runs Ubuntu 26.04 LTS, skip this section and set up RabbitMQ on a separate Ubuntu 22.04 LTS or Ubuntu 24.04 LTS machine instead. For details, see {ref}`how-to-configure-remote-rabbitmq`.
 
 ```{note}
 You may want to change the default timeout of 30 minutes in RabbitMQ. See {ref}`how-to-configure-rabbitmq`.
@@ -238,6 +240,7 @@ Section `[stores]`:
 Section `[broker]`:
 
 - Replace the `password` value with the password chosen above when configuring rabbitmq
+- If RabbitMQ runs on a separate machine (required for an Ubuntu 26.04 LTS application server), set `host` to the IP or hostname of the RabbitMQ server. If RabbitMQ doesn't listen on the default port (`5672`), also set `port`. For details, see {ref}`how-to-configure-remote-rabbitmq`
 
 Section `[schema]`:
 

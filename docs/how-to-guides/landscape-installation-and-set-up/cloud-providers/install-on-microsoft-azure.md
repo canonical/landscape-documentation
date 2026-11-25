@@ -9,6 +9,10 @@ myst:
 
 This guide provides an example of how to install and set up your Landscape server on Microsoft Azure with [cloud-init](https://cloudinit.readthedocs.io/en/latest/). The instructions here can be used for standard or FIPS-compliant deployments.
 
+```{tip}
+To deploy Landscape Server from the Azure portal without building the VM yourself, you can use the Landscape managed application in the Azure Marketplace. See {ref}`how-to-deploy-from-azure-marketplace`. Use this guide instead when you want full control of the VM and its cloud-init configuration.
+```
+
 ```{note}
 For the most up-to-date documentation on Microsoft Azure, see [Microsoft's Azure documentation](https://learn.microsoft.com/en-us/azure).
 ```

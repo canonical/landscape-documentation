@@ -1,0 +1,1 @@
+Repository management requires the Debarchive service. To set it up, see {ref}`how-to-debarchive-repository-management` for Quickstart and Manual installations, or {ref}`how-to-juju-ha-installation` for Juju deployments.
