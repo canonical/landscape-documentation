@@ -157,7 +157,7 @@ For security, Debarchive blocks publication targets whose endpoints resolve to p
 If you use an S3-compatible object store on your internal network (for example, MinIO on a private subnet), creating or publishing to the S3 publication target fails with an error such as:
 
 ```text
-storage credentials validation failed: publication target backend configuration is invalid: invalid S3 endpoint URL: cannot allow URL "<endpoint>": cannot allow private network address: blocked for security
+storage credentials validation failed: publication target backend configuration is invalid: invalid S3 endpoint URL: cannot allow host "<hostname>": address blocked for security: private network address
 ```
 
 To allow endpoints on private networks, enable the setting:
