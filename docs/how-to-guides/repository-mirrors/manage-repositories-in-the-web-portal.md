@@ -92,7 +92,9 @@ Landscape doesn't serve filesystem publication targets. To serve them with Apach
 ```{include} /reuse/filesystem-publication-target-disk-space.md
 ```
 
-For S3 publication targets, if you use an S3-compatible object store other than Amazon S3, enter the object store's hostname in the **Endpoint** field. If the object store is on a private network, endpoint validation fails unless you enable `deb.archive.allow-private-ips` on the Debarchive snap; see {ref}`how-to-debarchive-allow-private-ips`. If you set a **Prefix**, the repository is published under that path in the bucket, and the URL in your repository profile must include it.
+For S3 publication targets, if you use an S3-compatible object store other than Amazon S3, enter the object store's hostname in the **Endpoint** field. If you set a **Prefix**, the repository is published under that path in the bucket, and the URL in your repository profile must include it.
+
+For S3 and Swift publication targets, if the object store's endpoint or authentication URL is on a private network, endpoint validation fails unless you enable `deb.archive.allow-private-ips` on the Debarchive snap; see {ref}`how-to-debarchive-allow-private-ips`.
 
 For a complete example with S3 and filesystem publication targets, see {ref}`how-to-set-up-repository-mirroring-end-to-end`.
 
