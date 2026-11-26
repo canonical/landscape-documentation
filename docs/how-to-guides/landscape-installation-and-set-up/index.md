@@ -83,6 +83,7 @@ Configure supporting services for your Landscape deployment.
 :maxdepth: 1
 
 Configure RabbitMQ <configure-rabbitmq>
+Use a remote RabbitMQ server <configure-remote-rabbitmq>
 Configure Outbox <configure-outbox>
 Configure Task Handler <configure-task-handler>
 Configure Postfix <configure-postfix>

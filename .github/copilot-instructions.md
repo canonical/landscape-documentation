@@ -1,30 +1,31 @@
-# GitHub Copilot instructions – Landscape documentation
+# Copilot instructions: Landscape documentation
 
-Consult [`AGENTS.md`](../AGENTS.md) before substantial work. It holds the full
-repository guidance; this file summarizes the highest-impact rules because not
-every Copilot surface loads `AGENTS.md`.
+The full guidance is in [`AGENTS.md`](../AGENTS.md). Read it before substantial
+work. Some Copilot surfaces read only this file, so it repeats the core rules.
 
-This repository is Landscape's product documentation, written in MyST Markdown
-under `docs/` and built with Sphinx (Canonical Sphinx Stack), organized by
-Diátaxis.
+This repository holds Landscape's product documentation: MyST Markdown under
+`docs/`, built with Sphinx (Canonical Sphinx Stack) and organized by Diátaxis.
 
-Core rules:
+- Change only what the task needs. Preserve existing SME wording. List other
+  problems you notice instead of fixing them.
+- Don't infer Landscape behavior from terminology, UI labels, or nearby prose.
+  Don't invent commands, configuration keys, defaults, output, file paths, API
+  behavior, navigation paths, prerequisites, or troubleshooting causes.
+- State applicability where it matters: release; edition (Landscape SaaS,
+  Managed Landscape, or self-hosted Landscape); install method; fresh install or
+  upgrade; component (Landscape Server, Landscape Client, web portal, or API).
+- Distinguish current behavior from planned or preview behavior. Report missing
+  or contradictory information instead of resolving it with an assumption.
+- Don't hand-edit generated content: `docs/_static/openapi.yaml`, regions
+  between `BEGIN_TF_DOCS` and `END_TF_DOCS` markers, or `changelog-bot` regions.
+  `AGENTS.md` lists where to make those changes.
+- Use `{ref}` for internal links. When you move, rename, or delete a page, add a
+  line to `docs/redirects.txt`.
+- Open PRs against `main`.
+- For any docs edit, run `make html` and `make spelling` from `docs/`. Also run
+  `make linkcheck` when links change.
+- Never put internal links or confidential details in public docs, commit
+  messages, or PR text.
 
-- Make focused changes that address the requested task. Avoid unrelated cleanup
-  and cosmetic rewording; preserve technically precise, existing SME wording.
-- Do not infer Landscape behavior from terminology, UI labels, or nearby prose.
-  Verify technical claims against authoritative sources for the task.
-- Do not invent commands, configuration, defaults, output, file paths, API
-  behavior, UI navigation paths, prerequisites, or troubleshooting causes.
-- Check edition and version applicability when it matters. Distinguish Landscape
-  SaaS, Landscape Managed, and self-hosted Landscape, and distinguish Landscape
-  Server, Landscape Client, the web portal, and the API. Do not generalize a
-  feature across editions or releases without evidence.
-- Distinguish current availability from planned, preview, or future behavior.
-- Preserve uncertainty. Report missing or contradictory information instead of
-  resolving it with an assumption.
-- Run the checks relevant to your change from `docs/` (for example
-  `make spelling`, `make linkcheck`, `make html`). Do not restate the mechanical
-  formatting rules already enforced in CI.
-
-Path-specific guidance lives in `.github/instructions/`.
+Task workflows for planning, updating, editing, testing, and reviewing docs are
+in `.agents/skills/*/SKILL.md`.

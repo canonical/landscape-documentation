@@ -7,6 +7,10 @@ myst:
 (reference-api-debarchive)=
 # Debarchive API
 
+The endpoints available here are related to repository management and are available only on self-hosted deployments.
+
+In the request examples, replace `landscape.example.com` with your Landscape Server hostname.
+
 ```{raw} html
 <style>
   /* Neutralize Furo's TOC-error injection — Scalar may portal content outside
@@ -44,7 +48,7 @@ myst:
     url: '../../../_static/openapi-with-examples.yaml',
     theme: 'default',
     servers: [
-      { url: 'https://landscape.canonical.com/api/debarchive', description: 'Production' },
+      { url: 'https://landscape.example.com/debarchive', description: 'Self-hosted' },
     ],
     withDefaultFonts: false,
     showSidebar: false,

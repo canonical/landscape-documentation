@@ -169,7 +169,7 @@ If for any reason you suspect that the key has been compromised, create a new ke
 
 To harden your deployment, you also need to harden the Ubuntu installations that Landscape is deployed on. The best way to ensure your Ubuntu installations are hardened is to make them compliant with security benchmarks.
 
-Ubuntu LTS releases with Ubuntu Pro can take advantage of the [Ubuntu Security Guide](https://ubuntu.com/security/certifications/docs) to ensure they are secure.
+Ubuntu LTS releases with Ubuntu Pro can take advantage of the [Ubuntu Security Guide](https://documentation.ubuntu.com/security/compliance/usg/) to ensure they are secure.
 
 ## Harden Juju
 
