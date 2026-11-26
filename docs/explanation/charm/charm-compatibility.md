@@ -175,3 +175,47 @@ RabbitMQ Server integration varies by Landscape Server version:
 - Relation: `landscape-server:amqp` ↔ `rabbitmq-server:amqp`
 
 - [RabbitMQ Server on Charmhub](https://charmhub.io/rabbitmq-server)
+
+## Juju version compatibility
+
+| Charm | Juju 3 | Juju 4 |
+| --- | --- | --- |
+| `landscape-server` | Yes | Yes (workaround required, see below) |
+| `landscape-client` | Yes | Yes |
+| `landscape-debarchive` | Yes | Yes |
+| `landscape-task-handler` | Yes | Yes |
+
+### Juju 4 and landscape-server
+
+`postgresql` and `rabbitmq-server` cannot be deployed directly in a Juju 4
+model -- both explicitly declare `assumes: juju < 4.0.0`:
+
+- `postgresql` (all channels, including `16/edge`) -- rejected at deploy time
+- `rabbitmq-server` -- calls `leader-get` and `leader-set` hook tools removed
+  in Juju 4.0, failing during install with `FileNotFoundError: 'leader-get'`
+
+**Workaround:** deploy `postgresql` and `rabbitmq-server` in a Juju 3 model and
+consume them from the Juju 4 model via cross-model relations (CMR). The
+`landscape-server` charm itself runs correctly on Juju 4 once those relations
+are in place.
+
+```bash
+# In the Juju 3 model, offer postgresql and rabbitmq-server
+juju switch <juju3-controller>:<model>
+juju offer postgresql:database pg-database
+juju offer rabbitmq-server:amqp rabbit-amqp
+
+# In the Juju 4 model, consume the offers and integrate
+juju switch <juju4-controller>:<model>
+juju consume <juju3-controller>:admin/<model>.pg-database
+juju consume <juju3-controller>:admin/<model>.rabbit-amqp
+juju integrate landscape-server:database pg-database
+juju integrate landscape-server:inbound-amqp rabbit-amqp
+juju integrate landscape-server:outbound-amqp rabbit-amqp
+juju integrate landscape-task-handler:task-db pg-database
+juju integrate landscape-debarchive:database pg-database
+```
+
+Note that cross-model relations with subordinate charms between Juju 3 and Juju 4
+controllers do not work. Any subordinate charms must be deployed locally in each
+model.
