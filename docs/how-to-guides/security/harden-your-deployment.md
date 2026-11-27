@@ -10,6 +10,7 @@ myst:
 
 You have many options when hardening your Landscape deployment.
 
+(how-to-harden-deployment-network)=
 ## Harden the network
 
 The only application in your Landscape server deployment that should be exposed to incoming external traffic is the reverse proxy, which is either HAProxy or Apache. The reverse proxy listens on these frontend ports:
@@ -339,8 +340,10 @@ sudo lsctl restart
 ```
 
 ```{important}
-These settings are intended for self-hosted deployments where Landscape Client connects to the message server directly. The message server terminates TLS itself, so it can't sit behind a reverse proxy that terminates TLS and forwards `/message-system` over plain HTTP, such as the Apache configuration in {ref}`how-to-manual-installation`. A proxy in front of the message server must pass the connection through unchanged.
+These settings are intended for self-hosted deployments where Landscape Client connects to the message server without a TLS-terminating reverse proxy in between. The message server terminates TLS itself, so it can't sit behind a reverse proxy that terminates TLS and forwards `/message-system` over plain HTTP, such as the Apache configuration in {ref}`how-to-manual-installation`.
 ```
+
+To keep the message server ports internal, as described in {ref}`how-to-harden-deployment-network`, we strongly recommend placing a TCP-passthrough proxy in front of the message server, such as HAProxy in TCP mode. The proxy forwards connections unchanged to the message server ports and can spread them across workers. Only the proxy port is exposed, and clients use the proxy's address in their `url`. Connect clients directly to the message server only for testing.
 
 With mTLS enabled, the message server requires a client certificate on every connection to its port, before any request is handled. Every client of that port must present a certificate issued by the same CA, including:
 
