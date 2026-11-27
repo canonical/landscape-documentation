@@ -10,6 +10,7 @@ myst:
 
 You have many options when hardening your Landscape deployment.
 
+(how-to-harden-deployment-network)=
 ## Harden the network
 
 The only application in your Landscape server deployment that should be exposed to incoming external traffic is the reverse proxy, which is either HAProxy or Apache. The reverse proxy listens on these frontend ports:
@@ -275,6 +276,7 @@ sudo lsctl restart
 The following Landscape services can be configured to use TLS or mTLS:
 
 - `landscape-async-frontend`
+- `landscape-message-server`
 - `landscape-task-handler`
 - `landscape-outbox`
 - `landscape-debarchive`
@@ -283,6 +285,7 @@ The following Landscape services can be configured to use TLS or mTLS:
 Each service can have its own server certificate and can be configured to require clients to authenticate via their own TLS credentials.
 The `secrets-service` can additionally be configured to connect to HashiCorp Vault as a client via TLS or mTLS.
 
+(how-to-harden-deployment-async-frontend)=
 #### Async Frontend
 
 The `async-frontend` service can listen using TLS or mTLS for incoming connections.
@@ -313,6 +316,40 @@ Restart Landscape:
 ```sh
 sudo lsctl restart
 ```
+
+(how-to-harden-deployment-message-server)=
+#### Message Server
+
+The `message-server` service can listen using TLS or mTLS for incoming connections from Landscape Client. The setup is the same as for the {ref}`Async Frontend <how-to-harden-deployment-async-frontend>`, using the `[message_server]` section in `service.conf`:
+
+```ini
+ssl_server_cert = /path/to/message_server/server-cert.pem
+ssl_server_private_key = /path/to/message_server/server-key.pem
+```
+
+To further enable mTLS, you must also provide the path to the CA cert:
+
+```ini
+ssl_server_ca_cert = /path/to/ca/ca-cert.pem
+```
+
+Set the same ownership and permissions on these files as for the Async Frontend, then restart Landscape:
+
+```sh
+sudo lsctl restart
+```
+
+```{important}
+These settings are intended for self-hosted deployments where Landscape Client connects to the message server without a TLS-terminating reverse proxy in between. The message server terminates TLS itself, so it can't sit behind a reverse proxy that terminates TLS and forwards `/message-system` over plain HTTP, such as the Apache configuration in {ref}`how-to-manual-installation`.
+```
+
+To keep the message server ports internal, as described in {ref}`how-to-harden-deployment-network`, we strongly recommend placing a TCP-passthrough proxy in front of the message server, such as HAProxy in TCP mode. The proxy forwards connections unchanged to the message server ports and can spread them across workers. Only the proxy port is exposed, and clients use the proxy's address in their `url`. Connect clients directly to the message server only for testing.
+
+With mTLS enabled, the message server requires a client certificate on every connection to its port, before any request is handled. Every client of that port must present a certificate issued by the same CA, including:
+
+- Landscape Client, which you configure with a client certificate as described in {ref}`how-to-configure-landscape-client-mtls`
+- Tools that scrape the message server's `/metrics` endpoint, such as Prometheus
+- Health checks that connect to the message server, for example from a load balancer
 
 #### Task Handler
 

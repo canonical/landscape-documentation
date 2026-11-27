@@ -70,6 +70,31 @@ If you're using a self-signed SSL certificate for your Landscape instance, follo
       ssl_public_key = /etc/landscape/server.pem
       ```
 
+(how-to-configure-landscape-client-mtls)=
+### Client certificates for mTLS
+
+If your self-hosted message server requires client certificates (see {ref}`how-to-harden-deployment-message-server`), configure Landscape Client with a certificate and private key issued by the CA that the message server trusts:
+
+1. Save the certificate and its unencrypted private key to an accessible location, such as `/etc/landscape/client.pem` and `/etc/landscape/client.key`. Both files must be readable by the `landscape` user.
+2. Reference both paths using one of the following methods:
+
+   i. **Command Line**: Provide the paths to the `--ssl-client-cert` and `--ssl-client-private-key` parameters when registering the computer.
+
+      ```
+      landscape-config --ssl-client-cert /etc/landscape/client.pem --ssl-client-private-key /etc/landscape/client.key
+      ```
+
+   ii. **Configuration File**: Add the paths to your `client.conf` file. The keys in `client.conf` will be `ssl_client_cert` and `ssl_client_private_key`, for example:
+
+      ```
+      ssl_client_cert = /etc/landscape/client.pem
+      ssl_client_private_key = /etc/landscape/client.key
+      ```
+
+`landscape-config` checks that both values are set and that the private key matches the certificate, and stops without registering if they don't. Values set directly in `client.conf` aren't checked, so a wrong pair only shows up as connection errors in the client logs.
+
+The client only sends the certificate when the server requests one, so it has no effect on servers that don't require client certificates.
+
 (howto-heading-client-autoregister)=
 ## Auto-register new computers
 

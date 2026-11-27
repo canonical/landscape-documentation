@@ -41,6 +41,15 @@ If you’re using Ubuntu Core and require your own SSL certificates, you must pl
 sudo landscape-client.config --ssl-public-key /var/snap/landscape-client/ssl/server.pem
 ```
 
+## Client certificates for mTLS
+
+If your self-hosted message server requires client certificates (see {ref}`how-to-harden-deployment-message-server`), provide the client certificate and its unencrypted private key with `snap set`. The values are the PEM contents of the files, not their paths. The snap stores them under `/var/snap/landscape-client/common/etc/ssl/`, with the private key readable only by `root`, and sets `ssl_client_cert` and `ssl_client_private_key` in the client configuration to those files:
+
+```bash
+sudo snap set landscape-client ssl-client-cert="$(cat client.pem)" ssl-client-private-key="$(cat client.key)"
+sudo snap restart landscape-client
+```
+
 ## Auto-register new devices
 
 ```{note}
