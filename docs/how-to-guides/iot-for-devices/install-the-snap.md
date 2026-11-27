@@ -87,6 +87,17 @@ The options you can set with snap `set` are:
 - `monitor-plugins`
 - `access-group`
 - `registration-key`
+- `ssl-public-key`
+- `ssl-client-cert`
+- `ssl-client-private-key`
+
+````{note}
+The `ssl-*` options take the PEM contents of the file, not its path. For example:
+
+```bash
+sudo snap set landscape-client ssl-public-key="$(cat server.pem)"
+```
+````
 
 ```{note}
 When you run `snap set`, the value is written to snap options and then applied to `landscape-client.conf` by the `configure` hook. Only the keys listed above are recognized and applied. If you set an unrecognized key, it will not be written to the configuration file but will persist in snap options, which can be misleading. Use `snap unset landscape-client <key>` to remove it.
