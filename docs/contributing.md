@@ -52,6 +52,18 @@ For further details on our Diátaxis strategy, see [Diátaxis, a new foundation 
 
 Improving our documentation and applying the principles of Diátaxis are on-going tasks. There's a lot to do, and we don't want to deter anyone from contributing to our docs. If you don't know whether something should be a tutorial, how-to guide, reference doc or explanatory text, either ask on the forum or publish what you're thinking. Changes are easy to make, and every contribution helps.
 
+## Documentation versions
+
+The Landscape documentation is versioned to match self-hosted Landscape releases. Use the version menu on the documentation site to switch versions. Each version is built from a separate repository branch:
+
+- `main`: development documentation for the next Landscape release
+- `latest-stable`: documentation for the latest stable release, shown by default on the site
+- `release-XX.YY`: documentation for a specific LTS release, such as `release-26.04`
+
+Open pull requests against `main`, including fixes that also apply to older releases. If a change applies only to an older LTS release, use its `release-XX.YY` branch instead. Maintainers add version labels and backport changes where needed.
+
+When behavior changes, update the existing description rather than adding comparisons between releases. The previous behavior remains documented in earlier versions.
+
 ## Using AI-assisted tools
 
 You're welcome to use AI-assisted tools to help write or edit documentation. If you do, keep the following in mind:
@@ -131,6 +143,6 @@ These tests make sure everything is spelled correctly and that all links go to a
 
 ### Submit a pull request
 
-Once you've finished creating and testing your changes, create a pull request against the Landscape documentation repository.
+After testing your changes, open a pull request against the Landscape documentation repository. See [Documentation versions](#documentation-versions) for which branch to use.
 
 Your submitted issues and pull requests will be reviewed in due time. If you submit a PR, we have some automatic checks that will run against your PR to check for consistent style and language. However, don't let this be a barrier to your contribution. You can still submit contributions to the best of your ability, and if something is inconsistent, we'll help you fix it.
